@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 
+<script src="https://code.jquery.com/jquery-3.0.0.min.js"></script> 
+<script src="https://cdn.jsdelivr.net/jquery.typeit/4.4.0/typeit.min.js"></script>
+
 <head>
 
     <meta charset="utf-8">
@@ -75,6 +78,20 @@
                     <div class="intro-message">
                         <h1>YenNanLiu @ github</h1>
                         <h3>nice to meet u and :)</h3>
+                         <h3 id ="danamic_type" ></h3>
+
+                        <script> 
+                        $('#danamic_type').typeIt({
+                             strings: ["&nbsp; Data Analytics/Science background", "&nbsp; and python developer", "&nbsp;looking for DATA JOBS"],
+                             speed: 100,
+                             breakLines: false,
+                             loop:true,
+                             breakDelay:2500,
+                             startDelay:300,
+                             loopDelay:2500
+                        });
+                         </script>
+
                         <hr class="intro-divider">
                         <ul class="list-inline intro-social-buttons">
                             <li>
