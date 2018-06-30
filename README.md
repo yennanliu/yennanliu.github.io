@@ -1,6 +1,7 @@
 
 
 Portfolio website | https://yennanliu.github.io/ 
+Main Project Index | https://yennanliu.github.io/blog.html
 ------------ | -------------
 Overview | Road map of all side projects works 
 Contents  | 1. applications projects  2. collections of utility codes
