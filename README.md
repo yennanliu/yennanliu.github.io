@@ -12,6 +12,6 @@ Tech | Html / CSS / Javascript
 
 
 ## Blog 
-- https://github.com/yennanliu/yennanliu.github.io/issues?q=is%3Aissue+is%3Aopen+label%3Ablog
 - https://yennanliu.github.io/blog.html
-- Currently put at github issue, will push to github.io via github API soon
+- Please check the github issue for all other types of articles as well
+(- https://github.com/yennanliu/yennanliu.github.io/issues?q=is%3Aissue+is%3Aopen+label%3Ablog)
