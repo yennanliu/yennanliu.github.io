@@ -68,16 +68,6 @@ library(mvtnorm)
 
 ```
 
-    
-    Attaching package: ‘lubridate’
-    
-    The following object is masked from ‘package:base’:
-    
-        date
-    
-    Loading required package: ggplot2
-
-
 # 0) Get data 
 
 
