@@ -15,3 +15,7 @@ Tech | Html / CSS / Javascript
 - https://yennanliu.github.io/blog.html
 - Please check the github issue for all other types of articles as well
 	- https://github.com/yennanliu/yennanliu.github.io/issues?q=is%3Aissue+is%3Aopen+label%3Ablog 
+
+## Ref 
+- Jekyll (blog)
+- https://jekyllrb.com/
