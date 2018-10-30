@@ -19,3 +19,7 @@ Tech | Html / CSS / Javascript
 ## Ref 
 - Jekyll (blog)
 - https://jekyllrb.com/
+
+
+## Update 
+- 2018-10-30 : Set up CNAME, map site via js.org. Set up Jekyll for blog 
