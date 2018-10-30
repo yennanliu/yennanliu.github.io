@@ -16,10 +16,20 @@ Tech | Html / CSS / Javascript
 - Please check the github issue for all other types of articles as well
 	- https://github.com/yennanliu/yennanliu.github.io/issues?q=is%3Aissue+is%3Aopen+label%3Ablog 
 
+
+## Run blog locally 
+```bash
+bundle exec jekyll serve
+# visit the blog via  http://127.0.0.1:4000/
+```
+
+
 ## Ref 
 - Jekyll (blog)
 - https://jekyllrb.com/
 
-
 ## Update 
-- 2018-10-30 : Set up CNAME, map site via js.org. Set up Jekyll for blog 
+- 2018-10-30 : Set up CNAME, map site via js.org. Set up Jekyll for blog
+
+
+ 
