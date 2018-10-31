@@ -1,0 +1,1276 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.5.0 -->
+<title>NLP_EDA | yennj12 blog</title>
+<meta name="generator" content="Jekyll v3.8.4" />
+<meta property="og:title" content="NLP_EDA" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Credit" />
+<meta property="og:description" content="Credit" />
+<link rel="canonical" href="http://localhost:4000/nlp/2018/10/30/NLP_EDA.html" />
+<meta property="og:url" content="http://localhost:4000/nlp/2018/10/30/NLP_EDA.html" />
+<meta property="og:site_name" content="yennj12 blog" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2018-10-30T21:46:51+00:00" />
+<script type="application/ld+json">
+{"description":"Credit","@type":"BlogPosting","url":"http://localhost:4000/nlp/2018/10/30/NLP_EDA.html","headline":"NLP_EDA","dateModified":"2018-10-30T21:46:51+00:00","datePublished":"2018-10-30T21:46:51+00:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/nlp/2018/10/30/NLP_EDA.html"},"@context":"http://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="yennj12 blog" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">yennj12 blog</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about/">About</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">NLP_EDA</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2018-10-30T21:46:51+00:00" itemprop="datePublished">Oct 30, 2018
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <h1 id="credit">Credit</h1>
+
+<ul>
+  <li>https://www.kaggle.com/itratrahman/nlp-tutorial-using-python</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="c1"># OP 
+</span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="n">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">LabelEncoder</span>
+<span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">preprocessing</span>
+<span class="kn">from</span> <span class="nn">sklearn.feature_extraction.text</span> <span class="kn">import</span> <span class="n">CountVectorizer</span><span class="p">,</span> <span class="n">TfidfVectorizer</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span><span class="p">,</span> <span class="n">KFold</span>
+<span class="kn">from</span> <span class="nn">nltk.corpus</span> <span class="kn">import</span> <span class="n">stopwords</span>
+<span class="kn">from</span> <span class="nn">nltk.stem.snowball</span> <span class="kn">import</span> <span class="n">SnowballStemmer</span>
+
+<span class="o">%</span><span class="n">matplotlib</span> <span class="n">inline</span>
+<span class="o">%</span><span class="n">pylab</span> <span class="n">inline</span>
+<span class="kn">import</span> <span class="nn">seaborn</span>  <span class="k">as</span> <span class="n">sns</span> 
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+
+
+
+<span class="c1"># ML 
+</span>
+<span class="kn">from</span> <span class="nn">sklearn.naive_bayes</span> <span class="kn">import</span> <span class="n">GaussianNB</span><span class="p">,</span> <span class="n">BernoulliNB</span><span class="p">,</span> <span class="n">MultinomialNB</span>
+<span class="kn">from</span> <span class="nn">sklearn.neighbors</span> <span class="kn">import</span> <span class="n">KNeighborsClassifier</span>
+<span class="kn">from</span> <span class="nn">sklearn.tree</span> <span class="kn">import</span> <span class="n">DecisionTreeClassifier</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">accuracy_score</span><span class="p">,</span> <span class="n">log_loss</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">GridSearchCV</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Populating the interactive namespace from numpy and matplotlib
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># set plot style
+</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s">'fivethirtyeight'</span><span class="p">)</span>
+<span class="n">matplotlib</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s">'font.size'</span><span class="p">]</span> <span class="o">=</span> <span class="mi">12</span>
+<span class="n">matplotlib</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s">'figure.figsize'</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h2 id="0-load-data">0) Load data</h2>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># help fun 
+</span>
+<span class="k">def</span> <span class="nf">get_sentence_length</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">remove_punctuation</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+    <span class="s">'''a function for removing punctuation'''</span>
+    <span class="kn">import</span> <span class="nn">string</span>
+    <span class="c1"># replacing the punctuations with no space, 
+</span>    <span class="c1"># which in effect deletes the punctuation marks 
+</span>    <span class="n">translator</span> <span class="o">=</span> <span class="nb">str</span><span class="o">.</span><span class="n">maketrans</span><span class="p">(</span><span class="s">''</span><span class="p">,</span> <span class="s">''</span><span class="p">,</span> <span class="n">string</span><span class="o">.</span><span class="n">punctuation</span><span class="p">)</span>
+    <span class="c1"># return the text stripped of punctuation marks
+</span>    <span class="k">return</span> <span class="n">text</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="n">translator</span><span class="p">)</span>
+
+
+<span class="c1"># stop words : show stop words in English 
+</span>
+
+<span class="k">def</span> <span class="nf">stopwords_</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+    <span class="s">'''a function for removing the stopword'''</span>
+    <span class="c1"># removing the stop words and lowercasing the selected words
+</span>    <span class="n">sw</span> <span class="o">=</span> <span class="n">stopwords</span><span class="o">.</span><span class="n">words</span><span class="p">(</span><span class="s">'english'</span><span class="p">)</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="p">[</span><span class="n">word</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">text</span><span class="o">.</span><span class="n">split</span><span class="p">()</span> <span class="k">if</span> <span class="n">word</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">sw</span><span class="p">]</span>
+    <span class="c1"># joining the list of words with space separator
+</span>    <span class="k">return</span> <span class="s">" "</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+
+
+<span class="c1"># create an object of stemming function
+</span><span class="n">stemmer</span> <span class="o">=</span> <span class="n">SnowballStemmer</span><span class="p">(</span><span class="s">"english"</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">stemming</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>    
+    <span class="s">'''a function which stems each word in the given text'''</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="p">[</span><span class="n">stemmer</span><span class="o">.</span><span class="n">stem</span><span class="p">(</span><span class="n">word</span><span class="p">)</span> <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">text</span><span class="o">.</span><span class="n">split</span><span class="p">()]</span>
+    <span class="k">return</span> <span class="s">" "</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">text</span><span class="p">)</span> 
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># LOAD THE DATA 
+</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s">'spam.csv'</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s">','</span><span class="p">,</span><span class="n">encoding</span><span class="o">=</span><span class="s">'latin-1'</span><span class="p">)</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,[</span><span class="s">'v1'</span><span class="p">,</span><span class="s">'v2'</span><span class="p">]]</span>
+
+<span class="c1"># get feature
+</span>
+<span class="n">df</span><span class="p">[</span><span class="s">'length'</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s">'v2'</span><span class="p">]</span><span class="o">.</span><span class="nb">apply</span><span class="p">(</span><span class="n">get_sentence_length</span><span class="p">)</span>
+<span class="c1"># remove punctuation
+</span><span class="n">df</span><span class="p">[</span><span class="s">'v2_del_punct'</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s">'v2'</span><span class="p">]</span><span class="o">.</span><span class="nb">apply</span><span class="p">(</span><span class="n">remove_punctuation</span><span class="p">)</span>
+<span class="c1"># remove stopwords
+</span><span class="n">df</span><span class="p">[</span><span class="s">'v2_del_stopword'</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s">'v2'</span><span class="p">]</span><span class="o">.</span><span class="nb">apply</span><span class="p">(</span><span class="n">stopwords_</span><span class="p">)</span>
+<span class="c1"># get stem
+</span><span class="n">df</span><span class="p">[</span><span class="s">'v2_stemming'</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s">'v2'</span><span class="p">]</span><span class="o">.</span><span class="nb">apply</span><span class="p">(</span><span class="n">stemming</span><span class="p">)</span>
+
+
+<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</code></pre></div></div>
+
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>v1</th>
+      <th>v2</th>
+      <th>length</th>
+      <th>v2_del_punct</th>
+      <th>v2_del_stopword</th>
+      <th>v2_stemming</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>ham</td>
+      <td>Go until jurong point, crazy.. Available only ...</td>
+      <td>111</td>
+      <td>Go until jurong point crazy Available only in ...</td>
+      <td>go jurong point, crazy.. available bugis n gre...</td>
+      <td>go until jurong point, crazy.. avail onli in b...</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>ham</td>
+      <td>Ok lar... Joking wif u oni...</td>
+      <td>29</td>
+      <td>Ok lar Joking wif u oni</td>
+      <td>ok lar... joking wif u oni...</td>
+      <td>ok lar... joke wif u oni...</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>spam</td>
+      <td>Free entry in 2 a wkly comp to win FA Cup fina...</td>
+      <td>155</td>
+      <td>Free entry in 2 a wkly comp to win FA Cup fina...</td>
+      <td>free entry 2 wkly comp win fa cup final tkts 2...</td>
+      <td>free entri in 2 a wkli comp to win fa cup fina...</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>ham</td>
+      <td>U dun say so early hor... U c already then say...</td>
+      <td>49</td>
+      <td>U dun say so early hor U c already then say</td>
+      <td>u dun say early hor... u c already say...</td>
+      <td>u dun say so earli hor... u c alreadi then say...</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>ham</td>
+      <td>Nah I don't think he goes to usf, he lives aro...</td>
+      <td>61</td>
+      <td>Nah I dont think he goes to usf he lives aroun...</td>
+      <td>nah think goes usf, lives around though</td>
+      <td>nah i don't think he goe to usf, he live aroun...</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<h2 id="1-data-overview">1) Data Overview</h2>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># sentence length hist 
+</span>
+<span class="n">df</span><span class="o">.</span><span class="n">length</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">bins</span><span class="o">=</span><span class="mi">40</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">400</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s">'Sentence Length Histagram'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Text(0.5,1,'Sentence Length Histagram')
+</code></pre></div></div>
+
+<p><img src="NLP_EDA_files/NLP_EDA_7_1.png" alt="png" /></p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># sentence length hist  with spam V. ham
+</span>
+<span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">v1</span> <span class="o">==</span> <span class="s">'spam'</span> <span class="p">]</span><span class="o">.</span><span class="n">length</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">bins</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span><span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.4</span><span class="p">)</span>
+<span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">v1</span> <span class="o">==</span> <span class="s">'ham'</span> <span class="p">]</span><span class="o">.</span><span class="n">length</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">bins</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span><span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.4</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">400</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s">'Sentence Length Histagram : spam V. ham'</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">([</span><span class="s">'spam'</span><span class="p">,</span><span class="s">'ham'</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p><img src="NLP_EDA_files/NLP_EDA_8_0.png" alt="png" /></p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">X</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">v2</span>
+<span class="n">Y</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">v1</span>
+<span class="n">le</span> <span class="o">=</span> <span class="n">LabelEncoder</span><span class="p">()</span>
+<span class="n">Y</span> <span class="o">=</span> <span class="n">le</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">Y</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Y</span><span class="o">.</span><span class="n">shape</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>(5572,)
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">Y</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>0    4825
+1     747
+Name: 0, dtype: int64
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">X</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>'Go until jurong point, crazy.. Available only in bugis n great world la e buffet... Cine there got amore wat...'
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">X</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>'Ok lar... Joking wif u oni...'
+</code></pre></div></div>
+
+<h2 id="1-nlp-feature-extract">1) NLP feature extract</h2>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">stopwords</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;WordListCorpusReader in '/Users/yennanliu/nltk_data/corpora/stopwords'&gt;
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#print("Number of stopwords: ", len(sw))
+</span></code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</code></pre></div></div>
+
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>v1</th>
+      <th>v2</th>
+      <th>length</th>
+      <th>v2_del_punct</th>
+      <th>v2_del_stopword</th>
+      <th>v2_stemming</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>ham</td>
+      <td>Go until jurong point, crazy.. Available only ...</td>
+      <td>111</td>
+      <td>Go until jurong point crazy Available only in ...</td>
+      <td>go jurong point, crazy.. available bugis n gre...</td>
+      <td>go until jurong point, crazy.. avail onli in b...</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>ham</td>
+      <td>Ok lar... Joking wif u oni...</td>
+      <td>29</td>
+      <td>Ok lar Joking wif u oni</td>
+      <td>ok lar... joking wif u oni...</td>
+      <td>ok lar... joke wif u oni...</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>spam</td>
+      <td>Free entry in 2 a wkly comp to win FA Cup fina...</td>
+      <td>155</td>
+      <td>Free entry in 2 a wkly comp to win FA Cup fina...</td>
+      <td>free entry 2 wkly comp win fa cup final tkts 2...</td>
+      <td>free entri in 2 a wkli comp to win fa cup fina...</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>ham</td>
+      <td>U dun say so early hor... U c already then say...</td>
+      <td>49</td>
+      <td>U dun say so early hor U c already then say</td>
+      <td>u dun say early hor... u c already say...</td>
+      <td>u dun say so earli hor... u c alreadi then say...</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>ham</td>
+      <td>Nah I don't think he goes to usf, he lives aro...</td>
+      <td>61</td>
+      <td>Nah I dont think he goes to usf he lives aroun...</td>
+      <td>nah think goes usf, lives around though</td>
+      <td>nah i don't think he goe to usf, he live aroun...</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Collect vocabulary count
+</span>
+
+<span class="c1"># create a count vectorizer object
+</span><span class="n">count_vectorizer</span> <span class="o">=</span> <span class="n">CountVectorizer</span><span class="p">()</span>
+<span class="c1"># fit the count vectorizer using the text data
+</span><span class="n">count_vectorizer</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s">'v2_del_stopword'</span><span class="p">])</span>
+<span class="c1"># collect the vocabulary items used in the vectorizer
+</span><span class="n">dictionary</span> <span class="o">=</span> <span class="n">count_vectorizer</span><span class="o">.</span><span class="n">vocabulary_</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+
+<span class="c1"># lists to store the vocab and counts
+</span><span class="n">vocab</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">count</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="c1"># iterate through each vocab and count append the value to designated lists
+</span><span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
+    <span class="n">vocab</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+    <span class="n">count</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+<span class="c1"># store the count in panadas dataframe with vocab as index
+</span><span class="n">vocab_bef_stem</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">count</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">vocab</span><span class="p">)</span>
+<span class="c1"># sort the dataframe
+</span><span class="n">vocab_bef_stem</span> <span class="o">=</span> <span class="n">vocab_bef_stem</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">ascending</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># plot top vacab.
+</span>
+<span class="n">top_vacab</span> <span class="o">=</span> <span class="n">vocab_bef_stem</span><span class="p">[</span><span class="mi">20</span><span class="p">:</span><span class="mi">40</span><span class="p">]</span>
+<span class="n">top_vacab</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span> <span class="o">=</span> <span class="s">'barh'</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">10</span><span class="p">),</span> <span class="n">xlim</span><span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10000</span><span class="p">))</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;matplotlib.axes._subplots.AxesSubplot at 0x114c6d320&gt;
+</code></pre></div></div>
+
+<p><img src="NLP_EDA_files/NLP_EDA_19_1.png" alt="png" /></p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># stemming ops 
+# run stemming operation 
+</span>
+<span class="k">print</span> <span class="p">(</span><span class="s">'stemming words :  '</span><span class="p">)</span>
+<span class="k">print</span> <span class="p">(</span><span class="s">'-'</span><span class="o">*</span><span class="mi">10</span><span class="p">)</span>
+<span class="k">print</span> <span class="p">(</span><span class="s">''</span><span class="p">)</span>
+<span class="k">print</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s">'v2_stemming'</span><span class="p">]</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>
+<span class="k">print</span> <span class="p">(</span><span class="s">'-'</span><span class="o">*</span><span class="mi">10</span><span class="p">)</span>
+<span class="k">print</span> <span class="p">(</span><span class="s">'original words :  '</span><span class="p">)</span>
+<span class="n">df</span><span class="p">[</span><span class="s">'v2'</span><span class="p">]</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>stemming words :  
+----------
+
+0    go until jurong point, crazy.. avail onli in b...
+1                          ok lar... joke wif u oni...
+2    free entri in 2 a wkli comp to win fa cup fina...
+3    u dun say so earli hor... u c alreadi then say...
+4    nah i don't think he goe to usf, he live aroun...
+Name: v2_stemming, dtype: object
+----------
+original words :  
+
+
+
+
+
+0    Go until jurong point, crazy.. Available only ...
+1                        Ok lar... Joking wif u oni...
+2    Free entry in 2 a wkly comp to win FA Cup fina...
+3    U dun say so early hor... U c already then say...
+4    Nah I don't think he goes to usf, he lives aro...
+Name: v2, dtype: object
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#  TF-IDF Extraction : I 
+</span>
+
+<span class="s">"""
+
+
+TF(t) = (Number of times term t appears in a document) / (Total number of terms in the document).
+
+IDF(t) = log_e(Total number of documents / Number of documents with term t in it).
+
+"""</span>
+
+<span class="c1"># create the object of tfid vectorizer
+</span><span class="n">EAP_tfid_vectorizer</span> <span class="o">=</span> <span class="n">TfidfVectorizer</span><span class="p">(</span><span class="s">"english"</span><span class="p">)</span>
+<span class="c1"># fit the vectorizer using the text data
+</span><span class="n">EAP_tfid_vectorizer</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s">'v2_del_stopword'</span><span class="p">])</span>
+<span class="c1"># collect the vocabulary items used in the vectorizer
+</span><span class="n">EAP_dictionary</span> <span class="o">=</span> <span class="n">EAP_tfid_vectorizer</span><span class="o">.</span><span class="n">vocabulary_</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+
+<span class="c1"># lists to store the vocab and counts
+</span><span class="n">vocab</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">count</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="c1"># iterate through each vocab and count append the value to designated lists
+</span><span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">EAP_dictionary</span><span class="p">:</span>
+    <span class="n">vocab</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+    <span class="n">count</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+    
+<span class="c1"># store the count in panadas dataframe with vocab as index
+</span><span class="n">EAP_vocab</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">count</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">vocab</span><span class="p">)</span>
+<span class="c1"># sort the dataframe
+</span><span class="n">EAP_vocab</span> <span class="o">=</span> <span class="n">EAP_vocab</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">ascending</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+
+<span class="k">print</span> <span class="p">(</span><span class="n">EAP_vocab</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">distplot</span><span class="p">(</span><span class="n">EAP_vocab</span><span class="p">)</span>
+
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ûówell     8649
+ûò         8648
+ûïharry    8647
+ûï         8646
+ûªve       8645
+dtype: int64
+
+
+/Users/yennanliu/anaconda3/envs/ds_dash/lib/python3.5/site-packages/matplotlib/axes/_axes.py:6462: UserWarning: The 'normed' kwarg is deprecated, and has been replaced by the 'density' kwarg.
+  warnings.warn("The 'normed' kwarg is deprecated, and has been "
+
+
+
+
+
+&lt;matplotlib.axes._subplots.AxesSubplot at 0x10b407f98&gt;
+</code></pre></div></div>
+
+<p><img src="NLP_EDA_files/NLP_EDA_21_3.png" alt="png" /></p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#  TF-IDF Extraction : II
+</span>
+<span class="kn">from</span> <span class="nn">sklearn.feature_extraction.text</span> <span class="kn">import</span>  <span class="n">TfidfVectorizer</span>
+
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># create the object of tfid vectorizer
+</span><span class="n">tfid_vectorizer</span> <span class="o">=</span> <span class="n">TfidfVectorizer</span><span class="p">(</span><span class="s">"english"</span><span class="p">)</span>
+<span class="c1"># fit the vectorizer using the text data
+</span><span class="n">tfid_vectorizer</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s">'v2_stemming'</span><span class="p">])</span>
+<span class="c1"># collect the vocabulary items used in the vectorizer
+</span><span class="n">dictionary</span> <span class="o">=</span> <span class="n">tfid_vectorizer</span><span class="o">.</span><span class="n">vocabulary_</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>  
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># extract the tfid representation matrix of the text data
+#tfid_vectorizer = TfidfVectorizer("english")
+</span><span class="n">tfid_matrix</span> <span class="o">=</span> <span class="n">tfid_vectorizer</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s">'v2'</span><span class="p">])</span>
+<span class="c1"># collect the tfid matrix in numpy array
+</span><span class="n">array</span> <span class="o">=</span> <span class="n">tfid_matrix</span><span class="o">.</span><span class="n">todense</span><span class="p">()</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">array</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>matrix([[ 0.,  0.,  0., ...,  0.,  0.,  0.],
+        [ 0.,  0.,  0., ...,  0.,  0.,  0.],
+        [ 0.,  0.,  0., ...,  0.,  0.,  0.],
+        ..., 
+        [ 0.,  0.,  0., ...,  0.,  0.,  0.],
+        [ 0.,  0.,  0., ...,  0.,  0.,  0.],
+        [ 0.,  0.,  0., ...,  0.,  0.,  0.]])
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># store the tf-idf array into pandas dataframe
+</span><span class="n">df_vectorize</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">array</span><span class="p">)</span>
+<span class="n">df_vectorize</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>0</th>
+      <th>1</th>
+      <th>2</th>
+      <th>3</th>
+      <th>4</th>
+      <th>5</th>
+      <th>6</th>
+      <th>7</th>
+      <th>8</th>
+      <th>9</th>
+      <th>...</th>
+      <th>8172</th>
+      <th>8173</th>
+      <th>8174</th>
+      <th>8175</th>
+      <th>8176</th>
+      <th>8177</th>
+      <th>8178</th>
+      <th>8179</th>
+      <th>8180</th>
+      <th>8181</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+  </tbody>
+</table>
+<p>10 rows × 8182 columns</p>
+</div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">shape</span><span class="p">(</span><span class="n">df_vectorize</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>(5572, 8182)
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">shape</span><span class="p">(</span><span class="n">array</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>(5572, 8182)
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">shape</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>(5572, 6)
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>v1</th>
+      <th>v2</th>
+      <th>length</th>
+      <th>v2_del_punct</th>
+      <th>v2_del_stopword</th>
+      <th>v2_stemming</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>ham</td>
+      <td>Go until jurong point, crazy.. Available only ...</td>
+      <td>111</td>
+      <td>Go until jurong point crazy Available only in ...</td>
+      <td>go jurong point, crazy.. available bugis n gre...</td>
+      <td>go until jurong point, crazy.. avail onli in b...</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<h2 id="2-model">2) Model</h2>
+
+<h3 id="2-1-multinomialnb-multinomial-naive-bayes-classifier">2-1) MultinomialNB (multinomial Naive Bayes classifier)</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df_vectorize</span><span class="p">[</span><span class="s">'v1'</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s">'v1'</span><span class="p">]</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">features</span> <span class="o">=</span> <span class="n">df_vectorize</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+<span class="n">output</span> <span class="o">=</span> <span class="s">'v1'</span>
+<span class="c1"># removing the output and the id from features
+</span><span class="n">features</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">alpha_list1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.006</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+<span class="n">alpha_list1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">around</span><span class="p">(</span><span class="n">alpha_list1</span><span class="p">,</span> <span class="n">decimals</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">alpha_list1</span>
+
+<span class="c1"># parameter grid
+</span><span class="n">parameter_grid</span> <span class="o">=</span> <span class="p">[{</span><span class="s">"alpha"</span><span class="p">:</span><span class="n">alpha_list1</span><span class="p">}]</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">parameter_grid</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[{'alpha': array([ 0.006 ,  0.0109,  0.0159,  0.0208,  0.0258,  0.0307,  0.0357,
+          0.0406,  0.0456,  0.0505,  0.0555,  0.0604,  0.0654,  0.0703,
+          0.0753,  0.0802,  0.0852,  0.0901,  0.0951,  0.1   ])}]
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># TRAIN 
+</span>
+<span class="c1"># classifier object
+</span><span class="n">classifier1</span> <span class="o">=</span> <span class="n">MultinomialNB</span><span class="p">()</span>
+<span class="c1"># gridsearch object using 4 fold cross validation and neg_log_loss as scoring paramter
+</span><span class="n">gridsearch1</span> <span class="o">=</span> <span class="n">GridSearchCV</span><span class="p">(</span><span class="n">classifier1</span><span class="p">,</span><span class="n">parameter_grid</span><span class="p">,</span> <span class="n">scoring</span> <span class="o">=</span> <span class="s">'neg_log_loss'</span><span class="p">,</span> <span class="n">cv</span> <span class="o">=</span> <span class="mi">4</span><span class="p">)</span>
+<span class="c1"># fit the gridsearch
+</span><span class="n">gridsearch1</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">df_vectorize</span><span class="p">[</span><span class="n">features</span><span class="p">],</span> <span class="n">df_vectorize</span><span class="p">[</span><span class="n">output</span><span class="p">])</span>
+
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>GridSearchCV(cv=4, error_score='raise',
+       estimator=MultinomialNB(alpha=1.0, class_prior=None, fit_prior=True),
+       fit_params=None, iid=True, n_jobs=1,
+       param_grid=[{'alpha': array([ 0.006 ,  0.0109,  0.0159,  0.0208,  0.0258,  0.0307,  0.0357,
+        0.0406,  0.0456,  0.0505,  0.0555,  0.0604,  0.0654,  0.0703,
+        0.0753,  0.0802,  0.0852,  0.0901,  0.0951,  0.1   ])}],
+       pre_dispatch='2*n_jobs', refit=True, return_train_score='warn',
+       scoring='neg_log_loss', verbose=0)
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">results1</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
+<span class="c1"># collect alpha list
+</span><span class="n">results1</span><span class="p">[</span><span class="s">'alpha'</span><span class="p">]</span> <span class="o">=</span> <span class="n">gridsearch1</span><span class="o">.</span><span class="n">cv_results_</span><span class="p">[</span><span class="s">'param_alpha'</span><span class="p">]</span><span class="o">.</span><span class="n">data</span>
+<span class="c1"># collect test scores
+</span><span class="n">results1</span><span class="p">[</span><span class="s">'neglogloss'</span><span class="p">]</span> <span class="o">=</span> <span class="n">gridsearch1</span><span class="o">.</span><span class="n">cv_results_</span><span class="p">[</span><span class="s">'mean_test_score'</span><span class="p">]</span><span class="o">.</span><span class="n">data</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">matplotlib</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s">'figure.figsize'</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mf">12.0</span><span class="p">,</span> <span class="mf">6.0</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">results1</span><span class="p">[</span><span class="s">'alpha'</span><span class="p">],</span> <span class="o">-</span><span class="n">results1</span><span class="p">[</span><span class="s">'neglogloss'</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s">'alpha'</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s">'logloss'</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s">'Model : MultinomialNB '</span><span class="p">)</span>
+
+<span class="n">results1</span><span class="o">.</span><span class="n">T</span>
+</code></pre></div></div>
+
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>0</th>
+      <th>1</th>
+      <th>2</th>
+      <th>3</th>
+      <th>4</th>
+      <th>5</th>
+      <th>6</th>
+      <th>7</th>
+      <th>8</th>
+      <th>9</th>
+      <th>10</th>
+      <th>11</th>
+      <th>12</th>
+      <th>13</th>
+      <th>14</th>
+      <th>15</th>
+      <th>16</th>
+      <th>17</th>
+      <th>18</th>
+      <th>19</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>alpha</th>
+      <td>0.006</td>
+      <td>0.0109</td>
+      <td>0.0159</td>
+      <td>0.0208</td>
+      <td>0.0258</td>
+      <td>0.0307</td>
+      <td>0.0357</td>
+      <td>0.0406</td>
+      <td>0.0456</td>
+      <td>0.0505</td>
+      <td>0.0555</td>
+      <td>0.0604</td>
+      <td>0.0654</td>
+      <td>0.0703</td>
+      <td>0.0753</td>
+      <td>0.0802</td>
+      <td>0.0852</td>
+      <td>0.0901</td>
+      <td>0.0951</td>
+      <td>0.1</td>
+    </tr>
+    <tr>
+      <th>neglogloss</th>
+      <td>-0.0542484</td>
+      <td>-0.0524873</td>
+      <td>-0.0517779</td>
+      <td>-0.0514898</td>
+      <td>-0.0513987</td>
+      <td>-0.0514207</td>
+      <td>-0.0515115</td>
+      <td>-0.0516433</td>
+      <td>-0.0518067</td>
+      <td>-0.0519863</td>
+      <td>-0.0521835</td>
+      <td>-0.0523867</td>
+      <td>-0.0526016</td>
+      <td>-0.0528178</td>
+      <td>-0.0530429</td>
+      <td>-0.0532672</td>
+      <td>-0.0534991</td>
+      <td>-0.0537291</td>
+      <td>-0.0539662</td>
+      <td>-0.0542007</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<p><img src="NLP_EDA_files/NLP_EDA_39_1.png" alt="png" /></p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="s">"Best parameter: "</span><span class="p">,</span><span class="n">gridsearch1</span><span class="o">.</span><span class="n">best_params_</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s">"Best score: "</span><span class="p">,</span><span class="n">gridsearch1</span><span class="o">.</span><span class="n">best_score_</span><span class="p">)</span> 
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Best parameter:  {'alpha': 0.0258}
+Best score:  -0.0513987444724
+</code></pre></div></div>
+
+<h2 id="2-2-random-forest">2-2) Random forest</h2>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="kn">import</span> <span class="n">RandomForestClassifier</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">accuracy_score</span><span class="p">,</span><span class="n">f1_score</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">confusion_matrix</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">cross_val_score</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">learning_curve</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="k">def</span> <span class="nf">learn_curve</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">model</span><span class="p">):</span>
+        <span class="c1">#df_train_2 = df_train_.head(10000)
+</span>        <span class="k">print</span> <span class="p">(</span><span class="s">'model : '</span><span class="p">,</span><span class="n">model</span><span class="p">)</span>
+        <span class="c1"># get train, test scores
+</span>        <span class="n">train_sizes</span><span class="p">,</span> <span class="n">train_scores</span><span class="p">,</span> <span class="n">test_scores</span> <span class="o">=</span> <span class="n">learning_curve</span><span class="p">(</span>
+                                                 <span class="n">model</span><span class="p">,</span> <span class="n">X</span><span class="o">=</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="p">,</span> 
+                                                 <span class="n">cv</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> 
+                                                 <span class="n">train_sizes</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
+
+        <span class="k">print</span> <span class="p">(</span><span class="s">'train_sizes = '</span><span class="p">,</span> <span class="n">train_sizes</span><span class="p">)</span>
+        <span class="c1">#print ('train_scores = ', train_scores)
+</span>        <span class="c1">#print ('test_scores = ', test_scores)
+</span>        <span class="c1"># get mean, std 
+</span>        <span class="n">train_mean</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">train_scores</span><span class="p">,</span><span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span> <span class="p">)</span>
+        <span class="n">train_std</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">train_scores</span><span class="p">,</span><span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span> <span class="p">)</span>
+        <span class="n">test_mean</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">test_scores</span><span class="p">,</span><span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span> <span class="p">)</span>
+        <span class="n">test_std</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">test_scores</span><span class="p">,</span><span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span> <span class="p">)</span>
+
+        <span class="c1"># plot 
+</span>        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">train_sizes</span><span class="p">,</span>
+                 <span class="n">train_mean</span><span class="p">,</span>
+                 <span class="n">color</span><span class="o">=</span><span class="s">'blue'</span><span class="p">,</span> 
+                 <span class="n">marker</span><span class="o">=</span><span class="s">'o'</span><span class="p">,</span>
+                 <span class="n">markersize</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+                 <span class="n">label</span><span class="o">=</span><span class="s">"training accuracy"</span><span class="p">)</span>
+        <span class="c1"># plot errors 
+</span>        <span class="n">plt</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">train_sizes</span><span class="p">,</span> 
+                         <span class="n">train_mean</span> <span class="o">+</span> <span class="n">train_std</span> <span class="p">,</span> 
+                         <span class="n">train_mean</span> <span class="o">-</span> <span class="n">train_std</span> <span class="p">,</span> 
+                         <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.15</span><span class="p">,</span>
+                         <span class="n">color</span> <span class="o">=</span> <span class="s">'blue'</span><span class="p">,</span>
+                         <span class="n">label</span><span class="o">=</span><span class="s">"training accuracy"</span><span class="p">)</span>
+
+
+        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">train_sizes</span><span class="p">,</span>
+                 <span class="n">test_mean</span><span class="p">,</span>
+                 <span class="n">color</span><span class="o">=</span><span class="s">'green'</span><span class="p">,</span>
+                 <span class="n">linestyle</span><span class="o">=</span><span class="s">'--'</span> <span class="p">,</span>
+                 <span class="n">marker</span><span class="o">=</span><span class="s">'s'</span><span class="p">,</span>
+                 <span class="n">markersize</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+                 <span class="n">label</span><span class="o">=</span><span class="s">"validation accuracy"</span><span class="p">)</span>
+
+        <span class="n">plt</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">train_sizes</span><span class="p">,</span> 
+                         <span class="n">test_mean</span> <span class="o">+</span> <span class="n">test_std</span> <span class="p">,</span> 
+                         <span class="n">test_mean</span> <span class="o">-</span>  <span class="n">test_std</span> <span class="p">,</span> 
+                         <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.15</span><span class="p">,</span>
+                         <span class="n">color</span> <span class="o">=</span> <span class="s">'green'</span><span class="p">,</span>
+                         <span class="n">label</span><span class="o">=</span><span class="s">"validation accuracy"</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s">'# of train sample'</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s">'Accuracy'</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span> <span class="o">=</span> <span class="s">"lower right"</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">([</span><span class="mf">0.1</span><span class="p">,</span><span class="mf">1.2</span><span class="p">])</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df_vectorize</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>0</th>
+      <th>1</th>
+      <th>2</th>
+      <th>3</th>
+      <th>4</th>
+      <th>5</th>
+      <th>6</th>
+      <th>7</th>
+      <th>8</th>
+      <th>9</th>
+      <th>...</th>
+      <th>8173</th>
+      <th>8174</th>
+      <th>8175</th>
+      <th>8176</th>
+      <th>8177</th>
+      <th>8178</th>
+      <th>8179</th>
+      <th>8180</th>
+      <th>8181</th>
+      <th>v1</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>ham</td>
+    </tr>
+  </tbody>
+</table>
+<p>1 rows × 8183 columns</p>
+</div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">d</span><span class="o">=</span><span class="p">{</span><span class="s">'spam'</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="s">'ham'</span><span class="p">:</span><span class="mi">0</span><span class="p">}</span>
+<span class="n">df_vectorize</span><span class="p">[</span><span class="s">'v1_'</span><span class="p">]</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span><span class="n">d</span><span class="p">[</span><span class="n">x</span><span class="p">],</span><span class="n">df_vectorize</span><span class="o">.</span><span class="n">v1</span><span class="p">))</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># mapping non-numerical lebel to numerical ones 
+</span><span class="n">features</span> <span class="o">=</span> <span class="n">df_vectorize</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+<span class="n">output</span> <span class="o">=</span> <span class="s">'v1'</span>
+<span class="n">output2</span> <span class="o">=</span> <span class="s">'v1_'</span>
+<span class="c1"># removing the output and the id from features
+</span><span class="n">features</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
+<span class="n">features</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">output2</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># train - test split 
+</span><span class="n">Xtrain</span><span class="p">,</span> <span class="n">Xtest</span><span class="p">,</span> <span class="n">ytrain</span><span class="p">,</span> <span class="n">ytest</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">df_vectorize</span><span class="p">[</span><span class="n">features</span><span class="p">],</span> <span class="n">df_vectorize</span><span class="p">[</span><span class="n">output2</span><span class="p">],</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Acc</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="n">F1score</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="n">confusion_mat</span><span class="o">=</span><span class="p">{}</span>
+<span class="n">predictions</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="n">name</span> <span class="o">=</span> <span class="s">'RF'</span>
+
+<span class="n">RF</span> <span class="o">=</span> <span class="n">RandomForestClassifier</span><span class="p">(</span><span class="n">n_estimators</span> <span class="o">=</span><span class="mi">80</span><span class="p">,</span><span class="n">class_weight</span> <span class="o">=</span><span class="s">'balanced'</span><span class="p">)</span>
+<span class="n">RF</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">Xtrain</span><span class="p">,</span><span class="n">ytrain</span><span class="p">)</span>
+<span class="n">pred</span> <span class="o">=</span> <span class="n">RF</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">Xtest</span><span class="p">)</span>
+<span class="n">F1score</span><span class="p">[</span><span class="n">name</span><span class="p">]</span><span class="o">=</span> <span class="n">f1_score</span><span class="p">(</span><span class="n">ytest</span><span class="p">,</span><span class="n">pred</span><span class="p">)</span>
+<span class="n">Acc</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">ytest</span><span class="p">,</span><span class="n">pred</span><span class="p">)</span>
+<span class="n">confusion_mat</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">confusion_matrix</span><span class="p">(</span><span class="n">ytest</span><span class="p">,</span><span class="n">pred</span><span class="p">)</span>
+<span class="n">predictions</span><span class="p">[</span><span class="n">name</span><span class="p">]</span><span class="o">=</span><span class="n">pred</span>
+<span class="k">print</span><span class="p">(</span><span class="n">name</span><span class="o">+</span><span class="s">': Accuracy=</span><span class="si">%1.3</span><span class="s">f, F1=</span><span class="si">%1.3</span><span class="s">f'</span><span class="o">%</span><span class="p">(</span><span class="n">Acc</span><span class="p">[</span><span class="n">name</span><span class="p">],</span><span class="n">F1score</span><span class="p">[</span><span class="n">name</span><span class="p">]))</span>  
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>RF: Accuracy=0.988, F1=0.951
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">learn_curve</span><span class="p">(</span><span class="n">Xtrain</span><span class="p">,</span><span class="n">ytrain</span><span class="p">,</span><span class="n">RF</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">model</span> <span class="p">:</span>  <span class="n">RandomForestClassifier</span><span class="p">(</span><span class="n">bootstrap</span><span class="p">=</span><span class="nb">True</span><span class="p">,</span> <span class="n">class_weight</span><span class="p">=</span><span class="s1">'balanced'</span><span class="p">,</span>
+            <span class="n">criterion</span><span class="p">=</span><span class="s1">'gini'</span><span class="p">,</span> <span class="n">max_depth</span><span class="p">=</span><span class="n">None</span><span class="p">,</span> <span class="n">max_features</span><span class="p">=</span><span class="s1">'auto'</span><span class="p">,</span>
+            <span class="n">max_leaf_nodes</span><span class="p">=</span><span class="n">None</span><span class="p">,</span> <span class="n">min_impurity_decrease</span><span class="p">=</span><span class="m">0.0</span><span class="p">,</span>
+            <span class="n">min_impurity_split</span><span class="p">=</span><span class="n">None</span><span class="p">,</span> <span class="n">min_samples_leaf</span><span class="p">=</span><span class="m">1</span><span class="p">,</span>
+            <span class="n">min_samples_split</span><span class="p">=</span><span class="m">2</span><span class="p">,</span> <span class="n">min_weight_fraction_leaf</span><span class="p">=</span><span class="m">0.0</span><span class="p">,</span>
+            <span class="n">n_estimators</span><span class="p">=</span><span class="m">80</span><span class="p">,</span> <span class="n">n_jobs</span><span class="p">=</span><span class="m">1</span><span class="p">,</span> <span class="n">oob_score</span><span class="p">=</span><span class="nb">False</span><span class="p">,</span> <span class="n">random_state</span><span class="p">=</span><span class="n">None</span><span class="p">,</span>
+            <span class="n">verbose</span><span class="p">=</span><span class="m">0</span><span class="p">,</span> <span class="n">warm_start</span><span class="p">=</span><span class="nb">False</span><span class="p">)</span>
+<span class="n">train_sizes</span> <span class="p">=</span>  <span class="p">[</span> <span class="m">401</span>  <span class="m">802</span> <span class="m">1203</span> <span class="m">1604</span> <span class="m">2005</span> <span class="m">2406</span> <span class="m">2807</span> <span class="m">3208</span> <span class="m">3609</span> <span class="m">4011</span><span class="p">]</span>
+</code></pre></div></div>
+
+<p><img src="NLP_EDA_files/NLP_EDA_49_1.png" alt="png" /></p>
+
+
+  </div><a class="u-url" href="/nlp/2018/10/30/NLP_EDA.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">yennj12 blog</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">yennj12 blog</li><li><a class="u-email" href="mailto:f339339 at gmail.com">f339339 at gmail.com</a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/jekyll"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">jekyll</span></a></li><li><a href="https://www.twitter.com/jekyllrb"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#twitter"></use></svg> <span class="username">jekyllrb</span></a></li></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
