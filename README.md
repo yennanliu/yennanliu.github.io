@@ -1,6 +1,6 @@
 
 
-Portfolio website | https://yennanliu.github.io/ 
+Portfolio website | https://yennanliu.github.io/  |  https://yennj12.js.org/
 ------------ | -------------
 Main Project |  https://yennanliu.github.io/blog.html
 Overview | Road map of all side projects works 
@@ -12,7 +12,7 @@ Tech | Html / CSS / Javascript
 
 
 ## Blog 
-- https://yennanliu.github.io/blog.html
+- https://yennanliu.github.io/blog.html (https://yennj12.js.org/)
 - Please check the github issue for all other types of articles as well
 	- https://github.com/yennanliu/yennanliu.github.io/issues?q=is%3Aissue+is%3Aopen+label%3Ablog 
 
@@ -32,4 +32,3 @@ bundle exec jekyll serve
 - 2018-10-30 : Set up CNAME, map site via js.org. Set up Jekyll for blog
 
 
- 
