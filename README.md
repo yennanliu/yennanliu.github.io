@@ -1,6 +1,6 @@
 
 
-Portfolio website | https://yennanliu.github.io/  |  https://yennj12.js.org/
+Portfolio website | https://yennanliu.github.io/  (https://yennj12.js.org/) 
 ------------ | -------------
 Main Project |  https://yennanliu.github.io/blog.html
 Overview | Road map of all side projects works 
