@@ -47,7 +47,7 @@
                <span class="icon-bar"></span>
                <span class="icon-bar"></span>
                </button>
-               <a class="navbar-brand topnav" href="">yennanliu.github.io</a>
+               <a class="navbar-brand topnav" href="https://yennanliu.github.io">yennanliu.github.io</a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -312,13 +312,13 @@
 
                var  locations = [
 
-                  ['Ice island', 64.146, 21.942, 1],
-                  ['Berlin', 52.520, 13.405, 1],
-                  ['Paris', 48.856, 2.352, 1],
-                  ['Barcelona', 41.38, 2.1734 ,1 ],
-                  ['Edinburgh', 55.953, 3.188, 1],
-                  ['London', 51.516416, -0.118126, 1]
-                  ];
+                        ['Ice island', 64.146, 21.942, 1],
+                        ['Berlin', 52.520, 13.405, 1],
+                        ['Paris', 48.856, 2.352, 1],
+                        ['Barcelona', 41.38, 2.1734 ,1 ],
+                        ['Edinburgh', 55.953, 3.188, 1],
+                        ['London', 51.516416, -0.118126, 1]
+                    ];
             
                 // Let's also add a marker while we're at it
                 for (i = 0; i < locations.length; i++){          
@@ -327,7 +327,16 @@
                        map: map,
                        title: 'Snazzy!'
                    }) 
-                  };
+
+                   var infowindow = new google.maps.InfoWindow();
+
+                   google.maps.event.addListener(marker, 'click', (function(marker, i) {
+                    return function() {
+                      infowindow.setContent(locations[i][0]);
+                      infowindow.open(map, marker);}
+                      })(marker, i));
+                  
+                };
             }
          </script>
       </head>
