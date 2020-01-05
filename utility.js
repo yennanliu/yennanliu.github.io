@@ -5,10 +5,6 @@ script.type = 'text/javascript';
 script.src = 'https://cdn.jsdelivr.net/jquery.typeit/4.4.0/typeit.min.js';
 script.type = 'text/javascript';
 
-
-
-
-
 function map_init() {
                 // Basic options for a simple Google Map
                 // For more options see: https://developers.google.com/maps/documentation/javascript/reference#MapOptions
@@ -34,5 +30,3 @@ function dynamic_word() {
                              startDelay:300,
                              loopDelay:2500
                         });}
-
-

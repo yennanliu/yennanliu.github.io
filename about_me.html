@@ -1,16 +1,205 @@
 <!DOCTYPE html>
-<html>
-<body>
+<html lang="en">
+   <script src="https://code.jquery.com/jquery-3.0.0.min.js"></script> 
+   <script src="https://cdn.jsdelivr.net/jquery.typeit/4.4.0/typeit.min.js"></script>
+   <head >
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <!-- Global site tag (gtag.js) - Google Analytics -->
+      <script async src="https://www.googletagmanager.com/gtag/js?id=UA-110307295-1"></script>
+      <script>
+         window.dataLayer = window.dataLayer || [];
+         function gtag(){dataLayer.push(arguments);}
+         gtag('js', new Date());
+         
+         gtag('config', 'UA-110307295-1');
+      </script>
+      <!-- Global site tag (gtag.js) - Google Analytics -->
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta name="description" content="">
+      <meta name="author" content="">
+      <!--  <title>YenNanLiu @ github; Nice to meet u and :)</title> -->
+      <title>Learning by doing, code the world better :) </title>
+      <!-- Bootstrap Core CSS -->
+      <link href="css/bootstrap.min.css" rel="stylesheet">
+      <!-- Custom CSS -->
+      <link href="css/landing-page.css" rel="stylesheet">
+      <!-- Custom Fonts -->
+      <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+      <link href="http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+      <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+      <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+      <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+      <![endif]-->
+   </head>
+   <body>
+      <!-- Navigation -->
+      <nav class="navbar navbar-default navbar-fixed-top topnav" role="navigation">
+         <div class="container topnav">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+               <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+               <span class="sr-only">Toggle navigation</span>
+               <span class="icon-bar"></span>
+               <span class="icon-bar"></span>
+               <span class="icon-bar"></span>
+               </button>
+               <a class="navbar-brand topnav" href="#">yennanliu.github.io</a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+               <ul class="nav navbar-nav navbar-right">
+                  <li>
+                     <a href="https://yennanliu.github.io/about_me.html">About_Me</a>
+                  </li>
+                  <li>
+                     <a href="#Side_Project">Side_Project</a>
+                  </li>
+                  <li>
+                     <a href="https://yennanliu.github.io/main_project.html">Main_Project</a>
+                  </li>
+                  <li>
+                     <a href="https://yennanliu.github.io/contact.html">Contact</a>
+                  </li>
+                  <li>
+                     <a href="https://yennanliu.github.io/blog.html">Blog</a>
+                  </li>
+               </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+         </div>
+         <!-- /.container -->
+      </nav>
 
-<h1>About</h1>
 
-<p>#################################################################</p>
-<p> Travel lover : 20+ countries backpacker		                    </p>	 <p> Music  lover : electro/funk/jazz/indie                          </p>
-<p> Worked in couple of Startups and will run my own Startup future </p>
-<p> Engineering -> Physics -> Business -> Data             	        </p>
-<p>#################################################################</p>
+      <!-- /.intro-header -->
+      <!-- Page Content -->
+      <!-- /.content-section-a -->
+      <a  name="Side_Project"></a>
+      <div class="content-section-a">
+         <div class="container">
+            <div class="row">
+               <div class="col-lg-5 col-sm-20">
+                  <hr class="section-heading-spacer">
+                  <div class="clearfix"></div>
+                  <h2 class="section-heading">About Me</h2>
+                  <p>Data Guy / Entrepreneur / Adventurer</p>
+                  <p class="lead">A <i>slashie</i>, digital nomad, and software engineer, from Physics/engineering but having entrepreneur mindset that will run his own project/business one day through the nutrition learning from  the world traveling. <b><i> "future is anyway you wanna flow"</i></b>
+                  </p>
+               </div>
+<!--                <div class="col-lg-5 col-lg-offset-2 col-sm-6">
+                  <img class="img-responsive" src="img/nyc_taxi.jpg" height="300" width="700" alt="">
+               </div> -->
+            </div>
+         </div>
+         <!-- /.container -->
+      </div>
 
 
-
-</body>
+      <!-- google map  -->
+      <head>
+         <style type="text/css">
+            /* Set a size for our map container, the Google Map will take up 100% of this container */
+            #map {
+            width: 100%;
+            height: 30%;
+            }
+         </style>
+         <!-- 
+            You need to include this script tag on any page that has a Google Map.
+            
+            The following script tag will work when opening this example locally on your computer.
+            But if you use this on a localhost server or a live website you will need to include an API key. 
+            Sign up for one here (it's free for small usage): 
+                https://developers.google.com/maps/documentation/javascript/tutorial#api_key
+            
+            After you sign up, use the following script tag with YOUR_GOOGLE_API_KEY replaced with your actual key.
+                <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=YOUR_GOOGLE_API_KEY"></script>
+            -->
+         <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyADoRYCeFuPDckdA0MabReBYgdbyrUAGJ4"></script>
+         <script type="text/javascript">
+            // When the window has finished loading create our google map below
+            google.maps.event.addDomListener(window, 'load', init);
+            
+            function init() {
+                // Basic options for a simple Google Map
+                // For more options see: https://developers.google.com/maps/documentation/javascript/reference#MapOptions
+                var mapOptions = {
+                    // How zoomed in you want the map to start at (always required)
+                    zoom: 11,
+            
+                    // The latitude and longitude to center the map (always required)
+                    center: new google.maps.LatLng(51.516416, -0.118126), // LSE, UK 
+            
+                    // How you would like to style the map. 
+                    // This is where you would paste any style found on Snazzy Maps.
+                    styles: [{"featureType":"road","elementType":"labels","stylers":[{"visibility":"on"}]},{"featureType":"poi","stylers":[{"visibility":"off"}]},{"featureType":"administrative","stylers":[{"visibility":"off"}]},{"featureType":"road","elementType":"geometry.fill","stylers":[{"color":"#000000"},{"weight":1}]},{"featureType":"road","elementType":"geometry.stroke","stylers":[{"color":"#000000"},{"weight":0.8}]},{"featureType":"landscape","stylers":[{"color":"#ffffff"}]},{"featureType":"water","stylers":[{"visibility":"off"}]},{"featureType":"transit","stylers":[{"visibility":"off"}]},{"elementType":"labels","stylers":[{"visibility":"off"}]},{"elementType":"labels.text","stylers":[{"visibility":"on"}]},{"elementType":"labels.text.stroke","stylers":[{"color":"#ffffff"}]},{"elementType":"labels.text.fill","stylers":[{"color":"#000000"}]},{"elementType":"labels.icon","stylers":[{"visibility":"on"}]}]
+                };
+            
+                // Get the HTML DOM element that will contain your map 
+                // We are using a div with id="map" seen below in the <body>
+                var mapElement = document.getElementById('map');
+            
+                // Create the Google Map using our element and options defined above
+                var map = new google.maps.Map(mapElement, mapOptions);
+            
+                // Let's also add a marker while we're at it
+                var marker = new google.maps.Marker({
+                    position: new google.maps.LatLng(51.516416, -0.118126),
+                    map: map,
+                    title: 'Snazzy!'
+                });
+            }
+         </script>
+      </head>
+      <body>
+         <!-- The element that will contain our Google Map. This is used in both the Javascript and CSS above. -->
+         <div id="map"></div>
+   </body>
+   <!-- google map  -->
+   <!-- /.container -->
+   </div>
+   <!-- /.banner -->
+   <!-- Footer -->
+   <footer>
+      <div class="container">
+         <div class="row">
+            <div class="col-lg-12">
+               <ul class="list-inline">
+                  <li>
+                     <a href="#">Home</a>
+                  </li>
+                  <li class="footer-menu-divider">&sdot;</li>
+                  <li>
+                     <a href="https://yennanliu.github.io/about_me.html">About_Me</a>
+                  </li>
+                  <li class="footer-menu-divider">&sdot;</li>
+                  <li>
+                     <a href="#Side_Project">Side_Project</a>
+                  </li>
+                  <li>
+                     <a href="https://yennanliu.github.io/main_project.html">Main_Project</a>
+                  </li>
+                  <li class="footer-menu-divider">&sdot;</li>
+                  <li>
+                     <!-- <a href="#contact">Contacts2</a> -->
+                     <a href="https://yennanliu.github.io/contact.html">Contact</a>
+                  </li>
+                  <li class="footer-menu-divider">&sdot;</li>
+                  <li>
+                     <a href="https://yennanliu.github.io/blog.html">Blog</a>
+                  </li>
+               </ul>
+            </div>
+         </div>
+      </div>
+   </footer>
+   <!-- jQuery -->
+   <script src="js/jquery.js"></script>
+   <!-- Bootstrap Core JavaScript -->
+   <script src="js/bootstrap.min.js"></script>
+   </body>
 </html>
