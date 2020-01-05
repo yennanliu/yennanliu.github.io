@@ -312,12 +312,19 @@
 
                var  locations = [
 
-                        ['Ice island', 64.146, 21.942, 1],
-                        ['Berlin', 52.520, 13.405, 1],
-                        ['Paris', 48.856, 2.352, 1],
-                        ['Barcelona', 41.38, 2.1734 ,1 ],
-                        ['Edinburgh', 55.953, 3.188, 1],
-                        ['London', 51.516416, -0.118126, 1]
+                    ['Iceland', 64.146, 21.942, "ice everywhere. sometimes feel I am not in the earth"],
+                    ['Berlin', 52.520, 13.405, "Germany captial, east-west Germany"],
+                    ['Paris', 48.856, 2.352, "fancy city, should visit again"],
+                    ['Barcelona', 41.38, 2.1734 , "famous travel point in Spain" ],
+                    ['Madrid', 40.416,  -3.703 ,"a city build on the hillside" ],
+                    ['Valencia', 39.469, 0.376 ,"beautiful city, I love the food and people there" ],
+                    ['Porto', 41.157, -8.629 ,"my #1 travel city in Europe" ],
+                    ['Lisbon', 38.722, -9.139 , "possibly my #2 travel city in Europe" ],
+                    ['Rome', 41.902, 12.496 , "Italy capital, very historic" ],
+                    ['Venice', 45.4408, 12.315 , "relaxing city. I love the atmosphere" ],
+                    ['Milan', 45.4642, 9.190 , "Italy's fasion center" ],
+                    ['Edinburgh', 55.953, 3.188, "Elegant city, beginning of Skye trip"],
+                    ['London', 51.516416, -0.118126, "The city I stayed 2 years. good old day!"]
                     ];
             
                 // Let's also add a marker while we're at it
@@ -332,7 +339,7 @@
 
                    google.maps.event.addListener(marker, 'click', (function(marker, i) {
                     return function() {
-                      infowindow.setContent(locations[i][0]);
+                      infowindow.setContent( locations[i][0] + " : " + locations[i][3]);
                       infowindow.open(map, marker);}
                       })(marker, i));
                   

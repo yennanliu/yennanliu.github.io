@@ -9,8 +9,6 @@ Todo | 1. add blog page 2. optimize layout 3. add backend stuff
 Tech | Html / CSS / Javascript 
 
 
-
-
 ## Blog 
 - https://yennanliu.github.io/blog.html (https://yennj12.js.org/)
 - Please check the github issue for all other types of articles as well
@@ -26,9 +24,10 @@ bundle exec jekyll serve
 
 ## Ref 
 - Jekyll (blog)
-- https://jekyllrb.com/
+	- https://jekyllrb.com/
+
+- JS works with google map API
+	- https://stackoverflow.com/questions/3059044/google-maps-js-api-v3-simple-multiple-marker-example
 
 ## Update 
 - 2018-10-30 : Set up CNAME, map site via js.org. Set up Jekyll for blog
-
-
