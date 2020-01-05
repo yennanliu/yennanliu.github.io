@@ -47,7 +47,7 @@
                <span class="icon-bar"></span>
                <span class="icon-bar"></span>
                </button>
-               <a class="navbar-brand topnav" href="#">yennanliu.github.io</a>
+               <a class="navbar-brand topnav" href="">yennanliu.github.io</a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -104,8 +104,8 @@
          <style type="text/css">
             /* Set a size for our map container, the Google Map will take up 100% of this container */
             #map {
-            width: 100%;
-            height: 30%;
+            width:  100%;
+            height: 100%;
             }
          </style>
          <!-- 
@@ -127,9 +127,10 @@
             function init() {
                 // Basic options for a simple Google Map
                 // For more options see: https://developers.google.com/maps/documentation/javascript/reference#MapOptions
+
                 var mapOptions = {
                     // How zoomed in you want the map to start at (always required)
-                    zoom: 11,
+                    zoom: 1,
             
                     // The latitude and longitude to center the map (always required)
                     center: new google.maps.LatLng(51.516416, -0.118126), // LSE, UK 
@@ -145,13 +146,22 @@
             
                 // Create the Google Map using our element and options defined above
                 var map = new google.maps.Map(mapElement, mapOptions);
+
+               var  locations = [
+
+                  ['Ice island', 64.146, 21.942, 1],
+                  ['Paris', 48.856, 2.352, 1],
+                  ['London', 51.516416, -0.118126, 1]
+                  ];
             
                 // Let's also add a marker while we're at it
-                var marker = new google.maps.Marker({
-                    position: new google.maps.LatLng(51.516416, -0.118126),
-                    map: map,
-                    title: 'Snazzy!'
-                });
+                for (i = 0; i < locations.length; i++){          
+                   var marker = new google.maps.Marker({
+                       position: new google.maps.LatLng(locations[i][1],locations[i][2]),
+                       map: map,
+                       title: 'Snazzy!'
+                   }) 
+                  };
             }
          </script>
       </head>
