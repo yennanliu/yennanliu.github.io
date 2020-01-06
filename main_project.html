@@ -1,37 +1,171 @@
-<!-- readme to html :  https://stackoverflow.com/questions/14951321/how-to-display-html-content-in-github-readme-md -->
+<!DOCTYPE html>
+<html lang="en">
+   <script src="https://code.jquery.com/jquery-3.0.0.min.js"></script> 
+   <script src="https://cdn.jsdelivr.net/jquery.typeit/4.4.0/typeit.min.js"></script>
+   <head >
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <!-- Global site tag (gtag.js) - Google Analytics -->
+      <script async src="https://www.googletagmanager.com/gtag/js?id=UA-110307295-1"></script>
+      <script>
+         window.dataLayer = window.dataLayer || [];
+         function gtag(){dataLayer.push(arguments);}
+         gtag('js', new Date());
+         
+         gtag('config', 'UA-110307295-1');
+      </script>
+      <!-- Global site tag (gtag.js) - Google Analytics -->
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta name="description" content="">
+      <meta name="author" content="">
+      <!--  <title>YenNanLiu @ github; Nice to meet u and :)</title> -->
+      <title>Learning by doing, code the world better :) </title>
+      <!-- Bootstrap Core CSS -->
+      <link href="css/bootstrap.min.css" rel="stylesheet">
+      <!-- Custom CSS -->
+      <link href="css/landing-page.css" rel="stylesheet">
+      <!-- Custom Fonts -->
+      <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+      <link href="http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+      <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+      <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+      <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+      <![endif]-->
+   </head>
+   <body>
+      <!-- Navigation -->
+      <nav class="navbar navbar-default navbar-fixed-top topnav" role="navigation">
+         <div class="container topnav">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+               <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+               <span class="sr-only">Toggle navigation</span>
+               <span class="icon-bar"></span>
+               <span class="icon-bar"></span>
+               <span class="icon-bar"></span>
+               </button>
+               <a class="navbar-brand topnav" href="https://yennanliu.github.io">Home</a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+               <ul class="nav navbar-nav navbar-right">
+                  <li>
+                     <a href="https://yennanliu.github.io/about_me.html">About_Me</a>
+                  </li>
+                  <li>
+                     <a href="https://yennj12.js.org/#Side_Project">Side_Project</a>
+                  </li>
+                  <li>
+                     <a href="https://yennanliu.github.io/main_project.html">Main_Project</a>
+                  </li>
+                  <li>
+                     <a href="https://yennanliu.github.io/contact.html">Contact</a>
+                  </li>
+                  <li>
+                     <a href="https://yennanliu.github.io/blog.html">Blog</a>
+                  </li>
+               </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+         </div>
+         <!-- /.container -->
+      </nav>
 
-<h1><a id="Main_Project"></a>Main Project</h1>
 
-<h2><a id="de_side_project"></a>DE side project : Pipeline/Infra</h2>
-<ul>
-<li><a href="https://github.com/yennanliu/XJob">Xjob ETL</a> - Run various ETL jobs via airflow (monitor via slack bot) </li>
-<li><a href="https://github.com/yennanliu/data_infra_repo">data infra repo</a> - collection of interesting data infrastructure projects  </li>
-<li><a href="https://github.com/yennanliu/airflow-heroku-dev">airflow heroku dev</a> - deploy airflow app to Heroku cloud</li>
-</ul>
+      <!-- /.intro-header -->
+      <!-- Page Content -->
+      <!-- /.content-section-a -->
+      <a  name="Side_Project"></a>
+      <div class="content-section-a">
+         <div class="container">
+            <div class="row">
+               <div class="col-lg-5 col-sm-20">
+                  <hr class="section-heading-spacer">
+                  <div class="clearfix"></div>
+                  <h1 class="section-heading">Main Project</h1>
 
-<h2><a id="ds_side_project"></a>DS side project : Application/Model</h2>
-<ul>
-<li><a href="https://github.com/yennanliu/NYC_Taxi_Trip_Duration">NYC TAXI TRIP</a> - Develop models predict taxi trip duration in NYC </li>
-<li><a href="https://github.com/yennanliu/movie_recommendation">movie_recommendation</a> - Build recommend systems via movie data with 4 various algorithms  </li>
-<li><a href="https://github.com/yennanliu/sequence_predictor">sequence_predictor</a> - Modeling sequence time-series data via DL frameworks (Tensorflow/Keras..) </li>
-<li><a href="https://github.com/yennanliu/data_science_repo">data_science_repo</a> - Resources for data science applications</li>
-<li><a href="https://github.com/yennanliu/analysis">analysis</a>- Repo for practical data science problems approaches, including notebook demo and working scripts</li>
-</ul>
+                  <!-- DE side project -->
+                  <h2 class="section-heading">DE side project : Pipeline/Infra</h2>
+                  <li><a target="_blank" href="https://github.com/yennanliu/spark_emr_dev"> spark_emr_dev - code for submitting Spark/Hadoop/Hive/Pig tasks to EMR (AWS Elastic MapReduce) </a><br>
+                  <li><a target="_blank" href="https://github.com/yennanliu/XJob"> Xjob - Build an airflow for various ETL jobs scheduling </a><br>
+                  <li><a target="_blank" href="https://github.com/yennanliu/data_infra_repo"> data_infra_repo - collection of interesting data infrastructure projects</a><br>
+                  <li><a target="_blank" href="https://github.com/yennanliu/airflow-heroku-dev"> airflow_heroku_dev - deploy an airflow app to Heroku cloud</a><br>
 
-<h2><a id="backend_side_project"></a>Backend side project : API development</h2>
-<ul>
-<li><a href="https://github.com/yennanliu/web_development">Web Development</a> - Various backend services demo (web based) </li>
-</ul>
+                  <!-- DS side project -->
+                  <h2 class="section-heading">DS side project : Application/Model</h2>
+                  <li><a href="https://github.com/yennanliu/NYC_Taxi_Trip_Duration">NYC TAXI TRIP - Develop models predict taxi trip duration in NYC</a><br>
+                  <li><a href="https://github.com/yennanliu/movie_recommendation">movie_recommendation - Build recommend systems via movie data with 4 various algorithms</a><br>
+                  <li><a href="https://github.com/yennanliu/sequence_predictor">sequence_predictor - Modeling sequence time-series data via DL frameworks (Tensorflow/Keras..)</a><br>
+                  <li><a href="https://github.com/yennanliu/data_science_repo">data_science_repo - Resources for data science applications</a><br>
+                  <li><a href="https://github.com/yennanliu/analysis">analysis- Repo for practical data science problems approaches, including notebook demo and working scripts</a><br>
 
-<h2><a id="software_eng_side_project"></a>Software engineer project : Algorithm/Data Structure</h2>
-<ul>
-<li><a href="https://github.com/yennanliu/CS_basics">CS_basics</a> - Leetcode/Algorithm/Data Structure via Python/Java </li>
-<li><a href="https://github.com/yennanliu/slack_bot_flask">slack_bot_flask</a> - A light implementation that fast daily routines, contains data parse / scraping / cron jobs via python flask</li>
-<li><a href="https://github.com/yennanliu/SGTaxiMap">SGTaxiMap</a> - SG taxi real-time heat map with gov.SG API and python flask, JS leaflet library</li>
-</ul>
+                  <!-- Backend side project -->
+                  <h2 class="section-heading">Backend side project</h2>
+                  <li><a href="https://github.com/yennanliu/web_scraping">web_scraping- Various scrppaers code for real-world data collections : website /js/ API</a><br>
+                  <li><a href="https://github.com/yennanliu/web_development">web_development - Various backend services demo(web based)</a><br>
 
-<h2><a id="Collections_code"></a>Collections Of Code</h2>
-<ul>
-<li><a href="https://github.com/yennanliu/web_scraping">web_scraping</a> - Various scrppaers code for real-world data collections : website /js/ API</li>
-<li><a href="https://github.com/yennanliu/utility_shell">utility_shell</a> - Collection of shell commands for server/DB/pipelines/docker management</li>
-</ul>
+                  <!-- SE side project -->
+                  <h2 class="section-heading">Software engineer project : Algorithm/Data Structure</h2>
+                  <li><a href="https://github.com/yennanliu/CS_basics">CS_basics - Leetcode/Algorithm/Data Structure via Python/Java</a><br>
+                  <li><a href="https://github.com/yennanliu/SGTaxiMap">SGTaxiMap- SG taxi real-time heat map with gov.SG API and python flask, JS leaflet library</a></br>
+
+                  <!-- Collections Of Code -->
+                  <h2 class="section-heading">Collections Of Code</h2>
+                  <li><a href="https://github.com/yennanliu/utility_shell">utility_shell - Collection of shell commands for server/DB/pipelines/docker management</a><br>
+
+                  <p class="lead">
+                  </p>
+               </div>
+<!--                <div class="col-lg-5 col-lg-offset-2 col-sm-6">
+                  <img class="img-responsive" src="img/nyc_taxi.jpg" height="300" width="700" alt="">
+               </div> -->
+            </div>
+         </div>
+         <!-- /.container -->
+      </div>
+
+   </div>
+   <!-- /.banner -->
+   <!-- Footer -->
+   <footer>
+      <div class="container">
+         <div class="row">
+            <div class="col-lg-12">
+               <ul class="list-inline">
+                  <li>
+                     <a href="https://yennanliu.github.io/">Home</a>
+                  </li>
+                  <li class="footer-menu-divider">&sdot;</li>
+                  <li>
+                     <a href="https://yennanliu.github.io/about_me.html">About_Me</a>
+                  </li>
+                  <li class="footer-menu-divider">&sdot;</li>
+                  <li>
+                     <a href="https://yennj12.js.org#Side_Project">Side_Project</a>
+                  </li>
+                  <li>
+                     <a href="https://yennanliu.github.io/main_project.html">Main_Project</a>
+                  </li>
+                  <li class="footer-menu-divider">&sdot;</li>
+                  <li>
+                     <!-- <a href="#contact">Contacts2</a> -->
+                     <a href="https://yennanliu.github.io/contact.html">Contact</a>
+                  </li>
+                  <li class="footer-menu-divider">&sdot;</li>
+                  <li>
+                     <a href="https://yennanliu.github.io/blog.html">Blog</a>
+                  </li>
+               </ul>
+            </div>
+         </div>
+      </div>
+   </footer>
+   <!-- jQuery -->
+   <script src="js/jquery.js"></script>
+   <!-- Bootstrap Core JavaScript -->
+   <script src="js/bootstrap.min.js"></script>
+   </body>
+</html>
