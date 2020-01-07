@@ -1,12 +1,13 @@
-<h1 align="left"><a href="yennanliu.github.io">yennanliu.github.io</a></h1>
+<h1 align="left"><a href="https://yennj12.js.org/">yennanliu.github.io</a></h1>
 
 
 Portfolio website | https://yennanliu.github.io/  (https://yennj12.js.org/) 
 ------------ | -------------
 Main Project |  https://yennj12.js.org/main_project.html
+About Me     |  https://yennj12.js.org/about_me.html
 Overview | collections of my all side projects 
 Contents  | 1. applications projects  2. collections of utility codes
-Todo | 1. add blog page 2. optimize layout 3. add backend stuff  
+Todo | 1. add blog page (sync with jekyll) 2. fix layout 3. add backend   
 Tech | Html / CSS / Javascript 
 
 ## Blog 
