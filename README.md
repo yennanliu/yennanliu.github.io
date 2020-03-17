@@ -43,3 +43,7 @@ Tech | Html / CSS / Javascript
 
 - JS works with google map API
 	- https://stackoverflow.com/questions/3059044/google-maps-js-api-v3-simple-multiple-marker-example
+
+- Video banner
+	- https://startbootstrap.com/snippets/video-header/?fbclid=IwAR3XJrmaAADpWJYHdrYshFuQZFcqZi-ZR1Uv2He-Sq8eRLNRZ707zbXEQxY
+	- https://www.w3schools.com/howto/howto_css_fullscreen_video.asp?fbclid=IwAR1BV7roKF_L0ebrzgRpWUVMXxTrIEz4mKdOdY_6p0VhO0PgzIEcBQx8Mqg
