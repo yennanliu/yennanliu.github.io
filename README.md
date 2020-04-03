@@ -1,12 +1,15 @@
 <h1 align="left"><a href="https://yennj12.js.org/">yennanliu.github.io</a></h1>
 
 
-Portfolio website | https://yennanliu.github.io/  (https://yennj12.js.org/) 
+Portfolio website | [yennj12.js.org](https://yennj12.js.org/) 
 ------------ | -------------
 Main Project |  [Main_Project](https://yennj12.js.org/main_project.html)
 About Me     |  [About_Me](https://yennj12.js.org/about_me.html)
 Blog     |  [Blog](https://yennj12.js.org/yennj12_blog_V2/)
 Contents  | 1. applications projects  2. collections of utility codes
+
+## Intro
+- This repo only holds the source code for my current `landing page, about-me, and main_projects pages`. `Blog` code is in the other repo : [yennj12_blog_V2](https://github.com/yennanliu/yennj12_blog_V2) which built on top of [fastai](https://github.com/fastai)'s [fastpage](https://github.com/fastai/fastpages)
 
 ## Development 
 ```bash
