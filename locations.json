@@ -1,0 +1,170 @@
+[
+    {
+        "name": "New York 🇺🇸",
+        "latitude": 40.712,
+        "longitude": -74.006,
+        "description": "The city I love most till now, full of innovation and freedom. Stayed there for 1 month when 2012"
+    },
+    {
+        "name": "Boston 🇺🇸",
+        "latitude": 42.36,
+        "longitude": -71.0589,
+        "description": "Very relaxing city, and also the best education hub of the US"
+    },
+    {
+        "name": "Moscow 🇷🇺",
+        "latitude": 55.755,
+        "longitude": 37.617,
+        "description": "Russia capital, the Kremlin, Red Square are cool. Start point of my Siberia trip"
+    },
+    {
+        "name": "Saint Petersburg 🇷🇺",
+        "latitude": 59.9343,
+        "longitude": 30.335,
+        "description": "Most beautiful city of the Russian cities I visited, quite love its palace, museum, and people"
+    },
+    {
+        "name": "Kazan 🇷🇺",
+        "latitude": 55.83,
+        "longitude": 49.0661,
+        "description": "The capital of the Republic of Tatarstan (part of Russia), everything looks different from Europe since this city"
+    },
+    {
+        "name": "Novosibirsk 🇷🇺",
+        "latitude": 55.0,
+        "longitude": 82.935,
+        "description": "Just passed by... Remembered it was a 2 days 23 hours train trip"
+    },
+    {
+        "name": "Yekaterinburg 🇷🇺",
+        "latitude": 56.8389,
+        "longitude": 60.6,
+        "description": "Just passed by again.. There were historic events happened there"
+    },
+    {
+        "name": "Irkutsk 🇷🇺",
+        "latitude": 52.287,
+        "longitude": 104.305,
+        "description": "Visited there for the Lake Baikal trip!"
+    },
+    {
+        "name": "Lake Baikal 🇷🇺",
+        "latitude": 53.558,
+        "longitude": 108.165,
+        "description": "Awesome place! Very clean lake with natural views. Should visit the frozen lake again when winter"
+    },
+    {
+        "name": "Ulan-Ude 🇷🇺",
+        "latitude": 51.823,
+        "longitude": 107.607,
+        "description": "The city very nearby Mongolia. Felt that I was not in the Russia"
+    },
+    {
+        "name": "Khabarovsk 🇷🇺",
+        "latitude": 48.515,
+        "longitude": 135.101,
+        "description": "The city I off the train just for taking a shower...but interesting to see a mix of Russia and Asia"
+    },
+    {
+        "name": "Vladivostok 🇷🇺",
+        "latitude": 43.119,
+        "longitude": 131.8869,
+        "description": "Final stop of my Siberia trip (Moscow -> Vladivostok), quite like the sea-side and seafood, many Japanese and Korean there"
+    },
+    {
+        "name": "Montenegro 🇲🇪",
+        "latitude": 42.708,
+        "longitude": 19.374,
+        "description": ""
+    },
+    {
+        "name": "Krakow 🇵🇱",
+        "latitude": 50.06,
+        "longitude": 19.945,
+        "description": ""
+    },
+    {
+        "name": "Prague 🇨🇿",
+        "latitude": 50.075,
+        "longitude": 14.4378,
+        "description": ""
+    },
+    {
+        "name": "Croatia 🇭🇷",
+        "latitude": 45.1,
+        "longitude": 15.2,
+        "description": ""
+    },
+    {
+        "name": "Brussel 🇧🇪",
+        "latitude": 50.85,
+        "longitude": 4.351,
+        "description": ""
+    },
+    {
+        "name": "Reykjavik 🇮🇸",
+        "latitude": 64.146,
+        "longitude": -21.94,
+        "description": "Iceland. Ice everywhere (winter). Sometimes feel I am not on the earth"
+    },
+    {
+        "name": "Berlin 🇩🇪",
+        "latitude": 52.52,
+        "longitude": 13.405,
+        "description": "Germany capital, east-west Germany comparison is interesting"
+    },
+    {
+        "name": "Paris 🇫🇷",
+        "latitude": 48.856,
+        "longitude": 2.352,
+        "description": "Fancy city, should visit again"
+    },
+    {
+        "name": "Barcelona 🇪🇸",
+        "latitude": 41.38,
+        "longitude": 2.1734,
+        "description": "Famous travel point in Spain"
+    },
+    {
+        "name": "Madrid 🇪🇸",
+        "latitude": 40.416,
+        "longitude": -3.703,
+        "description": "A city build on the hillside"
+    },
+    {
+        "name": "Valencia 🇪🇸",
+        "latitude": 39.469,
+        "longitude": 0.376,
+        "description": "Beautiful city, I love the food and people there"
+    },
+    {
+        "name": "Porto 🇵🇹",
+        "latitude": 41.157,
+        "longitude": -8.629,
+        "description": "My #1 travel city in Europe"
+    },
+    {
+        "name": "Lisbon 🇵🇹",
+        "latitude": 38.722,
+        "longitude": -9.139,
+        "description": "Possibly my #2 travel city in Europe"
+    },
+    {
+        "name": "Rome 🇮🇹",
+        "latitude": 41.902,
+        "longitude": 12.496,
+        "description": "Italy capital, very historic"
+    },
+    {
+        "name": "Venice 🇮🇹",
+        "latitude": 45.4408,
+        "longitude": 12.315,
+        "description": "Relaxing city. I love the atmosphere"
+    },
+    {
+        "name": "Helsinki 🇫🇮",
+        "latitude": 60.169,
+        "longitude": 24.938,
+        "description": "Helsinki"
+    }
+]
