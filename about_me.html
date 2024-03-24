@@ -70,7 +70,7 @@
             /* Set a size for our map container, the Google Map will take up 100% of this container */
             #map {
             width:  100%;
-            height: 100%;
+            height: 50%;
             }
          </style>
          <!-- 
@@ -99,6 +99,8 @@
             
                     // The latitude and longitude to center the map (always required)
                     center: new google.maps.LatLng(51.516416, -0.118126), // LSE, UK 
+
+                    mapTypeId: google.maps.MapTypeId.SATELLITE, // Set map type to satellite
             
                     // How you would like to style the map. 
                     // This is where you would paste any style found on Snazzy Maps.
