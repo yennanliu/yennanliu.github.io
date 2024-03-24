@@ -331,7 +331,7 @@
                 // Create the Google Map using our element and options defined above
                 var map = new google.maps.Map(mapElement, mapOptions);
 
-               var  locations = [
+                var locations = [
                     ['New York 🇺🇸', 40.712, -74.006, "The city I love most till now, full of innovation and freedom. Stayed there for 1 month when 2012"],
                     ['Boston 🇺🇸', 42.36, -71.0589, "Very relaxing city, and also the best education hub of the US"], 
                     ['Moscow 🇷🇺', 55.755, 37.617, "Russia captial, the Kremlin, red square are cool. Start point of my Siberia trip "],
@@ -372,31 +372,71 @@
                     ['Tokyo 🇯🇵', 35.676, 139.650, "Traveled there ~6 days myself. enjoyed midnight street wandering, exloring the hidden bar around the city."],
                     ['Osaka 🇯🇵', 34.69, 135.50, "tranditonal JP city. palace/temple/gargen are so authentic. Just like Tainan in Taiwan."],
                     ['Kobe 🇯🇵', 34.69, 135.195, "Cleaned, well development city. Must try Wagyu and Sukiyaki there!"],
+                    ['Sapporo 🇯🇵', 43.0618, 141.3545, "Very nice city !! I like Hokkaido, like its relaxing and well design city vibe"],
+                    ['Hakodate 🇯🇵', 41.7687, 40.729, "Amazing night view"],
+                    ['Kushiro 🇯🇵', 42.9849, 144.3818, "nice place"],
                     ['Singapore 🇸🇬', 1.352, 103.819, "Had mall 1 week trip. Met friends and experienced life there. Believe I'll be back there one day."],
                     ['Indonesia 🇮🇩', -0.789, 113.921, "Bali for ~ 5 days trip. Super hot but fun."],
                     ['Hong-Kong 🇭🇰', 22.31, 114.169, "The city I used to worked and met good friends from. Old memory!"],
+                    ['Bangkok 🇹🇹', 13.7563, 100.5, "chilled"],
                     ['Tainan 🇹🇼', 22.9997, 120.227, "The city with TW tranditon, food/culture/architecture are all good."],
                     ['Taipei 🇹🇼', 25.03, 121.565, "My hometown. TW #1!"]
-
                     ];
             
                 // Let's also add a marker while we're at it
-                for (i = 0; i < locations.length; i++){          
-                   var marker = new google.maps.Marker({
-                       position: new google.maps.LatLng(locations[i][1],locations[i][2]),
-                       map: map,
-                       title: 'Snazzy!'
-                   }) 
+                // for (i = 0; i < locations.length; i++){   
 
-                   var infowindow = new google.maps.InfoWindow();
+                //    var marker = new google.maps.Marker({
+                //        position: new google.maps.LatLng(locations[i][1],locations[i][2]),
+                //        map: map,
+                //        title: 'Snazzy!'
+                //    }) 
 
-                   google.maps.event.addListener(marker, 'click', (function(marker, i) {
-                    return function() {
-                      infowindow.setContent( locations[i][0] + " : " + locations[i][3]);
-                      infowindow.open(map, marker);}
-                      })(marker, i));
+                //    var infowindow = new google.maps.InfoWindow();
+
+                //    google.maps.event.addListener(marker, 'click', (function(marker, i) {
+                    
+                //     return function() {
+                //       infowindow.setContent( locations[i][0] + " : " + locations[i][3]);
+                //       infowindow.open(map, marker);}
+                //       })(marker, i));
                   
-                };
+                // };
+
+               for (i = 0; i < locations.length; i++) {
+                  var marker = new google.maps.Marker({
+                      position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+                      map: map,
+                      title: 'Snazzy!'
+                  });
+
+                  var infowindow = new google.maps.InfoWindow();
+
+                  google.maps.event.addListener(marker, 'click', (function (marker, i) {
+                      return function () {
+                          // Create a div element to hold the content
+                          var content = document.createElement('div');
+
+
+                          // Add the text content to the content div
+                          var text = document.createElement('p');
+                          text.textContent = locations[i][0] + " : " + locations[i][3]; // Add your text content here
+                          content.appendChild(text);
+
+                          // Add the image to the content div
+                          var image = document.createElement('img');
+                          image.src = 'https://www.studying-in-germany.org/wp-content/uploads/2023/02/germany-facts-1068x580.jpg'; // Add the URL of the image
+                          image.style.width = '100px'; // Set the width of the image
+                          content.appendChild(image);
+
+                          // Set the content of the InfoWindow to the content div
+                          infowindow.setContent(content);
+                          infowindow.open(map, marker);
+                      }
+                  })(marker, i));
+              };
+
+
             }
          </script>
       </head>
