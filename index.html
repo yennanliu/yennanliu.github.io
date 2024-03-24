@@ -46,11 +46,13 @@
         <div class="row">
             <div class="col-lg-12 text-center">
                 <h1 class="display-4">Welcome!</h1>
-<p class="lead">I'm a software engineer 👨‍💻 specialized in backend/data projects ☕ and learning new technologies. Check my <a href="https://yennanliu.github.io/portfolios.html">portfolio</a>, and feel free to <a href="mailto:f339339@gmail.com">msg</a> me for any business ideas.</p>
+                <p class="lead">I'm a software engineer 👨‍💻 specialized in backend/data projects ☕ <br> Check my <a href="https://yennanliu.github.io/portfolios.html">portfolio</a>, feel free to <a href="mailto:f339339@gmail.com">message</a> me for any business ideas.</p>
+
             </div>
         </div>
+    </div>
 
-   <!-- LinkedIn and GitHub Logos -->
+    <!-- LinkedIn and GitHub Logos -->
     <div class="container mt-5 text-center">
         <a href="https://linkedin.com/in/yennanliu" target="_blank">
             <img src="https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png" alt="LinkedIn" style="width: 50px; height: 50px;">
@@ -82,6 +84,25 @@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <!-- Custom JavaScript for dynamic alignment -->
+    <script>
+        window.addEventListener('resize', function() {
+            var screenWidth = window.innerWidth;
+            var introElement = document.querySelector('.intro');
+            if (screenWidth < 576) {
+                introElement.style.fontSize = '1rem';
+            } else if (screenWidth >= 576 && screenWidth < 768) {
+                introElement.style.fontSize = '1.2rem';
+            } else if (screenWidth >= 768 && screenWidth < 992) {
+                introElement.style.fontSize = '1.5rem';
+            } else if (screenWidth >= 992 && screenWidth < 1200) {
+                introElement.style.fontSize = '1.8rem';
+            } else {
+                introElement.style.fontSize = '2rem';
+            }
+        });
+    </script>
 
 </body>
 </html>
