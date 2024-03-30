@@ -1,47 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact</title>
-    <!-- Bootstrap CSS -->
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Custom CSS -->
-    <link href="css/landing-page.css" rel="stylesheet">
-    <!-- Font Awesome -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet">
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
-</head>
-<body>
-
-    <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container">
+   <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Contact</title>
+      <!-- Bootstrap CSS -->
+      <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+      <!-- Custom CSS -->
+      <link href="css/landing-page.css" rel="stylesheet">
+      <!-- Font Awesome -->
+      <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet">
+      <!-- Google Fonts -->
+      <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+   </head>
+   <body>
+      <!-- Navigation -->
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+         <div class="container">
             <a class="navbar-brand" href="https://yennanliu.github.io">Home</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
+            <span class="navbar-toggler-icon"></span>
             </button>
-
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="https://yennanliu.github.io/about_me.html">About Me</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="https://yennanliu.github.io/portfolios.html">Portfolios</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="https://yennanliu.github.io/contact.html">Contact</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="https://yennj12.js.org/yennj12_blog_V2/">Blog</a>
-                    </li>
-                </ul>
+               <ul class="navbar-nav ml-auto">
+                  <li class="nav-item">
+                     <a class="nav-link" href="https://yennanliu.github.io/about_me.html">About Me</a>
+                  </li>
+                  <li class="nav-item">
+                     <a class="nav-link" href="https://yennanliu.github.io/portfolios.html">Portfolios</a>
+                  </li>
+                  <li class="nav-item">
+                     <a class="nav-link" href="https://yennanliu.github.io/contact.html">Contact</a>
+                  </li>
+                  <li class="nav-item">
+                     <a class="nav-link" href="https://yennj12.js.org/yennj12_blog_V2/">Blog</a>
+                  </li>
+               </ul>
             </div>
-        </div>
-    </nav>
-
+         </div>
+      </nav>
       <!-- /.intro-header -->
       <!-- Page Content -->
       <!-- /.content-section-a -->
@@ -57,15 +54,12 @@
                   <!-- <h6 class="display-5">Software engineer / Entrepreneur / Adventurer</h6> -->
                   <p class="lead">Yen is a <b><i>slashie</i></b>, <b><i>digital nomad</i></b>, and <b><i>software engineer</i></b>, used to work in military, NGO, and companies around the world(UK/HK/SG/JP/TW). From Physics/Engineering but having entrepreneur mindset that is running his own business now. <span style="color:blue;">#travel #tech #music #mobility</span> 🇬🇧 🇩🇪 🇪🇸 🇵🇹 🇮🇹 🇫🇷 🇳🇱 🇭🇷 🇲🇪 🇧🇪 🇨🇿 🇵🇱 🇫🇮 🇮🇸 🇱🇻 🇪🇪 🇱🇹 🇲🇦 🇻🇦 🇷🇺 🇺🇸 🇰🇷 🇯🇵 🇮🇩 🇸🇬 🇭🇰 🇹🇼 <b><i> "future is anyway you wanna flow"</i></b>
                   </p>
-
                   <p class="display-4" style="font-size: medium;">Visited 31 of 195 countries over the world</p>
                </div>
             </div>
          </div>
          <!-- /.container -->
       </div>
-
-
       <!-- google map  -->
       <head>
          <style type="text/css">
@@ -94,14 +88,14 @@
             function init() {
                 // Basic options for a simple Google Map
                 // For more options see: https://developers.google.com/maps/documentation/javascript/reference#MapOptions
-
+            
                 var mapOptions = {
                     // How zoomed in you want the map to start at (always required)
                     zoom: 2,
             
                     // The latitude and longitude to center the map (always required)
                     center: new google.maps.LatLng(51.516416, -0.118126), // LSE, UK 
-
+            
                     mapTypeId: google.maps.MapTypeId.SATELLITE, // Set map type to satellite
             
                     // How you would like to style the map. 
@@ -332,18 +326,20 @@
             
                 // Create the Google Map using our element and options defined above
                 var map = new google.maps.Map(mapElement, mapOptions);
-
+            
                 var locations = [
-                    ['New York 🇺🇸', 40.712, -74.006, "The city I love most till now, full of innovation and freedom. Stayed there for 1 month when 2012"],
-                    ['Boston 🇺🇸', 42.36, -71.0589, "Very relaxing city, and also the best education hub of the US"], 
-                    ['Moscow 🇷🇺', 55.755, 37.617, "Russia captial, the Kremlin, red square are cool. Start point of my Siberia trip "],
-                    ['Saint Petersburg 🇷🇺', 59.9343, 30.335, "Most beautiful city of the Russia cities I visited, quite love its palace, museum and people"],
-                    ['Kazan 🇷🇺', 55.83, 49.0661, "The capital of the Republic of Tatarstan (part of Russia), everything looks different from Europe since this city"],  
-                    ['Novosibirsk 🇷🇺', 55.00, 82.935, "Just passed by...Remembered it was a 2 days 23 hours train trip"],
-                    ['Yekaterinburg 🇷🇺',56.8389, 60.6,"Just passed by again.. There was historic events happened there"],
-                    ['Irkutsk 🇷🇺', 52.287, 104.305, "Visited there for the Lake Baikal trip!"], 
-                    ['Lake Baikal 🇷🇺', 53.558, 108.165, "Awesome place! very clean lake with natural views. should visit the frozen lake again when winter"],                    
-                    ['Ulan-Ude 🇷🇺', 51.823, 107.607, "The city very nearby Mongolia. Felt that I was not in the Russia"], 
+                    ['New York 🇺🇸', 40.712, -74.006, "The city I love most till now, full of innovation and freedom. Stayed there for 1 month when 2012", "https://cdn.britannica.com/61/93061-050-99147DCE/Statue-of-Liberty-Island-New-York-Bay.jpg"],
+                    ['Boston 🇺🇸', 42.36, -71.0589, "Very relaxing city, and also the best education hub of the US", "https://media.nomadicmatt.com/boston_guide.jpg"], 
+                    ['Moscow 🇷🇺', 55.755, 37.617, "Russia captial, the Kremlin, red square are cool. Start point of my Siberia trip ", "https://static.toiimg.com/photo/msid-83890076,width-96,height-65.cms"],
+            
+            
+                    ['Saint Petersburg 🇷🇺', 59.9343, 30.335, "Most beautiful city of the Russia cities I visited, quite love its palace, museum and people", "https://velvetescape.com/wp-content/uploads/2017/10/IMG_5197-1280x920.jpg"],
+                    ['Kazan 🇷🇺', 55.83, 49.0661, "The capital of the Republic of Tatarstan (part of Russia), everything looks different from Europe since this city", "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0f/d5/04/53/qol-shariff-mosque.jpg?w=500&h=-1&s=1"],  
+                    ['Novosibirsk 🇷🇺', 55.00, 82.935, "Just passed by...Remembered it was a 2 days 23 hours train trip", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRxxYnHTrnKdiaQR50FrEmiXUDjpcosk5lEAg&usqp=CAU"],
+                    ['Yekaterinburg 🇷🇺',56.8389, 60.6,"Just passed by again.. There was historic events happened there", "https://static.independent.co.uk/s3fs-public/thumbnails/image/2017/01/06/19/yekaterinburg-3.jpg?width=1200"],
+                    ['Irkutsk 🇷🇺', 52.287, 104.305, "Visited there for the Lake Baikal trip!", "https://tigersontearoad.files.wordpress.com/2012/02/dsc_0032-2.jpg"], 
+                    ['Lake Baikal 🇷🇺', 53.558, 108.165, "Awesome place! very clean lake with natural views. should visit the frozen lake again when winter", "https://www.india.com/wp-content/uploads/2018/08/Lake-Baikal-1.jpg"],                    
+                    ['Ulan-Ude 🇷🇺', 51.823, 107.607, "The city very nearby Mongolia. Felt that I was not in the Russia", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTUaOD4y06KpCHaVPjTBqYR-UjKGv6CHkL8zQ&usqp=CAU"], 
                     ['Khabarovsk 🇷🇺', 48.515, 135.101, "The city I off the train just for taking a shower...but interesting to see a mix of Russia and Asia"],
                     ['Vladivostok 🇷🇺', 43.119, 131.8869, "Final stop of my Siberia trip (Moscow -> Vladivostok), quite like the sea-side and seafood, many Japanese and Korean there"],
                     ['Montenegro 🇲🇪', 42.708, 19.374, ""],
@@ -381,21 +377,21 @@
                     ['Indonesia 🇮🇩', -0.789, 113.921, "Bali for ~ 5 days trip. Super hot but fun."],
                     ['Hong-Kong 🇭🇰', 22.31, 114.169, "The city I used to worked and met good friends from. Old memory!"],
                     ['Bangkok 🇹🇹', 13.7563, 100.5, "chilled"],
-                    ['Tainan 🇹🇼', 22.9997, 120.227, "The city with TW tranditon, food/culture/architecture are all good."],
-                    ['Taipei 🇹🇼', 25.03, 121.565, "My hometown. TW #1!"]
+                    ['Tainan 🇹🇼', 22.9997, 120.227, "The city with TW tranditon, food/culture/architecture are all good.", "https://www.taiwanobsessed.com/wp-content/uploads/2023/08/tainan-taiwan.jpg"],
+                    ['Taipei 🇹🇼', 25.03, 121.565, "My hometown. TW #1!", "https://a.cdn-hotels.com/gdcs/production36/d1512/fcb814af-aff9-409d-9641-aeb8d389650a.jpg"]
                     ];
             
                 // Let's also add a marker while we're at it
                 // for (i = 0; i < locations.length; i++){   
-
+            
                 //    var marker = new google.maps.Marker({
                 //        position: new google.maps.LatLng(locations[i][1],locations[i][2]),
                 //        map: map,
                 //        title: 'Snazzy!'
                 //    }) 
-
+            
                 //    var infowindow = new google.maps.InfoWindow();
-
+            
                 //    google.maps.event.addListener(marker, 'click', (function(marker, i) {
                     
                 //     return function() {
@@ -404,41 +400,44 @@
                 //       })(marker, i));
                   
                 // };
-
+            
                for (i = 0; i < locations.length; i++) {
                   var marker = new google.maps.Marker({
                       position: new google.maps.LatLng(locations[i][1], locations[i][2]),
                       map: map,
                       title: 'Snazzy!'
                   });
-
+            
                   var infowindow = new google.maps.InfoWindow();
-
+            
                   google.maps.event.addListener(marker, 'click', (function (marker, i) {
                       return function () {
                           // Create a div element to hold the content
                           var content = document.createElement('div');
-
-
+            
+            
                           // Add the text content to the content div
                           var text = document.createElement('p');
                           text.textContent = locations[i][0] + " : " + locations[i][3]; // Add your text content here
                           content.appendChild(text);
-
+            
                           // Add the image to the content div
                           var image = document.createElement('img');
-                          image.src = 'https://www.studying-in-germany.org/wp-content/uploads/2023/02/germany-facts-1068x580.jpg'; // Add the URL of the image
+                          
+                           // image.src = 'https://www.studying-in-germany.org/wp-content/uploads/2023/02/germany-facts-1068x580.jpg'; // Add the URL of the image
+            
+                          image.src = locations[i][4];
                           image.style.width = '100px'; // Set the width of the image
                           content.appendChild(image);
-
+            
                           // Set the content of the InfoWindow to the content div
                           infowindow.setContent(content);
                           infowindow.open(map, marker);
                       }
                   })(marker, i));
               };
-
-
+            
+            
             }
          </script>
       </head>
@@ -450,26 +449,23 @@
    <!-- /.container -->
    </div>
    <!-- /.banner -->
-
-    <!-- Footer -->
-    <footer class="mt-5">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 text-center">
-                    <ul class="list-inline">
-                        <li class="list-inline-item"><a href="https://yennanliu.github.io/">Home</a></li>
-                        <li class="list-inline-item"><a href="https://yennanliu.github.io/about_me.html">About Me</a></li>
-                        <li class="list-inline-item"><a href="https://yennanliu.github.io/portfolios.html">Portfolios</a></li>
-                        <li class="list-inline-item"><a href="https://yennanliu.github.io/contact.html">Contact</a></li>
-                        <li class="list-inline-item"><a href="https://yennj12.js.org/yennj12_blog_V2/">Blog</a></li>
-                    </ul>
-                    <p>&copy; 2024 yen.dev.com. All Rights Reserved.</p>
-                </div>
+   <!-- Footer -->
+   <footer class="mt-5">
+      <div class="container">
+         <div class="row">
+            <div class="col-lg-12 text-center">
+               <ul class="list-inline">
+                  <li class="list-inline-item"><a href="https://yennanliu.github.io/">Home</a></li>
+                  <li class="list-inline-item"><a href="https://yennanliu.github.io/about_me.html">About Me</a></li>
+                  <li class="list-inline-item"><a href="https://yennanliu.github.io/portfolios.html">Portfolios</a></li>
+                  <li class="list-inline-item"><a href="https://yennanliu.github.io/contact.html">Contact</a></li>
+                  <li class="list-inline-item"><a href="https://yennj12.js.org/yennj12_blog_V2/">Blog</a></li>
+               </ul>
+               <p>&copy; 2024 yen.dev.com. All Rights Reserved.</p>
             </div>
-        </div>
-    </footer>
-
-
+         </div>
+      </div>
+   </footer>
    <!-- jQuery -->
    <script src="js/jquery.js"></script>
    <!-- Bootstrap Core JavaScript -->
