@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Part time developer</title>
+    <title>Part Time Developer</title>
     <!-- Bootstrap CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom CSS -->
@@ -13,92 +13,148 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet">
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Lato', sans-serif;
+        }
+
+        .navbar-brand, .nav-link {
+            font-weight: 700;
+        }
+
+        .lead {
+            color: #333;
+            line-height: 1.8;
+        }
+
+        h2 {
+            font-weight: 700;
+            color: #007bff;
+        }
+
+        h1 {
+            font-weight: 700;
+            color: #007bff;
+        }
+
+        footer {
+            background-color: #f8f9fa;
+            padding: 20px 0;
+        }
+
+        .list-inline-item a {
+            color: #007bff;
+        }
+
+        .list-inline-item a:hover {
+            color: #0056b3;
+            text-decoration: none;
+        }
+
+        /* Add a subtle card style for the content */
+        .content-card {
+            background: #fff;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        .service-list, .case-list {
+            margin-bottom: 20px;
+            padding-left: 20px;
+        }
+
+        .service-list li, .case-list li {
+            list-style-type: none;
+            position: relative;
+            padding-left: 20px;
+            margin-bottom: 10px;
+        }
+
+        .service-list li::before, .case-list li::before {
+            content: "\f058";
+            font-family: 'Font Awesome 5 Free';
+            color: #007bff;
+            position: absolute;
+            left: 0;
+            top: 2px;
+        }
+    </style>
 </head>
 
 <body>
 
-      <!-- Navigation -->
-      <nav class="navbar navbar-expand-lg navbar-light bg-light">
-         <div class="container">
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
             <a class="navbar-brand" href="https://yennanliu.github.io">Home</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
+                <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-               <ul class="navbar-nav ml-auto">
-                  <li class="nav-item">
-                     <a class="nav-link" href="https://yennanliu.github.io/about_me.html">About Me</a>
-                  </li>
-                  <li class="nav-item">
-                     <a class="nav-link" href="https://yennanliu.github.io/portfolios.html">Portfolios</a>
-                  </li>
-                  <li class="nav-item">
-                     <a class="nav-link" href="https://yennanliu.github.io/contact.html">Contact</a>
-                  </li>
-                  <li class="nav-item">
-                     <a class="nav-link" href="https://yennj12.js.org/yennj12_blog_V2/">Blog</a>
-                  </li>
-               </ul>
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item"><a class="nav-link" href="https://yennanliu.github.io/about_me.html">About Me</a></li>
+                    <li class="nav-item"><a class="nav-link" href="https://yennanliu.github.io/portfolios.html">Portfolios</a></li>
+                    <li class="nav-item"><a class="nav-link" href="https://yennanliu.github.io/contact.html">Contact</a></li>
+                    <li class="nav-item"><a class="nav-link" href="https://yennj12.js.org/yennj12_blog_V2/">Blog</a></li>
+                </ul>
             </div>
-         </div>
-      </nav>
-      
+        </div>
+    </nav>
 
     <!-- Content -->
     <div class="container mt-5">
-        <div class="row">
-            <div class="col-lg-6">
-                <h2>接案軟體工程師</h2>
-                <p class="lead">7年FANNG美商大廠資深後端工程師經驗, 曾在英國, 日本, 新加坡等團隊工作.
-                完整軟體開發經驗, 熟悉演算法, 資料結構, 數據庫與後端/全端開發. 主要使用Python, Java開發, 並輔以
-                Javascript框架做出全端產品.
-                </p>
+        <div class="row justify-content-center">
+            <div class="col-lg-8 content-card">
+                <h1>接案軟體工程師</h1>
+                <p class="lead">7年FANNG美商大廠資深後端工程師經驗, 曾在英國, 日本, 新加坡等團隊工作. 完整軟體開發經驗, 熟悉演算法, 資料結構, 數據庫與後端/全端開發. 主要使用Python, Java開發, 並輔以 Javascript框架做出全端產品.</p>
+                <p class="lead">作品集: <a href="https://yennanliu.github.io/portfolios.html">portfolio</a> | Github: <a href="https://github.com/yennanliu">github</a></p>
 
-                <p class="lead">作品集: <a href="https://yennanliu.github.io/portfolios.html">portfolio</a> </p>
-                <p class="lead">Github: <a href="https://github.com/yennanliu">github</a> </p>          
+                <h4>服務項目</h4>
+                <ul class="service-list">
+                    <li>後端開發 (Spring Boot, Flask, Django)</li>
+                    <li>全端開發 (Python/Java/NodeJS, Javascript/vue.js)</li>
+                    <li>資料平台建置,設計 (Spark, Flink, Airlfow, Hadoop)</li>
+                    <li>網路爬蟲開發 (Python)</li>
+                    <li>雲端基礎建設 (AWS, GCP, Azure, Databricks) 開發</li>
+                    <li>ETL開發 (Airflow, Python, Scala, Java, DB)</li>
+                    <li>Dashboard開發 (Looker, Tableau, PowerBI, SuperSet)</li>
+                    <li>AI應用開發 (NLP, OpenAI串接)</li>
+                    <li>技術架構顧問 (AWS, GCP)</li>
+                </ul>
 
-                <p> 服務項目: </p>
-                <p class="lead"> 1. 後端開發(Spring boot, Flask, Django)</p>
-                <p class="lead"> 2. 全端開發(Python/Java/NodeJS, Javascript/vue.js)</p>
-                <p class="lead"> 3. 資料平台建置,設計(Spark, Flink, Airlfow, Hadoop)</p>
-                <p class="lead"> 4. 網路爬蟲開發(Python)</p>
-                <p class="lead"> 5. 雲端基礎建設(AWS, GCP, Azure, Databricks)開發</p>
-                <p class="lead"> 6. ETL開發(Airflow, Python, Scala, Java, DB)</p>
-                <p class="lead"> 7. Dashboard開發(Looker, Tableau, PowerBI, SuperSet)</p>
-                <p class="lead"> 8. AI應用開發(NLP, OpenAI串接)</p>
+                <h4>成功案例</h4>
+                <ul class="case-list">
+                    <li>開發分散式ML運算平台 (Python) - 提交ML任務, 客戶非同步執行, 並回傳結果</li>
+                    <li>優化遊戲CPU用量 (Java) - 降低20% VM CPU用量</li>
+                    <li>停車場管理Web App (Python, Javascript) - 優化Flask app Http, DB transaction邏輯</li>
+                    <li>貨倉Web App (Java, Vue) - 開發存貨管理app, CRUDL功能 以及其他客制邏輯, API串接</li>
+                    <li>爬蟲程式開發 (Python) - 搜集台北餐廳資訊, 評論以供業務開發</li>
+                </ul>
 
-                <p> 成功案例: </p>
-                <p class="lead"> 1. 開發分散式ML運算平台 : <br>
-                  &nbsp; &nbsp; 實現伺服器端, 任務管理中心, 客戶端架構, 透過Restful<br> &nbsp; &nbsp;  
-                     提交ML任務, 客戶非同步執行, 並回傳結果</p>
-                <p class="lead"> 2. 優化遊戲CPU用量: <br>
-                &nbsp; &nbsp; 透過JVM線程優化, 程式碼重構, 成功的降低20% VM <br> &nbsp; &nbsp; CPU用量</p>
-
-                <p>聯絡方式:</p>
+                <h4>聯絡方式</h4>
                 <p>Email: f339339@hotmail.com</p>
-
             </div>
         </div>
     </div>
 
-      <!-- Footer -->
-      <footer class="mt-5">
-         <div class="container">
+    <!-- Footer -->
+    <footer class="mt-5">
+        <div class="container">
             <div class="row">
-               <div class="col-lg-12 text-center">
-                  <ul class="list-inline">
-                     <li class="list-inline-item"><a href="https://yennanliu.github.io/">Home</a></li>
-                     <li class="list-inline-item"><a href="https://yennanliu.github.io/about_me.html">About Me</a></li>
-                     <li class="list-inline-item"><a href="https://yennanliu.github.io/portfolios.html">Portfolios</a></li>
-                     <li class="list-inline-item"><a href="https://yennanliu.github.io/contact.html">Contact</a></li>
-                     <li class="list-inline-item"><a href="https://yennj12.js.org/yennj12_blog_V2/">Blog</a></li>
-                  </ul>
-                  <p>&copy; 2024 yen.dev.com. All Rights Reserved.</p>
-               </div>
+                <div class="col-lg-12 text-center">
+                    <ul class="list-inline">
+                        <li class="list-inline-item"><a href="https://yennanliu.github.io/">Home</a></li>
+                        <li class="list-inline-item"><a href="https://yennanliu.github.io/about_me.html">About Me</a></li>
+                        <li class="list-inline-item"><a href="https://yennanliu.github.io/portfolios.html">Portfolios</a></li>
+                        <li class="list-inline-item"><a href="https://yennanliu.github.io/contact.html">Contact</a></li>
+                        <li class="list-inline-item"><a href="https://yennj12.js.org/yennj12_blog_V2/">Blog</a></li>
+                    </ul>
+                    <p>&copy; 2024 yen.dev.com. All Rights Reserved.</p>
+                </div>
             </div>
-         </div>
-      </footer>
-
+        </div>
+    </footer>
 
     <!-- jQuery, Popper.js, Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
