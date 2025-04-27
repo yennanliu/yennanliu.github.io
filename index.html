@@ -16,47 +16,221 @@
       <!-- Google analytics -->
       <!-- Bootstrap CSS -->
       <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+      <!-- AOS Animation Library -->
+      <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
       <!-- Custom CSS -->
       <style>
+         :root {
+            --primary-color: #4a6bff;
+            --secondary-color: #25d366;
+            --light-bg: #f8f9fa;
+            --dark-bg: #121212;
+            --light-text: #f8f9fa;
+            --dark-text: #212529;
+            --transition-speed: 0.3s;
+         }
+         
+         body {
+            font-family: 'Poppins', sans-serif;
+            transition: background-color var(--transition-speed), color var(--transition-speed);
+            scroll-behavior: smooth;
+         }
+         
          .skills-item {
-            font-size: 1rem;
-            margin: 10px 0;
+            font-size: 1.1rem;
+            margin: 15px 0;
+            font-weight: 500;
+            color: var(--primary-color);
+            transition: all var(--transition-speed);
+            text-decoration: none;
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 25px;
+            background: rgba(74, 107, 255, 0.1);
          }
+         
+         .skills-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            text-decoration: none;
+         }
+         
          .navbar {
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+            transition: all var(--transition-speed);
+            padding: 15px 0;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            background-color: rgba(255, 255, 255, 0.9) !important;
          }
+         
+         .navbar-brand {
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--primary-color) !important;
+         }
+         
+         .nav-link {
+            font-weight: 500;
+            position: relative;
+            margin: 0 10px;
+         }
+         
+         .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--primary-color);
+            transition: width var(--transition-speed);
+         }
+         
+         .nav-link:hover::after {
+            width: 100%;
+         }
+         
          footer {
-            background-color: #f8f9fa;
-            padding: 20px 0;
+            background-color: var(--light-bg);
+            padding: 40px 0 20px;
+            transition: background-color var(--transition-speed), color var(--transition-speed);
+         }
+         
+         .hero-section {
+            height: 80vh;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(135deg, rgba(74, 107, 255, 0.1) 0%, rgba(37, 211, 102, 0.1) 100%);
+            border-radius: 0 0 50px 50px;
+            margin-bottom: 80px;
+            position: relative;
+            overflow: hidden;
+         }
+         
+         .hero-content {
+            position: relative;
+            z-index: 2;
+         }
+         
+         .hero-bg {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1;
+            opacity: 0.3;
+            background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1IiBoZWlnaHQ9IjUiPgo8cmVjdCB3aWR0aD0iNSIgaGVpZ2h0PSI1IiBmaWxsPSIjZmZmIj48L3JlY3Q+CjxyZWN0IHdpZHRoPSIxIiBoZWlnaHQ9IjEiIGZpbGw9IiNjY2MiPjwvcmVjdD4KPC9zdmc+');
+         }
+         
+         .display-4 {
+            font-weight: 700;
+            margin-bottom: 20px;
+            font-size: 3.5rem;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+         }
+         
+         .lead {
+            font-size: 1.25rem;
+            font-weight: 400;
+            margin-bottom: 30px;
+            line-height: 1.8;
+         }
+         
+         .card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            transition: all var(--transition-speed);
+            margin-bottom: 20px;
+            overflow: hidden;
+         }
+         
+         .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+         }
+         
+         .card-body {
+            padding: 25px;
+         }
+         
+         /* Social media icons */
+         .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 40px 0;
+         }
+         
+         .social-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all var(--transition-speed);
+            background-color: #fff;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+         }
+         
+         .social-icon:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+         }
+         
+         .social-icon img {
+            width: 30px;
+            height: 30px;
+            transition: all var(--transition-speed);
          }
          
          /* Dark mode styles */
          body.dark-mode {
-            background-color: #121212;
-            color: #e0e0e0;
+            background-color: var(--dark-bg);
+            color: var(--light-text);
          }
          
          body.dark-mode .navbar {
-            background-color: #1e1e1e !important;
+            background-color: rgba(18, 18, 18, 0.9) !important;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
          }
          
          body.dark-mode .navbar-light .navbar-brand,
          body.dark-mode .navbar-light .nav-link {
-            color: #e0e0e0;
+            color: var(--light-text) !important;
          }
          
          body.dark-mode .card {
-            background-color: #2d2d2d;
-            color: #e0e0e0;
+            background-color: #1e1e1e;
+            color: var(--light-text);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
          }
          
          body.dark-mode footer {
             background-color: #1e1e1e;
-            color: #e0e0e0;
+            color: var(--light-text);
          }
          
          body.dark-mode a {
             color: #9ba4ff;
+         }
+         
+         body.dark-mode .social-icon {
+            background-color: #2d2d2d;
+         }
+         
+         body.dark-mode .hero-section {
+            background: linear-gradient(135deg, rgba(74, 107, 255, 0.15) 0%, rgba(37, 211, 102, 0.15) 100%);
+         }
+         
+         body.dark-mode .skills-item {
+            background: rgba(74, 107, 255, 0.2);
          }
          
          /* Toggle button styles */
@@ -102,7 +276,7 @@
          }
          
          input:checked + .slider {
-            background-color: #2196F3;
+            background-color: var(--primary-color);
          }
          
          input:checked + .slider:before {
@@ -115,17 +289,66 @@
             align-items: center;
             margin-left: 8px;
          }
+         
+         /* Floating scroll-to-top button */
+         .scroll-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: var(--primary-color);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            z-index: 999;
+         }
+         
+         .scroll-top.visible {
+            opacity: 1;
+         }
+         
+         .scroll-top:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+         }
+         
+         /* Typwriter effect */
+         .typewriter {
+            overflow: hidden;
+            border-right: 0.15em solid var(--primary-color);
+            white-space: nowrap;
+            margin: 0 auto;
+            letter-spacing: 0.15em;
+            animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
+         }
+         
+         @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+         }
+         
+         @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: var(--primary-color) }
+         }
       </style>
       <!-- Font Awesome -->
       <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet">
       <!-- Google Fonts -->
-      <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+      <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
    </head>
    <body>
       <!-- Navigation -->
-      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
          <div class="container">
-            <a class="navbar-brand" href="https://yennanliu.github.io">Home</a>
+            <a class="navbar-brand" href="https://yennanliu.github.io">Yen.Dev</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
             </button>
@@ -160,83 +383,108 @@
             </div>
          </div>
       </nav>
-      <!-- Content -->
-      <div class="container mt-5">
-         <div class="row">
-            <div class="col-lg-12 text-center">
-               <h1 class="display-4">Welcome!</h1>
-               <p class="lead">I'm a software engineer 👨‍💻 specialized in backend solutions ☕.<br>Envolve from prototypes to formal launches, ensuring maintenance and monitoring.<br> Check my <a href="https://yennanliu.github.io/portfolios.html">portfolio</a>, feel free to <a href="mailto:f339339@gmail.com">contact</a> me for any business idea.</p>
+      
+      <!-- Hero Section -->
+      <section class="hero-section">
+         <div class="hero-bg"></div>
+         <div class="container hero-content">
+            <div class="row">
+               <div class="col-lg-12 text-center" data-aos="fade-up" data-aos-delay="100">
+                  <br>
+                  <h1 class="display-4">Welcome to My Digital Space</h1>
+                  <p class="lead typewriter">I'm a software engineer 👨‍💻 specialized in backend solutions ☕</p>
+                  <p class="lead">From prototypes to formal launches, ensuring maintenance and monitoring.<br> Check my <a href="https://yennanliu.github.io/portfolios.html">portfolio</a>, feel free to <a href="mailto:f339339@gmail.com">contact</a> me for any business idea.</p>
+                  <a href="#skills" class="btn btn-primary btn-lg mt-3" data-aos="fade-up" data-aos-delay="300">Explore My Skills</a>
+               </div>
             </div>
-            <div class="col-lg-12 text-center">
-               <h3 class="display-10">Skills</h3>
-               <br>
-               <a href="#" data-toggle="collapse" data-target="#backend-development" aria-expanded="false" aria-controls="backend-development" class="skills-item">Backend Development</a>
-               <div class="collapse" id="backend-development">
-                  <div class="card card-body">
-                     <p>
-                        Design and implement microservices and APIs using <a href="https://spring.io/projects/spring-boot">Java spring boot</a>, Python <a href="https://flask.palletsprojects.com">Flask</a>, and <a href="https://www.djangoproject.com/">Django</a>. Integrate with databases, message queues, and file systems. Manage diverse business requirements from clients. See <a href="https://github.com/yennanliu/SpringPlayground">projects</a>
-                     </p>
+         </div>
+      </section>
+      
+      <!-- Content -->
+      <div class="container mt-5" id="skills">
+         <div class="row">
+            <div class="col-lg-12 text-center" data-aos="fade-up">
+               <h3 class="mb-5">My Expertise</h3>
+               <div class="row">
+                  <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="100">
+                     <a href="#" data-toggle="collapse" data-target="#backend-development" aria-expanded="false" aria-controls="backend-development" class="skills-item"><i class="fas fa-server mr-2"></i>Backend Development</a>
+                     <div class="collapse" id="backend-development">
+                        <div class="card card-body mt-3">
+                           <p>
+                              Design and implement microservices and APIs using <a href="https://spring.io/projects/spring-boot">Java spring boot</a>, Python <a href="https://flask.palletsprojects.com">Flask</a>, and <a href="https://www.djangoproject.com/">Django</a>. Integrate with databases, message queues, and file systems. Manage diverse business requirements from clients. See <a href="https://github.com/yennanliu/SpringPlayground">projects</a>
+                           </p>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="200">
+                     <a href="#" data-toggle="collapse" data-target="#full-stack-development" aria-expanded="false" aria-controls="full-stack-development" class="skills-item"><i class="fas fa-laptop-code mr-2"></i>Full Stack Development</a>
+                     <div class="collapse" id="full-stack-development">
+                        <div class="card card-body mt-3">
+                           <p>
+                              Proficient in developing both frontend and backend components of web applications. Experience with technologies like HTML, CSS, JavaScript, <a href="https://vuejs.org/">Vue.js</a>, <a href="https://nodejs.org/en">Node.js</a>, and <a href="https://expressjs.com/">Express</a>.
+                           </p>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="300">
+                     <a href="#" data-toggle="collapse" data-target="#big-data-platform" aria-expanded="false" aria-controls="big-data-platform" class="skills-item"><i class="fas fa-database mr-2"></i>Big Data Platform</a>
+                     <div class="collapse" id="big-data-platform">
+                        <div class="card card-body mt-3">
+                           <p>
+                              Implement batch and stream processing using <a href="https://spark.apache.org/">Spark</a>, <a href="https://flink.apache.org/">Flink</a>, and Hadoop. Create data products using backend and big data technologies. <a href="https://github.com/yennanliu/NYC_Taxi_Pipeline">project</a>
+                           </p>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="col-md-6 mb-4" data-aos="fade-up" data-aos-delay="400">
+                     <a href="#" data-toggle="collapse" data-target="#web-scraping" aria-expanded="false" aria-controls="web-scraping" class="skills-item"><i class="fas fa-spider mr-2"></i>Web Scraping</a>
+                     <div class="collapse" id="web-scraping">
+                        <div class="card card-body mt-3">
+                           <p>
+                              Develop custom web scraping applications using Python with <a href="https://selenium-python.readthedocs.io/">Selenium</a>, Scrapy, and <a href="https://airflow.apache.org/">Airflow</a>. Design parallel web scraping systems.
+                           </p>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="col-md-6 mb-4" data-aos="fade-up" data-aos-delay="500">
+                     <a href="#" data-toggle="collapse" data-target="#cloud-infrastructure" aria-expanded="false" aria-controls="cloud-infrastructure" class="skills-item"><i class="fas fa-cloud mr-2"></i>Cloud Infrastructure</a>
+                     <div class="collapse" id="cloud-infrastructure">
+                        <div class="card card-body mt-3">
+                           <p>
+                              Proficient in <a href="https://aws.amazon.com/">AWS</a>, <a href="https://cloud.google.com/">GCP</a>, and Azure. Experienced in system design and prototype implementation, providing custom solutions tailored to specific business cases. <a href="https://github.com/yennanliu/cdk-playground">project</a>
+                           </p>
+                        </div>
+                     </div>
                   </div>
                </div>
-               <br>
-               <a href="#" data-toggle="collapse" data-target="#full-stack-development" aria-expanded="false" aria-controls="full-stack-development" class="skills-item">Full Stack Development</a>
-               <div class="collapse" id="full-stack-development">
-                  <div class="card card-body">
-                     <p>
-                        Proficient in developing both frontend and backend components of web applications. Experience with technologies like HTML, CSS, JavaScript, <a href="https://vuejs.org/">Vue.js</a>, <a href="https://nodejs.org/en">Node.js</a>, and <a href="https://expressjs.com/">Express</a>.
-                     </p>
-                  </div>
-               </div>
-               <br>
-               <a href="#" data-toggle="collapse" data-target="#big-data-platform" aria-expanded="false" aria-controls="big-data-platform" class="skills-item">Big Data Platform</a>
-               <div class="collapse" id="big-data-platform">
-                  <div class="card card-body">
-                     <p>
-                        Implement batch and stream processing using <a href="https://spark.apache.org/">Spark</a>, <a href="https://flink.apache.org/">Flink</a>, and Hadoop. Create data products using backend and big data technologies. <a href="https://github.com/yennanliu/NYC_Taxi_Pipeline">project</a>
-                     </p>
-                  </div>
-               </div>
-               <br>
-               <a href="#" data-toggle="collapse" data-target="#web-scraping" aria-expanded="false" aria-controls="web-scraping" class="skills-item">Web Scraping</a>
-               <div class="collapse" id="web-scraping">
-                  <div class="card card-body">
-                     <p>
-                        Selenium
-                        Develop custom web scraping applications using Python with <a href="https://selenium-python.readthedocs.io/">Selenium</a>, Scrapy, and <a href="https://airflow.apache.org/">Airflow</a>. Design parallel web scraping systems.
-                     </p>
-                  </div>
-               </div>
-               <br>
-               <a href="#" data-toggle="collapse" data-target="#cloud-infrastructure" aria-expanded="false" aria-controls="cloud-infrastructure" class="skills-item">Cloud Infrastructure</a>
-               <div class="collapse" id="cloud-infrastructure">
-                  <div class="card card-body">
-                     <p>
-                        Proficient in <a href="https://aws.amazon.com/">AWS</a>, <a href="https://cloud.google.com/">GCP</a>, and Azure. Experienced in system design and prototype implementation, providing custom solutions tailored to specific business cases. <a href="https://github.com/yennanliu/cdk-playground">project</a>
-                     </p>
-                  </div>
-               </div>
-               <br>
-               </p>
             </div>
          </div>
       </div>
+      
       <!-- LinkedIn, GitHub, Twitter, Hugging Face, and GitLab Logos -->
-      <div class="container mt-5 text-center">
-          <a href="https://linkedin.com/in/yennanliu" target="_blank">
-              <img src="https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png" alt="LinkedIn" style="width: 50px; height: 50px;">
-          </a>
-          <a href="https://github.com/yennanliu" target="_blank">
-              <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" alt="GitHub" style="width: 50px; height: 50px;">
-          </a>
-          <a href="https://twitter.com/free_tempopo" target="_blank">
-              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ce/X_logo_2023.svg/1280px-X_logo_2023.svg.png" alt="Twitter" style="width: 50px; height: 50px;">
-          </a>
-          <a href="https://huggingface.co/yennj12" target="_blank">
-              <img src="img/hf-logo.svg" alt="Hugging Face" style="width: 50px; height: 50px;">
-          </a>
-          <a href="https://gitlab.com/yennanliu" target="_blank">
-              <img src="img/gitlab-logo.svg" alt="GitLab" style="width: 50px; height: 50px;">
-          </a>
+      <div class="container mt-5">
+         <div class="social-icons" data-aos="fade-up">
+             <a href="https://linkedin.com/in/yennanliu" target="_blank" class="social-icon">
+                 <img src="https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png" alt="LinkedIn">
+             </a>
+             <a href="https://github.com/yennanliu" target="_blank" class="social-icon">
+                 <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" alt="GitHub">
+             </a>
+             <a href="https://twitter.com/free_tempopo" target="_blank" class="social-icon">
+                 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ce/X_logo_2023.svg/1280px-X_logo_2023.svg.png" alt="Twitter">
+             </a>
+             <a href="https://huggingface.co/yennj12" target="_blank" class="social-icon">
+                 <img src="img/hf-logo.svg" alt="Hugging Face">
+             </a>
+             <a href="https://gitlab.com/yennanliu" target="_blank" class="social-icon">
+                 <img src="img/gitlab-logo.svg" alt="GitLab">
+             </a>
+         </div>
+      </div>
+
+      <!-- Scroll to top button -->
+      <div class="scroll-top">
+         <i class="fas fa-arrow-up"></i>
       </div>
 
       <!-- Footer -->
@@ -257,25 +505,73 @@
             </div>
          </div>
       </footer>
+      
       <!-- jQuery, Popper.js, Bootstrap JS -->
       <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
       <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
       <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-      <!-- Custom JavaScript for dynamic alignment -->
+      <!-- AOS Animation Library -->
+      <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+      <!-- Custom JavaScript -->
       <script>
+         // Initialize AOS animation
+         AOS.init({
+             duration: 800,
+             easing: 'ease-in-out',
+             once: true
+         });
+         
+         // Scroll to top button functionality
+         const scrollTopBtn = document.querySelector('.scroll-top');
+         
+         window.addEventListener('scroll', function() {
+             if (window.pageYOffset > 300) {
+                 scrollTopBtn.classList.add('visible');
+             } else {
+                 scrollTopBtn.classList.remove('visible');
+             }
+         });
+         
+         scrollTopBtn.addEventListener('click', function() {
+             window.scrollTo({
+                 top: 0,
+                 behavior: 'smooth'
+             });
+         });
+         
+         // Smooth scrolling for anchor links
+         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+             anchor.addEventListener('click', function (e) {
+                 e.preventDefault();
+                 
+                 const targetId = this.getAttribute('href');
+                 if (targetId === '#') return;
+                 
+                 const targetElement = document.querySelector(targetId);
+                 if (targetElement) {
+                     targetElement.scrollIntoView({
+                         behavior: 'smooth'
+                     });
+                 }
+             });
+         });
+         
+         // Responsive font size
          window.addEventListener('resize', function() {
              var screenWidth = window.innerWidth;
              var introElement = document.querySelector('.intro');
-             if (screenWidth < 576) {
-                 introElement.style.fontSize = '1rem';
-             } else if (screenWidth >= 576 && screenWidth < 768) {
-                 introElement.style.fontSize = '1.2rem';
-             } else if (screenWidth >= 768 && screenWidth < 992) {
-                 introElement.style.fontSize = '1.5rem';
-             } else if (screenWidth >= 992 && screenWidth < 1200) {
-                 introElement.style.fontSize = '1.8rem';
-             } else {
-                 introElement.style.fontSize = '2rem';
+             if (introElement) {
+                 if (screenWidth < 576) {
+                     introElement.style.fontSize = '1rem';
+                 } else if (screenWidth >= 576 && screenWidth < 768) {
+                     introElement.style.fontSize = '1.2rem';
+                 } else if (screenWidth >= 768 && screenWidth < 992) {
+                     introElement.style.fontSize = '1.5rem';
+                 } else if (screenWidth >= 992 && screenWidth < 1200) {
+                     introElement.style.fontSize = '1.8rem';
+                 } else {
+                     introElement.style.fontSize = '2rem';
+                 }
              }
          });
          
