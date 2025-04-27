@@ -452,20 +452,23 @@
                <div class="card h-100">
                   <div class="card-body">
                      <h3 class="mb-4">Send Me a Message</h3>
-                     <form class="contact-form">
+                     <form class="contact-form" action="https://docs.google.com/forms/d/e/1FAIpQLSeTm5kvdjhwLDgCgfD1RJ3_LZ-S4qYN3Y_Z3QDHnLxmLFthkg/formResponse" method="post" target="_blank">
                         <div class="form-group">
-                           <input type="text" class="form-control" placeholder="Your Name" required>
+                           <input type="text" class="form-control" name="entry.2091844309" placeholder="Your Name" required>
                         </div>
                         <div class="form-group">
-                           <input type="email" class="form-control" placeholder="Your Email" required>
+                           <input type="email" class="form-control" name="entry.1158136426" placeholder="Your Email" required>
                         </div>
                         <div class="form-group">
-                           <input type="text" class="form-control" placeholder="Subject">
+                           <input type="text" class="form-control" name="entry.896521488" placeholder="Subject">
                         </div>
                         <div class="form-group">
-                           <textarea class="form-control" rows="5" placeholder="Your Message" required></textarea>
+                           <textarea class="form-control" rows="5" name="entry.1551286801" placeholder="Your Message" required></textarea>
                         </div>
-                        <button type="submit" class="btn btn-submit">Send Message</button>
+                        <div class="d-flex justify-content-between align-items-center">
+                           <button type="submit" class="btn btn-submit">Send Message</button>
+                           <div id="form-status"></div>
+                        </div>
                      </form>
                   </div>
                </div>
@@ -556,6 +559,26 @@
              
              // Event listener for toggle switch
              toggleSwitch.addEventListener('change', switchTheme);
+         });
+         
+         // Handle contact form submission
+         document.addEventListener('DOMContentLoaded', function() {
+             const contactForm = document.querySelector('.contact-form');
+             const formStatus = document.getElementById('form-status');
+             
+             contactForm.addEventListener('submit', function(e) {
+                 // Prevent the default form submission if you want to handle it via AJAX
+                 // e.preventDefault();
+                 
+                 formStatus.innerHTML = '<span class="text-success">Thanks for your message! I\'ll get back to you soon.</span>';
+                 
+                 // Optional: Reset the form after submission
+                 setTimeout(() => {
+                     contactForm.reset();
+                 }, 1000);
+                 
+                 // Note: Google Forms will handle the actual submission and redirect
+             });
          });
       </script>
    </body>
