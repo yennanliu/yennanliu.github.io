@@ -45,12 +45,34 @@
             --transition-speed: 0.3s;
          }
          
+         /* Base styles */
          body {
             font-family: 'Poppins', sans-serif;
             transition: background-color var(--transition-speed), color var(--transition-speed);
             scroll-behavior: smooth;
+            padding-top: 76px; /* Add padding for fixed navbar */
          }
          
+         /* Responsive typography */
+         h1.display-4 {
+            font-size: 2.5rem;
+         }
+         
+         .lead {
+            font-size: 1.1rem;
+         }
+         
+         @media (min-width: 768px) {
+            h1.display-4 {
+               font-size: 3.5rem;
+            }
+            
+            .lead {
+               font-size: 1.25rem;
+            }
+         }
+         
+         /* Responsive navbar */
          .navbar {
             box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
             transition: all var(--transition-speed);
@@ -58,6 +80,87 @@
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
             background-color: rgba(255, 255, 255, 0.9) !important;
+         }
+         
+         @media (max-width: 991.98px) {
+            .navbar-collapse {
+               background-color: rgba(255, 255, 255, 0.95);
+               padding: 20px;
+               border-radius: 10px;
+               margin-top: 10px;
+            }
+            
+            .nav-link {
+               margin: 10px 0;
+            }
+            
+            .toggle-container {
+               margin: 15px 0;
+            }
+         }
+         
+         /* Responsive about section */
+         .about-section {
+            padding: 40px 0;
+            min-height: auto;
+         }
+         
+         @media (min-width: 768px) {
+            .about-section {
+               padding: 80px 0;
+            }
+         }
+         
+         /* Responsive map container */
+         .map-container {
+            height: 300px;
+            margin: 20px 0;
+         }
+         
+         @media (min-width: 768px) {
+            .map-container {
+               height: 500px;
+               margin: 40px 0;
+            }
+         }
+         
+         /* Responsive footer */
+         footer {
+            padding: 30px 0 20px;
+         }
+         
+         .list-inline {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+         }
+         
+         @media (min-width: 768px) {
+            footer {
+               padding: 40px 0 20px;
+            }
+            
+            .list-inline {
+               gap: 20px;
+            }
+         }
+         
+         /* Scroll to top button */
+         .scroll-top {
+            width: 40px;
+            height: 40px;
+            bottom: 20px;
+            right: 20px;
+         }
+         
+         @media (min-width: 768px) {
+            .scroll-top {
+               width: 50px;
+               height: 50px;
+               bottom: 30px;
+               right: 30px;
+            }
          }
          
          .navbar-brand {
@@ -89,7 +192,6 @@
          
          footer {
             background-color: var(--light-bg);
-            padding: 40px 0 20px;
             transition: background-color var(--transition-speed), color var(--transition-speed);
          }
          
