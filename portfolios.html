@@ -30,10 +30,185 @@
             --transition-speed: 0.3s;
          }
          
+         /* Base styles */
          body {
             font-family: 'Poppins', sans-serif;
             transition: background-color var(--transition-speed), color var(--transition-speed);
             scroll-behavior: smooth;
+            padding-top: 76px; /* Add padding for fixed navbar */
+         }
+         
+         /* Responsive typography */
+         h1.display-4 {
+            font-size: 2.5rem;
+         }
+         
+         .lead {
+            font-size: 1.1rem;
+         }
+         
+         @media (min-width: 768px) {
+            h1.display-4 {
+               font-size: 3.5rem;
+            }
+            
+            .lead {
+               font-size: 1.25rem;
+            }
+         }
+         
+         /* Responsive navbar */
+         .navbar {
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+            transition: all var(--transition-speed);
+            padding: 15px 0;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            background-color: rgba(255, 255, 255, 0.9) !important;
+         }
+         
+         @media (max-width: 991.98px) {
+            .navbar-collapse {
+               background-color: rgba(255, 255, 255, 0.95);
+               padding: 20px;
+               border-radius: 10px;
+               margin-top: 10px;
+            }
+            
+            .nav-link {
+               margin: 10px 0;
+            }
+            
+            .toggle-container {
+               margin: 15px 0;
+            }
+         }
+         
+         /* Responsive hero section */
+         .hero-section {
+            height: auto;
+            min-height: 30vh;
+            padding: 40px 0;
+         }
+         
+         @media (min-width: 768px) {
+            .hero-section {
+               height: 40vh;
+               padding: 60px 0;
+            }
+         }
+         
+         /* Responsive portfolio cards */
+         .card {
+            margin-bottom: 20px;
+         }
+         
+         .card-img-top {
+            height: 150px;
+         }
+         
+         .card-body {
+            padding: 15px;
+         }
+         
+         @media (min-width: 768px) {
+            .card {
+               margin-bottom: 30px;
+            }
+            
+            .card-img-top {
+               height: 200px;
+            }
+            
+            .card-body {
+               padding: 25px;
+            }
+         }
+         
+         /* Responsive buttons */
+         .btn-primary, .btn-outline-primary {
+            padding: 8px 16px;
+            font-size: 0.9rem;
+         }
+         
+         @media (min-width: 768px) {
+            .btn-primary, .btn-outline-primary {
+               padding: 10px 20px;
+               font-size: 1rem;
+            }
+         }
+         
+         /* Responsive social icons */
+         .social-icons {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+         }
+         
+         .social-icon {
+            width: 40px;
+            height: 40px;
+         }
+         
+         .social-icon img {
+            width: 20px;
+            height: 20px;
+         }
+         
+         @media (min-width: 768px) {
+            .social-icons {
+               gap: 20px;
+            }
+            
+            .social-icon {
+               width: 60px;
+               height: 60px;
+            }
+            
+            .social-icon img {
+               width: 30px;
+               height: 30px;
+            }
+         }
+         
+         /* Responsive footer */
+         footer {
+            padding: 30px 0 20px;
+         }
+         
+         .list-inline {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+         }
+         
+         @media (min-width: 768px) {
+            footer {
+               padding: 40px 0 20px;
+            }
+            
+            .list-inline {
+               gap: 20px;
+            }
+         }
+         
+         /* Scroll to top button */
+         .scroll-top {
+            width: 40px;
+            height: 40px;
+            bottom: 20px;
+            right: 20px;
+         }
+         
+         @media (min-width: 768px) {
+            .scroll-top {
+               width: 50px;
+               height: 50px;
+               bottom: 30px;
+               right: 30px;
+            }
          }
          
          .skills-item {
@@ -53,15 +228,6 @@
             transform: translateY(-3px);
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
             text-decoration: none;
-         }
-         
-         .navbar {
-            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
-            transition: all var(--transition-speed);
-            padding: 15px 0;
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            background-color: rgba(255, 255, 255, 0.9) !important;
          }
          
          .navbar-brand {
@@ -93,19 +259,7 @@
          
          footer {
             background-color: var(--light-bg);
-            padding: 40px 0 20px;
             transition: background-color var(--transition-speed), color var(--transition-speed);
-         }
-         
-         .hero-section {
-            height: 40vh;
-            display: flex;
-            align-items: center;
-            background: linear-gradient(135deg, rgba(74, 107, 255, 0.1) 0%, rgba(37, 211, 102, 0.1) 100%);
-            border-radius: 0 0 50px 50px;
-            margin-bottom: 40px;
-            position: relative;
-            overflow: hidden;
          }
          
          .hero-content {
@@ -155,13 +309,6 @@
             box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
          }
          
-         .card-body {
-            padding: 25px;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-         }
-         
          .card-title {
             font-weight: 600;
             color: var(--primary-color);
@@ -171,11 +318,6 @@
          .card-text {
             flex-grow: 1;
             margin-bottom: 20px;
-         }
-         
-         .card-img-top {
-            height: 200px;
-            object-fit: cover;
          }
          
          .btn-primary {
