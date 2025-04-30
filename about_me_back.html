@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Contact</title>
+      <!-- Bootstrap CSS -->
+      <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+      <!-- Custom CSS -->
+      <link href="css/landing-page.css" rel="stylesheet">
+      <!-- Font Awesome -->
+      <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet">
+      <!-- Google Fonts -->
+      <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+   </head>
+   <body>
+      <!-- Navigation -->
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+         <div class="container">
+            <a class="navbar-brand" href="https://yennanliu.github.io">Home</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+               <ul class="navbar-nav ml-auto">
+                  <li class="nav-item">
+                     <a class="nav-link" href="https://yennanliu.github.io/about_me.html">About Me</a>
+                  </li>
+                  <li class="nav-item">
+                     <a class="nav-link" href="https://yennanliu.github.io/portfolios.html">Portfolios</a>
+                  </li>
+                  <li class="nav-item">
+                     <a class="nav-link" href="https://yennanliu.github.io/contact.html">Contact</a>
+                  </li>
+                  <li class="nav-item">
+                     <a class="nav-link" href="https://yennj12.js.org/yennj12_blog_V2/">Blog</a>
+                  </li>
+               </ul>
+            </div>
+         </div>
+      </nav>
+      <!-- /.intro-header -->
+      <!-- Page Content -->
+      <!-- /.content-section-a -->
+      <div class="content-section-a">
+         <div class="container">
+            <div class="row">
+               <div class="col-lg-5 col-sm-20">
+                  <hr class="section-heading-spacer">
+                  <div class="clearfix"></div>
+                  <!-- <h2 class="section-heading">About Me</h2> -->
+                  <h1 class="display-4">About Me</h1>
+                  <!-- <p>Software engineer / Entrepreneur / Adventurer</p> -->
+                  <!-- <h6 class="display-5">Software engineer / Entrepreneur / Adventurer</h6> -->
+                  <p class="lead">Yen is a <b><i>slashie</i></b>, <b><i>digital nomad</i></b>, and <b><i>software engineer</i></b>, used to work in military, NGO, and companies around the world(UK/HK/SG/JP/TW). From Physics/Engineering but having entrepreneur mindset that is running his own business now. <span style="color:blue;">#travel #tech #music #mobility</span> 🇬🇧 🇩🇪 🇪🇸 🇵🇹 🇮🇹 🇫🇷 🇳🇱 🇭🇷 🇲🇪 🇧🇪 🇨🇿 🇵🇱 🇫🇮 🇮🇸 🇱🇻 🇪🇪 🇱🇹 🇲🇦 🇻🇦 🇷🇺 🇺🇸 🇰🇷 🇯🇵 🇮🇩 🇸🇬 🇭🇰 🇹🇼 <b><i> "future is anyway you wanna flow"</i></b>
+                  </p>
+                  <p class="display-4" style="font-size: medium;">Visited 31 of 195 countries over the world</p>
+               </div>
+            </div>
+         </div>
+         <!-- /.container -->
+      </div>
+      <!-- google map  -->
+      <head>
+         <style type="text/css">
+            /* Set a size for our map container, the Google Map will take up 100% of this container */
+            #map {
+            width:  100%;
+            height: 50%;
+            }
+         </style>
+         <!-- 
+            You need to include this script tag on any page that has a Google Map.
+            
+            The following script tag will work when opening this example locally on your computer.
+            But if you use this on a localhost server or a live website you will need to include an API key. 
+            Sign up for one here (it's free for small usage): 
+                https://developers.google.com/maps/documentation/javascript/tutorial#api_key
+            
+            After you sign up, use the following script tag with YOUR_GOOGLE_API_KEY replaced with your actual key.
+                <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=YOUR_GOOGLE_API_KEY"></script>
+            -->
+         <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyADoRYCeFuPDckdA0MabReBYgdbyrUAGJ4"></script>
+         <script type="text/javascript">
+            // When the window has finished loading create our google map below
+            google.maps.event.addDomListener(window, 'load', init);
+            
+            function init() {
+                // Basic options for a simple Google Map
+                // For more options see: https://developers.google.com/maps/documentation/javascript/reference#MapOptions
+            
+                var mapOptions = {
+                    // How zoomed in you want the map to start at (always required)
+                    zoom: 2,
+            
+                    // The latitude and longitude to center the map (always required)
+                    center: new google.maps.LatLng(51.516416, -0.118126), // LSE, UK 
+            
+                    mapTypeId: google.maps.MapTypeId.SATELLITE, // Set map type to satellite
+            
+                    // How you would like to style the map. 
+                    // This is where you would paste any style found on Snazzy Maps.
+                    
+                    // google map style  : https://mapstyle.withgoogle.com/
+                    styles: [
+                                {
+                                  "elementType": "geometry",
+                                  "stylers": [
+                                    {
+                                      "color": "#ebe3cd"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "elementType": "labels.text.fill",
+                                  "stylers": [
+                                    {
+                                      "color": "#523735"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "elementType": "labels.text.stroke",
+                                  "stylers": [
+                                    {
+                                      "color": "#f5f1e6"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "featureType": "administrative",
+                                  "elementType": "geometry.stroke",
+                                  "stylers": [
+                                    {
+                                      "color": "#c9b2a6"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "featureType": "administrative.land_parcel",
+                                  "elementType": "geometry.stroke",
+                                  "stylers": [
+                                    {
+                                      "color": "#dcd2be"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "featureType": "administrative.land_parcel",
+                                  "elementType": "labels.text.fill",
+                                  "stylers": [
+                                    {
+                                      "color": "#ae9e90"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "featureType": "landscape.natural",
+                                  "elementType": "geometry",
+                                  "stylers": [
+                                    {
+                                      "color": "#dfd2ae"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "featureType": "poi",
+                                  "elementType": "geometry",
+                                  "stylers": [
+                                    {
+                                      "color": "#dfd2ae"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "featureType": "poi",
+                                  "elementType": "labels.text.fill",
+                                  "stylers": [
+                                    {
+                                      "color": "#93817c"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "featureType": "poi.park",
+                                  "elementType": "geometry.fill",
+                                  "stylers": [
+                                    {
+                                      "color": "#a5b076"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "featureType": "poi.park",
+                                  "elementType": "labels.text.fill",
+                                  "stylers": [
+                                    {
+                                      "color": "#447530"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "featureType": "road",
+                                  "elementType": "geometry",
+                                  "stylers": [
+                                    {
+                                      "color": "#f5f1e6"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "featureType": "road.arterial",
+                                  "elementType": "geometry",
+                                  "stylers": [
+                                    {
+                                      "color": "#fdfcf8"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "featureType": "road.highway",
+                                  "elementType": "geometry",
+                                  "stylers": [
+                                    {
+                                      "color": "#f8c967"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "featureType": "road.highway",
+                                  "elementType": "geometry.stroke",
+                                  "stylers": [
+                                    {
+                                      "color": "#e9bc62"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "featureType": "road.highway.controlled_access",
+                                  "elementType": "geometry",
+                                  "stylers": [
+                                    {
+                                      "color": "#e98d58"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "featureType": "road.highway.controlled_access",
+                                  "elementType": "geometry.stroke",
+                                  "stylers": [
+                                    {
+                                      "color": "#db8555"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "featureType": "road.local",
+                                  "elementType": "labels.text.fill",
+                                  "stylers": [
+                                    {
+                                      "color": "#806b63"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "featureType": "transit.line",
+                                  "elementType": "geometry",
+                                  "stylers": [
+                                    {
+                                      "color": "#dfd2ae"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "featureType": "transit.line",
+                                  "elementType": "labels.text.fill",
+                                  "stylers": [
+                                    {
+                                      "color": "#8f7d77"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "featureType": "transit.line",
+                                  "elementType": "labels.text.stroke",
+                                  "stylers": [
+                                    {
+                                      "color": "#ebe3cd"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "featureType": "transit.station",
+                                  "elementType": "geometry",
+                                  "stylers": [
+                                    {
+                                      "color": "#dfd2ae"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "featureType": "water",
+                                  "elementType": "geometry.fill",
+                                  "stylers": [
+                                    {
+                                      "color": "#b9d3c2"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "featureType": "water",
+                                  "elementType": "labels.text.fill",
+                                  "stylers": [
+                                    {
+                                      "color": "#92998d"
+                                    }
+                                  ]
+                                }
+                            ]
+                };
+                // google map style
+            
+                // Get the HTML DOM element that will contain your map 
+                // We are using a div with id="map" seen below in the <body>
+                var mapElement = document.getElementById('map');
+            
+                // Create the Google Map using our element and options defined above
+                var map = new google.maps.Map(mapElement, mapOptions);
+            
+                var locations = [
+                    ['New York 🇺🇸', 40.712, -74.006, "The city I love most till now, full of innovation and freedom. Stayed there for 1 month when 2012", "https://cdn.britannica.com/61/93061-050-99147DCE/Statue-of-Liberty-Island-New-York-Bay.jpg"],
+                    ['Boston 🇺🇸', 42.36, -71.0589, "Very relaxing city, and also the best education hub of the US", "https://media.nomadicmatt.com/boston_guide.jpg"], 
+                    ['Moscow 🇷🇺', 55.755, 37.617, "Russia captial, the Kremlin, red square are cool. Start point of my Siberia trip ", "https://static.toiimg.com/photo/msid-83890076,width-96,height-65.cms"],
+            
+            
+                    ['Saint Petersburg 🇷🇺', 59.9343, 30.335, "Most beautiful city of the Russia cities I visited, quite love its palace, museum and people", "https://velvetescape.com/wp-content/uploads/2017/10/IMG_5197-1280x920.jpg"],
+                    ['Kazan 🇷🇺', 55.83, 49.0661, "The capital of the Republic of Tatarstan (part of Russia), everything looks different from Europe since this city", "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0f/d5/04/53/qol-shariff-mosque.jpg?w=500&h=-1&s=1"],  
+                    ['Novosibirsk 🇷🇺', 55.00, 82.935, "Just passed by...Remembered it was a 2 days 23 hours train trip", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRxxYnHTrnKdiaQR50FrEmiXUDjpcosk5lEAg&usqp=CAU"],
+                    ['Yekaterinburg 🇷🇺',56.8389, 60.6,"Just passed by again.. There was historic events happened there", "https://static.independent.co.uk/s3fs-public/thumbnails/image/2017/01/06/19/yekaterinburg-3.jpg?width=1200"],
+                    ['Irkutsk 🇷🇺', 52.287, 104.305, "Visited there for the Lake Baikal trip!", "https://tigersontearoad.files.wordpress.com/2012/02/dsc_0032-2.jpg"], 
+                    ['Lake Baikal 🇷🇺', 53.558, 108.165, "Awesome place! very clean lake with natural views. should visit the frozen lake again when winter", "https://www.india.com/wp-content/uploads/2018/08/Lake-Baikal-1.jpg"],                    
+                    ['Ulan-Ude 🇷🇺', 51.823, 107.607, "The city very nearby Mongolia. Felt that I was not in the Russia", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTUaOD4y06KpCHaVPjTBqYR-UjKGv6CHkL8zQ&usqp=CAU"], 
+                    ['Khabarovsk 🇷🇺', 48.515, 135.101, "The city I off the train just for taking a shower...but interesting to see a mix of Russia and Asia"],
+                    ['Vladivostok 🇷🇺', 43.119, 131.8869, "Final stop of my Siberia trip (Moscow -> Vladivostok), quite like the sea-side and seafood, many Japanese and Korean there"],
+                    ['Montenegro 🇲🇪', 42.708, 19.374, ""],
+                    ['Krakow 🇵🇱', 50.06, 19.9450, ""],
+                    ['Prague 🇨🇿', 50.075, 14.4378, ""],
+                    ['Croatia 🇭🇷', 45.10, 15.20, ""],
+                    ['Brussel 🇧🇪', 50.85, 4.351, ""],
+                    ['Reykjavik 🇮🇸', 64.146, -21.94, "Iceland. ice everywhere (winter). sometimes feel I am not on the earth"],
+                    ['Berlin 🇩🇪', 52.520, 13.405, "Germany captial, east-west Germany comparison is interesting"],
+                    ['Paris 🇫🇷', 48.856, 2.352, "fancy city, should visit again"],
+                    ['Barcelona 🇪🇸', 41.38, 2.1734 , "famous travel point in Spain" ],
+                    ['Madrid 🇪🇸', 40.416,  -3.703 ,"a city build on the hillside" ],
+                    ['Valencia 🇪🇸', 39.469, 0.376 ,"beautiful city, I love the food and people there" ],
+                    ['Porto 🇵🇹', 41.157, -8.629 ,"my #1 travel city in Europe" ],
+                    ['Lisbon 🇵🇹', 38.722, -9.139 , "possibly my #2 travel city in Europe" ],
+                    ['Rome 🇮🇹' , 41.902, 12.496 , "Italy capital, very historic" ],
+                    ['Venice 🇮🇹', 45.4408, 12.315 , "relaxing city. I love the atmosphere" ],
+                    ['Helsinki  🇫🇮', 60.169, 24.938 , "Helsinki" ],
+                    ['Tallinn 🇪🇪', 59.43, 24.75 , "Tallinn" ],
+                    ['Riga 🇱🇻', 56.949, 24.10 , "Riga" ],
+                    ['Vilnius 🇱🇹', 54.687, 25.27 , "Vilnius" ],
+                    ['Edinburgh 🏴󠁧󠁢󠁳󠁣󠁴󠁿', 55.953, -3.188, "Elegant city, beginning of Skye trip"],
+                    ['London 🇬🇧', 51.516416, -0.118126, "The city I stayed 2 years. good old day!"],
+                    ['Marrakesh 🇲🇦', 31.62, -7.981, ""],
+                    ['Fez 🇲🇦', 34.0, -5.007, ""],
+                    ['Sahara 🇲🇦', 31.79, -7.09, ""],
+                    ['Seoul 🇰🇷', 37.56, 126.97, ""],
+                    ['Tokyo 🇯🇵', 35.676, 139.650, "Traveled there ~6 days myself. enjoyed midnight street wandering, exloring the hidden bar around the city."],
+                    ['Osaka 🇯🇵', 34.69, 135.50, "tranditonal JP city. palace/temple/gargen are so authentic. Just like Tainan in Taiwan."],
+                    ['Kobe 🇯🇵', 34.69, 135.195, "Cleaned, well development city. Must try Wagyu and Sukiyaki there!"],
+                    ['Sapporo 🇯🇵', 43.0618, 141.3545, "Very nice city !! I like Hokkaido, like its relaxing and well design city vibe"],
+                    ['Hakodate 🇯🇵', 41.7687, 40.729, "Amazing night view"],
+                    ['Kushiro 🇯🇵', 42.9849, 144.3818, "nice place"],
+                    ['Singapore 🇸🇬', 1.352, 103.819, "Had mall 1 week trip. Met friends and experienced life there. Believe I'll be back there one day."],
+                    ['Indonesia 🇮🇩', -0.789, 113.921, "Bali for ~ 5 days trip. Super hot but fun."],
+                    ['Hong-Kong 🇭🇰', 22.31, 114.169, "The city I used to worked and met good friends from. Old memory!"],
+                    ['Bangkok 🇹🇹', 13.7563, 100.5, "chilled"],
+                    ['Tainan 🇹🇼', 22.9997, 120.227, "The city with TW tranditon, food/culture/architecture are all good.", "https://www.taiwanobsessed.com/wp-content/uploads/2023/08/tainan-taiwan.jpg"],
+                    ['Taipei 🇹🇼', 25.03, 121.565, "My hometown. TW #1!", "https://a.cdn-hotels.com/gdcs/production36/d1512/fcb814af-aff9-409d-9641-aeb8d389650a.jpg"]
+                    ];
+            
+                // Let's also add a marker while we're at it
+                // for (i = 0; i < locations.length; i++){   
+            
+                //    var marker = new google.maps.Marker({
+                //        position: new google.maps.LatLng(locations[i][1],locations[i][2]),
+                //        map: map,
+                //        title: 'Snazzy!'
+                //    }) 
+            
+                //    var infowindow = new google.maps.InfoWindow();
+            
+                //    google.maps.event.addListener(marker, 'click', (function(marker, i) {
+                    
+                //     return function() {
+                //       infowindow.setContent( locations[i][0] + " : " + locations[i][3]);
+                //       infowindow.open(map, marker);}
+                //       })(marker, i));
+                  
+                // };
+            
+               for (i = 0; i < locations.length; i++) {
+                  var marker = new google.maps.Marker({
+                      position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+                      map: map,
+                      title: 'Snazzy!'
+                  });
+            
+                  var infowindow = new google.maps.InfoWindow();
+            
+                  google.maps.event.addListener(marker, 'click', (function (marker, i) {
+                      return function () {
+                          // Create a div element to hold the content
+                          var content = document.createElement('div');
+            
+            
+                          // Add the text content to the content div
+                          var text = document.createElement('p');
+                          text.textContent = locations[i][0] + " : " + locations[i][3]; // Add your text content here
+                          content.appendChild(text);
+            
+                          // Add the image to the content div
+                          var image = document.createElement('img');
+                          
+                           // image.src = 'https://www.studying-in-germany.org/wp-content/uploads/2023/02/germany-facts-1068x580.jpg'; // Add the URL of the image
+            
+                          image.src = locations[i][4];
+                          image.style.width = '100px'; // Set the width of the image
+                          content.appendChild(image);
+            
+                          // Set the content of the InfoWindow to the content div
+                          infowindow.setContent(content);
+                          infowindow.open(map, marker);
+                      }
+                  })(marker, i));
+              };
+            
+            
+            }
+         </script>
+      </head>
+      <body>
+         <!-- The element that will contain our Google Map. This is used in both the Javascript and CSS above. -->
+         <div id="map"></div>
+   </body>
+   <!-- google map  -->
+   <!-- /.container -->
+   </div>
+   <!-- /.banner -->
+   <!-- Footer -->
+   <footer class="mt-5">
+      <div class="container">
+         <div class="row">
+            <div class="col-lg-12 text-center">
+               <ul class="list-inline">
+                  <li class="list-inline-item"><a href="https://yennanliu.github.io/">Home</a></li>
+                  <li class="list-inline-item"><a href="https://yennanliu.github.io/about_me.html">About Me</a></li>
+                  <li class="list-inline-item"><a href="https://yennanliu.github.io/portfolios.html">Portfolios</a></li>
+                  <li class="list-inline-item"><a href="https://yennanliu.github.io/contact.html">Contact</a></li>
+                  <li class="list-inline-item"><a href="https://yennj12.js.org/yennj12_blog_V2/">Blog</a></li>
+               </ul>
+               <p>&copy; 2024 yen.dev.com All Rights Reserved.</p>
+            </div>
+         </div>
+      </div>
+   </footer>
+   <!-- jQuery -->
+   <script src="js/jquery.js"></script>
+   <!-- Bootstrap Core JavaScript -->
+   <script src="js/bootstrap.min.js"></script>
+   </body>
+</html>
