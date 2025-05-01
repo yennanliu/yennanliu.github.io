@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+      <title>About Me - Yen.Dev</title>
+      <meta name="description" content="Learn more about Yen, a software engineer with a passion for technology, travel, and entrepreneurship.">
+      
+      <!-- Open Graph / Facebook -->
+      <meta property="og:type" content="website">
+      <meta property="og:url" content="https://yennanliu.github.io/about_me.html">
+      <meta property="og:title" content="About Me - Yen.Dev">
+      <meta property="og:description" content="Learn more about Yen, a software engineer with a passion for technology, travel, and entrepreneurship.">
+      <meta property="og:image" content="https://yennanliu.github.io/img/website-preview.png">
+      
+      <!-- Twitter -->
+      <meta property="twitter:card" content="summary_large_image">
+      <meta property="twitter:url" content="https://yennanliu.github.io/about_me.html">
+      <meta property="twitter:title" content="About Me - Yen.Dev">
+      <meta property="twitter:description" content="Learn more about Yen, a software engineer with a passion for technology, travel, and entrepreneurship.">
+      <meta property="twitter:image" content="https://yennanliu.github.io/img/website-preview.png">
+      
+      <!-- Google analytics -->
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-X2DJ8VW74E"></script>
+      <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-X2DJ8VW74E');
+      </script>
+      
+      <!-- Bootstrap CSS -->
+      <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+      <!-- AOS Animation Library -->
+      <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+      <!-- Custom CSS -->
+      <style>
+         :root {
+            --primary-color: #4a6bff;
+            --secondary-color: #25d366;
+            --light-bg: #f8f9fa;
+            --dark-bg: #121212;
+            --light-text: #f8f9fa;
+            --dark-text: #212529;
+            --transition-speed: 0.3s;
+         }
+         
+         /* Base styles */
+         body {
+            font-family: 'Poppins', sans-serif;
+            transition: background-color var(--transition-speed), color var(--transition-speed);
+            scroll-behavior: smooth;
+            padding-top: 76px; /* Add padding for fixed navbar */
+         }
+         
+         /* Responsive typography */
+         h1.display-4 {
+            font-size: 2.5rem;
+         }
+         
+         .lead {
+            font-size: 1.1rem;
+         }
+         
+         @media (min-width: 768px) {
+            h1.display-4 {
+               font-size: 3.5rem;
+            }
+            
+            .lead {
+               font-size: 1.25rem;
+            }
+         }
+         
+         /* Responsive navbar */
+         .navbar {
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+            transition: all var(--transition-speed);
+            padding: 15px 0;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            background-color: rgba(255, 255, 255, 0.9) !important;
+         }
+         
+         @media (max-width: 991.98px) {
+            .navbar-collapse {
+               background-color: rgba(255, 255, 255, 0.95);
+               padding: 20px;
+               border-radius: 10px;
+               margin-top: 10px;
+            }
+            
+            .nav-link {
+               margin: 10px 0;
+            }
+            
+            .toggle-container {
+               margin: 15px 0;
+            }
+         }
+         
+         /* Responsive about section */
+         .about-section {
+            padding: 40px 0;
+            min-height: auto;
+         }
+         
+         @media (min-width: 768px) {
+            .about-section {
+               padding: 80px 0;
+            }
+         }
+         
+         /* Responsive map container */
+         .map-container {
+            height: 300px;
+            margin: 20px 0;
+         }
+         
+         @media (min-width: 768px) {
+            .map-container {
+               height: 500px;
+               margin: 40px 0;
+            }
+         }
+         
+         /* Responsive footer */
+         footer {
+            padding: 30px 0 20px;
+         }
+         
+         .list-inline {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+         }
+         
+         @media (min-width: 768px) {
+            footer {
+               padding: 40px 0 20px;
+            }
+            
+            .list-inline {
+               gap: 20px;
+            }
+         }
+         
+         /* Scroll to top button */
+         .scroll-top {
+            width: 40px;
+            height: 40px;
+            bottom: 20px;
+            right: 20px;
+         }
+         
+         @media (min-width: 768px) {
+            .scroll-top {
+               width: 50px;
+               height: 50px;
+               bottom: 30px;
+               right: 30px;
+            }
+         }
+         
+         .navbar-brand {
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--primary-color) !important;
+         }
+         
+         .nav-link {
+            font-weight: 500;
+            position: relative;
+            margin: 0 10px;
+         }
+         
+         .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--primary-color);
+            transition: width var(--transition-speed);
+         }
+         
+         .nav-link:hover::after {
+            width: 100%;
+         }
+         
+         footer {
+            background-color: var(--light-bg);
+            transition: background-color var(--transition-speed), color var(--transition-speed);
+         }
+         
+         .about-section {
+            padding: 80px 0;
+            background: linear-gradient(135deg, rgba(74, 107, 255, 0.1) 0%, rgba(37, 211, 102, 0.1) 100%);
+            border-radius: 0 0 50px 50px;
+            margin-bottom: 80px;
+         }
+         
+         .display-4 {
+            font-weight: 700;
+            margin-bottom: 20px;
+            font-size: 3.5rem;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+         }
+         
+         .lead {
+            font-size: 1.25rem;
+            font-weight: 400;
+            margin-bottom: 30px;
+            line-height: 1.8;
+         }
+         
+         .map-container {
+            height: 500px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            margin: 40px 0;
+         }
+         
+         #map {
+            width: 100%;
+            height: 100%;
+         }
+         
+         /* Dark mode styles */
+         body.dark-mode {
+            background-color: var(--dark-bg);
+            color: var(--light-text);
+         }
+         
+         body.dark-mode .navbar {
+            background-color: rgba(18, 18, 18, 0.9) !important;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+         }
+         
+         body.dark-mode .navbar-light .navbar-brand,
+         body.dark-mode .navbar-light .nav-link {
+            color: var(--light-text) !important;
+         }
+         
+         body.dark-mode footer {
+            background-color: #1e1e1e;
+            color: var(--light-text);
+         }
+         
+         body.dark-mode a {
+            color: #9ba4ff;
+         }
+         
+         /* Toggle button styles */
+         .toggle-container {
+            display: flex;
+            align-items: center;
+            margin-left: 15px;
+         }
+         
+         .theme-switch {
+            display: inline-block;
+            height: 24px;
+            position: relative;
+            width: 48px;
+         }
+         
+         .theme-switch input {
+            display: none;
+         }
+         
+         .slider {
+            background-color: #ccc;
+            bottom: 0;
+            cursor: pointer;
+            left: 0;
+            position: absolute;
+            right: 0;
+            top: 0;
+            transition: .4s;
+            border-radius: 24px;
+         }
+         
+         .slider:before {
+            background-color: white;
+            bottom: 4px;
+            content: "";
+            height: 16px;
+            left: 4px;
+            position: absolute;
+            transition: .4s;
+            width: 16px;
+            border-radius: 50%;
+         }
+         
+         input:checked + .slider {
+            background-color: var(--primary-color);
+         }
+         
+         input:checked + .slider:before {
+            transform: translateX(24px);
+         }
+         
+         .toggle-icons {
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            margin-left: 8px;
+         }
+         
+         /* Scroll to top button */
+         .scroll-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: var(--primary-color);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            z-index: 999;
+         }
+         
+         .scroll-top.visible {
+            opacity: 1;
+         }
+         
+         .scroll-top:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+         }
+         
+         /* Career path section styles */
+         .career-section {
+            background: linear-gradient(135deg, rgba(74, 107, 255, 0.05) 0%, rgba(37, 211, 102, 0.05) 100%);
+            padding: 60px 0;
+            margin-bottom: 50px;
+            position: relative;
+            overflow: hidden;
+         }
+         
+         .career-section::before {
+            content: '';
+            position: absolute;
+            top: -100px;
+            right: -100px;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, rgba(74, 107, 255, 0.1) 0%, rgba(37, 211, 102, 0.1) 100%);
+            z-index: 0;
+         }
+         
+         .career-section::after {
+            content: '';
+            position: absolute;
+            bottom: -100px;
+            left: -100px;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, rgba(37, 211, 102, 0.1) 0%, rgba(74, 107, 255, 0.1) 100%);
+            z-index: 0;
+         }
+         
+         .section-title {
+            font-weight: 700;
+            margin-bottom: 15px;
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+         }
+         
+         .title-underline {
+            height: 4px;
+            width: 70px;
+            margin: 0 auto;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            border-radius: 2px;
+            margin-bottom: 30px;
+         }
+         
+         .career-timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+            z-index: 1;
+         }
+         
+         .career-item {
+            display: flex;
+            background-color: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            z-index: 2;
+         }
+         
+         .career-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            border-radius: 5px 0 0 5px;
+         }
+         
+         .career-item:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 15px 35px rgba(74, 107, 255, 0.15);
+         }
+         
+         .career-icon {
+            flex-shrink: 0;
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 25px;
+            position: relative;
+         }
+         
+         .career-icon i {
+            font-size: 28px;
+            color: white;
+            z-index: 1;
+         }
+         
+         .pulse-effect {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: rgba(74, 107, 255, 0.4);
+            z-index: 0;
+            animation: pulse 2s infinite;
+         }
+         
+         @keyframes pulse {
+            0% {
+               transform: scale(1);
+               opacity: 0.8;
+            }
+            70% {
+               transform: scale(1.5);
+               opacity: 0;
+            }
+            100% {
+               transform: scale(1);
+               opacity: 0;
+            }
+         }
+         
+         .career-content {
+            flex-grow: 1;
+         }
+         
+         .career-content h3 {
+            font-weight: 600;
+            margin-bottom: 12px;
+            font-size: 1.5rem;
+         }
+         
+         .animate-gradient {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: gradient-shift 3s ease infinite;
+         }
+         
+         @keyframes gradient-shift {
+            0% {
+               background-position: 0% 50%;
+            }
+            50% {
+               background-position: 100% 50%;
+            }
+            100% {
+               background-position: 0% 50%;
+            }
+         }
+         
+         .career-skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 15px;
+         }
+         
+         .skill-tag {
+            background: rgba(74, 107, 255, 0.1);
+            color: var(--primary-color);
+            font-size: 0.9rem;
+            font-weight: 500;
+            padding: 6px 16px;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+         }
+         
+         .skill-tag:hover {
+            transform: translateY(-3px);
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+         }
+         
+         .timeline-connector {
+            position: relative;
+            height: 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 5px 0;
+         }
+         
+         .connector-line {
+            width: 2px;
+            height: 100%;
+            background: linear-gradient(to bottom, var(--primary-color), var(--secondary-color));
+         }
+         
+         .timeline-arrow {
+            position: absolute;
+            bottom: -5px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+         }
+         
+         .timeline-arrow i {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 5px 15px rgba(74, 107, 255, 0.3);
+            animation: bounce 2s infinite;
+         }
+         
+         @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+               transform: translateY(0);
+            }
+            40% {
+               transform: translateY(-8px);
+            }
+            60% {
+               transform: translateY(-4px);
+            }
+         }
+         
+         /* Dark mode career path styles */
+         body.dark-mode .career-item {
+            background-color: #1e1e1e;
+         }
+         
+         body.dark-mode .skill-tag {
+            background: rgba(74, 107, 255, 0.2);
+         }
+         
+         body.dark-mode .skill-tag:hover {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+         }
+         
+         /* Responsive career path styles */
+         @media (max-width: 768px) {
+            .career-item {
+               flex-direction: column;
+               padding: 25px;
+            }
+            
+            .career-icon {
+               margin-right: 0;
+               margin-bottom: 20px;
+            }
+            
+            .section-title {
+               font-size: 2rem;
+            }
+            
+            .career-item::before {
+               width: 100%;
+               height: 5px;
+               border-radius: 5px 5px 0 0;
+            }
+         }
+      </style>
+      <!-- Font Awesome -->
+      <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet">
+      <!-- Google Fonts -->
+      <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+   </head>
+   <body>
+      <!-- Navigation -->
+      <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+         <div class="container">
+            <a class="navbar-brand" href="https://yennanliu.github.io">Yen.Dev</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+               <ul class="navbar-nav ml-auto">
+                  <li class="nav-item">
+                     <a class="nav-link" href="https://yennanliu.github.io/about_me.html">About Me</a>
+                  </li>
+                  <li class="nav-item">
+                     <a class="nav-link" href="https://yennanliu.github.io/portfolios.html">Portfolios</a>
+                  </li>
+                  <li class="nav-item">
+                     <a class="nav-link" href="https://yennanliu.github.io/contact.html">Contact</a>
+                  </li>
+                  <li class="nav-item">
+                     <a class="nav-link" href="https://yennj12.js.org/yennj12_blog_V2/">Blog</a>
+                  </li>
+                  <li class="nav-item">
+                     <a class="nav-link" href="https://yennj12.js.org/index.html.backup.html">Old Site</a>
+                  </li>
+                  <!-- Dark mode toggle button -->
+                  <li class="nav-item toggle-container">
+                     <label class="theme-switch" for="theme-checkbox">
+                        <input type="checkbox" id="theme-checkbox" />
+                        <span class="slider"></span>
+                     </label>
+                     <div class="toggle-icons">
+                        <i class="fas fa-sun"></i>/<i class="fas fa-moon"></i>
+                     </div>
+                  </li>
+               </ul>
+            </div>
+         </div>
+      </nav>
+
+      <!-- About Section -->
+      <section class="about-section">
+         <div class="container">
+            <div class="row">
+               <div class="col-lg-12" data-aos="fade-up">
+                  <h1 class="display-4">About Me</h1>
+                  <p class="lead">Yen is a <b><i>slashie</i></b>, <b><i>digital nomad</i></b>, and <b><i>software engineer</i></b>, used to work in military, NGO, and companies around the world(UK/HK/SG/JP/TW). From Physics/Engineering but having entrepreneur mindset that is running his own business now. <span style="color:var(--primary-color);">#travel #tech #music #mobility</span> 🇬🇧 🇩🇪 🇪🇸 🇵🇹 🇮🇹 🇫🇷 🇳🇱 🇭🇷 🇲🇪 🇧🇪 🇨🇿 🇵🇱 🇫🇮 🇮🇸 🇱🇻 🇪🇪 🇱🇹 🇲🇦 🇻🇦 🇷🇺 🇺🇸 🇰🇷 🇯🇵 🇮🇩 🇸🇬 🇭🇰 🇹🇼 <b><i>"future is anyway you wanna flow"</i></b></p>
+                  <p class="lead">Visited 31 of 195 countries over the world</p>
+               </div>
+            </div>
+         </div>
+      </section>
+
+      <!-- Career Path Section -->
+      <section class="career-section py-5">
+         <div class="container">
+            <div class="row">
+               <div class="col-lg-12 text-center mb-5" data-aos="fade-up">
+                  <h2 class="section-title">My Career Journey</h2>
+                  <div class="title-underline"></div>
+               </div>
+            </div>
+            <div class="row">
+               <div class="col-lg-12">
+                  <div class="career-timeline" data-aos="fade-up">
+                     <!-- Timeline Item 1 -->
+                     <div class="career-item" data-aos="zoom-in-right" data-aos-delay="100">
+                        <div class="career-icon">
+                           <i class="fas fa-database"></i>
+                           <div class="pulse-effect"></div>
+                        </div>
+                        <div class="career-content">
+                           <h3 class="animate-gradient">Data Engineer</h3>
+                           <p>Started my journey building data pipelines, ETL processes, and data warehousing solutions. Worked with big data technologies like Hadoop, Spark, and various database systems.</p>
+                           <div class="career-skills">
+                              <span class="skill-tag">SQL</span>
+                              <span class="skill-tag">ETL</span>
+                              <span class="skill-tag">Python</span>
+                              <span class="skill-tag">Hadoop</span>
+                              <span class="skill-tag">Spark</span>
+                           </div>
+                        </div>
+                     </div>
+                     
+                     <!-- Timeline connector -->
+                     <div class="timeline-connector">
+                        <div class="connector-line"></div>
+                        <div class="timeline-arrow">
+                           <i class="fas fa-chevron-down"></i>
+                        </div>
+                     </div>
+                     
+                     <!-- Timeline Item 2 -->
+                     <div class="career-item" data-aos="zoom-in-left" data-aos-delay="200">
+                        <div class="career-icon">
+                           <i class="fas fa-code"></i>
+                           <div class="pulse-effect"></div>
+                        </div>
+                        <div class="career-content">
+                           <h3 class="animate-gradient">Software Engineer</h3>
+                           <p>Evolved into full-stack development, building robust applications and services. Expanded my toolkit with various frameworks and languages, focusing on creating scalable solutions.</p>
+                           <div class="career-skills">
+                              <span class="skill-tag">Java</span>
+                              <span class="skill-tag">Spring</span>
+                              <span class="skill-tag">REST APIs</span>
+                              <span class="skill-tag">Microservices</span>
+                              <span class="skill-tag">DevOps</span>
+                           </div>
+                        </div>
+                     </div>
+                     
+                     <!-- Timeline connector -->
+                     <div class="timeline-connector">
+                        <div class="connector-line"></div>
+                        <div class="timeline-arrow">
+                           <i class="fas fa-chevron-down"></i>
+                        </div>
+                     </div>
+                     
+                     <!-- Timeline Item 3 -->
+                     <div class="career-item" data-aos="zoom-in-right" data-aos-delay="300">
+                        <div class="career-icon">
+                           <i class="fas fa-brain"></i>
+                           <div class="pulse-effect"></div>
+                        </div>
+                        <div class="career-content">
+                           <h3 class="animate-gradient">Senior Developer</h3>
+                           <p>Leading development teams and architecting complex systems. Balancing technical leadership with mentoring, while continuing to evolve my technical skills and business understanding.</p>
+                           <div class="career-skills">
+                              <span class="skill-tag">Architecture</span>
+                              <span class="skill-tag">Team Leadership</span>
+                              <span class="skill-tag">System Design</span>
+                              <span class="skill-tag">Cloud Infrastructure</span>
+                              <span class="skill-tag">Strategic Planning</span>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </section>
+
+      <!-- Scroll to top button -->
+      <div class="scroll-top">
+         <i class="fas fa-arrow-up"></i>
+      </div>
+
+      <!-- Footer -->
+      <footer class="mt-5">
+         <div class="container">
+            <div class="row">
+               <div class="col-lg-12 text-center">
+                  <ul class="list-inline">
+                     <li class="list-inline-item"><a href="https://yennanliu.github.io/">Home</a></li>
+                     <li class="list-inline-item"><a href="https://yennanliu.github.io/about_me.html">About Me</a></li>
+                     <li class="list-inline-item"><a href="https://yennanliu.github.io/portfolios.html">Portfolios</a></li>
+                     <li class="list-inline-item"><a href="https://yennanliu.github.io/contact.html">Contact</a></li>
+                     <li class="list-inline-item"><a href="https://yennj12.js.org/yennj12_blog_V2/">Blog</a></li>
+                     <li class="list-inline-item"><a href="https://yennj12.js.org/index.html.backup.html">Old Site</a></li>                
+                  </ul>
+                  <p>&copy; 2024 yen.dev.com All Rights Reserved.</p>
+               </div>
+            </div>
+         </div>
+      </footer>
+      
+      <!-- jQuery, Popper.js, Bootstrap JS -->
+      <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+      <!-- AOS Animation Library -->
+      <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+      <!-- Custom JavaScript -->
+      <script>
+         // Initialize AOS animation
+         AOS.init({
+             duration: 800,
+             easing: 'ease-in-out',
+             once: true
+         });
+         
+         // Scroll to top button functionality
+         const scrollTopBtn = document.querySelector('.scroll-top');
+         
+         window.addEventListener('scroll', function() {
+             if (window.pageYOffset > 300) {
+                 scrollTopBtn.classList.add('visible');
+             } else {
+                 scrollTopBtn.classList.remove('visible');
+             }
+         });
+         
+         scrollTopBtn.addEventListener('click', function() {
+             window.scrollTo({
+                 top: 0,
+                 behavior: 'smooth'
+             });
+         });
+         
+         // Dark mode toggle functionality
+         document.addEventListener('DOMContentLoaded', function() {
+            const toggleSwitch = document.getElementById('theme-checkbox');
+            
+            // Check for saved theme preference or use device preference
+            const currentTheme = localStorage.getItem('theme') || 
+                (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+            
+            if (currentTheme === 'dark') {
+                document.body.classList.add('dark-mode');
+                toggleSwitch.checked = true;
+            }
+            
+            // Switch theme function
+            function switchTheme(event) {
+                if (event.target.checked) {
+                    document.body.classList.add('dark-mode');
+                    localStorage.setItem('theme', 'dark');
+                } else {
+                    document.body.classList.remove('dark-mode');
+                    localStorage.setItem('theme', 'light');
+                }
+            }
+            
+            // Event listener for toggle switch
+            toggleSwitch.addEventListener('change', switchTheme);
+         });
+      </script>
+   </body>
+</html>
