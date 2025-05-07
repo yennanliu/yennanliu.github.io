@@ -274,8 +274,22 @@
             top: 0;
             left: 0;
             z-index: 1;
-            opacity: 0.3;
-            background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1IiBoZWlnaHQ9IjUiPgo8cmVjdCB3aWR0aD0iNSIgaGVpZ2h0PSI1IiBmaWxsPSIjZmZmIj48L3JlY3Q+CjxyZWN0IHdpZHRoPSIxIiBoZWlnaHQ9IjEiIGZpbGw9IiNjY2MiPjwvcmVjdD4KPC9zdmc+');
+            opacity: 0.6;
+            background-size: 400% 400%;
+            background-image: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+            animation: gradient-animation 15s ease infinite;
+         }
+         
+         @keyframes gradient-animation {
+            0% {
+               background-position: 0% 50%;
+            }
+            50% {
+               background-position: 100% 50%;
+            }
+            100% {
+               background-position: 0% 50%;
+            }
          }
          
          .display-4 {
@@ -379,7 +393,7 @@
          }
          
          body.dark-mode .hero-section {
-            background: linear-gradient(135deg, rgba(74, 107, 255, 0.15) 0%, rgba(37, 211, 102, 0.15) 100%);
+            /* Keep the gradient background from hero-bg */
          }
          
          body.dark-mode .skills-item {
@@ -754,6 +768,26 @@
              
              // Event listener for toggle switch
              toggleSwitch.addEventListener('change', switchTheme);
+             
+             // Dynamic gradient colors
+             const heroBg = document.querySelector('.hero-bg');
+             const gradientColors = [
+                 ['#ee7752', '#e73c7e', '#23a6d5', '#23d5ab'], // Default
+                 ['#4158D0', '#C850C0', '#FFCC70'], // Purple-yellow
+                 ['#0093E9', '#80D0C7'], // Blue-teal
+                 ['#8EC5FC', '#E0C3FC'], // Light blue-purple
+                 ['#FBDA61', '#FF5ACD'] // Yellow-pink
+             ];
+             
+             let currentGradientIndex = 0;
+             
+             // Change gradient colors every 10 seconds
+             setInterval(() => {
+                 currentGradientIndex = (currentGradientIndex + 1) % gradientColors.length;
+                 const colors = gradientColors[currentGradientIndex];
+                 const newGradient = `linear-gradient(-45deg, ${colors.join(', ')})`;
+                 heroBg.style.backgroundImage = newGradient;
+             }, 10000);
          });
       </script>
    </body>
