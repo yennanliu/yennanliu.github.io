@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+      <title>AWS Architecture - Yen.Dev</title>
+      <meta name="description" content="Explore comprehensive AWS architecture solutions, from serverless applications to enterprise-scale cloud infrastructure designs.">
+      
+      <!-- Google analytics -->
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-X2DJ8VW74E"></script>
+      <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-X2DJ8VW74E');
+      </script>
+      
+      <!-- Bootstrap CSS -->
+      <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+      <!-- AOS Animation Library -->
+      <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+      <!-- Font Awesome -->
+      <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet">
+      <!-- Google Fonts -->
+      <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+      
+      <!-- Custom CSS -->
+      <style>
+         :root {
+            --primary-color: #4a6bff;
+            --secondary-color: #25d366;
+            --light-bg: #f8f9fa;
+            --dark-bg: #121212;
+            --light-text: #f8f9fa;
+            --dark-text: #212529;
+            --transition-speed: 0.3s;
+         }
+         
+         /* Base styles */
+         body {
+            font-family: 'Poppins', sans-serif;
+            transition: background-color var(--transition-speed), color var(--transition-speed);
+            scroll-behavior: smooth;
+            padding-top: 76px;
+         }
+         
+         /* Responsive typography */
+         h1.display-4 {
+            font-size: 2.5rem;
+         }
+         
+         .lead {
+            font-size: 1.1rem;
+         }
+         
+         @media (min-width: 768px) {
+            h1.display-4 {
+               font-size: 3.5rem;
+            }
+            
+            .lead {
+               font-size: 1.25rem;
+            }
+         }
+         
+         /* Responsive navbar */
+         .navbar {
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+            transition: all var(--transition-speed);
+            padding: 15px 0;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            background-color: rgba(255, 255, 255, 0.9) !important;
+         }
+         
+         @media (max-width: 991.98px) {
+            .navbar-collapse {
+               background-color: rgba(255, 255, 255, 0.95);
+               padding: 20px;
+               border-radius: 10px;
+               margin-top: 10px;
+            }
+            
+            .nav-link {
+               margin: 10px 0;
+            }
+            
+            .toggle-container {
+               margin: 15px 0;
+            }
+         }
+         
+         /* Responsive hero section */
+         .hero-section {
+            height: auto;
+            min-height: 30vh;
+            padding: 40px 0;
+         }
+         
+         @media (min-width: 768px) {
+            .hero-section {
+               height: 40vh;
+               padding: 60px 0;
+            }
+         }
+         
+         /* Responsive cards */
+         .card {
+            margin-bottom: 20px;
+         }
+         
+         .card-body {
+            padding: 15px;
+         }
+         
+         @media (min-width: 768px) {
+            .card {
+               margin-bottom: 30px;
+            }
+            
+            .card-body {
+               padding: 25px;
+            }
+         }
+         
+         /* Responsive buttons */
+         .btn-primary, .btn-outline-primary {
+            padding: 8px 16px;
+            font-size: 0.9rem;
+         }
+         
+         @media (min-width: 768px) {
+            .btn-primary, .btn-outline-primary {
+               padding: 10px 20px;
+               font-size: 1rem;
+            }
+         }
+         
+         /* Responsive footer */
+         footer {
+            padding: 30px 0 20px;
+         }
+         
+         .list-inline {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+         }
+         
+         @media (min-width: 768px) {
+            footer {
+               padding: 40px 0 20px;
+            }
+            
+            .list-inline {
+               gap: 20px;
+            }
+         }
+         
+         /* Scroll to top button */
+         .scroll-top {
+            width: 40px;
+            height: 40px;
+            bottom: 20px;
+            right: 20px;
+         }
+         
+         @media (min-width: 768px) {
+            .scroll-top {
+               width: 50px;
+               height: 50px;
+               bottom: 30px;
+               right: 30px;
+            }
+         }
+         
+         .navbar-brand {
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--primary-color) !important;
+         }
+         
+         .nav-link {
+            font-weight: 500;
+            position: relative;
+            margin: 0 10px;
+         }
+         
+         .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--primary-color);
+            transition: width var(--transition-speed);
+         }
+         
+         .nav-link:hover::after {
+            width: 100%;
+         }
+         
+         footer {
+            background-color: var(--light-bg);
+            transition: background-color var(--transition-speed), color var(--transition-speed);
+         }
+         
+         .hero-content {
+            position: relative;
+            z-index: 2;
+         }
+         
+         .hero-bg {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1;
+            opacity: 0.3;
+            background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1IiBoZWlnaHQ9IjUiPgo8cmVjdCB3aWR0aD0iNSIgaGVpZ2h0PSI1IiBmaWxsPSIjZmZmIj48L3JlY3Q+CjxyZWN0IHdpZHRoPSIxIiBoZWlnaHQ9IjEiIGZpbGw9IiNjY2MiPjwvcmVjdD4KPC9zdmc+');
+         }
+         
+         .display-4 {
+            font-weight: 700;
+            margin-bottom: 20px;
+            font-size: 3.5rem;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+         }
+         
+         .lead {
+            font-size: 1.25rem;
+            font-weight: 400;
+            margin-bottom: 30px;
+            line-height: 1.8;
+         }
+         
+         .card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            transition: all var(--transition-speed);
+            margin-bottom: 30px;
+            overflow: hidden;
+            height: 100%;
+         }
+         
+         .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+         }
+         
+         .card-title {
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+         }
+         
+         .card-text {
+            flex-grow: 1;
+            margin-bottom: 20px;
+         }
+         
+         .card-body {
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+         }
+         
+         .btn-primary {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            border: none;
+            padding: 10px 20px;
+            border-radius: 30px;
+            transition: all var(--transition-speed);
+            margin-right: 10px;
+         }
+         
+         .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(74, 107, 255, 0.3);
+         }
+         
+         .btn-outline-primary {
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+            padding: 10px 20px;
+            border-radius: 30px;
+            transition: all var(--transition-speed);
+         }
+         
+         .btn-outline-primary:hover {
+            background-color: var(--primary-color);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(74, 107, 255, 0.3);
+         }
+         
+         /* Dark mode styles */
+         body.dark-mode {
+            background-color: var(--dark-bg);
+            color: var(--light-text);
+         }
+         
+         body.dark-mode .navbar {
+            background-color: rgba(18, 18, 18, 0.9) !important;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+         }
+         
+         body.dark-mode .navbar-light .navbar-brand,
+         body.dark-mode .navbar-light .nav-link {
+            color: var(--light-text) !important;
+         }
+
+         /* Dark mode mobile navbar styles */
+         @media (max-width: 991.98px) {
+            body.dark-mode .navbar-collapse {
+               background-color: rgba(30, 30, 30, 0.95) !important;
+            }
+         }
+         
+         body.dark-mode .card {
+            background-color: #1e1e1e;
+            color: var(--light-text);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+         }
+         
+         body.dark-mode footer {
+            background-color: #1e1e1e;
+            color: var(--light-text);
+         }
+         
+         body.dark-mode a {
+            color: #9ba4ff;
+         }
+         
+         body.dark-mode .hero-section {
+            background: linear-gradient(135deg, rgba(74, 107, 255, 0.15) 0%, rgba(37, 211, 102, 0.15) 100%);
+         }
+         
+         body.dark-mode .btn-outline-primary {
+            color: #9ba4ff;
+            border-color: #9ba4ff;
+         }
+         
+         body.dark-mode .btn-outline-primary:hover {
+            background-color: #4a6bff;
+            color: var(--light-text);
+         }
+         
+         /* Toggle button styles */
+         .toggle-container {
+            display: flex;
+            align-items: center;
+            margin-left: 15px;
+         }
+         
+         .theme-switch {
+            display: inline-block;
+            height: 24px;
+            position: relative;
+            width: 48px;
+         }
+         
+         .theme-switch input {
+            display: none;
+         }
+         
+         .slider {
+            background-color: #ccc;
+            bottom: 0;
+            cursor: pointer;
+            left: 0;
+            position: absolute;
+            right: 0;
+            top: 0;
+            transition: .4s;
+            border-radius: 24px;
+         }
+         
+         .slider:before {
+            background-color: white;
+            bottom: 4px;
+            content: "";
+            height: 16px;
+            left: 4px;
+            position: absolute;
+            transition: .4s;
+            width: 16px;
+            border-radius: 50%;
+         }
+         
+         input:checked + .slider {
+            background-color: var(--primary-color);
+         }
+         
+         input:checked + .slider:before {
+            transform: translateX(24px);
+         }
+         
+         .toggle-icons {
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            margin-left: 8px;
+         }
+         
+         /* Floating scroll-to-top button */
+         .scroll-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: var(--primary-color);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            z-index: 999;
+         }
+         
+         .scroll-top.visible {
+            opacity: 1;
+         }
+         
+         .scroll-top:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+         }
+         
+         .project-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            font-weight: bold;
+            margin-right: 10px;
+         }
+         
+         /* Tech tags */
+         .tech-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 20px;
+         }
+         
+         .tech-tag {
+            background: rgba(74, 107, 255, 0.1);
+            color: var(--primary-color);
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            border: 1px solid rgba(74, 107, 255, 0.3);
+         }
+         
+         body.dark-mode .tech-tag {
+            background: rgba(74, 107, 255, 0.2);
+            color: #9ba4ff;
+         }
+         
+         /* Certification badges */
+         .cert-badge {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-block;
+            margin: 10px;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(74, 107, 255, 0.3);
+         }
+         
+         .cert-badge:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(74, 107, 255, 0.4);
+            color: white;
+            text-decoration: none;
+         }
+      </style>
+   </head>
+   <body>
+      <!-- Navigation -->
+      <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+         <div class="container">
+            <a class="navbar-brand" href="https://yennanliu.github.io">Yen.Dev</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+               <ul class="navbar-nav ml-auto">
+                  <li class="nav-item">
+                     <a class="nav-link" href="https://yennanliu.github.io/about_me.html">About Me</a>
+                  </li>
+                  <li class="nav-item">
+                     <a class="nav-link" href="https://yennanliu.github.io/portfolios.html">Portfolios</a>
+                  </li>
+                  <li class="nav-item">
+                     <a class="nav-link" href="https://yennanliu.github.io/aws_architecture.html">AWS Architecture</a>
+                  </li>
+                  <li class="nav-item">
+                     <a class="nav-link" href="https://yennanliu.github.io/contact.html">Contact</a>
+                  </li>
+                  <li class="nav-item">
+                     <a class="nav-link" href="https://yennj12.js.org/yennj12_blog_V2/">Blog</a>
+                  </li>
+                  <li class="nav-item">
+                     <a class="nav-link" href="https://yennj12.js.org/index.html.backup.html">Old Site</a>
+                  </li>
+                  <!-- Dark mode toggle button -->
+                  <li class="nav-item toggle-container">
+                     <label class="theme-switch" for="theme-checkbox">
+                        <input type="checkbox" id="theme-checkbox" />
+                        <span class="slider"></span>
+                     </label>
+                     <div class="toggle-icons">
+                        <i class="fas fa-sun"></i>/<i class="fas fa-moon"></i>
+                     </div>
+                  </li>
+               </ul>
+            </div>
+         </div>
+      </nav>
+
+      <!-- Hero Section -->
+      <section class="hero-section">
+         <div class="hero-bg"></div>
+         <div class="container hero-content">
+            <div class="row">
+               <div class="col-lg-12 text-center" data-aos="fade-up" data-aos-delay="100">
+                  <h1 class="display-4">AWS Architecture</h1>
+                  <p class="lead">Designing scalable, secure, and cost-effective cloud solutions</p>
+               </div>
+            </div>
+         </div>
+      </section>
+
+      <!-- Architecture Solutions Grid -->
+      <div class="container mt-5">
+         <div class="row">
+            <!-- 1) Serverless Architecture -->
+            <div class="col-md-6 col-lg-4 mb-4" data-aos="fade-up" data-aos-delay="100">
+               <div class="card h-100">
+                  <div class="card-body">
+                     <h5 class="card-title"><span class="project-number">1</span>Serverless Architecture</h5>
+                     <p class="card-text">Event-driven serverless applications using AWS Lambda, API Gateway, and DynamoDB. Perfect for high-scale, cost-effective solutions with automatic scaling.</p>
+                     <div class="tech-tags mb-3">
+                        <span class="tech-tag">Lambda</span>
+                        <span class="tech-tag">API Gateway</span>
+                        <span class="tech-tag">DynamoDB</span>
+                        <span class="tech-tag">S3</span>
+                        <span class="tech-tag">CloudWatch</span>
+                     </div>
+                     <div class="mt-auto">
+                        <a href="#" class="btn btn-primary">Learn More</a>
+                        <a href="https://github.com/yennanliu/cdk-playground" target="_blank" class="btn btn-outline-primary">Code</a>
+                     </div>
+                  </div>
+               </div>
+            </div>
+
+            <!-- 2) Microservices on EKS -->
+            <div class="col-md-6 col-lg-4 mb-4" data-aos="fade-up" data-aos-delay="200">
+               <div class="card h-100">
+                  <div class="card-body">
+                     <h5 class="card-title"><span class="project-number">2</span>Microservices on EKS</h5>
+                     <p class="card-text">Container-based microservices architecture using Amazon EKS (Kubernetes) with service mesh, auto-scaling, and comprehensive monitoring.</p>
+                     <div class="tech-tags mb-3">
+                        <span class="tech-tag">EKS</span>
+                        <span class="tech-tag">Fargate</span>
+                        <span class="tech-tag">App Mesh</span>
+                        <span class="tech-tag">ALB</span>
+                        <span class="tech-tag">ECR</span>
+                     </div>
+                     <div class="mt-auto">
+                        <a href="#" class="btn btn-primary">Learn More</a>
+                        <a href="https://github.com/yennanliu/k8s-playground" target="_blank" class="btn btn-outline-primary">Code</a>
+                     </div>
+                  </div>
+               </div>
+            </div>
+
+            <!-- 3) Data Lake Architecture -->
+            <div class="col-md-6 col-lg-4 mb-4" data-aos="fade-up" data-aos-delay="300">
+               <div class="card h-100">
+                  <div class="card-body">
+                     <h5 class="card-title"><span class="project-number">3</span>Data Lake & Analytics</h5>
+                     <p class="card-text">Modern data lake architecture with real-time streaming, batch processing, and advanced analytics. Built for big data processing with ML integration.</p>
+                     <div class="tech-tags mb-3">
+                        <span class="tech-tag">S3</span>
+                        <span class="tech-tag">Kinesis</span>
+                        <span class="tech-tag">Glue</span>
+                        <span class="tech-tag">Athena</span>
+                        <span class="tech-tag">Redshift</span>
+                     </div>
+                     <div class="mt-auto">
+                        <a href="#" class="btn btn-primary">Learn More</a>
+                        <a href="https://github.com/yennanliu/NYC_Taxi_Pipeline" target="_blank" class="btn btn-outline-primary">Code</a>
+                     </div>
+                  </div>
+               </div>
+            </div>
+
+            <!-- 4) Multi-Region HA -->
+            <div class="col-md-6 col-lg-4 mb-4" data-aos="fade-up" data-aos-delay="100">
+               <div class="card h-100">
+                  <div class="card-body">
+                     <h5 class="card-title"><span class="project-number">4</span>Multi-Region HA</h5>
+                     <p class="card-text">Highly available, disaster-resilient architecture spanning multiple AWS regions with automated failover, data replication, and global load balancing.</p>
+                     <div class="tech-tags mb-3">
+                        <span class="tech-tag">Route 53</span>
+                        <span class="tech-tag">CloudFront</span>
+                        <span class="tech-tag">RDS Cross-Region</span>
+                        <span class="tech-tag">VPC Peering</span>
+                        <span class="tech-tag">AWS Backup</span>
+                     </div>
+                     <div class="mt-auto">
+                        <a href="#" class="btn btn-primary">Learn More</a>
+                        <a href="https://github.com/yennanliu/aws-playground" target="_blank" class="btn btn-outline-primary">Code</a>
+                     </div>
+                  </div>
+               </div>
+            </div>
+
+            <!-- 5) DevOps & CI/CD -->
+            <div class="col-md-6 col-lg-4 mb-4" data-aos="fade-up" data-aos-delay="200">
+               <div class="card h-100">
+                  <div class="card-body">
+                     <h5 class="card-title"><span class="project-number">5</span>DevOps & CI/CD</h5>
+                     <p class="card-text">Comprehensive DevOps pipeline with Infrastructure as Code, automated testing, security scanning, and blue-green deployments for continuous delivery.</p>
+                     <div class="tech-tags mb-3">
+                        <span class="tech-tag">CodePipeline</span>
+                        <span class="tech-tag">CodeBuild</span>
+                        <span class="tech-tag">CloudFormation</span>
+                        <span class="tech-tag">CodeDeploy</span>
+                        <span class="tech-tag">CDK</span>
+                     </div>
+                     <div class="mt-auto">
+                        <a href="#" class="btn btn-primary">Learn More</a>
+                        <a href="https://github.com/yennanliu/cdk-playground" target="_blank" class="btn btn-outline-primary">Code</a>
+                     </div>
+                  </div>
+               </div>
+            </div>
+
+            <!-- 6) Security & Compliance -->
+            <div class="col-md-6 col-lg-4 mb-4" data-aos="fade-up" data-aos-delay="300">
+               <div class="card h-100">
+                  <div class="card-body">
+                     <h5 class="card-title"><span class="project-number">6</span>Security & Compliance</h5>
+                     <p class="card-text">Enterprise-grade security architecture with identity management, encryption, threat detection, and compliance frameworks for regulated industries.</p>
+                     <div class="tech-tags mb-3">
+                        <span class="tech-tag">IAM</span>
+                        <span class="tech-tag">KMS</span>
+                        <span class="tech-tag">GuardDuty</span>
+                        <span class="tech-tag">WAF</span>
+                        <span class="tech-tag">Config</span>
+                     </div>
+                     <div class="mt-auto">
+                        <a href="#" class="btn btn-primary">Learn More</a>
+                        <a href="https://github.com/yennanliu/aws-security" target="_blank" class="btn btn-outline-primary">Code</a>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+
+      <!-- AWS Skills Section -->
+      <div class="container">
+         <div class="card" data-aos="fade-up">
+            <div class="card-body">
+               <h3 class="text-center mb-4" style="color: var(--primary-color); font-weight: 700;">AWS Expertise Level</h3>
+               <div class="row">
+                  <div class="col-md-6">
+                     <div class="mb-3">
+                        <div class="d-flex justify-content-between">
+                           <span>Compute (EC2, Lambda, ECS/EKS)</span>
+                           <span>95%</span>
+                        </div>
+                        <div class="progress">
+                           <div class="progress-bar" role="progressbar" style="width: 95%; background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);"></div>
+                        </div>
+                     </div>
+                     <div class="mb-3">
+                        <div class="d-flex justify-content-between">
+                           <span>Storage (S3, EBS, EFS)</span>
+                           <span>90%</span>
+                        </div>
+                        <div class="progress">
+                           <div class="progress-bar" role="progressbar" style="width: 90%; background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);"></div>
+                        </div>
+                     </div>
+                     <div class="mb-3">
+                        <div class="d-flex justify-content-between">
+                           <span>Database (RDS, DynamoDB, Redshift)</span>
+                           <span>88%</span>
+                        </div>
+                        <div class="progress">
+                           <div class="progress-bar" role="progressbar" style="width: 88%; background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);"></div>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="col-md-6">
+                     <div class="mb-3">
+                        <div class="d-flex justify-content-between">
+                           <span>DevOps (CodePipeline, CloudFormation)</span>
+                           <span>92%</span>
+                        </div>
+                        <div class="progress">
+                           <div class="progress-bar" role="progressbar" style="width: 92%; background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);"></div>
+                        </div>
+                     </div>
+                     <div class="mb-3">
+                        <div class="d-flex justify-content-between">
+                           <span>Security (IAM, KMS, GuardDuty)</span>
+                           <span>87%</span>
+                        </div>
+                        <div class="progress">
+                           <div class="progress-bar" role="progressbar" style="width: 87%; background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);"></div>
+                        </div>
+                     </div>
+                     <div class="mb-3">
+                        <div class="d-flex justify-content-between">
+                           <span>Analytics (Kinesis, Glue, Athena)</span>
+                           <span>83%</span>
+                        </div>
+                        <div class="progress">
+                           <div class="progress-bar" role="progressbar" style="width: 83%; background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);"></div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+
+      <!-- AWS Certifications -->
+      <div class="container mt-5">
+         <div class="row">
+            <div class="col-lg-12 text-center" data-aos="fade-up">
+               <h3 class="mb-4" style="color: var(--primary-color); font-weight: 700;">AWS Certifications & Expertise</h3>
+               <div class="d-flex flex-wrap justify-content-center">
+                  <a href="#" class="cert-badge">
+                     <i class="fas fa-award mr-2"></i>AWS Solutions Architect
+                  </a>
+                  <a href="#" class="cert-badge">
+                     <i class="fas fa-cogs mr-2"></i>DevOps Engineer
+                  </a>
+                  <a href="#" class="cert-badge">
+                     <i class="fas fa-shield-alt mr-2"></i>Security Specialist
+                  </a>
+                  <a href="#" class="cert-badge">
+                     <i class="fas fa-chart-bar mr-2"></i>Big Data Analytics
+                  </a>
+               </div>
+            </div>
+         </div>
+      </div>
+
+      <!-- Scroll to top button -->
+      <div class="scroll-top">
+         <i class="fas fa-arrow-up"></i>
+      </div>
+
+      <!-- Footer -->
+      <footer class="mt-5">
+         <div class="container">
+            <div class="row">
+               <div class="col-lg-12 text-center">
+                  <ul class="list-inline">
+                     <li class="list-inline-item"><a href="https://yennanliu.github.io/">Home</a></li>
+                     <li class="list-inline-item"><a href="https://yennanliu.github.io/about_me.html">About Me</a></li>
+                     <li class="list-inline-item"><a href="https://yennanliu.github.io/portfolios.html">Portfolios</a></li>
+                     <li class="list-inline-item"><a href="https://yennanliu.github.io/aws_architecture.html">AWS Architecture</a></li>
+                     <li class="list-inline-item"><a href="https://yennanliu.github.io/contact.html">Contact</a></li>
+                     <li class="list-inline-item"><a href="https://yennj12.js.org/yennj12_blog_V2/">Blog</a></li>
+                     <li class="list-inline-item"><a href="https://yennj12.js.org/index.html.backup.html">Old Site</a></li>
+                  </ul>
+                  <p>&copy; 2024 yen.dev.com All Rights Reserved.</p>
+               </div>
+            </div>
+         </div>
+      </footer>
+
+      <!-- Scripts -->
+      <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+      <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+      
+      <script>
+         // Initialize AOS animation
+         AOS.init({
+             duration: 800,
+             easing: 'ease-in-out',
+             once: true
+         });
+
+         // Dark mode toggle functionality
+         document.addEventListener('DOMContentLoaded', function() {
+            const toggleSwitch = document.getElementById('theme-checkbox');
+            
+            // Check for saved theme preference or use device preference
+            const currentTheme = localStorage.getItem('theme') || 
+                (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+            
+            if (currentTheme === 'dark') {
+                document.body.classList.add('dark-mode');
+                toggleSwitch.checked = true;
+            }
+            
+            // Switch theme function
+            function switchTheme(event) {
+                if (event.target.checked) {
+                    document.body.classList.add('dark-mode');
+                    localStorage.setItem('theme', 'dark');
+                } else {
+                    document.body.classList.remove('dark-mode');
+                    localStorage.setItem('theme', 'light');
+                }
+            }
+            
+            // Event listener for toggle switch
+            toggleSwitch.addEventListener('change', switchTheme);
+         });
+
+         // Scroll to top button functionality
+         const scrollTopBtn = document.querySelector('.scroll-top');
+         
+         window.addEventListener('scroll', function() {
+             if (window.pageYOffset > 300) {
+                 scrollTopBtn.classList.add('visible');
+             } else {
+                 scrollTopBtn.classList.remove('visible');
+             }
+         });
+         
+         scrollTopBtn.addEventListener('click', function() {
+             window.scrollTo({
+                 top: 0,
+                 behavior: 'smooth'
+             });
+         });
+      </script>
+   </body>
+</html>
