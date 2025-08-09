@@ -14,6 +14,24 @@
         gtag('config', 'G-X2DJ8VW74E');
       </script>
       <!-- Google analytics -->
+      
+      <!-- PWA Meta Tags -->
+      <meta name="theme-color" content="#4a6bff">
+      <meta name="apple-mobile-web-app-capable" content="yes">
+      <meta name="apple-mobile-web-app-status-bar-style" content="default">
+      <meta name="apple-mobile-web-app-title" content="Yen.Dev">
+      <meta name="mobile-web-app-capable" content="yes">
+      <meta name="msapplication-TileColor" content="#4a6bff">
+      <meta name="msapplication-tap-highlight" content="no">
+      
+      <!-- PWA Icons -->
+      <link rel="icon" href="img/icon.svg" type="image/svg+xml">
+      <link rel="apple-touch-icon" href="img/icon.svg">
+      <link rel="mask-icon" href="img/icon.svg" color="#4a6bff">
+      
+      <!-- PWA Manifest -->
+      <link rel="manifest" href="manifest.json">
+      
       <!-- Bootstrap CSS -->
       <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
       <!-- AOS Animation Library -->
@@ -224,7 +242,9 @@
             background: rgba(74, 107, 255, 0.1);
          }
          
-         .skills-item:hover {
+         .skills-item:hover,
+         .skills-item:focus,
+         .skills-item:active {
             transform: translateY(-3px);
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
             text-decoration: none;
@@ -253,7 +273,9 @@
             transition: width var(--transition-speed);
          }
          
-         .nav-link:hover::after {
+         .nav-link:hover::after,
+         .nav-link:focus::after,
+         .nav-link:active::after {
             width: 100%;
          }
          
@@ -304,7 +326,9 @@
             height: 100%;
          }
          
-         .card:hover {
+         .card:hover,
+         .card:focus,
+         .card:active {
             transform: translateY(-5px);
             box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
          }
@@ -329,7 +353,9 @@
             margin-right: 10px;
          }
          
-         .btn-primary:hover {
+         .btn-primary:hover,
+         .btn-primary:focus,
+         .btn-primary:active {
             transform: translateY(-2px);
             box-shadow: 0 5px 15px rgba(74, 107, 255, 0.3);
          }
@@ -342,7 +368,9 @@
             transition: all var(--transition-speed);
          }
          
-         .btn-outline-primary:hover {
+         .btn-outline-primary:hover,
+         .btn-outline-primary:focus,
+         .btn-outline-primary:active {
             background-color: var(--primary-color);
             color: white;
             transform: translateY(-2px);
@@ -369,7 +397,9 @@
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
          }
          
-         .social-icon:hover {
+         .social-icon:hover,
+         .social-icon:focus,
+         .social-icon:active {
             transform: translateY(-10px);
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
          }
@@ -518,7 +548,9 @@
             opacity: 1;
          }
          
-         .scroll-top:hover {
+         .scroll-top:hover,
+         .scroll-top:focus,
+         .scroll-top:active {
             transform: translateY(-5px);
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
          }
@@ -534,6 +566,90 @@
             color: white;
             font-weight: bold;
             margin-right: 10px;
+         }
+
+         /* Touch-specific optimizations */
+         @media (hover: none) and (pointer: coarse) {
+            .skills-item:active {
+               transform: translateY(-3px);
+               box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+               text-decoration: none;
+               transition: all 0.1s ease;
+            }
+
+            .card:active {
+               transform: translateY(-5px);
+               box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+               transition: all 0.1s ease;
+            }
+
+            .btn-primary:active {
+               transform: translateY(-2px);
+               box-shadow: 0 5px 15px rgba(74, 107, 255, 0.3);
+               transition: all 0.1s ease;
+            }
+
+            .btn-outline-primary:active {
+               background-color: var(--primary-color);
+               color: white;
+               transform: translateY(-2px);
+               box-shadow: 0 5px 15px rgba(74, 107, 255, 0.3);
+               transition: all 0.1s ease;
+            }
+
+            .social-icon:active {
+               transform: translateY(-10px);
+               box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+               transition: all 0.1s ease;
+            }
+
+            .scroll-top:active {
+               transform: translateY(-5px);
+               box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+               transition: all 0.1s ease;
+            }
+
+            .nav-link:active::after {
+               width: 100%;
+               transition: width 0.1s ease;
+            }
+
+            /* Enhanced touch targets */
+            .btn, .nav-link, .skills-item {
+               min-height: 44px;
+               min-width: 44px;
+               display: inline-flex;
+               align-items: center;
+               justify-content: center;
+            }
+
+            .nav-link {
+               padding: 12px 16px;
+            }
+         }
+
+         /* Mobile-specific social icons stacking */
+         @media (max-width: 480px) {
+            .social-icons {
+               flex-direction: column;
+               align-items: center;
+               gap: 20px;
+               max-width: 200px;
+               margin: 40px auto;
+            }
+
+            .social-icon {
+               width: 55px;
+               height: 55px;
+            }
+         }
+
+         @media (min-width: 481px) and (max-width: 767px) {
+            .social-icons {
+               gap: 18px;
+               max-width: 400px;
+               margin: 40px auto;
+            }
          }
       </style>
       <!-- Font Awesome -->
@@ -818,6 +934,32 @@
              // Event listener for toggle switch
              toggleSwitch.addEventListener('change', switchTheme);
          });
+         
+         // Register Service Worker for PWA functionality
+         if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function() {
+               navigator.serviceWorker.register('/sw.js')
+                  .then(function(registration) {
+                     console.log('ServiceWorker registration successful with scope: ', registration.scope);
+                     
+                     // Check for updates
+                     registration.addEventListener('updatefound', () => {
+                        const newWorker = registration.installing;
+                        newWorker.addEventListener('statechange', () => {
+                           if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                              // Show update available notification
+                              if (confirm('A new version is available. Refresh to update?')) {
+                                 window.location.reload();
+                              }
+                           }
+                        });
+                     });
+                  })
+                  .catch(function(err) {
+                     console.log('ServiceWorker registration failed: ', err);
+                  });
+            });
+         }
       </script>
    </body>
 </html>

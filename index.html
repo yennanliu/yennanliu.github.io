@@ -20,6 +20,23 @@
       <meta property="twitter:description" content="I'm a software engineer specialized in backend solutions. From prototypes to formal launches, ensuring maintenance and monitoring.">
       <meta property="twitter:image" content="https://yennanliu.github.io/img/website-preview.png">
       
+      <!-- PWA Meta Tags -->
+      <meta name="theme-color" content="#4a6bff">
+      <meta name="apple-mobile-web-app-capable" content="yes">
+      <meta name="apple-mobile-web-app-status-bar-style" content="default">
+      <meta name="apple-mobile-web-app-title" content="Yen.Dev">
+      <meta name="mobile-web-app-capable" content="yes">
+      <meta name="msapplication-TileColor" content="#4a6bff">
+      <meta name="msapplication-tap-highlight" content="no">
+      
+      <!-- PWA Icons -->
+      <link rel="icon" href="img/icon.svg" type="image/svg+xml">
+      <link rel="apple-touch-icon" href="img/icon.svg">
+      <link rel="mask-icon" href="img/icon.svg" color="#4a6bff">
+      
+      <!-- PWA Manifest -->
+      <link rel="manifest" href="manifest.json">
+      
       <!-- Google analytics -->
       <script async src="https://www.googletagmanager.com/gtag/js?id=G-X2DJ8VW74E"></script>
       <script>
@@ -147,16 +164,44 @@
          .social-icons {
             flex-wrap: wrap;
             gap: 15px;
+            justify-content: center;
          }
          
          .social-icon {
             width: 50px;
             height: 50px;
+            /* Enhanced touch target for mobile */
+            min-width: 44px;
+            min-height: 44px;
          }
          
          .social-icon img {
             width: 25px;
             height: 25px;
+         }
+         
+         /* Mobile-specific: Stack social icons vertically on extra small screens */
+         @media (max-width: 480px) {
+            .social-icons {
+               flex-direction: column;
+               align-items: center;
+               gap: 20px;
+               max-width: 200px;
+               margin: 40px auto;
+            }
+            
+            .social-icon {
+               width: 55px;
+               height: 55px;
+            }
+         }
+         
+         @media (min-width: 481px) and (max-width: 767px) {
+            .social-icons {
+               gap: 18px;
+               max-width: 400px;
+               margin: 40px auto;
+            }
          }
          
          @media (min-width: 768px) {
@@ -224,10 +269,21 @@
             background: rgba(74, 107, 255, 0.1);
          }
          
-         .skills-item:hover {
+         .skills-item:hover,
+         .skills-item:focus,
+         .skills-item:active {
             transform: translateY(-3px);
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
             text-decoration: none;
+         }
+         
+         /* Touch-friendly interactions */
+         @media (hover: none) and (pointer: coarse) {
+            .skills-item:active {
+               transform: translateY(-3px);
+               box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+               transition: all 0.1s ease;
+            }
          }
          
          .navbar-brand {
@@ -316,9 +372,19 @@
             overflow: hidden;
          }
          
-         .card:hover {
+         .card:hover,
+         .card:focus-within {
             transform: translateY(-5px);
             box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+         }
+         
+         /* Touch-friendly card interactions */
+         @media (hover: none) and (pointer: coarse) {
+            .card:active {
+               transform: translateY(-5px);
+               box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+               transition: all 0.1s ease;
+            }
          }
          
          .card-body {
@@ -345,9 +411,19 @@
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
          }
          
-         .social-icon:hover {
+         .social-icon:hover,
+         .social-icon:focus {
             transform: translateY(-10px);
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+         }
+         
+         /* Touch-friendly social icon interactions */
+         @media (hover: none) and (pointer: coarse) {
+            .social-icon:active {
+               transform: translateY(-10px);
+               box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+               transition: all 0.1s ease;
+            }
          }
          
          .social-icon img {
@@ -488,9 +564,34 @@
             opacity: 1;
          }
          
-         .scroll-top:hover {
+         .scroll-top:hover,
+         .scroll-top:focus {
             transform: translateY(-5px);
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+         }
+         
+         /* Touch-friendly scroll-to-top */
+         @media (hover: none) and (pointer: coarse) {
+            .scroll-top:active {
+               transform: translateY(-5px);
+               box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+               transition: all 0.1s ease;
+            }
+         }
+         
+         /* Enhanced touch targets */
+         @media (hover: none) and (pointer: coarse) {
+            .btn, .nav-link, .skills-item {
+               min-height: 44px;
+               min-width: 44px;
+               display: inline-flex;
+               align-items: center;
+               justify-content: center;
+            }
+            
+            .nav-link {
+               padding: 12px 16px;
+            }
          }
          
          /* Typwriter effect */
@@ -796,6 +897,32 @@
                  heroBg.style.backgroundImage = newGradient;
              }, 10000);
          });
+         
+         // Register Service Worker for PWA functionality
+         if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function() {
+               navigator.serviceWorker.register('/sw.js')
+                  .then(function(registration) {
+                     console.log('ServiceWorker registration successful with scope: ', registration.scope);
+                     
+                     // Check for updates
+                     registration.addEventListener('updatefound', () => {
+                        const newWorker = registration.installing;
+                        newWorker.addEventListener('statechange', () => {
+                           if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                              // Show update available notification
+                              if (confirm('A new version is available. Refresh to update?')) {
+                                 window.location.reload();
+                              }
+                           }
+                        });
+                     });
+                  })
+                  .catch(function(err) {
+                     console.log('ServiceWorker registration failed: ', err);
+                  });
+            });
+         }
       </script>
    </body>
 </html>

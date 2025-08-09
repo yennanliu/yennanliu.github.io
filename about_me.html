@@ -20,6 +20,23 @@
       <meta property="twitter:description" content="Learn more about Yen, a software engineer with a passion for technology, travel, and entrepreneurship.">
       <meta property="twitter:image" content="https://yennanliu.github.io/img/website-preview.png">
       
+      <!-- PWA Meta Tags -->
+      <meta name="theme-color" content="#4a6bff">
+      <meta name="apple-mobile-web-app-capable" content="yes">
+      <meta name="apple-mobile-web-app-status-bar-style" content="default">
+      <meta name="apple-mobile-web-app-title" content="Yen.Dev">
+      <meta name="mobile-web-app-capable" content="yes">
+      <meta name="msapplication-TileColor" content="#4a6bff">
+      <meta name="msapplication-tap-highlight" content="no">
+      
+      <!-- PWA Icons -->
+      <link rel="icon" href="img/icon.svg" type="image/svg+xml">
+      <link rel="apple-touch-icon" href="img/icon.svg">
+      <link rel="mask-icon" href="img/icon.svg" color="#4a6bff">
+      
+      <!-- PWA Manifest -->
+      <link rel="manifest" href="manifest.json">
+      
       <!-- Google analytics -->
       <script async src="https://www.googletagmanager.com/gtag/js?id=G-X2DJ8VW74E"></script>
       <script>
@@ -186,7 +203,9 @@
             transition: width var(--transition-speed);
          }
          
-         .nav-link:hover::after {
+         .nav-link:hover::after,
+         .nav-link:focus::after,
+         .nav-link:active::after {
             width: 100%;
          }
          
@@ -345,7 +364,9 @@
             opacity: 1;
          }
          
-         .scroll-top:hover {
+         .scroll-top:hover,
+         .scroll-top:focus,
+         .scroll-top:active {
             transform: translateY(-5px);
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
          }
@@ -419,12 +440,16 @@
             box-shadow: 0 8px 40px rgba(0, 0, 0, 0.2);
          }
          
-         .career-item:hover {
+         .career-item:hover,
+         .career-item:focus,
+         .career-item:active {
             transform: translateY(-16px);
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
          }
          
-         body.dark-mode .career-item:hover {
+         body.dark-mode .career-item:hover,
+         body.dark-mode .career-item:focus,
+         body.dark-mode .career-item:active {
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
          }
          
@@ -514,7 +539,9 @@
             color: #f5f5f7;
          }
          
-         .skill-tag:hover {
+         .skill-tag:hover,
+         .skill-tag:focus,
+         .skill-tag:active {
             transform: translateY(-3px);
             background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
             color: white;
@@ -537,7 +564,9 @@
             box-shadow: 0 5px 15px rgba(74, 107, 255, 0.3);
          }
          
-         .career-cta:hover {
+         .career-cta:hover,
+         .career-cta:focus,
+         .career-cta:active {
             transform: translateY(-3px);
             box-shadow: 0 10px 25px rgba(74, 107, 255, 0.4);
             color: white;
@@ -577,6 +606,83 @@
             
             .career-content p {
                font-size: 16px;
+            }
+         }
+
+         /* Touch-specific optimizations */
+         @media (hover: none) and (pointer: coarse) {
+            .skill-tag:active {
+               transform: translateY(-3px);
+               background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+               color: white;
+               transition: all 0.1s ease;
+            }
+
+            .career-item:active {
+               transform: translateY(-16px);
+               box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+               transition: all 0.1s ease;
+            }
+
+            body.dark-mode .career-item:active {
+               box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+               transition: all 0.1s ease;
+            }
+
+            .career-cta:active {
+               transform: translateY(-3px);
+               box-shadow: 0 10px 25px rgba(74, 107, 255, 0.4);
+               color: white;
+               text-decoration: none;
+               transition: all 0.1s ease;
+            }
+
+            .scroll-top:active {
+               transform: translateY(-5px);
+               box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+               transition: all 0.1s ease;
+            }
+
+            .nav-link:active::after {
+               width: 100%;
+               transition: width 0.1s ease;
+            }
+
+            /* Enhanced touch targets */
+            .btn, .nav-link, .skill-tag, .career-cta {
+               min-height: 44px;
+               min-width: 44px;
+               display: inline-flex;
+               align-items: center;
+               justify-content: center;
+            }
+
+            .nav-link {
+               padding: 12px 16px;
+            }
+         }
+
+         /* Mobile-specific social icons stacking - Note: about_me.html doesn't have social icons section like other pages */
+         @media (max-width: 480px) {
+            .social-icons {
+               flex-direction: column;
+               align-items: center;
+               gap: 20px;
+               max-width: 200px;
+               margin: 40px auto;
+            }
+
+            .social-icon {
+               width: 55px;
+               height: 55px;
+            }
+         }
+
+         @media (min-width: 481px) and (max-width: 767px) {
+            .social-icons {
+               gap: 18px;
+               max-width: 400px;
+               margin: 40px auto;
             }
          }
       </style>
@@ -862,6 +968,32 @@
             // Event listener for toggle switch
             toggleSwitch.addEventListener('change', switchTheme);
          });
+         
+         // Register Service Worker for PWA functionality
+         if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function() {
+               navigator.serviceWorker.register('/sw.js')
+                  .then(function(registration) {
+                     console.log('ServiceWorker registration successful with scope: ', registration.scope);
+                     
+                     // Check for updates
+                     registration.addEventListener('updatefound', () => {
+                        const newWorker = registration.installing;
+                        newWorker.addEventListener('statechange', () => {
+                           if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                              // Show update available notification
+                              if (confirm('A new version is available. Refresh to update?')) {
+                                 window.location.reload();
+                              }
+                           }
+                        });
+                     });
+                  })
+                  .catch(function(err) {
+                     console.log('ServiceWorker registration failed: ', err);
+                  });
+            });
+         }
       </script>
    </body>
 </html>
