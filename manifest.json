@@ -1,0 +1,28 @@
+{
+  "name": "Yen.Dev - Software Engineer Portfolio",
+  "short_name": "Yen.Dev",
+  "description": "Portfolio website of a software engineer specialized in backend solutions, from prototypes to formal launches, ensuring maintenance and monitoring.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#4a6bff",
+  "theme_color": "#4a6bff",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "lang": "en",
+  "dir": "ltr",
+  "categories": ["portfolio", "business", "productivity"],
+  "icons": [
+    {
+      "src": "img/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "img/website-preview.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}
