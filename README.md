@@ -5,7 +5,7 @@ Portfolio website | [yennj12.js.org](https://yennj12.js.org/)
 ------------ | -------------
 Main Project |  [Main_Project](https://yennj12.js.org/main_project.html)
 About Me     |  [About_Me](https://yennj12.js.org/about_me.html)
-Blog     |  [Blog](https://yennj12.js.org/yennj12_blog_V2/)
+Blog     |  [Blog](https://yennj12.js.org/yennj12_blog_V4/)
 Contents  | 1. applications projects  2. collections of utility codes
 
 ## Intro
