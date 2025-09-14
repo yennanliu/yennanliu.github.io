@@ -27,50 +27,77 @@
       <!-- Custom CSS -->
       <style>
          :root {
-            --primary-color: #4a6bff;
-            --secondary-color: #25d366;
-            --light-bg: #f8f9fa;
-            --dark-bg: #121212;
-            --light-text: #f8f9fa;
-            --dark-text: #212529;
-            --transition-speed: 0.3s;
+            --apple-blue: #007AFF;
+            --apple-gray: #1d1d1f;
+            --apple-light-gray: #f5f5f7;
+            --apple-white: #ffffff;
+            --apple-text: #1d1d1f;
+            --apple-secondary-text: #86868b;
+            --apple-border: #d2d2d7;
+            --transition-speed: 0.28s;
+            --apple-radius: 18px;
+            --apple-shadow: 0 4px 8px rgba(0, 0, 0, 0.12);
          }
          
          /* Base styles */
          body {
-            font-family: 'Poppins', sans-serif;
-            transition: background-color var(--transition-speed), color var(--transition-speed);
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', Roboto, sans-serif;
+            background-color: var(--apple-white);
+            color: var(--apple-text);
+            line-height: 1.4705882353;
+            font-weight: 400;
+            letter-spacing: -.022em;
+            transition: all var(--transition-speed) ease-in-out;
             scroll-behavior: smooth;
-            padding-top: 76px;
+            padding-top: 44px;
          }
          
-         /* Responsive typography */
-         h1.display-4 {
-            font-size: 2.5rem;
+         /* Apple Typography */
+         .apple-headline {
+            font-size: 48px;
+            line-height: 1.0833333333;
+            font-weight: 600;
+            letter-spacing: -.003em;
+            color: var(--apple-text);
+            margin-bottom: 6px;
          }
          
-         .lead {
-            font-size: 1.1rem;
+         .apple-subheadline {
+            font-size: 28px;
+            line-height: 1.1428571429;
+            font-weight: 400;
+            letter-spacing: .007em;
+            color: var(--apple-secondary-text);
+            margin-bottom: 40px;
          }
          
-         @media (min-width: 768px) {
-            h1.display-4 {
-               font-size: 3.5rem;
+         .apple-body-large {
+            font-size: 21px;
+            line-height: 1.381;
+            font-weight: 400;
+            letter-spacing: .011em;
+         }
+         
+         @media (min-width: 1024px) {
+            .apple-headline {
+               font-size: 80px;
+               line-height: 1.05;
+               letter-spacing: -.015em;
             }
             
-            .lead {
-               font-size: 1.25rem;
+            .apple-subheadline {
+               font-size: 28px;
             }
          }
          
-         /* Responsive navbar */
+         /* Apple-style navbar */
          .navbar {
-            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
-            transition: all var(--transition-speed);
-            padding: 15px 0;
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            background-color: rgba(255, 255, 255, 0.9) !important;
+            background-color: rgba(255, 255, 255, 0.92) !important;
+            backdrop-filter: saturate(180%) blur(20px);
+            -webkit-backdrop-filter: saturate(180%) blur(20px);
+            border-bottom: 1px solid var(--apple-border);
+            padding: 8px 0;
+            transition: all var(--transition-speed) ease-in-out;
          }
          
          @media (max-width: 991.98px) {
@@ -90,36 +117,42 @@
             }
          }
          
-         /* Responsive hero section */
+         /* Apple-style hero section */
          .hero-section {
-            height: auto;
-            min-height: 30vh;
-            padding: 40px 0;
+            background: linear-gradient(180deg, var(--apple-light-gray) 0%, var(--apple-white) 100%);
+            padding: 66px 0 80px;
+            text-align: center;
          }
          
-         @media (min-width: 768px) {
+         @media (min-width: 1024px) {
             .hero-section {
-               height: 40vh;
-               padding: 60px 0;
+               padding: 106px 0 120px;
             }
          }
          
-         /* Responsive cards */
-         .card {
-            margin-bottom: 20px;
+         /* Apple-style product cards */
+         .architecture-card {
+            background: var(--apple-white);
+            border-radius: var(--apple-radius);
+            box-shadow: var(--apple-shadow);
+            border: 1px solid var(--apple-border);
+            transition: all var(--transition-speed) ease-in-out;
+            overflow: hidden;
+            margin-bottom: 40px;
          }
          
-         .card-body {
-            padding: 15px;
+         .architecture-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
          }
          
-         @media (min-width: 768px) {
-            .card {
-               margin-bottom: 30px;
-            }
-            
-            .card-body {
-               padding: 25px;
+         .architecture-card-body {
+            padding: 40px;
+         }
+         
+         @media (min-width: 1024px) {
+            .architecture-card-body {
+               padding: 60px;
             }
          }
          
@@ -176,181 +209,191 @@
          }
          
          .navbar-brand {
-            font-weight: 700;
-            font-size: 1.5rem;
-            color: var(--primary-color) !important;
+            font-weight: 600;
+            font-size: 21px;
+            color: var(--apple-text) !important;
+            letter-spacing: .011em;
          }
          
          .nav-link {
-            font-weight: 500;
-            position: relative;
-            margin: 0 10px;
+            font-weight: 400;
+            font-size: 12px;
+            color: var(--apple-text) !important;
+            opacity: 0.8;
+            transition: opacity var(--transition-speed) ease-in-out;
+            padding: 8px 8px;
+            margin: 0 4px;
          }
          
-         .nav-link::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: 0;
-            left: 0;
-            background-color: var(--primary-color);
-            transition: width var(--transition-speed);
-         }
-         
-         .nav-link:hover::after {
-            width: 100%;
+         .nav-link:hover {
+            opacity: 1;
+            color: var(--apple-text) !important;
          }
          
          footer {
-            background-color: var(--light-bg);
-            transition: background-color var(--transition-speed), color var(--transition-speed);
+            background-color: var(--apple-light-gray);
+            border-top: 1px solid var(--apple-border);
+            transition: all var(--transition-speed) ease-in-out;
          }
          
-         .hero-content {
-            position: relative;
-            z-index: 2;
-         }
-         
-         .hero-bg {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            z-index: 1;
-            opacity: 0.3;
-            background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1IiBoZWlnaHQ9IjUiPgo8cmVjdCB3aWR0aD0iNSIgaGVpZ2h0PSI1IiBmaWxsPSIjZmZmIj48L3JlY3Q+CjxyZWN0IHdpZHRoPSIxIiBoZWlnaHQ9IjEiIGZpbGw9IiNjY2MiPjwvcmVjdD4KPC9zdmc+');
-         }
-         
-         .display-4 {
-            font-weight: 700;
-            margin-bottom: 20px;
-            font-size: 3.5rem;
-            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-         }
-         
-         .lead {
-            font-size: 1.25rem;
+         /* Apple-style buttons */
+         .apple-button {
+            background: var(--apple-blue);
+            color: var(--apple-white);
+            border: none;
+            border-radius: 980px;
+            padding: 8px 16px;
+            font-size: 12px;
             font-weight: 400;
-            margin-bottom: 30px;
-            line-height: 1.8;
+            letter-spacing: -.01em;
+            min-width: 28px;
+            transition: all var(--transition-speed) ease-in-out;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            line-height: 1.33337;
          }
          
-         .card {
-            border: none;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-            transition: all var(--transition-speed);
-            margin-bottom: 30px;
-            overflow: hidden;
-            height: 100%;
+         .apple-button:hover {
+            background: #0051d5;
+            color: var(--apple-white);
+            text-decoration: none;
          }
          
-         .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+         .apple-button-large {
+            padding: 12px 24px;
+            font-size: 17px;
+            min-width: 44px;
          }
          
-         .card-title {
-            font-weight: 600;
-            color: var(--primary-color);
-            margin-bottom: 15px;
+         /* Apple-style sections */
+         .apple-section {
+            padding: 100px 0;
          }
          
-         .card-text {
-            flex-grow: 1;
-            margin-bottom: 20px;
-         }
-         
-         .card-body {
-            padding: 25px;
-            display: flex;
-            flex-direction: column;
-         }
-         
-         .btn-primary {
-            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
-            border: none;
-            padding: 10px 20px;
-            border-radius: 30px;
-            transition: all var(--transition-speed);
-            margin-right: 10px;
-         }
-         
-         .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(74, 107, 255, 0.3);
-         }
-         
-         .btn-outline-primary {
-            border: 2px solid var(--primary-color);
-            color: var(--primary-color);
-            padding: 10px 20px;
-            border-radius: 30px;
-            transition: all var(--transition-speed);
-         }
-         
-         .btn-outline-primary:hover {
-            background-color: var(--primary-color);
-            color: white;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(74, 107, 255, 0.3);
-         }
-         
-         /* Dark mode styles */
-         body.dark-mode {
-            background-color: var(--dark-bg);
-            color: var(--light-text);
-         }
-         
-         body.dark-mode .navbar {
-            background-color: rgba(18, 18, 18, 0.9) !important;
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-         }
-         
-         body.dark-mode .navbar-light .navbar-brand,
-         body.dark-mode .navbar-light .nav-link {
-            color: var(--light-text) !important;
-         }
-
-         /* Dark mode mobile navbar styles */
-         @media (max-width: 991.98px) {
-            body.dark-mode .navbar-collapse {
-               background-color: rgba(30, 30, 30, 0.95) !important;
+         @media (max-width: 1023px) {
+            .apple-section {
+               padding: 80px 0;
             }
          }
          
-         body.dark-mode .card {
-            background-color: #1e1e1e;
-            color: var(--light-text);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+         .apple-product-title {
+            font-size: 24px;
+            line-height: 1.16667;
+            font-weight: 600;
+            letter-spacing: .009em;
+            color: var(--apple-text);
+            margin-bottom: 8px;
          }
          
-         body.dark-mode footer {
-            background-color: #1e1e1e;
-            color: var(--light-text);
+         .apple-product-subtitle {
+            font-size: 19px;
+            line-height: 1.2105263158;
+            font-weight: 400;
+            letter-spacing: .012em;
+            color: var(--apple-secondary-text);
+            margin-bottom: 20px;
          }
          
-         body.dark-mode a {
-            color: #9ba4ff;
+         /* Architecture showcase grid */
+         .architecture-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 40px;
+            margin: 80px 0;
+         }
+         
+         @media (min-width: 768px) {
+            .architecture-grid {
+               grid-template-columns: 1fr 1fr;
+            }
+         }
+         
+         .architecture-visual {
+            background: var(--apple-light-gray);
+            border-radius: var(--apple-radius);
+            padding: 40px;
+            text-align: center;
+            min-height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+         }
+         
+         .architecture-visual img {
+            width: 100%;
+            height: auto;
+            max-width: 400px;
+         }
+         
+         /* Apple-style tech tags */
+         .tech-tag {
+            background: var(--apple-light-gray);
+            color: var(--apple-secondary-text);
+            padding: 4px 12px;
+            border-radius: 16px;
+            font-size: 12px;
+            font-weight: 400;
+            margin: 2px 4px 2px 0;
+            display: inline-block;
+         }
+         
+         /* Apple-style links */
+         .apple-link {
+            color: var(--apple-blue);
+            text-decoration: none;
+            font-size: 17px;
+            line-height: 1.23529;
+            font-weight: 400;
+            letter-spacing: -.022em;
+         }
+         
+         .apple-link:hover {
+            text-decoration: underline;
+            color: var(--apple-blue);
+         }
+         
+         /* Apple dark mode */
+         body.dark-mode {
+            background-color: #000000;
+            color: #f5f5f7;
+         }
+         
+         body.dark-mode .navbar {
+            background-color: rgba(29, 29, 31, 0.92) !important;
+            border-bottom: 1px solid #424245;
+         }
+         
+         body.dark-mode .navbar-brand,
+         body.dark-mode .nav-link {
+            color: #f5f5f7 !important;
          }
          
          body.dark-mode .hero-section {
-            background: linear-gradient(135deg, rgba(74, 107, 255, 0.15) 0%, rgba(37, 211, 102, 0.15) 100%);
+            background: linear-gradient(180deg, #1d1d1f 0%, #000000 100%);
          }
          
-         body.dark-mode .btn-outline-primary {
-            color: #9ba4ff;
-            border-color: #9ba4ff;
+         body.dark-mode .apple-headline {
+            color: #f5f5f7;
          }
          
-         body.dark-mode .btn-outline-primary:hover {
-            background-color: #4a6bff;
-            color: var(--light-text);
+         body.dark-mode .architecture-card {
+            background: #1d1d1f;
+            border-color: #424245;
+         }
+         
+         body.dark-mode .architecture-visual {
+            background: #1d1d1f;
+         }
+         
+         body.dark-mode .tech-tag {
+            background: #424245;
+            color: #a1a1a6;
+         }
+         
+         body.dark-mode footer {
+            background-color: #1d1d1f;
+            border-top: 1px solid #424245;
          }
          
          /* Toggle button styles */
@@ -542,19 +585,114 @@
 
       <!-- Hero Section -->
       <section class="hero-section">
-         <div class="hero-bg"></div>
-         <div class="container hero-content">
-            <div class="row">
-               <div class="col-lg-12 text-center" data-aos="fade-up" data-aos-delay="100">
-                  <h1 class="display-4">AWS Architecture</h1>
-                  <p class="lead">Designing scalable, secure, and cost-effective cloud solutions</p>
+         <div class="container">
+            <div class="row justify-content-center">
+               <div class="col-lg-8 text-center" data-aos="fade-up" data-aos-delay="100">
+                  <h1 class="apple-headline">你能想到的架構，<br>AWS 就能做到。</h1>
+                  <p class="apple-subheadline">Everything you can imagine in cloud architecture, AWS can do.</p>
+                  <a href="#architectures" class="apple-button apple-button-large">探索架構</a>
                </div>
             </div>
          </div>
       </section>
 
-      <!-- Architecture Solutions Grid -->
-      <div class="container mt-5">
+      <!-- Architecture Showcase Section -->
+      <section class="apple-section" id="architectures">
+         <div class="container">
+            
+            <!-- Serverless Architecture -->
+            <div class="architecture-grid" data-aos="fade-up" data-aos-delay="100">
+               <div class="architecture-card-body">
+                  <h2 class="apple-product-title">Serverless Architecture</h2>
+                  <p class="apple-product-subtitle">無伺服器架構</p>
+                  <p class="apple-body-large">Event-driven applications that scale automatically. Perfect for modern cloud-native solutions with zero server management.</p>
+                  <div class="mb-4">
+                     <span class="tech-tag">Lambda</span>
+                     <span class="tech-tag">API Gateway</span>
+                     <span class="tech-tag">DynamoDB</span>
+                     <span class="tech-tag">S3</span>
+                     <span class="tech-tag">CloudWatch</span>
+                  </div>
+                  <a href="https://github.com/yennanliu/cdk-playground" class="apple-link" target="_blank">View Code ›</a>
+               </div>
+               <div class="architecture-visual">
+                  <img src="https://d1.awsstatic.com/architecture-diagrams/ArchitectureDiagrams/serverless-web-application-on-aws.aa2fa14b4de0395d15d2c3e0e1ea1b4a3b14d7f6.png" 
+                       alt="Serverless Architecture Diagram" 
+                       class="img-fluid">
+               </div>
+            </div>
+
+            <!-- Microservices Architecture -->
+            <div class="architecture-grid" data-aos="fade-up" data-aos-delay="200">
+               <div class="architecture-visual">
+                  <img src="https://d1.awsstatic.com/architecture-diagrams/ArchitectureDiagrams/microservices-with-eks.b5b717681c9b7a7c6a9b92b4b45e8b5073e1b8c9.png" 
+                       alt="Microservices Architecture" 
+                       class="img-fluid">
+               </div>
+               <div class="architecture-card-body">
+                  <h2 class="apple-product-title">Microservices with EKS</h2>
+                  <p class="apple-product-subtitle">容器化微服務</p>
+                  <p class="apple-body-large">Container-based architecture using Kubernetes. Build scalable applications with independent services that can be developed and deployed separately.</p>
+                  <div class="mb-4">
+                     <span class="tech-tag">EKS</span>
+                     <span class="tech-tag">Fargate</span>
+                     <span class="tech-tag">App Mesh</span>
+                     <span class="tech-tag">ALB</span>
+                     <span class="tech-tag">ECR</span>
+                  </div>
+                  <a href="https://github.com/yennanliu/k8s-playground" class="apple-link" target="_blank">View Code ›</a>
+               </div>
+            </div>
+
+            <!-- Data Lake Architecture -->
+            <div class="architecture-grid" data-aos="fade-up" data-aos-delay="300">
+               <div class="architecture-card-body">
+                  <h2 class="apple-product-title">Data Lake & Analytics</h2>
+                  <p class="apple-product-subtitle">現代數據湖</p>
+                  <p class="apple-body-large">Modern data architecture with real-time streaming and advanced analytics. Process big data with machine learning integration at scale.</p>
+                  <div class="mb-4">
+                     <span class="tech-tag">S3</span>
+                     <span class="tech-tag">Kinesis</span>
+                     <span class="tech-tag">Glue</span>
+                     <span class="tech-tag">Athena</span>
+                     <span class="tech-tag">Redshift</span>
+                  </div>
+                  <a href="https://github.com/yennanliu/NYC_Taxi_Pipeline" class="apple-link" target="_blank">View Code ›</a>
+               </div>
+               <div class="architecture-visual">
+                  <img src="https://d1.awsstatic.com/architecture-diagrams/ArchitectureDiagrams/data-lake-architecture.34dc56e7a4a1de0436d9b8b17c7e28dfe65cf5a8.png" 
+                       alt="Data Lake Architecture" 
+                       class="img-fluid">
+               </div>
+            </div>
+
+            <!-- Multi-Region HA -->
+            <div class="architecture-grid" data-aos="fade-up" data-aos-delay="100">
+               <div class="architecture-visual">
+                  <img src="https://d1.awsstatic.com/architecture-diagrams/ArchitectureDiagrams/multi-region-application-architecture.1e7e3b5e0e4c8b5a6b1c8b5073e1b8c9.png" 
+                       alt="Multi-Region Architecture" 
+                       class="img-fluid">
+               </div>
+               <div class="architecture-card-body">
+                  <h2 class="apple-product-title">Multi-Region HA</h2>
+                  <p class="apple-product-subtitle">多區域高可用</p>
+                  <p class="apple-body-large">Disaster-resilient architecture spanning multiple AWS regions. Automated failover with global load balancing for maximum uptime.</p>
+                  <div class="mb-4">
+                     <span class="tech-tag">Route 53</span>
+                     <span class="tech-tag">CloudFront</span>
+                     <span class="tech-tag">RDS Cross-Region</span>
+                     <span class="tech-tag">VPC Peering</span>
+                     <span class="tech-tag">AWS Backup</span>
+                  </div>
+                  <a href="https://github.com/yennanliu/aws-playground" class="apple-link" target="_blank">View Code ›</a>
+               </div>
+            </div>
+            
+         </div>
+      </section>
+
+      <!-- Legacy Architecture Solutions Grid -->
+      <div class="container mt-5" style="display: none;">
          <div class="row">
             <!-- 1) Serverless Architecture -->
             <div class="col-md-6 col-lg-4 mb-4" data-aos="fade-up" data-aos-delay="100">
