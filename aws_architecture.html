@@ -404,26 +404,29 @@
          
          .architecture-visual img {
             width: 100%;
-            height: auto;
-            max-width: 100%;
+            height: 100%;
+            max-width: none;
             border-radius: 8px;
+            object-fit: contain;
          }
          
          @media (min-width: 768px) {
             .architecture-visual {
-               padding: 30px;
-               min-height: 250px;
+               padding: 20px;
+               min-height: 350px;
             }
             
             .architecture-visual img {
-               max-width: 400px;
+               width: 100%;
+               height: 100%;
+               max-width: none;
             }
          }
          
          @media (min-width: 1024px) {
             .architecture-visual {
-               padding: 40px;
-               min-height: 300px;
+               padding: 20px;
+               min-height: 400px;
             }
          }
          
@@ -454,7 +457,7 @@
             color: var(--apple-blue);
          }
          
-         /* Apple dark mode */
+         /* Apple dark mode - Enhanced */
          body.dark-mode {
             background-color: #000000;
             color: #f5f5f7;
@@ -478,23 +481,105 @@
             color: #f5f5f7;
          }
          
+         body.dark-mode .apple-subheadline {
+            color: #a1a1a6;
+         }
+         
          body.dark-mode .architecture-card {
             background: #1d1d1f;
             border-color: #424245;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+         }
+         
+         body.dark-mode .architecture-card:hover {
+            background: #2d2d2f;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
          }
          
          body.dark-mode .architecture-visual {
-            background: #1d1d1f;
+            background: #2d2d2f;
+            border: 1px solid #424245;
+         }
+         
+         body.dark-mode .architecture-card-body {
+            color: #f5f5f7;
+         }
+         
+         body.dark-mode .apple-product-title {
+            color: #f5f5f7;
+         }
+         
+         body.dark-mode .apple-product-subtitle {
+            color: #a1a1a6;
+         }
+         
+         body.dark-mode .apple-body-large {
+            color: #d1d1d6;
          }
          
          body.dark-mode .tech-tag {
             background: #424245;
             color: #a1a1a6;
+            border: 1px solid #525255;
+         }
+         
+         body.dark-mode .apple-link {
+            color: #7ba7ff;
+         }
+         
+         body.dark-mode .apple-link:hover {
+            color: #9bb9ff;
+         }
+         
+         body.dark-mode .apple-button {
+            background: #007AFF;
+            color: #ffffff;
+         }
+         
+         body.dark-mode .apple-button:hover {
+            background: #0051d5;
          }
          
          body.dark-mode footer {
             background-color: #1d1d1f;
             border-top: 1px solid #424245;
+            color: #a1a1a6;
+         }
+         
+         body.dark-mode footer a {
+            color: #7ba7ff;
+         }
+         
+         body.dark-mode footer a:hover {
+            color: #9bb9ff;
+         }
+         
+         /* Dark mode mobile navbar styles */
+         @media (max-width: 991.98px) {
+            body.dark-mode .navbar-collapse {
+               background-color: rgba(29, 29, 31, 0.95) !important;
+               border: 1px solid #424245;
+            }
+         }
+         
+         /* Dark mode progress bars (if any) */
+         body.dark-mode .progress {
+            background-color: #424245;
+         }
+         
+         body.dark-mode .progress-bar {
+            background-color: #f5f5f7 !important;
+         }
+         
+         /* Dark mode certification badges */
+         body.dark-mode .cert-badge {
+            background: linear-gradient(135deg, #007AFF 0%, #5AC8FA 100%);
+            color: #ffffff;
+            box-shadow: 0 5px 15px rgba(0, 122, 255, 0.3);
+         }
+         
+         body.dark-mode .cert-badge:hover {
+            box-shadow: 0 10px 25px rgba(0, 122, 255, 0.4);
          }
          
          /* Toggle button styles */
@@ -878,7 +963,7 @@
                      <span class="tech-tag">ALB</span>
                      <span class="tech-tag">ECR</span>
                   </div>
-                  <a href="https://github.com/yennanliu/k8s-playground" class="apple-link" target="_blank">View Code ›</a>
+                  <a href="https://github.com/yennanliu/cdk-playground" class="apple-link" target="_blank">View Code ›</a>
                </div>
             </div>
 
@@ -895,7 +980,7 @@
                      <span class="tech-tag">Athena</span>
                      <span class="tech-tag">Redshift</span>
                   </div>
-                  <a href="https://github.com/yennanliu/NYC_Taxi_Pipeline" class="apple-link" target="_blank">View Code ›</a>
+                  <a href="https://github.com/yennanliu/cdk-playground" class="apple-link" target="_blank">View Code ›</a>
                </div>
                <div class="architecture-visual">
                   <img src="img/data-lake-architecture.png" 
@@ -922,7 +1007,7 @@
                      <span class="tech-tag">VPC Peering</span>
                      <span class="tech-tag">AWS Backup</span>
                   </div>
-                  <a href="https://github.com/yennanliu/aws-playground" class="apple-link" target="_blank">View Code ›</a>
+                  <a href="https://github.com/yennanliu/cdk-playground" class="apple-link" target="_blank">View Code ›</a>
                </div>
             </div>
             
