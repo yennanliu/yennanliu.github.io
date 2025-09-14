@@ -78,6 +78,51 @@
             letter-spacing: .011em;
          }
          
+         /* Mobile First Responsive Typography */
+         @media (max-width: 480px) {
+            .apple-headline {
+               font-size: 32px;
+               line-height: 1.1;
+               letter-spacing: -.002em;
+               margin-bottom: 16px;
+            }
+            
+            .apple-subheadline {
+               font-size: 18px;
+               line-height: 1.3;
+               margin-bottom: 30px;
+            }
+            
+            .apple-body-large {
+               font-size: 16px;
+               line-height: 1.4;
+            }
+         }
+         
+         @media (min-width: 481px) and (max-width: 768px) {
+            .apple-headline {
+               font-size: 40px;
+               line-height: 1.08;
+               letter-spacing: -.008em;
+            }
+            
+            .apple-subheadline {
+               font-size: 22px;
+            }
+         }
+         
+         @media (min-width: 769px) and (max-width: 1023px) {
+            .apple-headline {
+               font-size: 56px;
+               line-height: 1.07;
+               letter-spacing: -.012em;
+            }
+            
+            .apple-subheadline {
+               font-size: 24px;
+            }
+         }
+         
          @media (min-width: 1024px) {
             .apple-headline {
                font-size: 80px;
@@ -117,11 +162,17 @@
             }
          }
          
-         /* Apple-style hero section */
+         /* Apple-style hero section - Mobile First */
          .hero-section {
             background: linear-gradient(180deg, var(--apple-light-gray) 0%, var(--apple-white) 100%);
-            padding: 66px 0 80px;
+            padding: 40px 0 60px;
             text-align: center;
+         }
+         
+         @media (min-width: 768px) {
+            .hero-section {
+               padding: 66px 0 80px;
+            }
          }
          
          @media (min-width: 1024px) {
@@ -236,7 +287,7 @@
             transition: all var(--transition-speed) ease-in-out;
          }
          
-         /* Apple-style buttons */
+         /* Apple-style buttons - Mobile First */
          .apple-button {
             background: var(--apple-blue);
             color: var(--apple-white);
@@ -252,6 +303,7 @@
             text-decoration: none;
             display: inline-block;
             line-height: 1.33337;
+            margin: 5px;
          }
          
          .apple-button:hover {
@@ -261,9 +313,31 @@
          }
          
          .apple-button-large {
-            padding: 12px 24px;
-            font-size: 17px;
+            padding: 10px 20px;
+            font-size: 14px;
             min-width: 44px;
+            min-height: 44px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+         }
+         
+         @media (min-width: 768px) {
+            .apple-button-large {
+               padding: 12px 24px;
+               font-size: 17px;
+               margin: 0 10px;
+            }
+         }
+         
+         /* Mobile button stacking */
+         @media (max-width: 480px) {
+            .hero-section .apple-button-large {
+               display: block;
+               width: 80%;
+               max-width: 280px;
+               margin: 10px auto;
+            }
          }
          
          /* Apple-style sections */
@@ -295,26 +369,34 @@
             margin-bottom: 20px;
          }
          
-         /* Architecture showcase grid */
+         /* Architecture showcase grid - Mobile First */
          .architecture-grid {
             display: grid;
             grid-template-columns: 1fr;
-            gap: 40px;
-            margin: 80px 0;
+            gap: 20px;
+            margin: 40px 0;
          }
          
          @media (min-width: 768px) {
             .architecture-grid {
                grid-template-columns: 1fr 1fr;
+               gap: 40px;
+               margin: 60px 0;
+            }
+         }
+         
+         @media (min-width: 1024px) {
+            .architecture-grid {
+               margin: 80px 0;
             }
          }
          
          .architecture-visual {
             background: var(--apple-light-gray);
             border-radius: var(--apple-radius);
-            padding: 40px;
+            padding: 20px;
             text-align: center;
-            min-height: 300px;
+            min-height: 200px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -323,7 +405,26 @@
          .architecture-visual img {
             width: 100%;
             height: auto;
-            max-width: 400px;
+            max-width: 100%;
+            border-radius: 8px;
+         }
+         
+         @media (min-width: 768px) {
+            .architecture-visual {
+               padding: 30px;
+               min-height: 250px;
+            }
+            
+            .architecture-visual img {
+               max-width: 400px;
+            }
+         }
+         
+         @media (min-width: 1024px) {
+            .architecture-visual {
+               padding: 40px;
+               min-height: 300px;
+            }
          }
          
          /* Apple-style tech tags */
@@ -518,6 +619,57 @@
             color: #9ba4ff;
          }
          
+         /* Touch-friendly and accessibility optimizations */
+         @media (hover: none) and (pointer: coarse) {
+            /* Touch devices - enhance tap targets */
+            .apple-button,
+            .nav-link,
+            .apple-link {
+               min-height: 44px;
+               min-width: 44px;
+               display: inline-flex;
+               align-items: center;
+               justify-content: center;
+               padding: 12px 16px;
+            }
+            
+            .architecture-card:active {
+               transform: translateY(-2px);
+               box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+               transition: all 0.1s ease;
+            }
+            
+            .apple-button:active {
+               background: #0051d5;
+               transform: scale(0.98);
+               transition: all 0.1s ease;
+            }
+         }
+         
+         /* Performance optimizations for mobile */
+         @media (max-width: 768px) {
+            * {
+               -webkit-tap-highlight-color: rgba(0, 0, 0, 0.1);
+            }
+            
+            .architecture-card {
+               will-change: transform;
+            }
+            
+            .apple-button {
+               will-change: transform, background-color;
+            }
+         }
+         
+         /* High DPI display support */
+         @media (-webkit-min-device-pixel-ratio: 2),
+                (min-resolution: 192dpi) {
+            .architecture-visual img {
+               image-rendering: -webkit-optimize-contrast;
+               image-rendering: crisp-edges;
+            }
+         }
+         
          /* Certification badges */
          .cert-badge {
             background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
@@ -591,7 +743,7 @@
                   <h1 class="apple-headline">你能想到的架構，<br>AWS 就能做到。</h1>
                   <p class="apple-subheadline">Everything you can imagine in cloud architecture, AWS can do.</p>
                   <a href="#architectures" class="apple-button apple-button-large">Navigate Infra</a>
-                  <a href="https://yennanliu.github.io/contact.html" class="apple-button apple-button-large" style="margin-left: 20px;">Contact Me</a>
+                  <a href="https://yennanliu.github.io/contact.html" class="apple-button apple-button-large">Contact Me</a>
                </div>
             </div>
          </div>
