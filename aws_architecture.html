@@ -616,9 +616,94 @@
                   <a href="https://github.com/yennanliu/cdk-playground" class="apple-link" target="_blank">View Code ›</a>
                </div>
                <div class="architecture-visual">
-                  <img src="https://d1.awsstatic.com/architecture-diagrams/ArchitectureDiagrams/serverless-web-application-on-aws.aa2fa14b4de0395d15d2c3e0e1ea1b4a3b14d7f6.png" 
-                       alt="Serverless Architecture Diagram" 
-                       class="img-fluid">
+                  <svg viewBox="0 0 700 400" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: auto;">
+                     <!-- Background -->
+                     <rect width="100%" height="100%" fill="#f8f9fa"/>
+                     
+                     <!-- Client -->
+                     <rect x="20" y="150" width="60" height="40" rx="4" fill="#6c757d" stroke="#495057" stroke-width="1"/>
+                     <text x="50" y="175" font-family="Arial, sans-serif" font-size="10" fill="white" text-anchor="middle">Client</text>
+                     
+                     <!-- CloudFront -->
+                     <rect x="120" y="130" width="70" height="30" rx="4" fill="#6f42c1" stroke="#5a2a9e" stroke-width="1"/>
+                     <text x="155" y="150" font-family="Arial, sans-serif" font-size="9" fill="white" text-anchor="middle">Amazon</text>
+                     <text x="155" y="160" font-family="Arial, sans-serif" font-size="9" fill="white" text-anchor="middle">CloudFront</text>
+                     
+                     <!-- API Gateway -->
+                     <rect x="120" y="180" width="70" height="50" rx="4" fill="#6f42c1" stroke="#5a2a9e" stroke-width="1"/>
+                     <text x="155" y="200" font-family="Arial, sans-serif" font-size="9" fill="white" text-anchor="middle">Amazon API</text>
+                     <text x="155" y="210" font-family="Arial, sans-serif" font-size="9" fill="white" text-anchor="middle">Gateway</text>
+                     
+                     <!-- Cognito -->
+                     <rect x="210" y="40" width="60" height="40" rx="4" fill="#dc3545" stroke="#bd2130" stroke-width="1"/>
+                     <text x="240" y="60" font-family="Arial, sans-serif" font-size="8" fill="white" text-anchor="middle">Amazon</text>
+                     <text x="240" y="70" font-family="Arial, sans-serif" font-size="8" fill="white" text-anchor="middle">Cognito</text>
+                     
+                     <!-- CloudWatch -->
+                     <rect x="120" y="250" width="70" height="40" rx="4" fill="#e83e8c" stroke="#c51162" stroke-width="1"/>
+                     <text x="155" y="265" font-family="Arial, sans-serif" font-size="9" fill="white" text-anchor="middle">Amazon</text>
+                     <text x="155" y="280" font-family="Arial, sans-serif" font-size="9" fill="white" text-anchor="middle">CloudWatch</text>
+                     
+                     <!-- Microservices Box -->
+                     <rect x="310" y="80" width="190" height="140" rx="8" fill="none" stroke="#dee2e6" stroke-width="2" stroke-dasharray="5,5"/>
+                     <text x="405" y="75" font-family="Arial, sans-serif" font-size="12" fill="#6c757d" text-anchor="middle">Microservices</text>
+                     
+                     <!-- Lambda Functions -->
+                     <rect x="330" y="100" width="50" height="40" rx="4" fill="#fd7e14" stroke="#e65100" stroke-width="1"/>
+                     <text x="355" y="115" font-family="Arial, sans-serif" font-size="8" fill="white" text-anchor="middle">AWS</text>
+                     <text x="355" y="125" font-family="Arial, sans-serif" font-size="8" fill="white" text-anchor="middle">Lambda</text>
+                     
+                     <rect x="400" y="100" width="50" height="40" rx="4" fill="#fd7e14" stroke="#e65100" stroke-width="1"/>
+                     <text x="425" y="115" font-family="Arial, sans-serif" font-size="8" fill="white" text-anchor="middle">AWS</text>
+                     <text x="425" y="125" font-family="Arial, sans-serif" font-size="8" fill="white" text-anchor="middle">Lambda</text>
+                     
+                     <rect x="330" y="160" width="50" height="40" rx="4" fill="#fd7e14" stroke="#e65100" stroke-width="1"/>
+                     <text x="355" y="175" font-family="Arial, sans-serif" font-size="8" fill="white" text-anchor="middle">AWS</text>
+                     <text x="355" y="185" font-family="Arial, sans-serif" font-size="8" fill="white" text-anchor="middle">Lambda</text>
+                     
+                     <rect x="400" y="160" width="50" height="40" rx="4" fill="#fd7e14" stroke="#e65100" stroke-width="1"/>
+                     <text x="425" y="175" font-family="Arial, sans-serif" font-size="8" fill="white" text-anchor="middle">AWS</text>
+                     <text x="425" y="185" font-family="Arial, sans-serif" font-size="8" fill="white" text-anchor="middle">Lambda</text>
+                     
+                     <!-- Storage Box -->
+                     <rect x="540" y="50" width="130" height="140" rx="8" fill="none" stroke="#dee2e6" stroke-width="2" stroke-dasharray="5,5"/>
+                     <text x="605" y="45" font-family="Arial, sans-serif" font-size="12" fill="#6c757d" text-anchor="middle">Storage</text>
+                     
+                     <!-- Aurora -->
+                     <rect x="560" y="80" width="50" height="40" rx="4" fill="#007bff" stroke="#0056b3" stroke-width="1"/>
+                     <text x="585" y="95" font-family="Arial, sans-serif" font-size="8" fill="white" text-anchor="middle">Amazon</text>
+                     <text x="585" y="105" font-family="Arial, sans-serif" font-size="8" fill="white" text-anchor="middle">Aurora</text>
+                     
+                     <!-- DynamoDB -->
+                     <rect x="560" y="140" width="50" height="40" rx="4" fill="#007bff" stroke="#0056b3" stroke-width="1"/>
+                     <text x="585" y="155" font-family="Arial, sans-serif" font-size="8" fill="white" text-anchor="middle">Amazon</text>
+                     <text x="585" y="165" font-family="Arial, sans-serif" font-size="8" fill="white" text-anchor="middle">DynamoDB</text>
+                     
+                     <!-- S3 Box -->
+                     <rect x="320" y="280" width="130" height="80" rx="8" fill="none" stroke="#dee2e6" stroke-width="2" stroke-dasharray="5,5"/>
+                     <text x="385" y="275" font-family="Arial, sans-serif" font-size="12" fill="#6c757d" text-anchor="middle">Static Web Content</text>
+                     
+                     <!-- S3 -->
+                     <rect x="360" y="310" width="50" height="40" rx="4" fill="#28a745" stroke="#1e7e34" stroke-width="1"/>
+                     <text x="385" y="325" font-family="Arial, sans-serif" font-size="7" fill="white" text-anchor="middle">Amazon Simple</text>
+                     <text x="385" y="335" font-family="Arial, sans-serif" font-size="7" fill="white" text-anchor="middle">Storage Service</text>
+                     <text x="385" y="345" font-family="Arial, sans-serif" font-size="7" fill="white" text-anchor="middle">(S3)</text>
+                     
+                     <!-- Arrows -->
+                     <path d="M 80 170 L 115 150" stroke="#495057" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+                     <path d="M 190 205 L 320 180" stroke="#495057" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+                     <path d="M 240 80 L 320 120" stroke="#495057" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+                     <path d="M 450 120 L 555 100" stroke="#495057" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+                     <path d="M 450 180 L 555 160" stroke="#495057" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+                     <path d="M 155 250 L 360 330" stroke="#495057" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+                     
+                     <!-- Arrow marker -->
+                     <defs>
+                        <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+                           <polygon points="0 0, 10 3.5, 0 7" fill="#495057"/>
+                        </marker>
+                     </defs>
+                  </svg>
                </div>
             </div>
 
