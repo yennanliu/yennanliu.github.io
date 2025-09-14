@@ -778,10 +778,10 @@
             }
          }
          
-         /* Certification badges */
+         /* Certification badges - Light Mode */
          .cert-badge {
-            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
-            color: white;
+            background: linear-gradient(135deg, var(--apple-blue) 0%, #5AC8FA 100%);
+            color: var(--apple-white);
             padding: 10px 20px;
             border-radius: 25px;
             font-weight: 600;
@@ -789,14 +789,16 @@
             display: inline-block;
             margin: 10px;
             transition: all 0.3s ease;
-            box-shadow: 0 5px 15px rgba(74, 107, 255, 0.3);
+            box-shadow: 0 5px 15px rgba(0, 122, 255, 0.3);
+            border: 1px solid transparent;
          }
-         
+
          .cert-badge:hover {
             transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(74, 107, 255, 0.4);
-            color: white;
+            box-shadow: 0 10px 25px rgba(0, 122, 255, 0.4);
+            color: var(--apple-white);
             text-decoration: none;
+            background: linear-gradient(135deg, #0051d5 0%, #4FB3D9 100%);
          }
       </style>
    </head>
