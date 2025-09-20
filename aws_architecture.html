@@ -581,6 +581,374 @@
          body.dark-mode .cert-badge:hover {
             box-shadow: 0 10px 25px rgba(0, 122, 255, 0.4);
          }
+
+         /* AI Infrastructure Section - Creative Design */
+         .ai-infra-section {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            position: relative;
+            overflow: hidden;
+         }
+
+         .ai-infra-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background:
+               radial-gradient(circle at 20% 20%, rgba(74, 107, 255, 0.03) 0%, transparent 50%),
+               radial-gradient(circle at 80% 80%, rgba(0, 122, 255, 0.03) 0%, transparent 50%),
+               linear-gradient(45deg, transparent 0%, rgba(74, 107, 255, 0.01) 50%, transparent 100%);
+            pointer-events: none;
+         }
+
+         .ai-infra-hero {
+            position: relative;
+            z-index: 2;
+         }
+
+         .ai-infra-title {
+            font-size: 48px;
+            line-height: 1.1;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #1a1a1a 0%, #4a6bff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+         }
+
+         .ai-infra-subtitle {
+            font-size: 20px;
+            line-height: 1.6;
+            color: #6c757d;
+            max-width: 600px;
+            margin: 0 auto;
+         }
+
+         /* AI Infrastructure Carousel */
+         .ai-carousel-container {
+            margin-top: 60px;
+            position: relative;
+            z-index: 2;
+         }
+
+         .ai-carousel-wrapper {
+            overflow: hidden;
+            border-radius: 20px;
+            position: relative;
+         }
+
+         .ai-carousel-track {
+            display: flex;
+            transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            gap: 30px;
+         }
+
+         .ai-infra-card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            padding: 40px 30px;
+            position: relative;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow: hidden;
+            cursor: pointer;
+            flex: 0 0 350px;
+            min-height: 300px;
+         }
+
+         .ai-infra-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(74, 107, 255, 0.1), transparent);
+            transform: rotate(45deg);
+            transition: all 0.6s ease;
+            opacity: 0;
+         }
+
+         .ai-infra-card:hover::before {
+            animation: shimmer 1.5s ease-in-out;
+         }
+
+         @keyframes shimmer {
+            0% {
+               transform: translateX(-100%) translateY(-100%) rotate(45deg);
+               opacity: 0;
+            }
+            50% {
+               opacity: 1;
+            }
+            100% {
+               transform: translateX(100%) translateY(100%) rotate(45deg);
+               opacity: 0;
+            }
+         }
+
+         .ai-infra-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow:
+               0 20px 40px rgba(74, 107, 255, 0.15),
+               0 10px 20px rgba(0, 0, 0, 0.1);
+            border-color: rgba(74, 107, 255, 0.3);
+         }
+
+         .ai-infra-card-icon {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 25px;
+            background: linear-gradient(135deg, #4a6bff 0%, #007bff 100%);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+         }
+
+         .ai-infra-card-icon::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.6s ease;
+         }
+
+         .ai-infra-card:hover .ai-infra-card-icon::before {
+            left: 100%;
+         }
+
+         .ai-icon {
+            width: 28px;
+            height: 28px;
+            color: white;
+            z-index: 2;
+            position: relative;
+         }
+
+         .ai-infra-card-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 12px;
+            text-align: center;
+         }
+
+         .ai-infra-card-description {
+            font-size: 14px;
+            line-height: 1.6;
+            color: #6c757d;
+            text-align: center;
+            margin-bottom: 20px;
+         }
+
+         .ai-infra-tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            justify-content: center;
+         }
+
+         .ai-tech-tag {
+            background: linear-gradient(135deg, rgba(74, 107, 255, 0.1) 0%, rgba(0, 123, 255, 0.1) 100%);
+            color: #4a6bff;
+            border: 1px solid rgba(74, 107, 255, 0.2);
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+         }
+
+         .ai-tech-tag:hover {
+            background: linear-gradient(135deg, #4a6bff 0%, #007bff 100%);
+            color: white;
+            transform: scale(1.05);
+         }
+
+         .ai-infra-cta {
+            margin-top: 80px;
+            position: relative;
+            z-index: 2;
+         }
+
+         .ai-infra-cta-text {
+            font-size: 18px;
+            color: #6c757d;
+            margin-bottom: 30px;
+         }
+
+         .ai-infra-cta-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background: linear-gradient(135deg, #4a6bff 0%, #007bff 100%);
+            color: white;
+            padding: 16px 32px;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 8px 25px rgba(74, 107, 255, 0.3);
+         }
+
+         .ai-infra-cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.6s ease;
+         }
+
+         .ai-infra-cta-button:hover::before {
+            left: 100%;
+         }
+
+         .ai-infra-cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 35px rgba(74, 107, 255, 0.4);
+            color: white;
+            text-decoration: none;
+         }
+
+         .cta-arrow {
+            width: 18px;
+            height: 18px;
+            transition: transform 0.3s ease;
+         }
+
+         .ai-infra-cta-button:hover .cta-arrow {
+            transform: translateX(4px);
+         }
+
+         /* Carousel Indicators */
+         .ai-carousel-indicators {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 40px;
+         }
+
+         .indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(74, 107, 255, 0.3);
+            cursor: pointer;
+            transition: all 0.3s ease;
+         }
+
+         .indicator.active {
+            background: #4a6bff;
+            transform: scale(1.2);
+         }
+
+         .indicator:hover {
+            background: rgba(74, 107, 255, 0.6);
+            transform: scale(1.1);
+         }
+
+         /* Responsive Design */
+         @media (max-width: 768px) {
+            .ai-infra-title {
+               font-size: 32px;
+            }
+
+            .ai-infra-subtitle {
+               font-size: 16px;
+            }
+
+            .ai-carousel-container {
+               margin-top: 40px;
+            }
+
+            .ai-carousel-track {
+               gap: 20px;
+            }
+
+            .ai-infra-card {
+               flex: 0 0 280px;
+               padding: 30px 20px;
+               min-height: 280px;
+            }
+
+            .ai-infra-cta {
+               margin-top: 60px;
+            }
+         }
+
+         /* Dark Mode Support */
+         body.dark-mode .ai-infra-section {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+         }
+
+         body.dark-mode .ai-infra-section::before {
+            background:
+               radial-gradient(circle at 20% 20%, rgba(74, 107, 255, 0.1) 0%, transparent 50%),
+               radial-gradient(circle at 80% 80%, rgba(0, 122, 255, 0.1) 0%, transparent 50%),
+               linear-gradient(45deg, transparent 0%, rgba(74, 107, 255, 0.05) 50%, transparent 100%);
+         }
+
+         body.dark-mode .ai-infra-title {
+            background: linear-gradient(135deg, #f5f5f7 0%, #4a6bff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+         }
+
+         body.dark-mode .ai-infra-subtitle {
+            color: #a1a1a6;
+         }
+
+         body.dark-mode .ai-infra-card {
+            background: rgba(29, 29, 31, 0.8);
+            border-color: rgba(74, 107, 255, 0.2);
+         }
+
+         body.dark-mode .ai-infra-card:hover {
+            background: rgba(45, 45, 47, 0.9);
+            box-shadow:
+               0 20px 40px rgba(74, 107, 255, 0.2),
+               0 10px 20px rgba(0, 0, 0, 0.3);
+         }
+
+         body.dark-mode .ai-infra-card-title {
+            color: #f5f5f7;
+         }
+
+         body.dark-mode .ai-infra-card-description {
+            color: #a1a1a6;
+         }
+
+         body.dark-mode .ai-infra-cta-text {
+            color: #a1a1a6;
+         }
+
+         body.dark-mode .indicator {
+            background: rgba(74, 107, 255, 0.4);
+         }
+
+         body.dark-mode .indicator.active {
+            background: #7ba7ff;
+         }
+
+         body.dark-mode .indicator:hover {
+            background: rgba(74, 107, 255, 0.7);
+         }
          
          /* AWS Expertise Level - Dark Mode Fix */
          body.dark-mode .card {
@@ -850,7 +1218,7 @@
          <div class="container">
             <div class="row justify-content-center">
                <div class="col-lg-8 text-center" data-aos="fade-up" data-aos-delay="100">
-                  <h1 class="apple-headline">你能想到的架構，<br>AWS 就能做到。</h1>
+                  <h1 class="apple-headline">你能想到的架構，AWS 就能做到。</h1>
                   <p class="apple-subheadline">Everything you can imagine in cloud architecture, AWS can do.</p>
                   <a href="#architectures" class="apple-button apple-button-large">Navigate Infra</a>
                   <a href="https://yennanliu.github.io/contact.html" class="apple-button apple-button-large">Contact Me</a>
@@ -1240,27 +1608,141 @@
       </div>
 
       <!-- AI LLM Infrastructure -->
-      <div class="container mt-5">
-         <div class="row">
-            <div class="col-lg-12 text-center" data-aos="fade-up">
-               <h3 class="mb-4" style="color: var(--primary-color); font-weight: 700;">Build AI LLM Infrastructure</h3>
-               <div class="d-flex flex-wrap justify-content-center">
-                  <a href="#" class="cert-badge">
-                     <i class="fas fa-brain mr-2"></i>LLM Training Pipeline
-                  </a>
-                  <a href="#" class="cert-badge">
-                     <i class="fas fa-server mr-2"></i>GPU Cluster Management
-                  </a>
-                  <a href="#" class="cert-badge">
-                     <i class="fas fa-rocket mr-2"></i>Model Deployment
-                  </a>
-                  <a href="#" class="cert-badge">
-                     <i class="fas fa-network-wired mr-2"></i>Vector Database
-                  </a>
+      <section class="ai-infra-section apple-section">
+         <div class="container">
+            <div class="ai-infra-hero text-center mb-5" data-aos="fade-up">
+               <div class="ai-infra-title-wrapper">
+                  <h2 class="ai-infra-title">AI Infrastructure. <br>Built for Tomorrow.</h2>
+                  <p class="ai-infra-subtitle">From neural networks to production systems, architect the future of artificial intelligence.</p>
                </div>
             </div>
+
+            <div class="ai-carousel-container" data-aos="fade-up" data-aos-delay="200">
+               <div class="ai-carousel-wrapper">
+                  <div class="ai-carousel-track">
+                     <div class="ai-infra-card">
+                        <div class="ai-infra-card-icon">
+                           <svg viewBox="0 0 24 24" class="ai-icon">
+                              <path d="M12 2L2 7L12 12L22 7L12 2M2 17L12 22L22 17M2 12L12 17L22 12" fill="currentColor"/>
+                           </svg>
+                        </div>
+                        <div class="ai-infra-card-content">
+                           <h3 class="ai-infra-card-title">Neural Training</h3>
+                           <p class="ai-infra-card-description">Distributed training pipelines with automatic scaling and optimization</p>
+                           <div class="ai-infra-tech-stack">
+                              <span class="ai-tech-tag">SageMaker</span>
+                              <span class="ai-tech-tag">EC2 P4</span>
+                              <span class="ai-tech-tag">PyTorch</span>
+                           </div>
+                        </div>
+                     </div>
+
+                     <div class="ai-infra-card">
+                        <div class="ai-infra-card-icon">
+                           <svg viewBox="0 0 24 24" class="ai-icon">
+                              <path d="M4 6H20V16H4M20 18A2 2 0 0 0 22 16V6C22 4.89 21.1 4 20 4H4A2 2 0 0 0 2 6V16A2 2 0 0 0 4 18H4L6 20V18H18L20 18Z" fill="currentColor"/>
+                           </svg>
+                        </div>
+                        <div class="ai-infra-card-content">
+                           <h3 class="ai-infra-card-title">Cluster Orchestration</h3>
+                           <p class="ai-infra-card-description">GPU-accelerated compute clusters with intelligent resource allocation</p>
+                           <div class="ai-infra-tech-stack">
+                              <span class="ai-tech-tag">EKS</span>
+                              <span class="ai-tech-tag">Karpenter</span>
+                              <span class="ai-tech-tag">NVIDIA</span>
+                           </div>
+                        </div>
+                     </div>
+
+                     <div class="ai-infra-card">
+                        <div class="ai-infra-card-icon">
+                           <svg viewBox="0 0 24 24" class="ai-icon">
+                              <path d="M12 16L16 12H13V8H11V12H8L12 16M12 2A10 10 0 0 0 2 12A10 10 0 0 0 12 22A10 10 0 0 0 22 12A10 10 0 0 0 12 2Z" fill="currentColor"/>
+                           </svg>
+                        </div>
+                        <div class="ai-infra-card-content">
+                           <h3 class="ai-infra-card-title">Model Deployment</h3>
+                           <p class="ai-infra-card-description">Real-time inference endpoints with A/B testing and monitoring</p>
+                           <div class="ai-infra-tech-stack">
+                              <span class="ai-tech-tag">Bedrock</span>
+                              <span class="ai-tech-tag">Lambda</span>
+                              <span class="ai-tech-tag">API Gateway</span>
+                           </div>
+                        </div>
+                     </div>
+
+                     <div class="ai-infra-card">
+                        <div class="ai-infra-card-icon">
+                           <svg viewBox="0 0 24 24" class="ai-icon">
+                              <path d="M12 3C7.58 3 4 6.58 4 11C4 16.55 12 21 12 21S20 16.55 20 11C20 6.58 16.42 3 12 3M12 13A2 2 0 0 1 10 11A2 2 0 0 1 12 9A2 2 0 0 1 14 11A2 2 0 0 1 12 13Z" fill="currentColor"/>
+                           </svg>
+                        </div>
+                        <div class="ai-infra-card-content">
+                           <h3 class="ai-infra-card-title">Vector Intelligence</h3>
+                           <p class="ai-infra-card-description">High-performance embedding storage with semantic search capabilities</p>
+                           <div class="ai-infra-tech-stack">
+                              <span class="ai-tech-tag">OpenSearch</span>
+                              <span class="ai-tech-tag">Pinecone</span>
+                              <span class="ai-tech-tag">RAG</span>
+                           </div>
+                        </div>
+                     </div>
+
+                     <div class="ai-infra-card">
+                        <div class="ai-infra-card-icon">
+                           <svg viewBox="0 0 24 24" class="ai-icon">
+                              <path d="M9 3V18H12V3H9M12 5L16 6.5V9.5L12 8V5M12 10L16 11.5V14.5L12 13V10M12 15L16 16.5V19.5L12 18V15Z" fill="currentColor"/>
+                           </svg>
+                        </div>
+                        <div class="ai-infra-card-content">
+                           <h3 class="ai-infra-card-title">Data Pipeline</h3>
+                           <p class="ai-infra-card-description">Real-time data processing and feature engineering at scale</p>
+                           <div class="ai-infra-tech-stack">
+                              <span class="ai-tech-tag">Kinesis</span>
+                              <span class="ai-tech-tag">Glue</span>
+                              <span class="ai-tech-tag">EMR</span>
+                           </div>
+                        </div>
+                     </div>
+
+                     <div class="ai-infra-card">
+                        <div class="ai-infra-card-icon">
+                           <svg viewBox="0 0 24 24" class="ai-icon">
+                              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" fill="currentColor"/>
+                           </svg>
+                        </div>
+                        <div class="ai-infra-card-content">
+                           <h3 class="ai-infra-card-title">MLOps Platform</h3>
+                           <p class="ai-infra-card-description">End-to-end machine learning lifecycle management and automation</p>
+                           <div class="ai-infra-tech-stack">
+                              <span class="ai-tech-tag">MLflow</span>
+                              <span class="ai-tech-tag">Kubeflow</span>
+                              <span class="ai-tech-tag">Airflow</span>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+
+               <!-- Carousel Indicators -->
+               <div class="ai-carousel-indicators">
+                  <span class="indicator active" data-slide="0"></span>
+                  <span class="indicator" data-slide="1"></span>
+                  <span class="indicator" data-slide="2"></span>
+               </div>
+            </div>
+
+            <div class="ai-infra-cta text-center mt-5" data-aos="fade-up" data-aos-delay="500">
+               <p class="ai-infra-cta-text">Ready to build the next generation of AI systems?</p>
+               <a href="https://yennanliu.github.io/contact.html" class="ai-infra-cta-button">
+                  <span>Let's Build Together</span>
+                  <svg viewBox="0 0 24 24" class="cta-arrow">
+                     <path d="M4 12L20 12M14 6L20 12L14 18" stroke="currentColor" stroke-width="2" fill="none"/>
+                  </svg>
+               </a>
+            </div>
          </div>
-      </div>
+      </section>
 
       <!-- Scroll to top button -->
       <div class="scroll-top">
@@ -1345,6 +1827,65 @@
                  top: 0,
                  behavior: 'smooth'
              });
+         });
+
+         // AI Infrastructure Carousel functionality
+         document.addEventListener('DOMContentLoaded', function() {
+            const track = document.querySelector('.ai-carousel-track');
+            const indicators = document.querySelectorAll('.indicator');
+            const cards = document.querySelectorAll('.ai-infra-card');
+
+            if (!track || !indicators.length || !cards.length) return;
+
+            let currentSlide = 0;
+            const cardsPerView = window.innerWidth <= 768 ? 1 : 2;
+            const totalSlides = Math.max(0, cards.length - cardsPerView);
+            const cardWidth = cards[0].offsetWidth + 30; // card width + gap
+
+            // Auto-advance carousel
+            function nextSlide() {
+               currentSlide = (currentSlide + 1) % (totalSlides + 1);
+               updateCarousel();
+            }
+
+            // Update carousel position and indicators
+            function updateCarousel() {
+               const translateX = -(currentSlide * cardWidth);
+               track.style.transform = `translateX(${translateX}px)`;
+
+               // Update indicators
+               indicators.forEach((indicator, index) => {
+                  indicator.classList.toggle('active', index === Math.floor(currentSlide * indicators.length / (totalSlides + 1)));
+               });
+            }
+
+            // Manual navigation via indicators
+            indicators.forEach((indicator, index) => {
+               indicator.addEventListener('click', () => {
+                  currentSlide = Math.floor(index * (totalSlides + 1) / indicators.length);
+                  updateCarousel();
+               });
+            });
+
+            // Auto-play carousel
+            let autoPlay = setInterval(nextSlide, 4000);
+
+            // Pause auto-play on hover
+            const carouselContainer = document.querySelector('.ai-carousel-container');
+            if (carouselContainer) {
+               carouselContainer.addEventListener('mouseenter', () => {
+                  clearInterval(autoPlay);
+               });
+
+               carouselContainer.addEventListener('mouseleave', () => {
+                  autoPlay = setInterval(nextSlide, 4000);
+               });
+            }
+
+            // Handle window resize
+            window.addEventListener('resize', function() {
+               updateCarousel();
+            });
          });
       </script>
    </body>
