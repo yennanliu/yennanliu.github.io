@@ -1,165 +1,609 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="zh-TW">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Part Time Developer</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>接案軟體工程師 - Yen.Dev</title>
+    <meta name="description" content="7年FANNG美商大廠資深後端工程師經驗，提供專業軟體開發、雲端架構設計等服務">
+
+    <!-- Google analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-X2DJ8VW74E"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-X2DJ8VW74E');
+    </script>
+
     <!-- Bootstrap CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Custom CSS -->
-    <link href="css/landing-page.css" rel="stylesheet">
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <!-- Font Awesome -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet">
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Custom CSS -->
     <style>
-        body {
-            font-family: 'Lato', sans-serif;
-        }
+       :root {
+          --apple-blue: #007AFF;
+          --apple-gray: #1d1d1f;
+          --apple-light-gray: #f5f5f7;
+          --apple-white: #ffffff;
+          --apple-text: #1d1d1f;
+          --apple-secondary-text: #86868b;
+          --apple-border: #d2d2d7;
+          --transition-speed: 0.28s;
+          --apple-radius: 18px;
+          --apple-shadow: 0 4px 8px rgba(0, 0, 0, 0.12);
+       }
 
-        .navbar-brand, .nav-link {
-            font-weight: 700;
-        }
+       /* Base styles */
+       body {
+          font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', Roboto, sans-serif;
+          background-color: var(--apple-white);
+          color: var(--apple-text);
+          line-height: 1.4705882353;
+          font-weight: 400;
+          letter-spacing: -.022em;
+          transition: all var(--transition-speed) ease-in-out;
+          scroll-behavior: smooth;
+          padding-top: 44px;
+       }
 
-        .lead {
-            color: #333;
-            line-height: 1.8;
-        }
+       /* Apple Typography */
+       .apple-headline {
+          font-size: 60px;
+          line-height: 1.0833333333;
+          font-weight: 600;
+          letter-spacing: -.003em;
+          color: var(--apple-text);
+          margin-bottom: 6px;
+       }
 
-        h2 {
-            font-weight: 700;
-            color: #007bff;
-        }
+       .apple-subheadline {
+          font-size: 36px;
+          line-height: 1.1428571429;
+          font-weight: 400;
+          letter-spacing: .007em;
+          color: var(--apple-secondary-text);
+          margin-bottom: 40px;
+       }
 
-        h1 {
-            font-weight: 700;
-            color: #007bff;
-        }
+       .apple-body-large {
+          font-size: 21px;
+          line-height: 1.381;
+          font-weight: 400;
+          letter-spacing: .011em;
+       }
 
-        footer {
-            background-color: #f8f9fa;
-            padding: 20px 0;
-        }
+       /* Mobile First Responsive Typography */
+       @media (max-width: 480px) {
+          .apple-headline {
+             font-size: 40px;
+             line-height: 1.1;
+             letter-spacing: -.002em;
+             margin-bottom: 16px;
+          }
 
-        .list-inline-item a {
-            color: #007bff;
-        }
+          .apple-subheadline {
+             font-size: 22px;
+             line-height: 1.3;
+             margin-bottom: 30px;
+          }
 
-        .list-inline-item a:hover {
-            color: #0056b3;
-            text-decoration: none;
-        }
+          .apple-body-large {
+             font-size: 16px;
+             line-height: 1.4;
+          }
+       }
 
-        /* Add a subtle card style for the content */
-        .content-card {
-            background: #fff;
-            padding: 20px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            border-radius: 8px;
-        }
+       @media (min-width: 481px) and (max-width: 768px) {
+          .apple-headline {
+             font-size: 50px;
+             line-height: 1.08;
+             letter-spacing: -.008em;
+          }
 
-        .service-list, .case-list {
-            margin-bottom: 20px;
-            padding-left: 20px;
-        }
+          .apple-subheadline {
+             font-size: 28px;
+          }
+       }
 
-        .service-list li, .case-list li {
-            list-style-type: none;
-            position: relative;
-            padding-left: 20px;
-            margin-bottom: 10px;
-        }
+       @media (min-width: 769px) and (max-width: 1023px) {
+          .apple-headline {
+             font-size: 70px;
+             line-height: 1.07;
+             letter-spacing: -.012em;
+          }
 
-        .service-list li::before, .case-list li::before {
-            content: "\f058";
-            font-family: 'Font Awesome 5 Free';
-            color: #007bff;
-            position: absolute;
-            left: 0;
-            top: 2px;
-        }
+          .apple-subheadline {
+             font-size: 32px;
+          }
+       }
+
+       @media (min-width: 1024px) {
+          .apple-headline {
+             font-size: 80px;
+             line-height: 1.05;
+             letter-spacing: -.015em;
+          }
+
+          .apple-subheadline {
+             font-size: 36px;
+          }
+       }
+
+       /* Apple-style navbar */
+       .navbar {
+          background-color: rgba(255, 255, 255, 0.92) !important;
+          backdrop-filter: saturate(180%) blur(20px);
+          -webkit-backdrop-filter: saturate(180%) blur(20px);
+          border-bottom: 1px solid var(--apple-border);
+          padding: 8px 0;
+          transition: all var(--transition-speed) ease-in-out;
+       }
+
+       @media (max-width: 991.98px) {
+          .navbar-collapse {
+             background-color: rgba(255, 255, 255, 0.95);
+             padding: 20px;
+             border-radius: 10px;
+             margin-top: 10px;
+          }
+
+          .nav-link {
+             margin: 10px 0;
+          }
+
+          .toggle-container {
+             margin: 15px 0;
+          }
+       }
+
+       /* Apple-style hero section - Mobile First */
+       .hero-section {
+          background: linear-gradient(180deg, var(--apple-light-gray) 0%, var(--apple-white) 100%);
+          padding: 40px 0 60px;
+          text-align: center;
+       }
+
+       @media (min-width: 768px) {
+          .hero-section {
+             padding: 66px 0 80px;
+          }
+       }
+
+       @media (min-width: 1024px) {
+          .hero-section {
+             padding: 106px 0 120px;
+          }
+       }
+
+       /* Apple-style cards */
+       .content-card {
+          background: var(--apple-white);
+          border-radius: var(--apple-radius);
+          box-shadow: var(--apple-shadow);
+          border: 1px solid var(--apple-border);
+          transition: all var(--transition-speed) ease-in-out;
+          overflow: hidden;
+          margin-bottom: 40px;
+          padding: 40px;
+       }
+
+       .content-card:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+       }
+
+       @media (min-width: 1024px) {
+          .content-card {
+             padding: 60px;
+          }
+       }
+
+       .navbar-brand {
+          font-weight: 600;
+          font-size: 21px;
+          color: var(--apple-text) !important;
+          letter-spacing: .011em;
+       }
+
+       .nav-link {
+          font-weight: 400;
+          font-size: 12px;
+          color: var(--apple-text) !important;
+          opacity: 0.8;
+          transition: opacity var(--transition-speed) ease-in-out;
+          padding: 8px 8px;
+          margin: 0 4px;
+       }
+
+       .nav-link:hover {
+          opacity: 1;
+          color: var(--apple-text) !important;
+       }
+
+       footer {
+          background-color: var(--apple-light-gray);
+          border-top: 1px solid var(--apple-border);
+          transition: all var(--transition-speed) ease-in-out;
+          padding: 40px 0 20px;
+       }
+
+       /* Apple-style buttons - Mobile First */
+       .apple-button {
+          background: var(--apple-blue);
+          color: var(--apple-white);
+          border: none;
+          border-radius: 980px;
+          padding: 8px 16px;
+          font-size: 12px;
+          font-weight: 400;
+          letter-spacing: -.01em;
+          min-width: 28px;
+          transition: all var(--transition-speed) ease-in-out;
+          cursor: pointer;
+          text-decoration: none;
+          display: inline-block;
+          line-height: 1.33337;
+          margin: 5px;
+       }
+
+       .apple-button:hover {
+          background: #0051d5;
+          color: var(--apple-white);
+          text-decoration: none;
+       }
+
+       .apple-button-large {
+          padding: 10px 20px;
+          font-size: 14px;
+          min-width: 44px;
+          min-height: 44px;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+       }
+
+       @media (min-width: 768px) {
+          .apple-button-large {
+             padding: 12px 24px;
+             font-size: 17px;
+             margin: 0 10px;
+          }
+       }
+
+       /* Service and case lists */
+       .service-list, .case-list {
+          margin-bottom: 30px;
+          padding-left: 0;
+       }
+
+       .service-list li, .case-list li {
+          list-style-type: none;
+          position: relative;
+          padding: 12px 0 12px 30px;
+          margin-bottom: 12px;
+          font-size: 17px;
+          line-height: 1.5;
+          color: var(--apple-text);
+          border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+       }
+
+       .service-list li:last-child, .case-list li:last-child {
+          border-bottom: none;
+       }
+
+       .service-list li::before, .case-list li::before {
+          content: "\f058";
+          font-family: 'Font Awesome 5 Free';
+          font-weight: 900;
+          color: var(--apple-blue);
+          position: absolute;
+          left: 0;
+          top: 14px;
+          font-size: 14px;
+       }
+
+       h4 {
+          font-size: 24px;
+          line-height: 1.16667;
+          font-weight: 600;
+          letter-spacing: .009em;
+          color: var(--apple-text);
+          margin-bottom: 20px;
+          margin-top: 40px;
+       }
+
+       h4:first-of-type {
+          margin-top: 20px;
+       }
+
+       /* Apple dark mode */
+       body.dark-mode {
+          background-color: #000000;
+          color: #f5f5f7;
+       }
+
+       body.dark-mode .navbar {
+          background-color: rgba(29, 29, 31, 0.92) !important;
+          border-bottom: 1px solid #424245;
+       }
+
+       body.dark-mode .navbar-brand,
+       body.dark-mode .nav-link {
+          color: #f5f5f7 !important;
+       }
+
+       body.dark-mode .hero-section {
+          background: linear-gradient(180deg, #1d1d1f 0%, #000000 100%);
+       }
+
+       body.dark-mode .apple-headline {
+          color: #f5f5f7;
+       }
+
+       body.dark-mode .apple-subheadline {
+          color: #a1a1a6;
+       }
+
+       body.dark-mode .content-card {
+          background: #1d1d1f;
+          border-color: #424245;
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+       }
+
+       body.dark-mode .content-card:hover {
+          background: #2d2d2f;
+          box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+       }
+
+       body.dark-mode h4 {
+          color: #f5f5f7;
+       }
+
+       body.dark-mode .service-list li,
+       body.dark-mode .case-list li {
+          color: #d1d1d6;
+          border-bottom-color: rgba(255, 255, 255, 0.08);
+       }
+
+       body.dark-mode footer {
+          background-color: #1d1d1f;
+          border-top: 1px solid #424245;
+          color: #a1a1a6;
+       }
+
+       body.dark-mode footer a {
+          color: #7ba7ff;
+       }
+
+       body.dark-mode footer a:hover {
+          color: #9bb9ff;
+       }
+
+       /* Dark mode mobile navbar styles */
+       @media (max-width: 991.98px) {
+          body.dark-mode .navbar-collapse {
+             background-color: rgba(29, 29, 31, 0.95) !important;
+             border: 1px solid #424245;
+          }
+       }
+
+       /* Toggle button styles */
+       .toggle-container {
+          display: flex;
+          align-items: center;
+          margin-left: 15px;
+       }
+
+       .theme-switch {
+          display: inline-block;
+          height: 24px;
+          position: relative;
+          width: 48px;
+       }
+
+       .theme-switch input {
+          display: none;
+       }
+
+       .slider {
+          background-color: #ccc;
+          bottom: 0;
+          cursor: pointer;
+          left: 0;
+          position: absolute;
+          right: 0;
+          top: 0;
+          transition: .4s;
+          border-radius: 24px;
+       }
+
+       .slider:before {
+          background-color: white;
+          bottom: 4px;
+          content: "";
+          height: 16px;
+          left: 4px;
+          position: absolute;
+          transition: .4s;
+          width: 16px;
+          border-radius: 50%;
+       }
+
+       input:checked + .slider {
+          background-color: var(--apple-blue);
+       }
+
+       input:checked + .slider:before {
+          transform: translateX(24px);
+       }
+
+       .toggle-icons {
+          font-size: 14px;
+          display: flex;
+          align-items: center;
+          margin-left: 8px;
+       }
     </style>
 </head>
-
 <body>
-
     <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container">
-            <a class="navbar-brand" href="https://yennanliu.github.io">Home</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item"><a class="nav-link" href="https://yennanliu.github.io/about_me.html">About Me</a></li>
-                    <li class="nav-item"><a class="nav-link" href="https://yennanliu.github.io/portfolios.html">Portfolios</a></li>
-                    <li class="nav-item"><a class="nav-link" href="https://yennanliu.github.io/contact.html">Contact</a></li>
-                    <li class="nav-item"><a class="nav-link" href="https://yennj12.js.org/yennj12_blog_V4/">Blog</a></li>
-                </ul>
-            </div>
-        </div>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+       <div class="container">
+          <a class="navbar-brand" href="https://yennanliu.github.io">Yen.Dev</a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+             <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                   <a class="nav-link" href="https://yennanliu.github.io/about_me.html">About Me</a>
+                </li>
+                <li class="nav-item">
+                   <a class="nav-link" href="https://yennanliu.github.io/portfolios.html">Portfolios</a>
+                </li>
+                <li class="nav-item">
+                   <a class="nav-link" href="https://yennanliu.github.io/aws_architecture.html">AWS Architecture</a>
+                </li>
+                <li class="nav-item">
+                   <a class="nav-link" href="https://yennanliu.github.io/contact.html">Contact</a>
+                </li>
+                <li class="nav-item">
+                   <a class="nav-link" href="https://yennj12.js.org/yennj12_blog_V4/">Blog</a>
+                </li>
+                <li class="nav-item">
+                   <a class="nav-link" href="https://yennj12.js.org/index.html.backup.html">Old Site</a>
+                </li>
+                <!-- Dark mode toggle button -->
+                <li class="nav-item toggle-container">
+                   <label class="theme-switch" for="theme-checkbox">
+                      <input type="checkbox" id="theme-checkbox" />
+                      <span class="slider"></span>
+                   </label>
+                   <div class="toggle-icons">
+                      <i class="fas fa-sun"></i>/<i class="fas fa-moon"></i>
+                   </div>
+                </li>
+             </ul>
+          </div>
+       </div>
     </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+       <div class="container">
+          <div class="row justify-content-center">
+             <div class="col-lg-10 text-center" data-aos="fade-up" data-aos-delay="100">
+                <h1 class="apple-headline">接案軟體工程師</h1>
+                <p class="apple-subheadline">專業軟體開發與雲端架構服務</p>
+                <a href="#services" class="apple-button apple-button-large">查看服務</a>
+                <a href="https://yennanliu.github.io/contact.html" class="apple-button apple-button-large">聯絡我</a>
+             </div>
+          </div>
+       </div>
+    </section>
 
     <!-- Content -->
     <div class="container mt-5">
         <div class="row justify-content-center">
-            <div class="col-lg-8 content-card">
-                <h1>接案軟體工程師</h1>
-                <p class="lead">7年FANNG美商大廠資深後端工程師經驗, 曾在英國, 日本, 新加坡等團隊工作. 完整軟體開發經驗, 熟悉演算法, 資料結構, 數據庫與後端/全端開發. 主要使用Python, Java開發, 並輔以 Javascript框架做出全端產品.</p>
-                <p class="lead">作品集: <a href="https://yennanliu.github.io/portfolios.html">portfolio</a> | Github: <a href="https://github.com/yennanliu">github</a></p>
+            <div class="col-lg-10 content-card" data-aos="fade-up" data-aos-delay="200">
+                <div class="apple-body-large mb-4">7年FANNG美商大廠資深後端工程師經驗，曾在英國、日本、新加坡等團隊工作。完整軟體開發經驗，熟悉演算法、資料結構、數據庫與後端/全端開發。主要使用Python、Java開發，並輔以 Javascript框架做出全端產品。</div>
+                <div class="apple-body-large mb-4">作品集：<a href="https://yennanliu.github.io/portfolios.html" style="color: var(--apple-blue); text-decoration: none;">portfolio</a> | Github：<a href="https://github.com/yennanliu" style="color: var(--apple-blue); text-decoration: none;">github</a></div>
 
-                <h4>服務項目</h4>
+                <h4 id="services">服務項目</h4>
                 <ul class="service-list">
-                    <li>後端開發 (Spring Boot, Flask, Django)</li>
-                    <li>全端開發 (Python/Java/NodeJS, Javascript/vue.js)</li>
-                    <li>資料平台建置,設計 (Spark, Flink, Airlfow, Hadoop)</li>
+                    <li>後端開發 (Spring Boot、Flask、Django)</li>
+                    <li>全端開發 (Python/Java/NodeJS、Javascript/vue.js)</li>
+                    <li>資料平台建置設計 (Spark、Flink、Airflow、Hadoop)</li>
                     <li>網路爬蟲開發 (Python)</li>
-                    <li>雲端基礎建設 (AWS, GCP, Azure, Databricks) 開發</li>
-                    <li>ETL開發 (Airflow, Python, Scala, Java, DB)</li>
-                    <li>Dashboard開發 (Looker, Tableau, PowerBI, SuperSet)</li>
-                    <li>AI應用開發 (NLP, OpenAI串接)</li>
-                    <li>技術架構顧問 (AWS, GCP)</li>
+                    <li>雲端基礎建設 (AWS、GCP、Azure、Databricks) 開發</li>
+                    <li>ETL開發 (Airflow、Python、Scala、Java、DB)</li>
+                    <li>Dashboard開發 (Looker、Tableau、PowerBI、SuperSet)</li>
+                    <li>AI應用開發 (NLP、OpenAI串接)</li>
+                    <li>技術架構顧問 (AWS、GCP)</li>
                 </ul>
 
                 <h4>成功案例</h4>
                 <ul class="case-list">
-                    <li>開發分散式ML運算平台 (Python) - 提交ML任務, 客戶非同步執行, 並回傳結果</li>
+                    <li>開發分散式ML運算平台 (Python) - 提交ML任務，客戶非同步執行，並回傳結果</li>
                     <li>優化遊戲CPU用量 (Java) - 降低20% VM CPU用量</li>
-                    <li>停車場管理Web App (Python, Javascript) - 優化Flask app Http, DB transaction邏輯</li>
-                    <li>貨倉Web App (Java, Vue) - 開發存貨管理app, CRUDL功能 以及其他客制邏輯, API串接</li>
-                    <li>爬蟲程式開發 (Python) - 搜集台北餐廳資訊, 評論以供業務開發</li>
+                    <li>停車場管理Web App (Python、Javascript) - 優化Flask app Http、DB transaction邏輯</li>
+                    <li>貨倉Web App (Java、Vue) - 開發存貨管理app，CRUDL功能以及其他客製邏輯、API串接</li>
+                    <li>爬蟲程式開發 (Python) - 搜集台北餐廳資訊、評論以供業務開發</li>
                 </ul>
 
                 <h4>聯絡方式</h4>
-                <p>Email: f339339@hotmail.com</p>
+                <div class="apple-body-large">Email：f339339@hotmail.com</div>
             </div>
         </div>
     </div>
 
     <!-- Footer -->
     <footer class="mt-5">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 text-center">
-                    <ul class="list-inline">
-                        <li class="list-inline-item"><a href="https://yennanliu.github.io/">Home</a></li>
-                        <li class="list-inline-item"><a href="https://yennanliu.github.io/about_me.html">About Me</a></li>
-                        <li class="list-inline-item"><a href="https://yennanliu.github.io/portfolios.html">Portfolios</a></li>
-                        <li class="list-inline-item"><a href="https://yennanliu.github.io/contact.html">Contact</a></li>
-                        <li class="list-inline-item"><a href="https://yennj12.js.org/yennj12_blog_V4/">Blog</a></li>
-                    </ul>
-                    <p>&copy; 2024 yen.dev.com All Rights Reserved.</p>
-                </div>
-            </div>
-        </div>
+       <div class="container">
+          <div class="row">
+             <div class="col-lg-12 text-center">
+                <ul class="list-inline">
+                   <li class="list-inline-item"><a href="https://yennanliu.github.io/">Home</a></li>
+                   <li class="list-inline-item"><a href="https://yennanliu.github.io/about_me.html">About Me</a></li>
+                   <li class="list-inline-item"><a href="https://yennanliu.github.io/portfolios.html">Portfolios</a></li>
+                   <li class="list-inline-item"><a href="https://yennanliu.github.io/aws_architecture.html">AWS Architecture</a></li>
+                   <li class="list-inline-item"><a href="https://yennanliu.github.io/contact.html">Contact</a></li>
+                   <li class="list-inline-item"><a href="https://yennj12.js.org/yennj12_blog_V4/">Blog</a></li>
+                   <li class="list-inline-item"><a href="https://yennj12.js.org/index.html.backup.html">Old Site</a></li>
+                </ul>
+                <p>&copy; 2024 yen.dev.com All Rights Reserved.</p>
+             </div>
+          </div>
+       </div>
     </footer>
 
-    <!-- jQuery, Popper.js, Bootstrap JS -->
+    <!-- Scripts -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-</body>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 
+    <script>
+       // Initialize AOS animation
+       AOS.init({
+           duration: 800,
+           easing: 'ease-in-out',
+           once: true
+       });
+
+       // Dark mode toggle functionality
+       document.addEventListener('DOMContentLoaded', function() {
+          const toggleSwitch = document.getElementById('theme-checkbox');
+
+          // Check for saved theme preference or use device preference
+          const currentTheme = localStorage.getItem('theme') ||
+              (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+
+          if (currentTheme === 'dark') {
+              document.body.classList.add('dark-mode');
+              toggleSwitch.checked = true;
+          }
+
+          // Switch theme function
+          function switchTheme(event) {
+              if (event.target.checked) {
+                  document.body.classList.add('dark-mode');
+                  localStorage.setItem('theme', 'dark');
+              } else {
+                  document.body.classList.remove('dark-mode');
+                  localStorage.setItem('theme', 'light');
+              }
+          }
+
+          // Event listener for toggle switch
+          toggleSwitch.addEventListener('change', switchTheme);
+       });
+    </script>
+</body>
 </html>
