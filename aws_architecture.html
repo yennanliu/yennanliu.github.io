@@ -614,10 +614,84 @@
             font-weight: 700;
             color: #1a1a1a;
             margin-bottom: 20px;
+         }
+
+         .ai-title-main {
             background: linear-gradient(135deg, #1a1a1a 0%, #4a6bff 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            display: inline-block;
+         }
+
+         .ai-title-sub {
+            background: linear-gradient(45deg, #4a6bff, #00d4ff, #ff6b6b, #4ecdc4);
+            background-size: 400% 400%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradient-shift 3s ease-in-out infinite;
+            display: inline-block;
+            position: relative;
+         }
+
+         @keyframes gradient-shift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+         }
+
+         /* Glitch effect for "Built for Tomorrow" */
+         .glitch-text {
+            position: relative;
+         }
+
+         .glitch-text::before,
+         .glitch-text::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: inherit;
+            -webkit-background-clip: text;
+            background-clip: text;
+         }
+
+         .glitch-text::before {
+            animation: glitch-1 2s infinite;
+            color: #ff6b6b;
+            z-index: -1;
+         }
+
+         .glitch-text::after {
+            animation: glitch-2 2s infinite;
+            color: #4ecdc4;
+            z-index: -2;
+         }
+
+         @keyframes glitch-1 {
+            0%, 14%, 15%, 49%, 50%, 99%, 100% {
+               transform: translate(0);
+            }
+            15% {
+               transform: translate(-2px, 2px);
+            }
+            50% {
+               transform: translate(2px, -2px);
+            }
+         }
+
+         @keyframes glitch-2 {
+            0%, 20%, 21%, 62%, 63%, 99%, 100% {
+               transform: translate(0);
+            }
+            21% {
+               transform: translate(2px, -2px);
+            }
+            63% {
+               transform: translate(-2px, 2px);
+            }
          }
 
          .ai-infra-subtitle {
@@ -904,10 +978,18 @@
                linear-gradient(45deg, transparent 0%, rgba(74, 107, 255, 0.05) 50%, transparent 100%);
          }
 
-         body.dark-mode .ai-infra-title {
+         body.dark-mode .ai-title-main {
             background: linear-gradient(135deg, #f5f5f7 0%, #4a6bff 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+         }
+
+         body.dark-mode .ai-title-sub {
+            background: linear-gradient(45deg, #7ba7ff, #00d4ff, #ff6b6b, #4ecdc4);
+            background-size: 400% 400%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
          }
 
          body.dark-mode .ai-infra-subtitle {
@@ -1612,7 +1694,11 @@
          <div class="container">
             <div class="ai-infra-hero text-center mb-5" data-aos="fade-up">
                <div class="ai-infra-title-wrapper">
-                  <h2 class="ai-infra-title">AI Infrastructure. <br>Built for Tomorrow.</h2>
+                  <h2 class="ai-infra-title">
+                     <span class="ai-title-main">AI Infrastructure.</span>
+                     <br>
+                     <span class="ai-title-sub glitch-text" data-text="Built for Tomorrow.">Built for Tomorrow.</span>
+                  </h2>
                   <p class="ai-infra-subtitle">From neural networks to production systems, architect the future of artificial intelligence.</p>
                </div>
             </div>
@@ -1867,8 +1953,8 @@
                });
             });
 
-            // Auto-play carousel
-            let autoPlay = setInterval(nextSlide, 4000);
+            // Auto-play carousel - faster movement
+            let autoPlay = setInterval(nextSlide, 2500);
 
             // Pause auto-play on hover
             const carouselContainer = document.querySelector('.ai-carousel-container');
@@ -1878,7 +1964,7 @@
                });
 
                carouselContainer.addEventListener('mouseleave', () => {
-                  autoPlay = setInterval(nextSlide, 4000);
+                  autoPlay = setInterval(nextSlide, 2500);
                });
             }
 
