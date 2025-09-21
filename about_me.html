@@ -371,19 +371,19 @@
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
          }
          
-         /* Career path section styles */
+         /* Apple-style Career Journey Section */
          .career-section {
-            background: #f5f5f7;
+            background: #ffffff;
             padding: 120px 0;
             margin-bottom: 0;
             position: relative;
             overflow: hidden;
          }
-         
+
          body.dark-mode .career-section {
-            background: #1d1d1f;
+            background: #000000;
          }
-         
+
          .section-title {
             font-weight: 700;
             margin-bottom: 15px;
@@ -394,217 +394,233 @@
             -webkit-text-fill-color: transparent;
             letter-spacing: -0.5px;
          }
-         
+
          .section-subtitle {
             font-size: 28px;
             text-align: center;
-            margin-bottom: 60px;
+            margin-bottom: 80px;
             max-width: 700px;
             margin-left: auto;
             margin-right: auto;
             color: #6e6e73;
             font-weight: 400;
          }
-         
+
          body.dark-mode .section-subtitle {
             color: #a1a1a6;
          }
-         
-         .title-underline {
-            display: none;
-         }
-         
+
          .career-timeline {
             position: relative;
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
             z-index: 1;
          }
-         
+
+         /* Apple-style Career Items */
          .career-item {
-            display: flex;
-            flex-direction: column;
-            background-color: white;
-            border-radius: 20px;
-            padding: 0;
-            margin-bottom: 100px;
-            box-shadow: 0 8px 40px rgba(0, 0, 0, 0.08);
-            transition: all 0.6s cubic-bezier(0.33, 1, 0.68, 1);
             position: relative;
-            overflow: hidden;
-            z-index: 2;
-         }
-         
-         body.dark-mode .career-item {
-            background-color: #2c2c2e;
-            box-shadow: 0 8px 40px rgba(0, 0, 0, 0.2);
-         }
-         
-         .career-item:hover,
-         .career-item:focus,
-         .career-item:active {
-            transform: translateY(-16px);
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
-         }
-         
-         body.dark-mode .career-item:hover,
-         body.dark-mode .career-item:focus,
-         body.dark-mode .career-item:active {
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-         }
-         
-         .career-item::before {
-            display: none;
-         }
-         
-         .career-image {
             width: 100%;
-            height: 300px;
+            height: 600px;
+            margin-bottom: 120px;
+            border-radius: 18px;
+            overflow: hidden;
             background-size: cover;
             background-position: center;
-            position: relative;
-            overflow: hidden;
+            background-repeat: no-repeat;
+            transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
          }
-         
-         .career-image-overlay {
+
+         .career-item:hover {
+            transform: scale(1.02);
+         }
+
+         /* Background overlay for readability */
+         .career-item::before {
+            content: '';
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.6) 100%);
-            display: flex;
-            align-items: flex-end;
-            padding: 30px;
+            background: linear-gradient(135deg, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.1) 50%, rgba(0,0,0,0.6) 100%);
+            z-index: 1;
          }
-         
-         .career-year {
+
+         /* Content container */
+         .career-content-wrapper {
             position: absolute;
-            top: 30px;
-            right: 30px;
-            background: rgba(255,255,255,0.2);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            padding: 8px 16px;
-            border-radius: 20px;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2;
+            padding: 60px;
+         }
+
+         .career-content {
+            text-align: center;
+            max-width: 800px;
+            color: white;
+         }
+
+         /* Apple-style statistics display */
+         .career-stats {
+            display: flex;
+            justify-content: center;
+            gap: 80px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+         }
+
+         .stat-item {
+            text-align: center;
+            min-width: 120px;
+         }
+
+         .stat-number {
+            font-size: 48px;
+            font-weight: 700;
+            line-height: 1;
+            color: white;
+            display: block;
+            margin-bottom: 8px;
+         }
+
+         .stat-label {
+            font-size: 16px;
+            color: rgba(255, 255, 255, 0.8);
+            font-weight: 400;
+            line-height: 1.3;
+         }
+
+         .career-title {
+            font-size: 56px;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 20px;
+            text-shadow: 0 2px 20px rgba(0,0,0,0.3);
+            line-height: 1.1;
+         }
+
+         .career-year-badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            padding: 12px 24px;
+            border-radius: 50px;
             color: white;
             font-weight: 600;
-            font-size: 14px;
-         }
-         
-         .career-image-title {
-            color: white;
-            font-size: 32px;
-            font-weight: 700;
-            margin: 0;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
-         }
-         
-         .career-content {
-            padding: 40px;
-         }
-         
-         .career-content p {
             font-size: 18px;
-            line-height: 1.6;
-            color: #424245;
             margin-bottom: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
          }
-         
-         body.dark-mode .career-content p {
-            color: #f5f5f7;
+
+         .career-description {
+            font-size: 20px;
+            line-height: 1.5;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 40px;
+            text-shadow: 0 1px 10px rgba(0,0,0,0.3);
          }
-         
+
+         /* Skills tags for Apple style */
          .career-skills {
             display: flex;
+            justify-content: center;
             flex-wrap: wrap;
-            gap: 12px;
-            margin-top: 30px;
+            gap: 16px;
+            margin-top: 40px;
          }
-         
+
          .skill-tag {
-            background: #f5f5f7;
-            color: #424245;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            color: white;
             font-size: 14px;
             font-weight: 500;
-            padding: 10px 20px;
-            border-radius: 30px;
+            padding: 12px 20px;
+            border-radius: 50px;
             transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.2);
          }
-         
-         body.dark-mode .skill-tag {
-            background: #3a3a3c;
-            color: #f5f5f7;
+
+         .skill-tag:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
          }
-         
-         .skill-tag:hover,
-         .skill-tag:focus,
-         .skill-tag:active {
-            transform: translateY(-3px);
-            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
-            color: white;
+
+         /* Responsive design */
+         @media (max-width: 1024px) {
+            .career-item {
+               height: 500px;
+               margin-bottom: 80px;
+            }
+
+            .career-content-wrapper {
+               padding: 40px;
+            }
+
+            .career-title {
+               font-size: 42px;
+            }
+
+            .career-stats {
+               gap: 40px;
+            }
+
+            .stat-number {
+               font-size: 36px;
+            }
          }
-         
-         .timeline-connector {
-            display: none;
-         }
-         
-         .career-cta {
-            display: inline-block;
-            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
-            color: white;
-            font-weight: 600;
-            padding: 12px 30px;
-            border-radius: 30px;
-            text-decoration: none;
-            margin-top: 20px;
-            transition: all 0.3s ease;
-            box-shadow: 0 5px 15px rgba(74, 107, 255, 0.3);
-         }
-         
-         .career-cta:hover,
-         .career-cta:focus,
-         .career-cta:active {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(74, 107, 255, 0.4);
-            color: white;
-            text-decoration: none;
-         }
-         
-         .career-icon {
-            display: none;
-         }
-         
-         /* Responsive career path styles */
+
          @media (max-width: 768px) {
             .career-section {
                padding: 80px 0;
             }
-            
+
             .section-title {
                font-size: 36px;
             }
-            
+
             .section-subtitle {
                font-size: 20px;
-               margin-bottom: 40px;
+               margin-bottom: 60px;
             }
-            
-            .career-image {
-               height: 220px;
+
+            .career-item {
+               height: 400px;
+               margin-bottom: 60px;
             }
-            
-            .career-image-title {
-               font-size: 24px;
+
+            .career-content-wrapper {
+               padding: 30px 20px;
             }
-            
-            .career-content {
-               padding: 30px;
+
+            .career-title {
+               font-size: 32px;
             }
-            
-            .career-content p {
+
+            .career-stats {
+               gap: 30px;
+               flex-direction: column;
+               align-items: center;
+            }
+
+            .stat-item {
+               min-width: auto;
+            }
+
+            .stat-number {
+               font-size: 28px;
+            }
+
+            .career-description {
                font-size: 16px;
             }
          }
@@ -775,79 +791,122 @@
          </div>
       </section>
 
-      <!-- Career Path Section -->
+      <!-- Apple-style Career Journey Section -->
       <section class="career-section py-5">
-         <div class="container">
+         <div class="container-fluid">
             <div class="row">
                <div class="col-lg-12 text-center mb-5" data-aos="fade-up">
                   <h2 class="section-title">My Career Journey</h2>
-                  <div class="title-underline"></div>
                   <p class="section-subtitle">From data engineering to software architecture, explore the path that shaped my technical expertise and leadership skills.</p>
                </div>
             </div>
-            <div class="row">
-               <div class="col-lg-12">
-                  <div class="career-timeline" data-aos="fade-up">
-                     <!-- Timeline Item 1 -->
-                     <div class="career-item" data-aos="fade-up" data-aos-delay="100">
-                        <div class="career-image" style="background-image: url('https://images.unsplash.com/photo-1558494949-ef010cbdcc31?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2340&q=80');">
-                           <div class="career-image-overlay">
-                              <h3 class="career-image-title">Software Engineer (data)</h3>
-                              <div class="career-year">2016-2018</div>
+            <div class="career-timeline">
+               <!-- Career Item 1: Data Engineer -->
+               <div class="career-item" data-aos="fade-up" data-aos-delay="100" style="background-image: url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2340&q=80');">
+                  <div class="career-content-wrapper">
+                     <div class="career-content">
+                        <div class="career-year-badge">2016-2018</div>
+                        <h3 class="career-title">Software Engineer (Data)</h3>
+
+                        <div class="career-stats">
+                           <div class="stat-item">
+                              <span class="stat-number">50+</span>
+                              <span class="stat-label">Data Pipelines<br>Built</span>
+                           </div>
+                           <div class="stat-item">
+                              <span class="stat-number">10TB</span>
+                              <span class="stat-label">Data Processed<br>Daily</span>
+                           </div>
+                           <div class="stat-item">
+                              <span class="stat-number">3</span>
+                              <span class="stat-label">Countries<br>UK/EU Experience</span>
                            </div>
                         </div>
-                        <div class="career-content">
-                           <p>Started my journey building data pipelines, ETL processes, and data warehousing solutions. Worked with big data technologies like Hadoop, Spark, and various database systems. Developed expertise in transforming raw data into actionable insights that drive business decisions. Lived at UK 🇬🇧 and traveled countries around Europe.</p>
-                           <div class="career-skills">
-                              <span class="skill-tag">SQL</span>
-                              <span class="skill-tag">ETL</span>
-                              <span class="skill-tag">Python</span>
-                              <span class="skill-tag">Hadoop</span>
-                              <span class="skill-tag">Spark</span>
-                           </div>
-                           <a href="#" class="career-cta">Learn more</a>
-                        </div>
-                     </div>
-                     
-                     <!-- Timeline Item 2 -->
-                     <div class="career-item" data-aos="fade-up" data-aos-delay="200">
-                        <div class="career-image" style="background-image: url('https://images.unsplash.com/photo-1571171637578-41bc2dd41cd2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2340&q=80');">
-                           <div class="career-image-overlay">
-                              <h3 class="career-image-title">Backend Engineer</h3>
-                              <div class="career-year">2018-2024</div>
-                           </div>
-                        </div>
-                        <div class="career-content">
-                           <p>Evolved into backend development, building robust applications and services. Expanded my toolkit with various frameworks and languages, focusing on creating scalable solutions. Collaborated with cross-functional teams to deliver high-quality software products that meet user needs and business requirements. Worked with global teams at Japan 🇯🇵, Relocated to 🇮🇪 and worked for AWS.</p>
-                           <div class="career-skills">
-                              <span class="skill-tag">Java</span>
-                              <span class="skill-tag">Spring</span>
-                              <span class="skill-tag">REST APIs</span>
-                              <span class="skill-tag">Microservices</span>
-                              <span class="skill-tag">DevOps</span>
-                           </div>
-                           <a href="#" class="career-cta">Learn more</a>
+
+                        <p class="career-description">
+                           Started my journey building data pipelines, ETL processes, and data warehousing solutions. Worked with big data technologies like Hadoop, Spark, and various database systems. Developed expertise in transforming raw data into actionable insights that drive business decisions. Lived at UK 🇬🇧 and traveled countries around Europe.
+                        </p>
+
+                        <div class="career-skills">
+                           <span class="skill-tag">Python</span>
+                           <span class="skill-tag">SQL</span>
+                           <span class="skill-tag">Hadoop</span>
+                           <span class="skill-tag">Spark</span>
+                           <span class="skill-tag">ETL</span>
                         </div>
                      </div>
-                     
-                     <!-- Timeline Item 3 -->
-                     <div class="career-item" data-aos="fade-up" data-aos-delay="300">
-                        <div class="career-image" style="background-image: url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2340&q=80');">
-                           <div class="career-image-overlay">
-                              <h3 class="career-image-title">Backend Engineer / Tech Consultant</h3>
-                              <div class="career-year">2024-Present</div>
+                  </div>
+               </div>
+
+               <!-- Career Item 2: Backend Engineer -->
+               <div class="career-item" data-aos="fade-up" data-aos-delay="200" style="background-image: url('https://images.unsplash.com/photo-1571171637578-41bc2dd41cd2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2340&q=80');">
+                  <div class="career-content-wrapper">
+                     <div class="career-content">
+                        <div class="career-year-badge">2018-2024</div>
+                        <h3 class="career-title">Backend Engineer</h3>
+
+                        <div class="career-stats">
+                           <div class="stat-item">
+                              <span class="stat-number">100+</span>
+                              <span class="stat-label">APIs<br>Developed</span>
+                           </div>
+                           <div class="stat-item">
+                              <span class="stat-number">99.9%</span>
+                              <span class="stat-label">System<br>Uptime</span>
+                           </div>
+                           <div class="stat-item">
+                              <span class="stat-number">5</span>
+                              <span class="stat-label">Global Teams<br>JP/IE/AWS</span>
                            </div>
                         </div>
-                        <div class="career-content">
-                           <p>Leading development teams and architecting complex systems. Balancing technical leadership with consulting, while continuing to evolve my technical skills and business understanding. Driving innovation and excellence in software development practices, ensuring projects are delivered on time and with exceptional quality.</p>
-                           <div class="career-skills">
-                              <span class="skill-tag">Architecture</span>
-                              <span class="skill-tag">Team Leadership</span>
-                              <span class="skill-tag">System Design</span>
-                              <span class="skill-tag">Cloud Infrastructure</span>
-                              <span class="skill-tag">Strategic Planning</span>
+
+                        <p class="career-description">
+                           Evolved into backend development, building robust applications and services. Expanded my toolkit with various frameworks and languages, focusing on creating scalable solutions. Collaborated with cross-functional teams to deliver high-quality software products that meet user needs and business requirements. Worked with global teams at Japan 🇯🇵, Relocated to 🇮🇪 and worked for AWS.
+                        </p>
+
+                        <div class="career-skills">
+                           <span class="skill-tag">Java</span>
+                           <span class="skill-tag">Spring Boot</span>
+                           <span class="skill-tag">Microservices</span>
+                           <span class="skill-tag">REST APIs</span>
+                           <span class="skill-tag">DevOps</span>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+
+               <!-- Career Item 3: Tech Consultant -->
+               <div class="career-item" data-aos="fade-up" data-aos-delay="300" style="background-image: url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2340&q=80');">
+                  <div class="career-content-wrapper">
+                     <div class="career-content">
+                        <div class="career-year-badge">2024-Present</div>
+                        <h3 class="career-title">Tech Consultant</h3>
+
+                        <div class="career-stats">
+                           <div class="stat-item">
+                              <span class="stat-number">20+</span>
+                              <span class="stat-label">Client<br>Projects</span>
                            </div>
-                           <a href="#" class="career-cta">Learn more</a>
+                           <div class="stat-item">
+                              <span class="stat-number">3x</span>
+                              <span class="stat-label">Performance<br>Improvements</span>
+                           </div>
+                           <div class="stat-item">
+                              <span class="stat-number">∞</span>
+                              <span class="stat-label">Innovation<br>Mindset</span>
+                           </div>
+                        </div>
+
+                        <p class="career-description">
+                           Leading development teams and architecting complex systems. Balancing technical leadership with consulting, while continuing to evolve my technical skills and business understanding. Driving innovation and excellence in software development practices, ensuring projects are delivered on time and with exceptional quality.
+                        </p>
+
+                        <div class="career-skills">
+                           <span class="skill-tag">System Architecture</span>
+                           <span class="skill-tag">Team Leadership</span>
+                           <span class="skill-tag">Cloud Infrastructure</span>
+                           <span class="skill-tag">Strategic Planning</span>
+                           <span class="skill-tag">Innovation</span>
                         </div>
                      </div>
                   </div>
