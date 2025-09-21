@@ -685,6 +685,34 @@
                margin: 40px auto;
             }
          }
+
+         /* Typewriter effect */
+         .typewriter {
+            overflow: hidden;
+            border-right: 0.15em solid var(--primary-color);
+            white-space: nowrap;
+            display: inline-block;
+            letter-spacing: 0.15em;
+            animation: typing 3.5s steps(50, end), blink-caret 0.75s step-end infinite;
+         }
+
+         @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+         }
+
+         @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: var(--primary-color) }
+         }
+
+         /* Responsive typewriter */
+         @media (max-width: 768px) {
+            .typewriter {
+               letter-spacing: 0.1em;
+               animation: typing 4s steps(40, end), blink-caret 0.75s step-end infinite;
+            }
+         }
       </style>
       <!-- Font Awesome -->
       <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet">
@@ -740,7 +768,7 @@
             <div class="row">
                <div class="col-lg-12" data-aos="fade-up">
                   <h1 class="display-4">About Me</h1>
-                  <p class="lead">Yen is a <b><i>slashie</i></b>, <b><i>digital nomad</i></b>, and <b><i>software engineer</i></b>, used to work in military, NGO, and companies around the world(UK/HK/SG/JP/TW). From Physics/Engineering but having entrepreneur mindset that is running his own business now. <span style="color:var(--primary-color);">#travel #tech #music #mobility</span> 🇬🇧 🇩🇪 🇪🇸 🇵🇹 🇮🇹 🇫🇷 🇳🇱 🇭🇷 🇲🇪 🇧🇪 🇨🇿 🇵🇱 🇫🇮 🇮🇸 🇱🇻 🇪🇪 🇱🇹 🇲🇦 🇻🇦 🇷🇺 🇺🇸 🇰🇷 🇯🇵 🇮🇩 🇸🇬 🇭🇰 🇹🇼 <b><i>"future is anyway you wanna flow"</i></b></p>
+                  <p class="lead"><span class="typewriter">Yen is a slashie, digital nomad, and software engineer,</span> used to work in military, NGO, and companies around the world(UK/HK/SG/JP/TW). From Physics/Engineering but having entrepreneur mindset that is running his own business now. <span style="color:var(--primary-color);">#travel #tech #music #mobility</span> 🇬🇧 🇩🇪 🇪🇸 🇵🇹 🇮🇹 🇫🇷 🇳🇱 🇭🇷 🇲🇪 🇧🇪 🇨🇿 🇵🇱 🇫🇮 🇮🇸 🇱🇻 🇪🇪 🇱🇹 🇲🇦 🇻🇦 🇷🇺 🇺🇸 🇰🇷 🇯🇵 🇮🇩 🇸🇬 🇭🇰 🇹🇼 <b><i>"future is anyway you wanna flow"</i></b></p>
                   <p class="lead">Visited 31 of 195 countries over the world</p>
                </div>
             </div>
