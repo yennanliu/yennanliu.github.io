@@ -70,22 +70,52 @@
             padding-top: 76px; /* Add padding for fixed navbar */
          }
          
-         /* Responsive typography */
+         /* Enhanced Responsive typography */
          h1.display-4 {
-            font-size: 2.5rem;
+            font-size: 2rem;
          }
-         
+
          .lead {
-            font-size: 1.1rem;
+            font-size: 1rem;
          }
-         
+
+         @media (min-width: 481px) {
+            h1.display-4 {
+               font-size: 2.5rem;
+            }
+
+            .lead {
+               font-size: 1.1rem;
+            }
+         }
+
          @media (min-width: 768px) {
+            h1.display-4 {
+               font-size: 3rem;
+            }
+
+            .lead {
+               font-size: 1.2rem;
+            }
+         }
+
+         @media (min-width: 1024px) {
             h1.display-4 {
                font-size: 3.5rem;
             }
-            
+
             .lead {
                font-size: 1.25rem;
+            }
+         }
+
+         @media (min-width: 1440px) {
+            h1.display-4 {
+               font-size: 4rem;
+            }
+
+            .lead {
+               font-size: 1.4rem;
             }
          }
          
@@ -116,15 +146,33 @@
             }
          }
          
-         /* Responsive about section */
+         /* Enhanced Responsive about section */
          .about-section {
-            padding: 40px 0;
+            padding: 30px 15px 40px;
             min-height: auto;
          }
-         
+
+         @media (min-width: 481px) {
+            .about-section {
+               padding: 40px 20px 50px;
+            }
+         }
+
          @media (min-width: 768px) {
             .about-section {
+               padding: 60px 0 70px;
+            }
+         }
+
+         @media (min-width: 1024px) {
+            .about-section {
                padding: 80px 0;
+            }
+         }
+
+         @media (min-width: 1440px) {
+            .about-section {
+               padding: 100px 0;
             }
          }
          
@@ -555,8 +603,54 @@
             transform: translateY(-2px);
          }
 
-         /* Responsive design */
-         @media (max-width: 1024px) {
+         /* Enhanced Responsive Design */
+
+         /* Large Desktop (1440px+) */
+         @media (min-width: 1440px) {
+            .career-item {
+               height: 700px;
+               margin-bottom: 140px;
+            }
+
+            .career-title {
+               font-size: 64px;
+            }
+
+            .stat-number {
+               font-size: 56px;
+            }
+
+            .career-description {
+               font-size: 22px;
+            }
+         }
+
+         /* Standard Desktop (1024px-1440px) */
+         @media (min-width: 1024px) and (max-width: 1439px) {
+            .career-item {
+               height: 600px;
+               margin-bottom: 120px;
+            }
+
+            .career-title {
+               font-size: 56px;
+            }
+         }
+
+         /* Tablets Landscape (768px-1023px) */
+         @media (min-width: 768px) and (max-width: 1023px) {
+            .career-section {
+               padding: 100px 0;
+            }
+
+            .section-title {
+               font-size: 42px;
+            }
+
+            .section-subtitle {
+               font-size: 24px;
+            }
+
             .career-item {
                height: 500px;
                margin-bottom: 80px;
@@ -577,9 +671,18 @@
             .stat-number {
                font-size: 36px;
             }
+
+            .stat-label {
+               font-size: 14px;
+            }
+
+            .career-description {
+               font-size: 18px;
+            }
          }
 
-         @media (max-width: 768px) {
+         /* Tablets Portrait (481px-767px) */
+         @media (min-width: 481px) and (max-width: 767px) {
             .career-section {
                padding: 80px 0;
             }
@@ -591,15 +694,18 @@
             .section-subtitle {
                font-size: 20px;
                margin-bottom: 60px;
+               padding: 0 20px;
             }
 
             .career-item {
-               height: 400px;
+               height: 450px;
                margin-bottom: 60px;
+               margin-left: 15px;
+               margin-right: 15px;
             }
 
             .career-content-wrapper {
-               padding: 30px 20px;
+               padding: 35px 25px;
             }
 
             .career-title {
@@ -607,9 +713,78 @@
             }
 
             .career-stats {
-               gap: 30px;
+               gap: 25px;
+               margin-bottom: 30px;
+            }
+
+            .stat-number {
+               font-size: 28px;
+            }
+
+            .stat-label {
+               font-size: 13px;
+            }
+
+            .career-description {
+               font-size: 16px;
+               line-height: 1.6;
+            }
+
+            .career-skills {
+               gap: 12px;
+            }
+
+            .skill-tag {
+               padding: 10px 16px;
+               font-size: 13px;
+            }
+         }
+
+         /* Mobile Phones (320px-480px) */
+         @media (max-width: 480px) {
+            .career-section {
+               padding: 60px 0;
+            }
+
+            .section-title {
+               font-size: 28px;
+               padding: 0 20px;
+            }
+
+            .section-subtitle {
+               font-size: 16px;
+               margin-bottom: 40px;
+               padding: 0 20px;
+            }
+
+            .career-item {
+               height: 400px;
+               margin-bottom: 40px;
+               margin-left: 10px;
+               margin-right: 10px;
+               border-radius: 12px;
+            }
+
+            .career-content-wrapper {
+               padding: 25px 20px;
+            }
+
+            .career-year-badge {
+               font-size: 14px;
+               padding: 8px 16px;
+               margin-bottom: 20px;
+            }
+
+            .career-title {
+               font-size: 24px;
+               line-height: 1.2;
+               margin-bottom: 20px;
+            }
+
+            .career-stats {
                flex-direction: column;
-               align-items: center;
+               gap: 20px;
+               margin-bottom: 25px;
             }
 
             .stat-item {
@@ -617,11 +792,52 @@
             }
 
             .stat-number {
-               font-size: 28px;
+               font-size: 24px;
+            }
+
+            .stat-label {
+               font-size: 12px;
             }
 
             .career-description {
-               font-size: 16px;
+               font-size: 14px;
+               line-height: 1.5;
+               margin-bottom: 25px;
+            }
+
+            .career-skills {
+               gap: 8px;
+               justify-content: center;
+            }
+
+            .skill-tag {
+               padding: 8px 12px;
+               font-size: 11px;
+            }
+         }
+
+         /* Extra Small Mobile (max-width: 320px) */
+         @media (max-width: 320px) {
+            .career-item {
+               height: 380px;
+               margin-left: 5px;
+               margin-right: 5px;
+            }
+
+            .career-content-wrapper {
+               padding: 20px 15px;
+            }
+
+            .career-title {
+               font-size: 20px;
+            }
+
+            .stat-number {
+               font-size: 20px;
+            }
+
+            .career-description {
+               font-size: 13px;
             }
          }
 
@@ -722,11 +938,26 @@
             50% { border-color: var(--primary-color) }
          }
 
-         /* Responsive typewriter */
+         /* Enhanced Responsive typewriter */
+         @media (max-width: 1024px) {
+            .typewriter {
+               letter-spacing: 0.12em;
+               animation: typing 3.8s steps(45, end), blink-caret 0.75s step-end infinite;
+            }
+         }
+
          @media (max-width: 768px) {
             .typewriter {
                letter-spacing: 0.1em;
                animation: typing 4s steps(40, end), blink-caret 0.75s step-end infinite;
+            }
+         }
+
+         @media (max-width: 480px) {
+            .typewriter {
+               letter-spacing: 0.08em;
+               animation: typing 4.5s steps(35, end), blink-caret 0.75s step-end infinite;
+               font-size: 1rem;
             }
          }
       </style>
