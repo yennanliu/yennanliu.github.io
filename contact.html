@@ -614,6 +614,173 @@
                margin: 40px auto;
             }
          }
+
+         /* Creative Contact Title - Inspired by AI Infrastructure */
+         .contact-hero {
+            position: relative;
+            z-index: 2;
+         }
+
+         .contact-title {
+            font-size: 48px;
+            line-height: 1.1;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 20px;
+         }
+
+         .contact-title-main {
+            background: linear-gradient(135deg, #1a1a1a 0%, var(--primary-color) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: inline-block;
+         }
+
+         .contact-title-sub {
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color), #ff6b6b, #4ecdc4);
+            background-size: 400% 400%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: contact-gradient-shift 3s ease-in-out infinite;
+            display: inline-block;
+            position: relative;
+         }
+
+         @keyframes contact-gradient-shift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+         }
+
+         /* Glitch effect for "Let's Connect" */
+         .contact-glitch-text {
+            position: relative;
+         }
+
+         .contact-glitch-text::before,
+         .contact-glitch-text::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: inherit;
+            -webkit-background-clip: text;
+            background-clip: text;
+         }
+
+         .contact-glitch-text::before {
+            animation: contact-glitch-1 2s infinite;
+            color: #ff6b6b;
+            z-index: -1;
+         }
+
+         .contact-glitch-text::after {
+            animation: contact-glitch-2 2s infinite;
+            color: var(--secondary-color);
+            z-index: -2;
+         }
+
+         @keyframes contact-glitch-1 {
+            0%, 14%, 15%, 49%, 50%, 99%, 100% {
+               transform: translate(0);
+            }
+            15% {
+               transform: translate(-2px, 2px);
+            }
+            50% {
+               transform: translate(2px, -2px);
+            }
+         }
+
+         @keyframes contact-glitch-2 {
+            0%, 20%, 21%, 62%, 63%, 99%, 100% {
+               transform: translate(0);
+            }
+            21% {
+               transform: translate(2px, -2px);
+            }
+            63% {
+               transform: translate(-2px, 2px);
+            }
+         }
+
+         /* Enhanced Responsive Design for Contact Title */
+
+         /* Large Desktop (1920px+) */
+         @media (min-width: 1920px) {
+            .contact-title {
+               font-size: 64px;
+            }
+         }
+
+         /* Large Desktop (1440px-1919px) */
+         @media (min-width: 1440px) and (max-width: 1919px) {
+            .contact-title {
+               font-size: 58px;
+            }
+         }
+
+         /* Standard Desktop (1024px-1439px) */
+         @media (min-width: 1024px) and (max-width: 1439px) {
+            .contact-title {
+               font-size: 52px;
+            }
+         }
+
+         /* Tablets Landscape (768px-1023px) */
+         @media (min-width: 768px) and (max-width: 1023px) {
+            .contact-title {
+               font-size: 42px;
+            }
+         }
+
+         /* Tablets Portrait (481px-767px) */
+         @media (min-width: 481px) and (max-width: 767px) {
+            .contact-title {
+               font-size: 36px;
+               padding: 0 20px;
+            }
+         }
+
+         /* Mobile Phones (320px-480px) */
+         @media (max-width: 480px) {
+            .contact-title {
+               font-size: 28px;
+               line-height: 1.3;
+               padding: 0 15px;
+            }
+
+            .contact-title-main, .contact-title-sub {
+               display: block;
+               margin-bottom: 5px;
+            }
+         }
+
+         /* Extra Small Mobile (max-width: 320px) */
+         @media (max-width: 320px) {
+            .contact-title {
+               font-size: 24px;
+               padding: 0 10px;
+            }
+         }
+
+         /* Dark Mode Support for Contact Title */
+         body.dark-mode .contact-title-main {
+            background: linear-gradient(135deg, #f5f5f7 0%, var(--primary-color) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+         }
+
+         body.dark-mode .contact-title-sub {
+            background: linear-gradient(45deg, #7ba7ff, var(--secondary-color), #ff6b6b, #4ecdc4);
+            background-size: 400% 400%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+         }
       </style>
       <!-- Font Awesome -->
       <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet">
@@ -669,7 +836,13 @@
          <div class="container hero-content">
             <div class="row">
                <div class="col-lg-12 text-center" data-aos="fade-up" data-aos-delay="100">
-                  <h1 class="display-4">Get In Touch</h1>
+                  <div class="contact-hero">
+                     <h1 class="contact-title">
+                        <span class="contact-title-main">Get In Touch.</span>
+                        <br>
+                        <span class="contact-title-sub contact-glitch-text" data-text="Let's Connect.">Let's Connect.</span>
+                     </h1>
+                  </div>
                   <p class="lead">Have a project in mind or just want to say hello? I'd love to hear from you!</p>
                </div>
             </div>
