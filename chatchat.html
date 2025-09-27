@@ -20,7 +20,7 @@
       <!-- Font Awesome -->
       <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
       <!-- Google Fonts -->
-      <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+      <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Noto+Sans+TC:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
 
       <style>
          :root {
@@ -42,27 +42,30 @@
          }
 
          body {
-            font-family: 'Noto Sans TC', sans-serif;
-            line-height: 1.7;
+            font-family: 'Inter', 'Noto Sans TC', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            line-height: 1.6;
             color: var(--dark-color);
             overflow-x: hidden;
+            font-feature-settings: 'kern' 1, 'liga' 1, 'calt' 1, 'pnum' 1, 'tnum' 0, 'onum' 1, 'lnum' 0, 'dlig' 0;
          }
 
-         /* Header */
+         /* Enhanced Header */
          .header {
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(99, 102, 241, 0.1);
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(22, 160, 133, 0.08);
             z-index: 1000;
-            transition: var(--transition);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
          }
 
          .header.scrolled {
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            background: rgba(255, 255, 255, 1);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05), 0 1px 20px rgba(0, 0, 0, 0.08);
          }
 
          .navbar {
@@ -71,13 +74,20 @@
 
          .navbar-brand {
             font-size: 1.5rem;
-            font-weight: 700;
+            font-weight: 800;
             color: var(--primary-color) !important;
             text-decoration: none;
+            letter-spacing: -0.025em;
+            display: flex;
+            align-items: center;
          }
 
          .navbar-brand i {
-            margin-right: 8px;
+            margin-right: 10px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-size: 1.2em;
          }
 
          .nav-link {
@@ -123,11 +133,11 @@
             color: white;
          }
 
-         /* Hero Section - AWS Style */
+         /* Enhanced Hero Section */
          .hero-section {
-            background: var(--light-green);
-            min-height: 70vh;
-            padding: 100px 0 80px;
+            background: linear-gradient(135deg, #f8fdfc 0%, var(--light-green) 40%, #e8f8f5 100%);
+            min-height: 75vh;
+            padding: 120px 0 100px;
             position: relative;
             overflow: hidden;
          }
@@ -140,8 +150,16 @@
             right: 0;
             bottom: 0;
             background-image:
-               radial-gradient(circle at 20% 20%, rgba(22, 160, 133, 0.05) 0%, transparent 50%),
-               radial-gradient(circle at 80% 80%, rgba(26, 188, 156, 0.03) 0%, transparent 50%);
+               radial-gradient(circle at 15% 25%, rgba(22, 160, 133, 0.08) 0%, transparent 35%),
+               radial-gradient(circle at 85% 75%, rgba(26, 188, 156, 0.06) 0%, transparent 40%),
+               radial-gradient(circle at 50% 10%, rgba(72, 201, 176, 0.04) 0%, transparent 45%);
+            animation: heroFloat 20s ease-in-out infinite;
+         }
+
+         @keyframes heroFloat {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(-10px, -15px) scale(1.02); }
+            66% { transform: translate(15px, -10px) scale(0.98); }
          }
 
          /* Breadcrumb */
@@ -180,24 +198,33 @@
          }
 
          .hero-title {
-            font-size: 3.5rem;
-            font-weight: 700;
-            margin-bottom: 1.5rem;
-            line-height: 1.2;
+            font-size: 4rem;
+            font-weight: 800;
+            margin-bottom: 2rem;
+            line-height: 1.1;
             color: var(--dark-color);
+            letter-spacing: -0.04em;
+            background: linear-gradient(135deg, var(--dark-color) 0%, #2c4a52 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
          }
 
          .dynamic-text {
             color: var(--primary-color);
-            transition: all 0.5s ease;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
             display: inline-block;
-            min-width: 180px;
+            min-width: 200px;
             text-align: center;
+            font-weight: 700;
+            text-shadow: 0 2px 10px rgba(22, 160, 133, 0.1);
          }
 
          .dynamic-text.changing {
-            transform: scale(1.05);
-            color: var(--secondary-color);
+            transform: scale(1.08) translateY(-2px);
+            filter: brightness(1.1);
          }
 
          .hero-subtitle {
@@ -231,22 +258,43 @@
          }
 
          .hero-cta {
-            display: inline-block;
-            background: var(--dark-color);
+            display: inline-flex;
+            align-items: center;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
             color: white;
-            padding: 12px 24px;
-            border-radius: 4px;
+            padding: 16px 32px;
+            border-radius: 8px;
             font-weight: 600;
-            font-size: 1rem;
+            font-size: 1.1rem;
             text-decoration: none;
-            transition: var(--transition);
-            border: 2px solid var(--dark-color);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border: none;
+            box-shadow: 0 4px 15px rgba(22, 160, 133, 0.3);
+            letter-spacing: -0.01em;
+            position: relative;
+            overflow: hidden;
+         }
+
+         .hero-cta::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+         }
+
+         .hero-cta:hover::before {
+            left: 100%;
          }
 
          .hero-cta:hover {
-            background: transparent;
-            color: var(--dark-color);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(22, 160, 133, 0.4);
             text-decoration: none;
+            color: white;
          }
 
          /* Coach Section */
@@ -275,17 +323,30 @@
 
          .coach-card {
             background: white;
-            border-radius: 20px;
-            padding: 3rem;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
-            transition: var(--transition);
+            border-radius: 16px;
+            padding: 2.5rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05), 0 4px 20px rgba(0, 0, 0, 0.08);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             margin-bottom: 2rem;
-            border-left: 5px solid var(--primary-color);
+            border: 1px solid rgba(22, 160, 133, 0.08);
+            position: relative;
+            overflow: hidden;
+         }
+
+         .coach-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
          }
 
          .coach-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+            transform: translateY(-4px);
+            box-shadow: 0 4px 25px rgba(0, 0, 0, 0.08), 0 8px 40px rgba(22, 160, 133, 0.1);
+            border-color: rgba(22, 160, 133, 0.15);
          }
 
          .coach-name {
@@ -325,10 +386,18 @@
          .skill-tag {
             background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
             color: white;
-            padding: 0.5rem 1rem;
-            border-radius: 25px;
-            font-size: 0.9rem;
-            font-weight: 500;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 0.01em;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(22, 160, 133, 0.2);
+         }
+
+         .skill-tag:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(22, 160, 133, 0.3);
          }
 
          /* Booking Section */
@@ -341,12 +410,24 @@
 
          .booking-card {
             background: white;
-            border-radius: 12px;
+            border-radius: 16px;
             padding: 3rem;
             margin: 2rem auto;
             max-width: 600px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-            border: 1px solid #e5e5e5;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05), 0 8px 35px rgba(0, 0, 0, 0.12);
+            border: 1px solid rgba(22, 160, 133, 0.1);
+            position: relative;
+            overflow: hidden;
+         }
+
+         .booking-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
          }
 
          .booking-price {
@@ -424,18 +505,38 @@
             color: white;
          }
 
-         /* Responsive Design */
-         @media (max-width: 768px) {
+         /* Enhanced Responsive Design */
+         @media (max-width: 1024px) {
             .hero-title {
-               font-size: 2.5rem;
+               font-size: 3.5rem;
+            }
+            .dynamic-text {
+               min-width: 180px;
+            }
+         }
+
+         @media (max-width: 768px) {
+            .hero-section {
+               padding: 100px 0 60px;
+               min-height: 65vh;
+            }
+
+            .hero-title {
+               font-size: 2.8rem;
+               margin-bottom: 1.5rem;
             }
 
             .hero-subtitle {
                font-size: 1.2rem;
             }
 
+            .dynamic-text {
+               min-width: 160px;
+               font-size: 0.95em;
+            }
+
             .section-title {
-               font-size: 2rem;
+               font-size: 2.2rem;
             }
 
             .coach-card {
@@ -453,6 +554,35 @@
 
             .nav-link {
                margin: 0.5rem 0;
+            }
+
+            .navbar-brand {
+               font-size: 1.3rem;
+            }
+         }
+
+         @media (max-width: 480px) {
+            .hero-title {
+               font-size: 2.2rem;
+            }
+
+            .hero-subtitle {
+               font-size: 1.1rem;
+            }
+
+            .dynamic-text {
+               min-width: 140px;
+               font-size: 0.9em;
+            }
+
+            .hero-cta {
+               padding: 14px 24px;
+               font-size: 1rem;
+            }
+
+            .coach-card,
+            .booking-card {
+               padding: 1.5rem;
             }
          }
 
@@ -518,18 +648,13 @@
          <div class="container">
             <div class="row">
                <div class="col-lg-8">
-                  <div class="hero-notice fade-in-up">
-                     <p>您是 2025 年 1 月 1 日之前建立麻吉帳戶的嗎？
-                        <a href="#booking">存取舊版免費方案 →</a>
-                     </p>
-                  </div>
 
                   <div class="hero-content">
                      <h1 class="hero-title fade-in-up">
                         麻吉免費方案
                      </h1>
                      <p class="hero-subtitle fade-in-up">
-                        透過<span id="dynamic-mentor" class="dynamic-text">AI/ML</span>導師與服務取得免費的實作經驗
+                        透過<span id="dynamic-mentor" class="dynamic-text">找PM導師</span>與服務取得免費的實作經驗
                      </p>
                      <a href="#booking" class="hero-cta fade-in-up">
                         建立免費帳戶
@@ -709,12 +834,9 @@
          // Dynamic mentor text cycling
          function initDynamicText() {
             const mentorTypes = [
-               'AI/ML',
-               'PM',
-               'Backend',
-               'Frontend',
-               'DevOps',
-               'Data Science'
+               '找PM導師',
+               '找Backend導師',
+               '找AI導師'
             ];
 
             const dynamicElement = document.getElementById('dynamic-mentor');
