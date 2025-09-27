@@ -368,42 +368,136 @@
             }
          }
          
+         /* Apple-style Expanded Architecture Visuals */
          .architecture-visual {
-            background: var(--apple-light-gray);
-            border-radius: var(--apple-radius);
-            padding: 20px;
+            position: relative;
+            overflow: hidden;
+            border-radius: 0;
+            padding: 0;
             text-align: center;
-            min-height: 200px;
+            min-height: 400px;
             display: flex;
             align-items: center;
             justify-content: center;
+            background: transparent;
+            margin: 0 -20px; /* Break out of container slightly */
          }
-         
+
          .architecture-visual img {
             width: 100%;
-            height: 100%;
+            height: auto;
+            min-height: 400px;
             max-width: none;
-            border-radius: 8px;
-            object-fit: contain;
+            border-radius: 20px;
+            object-fit: cover;
+            object-position: center;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+            transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
          }
-         
+
+         .architecture-visual svg {
+            width: 100%;
+            height: auto;
+            min-height: 400px;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+            background: white;
+            transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            display: block;
+         }
+
+         /* Specific styling for serverless architecture SVG */
+         .architecture-visual svg[viewBox="0 0 700 400"] {
+            aspect-ratio: 7/4;
+            object-fit: contain;
+            object-position: center;
+         }
+
+         .architecture-visual:hover img,
+         .architecture-visual:hover svg {
+            transform: scale(1.02);
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.15);
+         }
+
          @media (min-width: 768px) {
             .architecture-visual {
-               padding: 20px;
-               min-height: 350px;
+               min-height: 500px;
+               margin: 0 -40px; /* Bigger breakout on larger screens */
             }
-            
-            .architecture-visual img {
-               width: 100%;
-               height: 100%;
-               max-width: none;
+
+            .architecture-visual img,
+            .architecture-visual svg {
+               min-height: 500px;
+               border-radius: 24px;
+            }
+
+            .architecture-visual svg[viewBox="0 0 700 400"] {
+               min-height: 500px;
             }
          }
-         
+
          @media (min-width: 1024px) {
             .architecture-visual {
-               padding: 20px;
-               min-height: 400px;
+               min-height: 600px;
+               margin: 0 -60px; /* Even bigger breakout on desktop */
+            }
+
+            .architecture-visual img,
+            .architecture-visual svg {
+               min-height: 600px;
+               border-radius: 28px;
+            }
+
+            .architecture-visual svg[viewBox="0 0 700 400"] {
+               min-height: 600px;
+            }
+         }
+
+         @media (min-width: 1440px) {
+            .architecture-visual {
+               min-height: 700px;
+               margin: 0 -80px; /* Maximum breakout on large screens */
+            }
+
+            .architecture-visual img,
+            .architecture-visual svg {
+               min-height: 700px;
+               border-radius: 32px;
+            }
+
+            .architecture-visual svg[viewBox="0 0 700 400"] {
+               min-height: 700px;
+            }
+         }
+
+         /* Enhanced architecture grid for Apple-style layout */
+         .architecture-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 60px;
+            margin: 80px 0;
+            align-items: center;
+         }
+
+         @media (min-width: 768px) {
+            .architecture-grid {
+               grid-template-columns: 1fr 1fr;
+               gap: 80px;
+               margin: 120px 0;
+            }
+         }
+
+         @media (min-width: 1024px) {
+            .architecture-grid {
+               gap: 100px;
+               margin: 140px 0;
+            }
+         }
+
+         @media (min-width: 1440px) {
+            .architecture-grid {
+               gap: 120px;
+               margin: 160px 0;
             }
          }
          
@@ -474,8 +568,21 @@
          }
          
          body.dark-mode .architecture-visual {
-            background: #2d2d2f;
-            border: 1px solid #424245;
+            background: transparent;
+         }
+
+         body.dark-mode .architecture-visual img,
+         body.dark-mode .architecture-visual svg {
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+         }
+
+         body.dark-mode .architecture-visual:hover img,
+         body.dark-mode .architecture-visual:hover svg {
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.4);
+         }
+
+         body.dark-mode .architecture-visual svg {
+            background: #1d1d1f;
          }
          
          body.dark-mode .architecture-card-body {
@@ -1730,7 +1837,7 @@
                   <a href="https://github.com/yennanliu/cdk-playground" class="apple-link" target="_blank">View Code ›</a>
                </div>
                <div class="architecture-visual">
-                  <svg viewBox="0 0 700 400" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: auto;">
+                  <svg viewBox="0 0 700 400" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
                      <!-- Background -->
                      <rect width="100%" height="100%" fill="#f8f9fa"/>
                      
