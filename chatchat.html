@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+   <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+      <title>麻吉帶我飛 - 找生醫科導師</title>
+      <meta name="description" content="自己的貴人自己找，來麻吉帶我飛，找到你的導師麻吉，帶你一飛沖天。">
+
+      <!-- Open Graph / Facebook -->
+      <meta property="og:type" content="website">
+      <meta property="og:url" content="https://yennanliu.github.io/chatchat.html">
+      <meta property="og:title" content="麻吉帶我飛 - 找生醫科導師">
+      <meta property="og:description" content="自己的貴人自己找，來麻吉帶我飛，找到你的導師麻吉，帶你一飛沖天。">
+      <meta property="og:image" content="https://yennanliu.github.io/img/website-preview.png">
+
+      <!-- Bootstrap CSS -->
+      <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+      <!-- AOS Animation Library -->
+      <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+      <!-- Font Awesome -->
+      <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+      <!-- Google Fonts -->
+      <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+
+      <style>
+         :root {
+            --primary-color: #16a085;
+            --secondary-color: #1abc9c;
+            --accent-color: #48c9b0;
+            --dark-color: #232f3e;
+            --light-color: #f0f9ff;
+            --light-green: #d1f2eb;
+            --success-color: #10b981;
+            --warning-color: #f39c12;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+         }
+
+         * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+         }
+
+         body {
+            font-family: 'Noto Sans TC', sans-serif;
+            line-height: 1.7;
+            color: var(--dark-color);
+            overflow-x: hidden;
+         }
+
+         /* Header */
+         .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(99, 102, 241, 0.1);
+            z-index: 1000;
+            transition: var(--transition);
+         }
+
+         .header.scrolled {
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+         }
+
+         .navbar {
+            padding: 1rem 0;
+         }
+
+         .navbar-brand {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color) !important;
+            text-decoration: none;
+         }
+
+         .navbar-brand i {
+            margin-right: 8px;
+         }
+
+         .nav-link {
+            color: var(--dark-color) !important;
+            font-weight: 500;
+            margin: 0 1rem;
+            position: relative;
+            transition: var(--transition);
+         }
+
+         .nav-link:hover {
+            color: var(--primary-color) !important;
+         }
+
+         .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary-color);
+            transition: var(--transition);
+         }
+
+         .nav-link:hover::after {
+            width: 100%;
+         }
+
+         .btn-login {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            border: none;
+            padding: 0.75rem 2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: var(--transition);
+         }
+
+         .btn-login:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(99, 102, 241, 0.3);
+            color: white;
+         }
+
+         /* Hero Section - AWS Style */
+         .hero-section {
+            background: var(--light-green);
+            min-height: 70vh;
+            padding: 100px 0 80px;
+            position: relative;
+            overflow: hidden;
+         }
+
+         .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image:
+               radial-gradient(circle at 20% 20%, rgba(22, 160, 133, 0.05) 0%, transparent 50%),
+               radial-gradient(circle at 80% 80%, rgba(26, 188, 156, 0.03) 0%, transparent 50%);
+         }
+
+         /* Breadcrumb */
+         .breadcrumb-section {
+            background: white;
+            padding: 20px 0;
+            border-bottom: 1px solid #e5e5e5;
+         }
+
+         .breadcrumb {
+            background: none;
+            padding: 0;
+            margin: 0;
+            font-size: 0.9rem;
+         }
+
+         .breadcrumb-item {
+            color: var(--primary-color);
+         }
+
+         .breadcrumb-item + .breadcrumb-item::before {
+            content: "›";
+            color: #999;
+            font-weight: bold;
+         }
+
+         .breadcrumb-item.active {
+            color: #666;
+         }
+
+         .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: left;
+            color: var(--dark-color);
+         }
+
+         .hero-title {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+            color: var(--dark-color);
+         }
+
+         .dynamic-text {
+            color: var(--primary-color);
+            transition: all 0.5s ease;
+            display: inline-block;
+            min-width: 180px;
+            text-align: center;
+         }
+
+         .dynamic-text.changing {
+            transform: scale(1.05);
+            color: var(--secondary-color);
+         }
+
+         .hero-subtitle {
+            font-size: 1.3rem;
+            font-weight: 400;
+            margin-bottom: 2.5rem;
+            color: #666;
+            max-width: 500px;
+            line-height: 1.6;
+         }
+
+         .hero-notice {
+            background: white;
+            padding: 15px 20px;
+            border-radius: 8px;
+            margin-bottom: 3rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            border-left: 4px solid var(--warning-color);
+         }
+
+         .hero-notice p {
+            margin: 0;
+            color: var(--dark-color);
+            font-size: 0.95rem;
+         }
+
+         .hero-notice a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 500;
+         }
+
+         .hero-cta {
+            display: inline-block;
+            background: var(--dark-color);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 4px;
+            font-weight: 600;
+            font-size: 1rem;
+            text-decoration: none;
+            transition: var(--transition);
+            border: 2px solid var(--dark-color);
+         }
+
+         .hero-cta:hover {
+            background: transparent;
+            color: var(--dark-color);
+            text-decoration: none;
+         }
+
+         /* Coach Section */
+         .coach-section {
+            padding: 5rem 0;
+            background: white;
+         }
+
+         .section-title {
+            text-align: center;
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--dark-color);
+            margin-bottom: 1rem;
+         }
+
+         .section-subtitle {
+            text-align: center;
+            font-size: 1.2rem;
+            color: #6b7280;
+            margin-bottom: 4rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+         }
+
+         .coach-card {
+            background: white;
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            transition: var(--transition);
+            margin-bottom: 2rem;
+            border-left: 5px solid var(--primary-color);
+         }
+
+         .coach-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+         }
+
+         .coach-name {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+         }
+
+         .coach-title {
+            font-size: 1.1rem;
+            color: #6b7280;
+            margin-bottom: 1rem;
+         }
+
+         .coach-rating {
+            color: #fbbf24;
+            margin-bottom: 1.5rem;
+         }
+
+         .coach-location {
+            color: #6b7280;
+            margin-bottom: 1.5rem;
+         }
+
+         .coach-description {
+            margin-bottom: 2rem;
+            line-height: 1.8;
+         }
+
+         .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+         }
+
+         .skill-tag {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            font-weight: 500;
+         }
+
+         /* Booking Section */
+         .booking-section {
+            padding: 5rem 0;
+            background: var(--light-green);
+            color: var(--dark-color);
+            text-align: center;
+         }
+
+         .booking-card {
+            background: white;
+            border-radius: 12px;
+            padding: 3rem;
+            margin: 2rem auto;
+            max-width: 600px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            border: 1px solid #e5e5e5;
+         }
+
+         .booking-price {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+         }
+
+         .booking-duration {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+         }
+
+         .booking-features {
+            list-style: none;
+            margin-bottom: 3rem;
+         }
+
+         .booking-features li {
+            padding: 0.5rem 0;
+            font-size: 1.1rem;
+         }
+
+         .booking-features i {
+            color: var(--success-color);
+            margin-right: 1rem;
+         }
+
+         .booking-btn {
+            background: var(--primary-color);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 4px;
+            font-weight: 600;
+            font-size: 1rem;
+            text-decoration: none;
+            display: inline-block;
+            transition: var(--transition);
+            border: 2px solid var(--primary-color);
+         }
+
+         .booking-btn:hover {
+            background: var(--secondary-color);
+            border-color: var(--secondary-color);
+            text-decoration: none;
+            color: white;
+         }
+
+         /* Footer */
+         .footer {
+            background: var(--dark-color);
+            color: white;
+            padding: 3rem 0 2rem;
+            text-align: center;
+         }
+
+         .footer-links {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin-bottom: 2rem;
+         }
+
+         .footer-links a {
+            color: #9ca3af;
+            text-decoration: none;
+            transition: var(--transition);
+         }
+
+         .footer-links a:hover {
+            color: white;
+         }
+
+         /* Responsive Design */
+         @media (max-width: 768px) {
+            .hero-title {
+               font-size: 2.5rem;
+            }
+
+            .hero-subtitle {
+               font-size: 1.2rem;
+            }
+
+            .section-title {
+               font-size: 2rem;
+            }
+
+            .coach-card {
+               padding: 2rem;
+            }
+
+            .booking-card {
+               padding: 2rem;
+               margin: 1rem;
+            }
+
+            .skill-tags {
+               justify-content: center;
+            }
+
+            .nav-link {
+               margin: 0.5rem 0;
+            }
+         }
+
+         /* Animations */
+         .fade-in-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: var(--transition);
+         }
+
+         .fade-in-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+         }
+      </style>
+   </head>
+
+   <body>
+      <!-- Header -->
+      <header class="header" id="header">
+         <nav class="navbar navbar-expand-lg">
+            <div class="container">
+               <a class="navbar-brand" href="#home">
+                  <i class="fas fa-rocket"></i>
+                  麻吉帶我飛
+               </a>
+
+               <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
+                  <span class="navbar-toggler-icon"></span>
+               </button>
+
+               <div class="collapse navbar-collapse" id="navbarNav">
+                  <ul class="navbar-nav ml-auto">
+                     <li class="nav-item">
+                        <a class="nav-link" href="#coaches">導師介紹</a>
+                     </li>
+                     <li class="nav-item">
+                        <a class="nav-link" href="#booking">立即預約</a>
+                     </li>
+                  </ul>
+                  <a href="#booking" class="btn btn-login ml-3">
+                     <i class="fas fa-user"></i> 登入
+                  </a>
+               </div>
+            </div>
+         </nav>
+      </header>
+
+      <!-- Breadcrumb Section -->
+      <section class="breadcrumb-section">
+         <div class="container">
+            <nav aria-label="breadcrumb">
+               <ol class="breadcrumb">
+                  <li class="breadcrumb-item"><a href="#">麻吉帶我飛</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">麻吉免費方案</li>
+               </ol>
+            </nav>
+         </div>
+      </section>
+
+      <!-- Hero Section -->
+      <section class="hero-section" id="home">
+         <div class="container">
+            <div class="row">
+               <div class="col-lg-8">
+                  <div class="hero-notice fade-in-up">
+                     <p>您是 2025 年 1 月 1 日之前建立麻吉帳戶的嗎？
+                        <a href="#booking">存取舊版免費方案 →</a>
+                     </p>
+                  </div>
+
+                  <div class="hero-content">
+                     <h1 class="hero-title fade-in-up">
+                        麻吉免費方案
+                     </h1>
+                     <p class="hero-subtitle fade-in-up">
+                        透過<span id="dynamic-mentor" class="dynamic-text">AI/ML</span>導師與服務取得免費的實作經驗
+                     </p>
+                     <a href="#booking" class="hero-cta fade-in-up">
+                        建立免費帳戶
+                     </a>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </section>
+
+      <!-- Coach Section -->
+      <section class="coach-section" id="coaches">
+         <div class="container">
+            <h2 class="section-title fade-in-up">認識你的導師</h2>
+            <p class="section-subtitle fade-in-up">經驗豐富的科技業專家，為你的職涯保駕護航</p>
+
+            <!-- Coach 1 -->
+            <div class="coach-card fade-in-up">
+               <div class="row">
+                  <div class="col-lg-8">
+                     <div class="coach-name">Jerry</div>
+                     <div class="coach-title">Amazon資深軟體工程師 | 日本/加拿大/美國 10+ 年海外工作經驗</div>
+                     <div class="coach-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        5.00 | 16 reviews
+                     </div>
+                     <div class="coach-location">
+                        <i class="fas fa-map-marker-alt"></i> Taiwan
+                     </div>
+                     <div class="coach-description">
+                        擁有8年以上科技業經驗，從資料工程師到後端開發者再到技術顧問，經歷完整的軟體工程職涯路徑。曾在英國、愛爾蘭、日本、新加坡等多國工作，與全球團隊協作，帶來獨特的國際化職涯視野。專精於後端開發、資料工程、雲端架構設計。
+                     </div>
+                  </div>
+                  <div class="col-lg-4">
+                     <div class="skill-tags">
+                        <span class="skill-tag">Python</span>
+                        <span class="skill-tag">Java</span>
+                        <span class="skill-tag">AWS</span>
+                        <span class="skill-tag">系統設計</span>
+                        <span class="skill-tag">職涯轉換</span>
+                     </div>
+                  </div>
+               </div>
+            </div>
+
+            <!-- Coach 2 -->
+            <div class="coach-card fade-in-up">
+               <div class="row">
+                  <div class="col-lg-8">
+                     <div class="coach-name">Tim</div>
+                     <div class="coach-title">資深產品經理 | 社群媒體新創公司 10+ 年經驗</div>
+                     <div class="coach-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        4.9 | 23 reviews
+                     </div>
+                     <div class="coach-location">
+                        <i class="fas fa-map-marker-alt"></i> Taiwan
+                     </div>
+                     <div class="coach-description">
+                        10年以上產品管理經驗，專精於社群媒體平台產品策略與用戶增長。曾在多家知名新創公司擔任產品領導角色，成功推出多款用戶數破百萬的產品，對產品從0到1以及規模化成長有豐富實戰經驗。
+                     </div>
+                  </div>
+                  <div class="col-lg-4">
+                     <div class="skill-tags">
+                        <span class="skill-tag">產品策略</span>
+                        <span class="skill-tag">用戶增長</span>
+                        <span class="skill-tag">數據分析</span>
+                        <span class="skill-tag">團隊管理</span>
+                        <span class="skill-tag">新創經驗</span>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </section>
+
+      <!-- Booking Section -->
+      <section class="booking-section" id="booking">
+         <div class="container">
+            <h2 class="section-title fade-in-up">準備好加速你的職涯了嗎？</h2>
+            <p class="section-subtitle fade-in-up">立即預約專屬的職涯諮詢</p>
+
+            <div class="booking-card fade-in-up">
+               <div class="booking-price">$99</div>
+               <div class="booking-duration">60分鐘 • 一對一諮詢</div>
+
+               <ul class="booking-features">
+                  <li><i class="fas fa-check"></i> 個人化職涯評估</li>
+                  <li><i class="fas fa-check"></i> 策略性路徑規劃</li>
+                  <li><i class="fas fa-check"></i> 技能缺口分析</li>
+                  <li><i class="fas fa-check"></i> 求職策略指導</li>
+                  <li><i class="fas fa-check"></i> 問答交流時間</li>
+                  <li><i class="fas fa-check"></i> 後續資源提供</li>
+               </ul>
+
+               <a href="https://calendly.com/yennj12/30min?back=1&month=2025-09" target="_blank" class="booking-btn">
+                  <i class="fas fa-calendar-alt"></i> 立即預約 Calendly
+               </a>
+
+               <p style="margin-top: 2rem; opacity: 0.8; font-size: 0.9rem;">
+                  視訊通話進行 • 彈性時間安排 • 24小時內可取消
+               </p>
+            </div>
+         </div>
+      </section>
+
+      <!-- Footer -->
+      <footer class="footer">
+         <div class="container">
+            <ul class="footer-links">
+               <li><a href="https://yennanliu.github.io/">首頁</a></li>
+               <li><a href="https://yennanliu.github.io/about_me.html">關於我</a></li>
+               <li><a href="https://yennanliu.github.io/portfolios.html">作品集</a></li>
+               <li><a href="https://yennanliu.github.io/contact.html">聯絡我們</a></li>
+            </ul>
+            <p>&copy; 2024 麻吉帶我飛 All Rights Reserved.</p>
+         </div>
+      </footer>
+
+      <!-- Scripts -->
+      <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+      <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+      <script>
+         // Header scroll effect
+         window.addEventListener('scroll', function() {
+            const header = document.getElementById('header');
+            if (window.scrollY > 100) {
+               header.classList.add('scrolled');
+            } else {
+               header.classList.remove('scrolled');
+            }
+         });
+
+         // Smooth scrolling for anchor links
+         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+               e.preventDefault();
+               const target = document.querySelector(this.getAttribute('href'));
+               if (target) {
+                  target.scrollIntoView({
+                     behavior: 'smooth',
+                     block: 'start'
+                  });
+               }
+            });
+         });
+
+         // Fade in animation on scroll
+         const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+         };
+
+         const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+               if (entry.isIntersecting) {
+                  entry.target.classList.add('visible');
+               }
+            });
+         }, observerOptions);
+
+         // Observe all fade-in elements
+         document.querySelectorAll('.fade-in-up').forEach(element => {
+            observer.observe(element);
+         });
+
+         // Dynamic mentor text cycling
+         function initDynamicText() {
+            const mentorTypes = [
+               'AI/ML',
+               'PM',
+               'Backend',
+               'Frontend',
+               'DevOps',
+               'Data Science'
+            ];
+
+            const dynamicElement = document.getElementById('dynamic-mentor');
+            let currentIndex = 0;
+
+            function changeMentorType() {
+               dynamicElement.classList.add('changing');
+
+               setTimeout(() => {
+                  currentIndex = (currentIndex + 1) % mentorTypes.length;
+                  dynamicElement.textContent = mentorTypes[currentIndex];
+                  dynamicElement.classList.remove('changing');
+               }, 250);
+            }
+
+            // Start cycling after initial load
+            setTimeout(() => {
+               setInterval(changeMentorType, 3000);
+            }, 2000);
+         }
+
+         // Initialize animations
+         document.addEventListener('DOMContentLoaded', function() {
+            // Initialize dynamic text
+            initDynamicText();
+
+            // Trigger initial animations for hero section
+            setTimeout(function() {
+               document.querySelectorAll('.hero-content .fade-in-up').forEach((element, index) => {
+                  setTimeout(function() {
+                     element.classList.add('visible');
+                  }, index * 200);
+               });
+            }, 500);
+         });
+      </script>
+   </body>
+</html>
