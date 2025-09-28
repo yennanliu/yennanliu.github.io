@@ -93,6 +93,15 @@
             margin-bottom: 6px;
          }
 
+         .headline-chinese {
+            display: block;
+            word-break: keep-all;
+            overflow-wrap: break-word;
+            -webkit-text-size-adjust: 100%;
+            text-rendering: optimizeLegibility;
+            margin-bottom: 2px;
+         }
+
          .apple-subheadline {
             font-size: 36px;
             line-height: 1.1428571429;
@@ -549,6 +558,10 @@
          }
          
          body.dark-mode .apple-headline {
+            color: #f5f5f7;
+         }
+
+         body.dark-mode .headline-chinese {
             color: #f5f5f7;
          }
          
@@ -1170,6 +1183,12 @@
                padding: 0 20px;
             }
 
+            .headline-chinese {
+               font-size: 48px;
+               line-height: 1.2;
+               margin-bottom: 4px;
+            }
+
             .apple-subheadline {
                font-size: 24px;
                padding: 0 20px;
@@ -1259,6 +1278,12 @@
                line-height: 1.2;
                padding: 0 15px;
                margin-bottom: 12px;
+            }
+
+            .headline-chinese {
+               font-size: 32px;
+               line-height: 1.3;
+               margin-bottom: 3px;
             }
 
             .apple-subheadline {
@@ -1408,6 +1433,12 @@
                padding: 0 10px;
             }
 
+            .headline-chinese {
+               font-size: 28px;
+               line-height: 1.3;
+               margin-bottom: 2px;
+            }
+
             .apple-subheadline {
                font-size: 16px;
                padding: 0 10px;
@@ -1455,6 +1486,12 @@
 
             .apple-headline {
                font-size: 36px;
+            }
+
+            .headline-chinese {
+               font-size: 36px;
+               line-height: 1.2;
+               margin-bottom: 3px;
             }
 
             .apple-subheadline {
@@ -1808,7 +1845,10 @@
          <div class="container">
             <div class="row justify-content-center">
                <div class="col-lg-8 text-center" data-aos="fade-up" data-aos-delay="100">
-                  <h1 class="apple-headline">你能想到的架構，AWS 就能做到。</h1>
+                  <h1 class="apple-headline">
+                     <span class="headline-chinese">你能想到的架構，</span>
+                     <span class="headline-chinese">AWS 就能做到。</span>
+                  </h1>
                   <p class="apple-subheadline">Everything you can imagine in cloud architecture, AWS can do.</p>
                   <a href="#architectures" class="apple-button apple-button-large">Navigate Infra</a>
                   <a href="https://yennanliu.github.io/contact.html" class="apple-button apple-button-large">Contact Me</a>
