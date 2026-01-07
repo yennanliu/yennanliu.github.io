@@ -183,9 +183,7 @@
             background-color: var(--aws-white);
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
             padding: 20px 0;
-            position: sticky;
-            top: 0;
-            z-index: 100;
+            position: relative;
          }
 
          .secondary-nav-content {
@@ -759,65 +757,91 @@
 
          /* Extra Small Devices (phones, less than 576px) */
          @media (max-width: 575.98px) {
+            .container {
+               padding-left: 15px;
+               padding-right: 15px;
+            }
+
             .aws-logo {
-               font-size: 1.5rem;
+               font-size: 1.2rem;
             }
 
             .hero-title {
-               font-size: 1.8rem;
+               font-size: 1.6rem;
                line-height: 1.3;
             }
 
             .hero-subtitle {
-               font-size: 1rem;
+               font-size: 0.95rem;
             }
 
             .btn-hero-cta {
-               padding: 12px 30px;
-               font-size: 0.9rem;
+               padding: 10px 25px;
+               font-size: 0.85rem;
             }
 
             .notification-banner {
-               padding: 12px 18px;
-               font-size: 0.85rem;
+               padding: 10px 15px;
+               font-size: 0.8rem;
                flex-direction: column;
                text-align: center;
             }
 
+            .notification-banner i {
+               font-size: 1rem;
+            }
+
             .typewriter {
-               font-size: 0.85rem;
+               font-size: 0.8rem;
                white-space: normal;
                border-right: none;
                animation: none;
             }
 
             .services-header h2 {
-               font-size: 1.5rem;
+               font-size: 1.3rem;
             }
 
             .service-card {
-               padding: 25px 20px;
+               padding: 20px 15px;
             }
 
             .service-card h3 {
-               font-size: 1.2rem;
-            }
-
-            .secondary-nav-content h2 {
                font-size: 1.1rem;
             }
 
-            .top-bar {
-               font-size: 0.7rem;
+            .service-card p {
+               font-size: 0.9rem;
             }
 
-            .top-bar a {
-               margin: 0 8px;
+            .service-card-icon {
+               width: 50px;
+               height: 50px;
+            }
+
+            .service-card-icon i {
+               font-size: 1.3rem;
+            }
+
+            .secondary-nav-content h2 {
+               font-size: 0.95rem;
+            }
+
+            .top-bar {
+               display: none;
+            }
+
+            .main-nav-links a {
+               font-size: 0.75rem;
             }
          }
 
          /* Small Devices (landscape phones, 576px and up) */
          @media (min-width: 576px) and (max-width: 767.98px) {
+            .top-bar {
+               display: none;
+            }
+
             .hero-title {
                font-size: 2rem;
             }
@@ -833,12 +857,20 @@
             .service-cards-grid {
                grid-template-columns: 1fr;
             }
+
+            .footer-links {
+               grid-template-columns: repeat(2, 1fr);
+            }
          }
 
          /* Medium Devices (tablets, 768px and up) */
          @media (min-width: 768px) and (max-width: 991.98px) {
             .hero-title {
                font-size: 2.5rem;
+            }
+
+            .hero-subtitle {
+               font-size: 1.15rem;
             }
 
             .service-cards-grid {
@@ -848,6 +880,18 @@
 
             .main-nav-links {
                gap: 20px;
+            }
+
+            .main-nav-links a {
+               font-size: 0.9rem;
+            }
+
+            .secondary-nav {
+               padding: 15px 0;
+            }
+
+            .footer-links {
+               grid-template-columns: repeat(2, 1fr);
             }
          }
 
@@ -876,75 +920,109 @@
          /* Common Mobile Styles (all devices below 768px) */
          @media (max-width: 767.98px) {
             body {
-               padding-top: 60px;
+               padding-top: 0;
+            }
+
+            /* Hide top bar on mobile to save space */
+            .top-bar {
+               display: none;
             }
 
             .main-nav {
-               padding: 10px 0;
+               padding: 8px 0;
+               position: relative;
+               top: auto;
             }
 
             .nav-container {
                flex-direction: column;
-               gap: 15px;
+               gap: 10px;
+            }
+
+            .aws-logo {
+               font-size: 1.3rem;
+               margin-right: 0;
             }
 
             .main-nav-links {
                flex-direction: row;
                flex-wrap: wrap;
                justify-content: center;
-               gap: 10px;
+               gap: 8px;
             }
 
             .main-nav-links a {
-               font-size: 0.85rem;
-               padding: 3px 0;
+               font-size: 0.8rem;
+               padding: 4px 8px;
+            }
+
+            .main-nav-links a::after {
+               display: none;
             }
 
             .nav-actions {
                flex-direction: row;
-               gap: 15px;
+               gap: 12px;
+               width: 100%;
+               justify-content: center;
+            }
+
+            .search-icon {
+               font-size: 1rem;
             }
 
             .btn-aws-create {
-               padding: 8px 18px;
-               font-size: 0.85rem;
+               padding: 6px 16px;
+               font-size: 0.8rem;
+               border-radius: 16px;
             }
 
             .secondary-nav {
-               padding: 15px 0;
+               padding: 10px 0;
+               position: relative;
+               top: auto;
             }
 
             .secondary-nav-content {
-               flex-direction: column;
-               gap: 12px;
+               flex-direction: row;
+               flex-wrap: wrap;
+               gap: 8px;
+               justify-content: center;
+            }
+
+            .secondary-nav h2 {
+               font-size: 1rem;
+               width: 100%;
                text-align: center;
+               margin-bottom: 8px;
             }
 
             .secondary-nav a {
-               font-size: 0.9rem;
+               font-size: 0.85rem;
+               padding: 4px 8px;
             }
 
             .hero-aws-section {
-               padding: 40px 0 60px;
+               padding: 30px 0 50px;
                min-height: auto;
             }
 
             .breadcrumb-aws {
-               margin-bottom: 20px;
-               font-size: 0.8rem;
+               margin-bottom: 15px;
+               font-size: 0.75rem;
             }
 
             .services-section {
-               padding: 50px 0;
+               padding: 40px 0;
             }
 
             .services-header {
-               margin-bottom: 30px;
+               margin-bottom: 25px;
             }
 
             .filter-search-row {
                flex-direction: column;
-               gap: 12px;
+               gap: 10px;
             }
 
             .filter-btn, .search-box {
@@ -953,6 +1031,7 @@
 
             .filter-btn {
                justify-content: center;
+               padding: 10px 20px;
             }
 
             .service-cards-grid {
@@ -960,18 +1039,43 @@
                gap: 20px;
             }
 
-            .footer-links {
-               grid-template-columns: repeat(2, 1fr);
-               gap: 30px;
-            }
-
+            /* Compact footer for mobile */
             footer {
-               padding: 40px 0 20px;
+               padding: 30px 0 15px;
             }
 
             .footer-cta {
-               padding-bottom: 30px;
-               margin-bottom: 30px;
+               padding-bottom: 20px;
+               margin-bottom: 20px;
+            }
+
+            .footer-cta .btn-hero-cta {
+               padding: 12px 30px;
+               font-size: 0.9rem;
+            }
+
+            .footer-links {
+               grid-template-columns: 1fr;
+               gap: 20px;
+            }
+
+            .footer-column {
+               text-align: center;
+            }
+
+            .footer-column h4 {
+               font-size: 0.9rem;
+               margin-bottom: 12px;
+            }
+
+            .footer-column a {
+               font-size: 0.85rem;
+               margin-bottom: 8px;
+            }
+
+            .footer-bottom {
+               padding-top: 20px;
+               font-size: 0.75rem;
             }
          }
 
