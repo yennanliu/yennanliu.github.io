@@ -1,0 +1,1194 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+      <title>Yen.Dev - Software Engineer</title>
+      <meta name="description" content="Yen is a software engineer specialized in backend solutions, from prototypes to formal launches, ensuring maintenance and monitoring.">
+      
+      <!-- Open Graph / Facebook -->
+      <meta property="og:type" content="website">
+      <meta property="og:url" content="https://yennanliu.github.io/">
+      <meta property="og:title" content="Yen.Dev - Software Engineer">
+      <meta property="og:description" content="I'm a software engineer specialized in backend solutions. From prototypes to formal launches, ensuring maintenance and monitoring.">
+      <meta property="og:image" content="https://yennanliu.github.io/img/website-preview.png">
+      
+      <!-- Twitter -->
+      <meta property="twitter:card" content="summary_large_image">
+      <meta property="twitter:url" content="https://yennanliu.github.io/">
+      <meta property="twitter:title" content="Yen.Dev - Software Engineer">
+      <meta property="twitter:description" content="I'm a software engineer specialized in backend solutions. From prototypes to formal launches, ensuring maintenance and monitoring.">
+      <meta property="twitter:image" content="https://yennanliu.github.io/img/website-preview.png">
+      
+      <!-- PWA Meta Tags -->
+      <meta name="theme-color" content="#4a6bff">
+      <meta name="apple-mobile-web-app-capable" content="yes">
+      <meta name="apple-mobile-web-app-status-bar-style" content="default">
+      <meta name="apple-mobile-web-app-title" content="Yen.Dev">
+      <meta name="mobile-web-app-capable" content="yes">
+      <meta name="msapplication-TileColor" content="#4a6bff">
+      <meta name="msapplication-tap-highlight" content="no">
+      
+      <!-- PWA Icons -->
+      <link rel="icon" href="img/icon.svg" type="image/svg+xml">
+      <link rel="apple-touch-icon" href="img/icon.svg">
+      <link rel="mask-icon" href="img/icon.svg" color="#4a6bff">
+      
+      <!-- PWA Manifest -->
+      <link rel="manifest" href="manifest.json">
+      
+      <!-- Google analytics -->
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-X2DJ8VW74E"></script>
+      <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-X2DJ8VW74E');
+      </script>
+      <!-- Google analytics -->
+      <!-- Bootstrap CSS -->
+      <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+      <!-- AOS Animation Library -->
+      <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+      <!-- Custom CSS -->
+      <style>
+         :root {
+            --primary-color: #4a6bff;
+            --secondary-color: #25d366;
+            --light-bg: #f8f9fa;
+            --dark-bg: #121212;
+            --light-text: #f8f9fa;
+            --dark-text: #212529;
+            --transition-speed: 0.3s;
+         }
+         
+         /* Base styles */
+         body {
+            font-family: 'Poppins', sans-serif;
+            transition: background-color var(--transition-speed), color var(--transition-speed);
+            scroll-behavior: smooth;
+            padding-top: 76px; /* Add padding for fixed navbar */
+         }
+         
+         /* Responsive typography */
+         h1.display-4 {
+            font-size: 2.5rem;
+         }
+         
+         .lead {
+            font-size: 1.1rem;
+         }
+         
+         @media (min-width: 768px) {
+            h1.display-4 {
+               font-size: 3.5rem;
+            }
+            
+            .lead {
+               font-size: 1.25rem;
+            }
+         }
+         
+         /* Responsive navbar */
+         .navbar {
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+            transition: all var(--transition-speed);
+            padding: 15px 0;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            background-color: rgba(255, 255, 255, 0.9) !important;
+         }
+         
+         @media (max-width: 991.98px) {
+            .navbar-collapse {
+               background-color: rgba(255, 255, 255, 0.95);
+               padding: 20px;
+               border-radius: 10px;
+               margin-top: 10px;
+            }
+            
+            .nav-link {
+               margin: 10px 0;
+            }
+            
+            .toggle-container {
+               margin: 15px 0;
+            }
+         }
+         
+         /* Responsive hero section */
+         .hero-section {
+            height: auto;
+            min-height: 60vh;
+            padding: 60px 0;
+         }
+         
+         @media (max-width: 767.98px) {
+            .hero-section {
+               padding: 40px 0;
+            }
+            
+            .hero-content {
+               text-align: center;
+            }
+         }
+         
+         /* Responsive skills section */
+         .skills-item {
+            font-size: 1rem;
+            margin: 10px 0;
+            padding: 6px 12px;
+         }
+         
+         @media (min-width: 768px) {
+            .skills-item {
+               font-size: 1.1rem;
+               margin: 15px 0;
+               padding: 8px 16px;
+            }
+         }
+
+         /* AWS-Style Expertise Cards */
+         .expertise-card {
+            position: relative;
+            padding: 32px 28px;
+            border-radius: 16px;
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            min-height: 340px;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+         }
+
+         .expertise-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+            border-color: #d1d5db;
+         }
+
+         /* Featured card with gradient glow */
+         .expertise-card.featured {
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9ff 100%);
+            box-shadow: 0 0 0 1px rgba(74, 107, 255, 0.1),
+                        0 20px 60px -10px rgba(138, 84, 255, 0.3),
+                        0 0 80px -20px rgba(74, 197, 255, 0.25);
+         }
+
+         .expertise-card.featured:hover {
+            box-shadow: 0 0 0 1px rgba(74, 107, 255, 0.15),
+                        0 24px 70px -10px rgba(138, 84, 255, 0.4),
+                        0 0 100px -20px rgba(74, 197, 255, 0.35);
+         }
+
+         .expertise-category {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: #6b7280;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 12px;
+         }
+
+         .expertise-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.8rem;
+            color: #4b5563;
+            margin-bottom: 20px;
+            padding: 4px 0;
+         }
+
+         .expertise-badge i {
+            font-size: 0.875rem;
+         }
+
+         .expertise-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+            color: #111827;
+            line-height: 1.3;
+         }
+
+         .expertise-description {
+            font-size: 0.95rem;
+            color: #6b7280;
+            line-height: 1.6;
+            margin-bottom: auto;
+            flex-grow: 1;
+         }
+
+         .expertise-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 24px;
+            padding-top: 20px;
+            border-top: 1px solid #f3f4f6;
+         }
+
+         .expertise-link {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--primary-color);
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-decoration: none;
+            transition: all 0.2s ease;
+         }
+
+         .expertise-link:hover {
+            gap: 12px;
+            color: var(--secondary-color);
+            text-decoration: none;
+         }
+
+         .expertise-link i {
+            font-size: 1rem;
+         }
+
+         .expertise-add-btn {
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+            border: 2px solid #e5e7eb;
+            background: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            color: #6b7280;
+         }
+
+         .expertise-add-btn:hover {
+            border-color: var(--primary-color);
+            background: var(--primary-color);
+            color: white;
+            transform: scale(1.05);
+         }
+
+         .expertise-add-btn i {
+            font-size: 1.2rem;
+         }
+
+         /* Dark mode */
+         body.dark-mode .expertise-card {
+            background: #1e1e1e;
+            border-color: #374151;
+         }
+
+         body.dark-mode .expertise-card.featured {
+            background: linear-gradient(135deg, #1e1e1e 0%, #252545 100%);
+            border-color: rgba(74, 107, 255, 0.3);
+         }
+
+         body.dark-mode .expertise-category {
+            color: #9ca3af;
+         }
+
+         body.dark-mode .expertise-badge {
+            color: #9ca3af;
+         }
+
+         body.dark-mode .expertise-title {
+            color: #f9fafb;
+         }
+
+         body.dark-mode .expertise-description {
+            color: #9ca3af;
+         }
+
+         body.dark-mode .expertise-actions {
+            border-top-color: #374151;
+         }
+
+         body.dark-mode .expertise-add-btn {
+            background: #2d2d2d;
+            border-color: #374151;
+            color: #9ca3af;
+         }
+
+         body.dark-mode .expertise-add-btn:hover {
+            border-color: var(--primary-color);
+            background: var(--primary-color);
+            color: white;
+         }
+
+         /* Responsive */
+         @media (max-width: 768px) {
+            .expertise-card {
+               min-height: 300px;
+               padding: 24px 20px;
+            }
+
+            .expertise-title {
+               font-size: 1.3rem;
+            }
+         }
+
+         /* Expertise Section Background */
+         #skills {
+            background-color: #f9fafb;
+            padding: 60px 0;
+            margin-top: 0;
+            position: relative;
+            z-index: 2;
+         }
+
+         body.dark-mode #skills {
+            background-color: #111827;
+         }
+
+         /* Responsive cards */
+         .card {
+            margin-bottom: 20px;
+         }
+         
+         @media (min-width: 768px) {
+            .card {
+               margin-bottom: 30px;
+            }
+         }
+         
+         /* Responsive social icons */
+         .social-icons {
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+         }
+         
+         .social-icon {
+            width: 50px;
+            height: 50px;
+            /* Enhanced touch target for mobile */
+            min-width: 44px;
+            min-height: 44px;
+         }
+         
+         .social-icon img {
+            width: 25px;
+            height: 25px;
+         }
+         
+         /* Mobile-specific: Stack social icons vertically on extra small screens */
+         @media (max-width: 480px) {
+            .social-icons {
+               flex-direction: column;
+               align-items: center;
+               gap: 20px;
+               max-width: 200px;
+               margin: 40px auto;
+            }
+            
+            .social-icon {
+               width: 55px;
+               height: 55px;
+            }
+         }
+         
+         @media (min-width: 481px) and (max-width: 767px) {
+            .social-icons {
+               gap: 18px;
+               max-width: 400px;
+               margin: 40px auto;
+            }
+         }
+         
+         @media (min-width: 768px) {
+            .social-icons {
+               gap: 20px;
+            }
+            
+            .social-icon {
+               width: 60px;
+               height: 60px;
+            }
+            
+            .social-icon img {
+               width: 30px;
+               height: 30px;
+            }
+         }
+         
+         /* Responsive footer */
+         footer {
+            padding: 30px 0 20px;
+         }
+         
+         .list-inline {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+         }
+         
+         @media (min-width: 768px) {
+            footer {
+               padding: 40px 0 20px;
+            }
+            
+            .list-inline {
+               gap: 20px;
+            }
+         }
+         
+         /* Scroll to top button */
+         .scroll-top {
+            width: 40px;
+            height: 40px;
+            bottom: 20px;
+            right: 20px;
+         }
+         
+         @media (min-width: 768px) {
+            .scroll-top {
+               width: 50px;
+               height: 50px;
+               bottom: 30px;
+               right: 30px;
+            }
+         }
+         
+         .skills-item {
+            font-weight: 500;
+            color: var(--primary-color);
+            transition: all var(--transition-speed);
+            text-decoration: none;
+            display: inline-block;
+            border-radius: 25px;
+            background: rgba(74, 107, 255, 0.1);
+         }
+         
+         .skills-item:hover,
+         .skills-item:focus,
+         .skills-item:active {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            text-decoration: none;
+         }
+         
+         /* Touch-friendly interactions */
+         @media (hover: none) and (pointer: coarse) {
+            .skills-item:active {
+               transform: translateY(-3px);
+               box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+               transition: all 0.1s ease;
+            }
+         }
+         
+         .navbar-brand {
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--primary-color) !important;
+         }
+         
+         .nav-link {
+            font-weight: 500;
+            position: relative;
+            margin: 0 10px;
+         }
+         
+         .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--primary-color);
+            transition: width var(--transition-speed);
+         }
+         
+         .nav-link:hover::after {
+            width: 100%;
+         }
+         
+         footer {
+            background-color: var(--light-bg);
+            transition: background-color var(--transition-speed), color var(--transition-speed);
+         }
+         
+         .hero-content {
+            position: relative;
+            z-index: 2;
+         }
+         
+         .hero-bg {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1;
+            opacity: 0.3;
+            background-size: 400% 400%;
+            background-image: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+            animation: gradient-animation 15s ease infinite;
+         }
+         
+         @keyframes gradient-animation {
+            0% {
+               background-position: 0% 50%;
+            }
+            50% {
+               background-position: 100% 50%;
+            }
+            100% {
+               background-position: 0% 50%;
+            }
+         }
+         
+         .display-4 {
+            font-weight: 700;
+            margin-bottom: 20px;
+            font-size: 3.5rem;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+         }
+         
+         .lead {
+            font-size: 1.25rem;
+            font-weight: 400;
+            margin-bottom: 30px;
+            line-height: 1.8;
+         }
+         
+         .card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            transition: all var(--transition-speed);
+            overflow: hidden;
+         }
+         
+         .card:hover,
+         .card:focus-within {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+         }
+         
+         /* Touch-friendly card interactions */
+         @media (hover: none) and (pointer: coarse) {
+            .card:active {
+               transform: translateY(-5px);
+               box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+               transition: all 0.1s ease;
+            }
+         }
+         
+         .card-body {
+            padding: 25px;
+         }
+         
+         /* Social media icons */
+         .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 40px 0;
+         }
+         
+         .social-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all var(--transition-speed);
+            background-color: #fff;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+         }
+         
+         .social-icon:hover,
+         .social-icon:focus {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+         }
+         
+         /* Touch-friendly social icon interactions */
+         @media (hover: none) and (pointer: coarse) {
+            .social-icon:active {
+               transform: translateY(-10px);
+               box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+               transition: all 0.1s ease;
+            }
+         }
+         
+         .social-icon img {
+            width: 30px;
+            height: 30px;
+            transition: all var(--transition-speed);
+         }
+         
+         /* Dark mode styles */
+         body.dark-mode {
+            background-color: var(--dark-bg);
+            color: var(--light-text);
+         }
+         
+         body.dark-mode .navbar {
+            background-color: rgba(18, 18, 18, 0.9) !important;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+         }
+         
+         body.dark-mode .navbar-light .navbar-brand,
+         body.dark-mode .navbar-light .nav-link {
+            color: var(--light-text) !important;
+         }
+
+         /* Dark mode mobile navbar styles */
+         @media (max-width: 991.98px) {
+            body.dark-mode .navbar-collapse {
+               background-color: rgba(30, 30, 30, 0.95) !important;
+            }
+         }
+         
+         body.dark-mode .card {
+            background-color: #1e1e1e;
+            color: var(--light-text);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+         }
+         
+         body.dark-mode footer {
+            background-color: #1e1e1e;
+            color: var(--light-text);
+         }
+         
+         body.dark-mode a {
+            color: #9ba4ff;
+         }
+         
+         body.dark-mode .social-icon {
+            background-color: #2d2d2d;
+         }
+         
+         body.dark-mode .hero-section {
+            /* Keep the gradient background from hero-bg */
+         }
+         
+         body.dark-mode .skills-item {
+            background: rgba(74, 107, 255, 0.2);
+         }
+         
+         /* Toggle button styles */
+         .toggle-container {
+            display: flex;
+            align-items: center;
+            margin-left: 15px;
+         }
+         
+         .theme-switch {
+            display: inline-block;
+            height: 24px;
+            position: relative;
+            width: 48px;
+         }
+         
+         .theme-switch input {
+            display: none;
+         }
+         
+         .slider {
+            background-color: #ccc;
+            bottom: 0;
+            cursor: pointer;
+            left: 0;
+            position: absolute;
+            right: 0;
+            top: 0;
+            transition: .4s;
+            border-radius: 24px;
+         }
+         
+         .slider:before {
+            background-color: white;
+            bottom: 4px;
+            content: "";
+            height: 16px;
+            left: 4px;
+            position: absolute;
+            transition: .4s;
+            width: 16px;
+            border-radius: 50%;
+         }
+         
+         input:checked + .slider {
+            background-color: var(--primary-color);
+         }
+         
+         input:checked + .slider:before {
+            transform: translateX(24px);
+         }
+         
+         .toggle-icons {
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            margin-left: 8px;
+         }
+         
+         /* Floating scroll-to-top button */
+         .scroll-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: var(--primary-color);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            z-index: 999;
+         }
+         
+         .scroll-top.visible {
+            opacity: 1;
+         }
+         
+         .scroll-top:hover,
+         .scroll-top:focus {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+         }
+         
+         /* Touch-friendly scroll-to-top */
+         @media (hover: none) and (pointer: coarse) {
+            .scroll-top:active {
+               transform: translateY(-5px);
+               box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+               transition: all 0.1s ease;
+            }
+         }
+         
+         /* Enhanced touch targets */
+         @media (hover: none) and (pointer: coarse) {
+            .btn, .nav-link, .skills-item {
+               min-height: 44px;
+               min-width: 44px;
+               display: inline-flex;
+               align-items: center;
+               justify-content: center;
+            }
+            
+            .nav-link {
+               padding: 12px 16px;
+            }
+         }
+         
+         /* Typwriter effect */
+         .typewriter {
+            overflow: hidden;
+            border-right: 0.15em solid var(--primary-color);
+            white-space: nowrap;
+            margin: 0 auto;
+            letter-spacing: 0.15em;
+            animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
+         }
+         
+         @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+         }
+         
+         @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: var(--primary-color) }
+         }
+      </style>
+      <!-- Font Awesome -->
+      <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet">
+      <!-- Google Fonts -->
+      <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+   </head>
+   <body>
+      <!-- Navigation -->
+      <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+         <div class="container">
+            <a class="navbar-brand" href="https://yennanliu.github.io">Yen.Dev</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+               <ul class="navbar-nav ml-auto">
+                  <li class="nav-item">
+                     <a class="nav-link" href="https://yennanliu.github.io/about_me.html">About Me</a>
+                  </li>
+                  <li class="nav-item">
+                     <a class="nav-link" href="https://yennanliu.github.io/portfolios.html">Portfolios</a>
+                  </li>
+                  <li class="nav-item">
+                     <a class="nav-link" href="https://yennanliu.github.io/aws_architecture.html">AWS Architecture</a>
+                  </li>
+                  <li class="nav-item">
+                     <a class="nav-link" href="https://yennanliu.github.io/contact.html">Contact</a>
+                  </li>
+                  <li class="nav-item">
+                     <a class="nav-link" href="https://yennj12.js.org/yennj12_blog_V4/">Blog</a>
+                  </li>
+                  <li class="nav-item">
+                     <a class="nav-link" href="https://yennj12.js.org/index.html.backup.html">Old Site</a>
+                  </li>
+                  <!-- Dark mode toggle button -->
+                  <li class="nav-item toggle-container">
+                     <label class="theme-switch" for="theme-checkbox">
+                        <input type="checkbox" id="theme-checkbox" />
+                        <span class="slider"></span>
+                     </label>
+                     <div class="toggle-icons">
+                        <i class="fas fa-sun"></i>/<i class="fas fa-moon"></i>
+                     </div>
+                  </li>
+               </ul>
+            </div>
+         </div>
+      </nav>
+      
+      <!-- Hero Section -->
+      <section class="hero-section">
+         <div class="hero-bg"></div>
+         <div class="container hero-content">
+            <div class="row">
+               <div class="col-lg-12 text-center" data-aos="fade-up" data-aos-delay="100">
+                  <br>
+                  <h1 class="display-4">Welcome to My Space</h1>
+                  <p class="lead typewriter">I'm a software engineer 👨‍💻 specialized in backend solutions ☕</p>
+                  <p class="lead">From prototypes to formal launches, ensuring maintenance and monitoring.<br> Check my <a href="https://yennanliu.github.io/portfolios.html">portfolio</a>, feel free to <a href="mailto:f339339@gmail.com">contact</a> me for any business idea.</p>
+                  <a href="#skills" class="btn btn-primary btn-lg mt-3" data-aos="fade-up" data-aos-delay="300">Explore My Skills</a>
+               </div>
+            </div>
+         </div>
+      </section>
+      
+      <!-- Content -->
+      <section id="skills">
+         <div class="container">
+            <div class="row">
+               <div class="col-lg-12 text-center" data-aos="fade-up">
+                  <h3 class="mb-5">My Expertise</h3>
+               <div class="row">
+                  <div class="col-lg-4 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="100">
+                     <div class="expertise-card">
+                        <div class="expertise-category">Development</div>
+                        <div class="expertise-badge">
+                           <i class="fas fa-check-circle"></i>
+                           <span>Core Expertise</span>
+                        </div>
+                        <h4 class="expertise-title">Backend Development</h4>
+                        <p class="expertise-description">
+                           Design and implement microservices and APIs using Java Spring Boot, Python Flask, and Django. Integrate with databases, message queues, and file systems.
+                        </p>
+                        <div class="expertise-actions">
+                           <a href="https://github.com/yennanliu/SpringPlayground" target="_blank" class="expertise-link">
+                              <span>View Projects</span>
+                              <i class="fas fa-arrow-right"></i>
+                           </a>
+                           <div class="expertise-add-btn">
+                              <i class="fas fa-plus"></i>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+
+                  <div class="col-lg-4 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="200">
+                     <div class="expertise-card featured">
+                        <div class="expertise-category">Full Stack</div>
+                        <div class="expertise-badge">
+                           <i class="fas fa-star"></i>
+                           <span>Featured</span>
+                        </div>
+                        <h4 class="expertise-title">Full Stack Development</h4>
+                        <p class="expertise-description">
+                           Proficient in developing both frontend and backend components of web applications. Experience with HTML, CSS, JavaScript, Vue.js, Node.js, and Express.
+                        </p>
+                        <div class="expertise-actions">
+                           <a href="https://yennanliu.github.io/portfolios.html" class="expertise-link">
+                              <span>View Portfolio</span>
+                              <i class="fas fa-arrow-right"></i>
+                           </a>
+                           <div class="expertise-add-btn">
+                              <i class="fas fa-plus"></i>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+
+                  <div class="col-lg-4 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="300">
+                     <div class="expertise-card">
+                        <div class="expertise-category">Data Engineering</div>
+                        <div class="expertise-badge">
+                           <i class="fas fa-check-circle"></i>
+                           <span>Core Expertise</span>
+                        </div>
+                        <h4 class="expertise-title">Big Data Platform</h4>
+                        <p class="expertise-description">
+                           Implement batch and stream processing using Spark, Flink, and Hadoop. Create scalable data products using big data technologies.
+                        </p>
+                        <div class="expertise-actions">
+                           <a href="https://github.com/yennanliu/NYC_Taxi_Pipeline" target="_blank" class="expertise-link">
+                              <span>View Project</span>
+                              <i class="fas fa-arrow-right"></i>
+                           </a>
+                           <div class="expertise-add-btn">
+                              <i class="fas fa-plus"></i>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+
+                  <div class="col-lg-6 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="400">
+                     <div class="expertise-card">
+                        <div class="expertise-category">Automation</div>
+                        <div class="expertise-badge">
+                           <i class="fas fa-check-circle"></i>
+                           <span>Specialized</span>
+                        </div>
+                        <h4 class="expertise-title">Web Scraping</h4>
+                        <p class="expertise-description">
+                           Develop custom web scraping applications using Python with Selenium, Scrapy, and Airflow. Design parallel scraping systems for large-scale data extraction.
+                        </p>
+                        <div class="expertise-actions">
+                           <a href="https://github.com/yennanliu" target="_blank" class="expertise-link">
+                              <span>Learn More</span>
+                              <i class="fas fa-arrow-right"></i>
+                           </a>
+                           <div class="expertise-add-btn">
+                              <i class="fas fa-plus"></i>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+
+                  <div class="col-lg-6 col-md-6 mb-4" data-aos="fade-up" data-aos-delay="500">
+                     <div class="expertise-card">
+                        <div class="expertise-category">Cloud & DevOps</div>
+                        <div class="expertise-badge">
+                           <i class="fas fa-check-circle"></i>
+                           <span>Specialized</span>
+                        </div>
+                        <h4 class="expertise-title">Cloud Infrastructure</h4>
+                        <p class="expertise-description">
+                           Proficient in AWS, GCP, and Azure. Experienced in system design and prototype implementation, providing custom solutions tailored to business needs.
+                        </p>
+                        <div class="expertise-actions">
+                           <a href="https://github.com/yennanliu/cdk-playground" target="_blank" class="expertise-link">
+                              <span>View Project</span>
+                              <i class="fas fa-arrow-right"></i>
+                           </a>
+                           <div class="expertise-add-btn">
+                              <i class="fas fa-plus"></i>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </section>
+
+      <!-- LinkedIn, GitHub, Twitter, Hugging Face, and GitLab Logos -->
+      <div class="container mt-5">
+         <div class="social-icons" data-aos="fade-up">
+             <a href="https://linkedin.com/in/yennanliu" target="_blank" class="social-icon">
+                 <img src="https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png" alt="LinkedIn">
+             </a>
+             <a href="https://github.com/yennanliu" target="_blank" class="social-icon">
+                 <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" alt="GitHub">
+             </a>
+             <a href="https://twitter.com/free_tempopo" target="_blank" class="social-icon">
+                 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ce/X_logo_2023.svg/1280px-X_logo_2023.svg.png" alt="Twitter">
+             </a>
+             <a href="https://huggingface.co/yennj12" target="_blank" class="social-icon">
+                 <img src="img/hf-logo.svg" alt="Hugging Face">
+             </a>
+             <a href="https://gitlab.com/yennanliu" target="_blank" class="social-icon">
+                 <img src="img/gitlab-logo.svg" alt="GitLab">
+             </a>
+         </div>
+      </div>
+
+      <!-- Scroll to top button -->
+      <div class="scroll-top">
+         <i class="fas fa-arrow-up"></i>
+      </div>
+
+      <!-- Footer -->
+      <footer class="mt-5">
+         <div class="container">
+            <div class="row">
+               <div class="col-lg-12 text-center">
+                  <ul class="list-inline">
+                     <li class="list-inline-item"><a href="https://yennanliu.github.io/">Home</a></li>
+                     <li class="list-inline-item"><a href="https://yennanliu.github.io/about_me.html">About Me</a></li>
+                     <li class="list-inline-item"><a href="https://yennanliu.github.io/portfolios.html">Portfolios</a></li>
+                     <li class="list-inline-item"><a href="https://yennanliu.github.io/aws_architecture.html">AWS Architecture</a></li>
+                     <li class="list-inline-item"><a href="https://yennanliu.github.io/contact.html">Contact</a></li>
+                     <li class="list-inline-item"><a href="https://yennj12.js.org/yennj12_blog_V4/">Blog</a></li>
+                     <li class="list-inline-item"><a href="https://yennj12.js.org/index.html.backup.html">Old Site</a></li>                
+                  </ul>
+                  <p>&copy; 2024 yen.dev.com All Rights Reserved.</p>
+               </div>
+            </div>
+         </div>
+      </footer>
+      
+      <!-- jQuery, Popper.js, Bootstrap JS -->
+      <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+      <!-- AOS Animation Library -->
+      <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+      <!-- Custom JavaScript -->
+      <script>
+         // Initialize AOS animation
+         AOS.init({
+             duration: 800,
+             easing: 'ease-in-out',
+             once: true
+         });
+         
+         // Scroll to top button functionality
+         const scrollTopBtn = document.querySelector('.scroll-top');
+         
+         window.addEventListener('scroll', function() {
+             if (window.pageYOffset > 300) {
+                 scrollTopBtn.classList.add('visible');
+             } else {
+                 scrollTopBtn.classList.remove('visible');
+             }
+         });
+         
+         scrollTopBtn.addEventListener('click', function() {
+             window.scrollTo({
+                 top: 0,
+                 behavior: 'smooth'
+             });
+         });
+         
+         // Smooth scrolling for anchor links
+         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+             anchor.addEventListener('click', function (e) {
+                 e.preventDefault();
+                 
+                 const targetId = this.getAttribute('href');
+                 if (targetId === '#') return;
+                 
+                 const targetElement = document.querySelector(targetId);
+                 if (targetElement) {
+                     targetElement.scrollIntoView({
+                         behavior: 'smooth'
+                     });
+                 }
+             });
+         });
+         
+         // Responsive font size
+         window.addEventListener('resize', function() {
+             var screenWidth = window.innerWidth;
+             var introElement = document.querySelector('.intro');
+             if (introElement) {
+                 if (screenWidth < 576) {
+                     introElement.style.fontSize = '1rem';
+                 } else if (screenWidth >= 576 && screenWidth < 768) {
+                     introElement.style.fontSize = '1.2rem';
+                 } else if (screenWidth >= 768 && screenWidth < 992) {
+                     introElement.style.fontSize = '1.5rem';
+                 } else if (screenWidth >= 992 && screenWidth < 1200) {
+                     introElement.style.fontSize = '1.8rem';
+                 } else {
+                     introElement.style.fontSize = '2rem';
+                 }
+             }
+         });
+         
+         // Dark mode toggle functionality
+         document.addEventListener('DOMContentLoaded', function() {
+             const toggleSwitch = document.getElementById('theme-checkbox');
+             
+             // Check for saved theme preference or use device preference
+             const currentTheme = localStorage.getItem('theme') || 
+                 (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+             
+             if (currentTheme === 'dark') {
+                 document.body.classList.add('dark-mode');
+                 toggleSwitch.checked = true;
+             }
+             
+             // Switch theme function
+             function switchTheme(event) {
+                 if (event.target.checked) {
+                     document.body.classList.add('dark-mode');
+                     localStorage.setItem('theme', 'dark');
+                 } else {
+                     document.body.classList.remove('dark-mode');
+                     localStorage.setItem('theme', 'light');
+                 }
+             }
+             
+             // Event listener for toggle switch
+             toggleSwitch.addEventListener('change', switchTheme);
+             
+             // Dynamic gradient colors
+             const heroBg = document.querySelector('.hero-bg');
+             const gradientColors = [
+                 ['#ee7752', '#e73c7e', '#23a6d5', '#23d5ab'], // Default
+                 ['#4158D0', '#C850C0', '#FFCC70'], // Purple-yellow
+                 ['#0093E9', '#80D0C7'], // Blue-teal
+                 ['#8EC5FC', '#E0C3FC'], // Light blue-purple
+                 ['#FBDA61', '#FF5ACD'] // Yellow-pink
+             ];
+             
+             let currentGradientIndex = 0;
+             
+             // Change gradient colors every 10 seconds
+             setInterval(() => {
+                 currentGradientIndex = (currentGradientIndex + 1) % gradientColors.length;
+                 const colors = gradientColors[currentGradientIndex];
+                 const newGradient = `linear-gradient(-45deg, ${colors.join(', ')})`;
+                 heroBg.style.backgroundImage = newGradient;
+             }, 10000);
+         });
+         
+         // Register Service Worker for PWA functionality
+         if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function() {
+               navigator.serviceWorker.register('/sw.js')
+                  .then(function(registration) {
+                     console.log('ServiceWorker registration successful with scope: ', registration.scope);
+                     
+                     // Check for updates
+                     registration.addEventListener('updatefound', () => {
+                        const newWorker = registration.installing;
+                        newWorker.addEventListener('statechange', () => {
+                           if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                              // Show update available notification
+                              if (confirm('A new version is available. Refresh to update?')) {
+                                 window.location.reload();
+                              }
+                           }
+                        });
+                     });
+                  })
+                  .catch(function(err) {
+                     console.log('ServiceWorker registration failed: ', err);
+                  });
+            });
+         }
+      </script>
+   </body>
+</html>

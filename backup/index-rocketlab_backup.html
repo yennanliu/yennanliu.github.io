@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+      <title>Yen.Dev - Building the Future of Software | RocketLab Style</title>
+      <meta name="description" content="Software engineer specialized in backend solutions. Building scalable systems that power innovation.">
+
+      <!-- Open Graph / Facebook -->
+      <meta property="og:type" content="website">
+      <meta property="og:url" content="https://yennanliu.github.io/">
+      <meta property="og:title" content="Yen.Dev - Software Engineer">
+      <meta property="og:description" content="Building scalable systems that power innovation">
+      <meta property="og:image" content="https://yennanliu.github.io/img/website-preview.png">
+
+      <!-- Bootstrap CSS -->
+      <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+      <!-- Font Awesome -->
+      <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet">
+      <!-- Google Fonts -->
+      <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+      <style>
+         :root {
+            --rocket-black: #000000;
+            --rocket-navy: #0a0e1a;
+            --rocket-blue: #00d4ff;
+            --rocket-white: #ffffff;
+            --rocket-gray: #8892a6;
+            --rocket-light-gray: #c4c9d4;
+         }
+
+         * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+         }
+
+         body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--rocket-black);
+            color: var(--rocket-white);
+            line-height: 1.6;
+            overflow-x: hidden;
+         }
+
+         /* Navigation - RocketLab Style */
+         .navbar-rocket {
+            background-color: rgba(10, 14, 26, 0.95) !important;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 20px 0;
+            transition: all 0.3s ease;
+         }
+
+         .navbar-brand {
+            font-weight: 900;
+            font-size: 1.4rem;
+            color: var(--rocket-white) !important;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+         }
+
+         .nav-link {
+            color: var(--rocket-light-gray) !important;
+            font-weight: 500;
+            font-size: 0.9rem;
+            margin: 0 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: color 0.3s ease;
+         }
+
+         .nav-link:hover {
+            color: var(--rocket-blue) !important;
+         }
+
+         /* Hero Section - Space Theme */
+         .hero-rocket {
+            min-height: 90vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(180deg, #000000 0%, #0a0e1a 100%);
+         }
+
+         .hero-rocket::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-image:
+               radial-gradient(2px 2px at 20% 30%, white, transparent),
+               radial-gradient(2px 2px at 60% 70%, white, transparent),
+               radial-gradient(1px 1px at 50% 50%, white, transparent),
+               radial-gradient(1px 1px at 80% 10%, white, transparent),
+               radial-gradient(2px 2px at 90% 60%, white, transparent),
+               radial-gradient(1px 1px at 33% 90%, white, transparent);
+            background-size: 200% 200%;
+            background-position: 0% 0%;
+            animation: stars 120s linear infinite;
+            opacity: 0.5;
+         }
+
+         @keyframes stars {
+            from { background-position: 0% 0%; }
+            to { background-position: -200% -200%; }
+         }
+
+         .hero-rocket::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 300px;
+            background: linear-gradient(0deg, rgba(0, 212, 255, 0.1) 0%, transparent 100%);
+            pointer-events: none;
+         }
+
+         .hero-content-rocket {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            padding: 80px 20px;
+         }
+
+         .hero-rocket h1 {
+            font-size: 4.5rem;
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 30px;
+            letter-spacing: -1px;
+            text-transform: uppercase;
+         }
+
+         .hero-rocket .mission-statement {
+            font-size: 1.8rem;
+            font-weight: 300;
+            color: var(--rocket-light-gray);
+            margin-bottom: 50px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+         }
+
+         /* Stats Section - RocketLab Style */
+         .stats-rocket {
+            display: flex;
+            justify-content: center;
+            gap: 80px;
+            margin-top: 60px;
+            flex-wrap: wrap;
+         }
+
+         .stat-item-rocket {
+            text-align: center;
+         }
+
+         .stat-number-rocket {
+            font-size: 4rem;
+            font-weight: 900;
+            color: var(--rocket-blue);
+            margin-bottom: 10px;
+            line-height: 1;
+         }
+
+         .stat-label-rocket {
+            font-size: 1rem;
+            color: var(--rocket-gray);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 600;
+         }
+
+         /* Solutions Section */
+         .solutions-rocket {
+            padding: 120px 0;
+            background: linear-gradient(180deg, #0a0e1a 0%, #000000 100%);
+            position: relative;
+         }
+
+         .section-title-rocket {
+            font-size: 3rem;
+            font-weight: 900;
+            text-align: center;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: -1px;
+         }
+
+         .section-subtitle-rocket {
+            text-align: center;
+            font-size: 1.2rem;
+            color: var(--rocket-gray);
+            margin-bottom: 80px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+         }
+
+         /* Solution Cards - Product Style */
+         .solution-card-rocket {
+            background: linear-gradient(135deg, #0a0e1a 0%, #000000 100%);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 0;
+            padding: 50px 40px;
+            margin-bottom: 30px;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            min-height: 400px;
+            display: flex;
+            flex-direction: column;
+         }
+
+         .solution-card-rocket::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--rocket-blue), transparent);
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+         }
+
+         .solution-card-rocket:hover::before {
+            transform: scaleX(1);
+         }
+
+         .solution-card-rocket:hover {
+            border-color: var(--rocket-blue);
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(0, 212, 255, 0.2);
+         }
+
+         .solution-category-rocket {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--rocket-blue);
+            font-weight: 700;
+            margin-bottom: 20px;
+         }
+
+         .solution-title-rocket {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+         }
+
+         .solution-desc-rocket {
+            font-size: 1rem;
+            color: var(--rocket-gray);
+            line-height: 1.8;
+            margin-bottom: auto;
+            flex-grow: 1;
+         }
+
+         .solution-link-rocket {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--rocket-blue);
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 25px;
+            transition: gap 0.3s ease;
+         }
+
+         .solution-link-rocket:hover {
+            gap: 15px;
+            color: var(--rocket-white);
+            text-decoration: none;
+         }
+
+         /* CTA Section */
+         .cta-rocket {
+            padding: 100px 0;
+            background: linear-gradient(135deg, #000000 0%, #0a0e1a 100%);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+         }
+
+         .cta-rocket::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(0, 212, 255, 0.1) 0%, transparent 70%);
+            animation: pulse 4s ease-in-out infinite;
+         }
+
+         @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.1); opacity: 0.8; }
+         }
+
+         .cta-rocket h2 {
+            font-size: 3rem;
+            font-weight: 900;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+            position: relative;
+            z-index: 2;
+         }
+
+         .cta-rocket p {
+            font-size: 1.3rem;
+            color: var(--rocket-gray);
+            margin-bottom: 40px;
+            position: relative;
+            z-index: 2;
+         }
+
+         .btn-rocket {
+            display: inline-block;
+            padding: 18px 50px;
+            background: var(--rocket-blue);
+            color: var(--rocket-black);
+            text-decoration: none;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 2;
+            border: none;
+         }
+
+         .btn-rocket:hover {
+            background: var(--rocket-white);
+            color: var(--rocket-black);
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(0, 212, 255, 0.4);
+         }
+
+         /* Footer */
+         footer {
+            background: var(--rocket-navy);
+            padding: 80px 0 40px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+         }
+
+         .footer-links-rocket {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-bottom: 50px;
+            flex-wrap: wrap;
+         }
+
+         .footer-links-rocket a {
+            color: var(--rocket-gray);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: color 0.3s ease;
+         }
+
+         .footer-links-rocket a:hover {
+            color: var(--rocket-blue);
+         }
+
+         .social-rocket {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin-bottom: 50px;
+         }
+
+         .social-icon-rocket {
+            width: 50px;
+            height: 50px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--rocket-gray);
+            transition: all 0.3s ease;
+         }
+
+         .social-icon-rocket:hover {
+            border-color: var(--rocket-blue);
+            color: var(--rocket-blue);
+            background: rgba(0, 212, 255, 0.1);
+         }
+
+         /* Responsive */
+         @media (max-width: 768px) {
+            .hero-rocket h1 {
+               font-size: 2.5rem;
+            }
+
+            .hero-rocket .mission-statement {
+               font-size: 1.2rem;
+            }
+
+            .stat-number-rocket {
+               font-size: 2.5rem;
+            }
+
+            .stats-rocket {
+               gap: 40px;
+            }
+
+            .section-title-rocket {
+               font-size: 2rem;
+            }
+         }
+      </style>
+   </head>
+   <body>
+      <!-- Navigation -->
+      <nav class="navbar navbar-rocket navbar-expand-lg fixed-top">
+         <div class="container">
+            <a class="navbar-brand" href="https://yennanliu.github.io">YEN.DEV</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" style="background-color: rgba(255,255,255,0.1);">
+               <span class="navbar-toggler-icon" style="filter: invert(1);"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+               <ul class="navbar-nav ml-auto">
+                  <li class="nav-item"><a class="nav-link" href="https://yennanliu.github.io/about_me.html">About</a></li>
+                  <li class="nav-item"><a class="nav-link" href="https://yennanliu.github.io/portfolios.html">Solutions</a></li>
+                  <li class="nav-item"><a class="nav-link" href="https://yennanliu.github.io/aws_architecture.html">Architecture</a></li>
+                  <li class="nav-item"><a class="nav-link" href="https://yennanliu.github.io/contact.html">Contact</a></li>
+               </ul>
+            </div>
+         </div>
+      </nav>
+
+      <!-- Hero Section -->
+      <section class="hero-rocket">
+         <div class="hero-content-rocket">
+            <div class="container">
+               <h1>Building Systems<br>That Power Innovation</h1>
+               <p class="mission-statement">Engineering scalable backend solutions from prototype to production</p>
+
+               <div class="stats-rocket">
+                  <div class="stat-item-rocket">
+                     <div class="stat-number-rocket">50+</div>
+                     <div class="stat-label-rocket">Projects Deployed</div>
+                  </div>
+                  <div class="stat-item-rocket">
+                     <div class="stat-number-rocket">5+</div>
+                     <div class="stat-label-rocket">Years Experience</div>
+                  </div>
+                  <div class="stat-item-rocket">
+                     <div class="stat-number-rocket">100%</div>
+                     <div class="stat-label-rocket">Uptime Focus</div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </section>
+
+      <!-- Solutions Section -->
+      <section class="solutions-rocket">
+         <div class="container">
+            <h2 class="section-title-rocket">Core Solutions</h2>
+            <p class="section-subtitle-rocket">Specialized engineering capabilities across the full technology stack</p>
+
+            <div class="row">
+               <div class="col-lg-6 col-md-6">
+                  <div class="solution-card-rocket">
+                     <div class="solution-category-rocket">Backend Engineering</div>
+                     <h3 class="solution-title-rocket">Microservices Architecture</h3>
+                     <p class="solution-desc-rocket">
+                        Design and implement distributed systems using Java Spring Boot, Python Flask, and Django. Build scalable APIs that handle millions of requests with high availability and fault tolerance.
+                     </p>
+                     <a href="https://github.com/yennanliu/SpringPlayground" target="_blank" class="solution-link-rocket">
+                        Explore Projects <i class="fas fa-arrow-right"></i>
+                     </a>
+                  </div>
+               </div>
+
+               <div class="col-lg-6 col-md-6">
+                  <div class="solution-card-rocket">
+                     <div class="solution-category-rocket">Data Platform</div>
+                     <h3 class="solution-title-rocket">Big Data Processing</h3>
+                     <p class="solution-desc-rocket">
+                        Build batch and stream processing pipelines using Apache Spark, Flink, and Hadoop. Transform massive datasets into actionable insights with real-time analytics capabilities.
+                     </p>
+                     <a href="https://github.com/yennanliu/NYC_Taxi_Pipeline" target="_blank" class="solution-link-rocket">
+                        View Pipeline <i class="fas fa-arrow-right"></i>
+                     </a>
+                  </div>
+               </div>
+
+               <div class="col-lg-6 col-md-6">
+                  <div class="solution-card-rocket">
+                     <div class="solution-category-rocket">Cloud Infrastructure</div>
+                     <h3 class="solution-title-rocket">Cloud-Native Systems</h3>
+                     <p class="solution-desc-rocket">
+                        Deploy and manage infrastructure on AWS, GCP, and Azure. Infrastructure as Code, containerization, and serverless architectures designed for scale and reliability.
+                     </p>
+                     <a href="https://github.com/yennanliu/cdk-playground" target="_blank" class="solution-link-rocket">
+                        View Architecture <i class="fas fa-arrow-right"></i>
+                     </a>
+                  </div>
+               </div>
+
+               <div class="col-lg-6 col-md-6">
+                  <div class="solution-card-rocket">
+                     <div class="solution-category-rocket">Full Stack Development</div>
+                     <h3 class="solution-title-rocket">End-to-End Applications</h3>
+                     <p class="solution-desc-rocket">
+                        Build complete web applications from database to user interface. Modern frameworks, responsive design, and seamless integration across all layers of the technology stack.
+                     </p>
+                     <a href="https://yennanliu.github.io/portfolios.html" class="solution-link-rocket">
+                        View Portfolio <i class="fas fa-arrow-right"></i>
+                     </a>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </section>
+
+      <!-- CTA Section -->
+      <section class="cta-rocket">
+         <div class="container">
+            <h2>Ready to Launch Your Project?</h2>
+            <p>Let's build something exceptional together</p>
+            <a href="https://yennanliu.github.io/contact.html" class="btn-rocket">Get In Touch</a>
+         </div>
+      </section>
+
+      <!-- Footer -->
+      <footer>
+         <div class="container text-center">
+            <div class="social-rocket">
+               <a href="https://linkedin.com/in/yennanliu" target="_blank" class="social-icon-rocket" aria-label="LinkedIn">
+                  <i class="fab fa-linkedin-in"></i>
+               </a>
+               <a href="https://github.com/yennanliu" target="_blank" class="social-icon-rocket" aria-label="GitHub">
+                  <i class="fab fa-github"></i>
+               </a>
+               <a href="https://twitter.com/free_tempopo" target="_blank" class="social-icon-rocket" aria-label="Twitter">
+                  <i class="fab fa-twitter"></i>
+               </a>
+               <a href="https://huggingface.co/yennj12" target="_blank" class="social-icon-rocket" aria-label="Hugging Face">
+                  <i class="fas fa-robot"></i>
+               </a>
+               <a href="https://gitlab.com/yennanliu" target="_blank" class="social-icon-rocket" aria-label="GitLab">
+                  <i class="fab fa-gitlab"></i>
+               </a>
+            </div>
+
+            <div class="footer-links-rocket">
+               <a href="https://yennanliu.github.io/">Home</a>
+               <a href="https://yennanliu.github.io/about_me.html">About</a>
+               <a href="https://yennanliu.github.io/portfolios.html">Solutions</a>
+               <a href="https://yennanliu.github.io/aws_architecture.html">Architecture</a>
+               <a href="https://yennanliu.github.io/contact.html">Contact</a>
+               <a href="https://yennj12.js.org/yennj12_blog_V4/">Blog</a>
+            </div>
+
+            <p style="color: var(--rocket-gray); font-size: 0.85rem; margin-top: 30px;">&copy; 2024 yen.dev.com - Engineering Excellence</p>
+         </div>
+      </footer>
+
+      <!-- Scripts -->
+      <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+   </body>
+</html>

@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+      <title>Yen.Dev - Software Engineer Portfolio</title>
+      <meta name="description" content="I'm a software engineer specialized in backend solutions. From prototypes to formal launches, ensuring maintenance and monitoring.">
+
+      <!-- Open Graph / Facebook -->
+      <meta property="og:type" content="website">
+      <meta property="og:url" content="https://yennanliu.github.io/">
+      <meta property="og:title" content="Yen.Dev - Software Engineer">
+      <meta property="og:description" content="Software engineer specialized in backend solutions">
+      <meta property="og:image" content="https://yennanliu.github.io/img/website-preview.png">
+
+      <!-- Bootstrap CSS -->
+      <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+      <!-- Font Awesome -->
+      <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet">
+      <!-- Google Fonts -->
+      <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+      <style>
+         :root {
+            --aws-black: #000000;
+            --aws-peach: #FFF5F0;
+            --aws-peach-light: #FFF9F5;
+            --aws-white: #FFFFFF;
+            --aws-text: #16191f;
+            --aws-light-gray: #687078;
+            --aws-border: #D5DBDB;
+            --aws-card-bg: #F9F9F9;
+         }
+
+         * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+         }
+
+         body {
+            font-family: 'Open Sans', Arial, sans-serif;
+            background-color: var(--aws-white);
+            color: var(--aws-text);
+            line-height: 1.6;
+         }
+
+         /* Top Utility Bar - Thin Black Bar */
+         .top-bar {
+            background-color: var(--aws-black);
+            color: white;
+            padding: 6px 0;
+            font-size: 0.8rem;
+         }
+
+         .top-bar a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            transition: color 0.2s ease;
+         }
+
+         .top-bar a:hover {
+            color: #ddd;
+         }
+
+         /* Main Navigation - White Background */
+         .main-nav {
+            background-color: var(--aws-white);
+            padding: 15px 0;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+         }
+
+         .nav-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+         }
+
+         .aws-logo {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--aws-black);
+            text-decoration: none;
+            margin-right: 40px;
+         }
+
+         .aws-logo:hover {
+            color: var(--aws-black);
+            text-decoration: none;
+         }
+
+         .main-nav-links {
+            display: flex;
+            align-items: center;
+            gap: 35px;
+         }
+
+         .main-nav-links a {
+            color: var(--aws-text);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 400;
+            transition: color 0.2s ease;
+         }
+
+         .main-nav-links a:hover {
+            color: var(--aws-light-gray);
+         }
+
+         .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+         }
+
+         .search-icon {
+            color: var(--aws-text);
+            font-size: 1.1rem;
+            cursor: pointer;
+         }
+
+         .btn-aws-create {
+            background-color: var(--aws-black);
+            color: white;
+            padding: 10px 24px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.2s ease;
+            border: none;
+         }
+
+         .btn-aws-create:hover {
+            background-color: #1a1a1a;
+            color: white;
+            text-decoration: none;
+         }
+
+         /* Secondary Navigation */
+         .secondary-nav {
+            background-color: var(--aws-white);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            padding: 20px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+         }
+
+         .secondary-nav-content {
+            display: flex;
+            align-items: center;
+            gap: 35px;
+         }
+
+         .secondary-nav h2 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin: 0;
+            color: var(--aws-text);
+         }
+
+         .secondary-nav a {
+            color: var(--aws-light-gray);
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.2s ease;
+         }
+
+         .secondary-nav a:hover {
+            color: var(--aws-text);
+         }
+
+         /* Hero Section */
+         .hero-aws-section {
+            background: linear-gradient(180deg, var(--aws-peach) 0%, var(--aws-peach-light) 50%, var(--aws-white) 100%);
+            padding: 60px 0 80px;
+            min-height: 500px;
+            display: flex;
+            align-items: center;
+         }
+
+         .breadcrumb-aws {
+            font-size: 0.9rem;
+            color: var(--aws-light-gray);
+            margin-bottom: 40px;
+         }
+
+         .breadcrumb-aws a {
+            color: var(--aws-light-gray);
+            text-decoration: none;
+         }
+
+         .breadcrumb-aws a:hover {
+            text-decoration: underline;
+         }
+
+         .notification-banner {
+            background-color: white;
+            padding: 18px 25px;
+            border-radius: 8px;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+            margin-bottom: 40px;
+            display: inline-flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 0.95rem;
+         }
+
+         .notification-banner i {
+            font-size: 1.2rem;
+         }
+
+         .hero-title {
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: var(--aws-text);
+            margin-bottom: 25px;
+            line-height: 1.2;
+         }
+
+         .hero-subtitle {
+            font-size: 1.3rem;
+            color: var(--aws-light-gray);
+            margin-bottom: 40px;
+            font-weight: 400;
+         }
+
+         .btn-hero-cta {
+            background-color: var(--aws-black);
+            color: white;
+            padding: 16px 40px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1rem;
+            display: inline-block;
+            transition: all 0.2s ease;
+         }
+
+         .btn-hero-cta:hover {
+            background-color: #1a1a1a;
+            color: white;
+            text-decoration: none;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+         }
+
+         /* Services Section */
+         .services-section {
+            padding: 80px 0;
+            background-color: var(--aws-white);
+         }
+
+         .services-header {
+            margin-bottom: 50px;
+         }
+
+         .services-header h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--aws-text);
+            margin-bottom: 40px;
+         }
+
+         .filter-search-row {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            margin-bottom: 30px;
+         }
+
+         .filter-btn {
+            background-color: white;
+            border: 2px solid var(--aws-border);
+            padding: 12px 28px;
+            border-radius: 25px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.2s ease;
+         }
+
+         .filter-btn:hover {
+            border-color: var(--aws-black);
+         }
+
+         .search-box {
+            flex: 1;
+            position: relative;
+         }
+
+         .search-box input {
+            width: 100%;
+            padding: 12px 20px 12px 45px;
+            border: 1px solid var(--aws-border);
+            border-radius: 4px;
+            font-size: 0.95rem;
+         }
+
+         .search-box i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--aws-light-gray);
+         }
+
+         .results-count {
+            font-size: 0.9rem;
+            color: var(--aws-light-gray);
+            margin-bottom: 30px;
+         }
+
+         /* Service Cards */
+         .service-cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+         }
+
+         .service-card {
+            background-color: var(--aws-card-bg);
+            border-radius: 8px;
+            padding: 35px 30px;
+            transition: all 0.3s ease;
+            position: relative;
+            cursor: pointer;
+            border: 1px solid transparent;
+         }
+
+         .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+            border-color: var(--aws-border);
+         }
+
+         .service-category {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--aws-light-gray);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+         }
+
+         .service-card-icon {
+            width: 40px;
+            height: 40px;
+            background-color: white;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            border: 1px solid var(--aws-border);
+         }
+
+         .service-card h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--aws-text);
+            margin-bottom: 15px;
+         }
+
+         .service-card p {
+            font-size: 0.95rem;
+            color: var(--aws-light-gray);
+            line-height: 1.7;
+            margin-bottom: 25px;
+         }
+
+         .service-card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 20px;
+            border-top: 1px solid var(--aws-border);
+         }
+
+         .service-link {
+            color: var(--aws-text);
+            text-decoration: none;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: gap 0.2s ease;
+         }
+
+         .service-link:hover {
+            gap: 12px;
+            text-decoration: none;
+         }
+
+         .service-add-btn {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            border: 2px solid var(--aws-border);
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+         }
+
+         .service-add-btn:hover {
+            border-color: var(--aws-black);
+            background: var(--aws-black);
+            color: white;
+         }
+
+         /* Footer - Pure Black */
+         footer {
+            background-color: var(--aws-black);
+            padding: 60px 0 30px;
+            color: white;
+         }
+
+         .footer-cta {
+            text-align: center;
+            padding-bottom: 50px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            margin-bottom: 50px;
+         }
+
+         .footer-cta .btn-hero-cta {
+            background-color: white;
+            color: var(--aws-black);
+         }
+
+         .footer-cta .btn-hero-cta:hover {
+            background-color: #f0f0f0;
+            color: var(--aws-black);
+         }
+
+         .footer-links {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+         }
+
+         .footer-column h4 {
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+         }
+
+         .footer-column a {
+            display: block;
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            font-size: 0.9rem;
+            margin-bottom: 12px;
+            transition: color 0.2s ease;
+         }
+
+         .footer-column a:hover {
+            color: white;
+         }
+
+         .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.85rem;
+         }
+
+         /* Responsive */
+         @media (max-width: 991px) {
+            .main-nav-links {
+               flex-direction: column;
+               gap: 15px;
+               align-items: flex-start;
+            }
+
+            .nav-container {
+               flex-direction: column;
+               gap: 20px;
+            }
+         }
+
+         @media (max-width: 768px) {
+            .hero-title {
+               font-size: 2.2rem;
+            }
+
+            .services-header h2 {
+               font-size: 1.8rem;
+            }
+
+            .service-cards-grid {
+               grid-template-columns: 1fr;
+            }
+
+            .secondary-nav-content {
+               flex-wrap: wrap;
+               gap: 15px;
+            }
+
+            .filter-search-row {
+               flex-direction: column;
+            }
+
+            .filter-btn, .search-box {
+               width: 100%;
+            }
+         }
+      </style>
+   </head>
+   <body>
+      <!-- Top Utility Bar - Thin Black Bar -->
+      <div class="top-bar">
+         <div class="container">
+            <div class="d-flex justify-content-end align-items-center">
+               <a href="https://yennanliu.github.io/contact.html">Contact Me</a>
+               <a href="https://yennj12.js.org/yennj12_blog_V4/">Blog</a>
+               <a href="https://yennj12.js.org/index.html.backup.html">Old Site</a>
+            </div>
+         </div>
+      </div>
+
+      <!-- Main Navigation - White Background with Main Links -->
+      <nav class="main-nav">
+         <div class="container">
+            <div class="nav-container">
+               <div class="d-flex align-items-center">
+                  <a href="https://yennanliu.github.io" class="aws-logo">Yen.Dev</a>
+
+                  <div class="main-nav-links">
+                     <a href="https://yennanliu.github.io/about_me.html">About Me</a>
+                     <a href="https://yennanliu.github.io/portfolios.html">Portfolios</a>
+                     <a href="https://yennanliu.github.io/aws_architecture.html">AWS Architecture</a>
+                     <a href="https://yennanliu.github.io/contact.html">Contact</a>
+                     <a href="https://yennj12.js.org/yennj12_blog_V4/">Blog</a>
+                  </div>
+               </div>
+
+               <div class="nav-actions">
+                  <i class="fas fa-search search-icon"></i>
+                  <a href="https://yennanliu.github.io/contact.html" class="btn-aws-create">Get In Touch</a>
+               </div>
+            </div>
+         </div>
+      </nav>
+
+      <!-- Secondary Navigation -->
+      <div class="secondary-nav">
+         <div class="container">
+            <div class="secondary-nav-content">
+               <h2>My Services</h2>
+               <a href="#overview">Overview</a>
+               <a href="#services">Services</a>
+               <a href="#portfolio">Portfolio</a>
+               <a href="#contact">Contact</a>
+            </div>
+         </div>
+      </div>
+
+      <!-- Hero Section -->
+      <section class="hero-aws-section">
+         <div class="container">
+            <div class="breadcrumb-aws">
+               <a href="https://yennanliu.github.io">Home</a> › Software Engineer
+            </div>
+
+            <div class="notification-banner">
+               <span>I'm a software engineer 👨‍💻 specialized in backend solutions ☕</span>
+               <i class="fas fa-arrow-right"></i>
+            </div>
+
+            <h1 class="hero-title">Welcome to My Space</h1>
+            <p class="hero-subtitle">From prototypes to formal launches, ensuring maintenance and monitoring.</p>
+
+            <a href="#services" class="btn-hero-cta">Explore My Skills</a>
+         </div>
+      </section>
+
+      <!-- Services Section -->
+      <section id="services" class="services-section">
+         <div class="container">
+            <div class="services-header">
+               <h2>Explore My Expertise</h2>
+
+               <div class="filter-search-row">
+                  <button class="filter-btn">
+                     <i class="fas fa-sliders-h"></i>
+                     <span>Filter</span>
+                  </button>
+                  <div class="search-box">
+                     <i class="fas fa-search"></i>
+                     <input type="text" placeholder="Search services...">
+                  </div>
+               </div>
+
+               <div class="results-count">Showing 1 - 5 services</div>
+            </div>
+
+            <div class="service-cards-grid">
+               <!-- Service Card 1 -->
+               <div class="service-card">
+                  <div class="service-category">
+                     <i class="fas fa-tag"></i>
+                     <span>Development</span>
+                  </div>
+                  <div class="service-card-icon">
+                     <i class="fas fa-server" style="color: var(--aws-black);"></i>
+                  </div>
+                  <h3>Backend Development</h3>
+                  <p>Design and implement microservices and APIs using Java Spring Boot, Python Flask, and Django. Integrate with databases, message queues, and file systems.</p>
+                  <div class="service-card-footer">
+                     <a href="https://github.com/yennanliu/SpringPlayground" target="_blank" class="service-link">
+                        <i class="fas fa-arrow-right"></i>
+                     </a>
+                     <div class="service-add-btn">
+                        <i class="fas fa-plus"></i>
+                     </div>
+                  </div>
+               </div>
+
+               <!-- Service Card 2 -->
+               <div class="service-card">
+                  <div class="service-category">
+                     <i class="fas fa-tag"></i>
+                     <span>Full Stack</span>
+                  </div>
+                  <div class="service-card-icon">
+                     <i class="fas fa-layer-group" style="color: var(--aws-black);"></i>
+                  </div>
+                  <h3>Full Stack Development</h3>
+                  <p>Proficient in developing both frontend and backend components of web applications. Experience with HTML, CSS, JavaScript, Vue.js, Node.js, and Express.</p>
+                  <div class="service-card-footer">
+                     <a href="https://yennanliu.github.io/portfolios.html" class="service-link">
+                        <i class="fas fa-arrow-right"></i>
+                     </a>
+                     <div class="service-add-btn">
+                        <i class="fas fa-plus"></i>
+                     </div>
+                  </div>
+               </div>
+
+               <!-- Service Card 3 -->
+               <div class="service-card">
+                  <div class="service-category">
+                     <i class="fas fa-tag"></i>
+                     <span>Data Engineering</span>
+                  </div>
+                  <div class="service-card-icon">
+                     <i class="fas fa-database" style="color: var(--aws-black);"></i>
+                  </div>
+                  <h3>Big Data Platform</h3>
+                  <p>Implement batch and stream processing using Spark, Flink, and Hadoop. Create scalable data products using big data technologies.</p>
+                  <div class="service-card-footer">
+                     <a href="https://github.com/yennanliu/NYC_Taxi_Pipeline" target="_blank" class="service-link">
+                        <i class="fas fa-arrow-right"></i>
+                     </a>
+                     <div class="service-add-btn">
+                        <i class="fas fa-plus"></i>
+                     </div>
+                  </div>
+               </div>
+
+               <!-- Service Card 4 -->
+               <div class="service-card">
+                  <div class="service-category">
+                     <i class="fas fa-tag"></i>
+                     <span>Automation</span>
+                  </div>
+                  <div class="service-card-icon">
+                     <i class="fas fa-robot" style="color: var(--aws-black);"></i>
+                  </div>
+                  <h3>Web Scraping</h3>
+                  <p>Develop custom web scraping applications using Python with Selenium, Scrapy, and Airflow. Design parallel scraping systems for large-scale data extraction.</p>
+                  <div class="service-card-footer">
+                     <a href="https://github.com/yennanliu" target="_blank" class="service-link">
+                        <i class="fas fa-arrow-right"></i>
+                     </a>
+                     <div class="service-add-btn">
+                        <i class="fas fa-plus"></i>
+                     </div>
+                  </div>
+               </div>
+
+               <!-- Service Card 5 -->
+               <div class="service-card">
+                  <div class="service-category">
+                     <i class="fas fa-tag"></i>
+                     <span>Cloud & DevOps</span>
+                  </div>
+                  <div class="service-card-icon">
+                     <i class="fas fa-cloud" style="color: var(--aws-black);"></i>
+                  </div>
+                  <h3>Cloud Infrastructure</h3>
+                  <p>Proficient in AWS, GCP, and Azure. Experienced in system design and prototype implementation, providing custom solutions tailored to business needs.</p>
+                  <div class="service-card-footer">
+                     <a href="https://github.com/yennanliu/cdk-playground" target="_blank" class="service-link">
+                        <i class="fas fa-arrow-right"></i>
+                     </a>
+                     <div class="service-add-btn">
+                        <i class="fas fa-plus"></i>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </section>
+
+      <!-- Footer - Pure Black -->
+      <footer>
+         <div class="container">
+            <div class="footer-cta">
+               <a href="https://yennanliu.github.io/contact.html" class="btn-hero-cta">Get In Touch</a>
+            </div>
+
+            <div class="footer-links">
+               <div class="footer-column">
+                  <h4>About</h4>
+                  <a href="https://yennanliu.github.io/about_me.html">About Me</a>
+                  <a href="https://yennanliu.github.io/portfolios.html">Portfolio</a>
+                  <a href="https://yennj12.js.org/yennj12_blog_V4/">Blog</a>
+               </div>
+
+               <div class="footer-column">
+                  <h4>Services</h4>
+                  <a href="https://github.com/yennanliu/SpringPlayground">Backend Development</a>
+                  <a href="https://github.com/yennanliu/NYC_Taxi_Pipeline">Data Engineering</a>
+                  <a href="https://github.com/yennanliu/cdk-playground">Cloud Infrastructure</a>
+               </div>
+
+               <div class="footer-column">
+                  <h4>Resources</h4>
+                  <a href="https://yennanliu.github.io/aws_architecture.html">AWS Architecture</a>
+                  <a href="https://github.com/yennanliu">GitHub Projects</a>
+                  <a href="https://yennj12.js.org/index.html.backup.html">Legacy Site</a>
+               </div>
+
+               <div class="footer-column">
+                  <h4>Connect</h4>
+                  <a href="https://linkedin.com/in/yennanliu" target="_blank">LinkedIn</a>
+                  <a href="https://github.com/yennanliu" target="_blank">GitHub</a>
+                  <a href="https://twitter.com/free_tempopo" target="_blank">Twitter</a>
+                  <a href="https://yennanliu.github.io/contact.html">Contact</a>
+               </div>
+            </div>
+
+            <div class="footer-bottom">
+               <p>&copy; 2024 yen.dev.com - All Rights Reserved</p>
+            </div>
+         </div>
+      </footer>
+
+      <!-- Scripts -->
+      <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+   </body>
+</html>

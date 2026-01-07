@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+      <title>Yen.Dev - Software Engineer | Professional Portfolio</title>
+      <meta name="description" content="Yen is a software engineer specialized in backend solutions, from prototypes to formal launches, ensuring maintenance and monitoring.">
+
+      <!-- Open Graph / Facebook -->
+      <meta property="og:type" content="website">
+      <meta property="og:url" content="https://yennanliu.github.io/">
+      <meta property="og:title" content="Yen.Dev - Software Engineer">
+      <meta property="og:description" content="I'm a software engineer specialized in backend solutions. From prototypes to formal launches, ensuring maintenance and monitoring.">
+      <meta property="og:image" content="https://yennanliu.github.io/img/website-preview.png">
+
+      <!-- Bootstrap CSS -->
+      <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+      <!-- Font Awesome -->
+      <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet">
+      <!-- Google Fonts -->
+      <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+
+      <style>
+         :root {
+            --color-navy: #0A2540;
+            --color-blue: #2563EB;
+            --color-gray-dark: #334155;
+            --color-gray: #64748B;
+            --color-gray-light: #CBD5E1;
+            --color-bg: #F8FAFC;
+            --color-white: #ffffff;
+            --font-heading: 'Playfair Display', serif;
+            --font-body: 'Roboto', sans-serif;
+         }
+
+         * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+         }
+
+         body {
+            font-family: var(--font-body);
+            background-color: var(--color-white);
+            color: var(--color-gray-dark);
+            line-height: 1.7;
+         }
+
+         /* Professional Navbar */
+         .navbar-corporate {
+            background-color: var(--color-white) !important;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+            padding: 20px 0;
+            transition: all 0.3s ease;
+         }
+
+         .navbar-brand {
+            font-family: var(--font-heading);
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--color-navy) !important;
+            letter-spacing: 1px;
+         }
+
+         .nav-link {
+            color: var(--color-gray) !important;
+            font-weight: 500;
+            margin: 0 20px;
+            transition: color 0.3s ease;
+         }
+
+         .nav-link:hover {
+            color: var(--color-blue) !important;
+         }
+
+         .btn-corporate {
+            background-color: var(--color-blue);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 6px;
+            font-weight: 500;
+            border: none;
+            transition: all 0.3s ease;
+            text-decoration: none;
+         }
+
+         .btn-corporate:hover {
+            background-color: var(--color-navy);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(37, 99, 235, 0.2);
+            color: white;
+         }
+
+         /* Hero Section - Professional */
+         .hero-corporate {
+            background: linear-gradient(135deg, var(--color-navy) 0%, #1e3a5f 100%);
+            min-height: 75vh;
+            display: flex;
+            align-items: center;
+            padding: 120px 0 80px;
+            position: relative;
+            overflow: hidden;
+         }
+
+         .hero-corporate::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-image:
+               linear-gradient(30deg, rgba(255, 255, 255, 0.05) 12%, transparent 12.5%, transparent 87%, rgba(255, 255, 255, 0.05) 87.5%, rgba(255, 255, 255, 0.05)),
+               linear-gradient(150deg, rgba(255, 255, 255, 0.05) 12%, transparent 12.5%, transparent 87%, rgba(255, 255, 255, 0.05) 87.5%, rgba(255, 255, 255, 0.05));
+            background-size: 80px 140px;
+            opacity: 0.3;
+         }
+
+         .hero-corporate .container {
+            position: relative;
+            z-index: 2;
+         }
+
+         .hero-corporate h1 {
+            font-family: var(--font-heading);
+            font-size: 3.8rem;
+            font-weight: 700;
+            color: var(--color-white);
+            margin-bottom: 25px;
+            line-height: 1.2;
+         }
+
+         .hero-corporate .lead {
+            font-size: 1.4rem;
+            color: var(--color-gray-light);
+            margin-bottom: 40px;
+            max-width: 650px;
+         }
+
+         .hero-stats {
+            display: flex;
+            gap: 50px;
+            margin-top: 50px;
+            flex-wrap: wrap;
+         }
+
+         .stat-item {
+            text-align: left;
+         }
+
+         .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--color-white);
+            margin-bottom: 5px;
+         }
+
+         .stat-label {
+            color: var(--color-gray-light);
+            font-size: 0.95rem;
+         }
+
+         /* Services Section */
+         .services-corporate {
+            padding: 100px 0;
+            background-color: var(--color-white);
+         }
+
+         .section-header {
+            text-align: center;
+            margin-bottom: 70px;
+         }
+
+         .section-subtitle {
+            color: var(--color-blue);
+            font-weight: 600;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+         }
+
+         .section-title {
+            font-family: var(--font-heading);
+            font-size: 2.8rem;
+            color: var(--color-navy);
+            margin-bottom: 20px;
+         }
+
+         .section-description {
+            font-size: 1.1rem;
+            color: var(--color-gray);
+            max-width: 700px;
+            margin: 0 auto;
+         }
+
+         .service-card {
+            background-color: var(--color-white);
+            border: 1px solid var(--color-gray-light);
+            border-radius: 12px;
+            padding: 45px 35px;
+            margin-bottom: 30px;
+            transition: all 0.3s ease;
+            height: 100%;
+         }
+
+         .service-card:hover {
+            border-color: var(--color-blue);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+            transform: translateY(-5px);
+         }
+
+         .service-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, var(--color-blue), var(--color-navy));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.8rem;
+            margin-bottom: 25px;
+         }
+
+         .service-card h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--color-navy);
+            margin-bottom: 15px;
+         }
+
+         .service-card p {
+            color: var(--color-gray);
+            line-height: 1.7;
+            margin-bottom: 20px;
+         }
+
+         .service-link {
+            color: var(--color-blue);
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: gap 0.3s ease;
+         }
+
+         .service-link:hover {
+            gap: 12px;
+         }
+
+         /* CTA Section */
+         .cta-section {
+            background: linear-gradient(135deg, var(--color-navy) 0%, #1e3a5f 100%);
+            padding: 80px 0;
+            text-align: center;
+         }
+
+         .cta-section h2 {
+            font-family: var(--font-heading);
+            font-size: 2.5rem;
+            color: var(--color-white);
+            margin-bottom: 25px;
+         }
+
+         .cta-section p {
+            font-size: 1.2rem;
+            color: var(--color-gray-light);
+            margin-bottom: 35px;
+         }
+
+         .btn-outline-corporate {
+            background-color: transparent;
+            color: white;
+            padding: 15px 40px;
+            border: 2px solid white;
+            border-radius: 6px;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+         }
+
+         .btn-outline-corporate:hover {
+            background-color: white;
+            color: var(--color-navy);
+         }
+
+         /* Footer - Corporate */
+         footer {
+            background-color: var(--color-navy);
+            padding: 60px 0 30px;
+            color: var(--color-gray-light);
+         }
+
+         .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 35px;
+            margin-bottom: 35px;
+            flex-wrap: wrap;
+         }
+
+         .footer-links a {
+            color: var(--color-gray-light);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+         }
+
+         .footer-links a:hover {
+            color: var(--color-white);
+         }
+
+         .social-links-corporate {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 40px;
+         }
+
+         .social-link-corporate {
+            width: 45px;
+            height: 45px;
+            border: 2px solid var(--color-gray-light);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--color-gray-light);
+            transition: all 0.3s ease;
+         }
+
+         .social-link-corporate:hover {
+            background-color: var(--color-blue);
+            border-color: var(--color-blue);
+            color: white;
+            transform: translateY(-3px);
+         }
+
+         /* Responsive */
+         @media (max-width: 768px) {
+            .hero-corporate h1 {
+               font-size: 2.5rem;
+            }
+
+            .section-title {
+               font-size: 2rem;
+            }
+
+            .hero-stats {
+               gap: 30px;
+            }
+         }
+      </style>
+   </head>
+   <body>
+      <!-- Navigation -->
+      <nav class="navbar navbar-corporate navbar-expand-lg fixed-top">
+         <div class="container">
+            <a class="navbar-brand" href="https://yennanliu.github.io">YEN.DEV</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
+               <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+               <ul class="navbar-nav ml-auto align-items-center">
+                  <li class="nav-item"><a class="nav-link" href="https://yennanliu.github.io/about_me.html">About</a></li>
+                  <li class="nav-item"><a class="nav-link" href="https://yennanliu.github.io/portfolios.html">Portfolio</a></li>
+                  <li class="nav-item"><a class="nav-link" href="https://yennanliu.github.io/aws_architecture.html">Solutions</a></li>
+                  <li class="nav-item"><a href="https://yennanliu.github.io/contact.html" class="btn-corporate ml-3">Contact Me</a></li>
+               </ul>
+            </div>
+         </div>
+      </nav>
+
+      <!-- Hero Section -->
+      <section class="hero-corporate">
+         <div class="container">
+            <div class="row">
+               <div class="col-lg-10">
+                  <h1>Enterprise-Grade Software Solutions</h1>
+                  <p class="lead">Delivering robust backend systems, scalable architectures, and data-driven solutions for businesses that demand excellence.</p>
+                  <a href="#services" class="btn-corporate">Explore Services</a>
+
+                  <div class="hero-stats">
+                     <div class="stat-item">
+                        <div class="stat-number">5+</div>
+                        <div class="stat-label">Years Experience</div>
+                     </div>
+                     <div class="stat-item">
+                        <div class="stat-number">50+</div>
+                        <div class="stat-label">Projects Completed</div>
+                     </div>
+                     <div class="stat-item">
+                        <div class="stat-number">100%</div>
+                        <div class="stat-label">Client Satisfaction</div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </section>
+
+      <!-- Services Section -->
+      <section id="services" class="services-corporate">
+         <div class="container">
+            <div class="section-header">
+               <div class="section-subtitle">Services</div>
+               <h2 class="section-title">Core Competencies</h2>
+               <p class="section-description">Specialized expertise in building scalable, maintainable, and secure software systems tailored to your business needs.</p>
+            </div>
+
+            <div class="row">
+               <div class="col-lg-4 col-md-6">
+                  <div class="service-card">
+                     <div class="service-icon">
+                        <i class="fas fa-server"></i>
+                     </div>
+                     <h3>Backend Engineering</h3>
+                     <p>Design and implement microservices architecture, RESTful APIs, and distributed systems using Java Spring Boot, Python, and Node.js. Database optimization and integration with cloud services.</p>
+                     <a href="https://github.com/yennanliu/SpringPlayground" class="service-link" target="_blank">
+                        View Projects <i class="fas fa-arrow-right"></i>
+                     </a>
+                  </div>
+               </div>
+
+               <div class="col-lg-4 col-md-6">
+                  <div class="service-card">
+                     <div class="service-icon">
+                        <i class="fas fa-layer-group"></i>
+                     </div>
+                     <h3>Full Stack Solutions</h3>
+                     <p>End-to-end application development with modern frameworks and best practices. From database design to user interface implementation, ensuring seamless integration across all layers.</p>
+                     <a href="https://yennanliu.github.io/portfolios.html" class="service-link">
+                        View Portfolio <i class="fas fa-arrow-right"></i>
+                     </a>
+                  </div>
+               </div>
+
+               <div class="col-lg-4 col-md-6">
+                  <div class="service-card">
+                     <div class="service-icon">
+                        <i class="fas fa-database"></i>
+                     </div>
+                     <h3>Data Engineering</h3>
+                     <p>Build scalable data pipelines using Apache Spark, Flink, and Hadoop. ETL processes, real-time streaming, and batch processing for big data analytics and business intelligence.</p>
+                     <a href="https://github.com/yennanliu/NYC_Taxi_Pipeline" class="service-link" target="_blank">
+                        Case Study <i class="fas fa-arrow-right"></i>
+                     </a>
+                  </div>
+               </div>
+
+               <div class="col-lg-6 col-md-6">
+                  <div class="service-card">
+                     <div class="service-icon">
+                        <i class="fas fa-cloud"></i>
+                     </div>
+                     <h3>Cloud Architecture</h3>
+                     <p>Design and deploy cloud-native applications on AWS, GCP, and Azure. Infrastructure as Code, CI/CD pipelines, containerization with Docker and Kubernetes, and serverless architectures.</p>
+                     <a href="https://github.com/yennanliu/cdk-playground" class="service-link" target="_blank">
+                        Explore Solutions <i class="fas fa-arrow-right"></i>
+                     </a>
+                  </div>
+               </div>
+
+               <div class="col-lg-6 col-md-6">
+                  <div class="service-card">
+                     <div class="service-icon">
+                        <i class="fas fa-robot"></i>
+                     </div>
+                     <h3>Automation & Integration</h3>
+                     <p>Custom web scraping solutions, data extraction systems, and workflow automation using Python, Selenium, Scrapy, and Apache Airflow. API integration and third-party service orchestration.</p>
+                     <a href="https://github.com/yennanliu" class="service-link" target="_blank">
+                        Learn More <i class="fas fa-arrow-right"></i>
+                     </a>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </section>
+
+      <!-- CTA Section -->
+      <section class="cta-section">
+         <div class="container">
+            <h2>Ready to Build Something Great?</h2>
+            <p>Let's discuss how I can help bring your project to life</p>
+            <a href="https://yennanliu.github.io/contact.html" class="btn-outline-corporate">Schedule a Consultation</a>
+         </div>
+      </section>
+
+      <!-- Footer -->
+      <footer>
+         <div class="container text-center">
+            <div class="social-links-corporate">
+               <a href="https://linkedin.com/in/yennanliu" target="_blank" class="social-link-corporate" aria-label="LinkedIn">
+                  <i class="fab fa-linkedin-in"></i>
+               </a>
+               <a href="https://github.com/yennanliu" target="_blank" class="social-link-corporate" aria-label="GitHub">
+                  <i class="fab fa-github"></i>
+               </a>
+               <a href="https://twitter.com/free_tempopo" target="_blank" class="social-link-corporate" aria-label="Twitter">
+                  <i class="fab fa-twitter"></i>
+               </a>
+               <a href="https://huggingface.co/yennj12" target="_blank" class="social-link-corporate" aria-label="Hugging Face">
+                  <i class="fas fa-robot"></i>
+               </a>
+               <a href="https://gitlab.com/yennanliu" target="_blank" class="social-link-corporate" aria-label="GitLab">
+                  <i class="fab fa-gitlab"></i>
+               </a>
+            </div>
+
+            <div class="footer-links">
+               <a href="https://yennanliu.github.io/">Home</a>
+               <a href="https://yennanliu.github.io/about_me.html">About</a>
+               <a href="https://yennanliu.github.io/portfolios.html">Portfolio</a>
+               <a href="https://yennanliu.github.io/aws_architecture.html">AWS Solutions</a>
+               <a href="https://yennanliu.github.io/contact.html">Contact</a>
+               <a href="https://yennj12.js.org/yennj12_blog_V4/">Blog</a>
+            </div>
+
+            <p style="font-size: 0.9rem; margin-top: 30px;">&copy; 2024 yen.dev.com - All Rights Reserved</p>
+         </div>
+      </footer>
+
+      <!-- Scripts -->
+      <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+   </body>
+</html>
