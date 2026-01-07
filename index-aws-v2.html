@@ -226,12 +226,27 @@
          .hero-aws-section::before {
             content: '';
             position: absolute;
-            width: 600px;
-            height: 600px;
-            background: radial-gradient(circle, rgba(74, 144, 226, 0.1) 0%, transparent 70%);
-            top: -200px;
-            right: -200px;
-            animation: float 15s ease-in-out infinite;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 0;
+            opacity: 0.15;
+            background-size: 400% 400%;
+            background-image: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+            animation: gradient-animation 15s ease infinite;
+         }
+
+         @keyframes gradient-animation {
+            0% {
+               background-position: 0% 50%;
+            }
+            50% {
+               background-position: 100% 50%;
+            }
+            100% {
+               background-position: 0% 50%;
+            }
          }
 
          .hero-aws-section::after {
@@ -243,6 +258,7 @@
             bottom: -100px;
             left: -100px;
             animation: float 20s ease-in-out infinite reverse;
+            z-index: 0;
          }
 
          @keyframes float {
@@ -255,6 +271,8 @@
             font-size: 0.9rem;
             color: var(--aws-light-gray);
             margin-bottom: 40px;
+            position: relative;
+            z-index: 2;
          }
 
          .breadcrumb-aws a {
@@ -264,6 +282,11 @@
 
          .breadcrumb-aws a:hover {
             text-decoration: underline;
+         }
+
+         .hero-aws-section > .container {
+            position: relative;
+            z-index: 2;
          }
 
          .notification-banner {
@@ -290,6 +313,25 @@
          .notification-banner i {
             font-size: 1.2rem;
             color: var(--accent-blue);
+         }
+
+         /* Typewriter effect */
+         .typewriter {
+            overflow: hidden;
+            border-right: 0.15em solid var(--accent-blue);
+            white-space: nowrap;
+            letter-spacing: 0.05em;
+            animation: typing 3.5s steps(50, end), blink-caret 0.75s step-end infinite;
+         }
+
+         @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+         }
+
+         @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: var(--accent-blue) }
          }
 
          .hero-title {
@@ -381,40 +423,36 @@
 
          .filter-search-row {
             display: flex;
-            gap: 20px;
+            gap: 15px;
             align-items: center;
             margin-bottom: 30px;
          }
 
          .filter-btn {
-            background: linear-gradient(135deg, white 0%, #f8f9fa 100%);
-            border: 2px solid var(--aws-border);
-            padding: 12px 28px;
+            background: white;
+            border: 1px solid var(--aws-border);
+            padding: 14px 24px;
             border-radius: 30px;
             font-size: 0.95rem;
-            font-weight: 600;
+            font-weight: 500;
             cursor: pointer;
             display: flex;
             align-items: center;
             gap: 10px;
             transition: all 0.3s ease;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+            white-space: nowrap;
          }
 
          .filter-btn:hover {
             border-color: var(--accent-blue);
-            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
-            color: white;
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(74, 144, 226, 0.3);
+            background: white;
+            box-shadow: 0 4px 12px rgba(74, 144, 226, 0.15);
          }
 
          .filter-btn i {
             transition: transform 0.3s ease;
-         }
-
-         .filter-btn:hover i {
-            transform: rotate(90deg);
+            font-size: 1rem;
          }
 
          .search-box {
@@ -422,34 +460,36 @@
             position: relative;
          }
 
-         .search-box input {
-            width: 100%;
-            padding: 14px 20px 14px 50px;
-            border: 2px solid var(--aws-border);
-            border-radius: 30px;
-            font-size: 0.95rem;
-            transition: all 0.3s ease;
-            background: linear-gradient(135deg, white 0%, #f8f9fa 100%);
-         }
-
-         .search-box input:focus {
-            outline: none;
-            border-color: var(--accent-blue);
-            box-shadow: 0 8px 20px rgba(74, 144, 226, 0.2);
-            background: white;
-         }
-
          .search-box i {
             position: absolute;
-            left: 18px;
+            left: 20px;
             top: 50%;
             transform: translateY(-50%);
             color: var(--aws-light-gray);
             font-size: 1.1rem;
             transition: color 0.3s ease;
+            pointer-events: none;
+            z-index: 2;
          }
 
-         .search-box input:focus + i {
+         .search-box input {
+            width: 100%;
+            padding: 14px 20px 14px 50px;
+            border: 2px solid var(--accent-blue);
+            border-radius: 6px;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            background: white;
+         }
+
+         .search-box input:focus {
+            outline: none;
+            border-color: var(--accent-blue);
+            box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.1);
+            background: white;
+         }
+
+         .search-box input:focus ~ i {
             color: var(--accent-blue);
          }
 
@@ -814,7 +854,7 @@
             </div>
 
             <div class="notification-banner">
-               <span>I'm a software engineer 👨‍💻 specialized in backend solutions ☕</span>
+               <span class="typewriter">I'm a software engineer 👨‍💻 specialized in backend solutions ☕</span>
                <i class="fas fa-arrow-right"></i>
             </div>
 
@@ -837,8 +877,8 @@
                      <span>Filter</span>
                   </button>
                   <div class="search-box">
-                     <input type="text" placeholder="Search services..." id="searchInput">
                      <i class="fas fa-search"></i>
+                     <input type="text" placeholder="Search services..." id="searchInput">
                   </div>
                </div>
 
@@ -1042,6 +1082,33 @@
                observer.observe(card);
             });
          });
+
+         // Dynamic gradient color rotation
+         (function() {
+            const gradients = [
+               'linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab)',
+               'linear-gradient(-45deg, #667eea, #764ba2, #f093fb, #4facfe)',
+               'linear-gradient(-45deg, #4facfe, #00f2fe, #43e97b, #38f9d7)',
+               'linear-gradient(-45deg, #fa709a, #fee140, #30cfd0, #330867)',
+               'linear-gradient(-45deg, #fdbb2d, #22c1c3, #a8edea, #fed6e3)'
+            ];
+
+            let currentIndex = 0;
+            const styleElement = document.createElement('style');
+            document.head.appendChild(styleElement);
+
+            function updateGradient() {
+               currentIndex = (currentIndex + 1) % gradients.length;
+               styleElement.textContent = `
+                  .hero-aws-section::before {
+                     background-image: ${gradients[currentIndex]} !important;
+                     transition: background-image 2s ease;
+                  }
+               `;
+            }
+
+            setInterval(updateGradient, 10000); // Change every 10 seconds
+         })();
       </script>
    </body>
 </html>
