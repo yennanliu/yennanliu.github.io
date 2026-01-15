@@ -3,14 +3,14 @@
    <head>
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-      <title>Yen.Dev - Software Engineer Portfolio</title>
-      <meta name="description" content="I'm a software engineer specialized in backend solutions. From prototypes to formal launches, ensuring maintenance and monitoring.">
+      <title>Yen.Dev - Software Engineer | Minimalist Design</title>
+      <meta name="description" content="Yen is a software engineer specialized in backend solutions, from prototypes to formal launches, ensuring maintenance and monitoring.">
 
       <!-- Open Graph / Facebook -->
       <meta property="og:type" content="website">
       <meta property="og:url" content="https://yennanliu.github.io/">
       <meta property="og:title" content="Yen.Dev - Software Engineer">
-      <meta property="og:description" content="Software engineer specialized in backend solutions">
+      <meta property="og:description" content="I'm a software engineer specialized in backend solutions. From prototypes to formal launches, ensuring maintenance and monitoring.">
       <meta property="og:image" content="https://yennanliu.github.io/img/website-preview.png">
 
       <!-- Bootstrap CSS -->
@@ -18,21 +18,20 @@
       <!-- Font Awesome -->
       <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet">
       <!-- Google Fonts -->
-      <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+      <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
       <style>
          :root {
-            --aws-black: #000000;
-            --aws-peach: #FFF5F0;
-            --aws-peach-light: #FFF9F5;
-            --aws-white: #FFFFFF;
-            --aws-text: #16191f;
-            --aws-light-gray: #687078;
-            --aws-border: #D5DBDB;
-            --aws-card-bg: #F9F9F9;
-            --accent-blue: #4A90E2;
-            --accent-purple: #9B59B6;
-            --accent-orange: #FF9472;
+            --primary-color: #000000;
+            --accent-color: #333333;
+            --accent-dark: #1a1a1a;
+            --accent-light: #4a4a4a;
+            --text-primary: #000000;
+            --text-secondary: #666666;
+            --bg-primary: #ffffff;
+            --bg-secondary: #f5f5f5;
+            --border-color: #e0e0e0;
+            --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
          }
 
          * {
@@ -42,451 +41,169 @@
          }
 
          body {
-            font-family: 'Open Sans', Arial, sans-serif;
-            background-color: var(--aws-white);
-            color: var(--aws-text);
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
             line-height: 1.6;
-            overflow-x: hidden;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-         }
-
-         /* Performance optimizations */
-         .service-card,
-         .service-card-icon,
-         .btn-hero-cta,
-         .notification-banner {
-            will-change: transform;
-         }
-
-         @media (max-width: 767.98px) {
-            .service-card,
-            .service-card-icon,
-            .btn-hero-cta,
-            .notification-banner {
-               will-change: auto;
-            }
-         }
-
-         /* Smooth scroll */
-         html {
             scroll-behavior: smooth;
+            overflow-x: hidden;
          }
 
-         /* Top Utility Bar - Thin Black Bar */
-         .top-bar {
-            background-color: var(--aws-black);
-            color: white;
-            padding: 6px 0;
-            font-size: 0.8rem;
-         }
-
-         .top-bar a {
-            color: white;
-            text-decoration: none;
-            margin: 0 15px;
-            transition: color 0.2s ease;
-         }
-
-         .top-bar a:hover {
-            color: #ddd;
-         }
-
-         /* Main Navigation - White Background */
-         .main-nav {
-            background-color: var(--aws-white);
-            padding: 15px 0;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-            position: sticky;
+         /* Cursor trail effect */
+         body::before {
+            content: '';
+            position: fixed;
+            width: 100%;
+            height: 100%;
             top: 0;
-            z-index: 1000;
+            left: 0;
+            background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(0, 0, 0, 0.02) 0%, transparent 25%);
+            pointer-events: none;
+            z-index: 1;
+            transition: opacity 0.3s ease;
+         }
+
+         /* Minimalist Navbar */
+         .navbar {
+            background-color: rgba(255, 255, 255, 0.95) !important;
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-color);
+            padding: 20px 0;
+            transition: all var(--transition);
+            position: relative;
+            z-index: 100;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.03);
+         }
+
+         .navbar-brand {
+            font-weight: 700;
+            font-size: 1.25rem;
+            color: var(--primary-color) !important;
+            letter-spacing: -0.5px;
+            position: relative;
             transition: all 0.3s ease;
          }
 
-         .main-nav.scrolled {
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
-         }
-
-         .nav-container {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-         }
-
-         .aws-logo {
-            font-size: 2rem;
-            font-weight: 700;
-            background: linear-gradient(135deg, var(--aws-black), var(--accent-purple), var(--accent-blue));
-            background-size: 200% 200%;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            text-decoration: none;
-            margin-right: 40px;
-            transition: all 0.4s ease;
-            position: relative;
-            animation: gradientShift 3s ease infinite;
-         }
-
-         @keyframes gradientShift {
-            0%, 100% {
-               background-position: 0% 50%;
-            }
-            50% {
-               background-position: 100% 50%;
-            }
-         }
-
-         .aws-logo::after {
+         .navbar-brand::after {
             content: '';
             position: absolute;
             bottom: -5px;
             left: 0;
             width: 0;
-            height: 3px;
-            background: linear-gradient(90deg, var(--accent-blue), var(--accent-purple));
-            transition: width 0.4s ease;
-            border-radius: 2px;
-         }
-
-         .aws-logo:hover::after {
-            width: 100%;
-         }
-
-         .aws-logo:hover {
-            transform: scale(1.08) translateY(-2px);
-            text-decoration: none;
-            filter: drop-shadow(0 5px 15px rgba(74, 144, 226, 0.3));
-         }
-
-         .main-nav-links {
-            display: flex;
-            align-items: center;
-            gap: 35px;
-         }
-
-         .main-nav-links a {
-            color: var(--aws-text);
-            text-decoration: none;
-            font-size: 0.95rem;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            position: relative;
-            padding: 5px 0;
-         }
-
-         .main-nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
             height: 2px;
-            background: linear-gradient(90deg, var(--accent-blue), var(--accent-purple));
+            background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
             transition: width 0.3s ease;
          }
 
-         .main-nav-links a:hover {
-            color: var(--accent-purple);
-         }
-
-         .main-nav-links a:hover::after {
+         .navbar-brand:hover::after {
             width: 100%;
          }
 
-         .nav-actions {
-            display: flex;
-            align-items: center;
-            gap: 20px;
+         .navbar-brand:hover {
+            transform: translateY(-2px);
          }
 
-         .search-icon {
-            color: var(--aws-text);
-            font-size: 1.1rem;
-            cursor: pointer;
-         }
-
-         .btn-aws-create {
-            background-color: var(--aws-black);
-            color: white;
-            padding: 10px 24px;
-            border-radius: 20px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 0.9rem;
-            transition: all 0.2s ease;
-            border: none;
-         }
-
-         .btn-aws-create:hover {
-            background-color: #1a1a1a;
-            color: white;
-            text-decoration: none;
-         }
-
-         /* Secondary Navigation */
-         .secondary-nav {
-            background-color: var(--aws-white);
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-            padding: 20px 0;
-            position: relative;
-         }
-
-         .secondary-nav-content {
-            display: flex;
-            align-items: center;
-            gap: 35px;
-         }
-
-         .secondary-nav h2 {
-            font-size: 1.3rem;
-            font-weight: 700;
-            margin: 0;
-            color: var(--aws-text);
-         }
-
-         .secondary-nav a {
-            color: var(--aws-light-gray);
-            text-decoration: none;
+         .nav-link {
+            color: var(--text-secondary) !important;
+            font-weight: 500;
             font-size: 0.95rem;
-            transition: color 0.2s ease;
+            margin: 0 15px;
+            transition: all var(--transition);
+            position: relative;
          }
 
-         .secondary-nav a:hover {
-            color: var(--aws-text);
+         .nav-link::before {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+            transition: width 0.3s ease;
          }
 
-         /* Hero Section */
-         .hero-aws-section {
-            background: linear-gradient(180deg, var(--aws-peach) 0%, var(--aws-peach-light) 50%, var(--aws-white) 100%);
-            padding: 60px 0 80px;
-            min-height: 500px;
+         .nav-link:hover {
+            color: var(--primary-color) !important;
+         }
+
+         .nav-link:hover::before {
+            width: 80%;
+         }
+
+         /* Hero Section - Minimalist */
+         .hero-minimal {
+            min-height: 70vh;
             display: flex;
             align-items: center;
+            padding: 100px 0 80px;
             position: relative;
             overflow: hidden;
          }
 
-         .hero-aws-section::before {
+         .hero-minimal::before {
             content: '';
             position: absolute;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            z-index: 0;
-            opacity: 0.15;
-            background-size: 400% 400%;
-            background-image: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
-            animation: gradient-animation 15s ease infinite;
-         }
-
-         @keyframes gradient-animation {
-            0% {
-               background-position: 0% 50%;
-            }
-            50% {
-               background-position: 100% 50%;
-            }
-            100% {
-               background-position: 0% 50%;
-            }
-         }
-
-         .hero-aws-section::after {
-            content: '';
-            position: absolute;
-            width: 600px;
-            height: 600px;
-            background: radial-gradient(circle, rgba(155, 89, 182, 0.15) 0%, rgba(74, 144, 226, 0.1) 40%, transparent 70%);
-            bottom: -200px;
-            right: -200px;
-            animation: float 25s ease-in-out infinite;
-            z-index: 0;
-            filter: blur(60px);
-         }
-
-         @keyframes float {
-            0%, 100% { transform: translate(0, 0) rotate(0deg) scale(1); }
-            33% { transform: translate(50px, -50px) rotate(10deg) scale(1.1); }
-            66% { transform: translate(-30px, 30px) rotate(-10deg) scale(0.9); }
-         }
-
-         /* Particle background */
-         .particles-container {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            z-index: 1;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(0, 0, 0, 0.05) 0%, transparent 70%);
+            top: -200px;
+            right: -100px;
+            animation: float 20s ease-in-out infinite;
             pointer-events: none;
          }
 
-         .particle {
-            position: absolute;
-            width: 4px;
-            height: 4px;
-            background: radial-gradient(circle, var(--accent-purple), transparent);
-            border-radius: 50%;
-            opacity: 0.3;
-            animation: particleFloat 15s infinite ease-in-out;
-         }
-
-         @keyframes particleFloat {
-            0%, 100% {
-               transform: translateY(0) translateX(0);
-               opacity: 0.3;
-            }
-            50% {
-               transform: translateY(-100px) translateX(50px);
-               opacity: 0.6;
-            }
-         }
-
-         /* Geometric shapes */
-         .geometric-shape {
-            position: absolute;
-            z-index: 1;
-            opacity: 0.08;
-            animation: rotate3d 30s infinite linear;
-         }
-
-         @keyframes rotate3d {
-            from { transform: rotate(0deg) scale(1); }
-            50% { transform: rotate(180deg) scale(1.2); }
-            to { transform: rotate(360deg) scale(1); }
-         }
-
-         .shape-circle {
-            width: 300px;
-            height: 300px;
-            border: 2px solid var(--accent-blue);
-            border-radius: 50%;
-            top: 10%;
-            right: 5%;
-         }
-
-         .shape-square {
-            width: 200px;
-            height: 200px;
-            border: 2px solid var(--accent-purple);
-            top: 60%;
-            left: 10%;
-            animation: rotate3d 25s infinite linear reverse;
-         }
-
-         .breadcrumb-aws {
-            font-size: 0.9rem;
-            color: var(--aws-light-gray);
-            margin-bottom: 40px;
-            position: relative;
-            z-index: 2;
-         }
-
-         .breadcrumb-aws a {
-            color: var(--aws-light-gray);
-            text-decoration: none;
-         }
-
-         .breadcrumb-aws a:hover {
-            text-decoration: underline;
-         }
-
-         .hero-aws-section > .container {
-            position: relative;
-            z-index: 2;
-         }
-
-         .notification-banner {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            padding: 18px 25px;
-            border-radius: 16px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1), 0 2px 8px rgba(74, 144, 226, 0.15);
-            margin-bottom: 40px;
-            display: inline-flex;
-            align-items: center;
-            gap: 15px;
-            font-size: 0.95rem;
-            position: relative;
-            z-index: 2;
-            border: 1px solid rgba(255, 255, 255, 0.4);
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            overflow: hidden;
-         }
-
-         .notification-banner::before {
+         .hero-minimal::after {
             content: '';
             position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(74, 144, 226, 0.1), transparent);
-            transition: left 0.6s ease;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(0, 0, 0, 0.03) 0%, transparent 70%);
+            bottom: -150px;
+            left: -100px;
+            animation: float 25s ease-in-out infinite reverse;
+            pointer-events: none;
          }
 
-         .notification-banner:hover::before {
-            left: 100%;
+         @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(30px, -30px) scale(1.1); }
+            66% { transform: translate(-20px, 20px) scale(0.9); }
          }
 
-         .notification-banner:hover {
-            transform: translateY(-5px) scale(1.02);
-            box-shadow: 0 12px 48px rgba(74, 144, 226, 0.25), 0 4px 16px rgba(0, 0, 0, 0.1);
-            border-color: rgba(74, 144, 226, 0.4);
+         .hero-minimal > .container {
+            position: relative;
+            z-index: 2;
          }
 
-         .notification-banner i {
-            font-size: 1.2rem;
-            color: var(--accent-blue);
-         }
-
-         /* Typewriter effect */
-         .typewriter {
-            overflow: hidden;
-            border-right: 0.15em solid var(--accent-blue);
-            white-space: nowrap;
-            letter-spacing: 0.05em;
-            animation: typing 3.5s steps(50, end), blink-caret 0.75s step-end infinite;
-         }
-
-         @keyframes typing {
-            from { width: 0 }
-            to { width: 100% }
-         }
-
-         @keyframes blink-caret {
-            from, to { border-color: transparent }
-            50% { border-color: var(--accent-blue) }
-         }
-
-         .hero-title {
-            font-size: 3.5rem;
+         .hero-minimal h1 {
+            font-size: 4rem;
             font-weight: 700;
-            background: linear-gradient(135deg, var(--aws-text), var(--accent-purple), var(--aws-text));
+            line-height: 1.1;
+            margin-bottom: 30px;
+            letter-spacing: -2px;
+            background: linear-gradient(135deg, #000000 0%, #333333 50%, #666666 100%);
             background-size: 200% auto;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            margin-bottom: 25px;
-            line-height: 1.2;
-            position: relative;
-            z-index: 2;
-            animation: fadeInUp 0.8s ease-out, textShimmer 4s ease-in-out infinite;
+            animation: gradient-shift 8s ease infinite;
          }
 
-         @keyframes textShimmer {
-            0%, 100% {
-               background-position: 0% center;
-            }
-            50% {
-               background-position: 100% center;
-            }
+         @keyframes gradient-shift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+         }
+
+         .hero-minimal .subtitle {
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            font-weight: 400;
+            margin-bottom: 40px;
+            max-width: 600px;
+            animation: fadeInUp 0.8s ease 0.2s both;
          }
 
          @keyframes fadeInUp {
@@ -500,43 +217,23 @@
             }
          }
 
-         .hero-subtitle {
-            font-size: 1.3rem;
-            color: var(--aws-light-gray);
-            margin-bottom: 40px;
-            font-weight: 400;
-            position: relative;
-            z-index: 2;
-            animation: fadeInUp 0.8s ease-out 0.2s both;
-         }
-
-         .btn-hero-cta {
-            background: linear-gradient(135deg, var(--aws-black), #1a1a1a);
-            color: white;
-            padding: 16px 40px;
-            border-radius: 30px;
-            text-decoration: none;
-            font-weight: 700;
-            font-size: 1rem;
+         .hero-minimal .cta-button {
             display: inline-block;
-            transition: all 0.3s ease;
+            padding: 16px 40px;
+            background: linear-gradient(135deg, var(--primary-color) 0%, #1a1a1a 100%);
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            border-radius: 50px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 2px solid var(--primary-color);
             position: relative;
-            z-index: 2;
             overflow: hidden;
-            animation: fadeInUp 0.8s ease-out 0.4s both, pulse 2s ease-in-out infinite;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2), 0 0 0 0 rgba(74, 144, 226, 0.5);
+            animation: fadeInUp 0.8s ease 0.4s both;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
          }
 
-         @keyframes pulse {
-            0%, 100% {
-               box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2), 0 0 0 0 rgba(74, 144, 226, 0.5);
-            }
-            50% {
-               box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3), 0 0 0 15px rgba(74, 144, 226, 0);
-            }
-         }
-
-         .btn-hero-cta::before {
+         .hero-minimal .cta-button::before {
             content: '';
             position: absolute;
             top: 0;
@@ -544,457 +241,286 @@
             width: 100%;
             height: 100%;
             background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-            transition: left 0.5s ease;
+            transition: left 0.6s ease;
          }
 
-         .btn-hero-cta:hover::before {
+         .hero-minimal .cta-button:hover::before {
             left: 100%;
          }
 
-         .btn-hero-cta::after {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.3);
-            transform: translate(-50%, -50%);
-            transition: width 0.6s ease, height 0.6s ease;
-         }
-
-         .btn-hero-cta:hover::after {
-            width: 300px;
-            height: 300px;
-         }
-
-         .btn-hero-cta:hover {
-            transform: translateY(-5px) scale(1.08);
+         .hero-minimal .cta-button:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
             color: white;
             text-decoration: none;
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4), 0 0 30px rgba(74, 144, 226, 0.3);
-            animation: none;
          }
 
-         /* Services Section */
-         .services-section {
-            padding: 80px 0;
-            background-color: var(--aws-white);
-         }
-
-         .services-header {
-            margin-bottom: 50px;
-         }
-
-         .services-header h2 {
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: var(--aws-text);
-            margin-bottom: 40px;
-         }
-
-         .filter-search-row {
-            display: flex;
-            gap: 15px;
-            align-items: center;
-            margin-bottom: 30px;
-         }
-
-         .filter-btn {
-            background: white;
-            border: 1px solid var(--aws-border);
-            padding: 14px 24px;
-            border-radius: 30px;
-            font-size: 0.95rem;
-            font-weight: 500;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            transition: all 0.3s ease;
-            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
-            white-space: nowrap;
-         }
-
-         .filter-btn:hover {
-            border-color: var(--accent-blue);
-            background: white;
-            box-shadow: 0 4px 12px rgba(74, 144, 226, 0.15);
-         }
-
-         .filter-btn i {
-            transition: transform 0.3s ease;
-            font-size: 1rem;
-         }
-
-         .search-box {
-            flex: 1;
+         /* Expertise Grid - Minimalist */
+         .expertise-section {
+            padding: 100px 0;
+            background-color: var(--bg-secondary);
             position: relative;
-         }
-
-         .search-box i {
-            position: absolute;
-            left: 20px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--aws-light-gray);
-            font-size: 1.1rem;
-            transition: color 0.3s ease;
-            pointer-events: none;
-            z-index: 2;
-         }
-
-         .search-box input {
-            width: 100%;
-            padding: 14px 20px 14px 50px;
-            border: 2px solid var(--accent-blue);
-            border-radius: 6px;
-            font-size: 0.95rem;
-            transition: all 0.3s ease;
-            background: white;
-         }
-
-         .search-box input:focus {
-            outline: none;
-            border-color: var(--accent-blue);
-            box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.1);
-            background: white;
-         }
-
-         .search-box input:focus ~ i {
-            color: var(--accent-blue);
-         }
-
-         .results-count {
-            font-size: 0.9rem;
-            color: var(--aws-light-gray);
-            margin-bottom: 30px;
-         }
-
-         /* Service Cards */
-         .service-cards-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-            gap: 30px;
-         }
-
-         .service-card {
-            background: linear-gradient(135deg, #ffffff 0%, var(--aws-card-bg) 100%);
-            border-radius: 20px;
-            padding: 35px 30px;
-            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            cursor: pointer;
-            border: 1px solid rgba(0, 0, 0, 0.05);
             overflow: hidden;
-            transform-style: preserve-3d;
-            perspective: 1000px;
          }
 
-         .service-card::before {
+         .expertise-section::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             right: 0;
-            height: 5px;
-            background: linear-gradient(90deg, var(--accent-blue), var(--accent-purple), var(--accent-orange));
-            transform: scaleX(0);
-            transform-origin: left;
-            transition: transform 0.5s ease;
-            box-shadow: 0 0 20px rgba(74, 144, 226, 0.5);
-         }
-
-         .service-card:hover::before {
-            transform: scaleX(1);
-         }
-
-         .service-card::after {
-            content: '';
-            position: absolute;
-            top: -50%;
-            right: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle at 30% 30%, rgba(74, 144, 226, 0.08) 0%, rgba(155, 89, 182, 0.05) 50%, transparent 70%);
-            opacity: 0;
-            transition: opacity 0.5s ease, transform 0.5s ease;
+            bottom: 0;
+            background-image:
+               radial-gradient(circle at 20% 20%, rgba(0, 0, 0, 0.02) 0%, transparent 50%),
+               radial-gradient(circle at 80% 80%, rgba(0, 0, 0, 0.02) 0%, transparent 50%);
             pointer-events: none;
+            z-index: 0;
          }
 
-         .service-card:hover::after {
-            opacity: 1;
-            transform: rotate(10deg) scale(1.1);
-         }
-
-         .service-card:hover {
-            transform: translateY(-15px) rotateX(2deg) rotateY(2deg);
-            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.2),
-                        0 15px 35px rgba(74, 144, 226, 0.15),
-                        inset 0 -2px 10px rgba(74, 144, 226, 0.1);
-            border-color: rgba(74, 144, 226, 0.4);
-         }
-
-         /* Shimmer effect on cards */
-         @keyframes shimmer {
-            0% {
-               background-position: -1000px 0;
-            }
-            100% {
-               background-position: 1000px 0;
-            }
-         }
-
-         .service-card:hover {
-            animation: shimmer 3s infinite;
-            background-size: 1000px 100%;
-         }
-
-         .service-category {
-            font-size: 0.85rem;
-            font-weight: 600;
-            color: var(--aws-light-gray);
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-         }
-
-         .service-card-icon {
-            width: 70px;
-            height: 70px;
-            background: linear-gradient(135deg, var(--aws-black) 0%, #2a2a2a 100%);
-            border-radius: 16px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 25px;
+         .expertise-section > .container {
             position: relative;
             z-index: 1;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
          }
 
-         .service-card-icon::before {
+         .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 60px;
+            letter-spacing: -1px;
+            position: relative;
+            display: inline-block;
+            background: linear-gradient(135deg, #000000 0%, #333333 50%, #000000 100%);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradient-shift 6s ease infinite;
+         }
+
+         .section-title::after {
             content: '';
             position: absolute;
-            inset: -2px;
-            border-radius: 18px;
-            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple), var(--accent-orange));
-            opacity: 0;
-            transition: opacity 0.5s ease;
-            z-index: -1;
+            bottom: -15px;
+            left: 0;
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, #000000, #333333);
+            border-radius: 2px;
+            animation: expand-line 1s ease 0.5s both;
          }
 
-         .service-card:hover .service-card-icon::before {
-            opacity: 1;
-            animation: rotateGradient 3s linear infinite;
-         }
-
-         @keyframes rotateGradient {
-            0% {
-               filter: hue-rotate(0deg);
+         @keyframes expand-line {
+            from {
+               width: 0;
+               opacity: 0;
             }
-            100% {
-               filter: hue-rotate(360deg);
+            to {
+               width: 80px;
+               opacity: 1;
             }
          }
 
-         .service-card:hover .service-card-icon {
-            transform: scale(1.15) rotate(5deg) translateY(-5px);
-            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3),
-                        0 0 40px rgba(74, 144, 226, 0.4);
+         .expertise-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1px;
+            background-color: var(--border-color);
+            border: 1px solid var(--border-color);
          }
 
-         .service-card-icon i {
-            color: white !important;
-            font-size: 1.6rem;
-            transition: all 0.3s ease;
-            filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.5));
-         }
-
-         .service-card:hover .service-card-icon i {
-            transform: scale(1.1);
-            filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.8));
-         }
-
-         .service-card h3 {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--aws-text);
-            margin-bottom: 15px;
+         .expertise-item {
+            background-color: var(--bg-primary);
+            padding: 50px 40px;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
-            z-index: 1;
-            transition: color 0.3s ease;
-         }
-
-         .service-card:hover h3 {
-            color: var(--accent-purple);
-         }
-
-         .service-card p {
-            font-size: 0.95rem;
-            color: var(--aws-light-gray);
-            line-height: 1.7;
-            margin-bottom: 25px;
-            position: relative;
-            z-index: 1;
-         }
-
-         .service-card-footer {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding-top: 20px;
-            border-top: 1px solid var(--aws-border);
-         }
-
-         .service-link {
-            color: var(--aws-text);
-            text-decoration: none;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            transition: all 0.3s ease;
-            position: relative;
-            z-index: 1;
-            padding: 8px 12px;
-            border-radius: 8px;
-            margin: -8px -12px;
-         }
-
-         .service-link:hover {
-            gap: 14px;
-            text-decoration: none;
-            color: var(--accent-blue);
-            background: rgba(74, 144, 226, 0.05);
-         }
-
-         .service-link i {
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            display: inline-block;
-         }
-
-         .service-link:hover i {
-            transform: translateX(8px) rotate(10deg);
-            color: var(--accent-blue);
-            animation: arrowBounce 0.6s ease infinite;
-         }
-
-         @keyframes arrowBounce {
-            0%, 100% {
-               transform: translateX(8px) rotate(10deg);
-            }
-            50% {
-               transform: translateX(12px) rotate(10deg);
-            }
-         }
-
-         .service-add-btn {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            border: 2px solid var(--aws-border);
-            background: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            z-index: 1;
             overflow: hidden;
+            cursor: pointer;
          }
 
-         .service-add-btn::before {
+         .expertise-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 0;
+            background: linear-gradient(135deg, #000000 0%, #1a1a1a 50%, #333333 100%);
+            transition: height 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 0;
+         }
+
+         .expertise-item::after {
             content: '';
             position: absolute;
             top: 50%;
             left: 50%;
             width: 0;
             height: 0;
-            border-radius: 50%;
-            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
             transform: translate(-50%, -50%);
-            transition: all 0.4s ease;
+            transition: width 0.6s ease, height 0.6s ease;
+            pointer-events: none;
          }
 
-         .service-add-btn:hover::before {
-            width: 100%;
+         .expertise-item:hover::before {
             height: 100%;
          }
 
-         .service-add-btn i {
+         .expertise-item:hover::after {
+            width: 500px;
+            height: 500px;
+         }
+
+         .expertise-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+         }
+
+         .expertise-item > * {
+            position: relative;
+            z-index: 1;
+         }
+
+         .expertise-item:hover .expertise-number,
+         .expertise-item:hover .expertise-title,
+         .expertise-item:hover .expertise-desc {
+            color: white;
+         }
+
+         .expertise-number {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            font-weight: 600;
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+            transition: all 0.3s ease;
+            display: inline-block;
+         }
+
+         .expertise-item:hover .expertise-number {
+            transform: scale(1.2);
+            letter-spacing: 4px;
+         }
+
+         .expertise-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: var(--text-primary);
+            transition: all 0.3s ease;
+         }
+
+         .expertise-item:hover .expertise-title {
+            transform: translateX(5px);
+         }
+
+         .expertise-desc {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+            transition: all 0.3s ease;
+         }
+
+         .expertise-item:hover .expertise-desc {
+            transform: translateX(5px);
+         }
+
+         /* Social Links - Minimal */
+         .social-section {
+            padding: 80px 0;
+            text-align: center;
+            position: relative;
+         }
+
+         .social-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 200px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #000000, transparent);
+         }
+
+         .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+         }
+
+         .social-link {
+            width: 50px;
+            height: 50px;
+            border: 2px solid var(--border-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            color: var(--text-primary);
+            position: relative;
+            overflow: hidden;
+         }
+
+         .social-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #000000, #333333);
+            transform: scale(0);
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border-radius: 50%;
+         }
+
+         .social-link i {
             position: relative;
             z-index: 1;
             transition: all 0.3s ease;
          }
 
-         .service-add-btn:hover {
-            border-color: var(--accent-blue);
-            transform: scale(1.1) rotate(90deg);
+         .social-link:hover::before {
+            transform: scale(1);
          }
 
-         .service-add-btn:hover i {
+         .social-link:hover {
+            border-color: transparent;
             color: white;
+            transform: translateY(-8px) rotate(5deg) scale(1.1);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
          }
 
-         /* Page loader */
-         .page-loader {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, var(--aws-white) 0%, var(--aws-peach-light) 50%, var(--aws-peach) 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 10000;
-            transition: opacity 0.5s ease, visibility 0.5s ease;
+         .social-link:hover i {
+            transform: scale(1.2);
          }
 
-         .page-loader.hidden {
-            opacity: 0;
-            visibility: hidden;
+         .social-link:nth-child(1) { animation: fadeInScale 0.5s ease 0.1s both; }
+         .social-link:nth-child(2) { animation: fadeInScale 0.5s ease 0.2s both; }
+         .social-link:nth-child(3) { animation: fadeInScale 0.5s ease 0.3s both; }
+         .social-link:nth-child(4) { animation: fadeInScale 0.5s ease 0.4s both; }
+         .social-link:nth-child(5) { animation: fadeInScale 0.5s ease 0.5s both; }
+
+         @keyframes fadeInScale {
+            from {
+               opacity: 0;
+               transform: scale(0);
+            }
+            to {
+               opacity: 1;
+               transform: scale(1);
+            }
          }
 
-         .loader-content {
-            text-align: center;
-         }
-
-         .loader-spinner {
-            width: 60px;
-            height: 60px;
-            border: 4px solid rgba(74, 144, 226, 0.1);
-            border-top-color: var(--accent-blue);
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-            margin: 0 auto 20px;
-         }
-
-         @keyframes spin {
-            to { transform: rotate(360deg); }
-         }
-
-         .loader-text {
-            font-size: 1.2rem;
-            font-weight: 600;
-            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-         }
-
-         /* Footer - Pure Black */
+         /* Footer - Minimal */
          footer {
-            background: linear-gradient(180deg, #000000 0%, #0a0a0a 100%);
-            padding: 60px 0 30px;
-            color: white;
+            padding: 60px 0 40px;
+            border-top: 1px solid var(--border-color);
             position: relative;
-            overflow: hidden;
+            background: linear-gradient(180deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
          }
 
          footer::before {
@@ -1004,807 +530,165 @@
             left: 0;
             right: 0;
             height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(74, 144, 226, 0.5), transparent);
-         }
-
-         .footer-cta {
-            text-align: center;
-            padding-bottom: 50px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            margin-bottom: 50px;
-         }
-
-         .footer-cta .btn-hero-cta {
-            background-color: white;
-            color: var(--aws-black);
-         }
-
-         .footer-cta .btn-hero-cta:hover {
-            background-color: #f0f0f0;
-            color: var(--aws-black);
+            background: linear-gradient(90deg, transparent, #000000, #333333, transparent);
          }
 
          .footer-links {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 40px;
-            margin-bottom: 40px;
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
          }
 
-         .footer-column h4 {
-            font-size: 1rem;
-            font-weight: 700;
-            margin-bottom: 20px;
-         }
-
-         .footer-column a {
-            display: block;
-            color: rgba(255, 255, 255, 0.7);
+         .footer-links a {
+            color: var(--text-secondary);
             text-decoration: none;
             font-size: 0.9rem;
-            margin-bottom: 12px;
-            transition: color 0.2s ease;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 5px 0;
          }
 
-         .footer-column a:hover {
-            color: white;
+         .footer-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #000000, #333333);
+            transition: width 0.3s ease;
          }
 
-         .footer-bottom {
-            text-align: center;
-            padding-top: 30px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            color: rgba(255, 255, 255, 0.6);
-            font-size: 0.85rem;
+         .footer-links a:hover {
+            color: var(--primary-color);
+            transform: translateY(-2px);
          }
 
-         /* Responsive Design - Mobile First Approach */
-
-         /* Extra Small Devices (phones, less than 576px) */
-         @media (max-width: 575.98px) {
-            .container {
-               padding-left: 15px;
-               padding-right: 15px;
-            }
-
-            .aws-logo {
-               font-size: 1.2rem;
-            }
-
-            .hero-title {
-               font-size: 1.6rem;
-               line-height: 1.3;
-            }
-
-            .hero-subtitle {
-               font-size: 0.95rem;
-            }
-
-            .btn-hero-cta {
-               padding: 10px 25px;
-               font-size: 0.85rem;
-            }
-
-            .notification-banner {
-               padding: 10px 15px;
-               font-size: 0.8rem;
-               flex-direction: column;
-               text-align: center;
-            }
-
-            .notification-banner i {
-               font-size: 1rem;
-            }
-
-            .typewriter {
-               font-size: 0.8rem;
-               white-space: normal;
-               border-right: none;
-               animation: none;
-            }
-
-            .services-header h2 {
-               font-size: 1.3rem;
-            }
-
-            .service-card {
-               padding: 20px 15px;
-            }
-
-            .service-card h3 {
-               font-size: 1.1rem;
-            }
-
-            .service-card p {
-               font-size: 0.9rem;
-            }
-
-            .service-card-icon {
-               width: 50px;
-               height: 50px;
-            }
-
-            .service-card-icon i {
-               font-size: 1.3rem;
-            }
-
-            .secondary-nav-content h2 {
-               font-size: 0.95rem;
-            }
-
-            .top-bar {
-               display: none;
-            }
-
-            .main-nav-links a {
-               font-size: 0.75rem;
-            }
+         .footer-links a:hover::after {
+            width: 100%;
          }
 
-         /* Small Devices (landscape phones, 576px and up) */
-         @media (min-width: 576px) and (max-width: 767.98px) {
-            .top-bar {
-               display: none;
-            }
-
-            .hero-title {
-               font-size: 2rem;
-            }
-
-            .hero-subtitle {
-               font-size: 1.1rem;
-            }
-
-            .notification-banner {
-               font-size: 0.9rem;
-            }
-
-            .service-cards-grid {
-               grid-template-columns: 1fr;
-            }
-
-            .footer-links {
-               grid-template-columns: repeat(2, 1fr);
-            }
-         }
-
-         /* Medium Devices (tablets, 768px and up) */
-         @media (min-width: 768px) and (max-width: 991.98px) {
-            .hero-title {
+         /* Responsive */
+         @media (max-width: 768px) {
+            .hero-minimal h1 {
                font-size: 2.5rem;
             }
 
-            .hero-subtitle {
-               font-size: 1.15rem;
+            .hero-minimal .subtitle {
+               font-size: 1.2rem;
             }
 
-            .service-cards-grid {
-               grid-template-columns: repeat(2, 1fr);
-               gap: 25px;
-            }
-
-            .main-nav-links {
-               gap: 20px;
-            }
-
-            .main-nav-links a {
-               font-size: 0.9rem;
-            }
-
-            .secondary-nav {
-               padding: 15px 0;
-            }
-
-            .footer-links {
-               grid-template-columns: repeat(2, 1fr);
-            }
-         }
-
-         /* Large Devices (desktops, 992px and up) */
-         @media (min-width: 992px) and (max-width: 1199.98px) {
-            .hero-title {
-               font-size: 3rem;
-            }
-
-            .service-cards-grid {
-               grid-template-columns: repeat(2, 1fr);
-            }
-         }
-
-         /* Extra Large Devices (large desktops, 1200px and up) */
-         @media (min-width: 1200px) {
-            .hero-title {
-               font-size: 3.5rem;
-            }
-
-            .service-cards-grid {
-               grid-template-columns: repeat(3, 1fr);
-            }
-         }
-
-         /* Common Mobile Styles (all devices below 768px) */
-         @media (max-width: 767.98px) {
-            body {
-               padding-top: 0;
-            }
-
-            /* Hide top bar on mobile to save space */
-            .top-bar {
-               display: none;
-            }
-
-            .main-nav {
-               padding: 8px 0;
-               position: relative;
-               top: auto;
-            }
-
-            .nav-container {
-               flex-direction: column;
-               gap: 10px;
-            }
-
-            .aws-logo {
-               font-size: 1.3rem;
-               margin-right: 0;
-            }
-
-            .main-nav-links {
-               flex-direction: row;
-               flex-wrap: wrap;
-               justify-content: center;
-               gap: 8px;
-            }
-
-            .main-nav-links a {
-               font-size: 0.8rem;
-               padding: 4px 8px;
-            }
-
-            .main-nav-links a::after {
-               display: none;
-            }
-
-            .nav-actions {
-               flex-direction: row;
-               gap: 12px;
-               width: 100%;
-               justify-content: center;
-            }
-
-            .search-icon {
-               font-size: 1rem;
-            }
-
-            .btn-aws-create {
-               padding: 6px 16px;
-               font-size: 0.8rem;
-               border-radius: 16px;
-            }
-
-            .secondary-nav {
-               padding: 10px 0;
-               position: relative;
-               top: auto;
-            }
-
-            .secondary-nav-content {
-               flex-direction: row;
-               flex-wrap: wrap;
-               gap: 8px;
-               justify-content: center;
-            }
-
-            .secondary-nav h2 {
-               font-size: 1rem;
-               width: 100%;
-               text-align: center;
-               margin-bottom: 8px;
-            }
-
-            .secondary-nav a {
-               font-size: 0.85rem;
-               padding: 4px 8px;
-            }
-
-            .hero-aws-section {
-               padding: 30px 0 50px;
-               min-height: auto;
-            }
-
-            .breadcrumb-aws {
-               margin-bottom: 15px;
-               font-size: 0.75rem;
-            }
-
-            .services-section {
-               padding: 40px 0;
-            }
-
-            .services-header {
-               margin-bottom: 25px;
-            }
-
-            .filter-search-row {
-               flex-direction: column;
-               gap: 10px;
-            }
-
-            .filter-btn, .search-box {
-               width: 100%;
-            }
-
-            .filter-btn {
-               justify-content: center;
-               padding: 10px 20px;
-            }
-
-            .service-cards-grid {
+            .expertise-grid {
                grid-template-columns: 1fr;
-               gap: 20px;
-            }
-
-            /* Compact footer for mobile */
-            footer {
-               padding: 30px 0 15px;
-            }
-
-            .footer-cta {
-               padding-bottom: 20px;
-               margin-bottom: 20px;
-            }
-
-            .footer-cta .btn-hero-cta {
-               padding: 12px 30px;
-               font-size: 0.9rem;
-            }
-
-            .footer-links {
-               grid-template-columns: 1fr;
-               gap: 20px;
-            }
-
-            .footer-column {
-               text-align: center;
-            }
-
-            .footer-column h4 {
-               font-size: 0.9rem;
-               margin-bottom: 12px;
-            }
-
-            .footer-column a {
-               font-size: 0.85rem;
-               margin-bottom: 8px;
-            }
-
-            .footer-bottom {
-               padding-top: 20px;
-               font-size: 0.75rem;
-            }
-         }
-
-         /* Landscape Mode for Mobile Devices */
-         @media (max-width: 767.98px) and (orientation: landscape) {
-            .hero-aws-section {
-               min-height: auto;
-               padding: 30px 0 40px;
-            }
-
-            .hero-title {
-               font-size: 1.8rem;
-            }
-
-            .hero-subtitle {
-               font-size: 0.95rem;
-               margin-bottom: 20px;
-            }
-         }
-
-         /* Tablet Landscape and Desktop (992px and up) */
-         @media (min-width: 992px) {
-            .main-nav-links {
-               gap: 30px;
-            }
-
-            .secondary-nav-content {
-               gap: 30px;
-            }
-         }
-
-         /* Print Styles */
-         @media print {
-            .main-nav,
-            .secondary-nav,
-            .top-bar,
-            footer,
-            .btn-hero-cta,
-            .btn-aws-create,
-            .service-add-btn {
-               display: none;
-            }
-
-            body {
-               padding-top: 0;
-            }
-
-            .hero-aws-section::before,
-            .hero-aws-section::after {
-               display: none;
-            }
-         }
-
-         /* Touch Device Optimizations */
-         @media (hover: none) and (pointer: coarse) {
-            /* Disable heavy animations on mobile */
-            .particle,
-            .geometric-shape,
-            .hero-aws-section::before,
-            .hero-aws-section::after {
-               animation: none !important;
-            }
-
-            /* Simplify card effects for touch */
-            .service-card {
-               transform-style: flat;
-               perspective: none;
-            }
-
-            .service-card:hover {
-               transform: none;
-            }
-
-            .service-card:active {
-               transform: translateY(-5px);
-            }
-
-            /* Simplify button effects */
-            .btn-hero-cta,
-            .btn-aws-create {
-               animation: none !important;
-            }
-
-            .btn-hero-cta:hover,
-            .btn-aws-create:hover {
-               transform: none;
-            }
-
-            .btn-hero-cta:active,
-            .btn-aws-create:active {
-               transform: scale(0.95);
-            }
-
-            /* Disable parallax on mobile */
-            .hero-title,
-            .hero-subtitle,
-            .notification-banner {
-               transform: none !important;
-            }
-
-            /* Increase touch targets for mobile */
-            .main-nav-links a,
-            .secondary-nav a {
-               padding: 8px 5px;
-               min-height: 44px;
-               display: flex;
-               align-items: center;
-            }
-
-            .filter-btn,
-            .search-box input {
-               min-height: 44px;
-            }
-
-            /* Simplify icon animations */
-            .service-card-icon::before {
-               animation: none !important;
-            }
-
-            .service-link:hover i {
-               animation: none !important;
-            }
-         }
-
-         /* Reduce motion for users who prefer it */
-         @media (prefers-reduced-motion: reduce) {
-            *,
-            *::before,
-            *::after {
-               animation-duration: 0.01ms !important;
-               animation-iteration-count: 1 !important;
-               transition-duration: 0.01ms !important;
-            }
-
-            .particle,
-            .geometric-shape {
-               display: none;
-            }
-         }
-
-         /* Mobile-specific optimizations */
-         @media (max-width: 767.98px) {
-            /* Hide particles on mobile for performance */
-            .particles-container,
-            .geometric-shape {
-               display: none;
-            }
-
-            /* Simplify backgrounds */
-            .hero-aws-section::before {
-               opacity: 0.08;
-            }
-
-            /* Reduce blur effects */
-            .notification-banner {
-               backdrop-filter: none;
-               -webkit-backdrop-filter: none;
-               background: rgba(255, 255, 255, 0.98);
-            }
-
-            /* Simplify card shadows */
-            .service-card {
-               box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            }
-
-            /* Prevent layout shifts from transforms */
-            .service-card-icon {
-               will-change: auto;
             }
          }
       </style>
    </head>
    <body>
-      <!-- Page Loader -->
-      <div class="page-loader" id="pageLoader">
-         <div class="loader-content">
-            <div class="loader-spinner"></div>
-            <div class="loader-text">Loading...</div>
-         </div>
-      </div>
-
-      <!-- Top Utility Bar - Thin Black Bar -->
-      <div class="top-bar">
+      <!-- Navigation -->
+      <nav class="navbar navbar-expand-lg navbar-light fixed-top">
          <div class="container">
-            <div class="d-flex justify-content-end align-items-center">
-               <a href="https://yennj12.js.org/contact.html">Contact Me</a>
-               <a href="https://yennj12.js.org/yennj12_blog_V4/">Blog</a>
-               <a href="https://yennj12.js.org/index.html.backup.html">Old Site</a>
-            </div>
-         </div>
-      </div>
-
-      <!-- Main Navigation - White Background with Main Links -->
-      <nav class="main-nav">
-         <div class="container">
-            <div class="nav-container">
-               <div class="d-flex align-items-center">
-                  <a href="https://yennanliu.github.io" class="aws-logo">Yen.Dev</a>
-
-                  <div class="main-nav-links">
-                     <a href="https://yennanliu.github.io/about_me.html">About Me</a>
-                     <a href="https://yennj12.js.org/portfolios.html">Portfolios</a>
-                     <a href="https://yennanliu.github.io/aws_architecture.html">AWS Architecture</a>
-                     <a href="https://yennj12.js.org/contact.html">Contact</a>
-                     <a href="https://yennj12.js.org/yennj12_blog_V4/">Blog</a>
-                  </div>
-               </div>
-
-               <div class="nav-actions">
-                  <i class="fas fa-search search-icon"></i>
-                  <a href="https://yennj12.js.org/contact.html" class="btn-aws-create">Get In Touch</a>
-               </div>
+            <a class="navbar-brand" href="https://yennanliu.github.io">YEN.DEV</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
+               <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+               <ul class="navbar-nav ml-auto">
+                  <li class="nav-item"><a class="nav-link" href="https://yennanliu.github.io/about_me.html">About Me</a></li>
+                  <li class="nav-item"><a class="nav-link" href="https://yennj12.js.org/portfolios.html">Portfolios</a></li>
+                  <li class="nav-item"><a class="nav-link" href="https://yennanliu.github.io/aws_architecture.html">AWS Architecture</a></li>
+                  <li class="nav-item"><a class="nav-link" href="https://yennj12.js.org/contact.html">Contact</a></li>
+                  <li class="nav-item"><a class="nav-link" href="https://yennj12.js.org/yennj12_blog_V4/">Blog</a></li>
+               </ul>
             </div>
          </div>
       </nav>
 
-      <!-- Secondary Navigation -->
-      <div class="secondary-nav">
-         <div class="container">
-            <div class="secondary-nav-content">
-               <h2>My Services</h2>
-               <a href="#services">Services</a>
-               <a href="https://yennj12.js.org/portfolios.html">Portfolio</a>
-               <a href="https://yennj12.js.org/contact.html">Contact</a>
-            </div>
-         </div>
-      </div>
-
       <!-- Hero Section -->
-      <section class="hero-aws-section">
-         <!-- Particles Background -->
-         <div class="particles-container" id="particlesContainer"></div>
-
-         <!-- Geometric Shapes -->
-         <div class="geometric-shape shape-circle"></div>
-         <div class="geometric-shape shape-square"></div>
-
+      <section class="hero-minimal">
          <div class="container">
-            <div class="breadcrumb-aws">
-               <a href="https://yennanliu.github.io">Home</a> › Software Engineer
-            </div>
-
-            <div class="notification-banner">
-               <span class="typewriter">I'm a software engineer 👨‍💻 specialized in backend solutions ☕</span>
-               <i class="fas fa-arrow-right"></i>
-            </div>
-
-            <h1 class="hero-title">Welcome to My Space</h1>
-            <p class="hero-subtitle">From prototypes to formal launches, ensuring maintenance and monitoring.</p>
-
-            <a href="#services" class="btn-hero-cta">Explore My Skills</a>
+            <h1>Software Engineer<br>Specialized in<br>Backend Solutions</h1>
+            <p class="subtitle">From prototypes to formal launches, ensuring maintenance and monitoring.</p>
+            <a href="#expertise" class="cta-button">View My Work</a>
          </div>
       </section>
 
-      <!-- Services Section -->
-      <section id="services" class="services-section">
+      <!-- Expertise Section -->
+      <section id="expertise" class="expertise-section">
          <div class="container">
-            <div class="services-header">
-               <h2>Explore My Expertise</h2>
-
-               <div class="filter-search-row">
-                  <button class="filter-btn">
-                     <i class="fas fa-sliders-h"></i>
-                     <span>Filter</span>
-                  </button>
-                  <div class="search-box">
-                     <i class="fas fa-search"></i>
-                     <input type="text" placeholder="Search services..." id="searchInput">
-                  </div>
+            <h2 class="section-title">Expertise</h2>
+            <div class="expertise-grid">
+               <div class="expertise-item">
+                  <div class="expertise-number">01</div>
+                  <h3 class="expertise-title">Backend Development</h3>
+                  <p class="expertise-desc">Microservices and APIs using Java Spring Boot, Python Flask, and Django.</p>
                </div>
 
-               <div class="results-count">Showing 1 - 5 services</div>
-            </div>
-
-            <div class="service-cards-grid">
-               <!-- Service Card 1 -->
-               <div class="service-card">
-                  <div class="service-category">
-                     <i class="fas fa-tag"></i>
-                     <span>Development</span>
-                  </div>
-                  <div class="service-card-icon">
-                     <i class="fas fa-server" style="color: var(--aws-black);"></i>
-                  </div>
-                  <h3>Backend Development</h3>
-                  <p>Design and implement microservices and APIs using Java Spring Boot, Python Flask, and Django. Integrate with databases, message queues, and file systems.</p>
-                  <div class="service-card-footer">
-                     <a href="https://github.com/yennanliu/SpringPlayground" target="_blank" class="service-link">
-                        <i class="fas fa-arrow-right"></i>
-                     </a>
-                     <div class="service-add-btn">
-                        <i class="fas fa-plus"></i>
-                     </div>
-                  </div>
+               <div class="expertise-item">
+                  <div class="expertise-number">02</div>
+                  <h3 class="expertise-title">Full Stack Development</h3>
+                  <p class="expertise-desc">End-to-end web applications with modern frameworks and technologies.</p>
                </div>
 
-               <!-- Service Card 2 -->
-               <div class="service-card">
-                  <div class="service-category">
-                     <i class="fas fa-tag"></i>
-                     <span>Full Stack</span>
-                  </div>
-                  <div class="service-card-icon">
-                     <i class="fas fa-layer-group" style="color: var(--aws-black);"></i>
-                  </div>
-                  <h3>Full Stack Development</h3>
-                  <p>Proficient in developing both frontend and backend components of web applications. Experience with HTML, CSS, JavaScript, Vue.js, Node.js, and Express.</p>
-                  <div class="service-card-footer">
-                     <a href="https://yennj12.js.org/portfolios.html" class="service-link">
-                        <i class="fas fa-arrow-right"></i>
-                     </a>
-                     <div class="service-add-btn">
-                        <i class="fas fa-plus"></i>
-                     </div>
-                  </div>
+               <div class="expertise-item">
+                  <div class="expertise-number">03</div>
+                  <h3 class="expertise-title">Big Data Platform</h3>
+                  <p class="expertise-desc">Batch and stream processing using Spark, Flink, and Hadoop ecosystems.</p>
                </div>
 
-               <!-- Service Card 3 -->
-               <div class="service-card">
-                  <div class="service-category">
-                     <i class="fas fa-tag"></i>
-                     <span>Data Engineering</span>
-                  </div>
-                  <div class="service-card-icon">
-                     <i class="fas fa-database" style="color: var(--aws-black);"></i>
-                  </div>
-                  <h3>Big Data Platform</h3>
-                  <p>Implement batch and stream processing using Spark, Flink, and Hadoop. Create scalable data products using big data technologies.</p>
-                  <div class="service-card-footer">
-                     <a href="https://github.com/yennanliu/NYC_Taxi_Pipeline" target="_blank" class="service-link">
-                        <i class="fas fa-arrow-right"></i>
-                     </a>
-                     <div class="service-add-btn">
-                        <i class="fas fa-plus"></i>
-                     </div>
-                  </div>
+               <div class="expertise-item">
+                  <div class="expertise-number">04</div>
+                  <h3 class="expertise-title">Web Scraping</h3>
+                  <p class="expertise-desc">Custom scraping applications with Python, Selenium, Scrapy, and Airflow.</p>
                </div>
 
-               <!-- Service Card 4 -->
-               <div class="service-card">
-                  <div class="service-category">
-                     <i class="fas fa-tag"></i>
-                     <span>Automation</span>
-                  </div>
-                  <div class="service-card-icon">
-                     <i class="fas fa-robot" style="color: var(--aws-black);"></i>
-                  </div>
-                  <h3>Web Scraping</h3>
-                  <p>Develop custom web scraping applications using Python with Selenium, Scrapy, and Airflow. Design parallel scraping systems for large-scale data extraction.</p>
-                  <div class="service-card-footer">
-                     <a href="https://github.com/yennanliu" target="_blank" class="service-link">
-                        <i class="fas fa-arrow-right"></i>
-                     </a>
-                     <div class="service-add-btn">
-                        <i class="fas fa-plus"></i>
-                     </div>
-                  </div>
-               </div>
-
-               <!-- Service Card 5 -->
-               <div class="service-card">
-                  <div class="service-category">
-                     <i class="fas fa-tag"></i>
-                     <span>Cloud & DevOps</span>
-                  </div>
-                  <div class="service-card-icon">
-                     <i class="fas fa-cloud" style="color: var(--aws-black);"></i>
-                  </div>
-                  <h3>Cloud Infrastructure</h3>
-                  <p>Proficient in AWS, GCP, and Azure. Experienced in system design and prototype implementation, providing custom solutions tailored to business needs.</p>
-                  <div class="service-card-footer">
-                     <a href="https://github.com/yennanliu/cdk-playground" target="_blank" class="service-link">
-                        <i class="fas fa-arrow-right"></i>
-                     </a>
-                     <div class="service-add-btn">
-                        <i class="fas fa-plus"></i>
-                     </div>
-                  </div>
+               <div class="expertise-item">
+                  <div class="expertise-number">05</div>
+                  <h3 class="expertise-title">Cloud Infrastructure</h3>
+                  <p class="expertise-desc">AWS, GCP, and Azure. System design and custom solutions.</p>
                </div>
             </div>
          </div>
       </section>
 
-      <!-- Footer - Pure Black -->
+      <!-- Social Links -->
+      <section class="social-section">
+         <div class="container">
+            <div class="social-links">
+               <a href="https://linkedin.com/in/yennanliu" target="_blank" class="social-link" aria-label="LinkedIn">
+                  <i class="fab fa-linkedin-in"></i>
+               </a>
+               <a href="https://github.com/yennanliu" target="_blank" class="social-link" aria-label="GitHub">
+                  <i class="fab fa-github"></i>
+               </a>
+               <a href="https://twitter.com/free_tempopo" target="_blank" class="social-link" aria-label="Twitter">
+                  <i class="fab fa-twitter"></i>
+               </a>
+               <a href="https://huggingface.co/yennj12" target="_blank" class="social-link" aria-label="Hugging Face">
+                  <i class="fas fa-robot"></i>
+               </a>
+               <a href="https://gitlab.com/yennanliu" target="_blank" class="social-link" aria-label="GitLab">
+                  <i class="fab fa-gitlab"></i>
+               </a>
+            </div>
+         </div>
+      </section>
+
+      <!-- Footer -->
       <footer>
-         <div class="container">
-            <div class="footer-cta">
-               <a href="https://yennj12.js.org/contact.html" class="btn-hero-cta">Get In Touch</a>
-            </div>
-
+         <div class="container text-center">
             <div class="footer-links">
-               <div class="footer-column">
-                  <h4>About</h4>
-                  <a href="https://yennanliu.github.io/about_me.html">About Me</a>
-                  <a href="https://yennj12.js.org/portfolios.html">Portfolio</a>
-                  <a href="https://yennj12.js.org/yennj12_blog_V4/">Blog</a>
-               </div>
-
-               <div class="footer-column">
-                  <h4>Services</h4>
-                  <a href="https://github.com/yennanliu/SpringPlayground">Backend Development</a>
-                  <a href="https://github.com/yennanliu/NYC_Taxi_Pipeline">Data Engineering</a>
-                  <a href="https://github.com/yennanliu/cdk-playground">Cloud Infrastructure</a>
-               </div>
-
-               <div class="footer-column">
-                  <h4>Resources</h4>
-                  <a href="https://yennanliu.github.io/aws_architecture.html">AWS Architecture</a>
-                  <a href="https://github.com/yennanliu">GitHub Projects</a>
-                  <a href="https://yennj12.js.org/index.html.backup.html">Legacy Site</a>
-               </div>
-
-               <div class="footer-column">
-                  <h4>Connect</h4>
-                  <a href="https://linkedin.com/in/yennanliu" target="_blank">LinkedIn</a>
-                  <a href="https://github.com/yennanliu" target="_blank">GitHub</a>
-                  <a href="https://twitter.com/free_tempopo" target="_blank">Twitter</a>
-                  <a href="https://yennj12.js.org/contact.html">Contact</a>
-               </div>
+               <a href="https://yennanliu.github.io/">Home</a>
+               <a href="https://yennanliu.github.io/about_me.html">About Me</a>
+               <a href="https://yennj12.js.org/portfolios.html">Portfolios</a>
+               <a href="https://yennanliu.github.io/aws_architecture.html">AWS Architecture</a>
+               <a href="https://yennj12.js.org/contact.html">Contact</a>
+               <a href="https://yennj12.js.org/yennj12_blog_V4/">Blog</a>
             </div>
-
-            <div class="footer-bottom">
-               <p>&copy; 2026 yen.dev.com - All Rights Reserved</p>
-            </div>
+            <p style="color: var(--text-secondary); font-size: 0.9rem;">&copy; 2026 yen.dev.com</p>
          </div>
       </footer>
 
@@ -1814,276 +698,176 @@
       <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
       <script>
-         // Page loader
-         window.addEventListener('load', function() {
-            const loader = document.getElementById('pageLoader');
-            if (loader) {
-               setTimeout(() => {
-                  loader.classList.add('hidden');
-               }, 300);
+         // Mouse tracking for cursor effect
+         document.addEventListener('mousemove', (e) => {
+            const mouseX = (e.clientX / window.innerWidth) * 100;
+            const mouseY = (e.clientY / window.innerHeight) * 100;
+            document.documentElement.style.setProperty('--mouse-x', mouseX + '%');
+            document.documentElement.style.setProperty('--mouse-y', mouseY + '%');
+         });
+
+         // Parallax effect for hero section
+         window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const hero = document.querySelector('.hero-minimal');
+            if (hero && scrolled < window.innerHeight) {
+               hero.style.transform = `translateY(${scrolled * 0.5}px)`;
+               hero.style.opacity = 1 - (scrolled / window.innerHeight);
             }
+         });
+
+         // Intersection Observer for fade-in animations
+         const observerOptions = {
+            threshold: 0.15,
+            rootMargin: '0px 0px -50px 0px'
+         };
+
+         const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+               if (entry.isIntersecting) {
+                  entry.target.style.opacity = '1';
+                  entry.target.style.transform = 'translateY(0)';
+                  observer.unobserve(entry.target);
+               }
+            });
+         }, observerOptions);
+
+         // Observe expertise items
+         document.addEventListener('DOMContentLoaded', () => {
+            const expertiseItems = document.querySelectorAll('.expertise-item');
+            expertiseItems.forEach((item, index) => {
+               item.style.opacity = '0';
+               item.style.transform = 'translateY(30px)';
+               item.style.transition = `all 0.6s ease ${index * 0.1}s`;
+               observer.observe(item);
+            });
+
+            // Add stagger animation to expertise grid
+            const expertiseSection = document.querySelector('.expertise-section');
+            if (expertiseSection) {
+               observer.observe(expertiseSection);
+            }
+         });
+
+         // Smooth scroll for anchor links
+         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+               e.preventDefault();
+               const target = document.querySelector(this.getAttribute('href'));
+               if (target) {
+                  target.scrollIntoView({
+                     behavior: 'smooth',
+                     block: 'start'
+                  });
+               }
+            });
+         });
+
+         // Add hover effect to expertise items with 3D tilt
+         document.querySelectorAll('.expertise-item').forEach(item => {
+            item.addEventListener('mousemove', (e) => {
+               const rect = item.getBoundingClientRect();
+               const x = e.clientX - rect.left;
+               const y = e.clientY - rect.top;
+
+               const centerX = rect.width / 2;
+               const centerY = rect.height / 2;
+
+               const rotateX = (y - centerY) / 20;
+               const rotateY = (centerX - x) / 20;
+
+               item.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-10px)`;
+            });
+
+            item.addEventListener('mouseleave', () => {
+               item.style.transform = '';
+            });
          });
 
          // Navbar scroll effect
-         window.addEventListener('scroll', function() {
-            const nav = document.querySelector('.main-nav');
-            if (window.scrollY > 50) {
-               nav.classList.add('scrolled');
+         let lastScroll = 0;
+         const navbar = document.querySelector('.navbar');
+
+         window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset;
+
+            if (currentScroll > 100) {
+               navbar.style.padding = '10px 0';
+               navbar.style.boxShadow = '0 4px 30px rgba(0, 0, 0, 0.1)';
             } else {
-               nav.classList.remove('scrolled');
-            }
-         });
-
-         // Add staggered animation to service cards
-         document.addEventListener('DOMContentLoaded', function() {
-            const cards = document.querySelectorAll('.service-card');
-
-            const observerOptions = {
-               threshold: 0.1,
-               rootMargin: '0px 0px -50px 0px'
-            };
-
-            const observer = new IntersectionObserver(function(entries) {
-               entries.forEach((entry, index) => {
-                  if (entry.isIntersecting) {
-                     setTimeout(() => {
-                        entry.target.style.opacity = '1';
-                        entry.target.style.transform = 'translateY(0)';
-                     }, index * 100);
-                     observer.unobserve(entry.target);
-                  }
-               });
-            }, observerOptions);
-
-            cards.forEach(card => {
-               card.style.opacity = '0';
-               card.style.transform = 'translateY(30px)';
-               card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-               observer.observe(card);
-            });
-         });
-
-         // Dynamic gradient color rotation
-         (function() {
-            const gradients = [
-               'linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab)',
-               'linear-gradient(-45deg, #667eea, #764ba2, #f093fb, #4facfe)',
-               'linear-gradient(-45deg, #4facfe, #00f2fe, #43e97b, #38f9d7)',
-               'linear-gradient(-45deg, #fa709a, #fee140, #30cfd0, #330867)',
-               'linear-gradient(-45deg, #fdbb2d, #22c1c3, #a8edea, #fed6e3)'
-            ];
-
-            let currentIndex = 0;
-            const styleElement = document.createElement('style');
-            document.head.appendChild(styleElement);
-
-            function updateGradient() {
-               currentIndex = (currentIndex + 1) % gradients.length;
-               styleElement.textContent = `
-                  .hero-aws-section::before {
-                     background-image: ${gradients[currentIndex]} !important;
-                     transition: background-image 2s ease;
-                  }
-               `;
+               navbar.style.padding = '20px 0';
+               navbar.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.03)';
             }
 
-            setInterval(updateGradient, 10000); // Change every 10 seconds
-         })();
-
-         // Detect if device is mobile/tablet
-         let isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth < 768;
-         const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-         // Update isMobile on resize
-         window.addEventListener('resize', function() {
-            isMobile = window.innerWidth < 768;
+            lastScroll = currentScroll;
          });
 
-         // Generate particles (only on desktop)
-         (function() {
-            if (isMobile || prefersReducedMotion) return;
+         // Random floating animation for social links
+         document.querySelectorAll('.social-link').forEach((link, index) => {
+            const delay = index * 0.5;
+            const duration = 3 + Math.random() * 2;
+            link.style.animation += `, float-random ${duration}s ease-in-out ${delay}s infinite`;
+         });
 
-            const particlesContainer = document.getElementById('particlesContainer');
-            if (!particlesContainer) return;
-
-            const particleCount = 30;
-
-            for (let i = 0; i < particleCount; i++) {
-               const particle = document.createElement('div');
-               particle.className = 'particle';
-
-               // Random positioning
-               particle.style.left = Math.random() * 100 + '%';
-               particle.style.top = Math.random() * 100 + '%';
-
-               // Random animation delay and duration
-               particle.style.animationDelay = Math.random() * 15 + 's';
-               particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
-
-               // Random size
-               const size = Math.random() * 4 + 2;
-               particle.style.width = size + 'px';
-               particle.style.height = size + 'px';
-
-               particlesContainer.appendChild(particle);
+         // Add CSS for random float animation
+         const style = document.createElement('style');
+         style.textContent = `
+            @keyframes float-random {
+               0%, 100% { transform: translateY(0); }
+               50% { transform: translateY(-10px); }
             }
-         })();
+         `;
+         document.head.appendChild(style);
 
-         // 3D tilt effect on service cards following mouse (desktop only)
-         (function() {
-            if (isMobile || prefersReducedMotion) return;
-
-            const cards = document.querySelectorAll('.service-card');
-
-            cards.forEach(card => {
-               card.addEventListener('mousemove', function(e) {
-                  const rect = card.getBoundingClientRect();
-                  const x = e.clientX - rect.left;
-                  const y = e.clientY - rect.top;
-
-                  const centerX = rect.width / 2;
-                  const centerY = rect.height / 2;
-
-                  const rotateX = (y - centerY) / 20;
-                  const rotateY = (centerX - x) / 20;
-
-                  card.style.transform = `translateY(-15px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
-               });
-
-               card.addEventListener('mouseleave', function() {
-                  card.style.transform = '';
-               });
-            });
-         })();
-
-         // Parallax scrolling effect for hero elements (desktop only)
-         (function() {
-            if (isMobile || prefersReducedMotion) return;
-
-            const hero = document.querySelector('.hero-aws-section');
-            if (!hero) return;
-
-            let ticking = false;
-
-            window.addEventListener('scroll', function() {
-               if (!ticking) {
-                  window.requestAnimationFrame(function() {
-                     const scrolled = window.pageYOffset;
-                     const heroElements = hero.querySelectorAll('.hero-title, .hero-subtitle, .notification-banner');
-
-                     heroElements.forEach((element, index) => {
-                        const speed = 0.3 + (index * 0.1);
-                        const yPos = -(scrolled * speed);
-                        element.style.transform = `translateY(${yPos}px)`;
-                     });
-
-                     // Parallax for geometric shapes
-                     const shapes = document.querySelectorAll('.geometric-shape');
-                     shapes.forEach((shape, index) => {
-                        const speed = 0.15 + (index * 0.05);
-                        const yPos = scrolled * speed;
-                        shape.style.transform = `translateY(${yPos}px) rotate(${scrolled * 0.1}deg)`;
-                     });
-
-                     ticking = false;
-                  });
-                  ticking = true;
+         // Add particle effect on hover for expertise items
+         document.querySelectorAll('.expertise-item').forEach(item => {
+            item.addEventListener('mouseenter', () => {
+               for (let i = 0; i < 5; i++) {
+                  createParticle(item);
                }
             });
-         })();
+         });
 
-         // Enhanced search box with smooth focus effect
-         (function() {
-            const searchInput = document.getElementById('searchInput');
-            if (!searchInput) return;
+         function createParticle(element) {
+            const particle = document.createElement('div');
+            particle.style.position = 'absolute';
+            particle.style.width = '4px';
+            particle.style.height = '4px';
+            particle.style.background = 'rgba(0, 0, 0, 0.6)';
+            particle.style.borderRadius = '50%';
+            particle.style.pointerEvents = 'none';
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.top = Math.random() * 100 + '%';
+            particle.style.animation = 'particle-fade 1s ease-out forwards';
 
-            searchInput.addEventListener('focus', function() {
-               this.parentElement.style.transform = 'scale(1.02)';
-               this.parentElement.style.transition = 'transform 0.3s ease';
-            });
+            element.appendChild(particle);
 
-            searchInput.addEventListener('blur', function() {
-               this.parentElement.style.transform = 'scale(1)';
-            });
-         })();
+            setTimeout(() => particle.remove(), 1000);
+         }
 
-         // Smooth reveal animation for sections on scroll
-         (function() {
-            const observerOptions = {
-               threshold: 0.15,
-               rootMargin: '0px 0px -100px 0px'
-            };
-
-            const observer = new IntersectionObserver(function(entries) {
-               entries.forEach(entry => {
-                  if (entry.isIntersecting) {
-                     entry.target.style.opacity = '1';
-                     entry.target.style.transform = 'translateY(0)';
-                  }
-               });
-            }, observerOptions);
-
-            const sections = document.querySelectorAll('.services-section, footer');
-            sections.forEach(section => {
-               section.style.opacity = '0';
-               section.style.transform = 'translateY(50px)';
-               section.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
-               observer.observe(section);
-            });
-         })();
-
-         // Cursor trail effect (desktop only)
-         (function() {
-            if (isMobile || prefersReducedMotion) return;
-            if ('ontouchstart' in window) return; // Skip on touch devices
-
-            const coords = { x: 0, y: 0 };
-            const circles = [];
-            const colors = ['rgba(74, 144, 226, 0.3)', 'rgba(155, 89, 182, 0.3)', 'rgba(255, 148, 114, 0.3)'];
-
-            // Create cursor trail circles
-            for (let i = 0; i < 8; i++) {
-               const circle = document.createElement('div');
-               circle.style.position = 'fixed';
-               circle.style.width = '10px';
-               circle.style.height = '10px';
-               circle.style.borderRadius = '50%';
-               circle.style.backgroundColor = colors[i % colors.length];
-               circle.style.pointerEvents = 'none';
-               circle.style.zIndex = '9999';
-               circle.style.transition = 'opacity 0.3s ease';
-               circle.style.opacity = '0';
-               document.body.appendChild(circle);
-               circles.push(circle);
+         const particleStyle = document.createElement('style');
+         particleStyle.textContent = `
+            @keyframes particle-fade {
+               0% {
+                  opacity: 1;
+                  transform: scale(1) translateY(0);
+               }
+               100% {
+                  opacity: 0;
+                  transform: scale(0) translateY(-50px);
+               }
             }
+         `;
+         document.head.appendChild(particleStyle);
 
-            // Update cursor position
-            window.addEventListener('mousemove', function(e) {
-               coords.x = e.clientX;
-               coords.y = e.clientY;
-            });
-
-            // Animate circles
-            function animateCircles() {
-               let x = coords.x;
-               let y = coords.y;
-
-               circles.forEach((circle, index) => {
-                  circle.style.left = x - 5 + 'px';
-                  circle.style.top = y - 5 + 'px';
-                  circle.style.opacity = (8 - index) / 16;
-                  circle.style.transform = `scale(${(8 - index) / 8})`;
-
-                  const nextCircle = circles[index + 1] || circles[0];
-                  x += (parseInt(nextCircle.style.left) - x) * 0.3;
-                  y += (parseInt(nextCircle.style.top) - y) * 0.3;
-               });
-
-               requestAnimationFrame(animateCircles);
-            }
-
-            animateCircles();
-         })();
+         // Loading animation
+         window.addEventListener('load', () => {
+            document.body.style.opacity = '0';
+            setTimeout(() => {
+               document.body.style.transition = 'opacity 0.5s ease';
+               document.body.style.opacity = '1';
+            }, 100);
+         });
       </script>
    </body>
 </html>
