@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+      <title>Yen.Dev - Software Engineer | Minimalist Design</title>
+      <meta name="description" content="Yen is a software engineer specialized in backend solutions, from prototypes to formal launches, ensuring maintenance and monitoring.">
+
+      <!-- Open Graph / Facebook -->
+      <meta property="og:type" content="website">
+      <meta property="og:url" content="https://yennanliu.github.io/">
+      <meta property="og:title" content="Yen.Dev - Software Engineer">
+      <meta property="og:description" content="I'm a software engineer specialized in backend solutions. From prototypes to formal launches, ensuring maintenance and monitoring.">
+      <meta property="og:image" content="https://yennanliu.github.io/img/website-preview.png">
+
+      <!-- Bootstrap CSS -->
+      <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+      <!-- Font Awesome -->
+      <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet">
+      <!-- Google Fonts -->
+      <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+      <style>
+         :root {
+            --primary-color: #000000;
+            --accent-color: #0066ff;
+            --text-primary: #000000;
+            --text-secondary: #666666;
+            --bg-primary: #ffffff;
+            --bg-secondary: #f5f5f5;
+            --border-color: #e0e0e0;
+            --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+         }
+
+         * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+         }
+
+         body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            scroll-behavior: smooth;
+         }
+
+         /* Minimalist Navbar */
+         .navbar {
+            background-color: var(--bg-primary) !important;
+            border-bottom: 1px solid var(--border-color);
+            padding: 20px 0;
+            transition: all var(--transition);
+         }
+
+         .navbar-brand {
+            font-weight: 700;
+            font-size: 1.25rem;
+            color: var(--primary-color) !important;
+            letter-spacing: -0.5px;
+         }
+
+         .nav-link {
+            color: var(--text-secondary) !important;
+            font-weight: 500;
+            font-size: 0.95rem;
+            margin: 0 15px;
+            transition: color var(--transition);
+         }
+
+         .nav-link:hover {
+            color: var(--primary-color) !important;
+         }
+
+         /* Hero Section - Minimalist */
+         .hero-minimal {
+            min-height: 70vh;
+            display: flex;
+            align-items: center;
+            padding: 100px 0 80px;
+         }
+
+         .hero-minimal h1 {
+            font-size: 4rem;
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 30px;
+            letter-spacing: -2px;
+         }
+
+         .hero-minimal .subtitle {
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            font-weight: 400;
+            margin-bottom: 40px;
+            max-width: 600px;
+         }
+
+         .hero-minimal .cta-button {
+            display: inline-block;
+            padding: 16px 40px;
+            background-color: var(--primary-color);
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            border-radius: 2px;
+            transition: all var(--transition);
+            border: 2px solid var(--primary-color);
+         }
+
+         .hero-minimal .cta-button:hover {
+            background-color: transparent;
+            color: var(--primary-color);
+         }
+
+         /* Expertise Grid - Minimalist */
+         .expertise-section {
+            padding: 100px 0;
+            background-color: var(--bg-secondary);
+         }
+
+         .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 60px;
+            letter-spacing: -1px;
+         }
+
+         .expertise-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1px;
+            background-color: var(--border-color);
+            border: 1px solid var(--border-color);
+         }
+
+         .expertise-item {
+            background-color: var(--bg-primary);
+            padding: 50px 40px;
+            transition: all var(--transition);
+         }
+
+         .expertise-item:hover {
+            background-color: var(--primary-color);
+            color: white;
+         }
+
+         .expertise-item:hover .expertise-number,
+         .expertise-item:hover .expertise-title,
+         .expertise-item:hover .expertise-desc {
+            color: white;
+         }
+
+         .expertise-number {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            font-weight: 600;
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+         }
+
+         .expertise-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: var(--text-primary);
+         }
+
+         .expertise-desc {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+         }
+
+         /* Social Links - Minimal */
+         .social-section {
+            padding: 80px 0;
+            text-align: center;
+         }
+
+         .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+         }
+
+         .social-link {
+            width: 50px;
+            height: 50px;
+            border: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all var(--transition);
+            color: var(--text-primary);
+         }
+
+         .social-link:hover {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+            color: white;
+            transform: translateY(-5px);
+         }
+
+         /* Footer - Minimal */
+         footer {
+            padding: 60px 0 40px;
+            border-top: 1px solid var(--border-color);
+         }
+
+         .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+         }
+
+         .footer-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color var(--transition);
+         }
+
+         .footer-links a:hover {
+            color: var(--primary-color);
+         }
+
+         /* Responsive */
+         @media (max-width: 768px) {
+            .hero-minimal h1 {
+               font-size: 2.5rem;
+            }
+
+            .hero-minimal .subtitle {
+               font-size: 1.2rem;
+            }
+
+            .expertise-grid {
+               grid-template-columns: 1fr;
+            }
+         }
+      </style>
+   </head>
+   <body>
+      <!-- Navigation -->
+      <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+         <div class="container">
+            <a class="navbar-brand" href="https://yennanliu.github.io">YEN.DEV</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
+               <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+               <ul class="navbar-nav ml-auto">
+                  <li class="nav-item"><a class="nav-link" href="https://yennanliu.github.io/about_me.html">About Me</a></li>
+                  <li class="nav-item"><a class="nav-link" href="https://yennj12.js.org/portfolios.html">Portfolios</a></li>
+                  <li class="nav-item"><a class="nav-link" href="https://yennanliu.github.io/aws_architecture.html">AWS Architecture</a></li>
+                  <li class="nav-item"><a class="nav-link" href="https://yennj12.js.org/contact.html">Contact</a></li>
+                  <li class="nav-item"><a class="nav-link" href="https://yennj12.js.org/yennj12_blog_V4/">Blog</a></li>
+               </ul>
+            </div>
+         </div>
+      </nav>
+
+      <!-- Hero Section -->
+      <section class="hero-minimal">
+         <div class="container">
+            <h1>Software Engineer<br>Specialized in<br>Backend Solutions</h1>
+            <p class="subtitle">From prototypes to formal launches, ensuring maintenance and monitoring.</p>
+            <a href="#expertise" class="cta-button">View My Work</a>
+         </div>
+      </section>
+
+      <!-- Expertise Section -->
+      <section id="expertise" class="expertise-section">
+         <div class="container">
+            <h2 class="section-title">Expertise</h2>
+            <div class="expertise-grid">
+               <div class="expertise-item">
+                  <div class="expertise-number">01</div>
+                  <h3 class="expertise-title">Backend Development</h3>
+                  <p class="expertise-desc">Microservices and APIs using Java Spring Boot, Python Flask, and Django.</p>
+               </div>
+
+               <div class="expertise-item">
+                  <div class="expertise-number">02</div>
+                  <h3 class="expertise-title">Full Stack Development</h3>
+                  <p class="expertise-desc">End-to-end web applications with modern frameworks and technologies.</p>
+               </div>
+
+               <div class="expertise-item">
+                  <div class="expertise-number">03</div>
+                  <h3 class="expertise-title">Big Data Platform</h3>
+                  <p class="expertise-desc">Batch and stream processing using Spark, Flink, and Hadoop ecosystems.</p>
+               </div>
+
+               <div class="expertise-item">
+                  <div class="expertise-number">04</div>
+                  <h3 class="expertise-title">Web Scraping</h3>
+                  <p class="expertise-desc">Custom scraping applications with Python, Selenium, Scrapy, and Airflow.</p>
+               </div>
+
+               <div class="expertise-item">
+                  <div class="expertise-number">05</div>
+                  <h3 class="expertise-title">Cloud Infrastructure</h3>
+                  <p class="expertise-desc">AWS, GCP, and Azure. System design and custom solutions.</p>
+               </div>
+            </div>
+         </div>
+      </section>
+
+      <!-- Social Links -->
+      <section class="social-section">
+         <div class="container">
+            <div class="social-links">
+               <a href="https://linkedin.com/in/yennanliu" target="_blank" class="social-link" aria-label="LinkedIn">
+                  <i class="fab fa-linkedin-in"></i>
+               </a>
+               <a href="https://github.com/yennanliu" target="_blank" class="social-link" aria-label="GitHub">
+                  <i class="fab fa-github"></i>
+               </a>
+               <a href="https://twitter.com/free_tempopo" target="_blank" class="social-link" aria-label="Twitter">
+                  <i class="fab fa-twitter"></i>
+               </a>
+               <a href="https://huggingface.co/yennj12" target="_blank" class="social-link" aria-label="Hugging Face">
+                  <i class="fas fa-robot"></i>
+               </a>
+               <a href="https://gitlab.com/yennanliu" target="_blank" class="social-link" aria-label="GitLab">
+                  <i class="fab fa-gitlab"></i>
+               </a>
+            </div>
+         </div>
+      </section>
+
+      <!-- Footer -->
+      <footer>
+         <div class="container text-center">
+            <div class="footer-links">
+               <a href="https://yennanliu.github.io/">Home</a>
+               <a href="https://yennanliu.github.io/about_me.html">About Me</a>
+               <a href="https://yennj12.js.org/portfolios.html">Portfolios</a>
+               <a href="https://yennanliu.github.io/aws_architecture.html">AWS Architecture</a>
+               <a href="https://yennj12.js.org/contact.html">Contact</a>
+               <a href="https://yennj12.js.org/yennj12_blog_V4/">Blog</a>
+            </div>
+            <p style="color: var(--text-secondary); font-size: 0.9rem;">&copy; 2024 yen.dev.com</p>
+         </div>
+      </footer>
+
+      <!-- Scripts -->
+      <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+   </body>
+</html>
