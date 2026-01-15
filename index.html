@@ -571,18 +571,363 @@
             width: 100%;
          }
 
-         /* Responsive */
-         @media (max-width: 768px) {
+         /* Responsive Design - Mobile First Approach */
+
+         /* Extra Small Devices (phones, less than 576px) */
+         @media (max-width: 575.98px) {
+            .container {
+               padding-left: 15px;
+               padding-right: 15px;
+            }
+
+            .navbar-brand {
+               font-size: 1rem;
+            }
+
+            .navbar {
+               padding: 10px 0;
+            }
+
+            .nav-link {
+               font-size: 0.85rem;
+               margin: 5px 10px;
+            }
+
+            .hero-minimal {
+               min-height: 60vh;
+               padding: 60px 0 40px;
+            }
+
             .hero-minimal h1 {
-               font-size: 2.5rem;
+               font-size: 1.8rem;
+               letter-spacing: -1px;
+               margin-bottom: 20px;
             }
 
             .hero-minimal .subtitle {
-               font-size: 1.2rem;
+               font-size: 1rem;
+               margin-bottom: 30px;
+            }
+
+            .hero-minimal .cta-button {
+               padding: 12px 30px;
+               font-size: 0.9rem;
+            }
+
+            .expertise-section {
+               padding: 60px 0;
+            }
+
+            .section-title {
+               font-size: 1.8rem;
+               margin-bottom: 40px;
             }
 
             .expertise-grid {
                grid-template-columns: 1fr;
+               gap: 20px;
+            }
+
+            .expertise-item {
+               padding: 30px 25px;
+            }
+
+            .expertise-number {
+               font-size: 0.75rem;
+               margin-bottom: 15px;
+            }
+
+            .expertise-title {
+               font-size: 1.2rem;
+            }
+
+            .expertise-desc {
+               font-size: 0.9rem;
+            }
+
+            .social-section {
+               padding: 50px 0;
+            }
+
+            .social-links {
+               gap: 20px;
+            }
+
+            .social-link {
+               width: 45px;
+               height: 45px;
+            }
+
+            footer {
+               padding: 40px 0 30px;
+            }
+
+            .footer-links {
+               gap: 15px;
+               flex-direction: column;
+            }
+
+            .footer-links a {
+               font-size: 0.85rem;
+            }
+
+            /* Disable heavy animations on mobile */
+            .hero-minimal::before,
+            .hero-minimal::after,
+            .expertise-section::before {
+               display: none;
+            }
+
+            body::before {
+               display: none;
+            }
+         }
+
+         /* Small Devices (landscape phones, 576px and up) */
+         @media (min-width: 576px) and (max-width: 767.98px) {
+            .navbar-brand {
+               font-size: 1.1rem;
+            }
+
+            .hero-minimal {
+               min-height: 65vh;
+               padding: 80px 0 60px;
+            }
+
+            .hero-minimal h1 {
+               font-size: 2.2rem;
+            }
+
+            .hero-minimal .subtitle {
+               font-size: 1.15rem;
+            }
+
+            .hero-minimal .cta-button {
+               padding: 14px 35px;
+            }
+
+            .expertise-section {
+               padding: 70px 0;
+            }
+
+            .section-title {
+               font-size: 2rem;
+            }
+
+            .expertise-grid {
+               grid-template-columns: 1fr;
+               gap: 25px;
+            }
+
+            .expertise-item {
+               padding: 40px 30px;
+            }
+
+            .social-section {
+               padding: 60px 0;
+            }
+
+            footer {
+               padding: 50px 0 35px;
+            }
+
+            .footer-links {
+               gap: 20px;
+            }
+         }
+
+         /* Medium Devices (tablets, 768px and up) */
+         @media (min-width: 768px) and (max-width: 991.98px) {
+            .navbar-brand {
+               font-size: 1.15rem;
+            }
+
+            .nav-link {
+               font-size: 0.9rem;
+               margin: 0 12px;
+            }
+
+            .hero-minimal {
+               min-height: 68vh;
+            }
+
+            .hero-minimal h1 {
+               font-size: 3rem;
+            }
+
+            .hero-minimal .subtitle {
+               font-size: 1.3rem;
+            }
+
+            .expertise-section {
+               padding: 80px 0;
+            }
+
+            .section-title {
+               font-size: 2.2rem;
+            }
+
+            .expertise-grid {
+               grid-template-columns: repeat(2, 1fr);
+               gap: 25px;
+            }
+
+            .expertise-item {
+               padding: 45px 35px;
+            }
+
+            .social-section {
+               padding: 70px 0;
+            }
+
+            .social-link {
+               width: 48px;
+               height: 48px;
+            }
+
+            footer {
+               padding: 55px 0 38px;
+            }
+         }
+
+         /* Large Devices (desktops, 992px and up) */
+         @media (min-width: 992px) and (max-width: 1199.98px) {
+            .hero-minimal h1 {
+               font-size: 3.5rem;
+            }
+
+            .expertise-grid {
+               grid-template-columns: repeat(2, 1fr);
+               gap: 30px;
+            }
+         }
+
+         /* Extra Large Devices (large desktops, 1200px and up) */
+         @media (min-width: 1200px) {
+            .hero-minimal h1 {
+               font-size: 4rem;
+            }
+
+            .expertise-grid {
+               grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            }
+         }
+
+         /* Landscape Mode for Mobile Devices */
+         @media (max-width: 767.98px) and (orientation: landscape) {
+            .hero-minimal {
+               min-height: auto;
+               padding: 60px 0 50px;
+            }
+
+            .hero-minimal h1 {
+               font-size: 2rem;
+               margin-bottom: 15px;
+            }
+
+            .hero-minimal .subtitle {
+               font-size: 1rem;
+               margin-bottom: 25px;
+            }
+
+            .navbar {
+               padding: 8px 0;
+            }
+         }
+
+         /* Touch Device Optimizations */
+         @media (hover: none) and (pointer: coarse) {
+            /* Disable heavy animations on touch devices */
+            .hero-minimal::before,
+            .hero-minimal::after {
+               animation: none !important;
+            }
+
+            /* Simplify hover effects for touch */
+            .expertise-item:hover {
+               transform: translateY(-5px);
+            }
+
+            .cta-button:hover,
+            .social-link:hover {
+               transform: none;
+            }
+
+            .cta-button:active {
+               transform: scale(0.95);
+            }
+
+            .social-link:active {
+               transform: scale(0.9);
+            }
+
+            /* Increase touch targets */
+            .nav-link {
+               padding: 10px 5px;
+               min-height: 44px;
+               display: flex;
+               align-items: center;
+            }
+
+            .social-link {
+               min-width: 44px;
+               min-height: 44px;
+            }
+
+            .cta-button {
+               min-height: 44px;
+            }
+
+            /* Disable complex animations */
+            .expertise-item::after {
+               display: none;
+            }
+         }
+
+         /* Reduce Motion for Accessibility */
+         @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+               animation-duration: 0.01ms !important;
+               animation-iteration-count: 1 !important;
+               transition-duration: 0.01ms !important;
+            }
+
+            .hero-minimal::before,
+            .hero-minimal::after {
+               display: none;
+            }
+         }
+
+         /* High DPI Displays */
+         @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+            body {
+               -webkit-font-smoothing: antialiased;
+               -moz-osx-font-smoothing: grayscale;
+            }
+         }
+
+         /* Print Styles */
+         @media print {
+            .navbar,
+            .cta-button,
+            .social-section,
+            body::before,
+            .hero-minimal::before,
+            .hero-minimal::after {
+               display: none;
+            }
+
+            body {
+               background: white;
+               color: black;
+            }
+
+            .hero-minimal,
+            .expertise-section,
+            footer {
+               padding: 20px 0;
             }
          }
       </style>
