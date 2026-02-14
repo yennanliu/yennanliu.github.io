@@ -53,44 +53,55 @@
       <!-- Font Awesome -->
       <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet">
       <!-- Google Fonts -->
-      <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+      <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
       
       <!-- Custom CSS -->
       <style>
          :root {
-            --apple-blue: #007AFF;
+            --primary-color: #000000;
+            --apple-blue: #000000;
             --apple-gray: #1d1d1f;
             --apple-light-gray: #f5f5f7;
             --apple-white: #ffffff;
             --apple-text: #1d1d1f;
-            --apple-secondary-text: #86868b;
-            --apple-border: #d2d2d7;
+            --apple-secondary-text: #737373;
+            --apple-border: #e5e5e5;
             --transition-speed: 0.28s;
             --apple-radius: 18px;
-            --apple-shadow: 0 4px 8px rgba(0, 0, 0, 0.12);
+            --apple-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+            --gradient-black: linear-gradient(135deg, #000000 0%, #262626 100%);
          }
          
          /* Base styles */
          body {
-            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', Roboto, sans-serif;
+            font-family: 'Manrope', -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', Roboto, sans-serif;
             background-color: var(--apple-white);
             color: var(--apple-text);
-            line-height: 1.4705882353;
+            line-height: 1.6;
             font-weight: 400;
             letter-spacing: -.022em;
             transition: all var(--transition-speed) ease-in-out;
             scroll-behavior: smooth;
             padding-top: 44px;
          }
-         
+
+         /* Global Heading Styles */
+         h1, h2, h3, h4, h5, h6 {
+            font-family: 'Outfit', sans-serif;
+            font-weight: 700;
+            letter-spacing: -.02em;
+            color: var(--apple-text);
+         }
+
          /* Apple Typography */
          .apple-headline {
-            font-size: 60px;
-            line-height: 1.0833333333;
-            font-weight: 600;
-            letter-spacing: -.003em;
+            font-family: 'Outfit', sans-serif;
+            font-size: 90px;
+            line-height: 1;
+            font-weight: 900;
+            letter-spacing: -.04em;
             color: var(--apple-text);
-            margin-bottom: 6px;
+            margin-bottom: 30px;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -112,12 +123,15 @@
          }
 
          .apple-subheadline {
-            font-size: 36px;
-            line-height: 1.1428571429;
+            font-size: 52px;
+            line-height: 1.2;
             font-weight: 400;
-            letter-spacing: .007em;
+            letter-spacing: -.01em;
             color: var(--apple-secondary-text);
-            margin-bottom: 40px;
+            margin-bottom: 50px;
+            max-width: 1000px;
+            margin-left: auto;
+            margin-right: auto;
          }
          
          .apple-body-large {
@@ -638,8 +652,8 @@
          }
          
          body.dark-mode .apple-button {
-            background: #007AFF;
-            color: #ffffff;
+            background: #ffffff;
+            color: #000000;
          }
          
          body.dark-mode .apple-button:hover {
@@ -679,9 +693,9 @@
          
          /* Dark mode certification badges */
          body.dark-mode .cert-badge {
-            background: linear-gradient(135deg, #007AFF 0%, #5AC8FA 100%);
-            color: #ffffff;
-            box-shadow: 0 5px 15px rgba(0, 122, 255, 0.3);
+            background: linear-gradient(135deg, #ffffff 0%, #d4d4d4 100%);
+            color: #000000;
+            box-shadow: 0 5px 15px rgba(255, 255, 255, 0.2);
          }
          
          body.dark-mode .cert-badge:hover {
@@ -715,23 +729,25 @@
          }
 
          .ai-infra-title {
-            font-size: 48px;
-            line-height: 1.1;
-            font-weight: 700;
+            font-size: 72px;
+            line-height: 1;
+            font-weight: 900;
             color: #1a1a1a;
-            margin-bottom: 20px;
+            margin-bottom: 30px;
+            letter-spacing: -0.03em;
          }
 
          .ai-title-main {
-            background: linear-gradient(135deg, #1a1a1a 0%, #4a6bff 100%);
+            background: linear-gradient(135deg, #000000 0%, #404040 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
             display: inline-block;
+            font-family: 'Outfit', sans-serif;
          }
 
          .ai-title-sub {
-            background: linear-gradient(45deg, #4a6bff, #00d4ff, #ff6b6b, #4ecdc4);
+            background: linear-gradient(45deg, #000000, #404040, #737373, #525252);
             background-size: 400% 400%;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -739,6 +755,7 @@
             animation: gradient-shift 3s ease-in-out infinite;
             display: inline-block;
             position: relative;
+            font-family: 'Outfit', sans-serif;
          }
 
          @keyframes gradient-shift {
@@ -801,11 +818,12 @@
          }
 
          .ai-infra-subtitle {
-            font-size: 20px;
-            line-height: 1.6;
-            color: #6c757d;
-            max-width: 600px;
+            font-size: 28px;
+            line-height: 1.5;
+            color: var(--apple-secondary-text);
+            max-width: 800px;
             margin: 0 auto;
+            font-weight: 400;
          }
 
          /* AI Infrastructure Carousel */
@@ -917,19 +935,22 @@
          }
 
          .ai-infra-card-title {
-            font-size: 20px;
-            font-weight: 600;
-            color: #1a1a1a;
-            margin-bottom: 12px;
+            font-family: 'Outfit', sans-serif;
+            font-size: 28px;
+            font-weight: 800;
+            color: #000000;
+            margin-bottom: 16px;
             text-align: center;
+            letter-spacing: -0.02em;
          }
 
          .ai-infra-card-description {
-            font-size: 14px;
+            font-size: 17px;
             line-height: 1.6;
-            color: #6c757d;
+            color: var(--apple-secondary-text);
             text-align: center;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
+            font-weight: 400;
          }
 
          .ai-infra-tech-stack {
@@ -940,20 +961,22 @@
          }
 
          .ai-tech-tag {
-            background: linear-gradient(135deg, rgba(74, 107, 255, 0.1) 0%, rgba(0, 123, 255, 0.1) 100%);
-            color: #4a6bff;
-            border: 1px solid rgba(74, 107, 255, 0.2);
-            padding: 6px 12px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: 500;
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.05) 0%, rgba(0, 0, 0, 0.08) 100%);
+            color: #000000;
+            border: 2px solid rgba(0, 0, 0, 0.15);
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-size: 15px;
+            font-weight: 600;
             transition: all 0.3s ease;
+            letter-spacing: 0.01em;
          }
 
          .ai-tech-tag:hover {
-            background: linear-gradient(135deg, #4a6bff 0%, #007bff 100%);
+            background: linear-gradient(135deg, #000000 0%, #262626 100%);
             color: white;
             transform: scale(1.05);
+            border-color: #000000;
          }
 
          .ai-infra-cta {
@@ -963,25 +986,28 @@
          }
 
          .ai-infra-cta-text {
-            font-size: 18px;
+            font-size: 32px;
             color: #6c757d;
-            margin-bottom: 30px;
+            margin-bottom: 40px;
+            font-weight: 400;
+            letter-spacing: -0.02em;
          }
 
          .ai-infra-cta-button {
             display: inline-flex;
             align-items: center;
-            gap: 12px;
-            background: linear-gradient(135deg, #4a6bff 0%, #007bff 100%);
+            gap: 16px;
+            background: linear-gradient(135deg, #000000 0%, #333333 100%);
             color: white;
-            padding: 16px 32px;
+            padding: 24px 48px;
             border-radius: 50px;
-            font-weight: 600;
+            font-size: 20px;
+            font-weight: 700;
             text-decoration: none;
             position: relative;
             overflow: hidden;
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 0 8px 25px rgba(74, 107, 255, 0.3);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
          }
 
          .ai-infra-cta-button::before {
@@ -1001,7 +1027,7 @@
 
          .ai-infra-cta-button:hover {
             transform: translateY(-2px);
-            box-shadow: 0 15px 35px rgba(74, 107, 255, 0.4);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
             color: white;
             text-decoration: none;
          }
@@ -1263,9 +1289,13 @@
                margin-top: 60px;
             }
 
+            .ai-infra-cta-text {
+               font-size: 20px;
+            }
+
             .ai-infra-cta-button {
-               padding: 14px 28px;
-               font-size: 16px;
+               padding: 18px 36px;
+               font-size: 18px;
             }
          }
 
@@ -1411,13 +1441,13 @@
             }
 
             .ai-infra-cta-text {
-               font-size: 14px;
+               font-size: 18px;
                padding: 0 20px;
             }
 
             .ai-infra-cta-button {
-               padding: 12px 24px;
-               font-size: 14px;
+               padding: 16px 32px;
+               font-size: 16px;
                border-radius: 40px;
             }
 
@@ -1484,9 +1514,13 @@
                font-size: 11px;
             }
 
+            .ai-infra-cta-text {
+               font-size: 16px;
+            }
+
             .ai-infra-cta-button {
-               padding: 10px 20px;
-               font-size: 13px;
+               padding: 14px 28px;
+               font-size: 15px;
             }
          }
 
@@ -1531,19 +1565,19 @@
 
          body.dark-mode .ai-infra-section::before {
             background:
-               radial-gradient(circle at 20% 20%, rgba(74, 107, 255, 0.1) 0%, transparent 50%),
-               radial-gradient(circle at 80% 80%, rgba(0, 122, 255, 0.1) 0%, transparent 50%),
-               linear-gradient(45deg, transparent 0%, rgba(74, 107, 255, 0.05) 50%, transparent 100%);
+               radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.05) 0%, transparent 50%),
+               radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.05) 0%, transparent 50%),
+               linear-gradient(45deg, transparent 0%, rgba(255, 255, 255, 0.02) 50%, transparent 100%);
          }
 
          body.dark-mode .ai-title-main {
-            background: linear-gradient(135deg, #f5f5f7 0%, #4a6bff 100%);
+            background: linear-gradient(135deg, #f5f5f7 0%, #888888 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
          }
 
          body.dark-mode .ai-title-sub {
-            background: linear-gradient(45deg, #7ba7ff, #00d4ff, #ff6b6b, #4ecdc4);
+            background: linear-gradient(45deg, #f5f5f7, #cccccc, #888888, #aaaaaa);
             background-size: 400% 400%;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -1556,13 +1590,13 @@
 
          body.dark-mode .ai-infra-card {
             background: rgba(29, 29, 31, 0.8);
-            border-color: rgba(74, 107, 255, 0.2);
+            border-color: rgba(255, 255, 255, 0.1);
          }
 
          body.dark-mode .ai-infra-card:hover {
             background: rgba(45, 45, 47, 0.9);
             box-shadow:
-               0 20px 40px rgba(74, 107, 255, 0.2),
+               0 20px 40px rgba(255, 255, 255, 0.1),
                0 10px 20px rgba(0, 0, 0, 0.3);
          }
 
@@ -1589,28 +1623,205 @@
          body.dark-mode .indicator:hover {
             background: rgba(74, 107, 255, 0.7);
          }
-         
-         /* AWS Expertise Level - Dark Mode Fix */
-         body.dark-mode .card {
+
+         /* AWS Expertise Cards - Modern Design */
+         .expertise-card {
+            background: white;
+            border: 2px solid #e5e5e5;
+            border-radius: 20px;
+            padding: 40px 30px;
+            text-align: center;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            height: 100%;
+         }
+
+         .expertise-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, #000000, #404040);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
+         }
+
+         .expertise-card:hover::before {
+            transform: scaleX(1);
+         }
+
+         .expertise-card:hover {
+            transform: translateY(-8px);
+            border-color: #000000;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+         }
+
+         .expertise-icon-wrapper {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #000000, #262626);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 25px;
+            transition: all 0.3s ease;
+         }
+
+         .expertise-card:hover .expertise-icon-wrapper {
+            transform: rotate(5deg) scale(1.1);
+         }
+
+         .expertise-icon {
+            font-size: 1.8rem;
+            color: white;
+         }
+
+         .expertise-progress-circle {
+            margin: 25px auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+         }
+
+         .circular-chart {
+            display: block;
+            margin: 0 auto;
+            max-width: 140px;
+            transform: rotate(-90deg);
+         }
+
+         .circle-bg {
+            fill: none;
+            stroke: #f0f0f0;
+            stroke-width: 8;
+         }
+
+         .circle-progress {
+            fill: none;
+            stroke: #000000;
+            stroke-width: 8;
+            stroke-linecap: round;
+            transition: stroke-dashoffset 1.5s ease-in-out;
+            animation: progress-animation 1.5s ease-out forwards;
+         }
+
+         @keyframes progress-animation {
+            from {
+               stroke-dashoffset: 377;
+            }
+         }
+
+         .circle-percentage {
+            fill: #000000;
+            font-family: 'Outfit', sans-serif;
+            font-size: 2.2rem;
+            font-weight: 900;
+            transform: rotate(90deg);
+            transform-origin: center;
+            text-anchor: middle;
+            dominant-baseline: middle;
+         }
+
+         .expertise-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 2rem;
+            font-weight: 800;
+            margin: 25px 0 15px;
+            color: #000000;
+            letter-spacing: -0.03em;
+         }
+
+         .expertise-services {
+            font-size: 1.1rem;
+            color: var(--apple-secondary-text);
+            margin: 0;
+            font-weight: 500;
+            letter-spacing: 0.02em;
+         }
+
+         /* Expertise Cards - Mobile Responsive */
+         @media (max-width: 767.98px) {
+            .expertise-card {
+               padding: 30px 20px;
+            }
+
+            .expertise-icon-wrapper {
+               width: 50px;
+               height: 50px;
+            }
+
+            .expertise-icon {
+               font-size: 1.5rem;
+            }
+
+            .expertise-progress-circle {
+               margin: 20px auto;
+            }
+
+            .circular-chart {
+               max-width: 120px;
+            }
+
+            .circle-percentage {
+               font-size: 1.6rem;
+            }
+
+            .expertise-title {
+               font-size: 1.3rem;
+            }
+
+            .expertise-services {
+               font-size: 0.9rem;
+            }
+         }
+
+         /* AWS Expertise Level - Dark Mode */
+         body.dark-mode .expertise-card {
             background-color: #1d1d1f;
-            border: 1px solid #424245;
+            border-color: #424245;
             color: #f5f5f7;
          }
-         
-         body.dark-mode .card h3 {
-            color: #f5f5f7 !important;
+
+         body.dark-mode .expertise-card::before {
+            background: linear-gradient(90deg, #ffffff, #d4d4d4);
          }
-         
-         body.dark-mode .card .d-flex span {
-            color: #f5f5f7;
+
+         body.dark-mode .expertise-card:hover {
+            border-color: #ffffff;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
          }
-         
-         body.dark-mode .progress {
-            background-color: #424245;
+
+         body.dark-mode .expertise-icon-wrapper {
+            background: linear-gradient(135deg, #ffffff, #d4d4d4);
          }
-         
-         body.dark-mode .progress-bar {
-            background: #f5f5f7 !important;
+
+         body.dark-mode .expertise-icon {
+            color: #000000;
+         }
+
+         body.dark-mode .circle-bg {
+            stroke: #424245;
+         }
+
+         body.dark-mode .circle-progress {
+            stroke: #ffffff;
+         }
+
+         body.dark-mode .circle-percentage {
+            fill: #ffffff;
+         }
+
+         body.dark-mode .expertise-title {
+            color: #ffffff;
+         }
+
+         body.dark-mode .expertise-services {
+            color: #a3a3a3;
          }
          
          /* Toggle button styles */
@@ -2096,70 +2307,123 @@
          </div>
       </div>
 
-      <!-- AWS Skills Section -->
-      <div class="container">
-         <div class="card" data-aos="fade-up">
-            <div class="card-body">
-               <h3 class="text-center mb-4" style="color: var(--primary-color); font-weight: 700;">AWS Expertise Level</h3>
-               <div class="row">
-                  <div class="col-md-6">
-                     <div class="mb-3">
-                        <div class="d-flex justify-content-between">
-                           <span>Compute (EC2, Lambda, ECS/EKS)</span>
-                           <span>95%</span>
-                        </div>
-                        <div class="progress">
-                           <div class="progress-bar" role="progressbar" style="width: 95%; background: #000000;"></div>
-                        </div>
-                     </div>
-                     <div class="mb-3">
-                        <div class="d-flex justify-content-between">
-                           <span>Storage (S3, EBS, EFS)</span>
-                           <span>90%</span>
-                        </div>
-                        <div class="progress">
-                           <div class="progress-bar" role="progressbar" style="width: 90%; background: #000000;"></div>
-                        </div>
-                     </div>
-                     <div class="mb-3">
-                        <div class="d-flex justify-content-between">
-                           <span>Database (RDS, DynamoDB, Redshift)</span>
-                           <span>88%</span>
-                        </div>
-                        <div class="progress">
-                           <div class="progress-bar" role="progressbar" style="width: 88%; background: #000000;"></div>
-                        </div>
-                     </div>
+      <!-- AWS Skills Section - Modernized -->
+      <div class="container mb-5" style="padding: 60px 0;">
+         <div class="text-center mb-5" data-aos="fade-up">
+            <h2 style="font-family: 'Outfit', sans-serif; font-size: 5rem; font-weight: 900; margin-bottom: 2rem; letter-spacing: -0.04em; line-height: 1;">
+               AWS Expertise Level
+            </h2>
+            <p style="font-size: 1.8rem; color: var(--apple-secondary-text); max-width: 800px; margin: 0 auto; font-weight: 400; line-height: 1.4;">
+               Comprehensive cloud infrastructure expertise<br>across AWS services
+            </p>
+         </div>
+
+         <div class="row g-4">
+            <!-- Skill Card 1 -->
+            <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+               <div class="expertise-card">
+                  <div class="expertise-icon-wrapper">
+                     <i class="fas fa-server expertise-icon"></i>
                   </div>
-                  <div class="col-md-6">
-                     <div class="mb-3">
-                        <div class="d-flex justify-content-between">
-                           <span>DevOps (CodePipeline, CloudFormation)</span>
-                           <span>92%</span>
-                        </div>
-                        <div class="progress">
-                           <div class="progress-bar" role="progressbar" style="width: 92%; background: #000000;"></div>
-                        </div>
-                     </div>
-                     <div class="mb-3">
-                        <div class="d-flex justify-content-between">
-                           <span>Security (IAM, KMS, GuardDuty)</span>
-                           <span>87%</span>
-                        </div>
-                        <div class="progress">
-                           <div class="progress-bar" role="progressbar" style="width: 87%; background: #000000;"></div>
-                        </div>
-                     </div>
-                     <div class="mb-3">
-                        <div class="d-flex justify-content-between">
-                           <span>Analytics (Kinesis, Glue, Athena)</span>
-                           <span>83%</span>
-                        </div>
-                        <div class="progress">
-                           <div class="progress-bar" role="progressbar" style="width: 83%; background: #000000;"></div>
-                        </div>
-                     </div>
+                  <div class="expertise-progress-circle">
+                     <svg width="140" height="140" viewBox="0 0 140 140" class="circular-chart">
+                        <circle class="circle-bg" cx="70" cy="70" r="60" />
+                        <circle class="circle-progress" cx="70" cy="70" r="60" stroke-dasharray="377" stroke-dashoffset="18.85" />
+                        <text x="70" y="75" class="circle-percentage">95%</text>
+                     </svg>
                   </div>
+                  <h4 class="expertise-title">Compute</h4>
+                  <p class="expertise-services">EC2 • Lambda • ECS/EKS</p>
+               </div>
+            </div>
+
+            <!-- Skill Card 2 -->
+            <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+               <div class="expertise-card">
+                  <div class="expertise-icon-wrapper">
+                     <i class="fas fa-database expertise-icon"></i>
+                  </div>
+                  <div class="expertise-progress-circle">
+                     <svg width="140" height="140" viewBox="0 0 140 140" class="circular-chart">
+                        <circle class="circle-bg" cx="70" cy="70" r="60" />
+                        <circle class="circle-progress" cx="70" cy="70" r="60" stroke-dasharray="377" stroke-dashoffset="37.7" />
+                        <text x="70" y="75" class="circle-percentage">90%</text>
+                     </svg>
+                  </div>
+                  <h4 class="expertise-title">Storage</h4>
+                  <p class="expertise-services">S3 • EBS • EFS</p>
+               </div>
+            </div>
+
+            <!-- Skill Card 3 -->
+            <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
+               <div class="expertise-card">
+                  <div class="expertise-icon-wrapper">
+                     <i class="fas fa-table expertise-icon"></i>
+                  </div>
+                  <div class="expertise-progress-circle">
+                     <svg width="140" height="140" viewBox="0 0 140 140" class="circular-chart">
+                        <circle class="circle-bg" cx="70" cy="70" r="60" />
+                        <circle class="circle-progress" cx="70" cy="70" r="60" stroke-dasharray="377" stroke-dashoffset="45.24" />
+                        <text x="70" y="75" class="circle-percentage">88%</text>
+                     </svg>
+                  </div>
+                  <h4 class="expertise-title">Database</h4>
+                  <p class="expertise-services">RDS • DynamoDB • Redshift</p>
+               </div>
+            </div>
+
+            <!-- Skill Card 4 -->
+            <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="400">
+               <div class="expertise-card">
+                  <div class="expertise-icon-wrapper">
+                     <i class="fas fa-code-branch expertise-icon"></i>
+                  </div>
+                  <div class="expertise-progress-circle">
+                     <svg width="140" height="140" viewBox="0 0 140 140" class="circular-chart">
+                        <circle class="circle-bg" cx="70" cy="70" r="60" />
+                        <circle class="circle-progress" cx="70" cy="70" r="60" stroke-dasharray="377" stroke-dashoffset="30.16" />
+                        <text x="70" y="75" class="circle-percentage">92%</text>
+                     </svg>
+                  </div>
+                  <h4 class="expertise-title">DevOps</h4>
+                  <p class="expertise-services">CodePipeline • CloudFormation</p>
+               </div>
+            </div>
+
+            <!-- Skill Card 5 -->
+            <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="500">
+               <div class="expertise-card">
+                  <div class="expertise-icon-wrapper">
+                     <i class="fas fa-shield-alt expertise-icon"></i>
+                  </div>
+                  <div class="expertise-progress-circle">
+                     <svg width="140" height="140" viewBox="0 0 140 140" class="circular-chart">
+                        <circle class="circle-bg" cx="70" cy="70" r="60" />
+                        <circle class="circle-progress" cx="70" cy="70" r="60" stroke-dasharray="377" stroke-dashoffset="49.01" />
+                        <text x="70" y="75" class="circle-percentage">87%</text>
+                     </svg>
+                  </div>
+                  <h4 class="expertise-title">Security</h4>
+                  <p class="expertise-services">IAM • KMS • GuardDuty</p>
+               </div>
+            </div>
+
+            <!-- Skill Card 6 -->
+            <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="600">
+               <div class="expertise-card">
+                  <div class="expertise-icon-wrapper">
+                     <i class="fas fa-chart-line expertise-icon"></i>
+                  </div>
+                  <div class="expertise-progress-circle">
+                     <svg width="140" height="140" viewBox="0 0 140 140" class="circular-chart">
+                        <circle class="circle-bg" cx="70" cy="70" r="60" />
+                        <circle class="circle-progress" cx="70" cy="70" r="60" stroke-dasharray="377" stroke-dashoffset="64.09" />
+                        <text x="70" y="75" class="circle-percentage">83%</text>
+                     </svg>
+                  </div>
+                  <h4 class="expertise-title">Analytics</h4>
+                  <p class="expertise-services">Kinesis • Glue • Athena</p>
                </div>
             </div>
          </div>
