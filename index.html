@@ -186,12 +186,12 @@
          }
 
          body.dark-mode {
-            background-color: var(--bg-primary);
+            background-color: #121212 !important;
             background-image:
                radial-gradient(ellipse at 20% 30%, rgba(92, 225, 230, 0.15) 0%, transparent 50%),
                radial-gradient(ellipse at 80% 70%, rgba(196, 113, 237, 0.12) 0%, transparent 50%),
-               radial-gradient(ellipse at 50% 50%, rgba(255, 107, 107, 0.08) 0%, transparent 60%);
-            color: var(--text-primary);
+               radial-gradient(ellipse at 50% 50%, rgba(255, 107, 107, 0.08) 0%, transparent 60%) !important;
+            color: #ffffff !important;
          }
 
          body.dark-mode::before {
@@ -367,7 +367,10 @@
          }
 
          .theme-switch input {
-            display: none;
+            opacity: 0;
+            width: 0;
+            height: 0;
+            position: absolute;
          }
 
          .slider {
@@ -1856,22 +1859,7 @@
          });
 
          // Navbar scroll effect
-         let lastScroll = 0;
          const navbar = document.querySelector('.navbar');
-
-         window.addEventListener('scroll', () => {
-            const currentScroll = window.pageYOffset;
-
-            if (currentScroll > 100) {
-               navbar.style.padding = '10px 0';
-               navbar.style.boxShadow = '0 4px 30px rgba(0, 0, 0, 0.1)';
-            } else {
-               navbar.style.padding = '20px 0';
-               navbar.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.03)';
-            }
-
-            lastScroll = currentScroll;
-         });
 
          // Random floating animation for social links
          document.querySelectorAll('.social-link').forEach((link, index) => {
@@ -1940,46 +1928,83 @@
             }, 100);
          });
 
-         // Dark/Light mode toggle functionality
-         document.addEventListener('DOMContentLoaded', function() {
+         // Dark/Light mode toggle functionality - Initialize immediately
+         function initThemeToggle() {
             const toggleSwitch = document.getElementById('theme-checkbox');
             const toggleIcon = document.querySelector('.toggle-icons i');
 
+            if (!toggleSwitch || !toggleIcon) {
+               console.error('Toggle elements not found:', { toggleSwitch, toggleIcon });
+               return;
+            }
+
+            console.log('Theme toggle initialized');
+
             // Check for saved theme preference or default to light
             const currentTheme = localStorage.getItem('theme') || 'light';
+            console.log('Current theme from localStorage:', currentTheme);
 
+            // Apply initial theme
             if (currentTheme === 'dark') {
                document.body.classList.add('dark-mode');
                toggleSwitch.checked = true;
-               toggleIcon.classList.remove('fa-moon');
-               toggleIcon.classList.add('fa-sun');
-               document.querySelector('meta[name="theme-color"]').setAttribute('content', '#121212');
+               toggleIcon.className = 'fas fa-sun';
+               if (document.querySelector('meta[name="theme-color"]')) {
+                  document.querySelector('meta[name="theme-color"]').setAttribute('content', '#121212');
+               }
+               console.log('Applied dark mode on load');
             } else {
-               document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff');
+               document.body.classList.remove('dark-mode');
+               toggleSwitch.checked = false;
+               toggleIcon.className = 'fas fa-moon';
+               if (document.querySelector('meta[name="theme-color"]')) {
+                  document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff');
+               }
+               console.log('Applied light mode on load');
             }
 
             // Switch theme function
-            function switchTheme(event) {
-               if (event.target.checked) {
+            function switchTheme() {
+               const isChecked = toggleSwitch.checked;
+               console.log('=== Toggle clicked ===');
+               console.log('Checkbox checked:', isChecked);
+               console.log('Body classes before:', document.body.className);
+
+               if (isChecked) {
                   // Switch to dark mode
                   document.body.classList.add('dark-mode');
                   localStorage.setItem('theme', 'dark');
-                  toggleIcon.classList.remove('fa-moon');
-                  toggleIcon.classList.add('fa-sun');
-                  document.querySelector('meta[name="theme-color"]').setAttribute('content', '#121212');
+                  toggleIcon.className = 'fas fa-sun';
+                  if (document.querySelector('meta[name="theme-color"]')) {
+                     document.querySelector('meta[name="theme-color"]').setAttribute('content', '#121212');
+                  }
+                  console.log('Switched to DARK mode');
                } else {
                   // Switch to light mode
                   document.body.classList.remove('dark-mode');
                   localStorage.setItem('theme', 'light');
-                  toggleIcon.classList.remove('fa-sun');
-                  toggleIcon.classList.add('fa-moon');
-                  document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff');
+                  toggleIcon.className = 'fas fa-moon';
+                  if (document.querySelector('meta[name="theme-color"]')) {
+                     document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff');
+                  }
+                  console.log('Switched to LIGHT mode');
                }
+
+               console.log('Body classes after:', document.body.className);
+               console.log('Background color:', window.getComputedStyle(document.body).backgroundColor);
             }
 
             // Event listener for toggle switch
             toggleSwitch.addEventListener('change', switchTheme);
-         });
+            console.log('Event listener attached to toggle');
+         }
+
+         // Run immediately if DOM is loaded, otherwise wait
+         if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initThemeToggle);
+         } else {
+            initThemeToggle();
+         }
 
          // Improved touch event handling for mobile
          if ('ontouchstart' in window) {
@@ -1992,7 +2017,6 @@
 
          // Prevent pull-to-refresh on mobile when scrolling in fixed navbar
          let lastTouchY = 0;
-         const navbar = document.querySelector('.navbar');
          if (navbar) {
             navbar.addEventListener('touchstart', (e) => {
                lastTouchY = e.touches[0].clientY;
