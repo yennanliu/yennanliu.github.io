@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>小小帶我魯 - 躺平導師計畫</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --safety-orange: #FF6B35;
+            --concrete-gray: #4A4A4A;
+            --terminal-green: #00FF41;
+            --black: #0A0A0A;
+            --off-white: #F4F4F4;
+            --cyber-yellow: #FFD700;
+        }
+
+        body {
+            background: var(--black);
+            color: var(--off-white);
+            font-family: 'Noto Sans TC', sans-serif;
+            overflow-x: hidden;
+            cursor: crosshair;
+        }
+
+        .retro-cursor {
+            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"><rect width="16" height="16" fill="%23FF6B35"/></svg>') 8 8, auto;
+        }
+
+        /* Header - Glitchy Terminal Style */
+        header {
+            position: relative;
+            padding: 60px 20px;
+            background: var(--concrete-gray);
+            border-bottom: 8px solid var(--safety-orange);
+            box-shadow: 12px 12px 0 rgba(255, 107, 53, 0.3);
+            margin: 20px;
+            transform: rotate(-0.5deg);
+        }
+
+        .glitch-title {
+            font-family: 'Space Mono', monospace;
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            font-weight: 900;
+            color: var(--terminal-green);
+            text-align: center;
+            text-shadow:
+                3px 3px 0 var(--safety-orange),
+                -2px -2px 0 var(--cyber-yellow);
+            letter-spacing: -2px;
+            animation: glitch 3s infinite;
+        }
+
+        @keyframes glitch {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-2px); }
+            50% { transform: translateX(2px); }
+            75% { transform: translateX(-1px); }
+        }
+
+        .subtitle {
+            font-family: 'Space Mono', monospace;
+            text-align: center;
+            color: var(--off-white);
+            margin-top: 20px;
+            font-size: 1.2rem;
+            letter-spacing: 2px;
+        }
+
+        .terminal-blink {
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+
+        /* Manifesto Section */
+        .manifesto {
+            margin: 40px 20px;
+            padding: 40px;
+            background: var(--safety-orange);
+            color: var(--black);
+            border: 6px dashed var(--terminal-green);
+            transform: rotate(0.8deg);
+            box-shadow: -10px 10px 0 var(--concrete-gray);
+        }
+
+        .manifesto h2 {
+            font-family: 'Space Mono', monospace;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            text-decoration: underline wavy var(--terminal-green);
+        }
+
+        .manifesto ul {
+            list-style: none;
+            font-size: 1.3rem;
+            line-height: 2;
+        }
+
+        .manifesto li:before {
+            content: "→ ";
+            color: var(--terminal-green);
+            font-weight: bold;
+        }
+
+        /* Mentors Section - Messy Grid */
+        .mentors-section {
+            padding: 60px 20px;
+            position: relative;
+        }
+
+        .mentors-section h2 {
+            font-family: 'Space Mono', monospace;
+            font-size: 3rem;
+            color: var(--cyber-yellow);
+            text-align: center;
+            margin-bottom: 60px;
+            transform: rotate(-1deg);
+        }
+
+        .mentors-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .mentor-card {
+            background: var(--concrete-gray);
+            border: 5px solid var(--terminal-green);
+            padding: 30px;
+            position: relative;
+            transition: transform 0.2s;
+        }
+
+        .mentor-card:nth-child(1) {
+            transform: rotate(-3deg);
+            top: -20px;
+        }
+
+        .mentor-card:nth-child(2) {
+            transform: rotate(2deg);
+            top: 15px;
+        }
+
+        .mentor-card:nth-child(3) {
+            transform: rotate(-1deg);
+            top: -10px;
+        }
+
+        .mentor-card:hover {
+            transform: rotate(0deg) scale(1.05) !important;
+            border-color: var(--safety-orange);
+            z-index: 10;
+        }
+
+        .mentor-emoji {
+            font-size: 5rem;
+            display: block;
+            text-align: center;
+            margin-bottom: 20px;
+            filter: grayscale(30%);
+        }
+
+        .mentor-name {
+            font-family: 'Space Mono', monospace;
+            font-size: 1.5rem;
+            color: var(--terminal-green);
+            margin-bottom: 10px;
+        }
+
+        .mentor-title {
+            font-size: 1.1rem;
+            color: var(--safety-orange);
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        .mentor-quote {
+            font-style: italic;
+            color: var(--off-white);
+            line-height: 1.6;
+            border-left: 4px solid var(--safety-orange);
+            padding-left: 15px;
+        }
+
+        /* Success Metrics - Terminal Style */
+        .metrics-section {
+            margin: 60px 20px;
+            padding: 50px;
+            background: var(--terminal-green);
+            color: var(--black);
+            border: 8px solid var(--black);
+            box-shadow: 15px 15px 0 var(--safety-orange);
+            transform: rotate(-1deg);
+        }
+
+        .metrics-section h2 {
+            font-family: 'Space Mono', monospace;
+            font-size: 2.8rem;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .metric-card {
+            background: var(--black);
+            color: var(--terminal-green);
+            padding: 30px;
+            border: 4px solid var(--safety-orange);
+            font-family: 'Space Mono', monospace;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .metric-value {
+            font-size: 3.5rem;
+            font-weight: bold;
+            color: var(--cyber-yellow);
+            margin-bottom: 10px;
+        }
+
+        .metric-label {
+            font-size: 1.1rem;
+            color: var(--off-white);
+        }
+
+        /* Testimonials - Windows 95 Style */
+        .testimonials {
+            padding: 60px 20px;
+        }
+
+        .testimonials h2 {
+            font-family: 'Space Mono', monospace;
+            font-size: 2.8rem;
+            color: var(--safety-orange);
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .testimonial-card {
+            background: var(--concrete-gray);
+            border: 3px solid var(--off-white);
+            border-bottom: 5px solid var(--black);
+            border-right: 5px solid var(--black);
+            padding: 30px;
+            margin: 30px auto;
+            max-width: 700px;
+            position: relative;
+        }
+
+        .testimonial-card:before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 30px;
+            background: linear-gradient(90deg,
+                var(--safety-orange) 0%,
+                var(--terminal-green) 50%,
+                var(--cyber-yellow) 100%);
+        }
+
+        .testimonial-header {
+            margin-top: 30px;
+            margin-bottom: 20px;
+            font-family: 'Space Mono', monospace;
+            color: var(--terminal-green);
+            font-weight: bold;
+        }
+
+        .testimonial-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--off-white);
+        }
+
+        /* CTA Section */
+        .cta-section {
+            margin: 80px 20px 40px;
+            padding: 60px 40px;
+            background: var(--safety-orange);
+            color: var(--black);
+            text-align: center;
+            border: 10px double var(--terminal-green);
+            transform: rotate(1deg);
+        }
+
+        .cta-section h2 {
+            font-family: 'Space Mono', monospace;
+            font-size: 3rem;
+            margin-bottom: 30px;
+        }
+
+        .cta-button {
+            font-family: 'Space Mono', monospace;
+            font-size: 1.5rem;
+            padding: 20px 50px;
+            background: var(--black);
+            color: var(--terminal-green);
+            border: 5px solid var(--terminal-green);
+            cursor: pointer;
+            text-transform: uppercase;
+            font-weight: bold;
+            transition: all 0.3s;
+            box-shadow: 8px 8px 0 var(--concrete-gray);
+        }
+
+        .cta-button:hover {
+            background: var(--terminal-green);
+            color: var(--black);
+            transform: translate(4px, 4px);
+            box-shadow: 4px 4px 0 var(--concrete-gray);
+        }
+
+        /* Footer */
+        footer {
+            padding: 40px 20px;
+            text-align: center;
+            border-top: 5px solid var(--safety-orange);
+            font-family: 'Space Mono', monospace;
+            color: var(--concrete-gray);
+        }
+
+        footer a {
+            color: var(--terminal-green);
+            text-decoration: none;
+            border-bottom: 2px dotted var(--terminal-green);
+        }
+
+        footer a:hover {
+            color: var(--safety-orange);
+            border-bottom-color: var(--safety-orange);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .glitch-title {
+                font-size: 2.5rem;
+            }
+
+            header {
+                margin: 10px;
+                padding: 40px 15px;
+            }
+
+            .manifesto, .metrics-section, .cta-section {
+                margin: 20px 10px;
+                padding: 30px 20px;
+            }
+
+            .mentor-card {
+                transform: rotate(0deg) !important;
+                top: 0 !important;
+            }
+
+            .metrics-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Scanlines Effect */
+        body:after {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(
+                0deg,
+                rgba(0, 0, 0, 0.1) 0px,
+                rgba(0, 0, 0, 0.1) 1px,
+                transparent 1px,
+                transparent 2px
+            );
+            pointer-events: none;
+            opacity: 0.3;
+        }
+    </style>
+</head>
+<body class="retro-cursor">
+    <header>
+        <h1 class="glitch-title">小小帶我魯</h1>
+        <p class="subtitle">躺平導師計畫 <span class="terminal-blink">_</span></p>
+    </header>
+
+    <section class="manifesto">
+        <h2>反成功宣言</h2>
+        <ul>
+            <li>我們不追求「財富自由」，我們追求「時間自由」</li>
+            <li>我們不要「升職加薪」，我們要「準時下班」</li>
+            <li>我們不崇拜「狼性文化」，我們擁抱「貓系人生」</li>
+            <li>我們拒絕「內卷」，我們選擇「外躺」</li>
+            <li>成功不是唯一的路，舒適才是最大的幸福</li>
+        </ul>
+    </section>
+
+    <section class="mentors-section">
+        <h2>[ 我們的導師陣容 ]</h2>
+        <div class="mentors-grid">
+            <div class="mentor-card">
+                <div class="mentor-emoji">🛌</div>
+                <h3 class="mentor-name">小睡怡情</h3>
+                <p class="mentor-title">午睡權威 | 前996逃兵</p>
+                <p class="mentor-quote">"一天不睡三次午覺，我就渾身不對勁。工作是暫時的，但睡眠是永恆的。"</p>
+            </div>
+
+            <div class="mentor-card">
+                <div class="mentor-emoji">🍜</div>
+                <h3 class="mentor-name">泡麵大師</h3>
+                <p class="mentor-title">速食哲學家 | 烹飪極簡主義者</p>
+                <p class="mentor-quote">"為什麼要花一小時做飯？三分鐘泡麵不香嗎？把時間留給Netflix才是王道。"</p>
+            </div>
+
+            <div class="mentor-card">
+                <div class="mentor-emoji">🎮</div>
+                <h3 class="mentor-name">遊戲人生</h3>
+                <p class="mentor-title">職業玩家 | 會議逃避專家</p>
+                <p class="mentor-quote">"別人開會的時候，我已經通關三款遊戲了。人生苦短，何必浪費在PPT上？"</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="metrics-section">
+        <h2>// 真正的成功指標 //</h2>
+        <div class="metrics-grid">
+            <div class="metric-card">
+                <div class="metric-value">147%</div>
+                <div class="metric-label">睡眠時間增長率</div>
+            </div>
+
+            <div class="metric-card">
+                <div class="metric-value">0</div>
+                <div class="metric-label">無意義會議參與數</div>
+            </div>
+
+            <div class="metric-card">
+                <div class="metric-value">365</div>
+                <div class="metric-label">每年的「我不想」天數</div>
+            </div>
+
+            <div class="metric-card">
+                <div class="metric-value">100%</div>
+                <div class="metric-label">準時下班達成率</div>
+            </div>
+
+            <div class="metric-card">
+                <div class="metric-value">∞</div>
+                <div class="metric-label">心靈平靜指數</div>
+            </div>
+
+            <div class="metric-card">
+                <div class="metric-value">-50%</div>
+                <div class="metric-label">焦慮值降低</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="testimonials">
+        <h2>[ 學員真心話 ]</h2>
+
+        <div class="testimonial-card">
+            <div class="testimonial-header">王小魯 | 前金融業社畜</div>
+            <p class="testimonial-text">
+                "以前每天加班到晚上十點，現在準時下班追劇。同事問我為什麼不積極一點，我說：我很積極啊，積極地保護自己的下班時間。感謝小小導師讓我重新找回生活。"
+            </p>
+        </div>
+
+        <div class="testimonial-card">
+            <div class="testimonial-header">李躺平 | 科技業倖存者</div>
+            <p class="testimonial-text">
+                "之前主管總說我『態度消極』，現在我學會了『策略性放鬆』。不是我不努力，是我選擇把力氣用在對的地方——比如找到最舒服的沙發角度。"
+            </p>
+        </div>
+
+        <div class="testimonial-card">
+            <div class="testimonial-header">陳咸魚 | 自由工作者</div>
+            <p class="testimonial-text">
+                "小小導師教會我最重要的一課：『夠用就好』。不用成為人生勝利組，當個人生及格組也很棒。現在我每天工作四小時，其他時間都在做自己喜歡的事。"
+            </p>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <h2>準備好躺平了嗎？</h2>
+        <p style="font-size: 1.3rem; margin-bottom: 30px; font-family: 'Space Mono', monospace;">
+            別再追求那些虛無的KPI了<br>
+            加入我們，一起過「夠用就好」的人生
+        </p>
+        <button class="cta-button" onclick="alert('恭喜你！你已經是躺平大師了。不需要報名，只需要放鬆。🛌')">
+            立即躺平
+        </button>
+    </section>
+
+    <footer>
+        <p>© 2026 小小帶我魯 | 本站拒絕雞湯，只提供躺平指南</p>
+        <p style="margin-top: 10px;">
+            <a href="index.html">← 回到正經的作品集</a>
+        </p>
+    </footer>
+
+    <script>
+        // Random glitch effect on load
+        window.addEventListener('load', function() {
+            const title = document.querySelector('.glitch-title');
+            setInterval(() => {
+                if (Math.random() > 0.95) {
+                    title.style.textShadow = `
+                        ${Math.random() * 10}px ${Math.random() * 10}px 0 var(--safety-orange),
+                        ${-Math.random() * 10}px ${-Math.random() * 10}px 0 var(--cyber-yellow)
+                    `;
+                    setTimeout(() => {
+                        title.style.textShadow = '3px 3px 0 var(--safety-orange), -2px -2px 0 var(--cyber-yellow)';
+                    }, 100);
+                }
+            }, 2000);
+        });
+
+        // Add random rotation to mentor cards on scroll
+        window.addEventListener('scroll', function() {
+            const cards = document.querySelectorAll('.mentor-card');
+            cards.forEach((card, index) => {
+                const scrolled = window.scrollY;
+                const rotation = (scrolled / 50) * (index % 2 === 0 ? 1 : -1);
+                if (!card.matches(':hover')) {
+                    card.style.transform = `rotate(${rotation % 5}deg)`;
+                }
+            });
+        });
+    </script>
+</body>
+</html>
