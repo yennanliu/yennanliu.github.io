@@ -1,0 +1,1176 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+      <title>AI Projects - Yen.Dev</title>
+      <!-- Google analytics -->
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-X2DJ8VW74E"></script>
+      <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-X2DJ8VW74E');
+      </script>
+
+      <!-- PWA Meta Tags -->
+      <meta name="theme-color" content="#000000">
+      <meta name="apple-mobile-web-app-capable" content="yes">
+      <meta name="apple-mobile-web-app-status-bar-style" content="black">
+      <meta name="apple-mobile-web-app-title" content="Yen.Dev">
+      <meta name="mobile-web-app-capable" content="yes">
+
+      <!-- PWA Icons -->
+      <link rel="icon" href="img/icon.svg" type="image/svg+xml">
+      <link rel="apple-touch-icon" href="img/icon.svg">
+      <link rel="manifest" href="manifest.json">
+
+      <!-- Bootstrap CSS -->
+      <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+      <!-- Font Awesome -->
+      <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet">
+      <!-- Google Fonts -->
+      <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Source+Code+Pro:wght@400;600&display=swap" rel="stylesheet">
+
+      <style>
+         /* =============================================
+            CSS VARIABLES & BASE
+         ============================================= */
+         :root {
+            --bg-dark: #0a0a0a;
+            --bg-card: #111111;
+            --bg-card-hover: #1a1a1a;
+            --border-color: #222222;
+            --border-hover: #444444;
+            --text-primary: #ffffff;
+            --text-secondary: #888888;
+            --text-muted: #555555;
+            --accent-primary: #00d4aa;
+            --accent-secondary: #7c5cbf;
+            --accent-yellow: #f5a623;
+            --accent-red: #ff6b6b;
+            --accent-blue: #4a90e2;
+            --transition: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            --navbar-height: 72px;
+         }
+
+         * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+         }
+
+         html, body {
+            max-width: 100%;
+            overflow-x: hidden;
+         }
+
+         body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-primary);
+            -webkit-font-smoothing: antialiased;
+            padding-top: var(--navbar-height);
+         }
+
+         /* =============================================
+            NAVBAR
+         ============================================= */
+         .navbar {
+            background: rgba(10, 10, 10, 0.95) !important;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-color);
+            padding: 18px 0;
+            transition: all var(--transition);
+         }
+
+         .navbar-brand {
+            font-family: 'Source Code Pro', monospace;
+            font-weight: 600;
+            font-size: 1.2rem;
+            color: var(--accent-primary) !important;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+         }
+
+         .navbar-brand:hover {
+            color: #fff !important;
+         }
+
+         .nav-link {
+            color: var(--text-secondary) !important;
+            font-size: 0.88rem;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            margin: 0 6px;
+            padding: 8px 12px !important;
+            border-radius: 6px;
+            transition: all var(--transition);
+            position: relative;
+         }
+
+         .nav-link:hover {
+            color: var(--text-primary) !important;
+            background: rgba(255, 255, 255, 0.05);
+         }
+
+         .nav-link.active-page {
+            color: var(--accent-primary) !important;
+         }
+
+         @media (max-width: 991.98px) {
+            .navbar-collapse {
+               background: rgba(10, 10, 10, 0.98);
+               border: 1px solid var(--border-color);
+               border-radius: 12px;
+               padding: 16px;
+               margin-top: 10px;
+            }
+
+            .nav-link {
+               margin: 4px 0;
+               display: block;
+            }
+         }
+
+         /* Dark mode toggle */
+         .toggle-container {
+            display: flex;
+            align-items: center;
+            margin-left: 10px;
+         }
+
+         .theme-switch {
+            display: inline-block;
+            height: 22px;
+            position: relative;
+            width: 44px;
+         }
+
+         .theme-switch input { display: none; }
+
+         .slider {
+            background-color: #333;
+            bottom: 0;
+            cursor: pointer;
+            left: 0;
+            position: absolute;
+            right: 0;
+            top: 0;
+            transition: .4s;
+            border-radius: 22px;
+         }
+
+         .slider:before {
+            background-color: #888;
+            bottom: 3px;
+            content: "";
+            height: 16px;
+            left: 3px;
+            position: absolute;
+            transition: .4s;
+            width: 16px;
+            border-radius: 50%;
+         }
+
+         input:checked + .slider { background-color: var(--accent-primary); }
+         input:checked + .slider:before {
+            transform: translateX(22px);
+            background-color: white;
+         }
+
+         .toggle-icons {
+            font-size: 13px;
+            color: var(--text-secondary);
+            margin-left: 8px;
+         }
+
+         /* =============================================
+            HERO SECTION
+         ============================================= */
+         .hero-section {
+            padding: 90px 0 60px;
+            position: relative;
+            overflow: hidden;
+         }
+
+         .hero-section::before {
+            content: '';
+            position: absolute;
+            top: -200px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(ellipse, rgba(0, 212, 170, 0.06) 0%, transparent 70%);
+            pointer-events: none;
+         }
+
+         .hero-eyebrow {
+            font-family: 'Source Code Pro', monospace;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--accent-primary);
+            margin-bottom: 18px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+         }
+
+         .hero-eyebrow::before {
+            content: '';
+            display: inline-block;
+            width: 32px;
+            height: 2px;
+            background: var(--accent-primary);
+         }
+
+         .hero-title {
+            font-size: clamp(2.5rem, 6vw, 5rem);
+            font-weight: 700;
+            line-height: 1.08;
+            letter-spacing: -2px;
+            margin-bottom: 24px;
+            color: var(--text-primary);
+         }
+
+         .hero-title .highlight {
+            background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-secondary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+         }
+
+         .hero-subtitle {
+            font-size: 1.05rem;
+            color: var(--text-secondary);
+            max-width: 520px;
+            line-height: 1.75;
+            margin-bottom: 0;
+         }
+
+         .hero-stats {
+            display: flex;
+            gap: 40px;
+            margin-top: 50px;
+            padding-top: 40px;
+            border-top: 1px solid var(--border-color);
+         }
+
+         .hero-stat-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            line-height: 1;
+         }
+
+         .hero-stat-label {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-top: 4px;
+         }
+
+         /* =============================================
+            FILTER BAR
+         ============================================= */
+         .filter-bar {
+            padding: 0 0 40px;
+            position: sticky;
+            top: var(--navbar-height);
+            z-index: 50;
+            background: var(--bg-dark);
+         }
+
+         .filter-bar-inner {
+            border-bottom: 1px solid var(--border-color);
+            padding: 18px 0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+         }
+
+         .filter-label {
+            font-family: 'Source Code Pro', monospace;
+            font-size: 0.72rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--text-muted);
+            margin-right: 8px;
+         }
+
+         .filter-btn {
+            font-size: 0.78rem;
+            font-weight: 500;
+            padding: 6px 16px;
+            border-radius: 100px;
+            border: 1px solid var(--border-color);
+            background: transparent;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all var(--transition);
+            letter-spacing: 0.3px;
+         }
+
+         .filter-btn:hover {
+            border-color: var(--text-muted);
+            color: var(--text-primary);
+            background: rgba(255, 255, 255, 0.04);
+         }
+
+         .filter-btn.active {
+            background: var(--accent-primary);
+            border-color: var(--accent-primary);
+            color: #000;
+            font-weight: 600;
+         }
+
+         /* =============================================
+            PROJECT GRID
+         ============================================= */
+         .projects-section {
+            padding: 0 0 100px;
+         }
+
+         .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            gap: 1px;
+            background: var(--border-color);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            overflow: hidden;
+         }
+
+         @media (max-width: 767px) {
+            .projects-grid {
+               grid-template-columns: 1fr;
+            }
+         }
+
+         /* =============================================
+            PROJECT CARD
+         ============================================= */
+         .project-card {
+            background: var(--bg-card);
+            padding: 36px 32px;
+            display: flex;
+            flex-direction: column;
+            transition: background var(--transition);
+            position: relative;
+            overflow: hidden;
+            cursor: default;
+         }
+
+         .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--card-accent, var(--accent-primary)), transparent);
+            opacity: 0;
+            transition: opacity var(--transition);
+         }
+
+         .project-card:hover {
+            background: var(--bg-card-hover);
+         }
+
+         .project-card:hover::before {
+            opacity: 1;
+         }
+
+         /* Card header */
+         .card-header-row {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            margin-bottom: 20px;
+         }
+
+         .card-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-color);
+            flex-shrink: 0;
+         }
+
+         .card-links {
+            display: flex;
+            gap: 8px;
+         }
+
+         .card-link {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid var(--border-color);
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: all var(--transition);
+            font-size: 0.85rem;
+         }
+
+         .card-link:hover {
+            border-color: var(--text-muted);
+            color: var(--text-primary);
+            background: rgba(255, 255, 255, 0.06);
+            text-decoration: none;
+         }
+
+         /* Card body */
+         .card-category {
+            font-family: 'Source Code Pro', monospace;
+            font-size: 0.68rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--card-accent, var(--accent-primary));
+            margin-bottom: 10px;
+         }
+
+         .card-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 12px;
+            line-height: 1.3;
+            letter-spacing: -0.3px;
+         }
+
+         .card-description {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+            flex-grow: 1;
+            margin-bottom: 24px;
+         }
+
+         /* Tags */
+         .card-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-bottom: 24px;
+         }
+
+         .tag {
+            font-family: 'Source Code Pro', monospace;
+            font-size: 0.68rem;
+            font-weight: 600;
+            padding: 3px 10px;
+            border-radius: 4px;
+            text-transform: lowercase;
+            letter-spacing: 0.3px;
+         }
+
+         .tag-green  { background: rgba(0, 212, 170, 0.1);  color: var(--accent-primary); }
+         .tag-purple { background: rgba(124, 92, 191, 0.1); color: #9d77f0; }
+         .tag-blue   { background: rgba(74, 144, 226, 0.1); color: var(--accent-blue); }
+         .tag-yellow { background: rgba(245, 166, 35, 0.1); color: var(--accent-yellow); }
+         .tag-red    { background: rgba(255, 107, 107, 0.1); color: var(--accent-red); }
+         .tag-gray   { background: rgba(136, 136, 136, 0.1); color: #aaa; }
+
+         /* Card footer */
+         .card-footer-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-color);
+            margin-top: auto;
+         }
+
+         .card-meta {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            gap: 16px;
+         }
+
+         .card-meta span {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+         }
+
+         .card-cta {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--card-accent, var(--accent-primary));
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: gap var(--transition);
+            letter-spacing: 0.3px;
+         }
+
+         .card-cta:hover {
+            gap: 10px;
+            color: var(--card-accent, var(--accent-primary));
+            text-decoration: none;
+         }
+
+         .card-cta i {
+            font-size: 0.7rem;
+         }
+
+         /* =============================================
+            FEATURED CARD (full-width)
+         ============================================= */
+         .project-card.featured {
+            grid-column: 1 / -1;
+            flex-direction: row;
+            gap: 48px;
+            align-items: flex-start;
+         }
+
+         .featured-content {
+            flex: 1;
+            min-width: 0;
+         }
+
+         .featured-side {
+            width: 300px;
+            flex-shrink: 0;
+         }
+
+         .featured-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-family: 'Source Code Pro', monospace;
+            font-size: 0.68rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--accent-yellow);
+            background: rgba(245, 166, 35, 0.1);
+            border: 1px solid rgba(245, 166, 35, 0.2);
+            padding: 4px 12px;
+            border-radius: 100px;
+            margin-bottom: 18px;
+         }
+
+         .featured-metrics {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+         }
+
+         .metric-item {
+            padding: 14px 18px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+         }
+
+         .metric-label {
+            font-size: 0.68rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 6px;
+            font-family: 'Source Code Pro', monospace;
+         }
+
+         .metric-value {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.4;
+         }
+
+         @media (max-width: 991px) {
+            .project-card.featured {
+               flex-direction: column;
+               gap: 28px;
+            }
+
+            .featured-side {
+               width: 100%;
+            }
+
+            .featured-metrics {
+               flex-direction: row;
+               flex-wrap: wrap;
+            }
+
+            .metric-item {
+               flex: 1;
+               min-width: 140px;
+            }
+         }
+
+         /* =============================================
+            SECTION DIVIDER
+         ============================================= */
+         .section-label {
+            font-family: 'Source Code Pro', monospace;
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--text-muted);
+            margin: 56px 0 20px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+         }
+
+         .section-label::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--border-color);
+         }
+
+         /* =============================================
+            FOOTER
+         ============================================= */
+         footer {
+            background: var(--bg-card);
+            border-top: 1px solid var(--border-color);
+            padding: 40px 0 28px;
+         }
+
+         footer a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: color var(--transition);
+         }
+
+         footer a:hover {
+            color: var(--text-primary);
+         }
+
+         .footer-links {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 24px;
+            margin-bottom: 20px;
+         }
+
+         footer p {
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            text-align: center;
+            margin: 0;
+         }
+
+         /* =============================================
+            SCROLL TO TOP
+         ============================================= */
+         .scroll-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: rgba(0, 212, 170, 0.15);
+            border: 1px solid rgba(0, 212, 170, 0.3);
+            color: var(--accent-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0;
+            transition: all 0.3s;
+            z-index: 999;
+            font-size: 0.9rem;
+         }
+
+         .scroll-top.visible { opacity: 1; }
+         .scroll-top:hover {
+            background: rgba(0, 212, 170, 0.25);
+            transform: translateY(-3px);
+         }
+
+         /* =============================================
+            LIGHT MODE OVERRIDES
+         ============================================= */
+         body.light-mode {
+            background-color: #f5f5f5;
+            color: #111;
+         }
+
+         body.light-mode .navbar {
+            background: rgba(245, 245, 245, 0.97) !important;
+            border-bottom-color: #e0e0e0;
+         }
+
+         body.light-mode .nav-link { color: #555 !important; }
+         body.light-mode .nav-link:hover { color: #111 !important; background: rgba(0,0,0,0.04); }
+
+         body.light-mode .hero-section::before {
+            background: radial-gradient(ellipse, rgba(0, 180, 140, 0.08) 0%, transparent 70%);
+         }
+
+         body.light-mode .filter-bar { background: #f5f5f5; }
+         body.light-mode .filter-bar-inner { border-bottom-color: #ddd; }
+
+         body.light-mode .filter-btn {
+            border-color: #ddd;
+            color: #666;
+         }
+
+         body.light-mode .filter-btn:hover {
+            border-color: #999;
+            color: #111;
+            background: rgba(0,0,0,0.03);
+         }
+
+         body.light-mode .projects-grid {
+            background: #ddd;
+            border-color: #ddd;
+         }
+
+         body.light-mode .project-card { background: #fff; }
+         body.light-mode .project-card:hover { background: #fafafa; }
+
+         body.light-mode .card-icon {
+            background: rgba(0,0,0,0.04);
+            border-color: #e0e0e0;
+         }
+
+         body.light-mode .card-link {
+            border-color: #e0e0e0;
+            color: #999;
+         }
+
+         body.light-mode .card-link:hover { border-color: #999; color: #333; background: rgba(0,0,0,0.04); }
+
+         body.light-mode .card-title { color: #111; }
+         body.light-mode .card-description { color: #555; }
+
+         body.light-mode .card-footer-row { border-top-color: #eee; }
+
+         body.light-mode .metric-item {
+            background: rgba(0,0,0,0.02);
+            border-color: #e0e0e0;
+         }
+
+         body.light-mode .metric-value { color: #444; }
+
+         body.light-mode footer {
+            background: #ebebeb;
+            border-top-color: #ddd;
+         }
+
+         body.light-mode footer p { color: #999; }
+
+         body.light-mode .section-label { color: #bbb; }
+         body.light-mode .section-label::after { background: #e0e0e0; }
+
+         body.light-mode .tag-gray { background: rgba(0,0,0,0.06); color: #777; }
+
+         body.light-mode .scroll-top {
+            background: rgba(0, 180, 140, 0.1);
+            border-color: rgba(0, 180, 140, 0.3);
+         }
+
+         body.light-mode .navbar-collapse {
+            background: rgba(245, 245, 245, 0.99);
+            border-color: #ddd;
+         }
+
+         body.light-mode .hero-subtitle { color: #666; }
+         body.light-mode .hero-stat-value { color: #111; }
+         body.light-mode .hero-stat-label { color: #aaa; }
+         body.light-mode .hero-stats { border-top-color: #e0e0e0; }
+      </style>
+   </head>
+   <body>
+      <!-- Navigation -->
+      <nav class="navbar navbar-expand-lg fixed-top">
+         <div class="container">
+            <a class="navbar-brand" href="https://yennanliu.github.io">Yen.Dev</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarAI" aria-controls="navbarAI" aria-expanded="false" aria-label="Toggle navigation">
+               <span class="navbar-toggler-icon" style="background-image:url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(0,212,170,1)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e\")"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarAI">
+               <ul class="navbar-nav ml-auto align-items-center">
+                  <li class="nav-item"><a class="nav-link" href="https://yennanliu.github.io/about_me.html">About Me</a></li>
+                  <li class="nav-item"><a class="nav-link" href="https://yennanliu.github.io/portfolios.html">Portfolios</a></li>
+                  <li class="nav-item"><a class="nav-link active-page" href="https://yennanliu.github.io/ai_projects.html">AI Projects</a></li>
+                  <li class="nav-item"><a class="nav-link" href="https://yennanliu.github.io/aws_architecture.html">AWS Architecture</a></li>
+                  <li class="nav-item"><a class="nav-link" href="https://yennanliu.github.io/contact.html">Contact</a></li>
+                  <li class="nav-item"><a class="nav-link" href="https://yennj12.js.org/yennj12_blog_V4/">Blog</a></li>
+                  <!-- Dark mode toggle -->
+                  <li class="nav-item toggle-container">
+                     <label class="theme-switch" for="theme-checkbox">
+                        <input type="checkbox" id="theme-checkbox" />
+                        <span class="slider"></span>
+                     </label>
+                     <div class="toggle-icons">
+                        <i class="fas fa-sun"></i>/<i class="fas fa-moon"></i>
+                     </div>
+                  </li>
+               </ul>
+            </div>
+         </div>
+      </nav>
+
+      <!-- Hero Section -->
+      <section class="hero-section">
+         <div class="container">
+            <div class="row">
+               <div class="col-lg-8">
+                  <div class="hero-eyebrow">AI &amp; Open Source</div>
+                  <h1 class="hero-title">
+                     Building<br>
+                     <span class="highlight">Intelligent</span><br>
+                     Tools.
+                  </h1>
+                  <p class="hero-subtitle">
+                     A collection of AI-powered projects — from automated job applications
+                     and financial analysis skills to SEC data pipelines. Built with Python,
+                     Claude AI, and modern automation frameworks.
+                  </p>
+                  <div class="hero-stats">
+                     <div>
+                        <div class="hero-stat-value">3</div>
+                        <div class="hero-stat-label">Projects</div>
+                     </div>
+                     <div>
+                        <div class="hero-stat-value">16+</div>
+                        <div class="hero-stat-label">AI Skills</div>
+                     </div>
+                     <div>
+                        <div class="hero-stat-value">Open</div>
+                        <div class="hero-stat-label">Source</div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </section>
+
+      <!-- Filter Bar -->
+      <div class="filter-bar">
+         <div class="container">
+            <div class="filter-bar-inner">
+               <span class="filter-label">Filter</span>
+               <button class="filter-btn active" data-filter="all">All</button>
+               <button class="filter-btn" data-filter="automation">Automation</button>
+               <button class="filter-btn" data-filter="finance">Finance</button>
+               <button class="filter-btn" data-filter="data">Data</button>
+               <button class="filter-btn" data-filter="claude-ai">Claude AI</button>
+            </div>
+         </div>
+      </div>
+
+      <!-- Projects Section -->
+      <section class="projects-section">
+         <div class="container">
+
+            <!-- Featured Project -->
+            <div class="section-label">Featured</div>
+            <div class="projects-grid">
+
+               <!-- InvestSkill - FEATURED -->
+               <div class="project-card featured" style="--card-accent: #9d77f0;" data-category="finance claude-ai">
+                  <div class="featured-content">
+                     <div class="card-header-row">
+                        <div class="card-icon" style="background:rgba(124,92,191,0.12);border-color:rgba(124,92,191,0.3);">
+                           <i class="fas fa-chart-line" style="color:#9d77f0;"></i>
+                        </div>
+                        <div class="card-links">
+                           <a href="https://github.com/yennanliu/InvestSkill" target="_blank" class="card-link" title="GitHub">
+                              <i class="fab fa-github"></i>
+                           </a>
+                        </div>
+                     </div>
+
+                     <div class="featured-badge">
+                        <i class="fas fa-star"></i> Featured Project
+                     </div>
+
+                     <div class="card-category">Finance · Claude AI Plugin</div>
+                     <h2 class="card-title">InvestSkill</h2>
+                     <p class="card-description">
+                        A comprehensive Claude Code plugin marketplace offering 16+ professional-grade skills
+                        for US stock market analysis. Covers fundamental analysis with Piotroski F-Score, ROIC/WACC,
+                        and DCF frameworks; technical chart patterns; earnings call sentiment analysis;
+                        insider trading tracking via SEC Form 4; institutional ownership changes from 13F filings;
+                        and interactive HTML/PDF report generation with Chart.js visualizations.
+                     </p>
+
+                     <div class="card-tags">
+                        <span class="tag tag-purple">python</span>
+                        <span class="tag tag-purple">claude-code</span>
+                        <span class="tag tag-blue">finance</span>
+                        <span class="tag tag-blue">stock-analysis</span>
+                        <span class="tag tag-yellow">chart.js</span>
+                        <span class="tag tag-green">open-source</span>
+                        <span class="tag tag-gray">mit license</span>
+                     </div>
+
+                     <div class="card-footer-row">
+                        <div class="card-meta">
+                           <span><i class="fas fa-code-branch"></i> MIT</span>
+                           <span><i class="fas fa-layer-group"></i> 16+ skills</span>
+                        </div>
+                        <a href="https://github.com/yennanliu/InvestSkill" target="_blank" class="card-cta">
+                           View on GitHub <i class="fas fa-arrow-right"></i>
+                        </a>
+                     </div>
+                  </div>
+
+                  <div class="featured-side">
+                     <div class="featured-metrics">
+                        <div class="metric-item">
+                           <div class="metric-label">Core Analysis</div>
+                           <div class="metric-value">Fundamental · Technical · Economic</div>
+                        </div>
+                        <div class="metric-item">
+                           <div class="metric-label">Advanced Features</div>
+                           <div class="metric-value">Earnings calls · Insider trades · 13F filings</div>
+                        </div>
+                        <div class="metric-item">
+                           <div class="metric-label">Output Formats</div>
+                           <div class="metric-value">Interactive HTML reports · PDF export</div>
+                        </div>
+                        <div class="metric-item">
+                           <div class="metric-label">Deployment</div>
+                           <div class="metric-value">Local · Cloud · GitHub Actions CI/CD</div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+
+            </div>
+
+            <!-- All Projects -->
+            <div class="section-label">All Projects</div>
+            <div class="projects-grid" id="projects-grid">
+
+               <!-- 104Skill -->
+               <div class="project-card" style="--card-accent: #00d4aa;" data-category="automation claude-ai">
+                  <div class="card-header-row">
+                     <div class="card-icon" style="background:rgba(0,212,170,0.1);border-color:rgba(0,212,170,0.25);">
+                        <i class="fas fa-robot" style="color:var(--accent-primary);"></i>
+                     </div>
+                     <div class="card-links">
+                        <a href="https://github.com/yennanliu/104Skill" target="_blank" class="card-link" title="GitHub">
+                           <i class="fab fa-github"></i>
+                        </a>
+                     </div>
+                  </div>
+
+                  <div class="card-category">Automation · Claude AI Skill</div>
+                  <h3 class="card-title">104Skill</h3>
+                  <p class="card-description">
+                     A Claude Code skill that automates job applications on Taiwan's 104.com.tw platform.
+                     Uses Playwright MCP for browser automation — supports single applications,
+                     batch processing across multiple pages, cover letter selection, and
+                     intelligent duplicate-application detection with configurable randomized delays.
+                  </p>
+
+                  <div class="card-tags">
+                     <span class="tag tag-green">playwright-mcp</span>
+                     <span class="tag tag-green">claude-code</span>
+                     <span class="tag tag-blue">automation</span>
+                     <span class="tag tag-gray">browser</span>
+                     <span class="tag tag-gray">taiwan</span>
+                  </div>
+
+                  <div class="card-footer-row">
+                     <div class="card-meta">
+                        <span><i class="fas fa-bolt"></i> Batch mode</span>
+                        <span><i class="fas fa-shield-alt"></i> Anti-duplicate</span>
+                     </div>
+                     <a href="https://github.com/yennanliu/104Skill" target="_blank" class="card-cta">
+                        View on GitHub <i class="fas fa-arrow-right"></i>
+                     </a>
+                  </div>
+               </div>
+
+               <!-- InvestSkill (compact) -->
+               <div class="project-card" style="--card-accent: #9d77f0;" data-category="finance claude-ai">
+                  <div class="card-header-row">
+                     <div class="card-icon" style="background:rgba(124,92,191,0.12);border-color:rgba(124,92,191,0.3);">
+                        <i class="fas fa-chart-line" style="color:#9d77f0;"></i>
+                     </div>
+                     <div class="card-links">
+                        <a href="https://github.com/yennanliu/InvestSkill" target="_blank" class="card-link" title="GitHub">
+                           <i class="fab fa-github"></i>
+                        </a>
+                     </div>
+                  </div>
+
+                  <div class="card-category">Finance · Claude AI Plugin</div>
+                  <h3 class="card-title">InvestSkill</h3>
+                  <p class="card-description">
+                     16+ professional-grade Claude Code skills for US stock market analysis.
+                     Covers fundamental analysis (Piotroski F-Score, DCF, ROIC/WACC),
+                     technical indicators, earnings call analysis, insider trading tracking,
+                     and institutional ownership changes. Generates interactive HTML/PDF reports.
+                  </p>
+
+                  <div class="card-tags">
+                     <span class="tag tag-purple">python</span>
+                     <span class="tag tag-purple">claude-code</span>
+                     <span class="tag tag-blue">stock-analysis</span>
+                     <span class="tag tag-yellow">chart.js</span>
+                     <span class="tag tag-gray">mit license</span>
+                  </div>
+
+                  <div class="card-footer-row">
+                     <div class="card-meta">
+                        <span><i class="fas fa-layer-group"></i> 16+ skills</span>
+                        <span><i class="fas fa-file-pdf"></i> Reports</span>
+                     </div>
+                     <a href="https://github.com/yennanliu/InvestSkill" target="_blank" class="card-cta">
+                        View on GitHub <i class="fas fa-arrow-right"></i>
+                     </a>
+                  </div>
+               </div>
+
+               <!-- finance_data -->
+               <div class="project-card" style="--card-accent: #f5a623;" data-category="finance data">
+                  <div class="card-header-row">
+                     <div class="card-icon" style="background:rgba(245,166,35,0.1);border-color:rgba(245,166,35,0.3);">
+                        <i class="fas fa-database" style="color:var(--accent-yellow);"></i>
+                     </div>
+                     <div class="card-links">
+                        <a href="https://github.com/yennanliu/finance_data" target="_blank" class="card-link" title="GitHub">
+                           <i class="fab fa-github"></i>
+                        </a>
+                     </div>
+                  </div>
+
+                  <div class="card-category">Data Pipeline · SEC / EDGAR</div>
+                  <h3 class="card-title">finance_data</h3>
+                  <p class="card-description">
+                     A collection of Python tools for downloading and managing SEC financial reports
+                     from the EDGAR database. Automates retrieval of 10-K annual reports, 10-Q quarterly filings,
+                     13-F institutional holdings, and 6-K foreign filings — with built-in rate limiting
+                     (max 10 req/s), ticker-to-CIK conversion, and batch download support.
+                  </p>
+
+                  <div class="card-tags">
+                     <span class="tag tag-yellow">python</span>
+                     <span class="tag tag-yellow">sec-edgar</span>
+                     <span class="tag tag-blue">10-k</span>
+                     <span class="tag tag-blue">13-f</span>
+                     <span class="tag tag-green">data-pipeline</span>
+                     <span class="tag tag-gray">open-source</span>
+                  </div>
+
+                  <div class="card-footer-row">
+                     <div class="card-meta">
+                        <span><i class="fas fa-file-alt"></i> Multi-filing</span>
+                        <span><i class="fas fa-tachometer-alt"></i> Rate limited</span>
+                     </div>
+                     <a href="https://github.com/yennanliu/finance_data" target="_blank" class="card-cta">
+                        View on GitHub <i class="fas fa-arrow-right"></i>
+                     </a>
+                  </div>
+               </div>
+
+            </div>
+         </div>
+      </section>
+
+      <!-- Scroll to top -->
+      <div class="scroll-top" id="scrollTop">
+         <i class="fas fa-arrow-up"></i>
+      </div>
+
+      <!-- Footer -->
+      <footer>
+         <div class="container">
+            <div class="footer-links">
+               <a href="https://yennanliu.github.io/">Home</a>
+               <a href="https://yennanliu.github.io/about_me.html">About Me</a>
+               <a href="https://yennanliu.github.io/portfolios.html">Portfolios</a>
+               <a href="https://yennanliu.github.io/ai_projects.html">AI Projects</a>
+               <a href="https://yennanliu.github.io/aws_architecture.html">AWS Architecture</a>
+               <a href="https://yennanliu.github.io/contact.html">Contact</a>
+               <a href="https://yennj12.js.org/yennj12_blog_V4/">Blog</a>
+            </div>
+            <p>&copy; 2026 yen.dev.com &mdash; All Rights Reserved.</p>
+         </div>
+      </footer>
+
+      <!-- Bootstrap JS -->
+      <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+      <script>
+         // ── Scroll to top ──────────────────────────────────────────
+         const scrollTopBtn = document.getElementById('scrollTop');
+         window.addEventListener('scroll', () => {
+            scrollTopBtn.classList.toggle('visible', window.pageYOffset > 300);
+         });
+         scrollTopBtn.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+         });
+
+         // ── Theme toggle ───────────────────────────────────────────
+         document.addEventListener('DOMContentLoaded', () => {
+            const toggle = document.getElementById('theme-checkbox');
+            const saved = localStorage.getItem('theme') ||
+               (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+
+            if (saved === 'light') {
+               document.body.classList.add('light-mode');
+               toggle.checked = true;
+            }
+
+            toggle.addEventListener('change', e => {
+               if (e.target.checked) {
+                  document.body.classList.add('light-mode');
+                  localStorage.setItem('theme', 'light');
+               } else {
+                  document.body.classList.remove('light-mode');
+                  localStorage.setItem('theme', 'dark');
+               }
+            });
+         });
+
+         // ── Filter buttons ─────────────────────────────────────────
+         const filterBtns = document.querySelectorAll('.filter-btn');
+         const projectCards = document.querySelectorAll('#projects-grid .project-card');
+
+         filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+               filterBtns.forEach(b => b.classList.remove('active'));
+               btn.classList.add('active');
+
+               const filter = btn.dataset.filter;
+               projectCards.forEach(card => {
+                  const cats = card.dataset.category || '';
+                  if (filter === 'all' || cats.includes(filter)) {
+                     card.style.display = '';
+                  } else {
+                     card.style.display = 'none';
+                  }
+               });
+            });
+         });
+      </script>
+   </body>
+</html>
