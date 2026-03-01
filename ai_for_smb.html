@@ -1,0 +1,1140 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+      <title>AI for Your Business - Yen.Dev</title>
+      <!-- Google analytics -->
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-X2DJ8VW74E"></script>
+      <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-X2DJ8VW74E');
+      </script>
+
+      <!-- PWA Meta Tags -->
+      <meta name="theme-color" content="#000000">
+      <meta name="apple-mobile-web-app-capable" content="yes">
+      <meta name="apple-mobile-web-app-status-bar-style" content="black">
+      <meta name="apple-mobile-web-app-title" content="Yen.Dev">
+      <meta name="mobile-web-app-capable" content="yes">
+
+      <!-- PWA Icons -->
+      <link rel="icon" href="img/icon.svg" type="image/svg+xml">
+      <link rel="apple-touch-icon" href="img/icon.svg">
+      <link rel="manifest" href="manifest.json">
+
+      <!-- Bootstrap CSS -->
+      <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+      <!-- Font Awesome -->
+      <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet">
+      <!-- Google Fonts -->
+      <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Source+Code+Pro:wght@400;600&display=swap" rel="stylesheet">
+
+      <style>
+         /* =============================================
+            CSS VARIABLES & BASE
+         ============================================= */
+         :root {
+            --bg-dark: #0a0a0a;
+            --bg-card: #111111;
+            --bg-card-hover: #1a1a1a;
+            --border-color: #222222;
+            --border-hover: #444444;
+            --text-primary: #ffffff;
+            --text-secondary: #888888;
+            --text-muted: #555555;
+            --accent-primary: #00d4aa;
+            --accent-secondary: #7c5cbf;
+            --accent-yellow: #f5a623;
+            --accent-red: #ff6b6b;
+            --accent-blue: #4a90e2;
+            --transition: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            --navbar-height: 72px;
+         }
+
+         * { margin: 0; padding: 0; box-sizing: border-box; }
+
+         html, body { max-width: 100%; overflow-x: hidden; }
+
+         body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-primary);
+            -webkit-font-smoothing: antialiased;
+            padding-top: var(--navbar-height);
+         }
+
+         /* =============================================
+            NAVBAR
+         ============================================= */
+         .navbar {
+            background: rgba(10, 10, 10, 0.95) !important;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-color);
+            padding: 18px 0;
+            transition: all var(--transition);
+         }
+
+         .navbar-brand {
+            font-family: 'Source Code Pro', monospace;
+            font-weight: 600;
+            font-size: 1.2rem;
+            color: var(--accent-primary) !important;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+         }
+         .navbar-brand:hover { color: #fff !important; }
+
+         .nav-link {
+            color: var(--text-secondary) !important;
+            font-size: 0.88rem;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            margin: 0 6px;
+            padding: 8px 12px !important;
+            border-radius: 6px;
+            transition: all var(--transition);
+         }
+         .nav-link:hover { color: var(--text-primary) !important; background: rgba(255,255,255,0.05); }
+         .nav-link.active-page { color: var(--accent-primary) !important; }
+
+         @media (max-width: 991.98px) {
+            .navbar-collapse {
+               background: rgba(10, 10, 10, 0.98);
+               border: 1px solid var(--border-color);
+               border-radius: 12px;
+               padding: 16px;
+               margin-top: 10px;
+            }
+            .nav-link { margin: 4px 0; display: block; }
+         }
+
+         .toggle-container { display: flex; align-items: center; margin-left: 10px; }
+         .theme-switch { display: inline-block; height: 22px; position: relative; width: 44px; }
+         .theme-switch input { display: none; }
+         .slider {
+            background-color: #333; bottom: 0; cursor: pointer; left: 0;
+            position: absolute; right: 0; top: 0; transition: .4s; border-radius: 22px;
+         }
+         .slider:before {
+            background-color: #888; bottom: 3px; content: ""; height: 16px; left: 3px;
+            position: absolute; transition: .4s; width: 16px; border-radius: 50%;
+         }
+         input:checked + .slider { background-color: var(--accent-primary); }
+         input:checked + .slider:before { transform: translateX(22px); background-color: white; }
+         .toggle-icons { font-size: 13px; color: var(--text-secondary); margin-left: 8px; }
+
+         /* =============================================
+            HERO
+         ============================================= */
+         .hero-section {
+            padding: 100px 0 80px;
+            position: relative;
+            overflow: hidden;
+         }
+
+         .hero-section::before {
+            content: '';
+            position: absolute;
+            top: -200px; left: 50%;
+            transform: translateX(-50%);
+            width: 900px; height: 900px;
+            background: radial-gradient(ellipse, rgba(0, 212, 170, 0.07) 0%, transparent 65%);
+            pointer-events: none;
+         }
+
+         .hero-eyebrow {
+            font-family: 'Source Code Pro', monospace;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--accent-primary);
+            margin-bottom: 18px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+         }
+         .hero-eyebrow::before {
+            content: ''; display: inline-block;
+            width: 32px; height: 2px;
+            background: var(--accent-primary);
+         }
+
+         .hero-title {
+            font-size: clamp(2.4rem, 6vw, 4.8rem);
+            font-weight: 700;
+            line-height: 1.08;
+            letter-spacing: -2px;
+            margin-bottom: 28px;
+            color: var(--text-primary);
+         }
+         .hero-title .highlight {
+            background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-secondary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+         }
+
+         .hero-subtitle {
+            font-size: 1.08rem;
+            color: var(--text-secondary);
+            max-width: 560px;
+            line-height: 1.8;
+            margin-bottom: 40px;
+         }
+
+         .hero-cta-group {
+            display: flex;
+            gap: 14px;
+            flex-wrap: wrap;
+         }
+
+         .btn-primary-custom {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 28px;
+            background: var(--accent-primary);
+            color: #000;
+            font-weight: 600;
+            font-size: 0.9rem;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: all var(--transition);
+            border: none;
+            letter-spacing: 0.3px;
+         }
+         .btn-primary-custom:hover {
+            background: #00f0c0;
+            color: #000;
+            text-decoration: none;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0, 212, 170, 0.25);
+         }
+
+         .btn-secondary-custom {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 28px;
+            background: transparent;
+            color: var(--text-primary);
+            font-weight: 500;
+            font-size: 0.9rem;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: all var(--transition);
+            border: 1px solid var(--border-hover);
+            letter-spacing: 0.3px;
+         }
+         .btn-secondary-custom:hover {
+            background: rgba(255,255,255,0.06);
+            color: var(--text-primary);
+            text-decoration: none;
+            border-color: #666;
+         }
+
+         .hero-trust-bar {
+            display: flex;
+            gap: 32px;
+            flex-wrap: wrap;
+            margin-top: 56px;
+            padding-top: 40px;
+            border-top: 1px solid var(--border-color);
+         }
+         .trust-item { display: flex; align-items: center; gap: 10px; }
+         .trust-item i { color: var(--accent-primary); font-size: 0.9rem; }
+         .trust-item span { font-size: 0.82rem; color: var(--text-secondary); }
+
+         /* =============================================
+            PAIN POINTS BANNER
+         ============================================= */
+         .pain-banner {
+            background: rgba(245, 166, 35, 0.06);
+            border-top: 1px solid rgba(245, 166, 35, 0.15);
+            border-bottom: 1px solid rgba(245, 166, 35, 0.15);
+            padding: 28px 0;
+         }
+         .pain-banner-inner {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            flex-wrap: wrap;
+         }
+         .pain-icon {
+            font-size: 1.5rem;
+            flex-shrink: 0;
+         }
+         .pain-text {
+            font-size: 0.95rem;
+            color: var(--accent-yellow);
+            line-height: 1.6;
+         }
+         .pain-text strong { color: #ffc84a; }
+
+         /* =============================================
+            SECTION LABEL
+         ============================================= */
+         .section-label {
+            font-family: 'Source Code Pro', monospace;
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--text-muted);
+            margin: 64px 0 24px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+         }
+         .section-label::after {
+            content: ''; flex: 1; height: 1px;
+            background: var(--border-color);
+         }
+
+         /* =============================================
+            SERVICE CARDS GRID
+         ============================================= */
+         .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 1px;
+            background: var(--border-color);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            overflow: hidden;
+         }
+         @media (max-width: 767px) {
+            .services-grid { grid-template-columns: 1fr; }
+         }
+
+         .service-card {
+            background: var(--bg-card);
+            padding: 36px 32px;
+            display: flex;
+            flex-direction: column;
+            transition: background var(--transition);
+            position: relative;
+            overflow: hidden;
+         }
+         .service-card::before {
+            content: '';
+            position: absolute; top: 0; left: 0; right: 0; height: 2px;
+            background: linear-gradient(90deg, transparent, var(--card-accent, var(--accent-primary)), transparent);
+            opacity: 0;
+            transition: opacity var(--transition);
+         }
+         .service-card:hover { background: var(--bg-card-hover); }
+         .service-card:hover::before { opacity: 1; }
+
+         .service-icon {
+            width: 48px; height: 48px;
+            border-radius: 12px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.3rem;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid var(--border-color);
+            margin-bottom: 22px;
+            flex-shrink: 0;
+         }
+
+         .service-category {
+            font-family: 'Source Code Pro', monospace;
+            font-size: 0.68rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--card-accent, var(--accent-primary));
+            margin-bottom: 10px;
+         }
+
+         .service-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 14px;
+            line-height: 1.3;
+            letter-spacing: -0.3px;
+         }
+
+         .service-description {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            line-height: 1.75;
+            flex-grow: 1;
+            margin-bottom: 24px;
+         }
+
+         .service-bullets {
+            list-style: none;
+            margin: 0 0 24px;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+         }
+         .service-bullets li {
+            font-size: 0.82rem;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+            line-height: 1.5;
+         }
+         .service-bullets li::before {
+            content: '';
+            display: inline-block;
+            width: 5px; height: 5px;
+            border-radius: 50%;
+            background: var(--card-accent, var(--accent-primary));
+            margin-top: 7px;
+            flex-shrink: 0;
+         }
+
+         .card-tags {
+            display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 24px;
+         }
+         .tag {
+            font-family: 'Source Code Pro', monospace;
+            font-size: 0.68rem; font-weight: 600;
+            padding: 3px 10px; border-radius: 4px;
+            text-transform: lowercase; letter-spacing: 0.3px;
+         }
+         .tag-green  { background: rgba(0, 212, 170, 0.1);  color: var(--accent-primary); }
+         .tag-purple { background: rgba(124, 92, 191, 0.1); color: #9d77f0; }
+         .tag-blue   { background: rgba(74, 144, 226, 0.1); color: var(--accent-blue); }
+         .tag-yellow { background: rgba(245, 166, 35, 0.1); color: var(--accent-yellow); }
+         .tag-red    { background: rgba(255, 107, 107, 0.1); color: var(--accent-red); }
+         .tag-gray   { background: rgba(136, 136, 136, 0.1); color: #aaa; }
+
+         .service-card-footer {
+            display: flex; align-items: center; justify-content: space-between;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-color);
+            margin-top: auto;
+         }
+
+         /* =============================================
+            WHY ME — WIDE CARD
+         ============================================= */
+         .why-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            overflow: hidden;
+         }
+         .why-card-header {
+            padding: 40px 40px 0;
+         }
+         .why-card-body {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 1px;
+            background: var(--border-color);
+            border-top: 1px solid var(--border-color);
+            margin-top: 36px;
+         }
+         .why-item {
+            background: var(--bg-card);
+            padding: 28px 28px;
+            transition: background var(--transition);
+         }
+         .why-item:hover { background: var(--bg-card-hover); }
+         .why-item-num {
+            font-family: 'Source Code Pro', monospace;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--accent-primary);
+            line-height: 1;
+            margin-bottom: 8px;
+         }
+         .why-item-label {
+            font-size: 0.88rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 6px;
+         }
+         .why-item-desc {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+         }
+
+         /* =============================================
+            PROCESS TIMELINE
+         ============================================= */
+         .process-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            overflow: hidden;
+         }
+         .process-step {
+            display: flex;
+            align-items: flex-start;
+            gap: 28px;
+            padding: 28px 32px;
+            background: var(--bg-card);
+            border-bottom: 1px solid var(--border-color);
+            transition: background var(--transition);
+         }
+         .process-step:last-child { border-bottom: none; }
+         .process-step:hover { background: var(--bg-card-hover); }
+
+         .step-num {
+            font-family: 'Source Code Pro', monospace;
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            min-width: 50px;
+            padding-top: 3px;
+         }
+         .step-content { flex: 1; }
+         .step-title {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 6px;
+         }
+         .step-desc {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+         }
+         .step-badge {
+            font-family: 'Source Code Pro', monospace;
+            font-size: 0.65rem;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            padding: 3px 10px;
+            border-radius: 100px;
+            flex-shrink: 0;
+         }
+         .badge-green { background: rgba(0,212,170,0.1); color: var(--accent-primary); border: 1px solid rgba(0,212,170,0.2); }
+         .badge-blue  { background: rgba(74,144,226,0.1); color: var(--accent-blue);  border: 1px solid rgba(74,144,226,0.2); }
+         .badge-purple{ background: rgba(124,92,191,0.1); color: #9d77f0;             border: 1px solid rgba(124,92,191,0.2); }
+         .badge-yellow{ background: rgba(245,166,35,0.1); color: var(--accent-yellow);border: 1px solid rgba(245,166,35,0.2); }
+
+         /* =============================================
+            CTA SECTION
+         ============================================= */
+         .cta-section {
+            padding: 80px 0 100px;
+         }
+         .cta-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 64px 56px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+         }
+         .cta-card::before {
+            content: '';
+            position: absolute;
+            top: -200px; left: 50%;
+            transform: translateX(-50%);
+            width: 600px; height: 400px;
+            background: radial-gradient(ellipse, rgba(0, 212, 170, 0.07) 0%, transparent 70%);
+            pointer-events: none;
+         }
+         .cta-title {
+            font-size: clamp(1.8rem, 4vw, 3rem);
+            font-weight: 700;
+            letter-spacing: -1.5px;
+            margin-bottom: 18px;
+            color: var(--text-primary);
+         }
+         .cta-title .highlight {
+            background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-secondary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+         }
+         .cta-subtitle {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            max-width: 500px;
+            margin: 0 auto 40px;
+            line-height: 1.75;
+         }
+         .cta-links {
+            display: flex;
+            justify-content: center;
+            gap: 14px;
+            flex-wrap: wrap;
+         }
+
+         /* =============================================
+            TESTIMONIAL / QUOTE BLOCK
+         ============================================= */
+         .quote-block {
+            background: rgba(124, 92, 191, 0.06);
+            border: 1px solid rgba(124, 92, 191, 0.18);
+            border-radius: 14px;
+            padding: 32px 36px;
+            margin-bottom: 0;
+         }
+         .quote-text {
+            font-size: 1.05rem;
+            font-style: italic;
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 18px;
+         }
+         .quote-attribution {
+            font-family: 'Source Code Pro', monospace;
+            font-size: 0.72rem;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+         }
+         .quote-attribution::before {
+            content: ''; display: inline-block;
+            width: 20px; height: 1px;
+            background: var(--text-muted);
+         }
+
+         /* =============================================
+            FOOTER
+         ============================================= */
+         footer {
+            background: var(--bg-card);
+            border-top: 1px solid var(--border-color);
+            padding: 40px 0 28px;
+         }
+         footer a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: color var(--transition);
+         }
+         footer a:hover { color: var(--text-primary); }
+         .footer-links {
+            display: flex; flex-wrap: wrap;
+            justify-content: center; gap: 24px; margin-bottom: 20px;
+         }
+         footer p { color: var(--text-muted); font-size: 0.8rem; text-align: center; margin: 0; }
+
+         /* =============================================
+            SCROLL TO TOP
+         ============================================= */
+         .scroll-top {
+            position: fixed; bottom: 30px; right: 30px;
+            width: 44px; height: 44px; border-radius: 50%;
+            background: rgba(0, 212, 170, 0.15);
+            border: 1px solid rgba(0, 212, 170, 0.3);
+            color: var(--accent-primary);
+            display: flex; align-items: center; justify-content: center;
+            cursor: pointer; opacity: 0; transition: all 0.3s; z-index: 999;
+            font-size: 0.9rem;
+         }
+         .scroll-top.visible { opacity: 1; }
+         .scroll-top:hover { background: rgba(0, 212, 170, 0.25); transform: translateY(-3px); }
+
+         /* =============================================
+            LIGHT MODE
+         ============================================= */
+         body.light-mode { background-color: #f5f5f5; color: #111; }
+         body.light-mode .navbar { background: rgba(245,245,245,0.97) !important; border-bottom-color: #e0e0e0; }
+         body.light-mode .nav-link { color: #555 !important; }
+         body.light-mode .nav-link:hover { color: #111 !important; background: rgba(0,0,0,0.04); }
+         body.light-mode .pain-banner { background: rgba(245,166,35,0.05); }
+         body.light-mode .service-card { background: #fff; }
+         body.light-mode .service-card:hover { background: #fafafa; }
+         body.light-mode .services-grid { background: #ddd; border-color: #ddd; }
+         body.light-mode .service-title { color: #111; }
+         body.light-mode .service-description { color: #555; }
+         body.light-mode .service-card-footer { border-top-color: #eee; }
+         body.light-mode .why-card { background: #fff; border-color: #e0e0e0; }
+         body.light-mode .why-card-body { background: #e8e8e8; border-top-color: #ddd; }
+         body.light-mode .why-item { background: #fff; }
+         body.light-mode .why-item:hover { background: #fafafa; }
+         body.light-mode .why-item-label { color: #111; }
+         body.light-mode .why-item-desc { color: #aaa; }
+         body.light-mode .process-step { background: #fff; border-bottom-color: #eee; }
+         body.light-mode .process-list { border-color: #ddd; }
+         body.light-mode .process-step:hover { background: #fafafa; }
+         body.light-mode .step-title { color: #111; }
+         body.light-mode .step-desc { color: #555; }
+         body.light-mode .cta-card { background: #fff; border-color: #e0e0e0; }
+         body.light-mode .cta-title { color: #111; }
+         body.light-mode .quote-block { background: rgba(124,92,191,0.04); border-color: rgba(124,92,191,0.15); }
+         body.light-mode .quote-text { color: #555; }
+         body.light-mode footer { background: #ebebeb; border-top-color: #ddd; }
+         body.light-mode footer p { color: #999; }
+         body.light-mode .navbar-collapse { background: rgba(245,245,245,0.99); border-color: #ddd; }
+         body.light-mode .hero-subtitle { color: #555; }
+         body.light-mode .trust-item span { color: #666; }
+         body.light-mode .hero-trust-bar { border-top-color: #e0e0e0; }
+         body.light-mode .tag-gray { background: rgba(0,0,0,0.06); color: #777; }
+      </style>
+   </head>
+   <body>
+      <!-- Navigation -->
+      <nav class="navbar navbar-expand-lg fixed-top">
+         <div class="container">
+            <a class="navbar-brand" href="https://yennanliu.github.io">Yen.Dev</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSMB" aria-controls="navbarSMB" aria-expanded="false" aria-label="Toggle navigation">
+               <span class="navbar-toggler-icon" style="background-image:url(&quot;data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(0,212,170,1)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e&quot;)"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSMB">
+               <ul class="navbar-nav ml-auto align-items-center">
+                  <li class="nav-item"><a class="nav-link" href="https://yennanliu.github.io/about_me.html">About Me</a></li>
+                  <li class="nav-item"><a class="nav-link" href="https://yennanliu.github.io/portfolios.html">Portfolios</a></li>
+                  <li class="nav-item"><a class="nav-link" href="https://yennanliu.github.io/ai_projects.html">AI Projects</a></li>
+                  <li class="nav-item"><a class="nav-link active-page" href="https://yennanliu.github.io/ai_for_smb.html">AI for Business</a></li>
+                  <li class="nav-item"><a class="nav-link" href="https://yennanliu.github.io/aws_architecture.html">AWS Architecture</a></li>
+                  <li class="nav-item"><a class="nav-link" href="https://yennanliu.github.io/contact.html">Contact</a></li>
+                  <li class="nav-item"><a class="nav-link" href="https://yennj12.js.org/yennj12_blog_V4/">Blog</a></li>
+                  <!-- Dark mode toggle -->
+                  <li class="nav-item toggle-container">
+                     <label class="theme-switch" for="theme-checkbox">
+                        <input type="checkbox" id="theme-checkbox" />
+                        <span class="slider"></span>
+                     </label>
+                     <div class="toggle-icons">
+                        <i class="fas fa-sun"></i>/<i class="fas fa-moon"></i>
+                     </div>
+                  </li>
+               </ul>
+            </div>
+         </div>
+      </nav>
+
+      <!-- Hero Section -->
+      <section class="hero-section">
+         <div class="container">
+            <div class="row">
+               <div class="col-lg-8">
+                  <div class="hero-eyebrow">AI Integration for SMB</div>
+                  <h1 class="hero-title">
+                     Your Business,<br>
+                     <span class="highlight">Powered by AI.</span><br>
+                     Without the Headache.
+                  </h1>
+                  <p class="hero-subtitle">
+                     Most AI tools are built for large enterprises — not your business. I bridge that gap:
+                     a software engineer who speaks both <strong style="color:var(--text-primary)">your language</strong>
+                     and AI's language, building practical automations that save you hours every week.
+                  </p>
+                  <div class="hero-cta-group">
+                     <a href="https://yennanliu.github.io/contact.html" class="btn-primary-custom">
+                        <i class="fas fa-calendar-check"></i> Book a Free Consultation
+                     </a>
+                     <a href="#services" class="btn-secondary-custom">
+                        <i class="fas fa-arrow-down"></i> See What I Do
+                     </a>
+                  </div>
+                  <div class="hero-trust-bar">
+                     <div class="trust-item">
+                        <i class="fas fa-check-circle"></i>
+                        <span>No jargon, plain English</span>
+                     </div>
+                     <div class="trust-item">
+                        <i class="fas fa-check-circle"></i>
+                        <span>SMB-sized budget friendly</span>
+                     </div>
+                     <div class="trust-item">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Real results, not demos</span>
+                     </div>
+                     <div class="trust-item">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Open source track record</span>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </section>
+
+      <!-- Pain Point Banner -->
+      <div class="pain-banner">
+         <div class="container">
+            <div class="pain-banner-inner">
+               <div class="pain-icon">💡</div>
+               <p class="pain-text">
+                  <strong>"AI is like the internet in 1995."</strong> — Mark Cuban. Large enterprises have AI teams.
+                  You don't. That gap is exactly where I work: bringing enterprise-grade automation to SMBs
+                  at a fraction of the cost.
+               </p>
+            </div>
+         </div>
+      </div>
+
+      <!-- Services -->
+      <section id="services">
+         <div class="container">
+            <div class="section-label">What I Can Do For You</div>
+
+            <div class="services-grid">
+
+               <!-- Workflow Automation -->
+               <div class="service-card" style="--card-accent: #00d4aa;">
+                  <div class="service-icon" style="background:rgba(0,212,170,0.1);border-color:rgba(0,212,170,0.25);">
+                     <i class="fas fa-robot" style="color:var(--accent-primary);"></i>
+                  </div>
+                  <div class="service-category">Automation</div>
+                  <h3 class="service-title">Workflow Automation</h3>
+                  <p class="service-description">
+                     Kill the copy-paste. I identify the repetitive tasks eating your team's time —
+                     data entry, report generation, email follow-ups — and automate them end-to-end
+                     with AI-powered scripts and integrations.
+                  </p>
+                  <ul class="service-bullets">
+                     <li>Automated data collection &amp; reporting</li>
+                     <li>Email / CRM workflow triggers</li>
+                     <li>Document processing &amp; extraction</li>
+                     <li>Scheduled batch job pipelines</li>
+                  </ul>
+                  <div class="card-tags">
+                     <span class="tag tag-green">python</span>
+                     <span class="tag tag-green">playwright</span>
+                     <span class="tag tag-blue">n8n / zapier</span>
+                     <span class="tag tag-gray">cron</span>
+                  </div>
+               </div>
+
+               <!-- AI Chatbot & Assistant -->
+               <div class="service-card" style="--card-accent: #9d77f0;">
+                  <div class="service-icon" style="background:rgba(124,92,191,0.12);border-color:rgba(124,92,191,0.3);">
+                     <i class="fas fa-comments" style="color:#9d77f0;"></i>
+                  </div>
+                  <div class="service-category">AI Assistant</div>
+                  <h3 class="service-title">Custom AI Chatbot</h3>
+                  <p class="service-description">
+                     Give your customers — or your internal team — a 24/7 assistant trained on
+                     your own business data. Answer FAQs, surface product info, triage support tickets,
+                     all without hiring extra headcount.
+                  </p>
+                  <ul class="service-bullets">
+                     <li>Train on your docs, FAQs, &amp; SOPs</li>
+                     <li>Embed on your website or Slack</li>
+                     <li>Escalation routing to human agents</li>
+                     <li>Conversation analytics dashboard</li>
+                  </ul>
+                  <div class="card-tags">
+                     <span class="tag tag-purple">claude ai</span>
+                     <span class="tag tag-purple">rag</span>
+                     <span class="tag tag-blue">langchain</span>
+                     <span class="tag tag-gray">vector db</span>
+                  </div>
+               </div>
+
+               <!-- Data & Analytics -->
+               <div class="service-card" style="--card-accent: #4a90e2;">
+                  <div class="service-icon" style="background:rgba(74,144,226,0.1);border-color:rgba(74,144,226,0.25);">
+                     <i class="fas fa-chart-bar" style="color:var(--accent-blue);"></i>
+                  </div>
+                  <div class="service-category">Data & Analytics</div>
+                  <h3 class="service-title">Insight Dashboards</h3>
+                  <p class="service-description">
+                     Your data is scattered across spreadsheets, POS systems, and email. I consolidate it
+                     into a live dashboard so you can make faster decisions without hiring a data analyst.
+                  </p>
+                  <ul class="service-bullets">
+                     <li>Sales, inventory &amp; ops KPI tracking</li>
+                     <li>Automated daily/weekly email reports</li>
+                     <li>Anomaly alerts (drop in sales, spike in cost)</li>
+                     <li>Lightweight BI — no enterprise license needed</li>
+                  </ul>
+                  <div class="card-tags">
+                     <span class="tag tag-blue">python</span>
+                     <span class="tag tag-blue">sql</span>
+                     <span class="tag tag-yellow">chart.js</span>
+                     <span class="tag tag-gray">google sheets api</span>
+                  </div>
+               </div>
+
+               <!-- AI-powered Hiring / HR -->
+               <div class="service-card" style="--card-accent: #f5a623;">
+                  <div class="service-icon" style="background:rgba(245,166,35,0.1);border-color:rgba(245,166,35,0.3);">
+                     <i class="fas fa-user-check" style="color:var(--accent-yellow);"></i>
+                  </div>
+                  <div class="service-category">HR & Recruiting</div>
+                  <h3 class="service-title">AI-Assisted Hiring</h3>
+                  <p class="service-description">
+                     Screening 100 resumes by hand is brutal. I build lightweight AI pipelines
+                     that score candidates against your criteria, draft outreach emails, and
+                     keep your hiring moving — all within your existing tools.
+                  </p>
+                  <ul class="service-bullets">
+                     <li>Resume parsing &amp; auto-scoring</li>
+                     <li>Personalized outreach generation</li>
+                     <li>Interview question banks from JD</li>
+                     <li>Candidate pipeline tracking sheet</li>
+                  </ul>
+                  <div class="card-tags">
+                     <span class="tag tag-yellow">claude ai</span>
+                     <span class="tag tag-yellow">python</span>
+                     <span class="tag tag-blue">airtable api</span>
+                     <span class="tag tag-gray">email automation</span>
+                  </div>
+               </div>
+
+               <!-- Content & Marketing -->
+               <div class="service-card" style="--card-accent: #ff6b6b;">
+                  <div class="service-icon" style="background:rgba(255,107,107,0.1);border-color:rgba(255,107,107,0.25);">
+                     <i class="fas fa-pen-nib" style="color:var(--accent-red);"></i>
+                  </div>
+                  <div class="service-category">Marketing</div>
+                  <h3 class="service-title">Content Engine</h3>
+                  <p class="service-description">
+                     Posting consistently to social media, newsletters, and your blog is hard when
+                     you're running a business. I build AI-assisted content pipelines that draft,
+                     format, and schedule content in your brand voice.
+                  </p>
+                  <ul class="service-bullets">
+                     <li>AI draft → human review → auto-publish</li>
+                     <li>Social media post generation (IG, LinkedIn)</li>
+                     <li>Newsletter summarisation from weekly highlights</li>
+                     <li>SEO meta tag generation for product pages</li>
+                  </ul>
+                  <div class="card-tags">
+                     <span class="tag tag-red">claude ai</span>
+                     <span class="tag tag-red">content</span>
+                     <span class="tag tag-blue">buffer api</span>
+                     <span class="tag tag-gray">notion api</span>
+                  </div>
+               </div>
+
+               <!-- Custom Integration -->
+               <div class="service-card" style="--card-accent: #00d4aa;">
+                  <div class="service-icon" style="background:rgba(0,212,170,0.1);border-color:rgba(0,212,170,0.25);">
+                     <i class="fas fa-plug" style="color:var(--accent-primary);"></i>
+                  </div>
+                  <div class="service-category">Integration</div>
+                  <h3 class="service-title">Bespoke AI Integration</h3>
+                  <p class="service-description">
+                     Have a unique workflow that no off-the-shelf tool covers? I design and build
+                     custom solutions from scratch — API integrations, internal tools, browser
+                     automations — tailored precisely to how your team actually works.
+                  </p>
+                  <ul class="service-bullets">
+                     <li>Scoping workshop to map your pain points</li>
+                     <li>Rapid prototype (1–2 weeks)</li>
+                     <li>Handoff with documentation &amp; training</li>
+                     <li>Optional ongoing maintenance retainer</li>
+                  </ul>
+                  <div class="card-tags">
+                     <span class="tag tag-green">custom build</span>
+                     <span class="tag tag-green">api</span>
+                     <span class="tag tag-purple">ai-first</span>
+                     <span class="tag tag-gray">full-stack</span>
+                  </div>
+               </div>
+
+            </div>
+         </div>
+      </section>
+
+      <!-- Why Me -->
+      <section>
+         <div class="container">
+            <div class="section-label">Why Work With Me</div>
+            <div class="why-card">
+               <div class="why-card-header">
+                  <div class="row align-items-start">
+                     <div class="col-lg-6 mb-4 mb-lg-0">
+                        <h2 style="font-size:1.6rem;font-weight:700;letter-spacing:-0.5px;margin-bottom:16px;">
+                           An engineer who understands business problems — not just code.
+                        </h2>
+                        <p style="font-size:0.9rem;color:var(--text-secondary);line-height:1.8;">
+                           I've built data pipelines, AI-powered tools, and automation systems used in production.
+                           More importantly, I know how to translate a messy business problem into a clean technical
+                           solution — and hand it back in a way your team can actually use and maintain.
+                        </p>
+                     </div>
+                     <div class="col-lg-5 offset-lg-1">
+                        <div class="quote-block">
+                           <p class="quote-text">
+                              "Right now there's a tremendous opportunity... if you know how to apply AI to any
+                              business, you can make a lot of money helping small businesses."
+                           </p>
+                           <div class="quote-attribution">Mark Cuban, entrepreneur &amp; investor</div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <div class="why-card-body">
+                  <div class="why-item">
+                     <div class="why-item-num">5+</div>
+                     <div class="why-item-label">Years SWE Experience</div>
+                     <div class="why-item-desc">Data engineering, backend systems, cloud (AWS), and full-stack dev.</div>
+                  </div>
+                  <div class="why-item">
+                     <div class="why-item-num">16+</div>
+                     <div class="why-item-label">AI Skills Built</div>
+                     <div class="why-item-desc">Production Claude AI plugins covering finance, automation, and data.</div>
+                  </div>
+                  <div class="why-item">
+                     <div class="why-item-num">100%</div>
+                     <div class="why-item-label">Open Source</div>
+                     <div class="why-item-desc">All personal projects are public — you can verify my work before hiring.</div>
+                  </div>
+                  <div class="why-item">
+                     <div class="why-item-num">Fast</div>
+                     <div class="why-item-label">Prototype in Days</div>
+                     <div class="why-item-desc">Not weeks of meetings. You get a working demo quickly, then iterate.</div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </section>
+
+      <!-- How It Works -->
+      <section>
+         <div class="container">
+            <div class="section-label">How It Works</div>
+            <div class="process-list">
+               <div class="process-step">
+                  <div class="step-num">Step 01</div>
+                  <div class="step-content">
+                     <div class="step-title">Free Discovery Call (30 min)</div>
+                     <div class="step-desc">
+                        Tell me about your business and the tasks that frustrate you most. No slides, no pitch — just
+                        an honest conversation about where AI can actually help and where it can't.
+                     </div>
+                  </div>
+                  <span class="step-badge badge-green">Free</span>
+               </div>
+               <div class="process-step">
+                  <div class="step-num">Step 02</div>
+                  <div class="step-content">
+                     <div class="step-title">Audit &amp; Proposal</div>
+                     <div class="step-desc">
+                        I map out your current workflows, identify the highest-ROI automation opportunities, and
+                        send you a clear proposal: scope, timeline, and fixed price. No surprises.
+                     </div>
+                  </div>
+                  <span class="step-badge badge-blue">1–3 days</span>
+               </div>
+               <div class="process-step">
+                  <div class="step-num">Step 03</div>
+                  <div class="step-content">
+                     <div class="step-title">Rapid Prototype</div>
+                     <div class="step-desc">
+                        I build a working prototype fast — typically 1 to 2 weeks — so you can see real output
+                        before committing to a full build. Feedback loops are short and direct.
+                     </div>
+                  </div>
+                  <span class="step-badge badge-purple">1–2 weeks</span>
+               </div>
+               <div class="process-step">
+                  <div class="step-num">Step 04</div>
+                  <div class="step-content">
+                     <div class="step-title">Deploy, Train &amp; Hand Off</div>
+                     <div class="step-desc">
+                        I deploy the solution, walk your team through how it works, and hand over
+                        documentation. You own the code. Optional retainer for ongoing updates.
+                     </div>
+                  </div>
+                  <span class="step-badge badge-yellow">Yours to keep</span>
+               </div>
+            </div>
+         </div>
+      </section>
+
+      <!-- CTA -->
+      <section class="cta-section">
+         <div class="container">
+            <div class="cta-card">
+               <h2 class="cta-title">
+                  Ready to stop doing<br>
+                  <span class="highlight">things manually?</span>
+               </h2>
+               <p class="cta-subtitle">
+                  Book a free 30-minute call. We'll look at your biggest time drains and I'll tell you
+                  honestly whether AI can help — and how.
+               </p>
+               <div class="cta-links">
+                  <a href="https://yennanliu.github.io/contact.html" class="btn-primary-custom">
+                     <i class="fas fa-calendar-check"></i> Book Free Call
+                  </a>
+                  <a href="https://github.com/yennanliu" target="_blank" class="btn-secondary-custom">
+                     <i class="fab fa-github"></i> See My Work on GitHub
+                  </a>
+                  <a href="https://yennanliu.github.io/ai_projects.html" class="btn-secondary-custom">
+                     <i class="fas fa-layer-group"></i> AI Projects
+                  </a>
+               </div>
+            </div>
+         </div>
+      </section>
+
+      <!-- Scroll to top -->
+      <div class="scroll-top" id="scrollTop">
+         <i class="fas fa-arrow-up"></i>
+      </div>
+
+      <!-- Footer -->
+      <footer>
+         <div class="container">
+            <div class="footer-links">
+               <a href="https://yennanliu.github.io/">Home</a>
+               <a href="https://yennanliu.github.io/about_me.html">About Me</a>
+               <a href="https://yennanliu.github.io/portfolios.html">Portfolios</a>
+               <a href="https://yennanliu.github.io/ai_projects.html">AI Projects</a>
+               <a href="https://yennanliu.github.io/ai_for_smb.html">AI for Business</a>
+               <a href="https://yennanliu.github.io/aws_architecture.html">AWS Architecture</a>
+               <a href="https://yennanliu.github.io/contact.html">Contact</a>
+               <a href="https://yennj12.js.org/yennj12_blog_V4/">Blog</a>
+            </div>
+            <p>&copy; 2026 yen.dev.com &mdash; All Rights Reserved.</p>
+         </div>
+      </footer>
+
+      <!-- Bootstrap JS -->
+      <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+      <script>
+         // Scroll to top
+         const scrollTopBtn = document.getElementById('scrollTop');
+         window.addEventListener('scroll', () => {
+            scrollTopBtn.classList.toggle('visible', window.pageYOffset > 300);
+         });
+         scrollTopBtn.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+         });
+
+         // Theme toggle
+         document.addEventListener('DOMContentLoaded', () => {
+            const toggle = document.getElementById('theme-checkbox');
+            const saved = localStorage.getItem('theme') ||
+               (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+
+            if (saved === 'light') {
+               document.body.classList.add('light-mode');
+               toggle.checked = true;
+            }
+
+            toggle.addEventListener('change', e => {
+               if (e.target.checked) {
+                  document.body.classList.add('light-mode');
+                  localStorage.setItem('theme', 'light');
+               } else {
+                  document.body.classList.remove('light-mode');
+                  localStorage.setItem('theme', 'dark');
+               }
+            });
+         });
+      </script>
+   </body>
+</html>
