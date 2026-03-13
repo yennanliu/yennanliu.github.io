@@ -419,6 +419,8 @@
          }
 
          /* Navbar toggler icon styling */
+         /* Override Bootstrap navbar-dark white icon for light mode */
+         body:not(.dark-mode) .navbar-dark .navbar-toggler-icon,
          .navbar-toggler-icon {
             background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(33, 37, 41, 0.8)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
          }
@@ -428,7 +430,7 @@
          }
 
          .navbar-toggler {
-            border-color: rgba(0, 0, 0, 0.1);
+            border-color: rgba(0, 0, 0, 0.3);
             padding: 8px 12px;
          }
 
@@ -1664,11 +1666,11 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                <ul class="navbar-nav ml-auto">
                   <li class="nav-item"><a class="nav-link" href="https://yennanliu.github.io/about_me.html">About Me</a></li>
-                  <li class="nav-item"><a class="nav-link" href="https://yennj12.js.org/portfolios.html">Portfolios</a></li>
+                  <li class="nav-item"><a class="nav-link" href="https://yennanliu.github.io/portfolios.html">Portfolios</a></li>
                   <li class="nav-item"><a class="nav-link" href="https://yennanliu.github.io/ai_projects.html">AI Projects</a></li>
                   <li class="nav-item"><a class="nav-link" href="https://yennanliu.github.io/ai_for_smb.html">AI for Business</a></li>
                   <li class="nav-item"><a class="nav-link" href="https://yennanliu.github.io/aws_architecture.html">AWS Architecture</a></li>
-                  <li class="nav-item"><a class="nav-link" href="https://yennj12.js.org/contact.html">Contact</a></li>
+                  <li class="nav-item"><a class="nav-link" href="https://yennanliu.github.io/contact.html">Contact</a></li>
                   <li class="nav-item"><a class="nav-link" href="https://yennj12.js.org/yennj12_blog_V4/">Blog</a></li>
 
                   <!-- Dark/Light mode toggle -->
