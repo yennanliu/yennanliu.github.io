@@ -1,0 +1,290 @@
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>AI consultant - 台灣中小企業 AI 導入顧問</title>
+    <style>
+      :root {
+        /* Base44 Signature Palette */
+        --bg: #ffffff;
+        --fg: #000000;
+        --accent: #ff3e00; /* Contrast orange/red */
+        --muted: #666666;
+        --border: #000000;
+        --card-bg: #f9f9f9;
+        
+        /* Typography */
+        --mono: "IBM Plex Mono", "SFMono-Regular", Consolas, monospace;
+        --sans: "Inter", system-ui, -apple-system, sans-serif;
+      }
+
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--fg);
+        font-family: var(--sans);
+        line-height: 1.5;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      .wrap {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 24px;
+      }
+
+      /* Borders & Grids - The Base44 Signature */
+      .b-bottom { border-bottom: 2px solid var(--border); }
+      .b-right { border-right: 2px solid var(--border); }
+      .b-all { border: 2px solid var(--border); }
+
+      /* Top Nav */
+      .nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: stretch;
+        height: 80px;
+      }
+      .brand {
+        display: flex;
+        align-items: center;
+        padding: 0 24px;
+        font-family: var(--mono);
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: -0.5px;
+        background: var(--fg);
+        color: var(--bg);
+      }
+      .navlinks {
+        display: flex;
+        align-items: center;
+      }
+      .navlinks a {
+        padding: 0 20px;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        font-family: var(--mono);
+        font-size: 14px;
+        text-decoration: none;
+        color: var(--fg);
+        border-left: 2px solid var(--border);
+        transition: background 0.2s;
+      }
+      .navlinks a:hover { background: #eee; }
+
+      /* Hero Section */
+      .hero {
+        display: grid;
+        grid-template-columns: 1fr 400px;
+        min-height: 60vh;
+      }
+      .hero-content {
+        padding: 80px 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+      .hero-sidebar {
+        padding: 40px;
+        background: var(--card-bg);
+        border-left: 2px solid var(--border);
+      }
+
+      h1 {
+        font-size: clamp(40px, 6vw, 84px);
+        line-height: 0.9;
+        margin: 0 0 32px;
+        letter-spacing: -3px;
+        font-weight: 800;
+        text-transform: uppercase;
+      }
+      .mono-label {
+        font-family: var(--mono);
+        font-size: 13px;
+        text-transform: uppercase;
+        margin-bottom: 16px;
+        display: block;
+        color: var(--accent);
+      }
+
+      /* Buttons */
+      .btn {
+        display: inline-block;
+        padding: 20px 40px;
+        background: var(--fg);
+        color: var(--bg);
+        text-decoration: none;
+        font-family: var(--mono);
+        font-weight: 700;
+        text-transform: uppercase;
+        border: none;
+        cursor: pointer;
+        transition: transform 0.1s;
+      }
+      .btn:hover { transform: translate(-4px, -4px); box-shadow: 4px 4px 0 var(--accent); }
+
+      /* Grid Sections */
+      .section-title {
+        padding: 24px;
+        font-family: var(--mono);
+        font-weight: 700;
+        background: var(--fg);
+        color: var(--bg);
+        display: inline-block;
+      }
+
+      .feature-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      }
+      .feature-card {
+        padding: 48px 24px;
+        border-right: 2px solid var(--border);
+        border-bottom: 2px solid var(--border);
+      }
+      .feature-card:nth-child(3n) { border-right: none; }
+      .feature-card h3 {
+        font-family: var(--mono);
+        text-transform: uppercase;
+        margin-top: 0;
+      }
+
+      /* Contact / Forms */
+      .contact-box {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        border: 2px solid var(--border);
+        margin: 80px 0;
+      }
+      .input-group {
+        border-bottom: 2px solid var(--border);
+        padding: 20px;
+      }
+      .input-group:last-child { border-bottom: none; }
+      input, select, textarea {
+        width: 100%;
+        border: none;
+        background: transparent;
+        font-family: var(--mono);
+        font-size: 18px;
+        outline: none;
+        padding: 10px 0;
+      }
+
+      footer {
+        padding: 60px 0;
+        background: var(--fg);
+        color: var(--bg);
+        font-family: var(--mono);
+        font-size: 12px;
+      }
+
+      @media (max-width: 900px) {
+        .hero, .contact-box { grid-template-columns: 1fr; }
+        .hero-sidebar { border-left: none; border-top: 2px solid var(--border); }
+        .feature-card { border-right: none; }
+      }
+    </style>
+  </head>
+  <body>
+
+    <header class="b-bottom">
+      <div class="wrap">
+        <div class="nav">
+          <a href="#" class="brand">AI CONSULTANT</a>
+          <nav class="navlinks">
+            <a href="#services">SERVICES</a>
+            <a href="#process">PROCESS</a>
+            <a href="#contact">CONTACT</a>
+          </nav>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero b-bottom">
+        <div class="wrap">
+          <div class="hero-content">
+            <span class="mono-label">// STRATEGY & IMPLEMENTATION</span>
+            <h1>讓 AI 成為企業<br>成長的實質動力</h1>
+            <p style="max-width: 600px; font-size: 20px; margin-bottom: 40px;">
+              專為台灣中小企業打造的 AI 導入顧問服務。從場景釐清到 POC 驗證，我們把複雜留在後台，把成果帶到前台。
+            </p>
+            <div>
+              <a href="#contact" class="btn">START DIAGNOSIS</a>
+            </div>
+          </div>
+        </div>
+        <aside class="hero-sidebar">
+          <span class="mono-label">Quick Checklist</span>
+          <ul style="list-style: none; padding: 0; font-family: var(--mono); font-size: 14px;">
+            <li style="margin-bottom: 20px;">[01] 知道 AI 重要但無從下手</li>
+            <li style="margin-bottom: 20px;">[02] 擔心工具選擇錯誤成本高</li>
+            <li style="margin-bottom: 20px;">[03] 缺乏內部技術維護團隊</li>
+            <li style="margin-bottom: 20px;">[04] 資料安全與權限疑慮</li>
+          </ul>
+        </aside>
+      </section>
+
+      <section id="services" class="b-bottom">
+        <div class="section-title">SERVICE_SCOPE</div>
+        <div class="feature-grid">
+          <div class="feature-card">
+            <span class="mono-label">01</span>
+            <h3>策略諮詢</h3>
+            <p>產出可執行的 AI 機會清單與優先順序。</p>
+          </div>
+          <div class="feature-card">
+            <span class="mono-label">02</span>
+            <h3>工具導入</h3>
+            <p>選擇符合規模與風險偏好的方案與落地方式。</p>
+          </div>
+          <div class="feature-card">
+            <span class="mono-label">03</span>
+            <h3>POC 驗證</h3>
+            <p>快速做出原型，用小成本避免大方向錯誤。</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="contact" class="wrap">
+        <div class="contact-box">
+          <div style="padding: 40px; background: var(--fg); color: var(--bg);">
+            <span class="mono-label" style="color: var(--accent);">// CONTACT_US</span>
+            <h2 style="font-size: 48px; letter-spacing: -2px; text-transform: uppercase;">預約免費<br>初步診斷</h2>
+            <p style="font-family: var(--mono); opacity: 0.7;">30-60m Discovery Call</p>
+          </div>
+          <form style="padding: 20px;">
+            <div class="input-group">
+              <label class="mono-label">Name</label>
+              <input type="text" placeholder="Your Name">
+            </div>
+            <div class="input-group">
+              <label class="mono-label">Email</label>
+              <input type="email" placeholder="email@company.com">
+            </div>
+            <div class="input-group">
+              <label class="mono-label">Message</label>
+              <textarea placeholder="Describe your pain point..."></textarea>
+            </div>
+            <div style="padding: 20px;">
+              <button class="btn" type="submit" style="width: 100%;">SEND REQUEST</button>
+            </div>
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="wrap" style="display: flex; justify-content: space-between;">
+        <span>© 2026 AI CONSULTANT</span>
+        <span>TW_SMB_AI_SOLUTIONS</span>
+      </div>
+    </footer>
+
+  </body>
+</html>
