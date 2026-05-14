@@ -99,7 +99,7 @@
       transition: background .3s, border-color .3s;
     }
     [data-theme="light"] .topnav {
-      background: rgba(244, 246, 251, 0.88);
+      background: rgba(244, 246, 251, 0.92);
     }
 
     .topnav .logo {
@@ -117,7 +117,7 @@
     }
     .topnav .nav-links { display: flex; align-items: center; }
     .topnav .nav-links a {
-      margin-left: 28px;
+      margin-left: 22px;
       font-size: 14px;
       font-weight: 500;
       color: var(--text-muted);
@@ -127,7 +127,7 @@
     .topnav .nav-links a:hover { color: var(--text); }
 
     .btn-nav {
-      margin-left: 28px;
+      margin-left: 22px;
       padding: 8px 20px;
       background: var(--grad-accent);
       color: #fff !important;
@@ -140,59 +140,65 @@
     }
     .btn-nav:hover { opacity: .85; transform: translateY(-1px); text-decoration: none; }
 
-    /* ── Theme dropdown ── */
-    .theme-dropdown {
-      position: relative;
+    /* ── Theme toggle slider (matching other pages) ── */
+    .toggle-container {
+      display: flex;
+      align-items: center;
       margin-left: 20px;
-    }
-    .theme-toggle-btn {
-      background: var(--bg-card);
-      border: 1px solid var(--border-bright);
-      border-radius: 8px;
-      padding: 7px 13px;
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--text);
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      transition: border-color .2s, background .2s;
-      white-space: nowrap;
-    }
-    .theme-toggle-btn:hover { border-color: var(--cyan); }
-    .theme-toggle-btn i { font-size: 12px; color: var(--cyan); }
-    .theme-toggle-btn .caret { font-size: 10px; margin-left: 2px; color: var(--text-muted); }
-
-    .theme-menu {
-      display: none;
-      position: absolute;
-      top: calc(100% + 8px);
-      right: 0;
-      background: var(--bg-card);
-      border: 1px solid var(--border-bright);
-      border-radius: 10px;
-      padding: 6px;
-      min-width: 140px;
-      box-shadow: var(--shadow-card);
-      z-index: 200;
-    }
-    .theme-menu.open { display: block; }
-    .theme-menu-item {
-      display: flex;
-      align-items: center;
       gap: 8px;
-      padding: 9px 12px;
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--text-muted);
-      border-radius: 7px;
-      cursor: pointer;
-      transition: background .15s, color .15s;
     }
-    .theme-menu-item:hover { background: var(--bg-band); color: var(--text); }
-    .theme-menu-item.active { color: var(--cyan); background: rgba(0, 212, 255, .08); }
-    .theme-menu-item i { width: 16px; text-align: center; }
+    .theme-switch {
+      display: inline-block;
+      height: 26px;
+      position: relative;
+      width: 50px;
+      flex-shrink: 0;
+    }
+    .theme-switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+      position: absolute;
+    }
+    .slider {
+      background: #2a3a50;
+      bottom: 0;
+      cursor: pointer;
+      left: 0;
+      position: absolute;
+      right: 0;
+      top: 0;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      border-radius: 26px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+    .slider:before {
+      background-color: white;
+      bottom: 3px;
+      content: "";
+      height: 20px;
+      left: 3px;
+      position: absolute;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      width: 20px;
+      border-radius: 50%;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    }
+    input:checked + .slider {
+      background: linear-gradient(135deg, #c5cedf 0%, #dde3ef 100%);
+    }
+    input:checked + .slider:before {
+      transform: translateX(24px);
+      background-color: #6d28d9;
+    }
+    [data-theme="dark"] .slider {
+      background: linear-gradient(135deg, var(--purple) 0%, var(--cyan) 100%);
+    }
+    .toggle-icon {
+      font-size: 13px;
+      color: var(--text-muted);
+      transition: color .3s;
+    }
 
     /* ── Hero ── */
     .hero {
@@ -382,69 +388,157 @@
       margin-bottom: 56px;
     }
 
-    /* ── Project cards ── */
-    .projects-grid {
+    /* ── Bento project grid ── */
+    .bento-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-      gap: 28px;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
     }
-    .project-card {
+    .bento-card {
       background: var(--bg-card);
       border: 1px solid var(--border);
-      border-radius: var(--radius-card);
-      padding: 28px;
-      transition: box-shadow .25s, transform .25s, border-color .25s;
-      display: flex;
-      flex-direction: column;
+      border-radius: 20px;
+      padding: 40px;
       position: relative;
       overflow: hidden;
+      transition: transform .35s ease, border-color .3s, box-shadow .35s;
+      display: flex;
+      flex-direction: column;
     }
-    .project-card::before {
+    .bento-card.featured {
+      grid-column: span 2;
+    }
+
+    /* Glowing left accent bar */
+    .bento-card::before {
       content: '';
       position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 3px;
-      border-radius: var(--radius-card) var(--radius-card) 0 0;
+      top: 0; left: 0;
+      width: 3px; height: 100%;
+      border-radius: 20px 0 0 20px;
     }
-    .project-card:hover {
-      box-shadow: var(--shadow-card);
-      transform: translateY(-4px);
+    .bento-card.card-ticket::before { background: linear-gradient(180deg, var(--orange) 0%, var(--purple) 100%); }
+    .bento-card.card-office::before { background: linear-gradient(180deg, var(--cyan) 0%, var(--purple) 100%); }
+    .bento-card.card-invest::before { background: linear-gradient(180deg, var(--green) 0%, var(--cyan) 100%); }
+
+    /* Large ghost number */
+    .bento-num {
+      position: absolute;
+      top: 16px; right: 24px;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 120px;
+      font-weight: 900;
+      line-height: 1;
+      opacity: .04;
+      letter-spacing: -4px;
+      pointer-events: none;
+      user-select: none;
+      transition: opacity .3s;
+    }
+    .bento-card:hover .bento-num { opacity: .08; }
+
+    /* Hover effects */
+    [data-theme="dark"] .bento-card.card-ticket:hover {
+      border-color: rgba(255,107,53,.35);
+      box-shadow: 0 0 0 1px rgba(255,107,53,.08), 0 24px 60px rgba(0,0,0,.5);
+      transform: translateY(-8px);
+    }
+    [data-theme="dark"] .bento-card.card-office:hover {
+      border-color: rgba(0,212,255,.35);
+      box-shadow: 0 0 0 1px rgba(0,212,255,.08), 0 24px 60px rgba(0,0,0,.5);
+      transform: translateY(-8px);
+    }
+    [data-theme="dark"] .bento-card.card-invest:hover {
+      border-color: rgba(0,229,160,.35);
+      box-shadow: 0 0 0 1px rgba(0,229,160,.08), 0 24px 60px rgba(0,0,0,.5);
+      transform: translateY(-8px);
+    }
+    [data-theme="light"] .bento-card:hover {
       border-color: var(--border-bright);
+      box-shadow: 0 12px 40px rgba(15,17,32,.12);
+      transform: translateY(-6px);
     }
 
-    .card-ticket::before { background: linear-gradient(90deg, var(--orange), var(--purple)); }
-    .card-office::before { background: linear-gradient(90deg, var(--cyan), var(--purple)); }
-    .card-invest::before { background: linear-gradient(90deg, var(--green), var(--cyan)); }
+    /* Status badge */
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 12px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .5px;
+      text-transform: uppercase;
+      margin-bottom: 18px;
+      width: fit-content;
+    }
+    .status-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      animation: blink 2s ease-in-out infinite;
+    }
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: .25; }
+    }
+    .status-live { background: rgba(0,229,160,.1); color: var(--green); border: 1px solid rgba(0,229,160,.2); }
+    .status-live .status-dot { background: var(--green); }
+    .status-open { background: rgba(0,212,255,.1); color: var(--cyan); border: 1px solid rgba(0,212,255,.2); }
+    .status-open .status-dot { background: var(--cyan); }
 
-    /* hover glows on dark */
-    [data-theme="dark"] .card-ticket:hover { box-shadow: 0 12px 40px rgba(255,107,53,.10), var(--shadow-card); }
-    [data-theme="dark"] .card-office:hover { box-shadow: 0 12px 40px rgba(0,212,255,.10), var(--shadow-card); }
-    [data-theme="dark"] .card-invest:hover { box-shadow: 0 12px 40px rgba(0,229,160,.10), var(--shadow-card); }
-
-    .card-icon {
+    /* Card icon */
+    .bento-icon {
       width: 52px; height: 52px;
-      border-radius: 12px;
+      border-radius: 14px;
       display: flex; align-items: center; justify-content: center;
       font-size: 22px;
-      margin-bottom: 20px;
+      margin-bottom: 18px;
+      flex-shrink: 0;
     }
     .icon-orange { background: rgba(255,107,53,.12); color: var(--orange); }
     .icon-blue   { background: rgba(0,212,255,.12);  color: var(--cyan); }
     .icon-green  { background: rgba(0,229,160,.12);  color: var(--green); }
+    .icon-purple { background: rgba(155,94,245,.12); color: var(--purple); }
 
-    .card-title { font-size: 20px; font-weight: 700; margin-bottom: 10px; letter-spacing: -.3px; }
-    .card-desc {
+    .bento-title { font-size: 22px; font-weight: 700; margin-bottom: 12px; letter-spacing: -.3px; }
+    .bento-desc {
       font-size: 14.5px;
       color: var(--text-muted);
       line-height: 1.7;
+      margin-bottom: 22px;
       flex: 1;
+    }
+
+    /* Metrics row */
+    .metrics-row {
+      display: flex;
+      gap: 24px;
+      padding: 14px 0;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
       margin-bottom: 20px;
     }
-    .tag-list { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px; }
+    .metric { display: flex; flex-direction: column; gap: 2px; }
+    .metric-val {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 17px;
+      font-weight: 700;
+    }
+    .metric-key {
+      font-size: 10px;
+      color: var(--text-muted);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: .6px;
+    }
+
+    /* Tags */
+    .tag-list { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 22px; }
     .tag {
-      padding: 4px 12px;
+      padding: 4px 11px;
       border-radius: var(--radius-pill);
-      font-size: 12px;
+      font-size: 11.5px;
       font-weight: 600;
       border: 1px solid transparent;
     }
@@ -452,15 +546,15 @@
     .tag-blue   { background: rgba(0,212,255,.10);  color: var(--cyan);   border-color: rgba(0,212,255,.15); }
     .tag-green  { background: rgba(0,229,160,.10);  color: var(--green);  border-color: rgba(0,229,160,.15); }
     .tag-purple { background: rgba(155,94,245,.10); color: var(--purple); border-color: rgba(155,94,245,.15); }
-    .tag-red    { background: rgba(255,107,53,.10); color: var(--orange); border-color: rgba(255,107,53,.15); }
 
-    .card-footer-row {
+    /* Card footer */
+    .bento-footer {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      border-top: 1px solid var(--border);
-      padding-top: 18px;
       margin-top: auto;
+      padding-top: 16px;
+      border-top: 1px solid var(--border);
     }
     .card-lang { display: flex; align-items: center; gap: 6px; font-size: 13px; color: var(--text-muted); font-weight: 500; }
     .lang-dot { width: 10px; height: 10px; border-radius: 50%; }
@@ -479,6 +573,35 @@
     }
     .btn-gh:hover { border-color: var(--cyan); color: var(--cyan); text-decoration: none; }
 
+    /* Featured card (full-width) 2-col inner layout */
+    .featured-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: start;
+    }
+    .framework-chips {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+    .fw-chip {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 16px;
+      background: rgba(0,229,160,.05);
+      border: 1px solid rgba(0,229,160,.12);
+      border-radius: 12px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text);
+      transition: border-color .2s, background .2s;
+      cursor: default;
+    }
+    .fw-chip:hover { border-color: var(--green); background: rgba(0,229,160,.1); }
+    .fw-chip i { font-size: 14px; color: var(--green); width: 16px; flex-shrink: 0; }
+
     /* code inline */
     code {
       background: rgba(0,212,255,.08);
@@ -495,22 +618,58 @@
     .full-band { padding: 80px 40px; background: var(--bg-band); border-top: 1px solid var(--border); }
     .band-inner { max-width: 1280px; margin: 0 auto; }
 
-    .feature-grid {
+    /* ── Step-flow for deep-dives ── */
+    .step-flow {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-      gap: 24px;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 0;
       margin-top: 40px;
+      position: relative;
     }
-    .feature-item { display: flex; gap: 14px; align-items: flex-start; }
-    .feature-icon {
-      width: 40px; height: 40px;
-      border-radius: 10px;
+    .step-item {
+      display: flex;
+      flex-direction: column;
+      padding: 24px 28px;
+      position: relative;
+    }
+    .step-item:not(:last-child)::after {
+      content: '→';
+      position: absolute;
+      right: -10px;
+      top: 30px;
+      font-size: 20px;
+      color: var(--border-bright);
+      font-weight: 700;
+      z-index: 1;
+    }
+    .step-num {
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      border: 2px solid var(--border-bright);
       display: flex; align-items: center; justify-content: center;
-      font-size: 16px;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 14px;
       flex-shrink: 0;
+      transition: border-color .2s, color .2s;
     }
-    .feature-item h4 { font-size: 15px; margin-bottom: 4px; color: var(--text); }
-    .feature-item p { font-size: 13.5px; color: var(--text-muted); line-height: 1.6; }
+    .step-item:hover .step-num { border-color: var(--cyan); color: var(--cyan); }
+    .step-item h4 { font-size: 15px; margin-bottom: 6px; color: var(--text); }
+    .step-item p { font-size: 13.5px; color: var(--text-muted); line-height: 1.6; }
+
+    /* Colored step numbers per section */
+    .step-flow.orange .step-num { border-color: rgba(255,107,53,.3); color: var(--orange); }
+    .step-flow.orange .step-item:not(:last-child)::after { color: rgba(255,107,53,.3); }
+    .step-flow.orange .step-item:hover .step-num { border-color: var(--orange); }
+
+    .step-flow.blue .step-num { border-color: rgba(0,212,255,.3); color: var(--cyan); }
+    .step-flow.blue .step-item:not(:last-child)::after { color: rgba(0,212,255,.3); }
+    .step-flow.blue .step-item:hover .step-num { border-color: var(--cyan); }
+
+    .step-flow.green .step-num { border-color: rgba(0,229,160,.3); color: var(--green); }
+    .step-flow.green .step-item:not(:last-child)::after { color: rgba(0,229,160,.3); }
+    .step-flow.green .step-item:hover .step-num { border-color: var(--green); }
 
     /* arch / code box */
     .arch-box {
@@ -527,15 +686,59 @@
       position: relative;
     }
     [data-theme="light"] .arch-box { color: var(--purple); }
-    .arch-box::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      border-radius: var(--radius-card);
-      pointer-events: none;
+    .arch-box-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 16px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border);
     }
-    [data-theme="dark"] .arch-box::before {
-      box-shadow: inset 0 0 0 1px rgba(0,212,255,.08);
+    .arch-box-dot {
+      width: 12px; height: 12px;
+      border-radius: 50%;
+    }
+    .arch-box-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-muted);
+      letter-spacing: .5px;
+    }
+
+    /* Flow diagram for arch */
+    .flow-diagram {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      flex-wrap: wrap;
+      margin: 32px 0;
+      padding: 24px 28px;
+      background: var(--bg);
+      border: 1px solid var(--border-bright);
+      border-radius: var(--radius-card);
+      overflow-x: auto;
+    }
+    .flow-node {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      padding: 12px 18px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-bright);
+      border-radius: 10px;
+      font-size: 12px;
+      font-weight: 600;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .flow-node i { font-size: 18px; }
+    .flow-arrow {
+      font-size: 18px;
+      color: var(--border-bright);
+      padding: 0 8px;
+      flex-shrink: 0;
     }
 
     /* ── CTA section ── */
@@ -574,6 +777,14 @@
     .site-footer a:hover { color: var(--cyan); }
 
     /* ── Responsive ── */
+    @media (max-width: 900px) {
+      .bento-grid { grid-template-columns: 1fr; }
+      .bento-card.featured { grid-column: span 1; }
+      .featured-inner { grid-template-columns: 1fr; gap: 32px; }
+      .framework-chips { grid-template-columns: 1fr 1fr; }
+      .step-flow { grid-template-columns: 1fr 1fr; }
+      .step-item:not(:last-child)::after { display: none; }
+    }
     @media (max-width: 768px) {
       .topnav { padding: 14px 20px; }
       .topnav .nav-links { display: none; }
@@ -584,6 +795,10 @@
       .stats-strip { padding: 24px 20px; }
       .cta-section { padding: 70px 20px; }
       .site-footer { padding: 30px 20px; }
+      .step-flow { grid-template-columns: 1fr; }
+      .framework-chips { grid-template-columns: 1fr; }
+      .bento-card { padding: 28px 24px; }
+      .bento-num { font-size: 80px; }
     }
   </style>
 </head>
@@ -591,29 +806,23 @@
 
 <!-- ── Navigation ── -->
 <nav class="topnav">
-  <a href="index.html" class="logo">yen<span>.</span>dev</a>
+  <a href="https://yennanliu.github.io/" class="logo">yen<span>.</span>dev</a>
   <div class="nav-links">
-    <a href="index.html">Home</a>
-    <a href="portfolios.html">Portfolio</a>
-    <a href="about_me.html">About</a>
-    <a href="ai_builder.html" style="color:var(--cyan)">AI Builder</a>
-    <a href="contact.html">Contact</a>
+    <a href="https://yennanliu.github.io/">Home</a>
+    <a href="https://yennanliu.github.io/about_me.html">About Me</a>
+    <a href="https://yennanliu.github.io/portfolios.html">Portfolios</a>
+    <a href="https://yennanliu.github.io/ai_builder.html" style="color:var(--cyan)">AI Builder</a>
+    <a href="https://yennanliu.github.io/aws_architecture.html">AWS Architecture</a>
+    <a href="https://yennanliu.github.io/contact.html">Contact</a>
+    <a href="https://yennj12.js.org/yennj12_blog_V4/">Blog</a>
 
-    <!-- Theme dropdown -->
-    <div class="theme-dropdown" id="themeDropdown">
-      <button class="theme-toggle-btn" id="themeToggleBtn" onclick="toggleThemeMenu()">
-        <i class="fas fa-moon" id="themeIcon"></i>
-        <span id="themeLabel">Dark</span>
-        <span class="caret">▾</span>
-      </button>
-      <div class="theme-menu" id="themeMenu">
-        <div class="theme-menu-item active" id="item-dark" onclick="setTheme('dark')">
-          <i class="fas fa-moon"></i> Dark
-        </div>
-        <div class="theme-menu-item" id="item-light" onclick="setTheme('light')">
-          <i class="fas fa-sun"></i> Bright
-        </div>
-      </div>
+    <!-- Theme toggle slider -->
+    <div class="toggle-container">
+      <label class="theme-switch" for="theme-checkbox-ai" aria-label="Toggle dark/light mode">
+        <input type="checkbox" id="theme-checkbox-ai" />
+        <span class="slider"></span>
+      </label>
+      <span class="toggle-icon" id="themeIcon"><i class="fas fa-moon"></i></span>
     </div>
 
     <a href="https://github.com/yennanliu" target="_blank" class="btn-nav">
@@ -693,7 +902,7 @@
   </div>
 </div>
 
-<!-- ── Projects grid ── -->
+<!-- ── Projects bento grid ── -->
 <section id="projects" class="section">
   <div class="section-label" style="color:var(--purple)">
     <i class="fas fa-cubes"></i> AI Projects
@@ -704,33 +913,45 @@
     designed to be deployed, not just demoed.
   </p>
 
-  <div class="projects-grid">
+  <div class="bento-grid">
 
     <!-- Card 1 — Agent Ticket System -->
-    <div class="project-card card-ticket">
-      <div class="card-icon icon-orange">
+    <div class="bento-card card-ticket">
+      <div class="bento-num">01</div>
+      <div class="status-badge status-live">
+        <span class="status-dot"></span> Live
+      </div>
+      <div class="bento-icon icon-orange">
         <i class="fas fa-ticket-alt"></i>
       </div>
-      <div class="card-title">Agent Ticket System</div>
-      <p class="card-desc">
-        An AI-powered task ticket manager that analyses a software project
+      <div class="bento-title">Agent Ticket System</div>
+      <p class="bento-desc">
+        AI-powered task ticket manager that analyses a software project
         (local repo or GitHub URL) and automatically generates structured,
         actionable tickets — no database required. Think Jira, but driven by
         an LLM that reads your code.
       </p>
+      <div class="metrics-row">
+        <div class="metric">
+          <div class="metric-val" style="color:var(--orange)">0-DB</div>
+          <div class="metric-key">Architecture</div>
+        </div>
+        <div class="metric">
+          <div class="metric-val" style="color:var(--orange)">REST</div>
+          <div class="metric-key">API Layer</div>
+        </div>
+        <div class="metric">
+          <div class="metric-val" style="color:var(--orange)">Full</div>
+          <div class="metric-key">Test Suite</div>
+        </div>
+      </div>
       <div class="tag-list">
         <span class="tag tag-orange">LLM</span>
         <span class="tag tag-purple">FastAPI</span>
-        <span class="tag tag-red">Python</span>
+        <span class="tag tag-orange">Python</span>
         <span class="tag tag-orange">OpenAI</span>
       </div>
-      <ul style="font-size:13.5px;color:var(--text-muted);line-height:1.9;padding-left:18px;margin-bottom:0;">
-        <li>Point at any repo → get structured tickets instantly</li>
-        <li>REST API with <code>uvicorn</code> backend</li>
-        <li>Zero-database architecture — lightweight &amp; portable</li>
-        <li>Full test suite included</li>
-      </ul>
-      <div class="card-footer-row">
+      <div class="bento-footer">
         <div class="card-lang">
           <div class="lang-dot" style="background:#e34c26"></div> HTML / Python
         </div>
@@ -741,32 +962,43 @@
     </div>
 
     <!-- Card 2 — Agent Office System -->
-    <div class="project-card card-office">
-      <div class="card-icon icon-blue">
+    <div class="bento-card card-office">
+      <div class="bento-num">02</div>
+      <div class="status-badge status-live">
+        <span class="status-dot"></span> Live
+      </div>
+      <div class="bento-icon icon-blue">
         <i class="fas fa-building"></i>
       </div>
-      <div class="card-title">Agent Office System</div>
-      <p class="card-desc">
+      <div class="bento-title">Agent Office System</div>
+      <p class="bento-desc">
         Multi-agent office automation built on <strong>CrewAI</strong> and
         <strong>GPT-4o</strong>. Handles email drafting, document summarisation,
         and US stock analysis — all scheduled automatically and tracked in a
         Streamlit dashboard with SQLite cost logging.
       </p>
+      <div class="metrics-row">
+        <div class="metric">
+          <div class="metric-val" style="color:var(--cyan)">4</div>
+          <div class="metric-key">AI Crews</div>
+        </div>
+        <div class="metric">
+          <div class="metric-val" style="color:var(--cyan)">Auto</div>
+          <div class="metric-key">Scheduled</div>
+        </div>
+        <div class="metric">
+          <div class="metric-val" style="color:var(--cyan)">Cost</div>
+          <div class="metric-key">Tracked</div>
+        </div>
+      </div>
       <div class="tag-list">
         <span class="tag tag-blue">CrewAI</span>
         <span class="tag tag-blue">GPT-4o</span>
         <span class="tag tag-purple">Streamlit</span>
-        <span class="tag tag-red">Gmail API</span>
+        <span class="tag tag-blue">Gmail API</span>
         <span class="tag tag-blue">SQLite</span>
       </div>
-      <ul style="font-size:13.5px;color:var(--text-muted);line-height:1.9;padding-left:18px;margin-bottom:0;">
-        <li><strong>EmailCrew</strong> — draft &amp; send via Gmail SMTP</li>
-        <li><strong>DocSummaryCrew</strong> — PDF/DOCX → summary → email</li>
-        <li><strong>StockSummaryCrew</strong> — yfinance data + LLM insight</li>
-        <li>APScheduler + YAML for hands-free runs</li>
-        <li>SQLite tracks token cost, timing, status per run</li>
-      </ul>
-      <div class="card-footer-row">
+      <div class="bento-footer">
         <div class="card-lang">
           <div class="lang-dot" style="background:#3572A5"></div> Python
         </div>
@@ -776,38 +1008,67 @@
       </div>
     </div>
 
-    <!-- Card 3 — InvestSkill -->
-    <div class="project-card card-invest">
-      <div class="card-icon icon-green">
-        <i class="fas fa-chart-line"></i>
+    <!-- Card 3 — InvestSkill (featured full-width) -->
+    <div class="bento-card card-invest featured">
+      <div class="bento-num">03</div>
+      <div class="status-badge status-open">
+        <span class="status-dot"></span> Open Source
       </div>
-      <div class="card-title">InvestSkill</div>
-      <p class="card-desc">
-        Professional investment analysis frameworks for US stocks — works on
-        <em>every</em> AI platform. 21 structured prompt skills turn any LLM
-        into an institutional-quality analyst. No runtime; just prompts that
-        plug into Claude Code, Cursor, Gemini CLI, or ChatGPT.
-      </p>
-      <div class="tag-list">
-        <span class="tag tag-green">Claude Code</span>
-        <span class="tag tag-green">Gemini CLI</span>
-        <span class="tag tag-purple">Cursor</span>
-        <span class="tag tag-orange">Finance</span>
-        <span class="tag tag-blue">21 Frameworks</span>
-      </div>
-      <ul style="font-size:13.5px;color:var(--text-muted);line-height:1.9;padding-left:18px;margin-bottom:0;">
-        <li>Piotroski score, ROIC, moat rating, buy/hold/sell signal</li>
-        <li>Sector rotation, insider trading &amp; earnings-call analysis</li>
-        <li>Platform-agnostic — paste prompt, get analysis</li>
-        <li>Available as a Claude Code plugin marketplace package</li>
-      </ul>
-      <div class="card-footer-row">
-        <div class="card-lang">
-          <div class="lang-dot" style="background:#f1e05a"></div> JavaScript
+      <div class="featured-inner">
+        <div>
+          <div class="bento-icon icon-green">
+            <i class="fas fa-chart-line"></i>
+          </div>
+          <div class="bento-title">InvestSkill</div>
+          <p class="bento-desc">
+            Professional investment analysis frameworks for US stocks — works on
+            <em>every</em> AI platform. 21 structured prompt skills turn any LLM
+            into an institutional-quality analyst. No runtime; just prompts that
+            plug into Claude Code, Cursor, Gemini CLI, or ChatGPT.
+          </p>
+          <div class="metrics-row">
+            <div class="metric">
+              <div class="metric-val" style="color:var(--green)">21</div>
+              <div class="metric-key">Frameworks</div>
+            </div>
+            <div class="metric">
+              <div class="metric-val" style="color:var(--green)">4+</div>
+              <div class="metric-key">Platforms</div>
+            </div>
+            <div class="metric">
+              <div class="metric-val" style="color:var(--green)">0</div>
+              <div class="metric-key">Install Needed</div>
+            </div>
+          </div>
+          <div class="tag-list">
+            <span class="tag tag-green">Claude Code</span>
+            <span class="tag tag-green">Gemini CLI</span>
+            <span class="tag tag-purple">Cursor</span>
+            <span class="tag tag-orange">Finance</span>
+          </div>
+          <div class="bento-footer" style="border-top: none; padding-top: 0;">
+            <div class="card-lang">
+              <div class="lang-dot" style="background:#f1e05a"></div> JavaScript
+            </div>
+            <a href="https://github.com/yennanliu/InvestSkill" target="_blank" class="btn-gh">
+              <i class="fab fa-github"></i> View Repo
+            </a>
+          </div>
         </div>
-        <a href="https://github.com/yennanliu/InvestSkill" target="_blank" class="btn-gh">
-          <i class="fab fa-github"></i> View Repo
-        </a>
+        <div>
+          <div style="font-size: 12px; font-weight: 700; color: var(--text-muted); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 16px;">Included Frameworks</div>
+          <div class="framework-chips">
+            <div class="fw-chip"><i class="fas fa-search-dollar"></i> stock-eval</div>
+            <div class="fw-chip"><i class="fas fa-industry"></i> sector-analysis</div>
+            <div class="fw-chip"><i class="fas fa-user-tie"></i> insider-trading</div>
+            <div class="fw-chip"><i class="fas fa-microphone-alt"></i> earnings-call</div>
+            <div class="fw-chip"><i class="fas fa-university"></i> institutional</div>
+            <div class="fw-chip"><i class="fas fa-briefcase"></i> portfolio-review</div>
+            <div class="fw-chip"><i class="fas fa-chart-bar"></i> dcf-valuation</div>
+            <div class="fw-chip"><i class="fas fa-fire"></i> short-interest</div>
+            <div class="fw-chip"><i class="fas fa-star"></i> + 13 more</div>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -826,38 +1087,64 @@
       Every run is persisted to SQLite so you can audit token usage and cost.
     </p>
 
-    <div class="feature-grid">
-      <div class="feature-item">
-        <div class="feature-icon icon-blue"><i class="fas fa-envelope-open-text"></i></div>
-        <div>
-          <h4>EmailCrew</h4>
-          <p>Drafts email body from natural-language intent, then sends via Gmail SMTP using GmailSendTool.</p>
-        </div>
+    <!-- Flow diagram -->
+    <div class="flow-diagram">
+      <div class="flow-node" style="border-color:rgba(0,212,255,.3); color:var(--cyan)">
+        <i class="fas fa-terminal"></i>
+        <span>main.py</span>
       </div>
-      <div class="feature-item">
-        <div class="feature-icon icon-blue"><i class="fas fa-file-alt"></i></div>
-        <div>
-          <h4>DocSummaryCrew</h4>
-          <p>Reads PDF / DOCX / TXT → produces a structured summary → emails it automatically.</p>
-        </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node" style="border-color:rgba(0,212,255,.3)">
+        <i class="fas fa-clock"></i>
+        <span>APScheduler</span>
       </div>
-      <div class="feature-item">
-        <div class="feature-icon icon-blue"><i class="fas fa-chart-bar"></i></div>
-        <div>
-          <h4>StockSummaryCrew</h4>
-          <p>Pulls live yfinance data, runs GPT-4o analysis, delivers a market summary to your inbox.</p>
-        </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node" style="border-color:rgba(155,94,245,.3); color:var(--purple)">
+        <i class="fas fa-robot"></i>
+        <span>CrewAI Crews</span>
       </div>
-      <div class="feature-item">
-        <div class="feature-icon icon-blue"><i class="fas fa-database"></i></div>
-        <div>
-          <h4>SQLite Cost Ledger</h4>
-          <p>Every crew run logs token count, cost, status, and timing — visible in the Streamlit dashboard.</p>
-        </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node" style="border-color:rgba(0,229,160,.3); color:var(--cyan)">
+        <i class="fas fa-brain"></i>
+        <span>GPT-4o</span>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node" style="border-color:rgba(0,229,160,.3); color:var(--green)">
+        <i class="fas fa-database"></i>
+        <span>SQLite Ledger</span>
+      </div>
+    </div>
+
+    <div class="step-flow blue">
+      <div class="step-item">
+        <div class="step-num">01</div>
+        <h4>EmailCrew</h4>
+        <p>Drafts email body from natural-language intent, then sends via Gmail SMTP using GmailSendTool.</p>
+      </div>
+      <div class="step-item">
+        <div class="step-num">02</div>
+        <h4>DocSummaryCrew</h4>
+        <p>Reads PDF / DOCX / TXT → produces a structured summary → emails it automatically.</p>
+      </div>
+      <div class="step-item">
+        <div class="step-num">03</div>
+        <h4>StockSummaryCrew</h4>
+        <p>Pulls live yfinance data, runs GPT-4o analysis, delivers a market summary to your inbox.</p>
+      </div>
+      <div class="step-item">
+        <div class="step-num">04</div>
+        <h4>SQLite Cost Ledger</h4>
+        <p>Every crew run logs token count, cost, status, and timing — visible in the Streamlit dashboard.</p>
       </div>
     </div>
 
     <div class="arch-box">
+      <div class="arch-box-header">
+        <div class="arch-box-dot" style="background:#ff5f57"></div>
+        <div class="arch-box-dot" style="background:#febc2e"></div>
+        <div class="arch-box-dot" style="background:#28c840"></div>
+        <span class="arch-box-title">agent_office_system / architecture</span>
+      </div>
 main.py (CLI)
   ├── email      → EmailCrew      → Gmail Agent       → GmailSendTool
   ├── summarize  → DocSummaryCrew → Document Analyst   → DocReaderTool → GmailSendTool
@@ -882,53 +1169,47 @@ All agents → LLM: OpenAI GPT-4o → runs.db (SQLite)
       or as a plain-text input on any LLM. No installation for most platforms.
     </p>
 
-    <div class="feature-grid">
-      <div class="feature-item">
-        <div class="feature-icon icon-green"><i class="fas fa-search-dollar"></i></div>
-        <div>
-          <h4>stock-eval</h4>
-          <p>Piotroski score, ROIC, moat rating, FCF yield, buy / hold / sell signal in one shot.</p>
-        </div>
+    <div class="step-flow green">
+      <div class="step-item">
+        <div class="step-num">01</div>
+        <h4>stock-eval</h4>
+        <p>Piotroski score, ROIC, moat rating, FCF yield, buy / hold / sell signal in one shot.</p>
       </div>
-      <div class="feature-item">
-        <div class="feature-icon icon-green"><i class="fas fa-industry"></i></div>
-        <div>
-          <h4>sector-analysis</h4>
-          <p>Identify rotation opportunities and relative strength across S&amp;P 500 sectors.</p>
-        </div>
+      <div class="step-item">
+        <div class="step-num">02</div>
+        <h4>sector-analysis</h4>
+        <p>Identify rotation opportunities and relative strength across S&amp;P 500 sectors.</p>
       </div>
-      <div class="feature-item">
-        <div class="feature-icon icon-green"><i class="fas fa-user-tie"></i></div>
-        <div>
-          <h4>insider-trading</h4>
-          <p>Track SEC Form 4 filings — spot clusters of insider buying before they move.</p>
-        </div>
+      <div class="step-item">
+        <div class="step-num">03</div>
+        <h4>insider-trading</h4>
+        <p>Track SEC Form 4 filings — spot clusters of insider buying before they move.</p>
       </div>
-      <div class="feature-item">
-        <div class="feature-icon icon-green"><i class="fas fa-microphone-alt"></i></div>
-        <div>
-          <h4>earnings-call-analysis</h4>
-          <p>Sentiment, key themes, and management tone extracted from earnings transcripts.</p>
-        </div>
+      <div class="step-item">
+        <div class="step-num">04</div>
+        <h4>earnings-call-analysis</h4>
+        <p>Sentiment, key themes, and management tone extracted from earnings transcripts.</p>
       </div>
-      <div class="feature-item">
-        <div class="feature-icon icon-green"><i class="fas fa-university"></i></div>
-        <div>
-          <h4>institutional-ownership</h4>
-          <p>Track 13F filing changes — follow smart-money moves across hedge funds.</p>
-        </div>
+      <div class="step-item">
+        <div class="step-num">05</div>
+        <h4>institutional-ownership</h4>
+        <p>Track 13F filing changes — follow smart-money moves across hedge funds.</p>
       </div>
-      <div class="feature-item">
-        <div class="feature-icon icon-green"><i class="fas fa-briefcase"></i></div>
-        <div>
-          <h4>portfolio-review</h4>
-          <p>Evaluate allocation, risk-adjusted returns, and concentration for any portfolio.</p>
-        </div>
+      <div class="step-item">
+        <div class="step-num">06</div>
+        <h4>portfolio-review</h4>
+        <p>Evaluate allocation, risk-adjusted returns, and concentration for any portfolio.</p>
       </div>
     </div>
 
     <div style="margin-top:36px;">
       <div class="arch-box">
+        <div class="arch-box-header">
+          <div class="arch-box-dot" style="background:#ff5f57"></div>
+          <div class="arch-box-dot" style="background:#febc2e"></div>
+          <div class="arch-box-dot" style="background:#28c840"></div>
+          <span class="arch-box-title">InvestSkill / quick-start</span>
+        </div>
 # Claude Code — recommended, full slash-command support
 claude
 /plugin marketplace add yennanliu/InvestSkill
@@ -955,39 +1236,65 @@ cat prompts/stock-eval.md | pbcopy
       infers missing context, and writes tickets an engineer would actually act on.
     </p>
 
-    <div class="feature-grid">
-      <div class="feature-item">
-        <div class="feature-icon icon-orange"><i class="fas fa-code-branch"></i></div>
-        <div>
-          <h4>Repo Ingestion</h4>
-          <p>Feed a local path or a GitHub URL — the agent clones, indexes, and reads the codebase automatically.</p>
-        </div>
+    <!-- Flow diagram -->
+    <div class="flow-diagram">
+      <div class="flow-node" style="border-color:rgba(255,107,53,.3); color:var(--orange)">
+        <i class="fas fa-code-branch"></i>
+        <span>Repo / URL</span>
       </div>
-      <div class="feature-item">
-        <div class="feature-icon icon-orange"><i class="fas fa-magic"></i></div>
-        <div>
-          <h4>Auto-Generation</h4>
-          <p>LLM produces structured tickets with title, description, acceptance criteria, and priority.</p>
-        </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node" style="border-color:rgba(255,107,53,.3)">
+        <i class="fas fa-search"></i>
+        <span>Indexer</span>
       </div>
-      <div class="feature-item">
-        <div class="feature-icon icon-orange"><i class="fas fa-server"></i></div>
-        <div>
-          <h4>FastAPI Backend</h4>
-          <p>Clean REST API served by uvicorn — integrate with Jira, Trello, or any issue tracker via webhook.</p>
-        </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node" style="border-color:rgba(155,94,245,.3); color:var(--purple)">
+        <i class="fas fa-brain"></i>
+        <span>LLM Analysis</span>
       </div>
-      <div class="feature-item">
-        <div class="feature-icon icon-orange"><i class="fas fa-vial"></i></div>
-        <div>
-          <h4>Full Test Suite</h4>
-          <p>pytest suite covering API endpoints and storage layer — designed to run in CI from day one.</p>
-        </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node" style="border-color:rgba(255,107,53,.3); color:var(--orange)">
+        <i class="fas fa-ticket-alt"></i>
+        <span>Structured Tickets</span>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node" style="border-color:rgba(0,212,255,.3); color:var(--cyan)">
+        <i class="fas fa-plug"></i>
+        <span>REST API</span>
+      </div>
+    </div>
+
+    <div class="step-flow orange">
+      <div class="step-item">
+        <div class="step-num">01</div>
+        <h4>Repo Ingestion</h4>
+        <p>Feed a local path or a GitHub URL — the agent clones, indexes, and reads the codebase automatically.</p>
+      </div>
+      <div class="step-item">
+        <div class="step-num">02</div>
+        <h4>Auto-Generation</h4>
+        <p>LLM produces structured tickets with title, description, acceptance criteria, and priority.</p>
+      </div>
+      <div class="step-item">
+        <div class="step-num">03</div>
+        <h4>FastAPI Backend</h4>
+        <p>Clean REST API served by uvicorn — integrate with Jira, Trello, or any issue tracker via webhook.</p>
+      </div>
+      <div class="step-item">
+        <div class="step-num">04</div>
+        <h4>Full Test Suite</h4>
+        <p>pytest suite covering API endpoints and storage layer — designed to run in CI from day one.</p>
       </div>
     </div>
 
     <div style="margin-top:36px;">
       <div class="arch-box">
+        <div class="arch-box-header">
+          <div class="arch-box-dot" style="background:#ff5f57"></div>
+          <div class="arch-box-dot" style="background:#febc2e"></div>
+          <div class="arch-box-dot" style="background:#28c840"></div>
+          <span class="arch-box-title">agent_ticket_system / quick-start</span>
+        </div>
 # Quick Start
 uv sync --extra dev
 cp .env.example .env   # add OPENAI_API_KEY
@@ -1012,10 +1319,10 @@ uv run pytest tests/ -v
     Reach out or explore more of my work below.
   </p>
   <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;position:relative;">
-    <a href="contact.html" class="btn-primary-brand">
+    <a href="https://yennanliu.github.io/contact.html" class="btn-primary-brand">
       <i class="fas fa-paper-plane"></i> Get in Touch
     </a>
-    <a href="portfolios.html" class="btn-secondary-brand">
+    <a href="https://yennanliu.github.io/portfolios.html" class="btn-secondary-brand">
       <i class="fas fa-th-large"></i> Full Portfolio
     </a>
     <a href="https://github.com/yennanliu" target="_blank" class="btn-secondary-brand">
@@ -1027,10 +1334,10 @@ uv run pytest tests/ -v
 <!-- ── Footer ── -->
 <footer class="site-footer">
   <p>
-    &copy; 2026 <a href="index.html">Yen Nan Liu</a> &mdash;
+    &copy; 2026 <a href="https://yennanliu.github.io/">Yen Nan Liu</a> &mdash;
     Built with curiosity &amp; caffeine &nbsp;·&nbsp;
     <a href="https://github.com/yennanliu" target="_blank">GitHub</a> &nbsp;·&nbsp;
-    <a href="contact.html">Contact</a>
+    <a href="https://yennanliu.github.io/contact.html">Contact</a>
   </p>
 </footer>
 
@@ -1039,38 +1346,25 @@ uv run pytest tests/ -v
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
 
 <script>
-  // ── Theme management ──
+  // ── Theme management (slider toggle) ──
   const html = document.documentElement;
-  const ICON_MAP = { dark: 'fas fa-moon', light: 'fas fa-sun' };
-  const LABEL_MAP = { dark: 'Dark', light: 'Bright' };
 
   function applyTheme(theme) {
     html.setAttribute('data-theme', theme);
     localStorage.setItem('ai_builder_theme', theme);
-    document.getElementById('themeIcon').className = ICON_MAP[theme];
-    document.getElementById('themeLabel').textContent = LABEL_MAP[theme];
-    document.getElementById('item-dark').classList.toggle('active', theme === 'dark');
-    document.getElementById('item-light').classList.toggle('active', theme === 'light');
-  }
-
-  function setTheme(theme) {
-    applyTheme(theme);
-    closeThemeMenu();
-  }
-
-  function toggleThemeMenu() {
-    document.getElementById('themeMenu').classList.toggle('open');
-  }
-
-  function closeThemeMenu() {
-    document.getElementById('themeMenu').classList.remove('open');
-  }
-
-  // Close menu when clicking outside
-  document.addEventListener('click', function(e) {
-    if (!document.getElementById('themeDropdown').contains(e.target)) {
-      closeThemeMenu();
+    const icon = document.getElementById('themeIcon');
+    const checkbox = document.getElementById('theme-checkbox-ai');
+    if (theme === 'dark') {
+      icon.innerHTML = '<i class="fas fa-moon"></i>';
+      checkbox.checked = false;
+    } else {
+      icon.innerHTML = '<i class="fas fa-sun"></i>';
+      checkbox.checked = true;
     }
+  }
+
+  document.getElementById('theme-checkbox-ai').addEventListener('change', function() {
+    applyTheme(this.checked ? 'light' : 'dark');
   });
 
   // Init theme from storage or default dark
