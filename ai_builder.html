@@ -1,0 +1,909 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Builder — Yen's AI Projects</title>
+  <meta name="description" content="A showcase of AI-powered projects built by Yen — from agent ticket systems to investment analysis frameworks.">
+
+  <!-- Bootstrap CSS -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Font Awesome -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    /* ── Design tokens (Figma playful palette) ── */
+    :root {
+      --bg:            #ffffff;
+      --bg-alt:        #fafafa;
+      --text:          #0f0f14;
+      --text-muted:    #6e6e78;
+      --border:        #e5e5ea;
+
+      --green:  #0acf83;
+      --orange: #f24e1e;
+      --purple: #a259ff;
+      --red:    #ff7262;
+      --blue:   #1abcfe;
+
+      --radius-card: 16px;
+      --radius-pill: 999px;
+      --shadow-card: 0 8px 28px rgba(15, 15, 20, 0.09);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      font-size: 16px;
+      color: var(--text);
+      background: var(--bg);
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3, h4 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+    }
+
+    /* ── Top nav ── */
+    .topnav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 40px;
+      background: rgba(255,255,255,0.88);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .topnav .logo {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 800;
+      font-size: 20px;
+      color: var(--text);
+      text-decoration: none;
+    }
+    .topnav .logo span { color: var(--purple); }
+    .topnav .nav-links a {
+      margin-left: 28px;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color .2s;
+    }
+    .topnav .nav-links a:hover { color: var(--text); }
+    .btn-nav {
+      margin-left: 28px;
+      padding: 8px 20px;
+      background: var(--purple);
+      color: #fff !important;
+      border-radius: var(--radius-pill);
+      font-size: 14px;
+      font-weight: 600;
+    }
+    .btn-nav:hover { background: #8a3ef0; }
+
+    /* ── Hero ── */
+    .hero {
+      padding: 140px 40px 80px;
+      max-width: 1280px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 16px;
+      background: rgba(162, 89, 255, 0.10);
+      color: var(--purple);
+      border-radius: var(--radius-pill);
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+    .hero h1 {
+      font-size: clamp(36px, 5vw, 68px);
+      line-height: 1.1;
+      letter-spacing: -1.5px;
+      margin-bottom: 20px;
+    }
+    .hero h1 .accent-green  { color: var(--green); }
+    .hero h1 .accent-orange { color: var(--orange); }
+    .hero h1 .accent-blue   { color: var(--blue); }
+
+    .hero p {
+      font-size: 18px;
+      color: var(--text-muted);
+      line-height: 1.7;
+      margin-bottom: 36px;
+      max-width: 480px;
+    }
+    .hero-cta {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+    .btn-primary-brand {
+      padding: 14px 32px;
+      background: var(--purple);
+      color: #fff;
+      border-radius: 10px;
+      font-weight: 600;
+      font-size: 15px;
+      text-decoration: none;
+      transition: background .2s, transform .15s;
+      display: inline-flex; align-items: center; gap: 8px;
+    }
+    .btn-primary-brand:hover { background: #8a3ef0; transform: translateY(-2px); color: #fff; text-decoration: none; }
+    .btn-secondary-brand {
+      padding: 14px 32px;
+      border: 1.5px solid var(--purple);
+      color: var(--purple);
+      border-radius: 10px;
+      font-weight: 600;
+      font-size: 15px;
+      text-decoration: none;
+      transition: background .2s, transform .15s;
+      display: inline-flex; align-items: center; gap: 8px;
+    }
+    .btn-secondary-brand:hover { background: rgba(162,89,255,.08); transform: translateY(-2px); text-decoration: none; }
+
+    /* hero illustration */
+    .hero-visual {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .hero-blob {
+      width: 440px;
+      height: 440px;
+      position: relative;
+    }
+    .blob-ring {
+      position: absolute;
+      border-radius: 50%;
+      opacity: .15;
+      animation: pulse 4s ease-in-out infinite;
+    }
+    .blob-ring:nth-child(1) { inset: 0; background: var(--purple); animation-delay: 0s; }
+    .blob-ring:nth-child(2) { inset: 30px; background: var(--blue); animation-delay: .8s; }
+    .blob-ring:nth-child(3) { inset: 60px; background: var(--green); animation-delay: 1.6s; }
+    @keyframes pulse {
+      0%,100% { transform: scale(1); opacity: .15; }
+      50% { transform: scale(1.06); opacity: .22; }
+    }
+    .blob-center {
+      position: absolute;
+      inset: 80px;
+      background: linear-gradient(135deg, var(--purple) 0%, var(--blue) 100%);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .blob-center i { font-size: 72px; color: rgba(255,255,255,.9); }
+
+    /* floating cards around blob */
+    .float-card {
+      position: absolute;
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 10px 16px;
+      font-size: 13px;
+      font-weight: 600;
+      box-shadow: var(--shadow-card);
+      display: flex; align-items: center; gap: 8px;
+      animation: float 3s ease-in-out infinite;
+    }
+    .float-card:nth-child(5) { top: 30px; left: 10px; animation-delay: 0s; }
+    .float-card:nth-child(6) { top: 60px; right: 0px; animation-delay: .7s; }
+    .float-card:nth-child(7) { bottom: 50px; left: 20px; animation-delay: 1.4s; }
+    .float-card:nth-child(8) { bottom: 30px; right: 10px; animation-delay: 2.1s; }
+    @keyframes float {
+      0%,100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+    .dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+
+    /* ── Stats strip ── */
+    .stats-strip {
+      background: var(--bg-alt);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 28px 40px;
+    }
+    .stats-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+    .stat-item { text-align: center; }
+    .stat-num {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 36px;
+      font-weight: 800;
+    }
+    .stat-label { font-size: 13px; color: var(--text-muted); font-weight: 500; margin-top: 2px; }
+
+    /* ── Section wrapper ── */
+    .section {
+      padding: 80px 40px;
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+    .section-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+    .section-title {
+      font-size: clamp(28px, 4vw, 44px);
+      letter-spacing: -1px;
+      margin-bottom: 14px;
+    }
+    .section-sub {
+      font-size: 17px;
+      color: var(--text-muted);
+      max-width: 560px;
+      line-height: 1.7;
+      margin-bottom: 56px;
+    }
+
+    /* ── Project cards ── */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 28px;
+    }
+    .project-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-card);
+      padding: 28px;
+      transition: box-shadow .25s, transform .25s;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      overflow: hidden;
+    }
+    .project-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 4px;
+      border-radius: var(--radius-card) var(--radius-card) 0 0;
+    }
+    .project-card:hover {
+      box-shadow: var(--shadow-card);
+      transform: translateY(-4px);
+    }
+
+    /* per-card accent colors */
+    .card-ticket::before { background: var(--orange); }
+    .card-office::before { background: var(--blue); }
+    .card-invest::before { background: var(--green); }
+
+    .card-icon {
+      width: 52px; height: 52px;
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 22px;
+      margin-bottom: 20px;
+    }
+    .icon-orange { background: rgba(242,78,30,.12); color: var(--orange); }
+    .icon-blue   { background: rgba(26,188,254,.12); color: var(--blue); }
+    .icon-green  { background: rgba(10,207,131,.12); color: var(--green); }
+
+    .card-title {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 10px;
+      letter-spacing: -.3px;
+    }
+    .card-desc {
+      font-size: 14.5px;
+      color: var(--text-muted);
+      line-height: 1.7;
+      flex: 1;
+      margin-bottom: 20px;
+    }
+    .tag-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 24px;
+    }
+    .tag {
+      padding: 4px 12px;
+      border-radius: var(--radius-pill);
+      font-size: 12px;
+      font-weight: 600;
+    }
+    .tag-orange { background: rgba(242,78,30,.10); color: var(--orange); }
+    .tag-blue   { background: rgba(26,188,254,.10); color: var(--blue); }
+    .tag-green  { background: rgba(10,207,131,.10); color: var(--green); }
+    .tag-purple { background: rgba(162,89,255,.10); color: var(--purple); }
+    .tag-red    { background: rgba(255,114,98,.10); color: var(--red); }
+
+    .card-footer-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-top: 1px solid var(--border);
+      padding-top: 18px;
+      margin-top: auto;
+    }
+    .card-lang {
+      display: flex; align-items: center; gap: 6px;
+      font-size: 13px; color: var(--text-muted); font-weight: 500;
+    }
+    .lang-dot { width: 10px; height: 10px; border-radius: 50%; }
+    .btn-gh {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 18px;
+      border: 1.5px solid var(--border);
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text);
+      text-decoration: none;
+      transition: border-color .2s, color .2s;
+    }
+    .btn-gh:hover { border-color: var(--text); color: var(--text); text-decoration: none; }
+
+    /* ── Features band (tinted) ── */
+    .band-purple { background: rgba(162,89,255,.06); }
+    .band-blue   { background: rgba(26,188,254,.06); }
+    .band-green  { background: rgba(10,207,131,.06); }
+    .full-band {
+      padding: 80px 40px;
+    }
+    .band-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+
+    /* feature list */
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 24px;
+      margin-top: 40px;
+    }
+    .feature-item {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+    }
+    .feature-icon {
+      width: 40px; height: 40px;
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 16px;
+      flex-shrink: 0;
+    }
+    .feature-item h4 { font-size: 15px; margin-bottom: 4px; }
+    .feature-item p { font-size: 13.5px; color: var(--text-muted); line-height: 1.6; }
+
+    /* arch diagram */
+    .arch-box {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-card);
+      padding: 28px;
+      font-family: 'Courier New', monospace;
+      font-size: 12.5px;
+      color: var(--text-muted);
+      line-height: 1.9;
+      overflow-x: auto;
+      margin-top: 32px;
+    }
+
+    /* ── CTA section ── */
+    .cta-section {
+      padding: 100px 40px;
+      text-align: center;
+      background: linear-gradient(135deg, rgba(162,89,255,.08) 0%, rgba(26,188,254,.08) 50%, rgba(10,207,131,.08) 100%);
+      border-top: 1px solid var(--border);
+    }
+    .cta-section h2 {
+      font-size: clamp(28px, 4vw, 48px);
+      letter-spacing: -1px;
+      margin-bottom: 16px;
+    }
+    .cta-section p {
+      font-size: 17px;
+      color: var(--text-muted);
+      margin-bottom: 36px;
+    }
+
+    /* ── Footer ── */
+    .site-footer {
+      padding: 40px;
+      border-top: 1px solid var(--border);
+      text-align: center;
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+    .site-footer a { color: var(--text-muted); }
+    .site-footer a:hover { color: var(--text); }
+
+    /* ── Responsive ── */
+    @media (max-width: 768px) {
+      .topnav { padding: 14px 20px; }
+      .topnav .nav-links { display: none; }
+      .hero { grid-template-columns: 1fr; padding: 110px 20px 60px; gap: 40px; }
+      .hero-visual { display: none; }
+      .section { padding: 60px 20px; }
+      .full-band { padding: 60px 20px; }
+      .stats-strip { padding: 24px 20px; }
+      .cta-section { padding: 70px 20px; }
+      .site-footer { padding: 30px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── Navigation ── -->
+<nav class="topnav">
+  <a href="index.html" class="logo">yen<span>.</span>dev</a>
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="portfolios.html">Portfolio</a>
+    <a href="about_me.html">About</a>
+    <a href="contact.html">Contact</a>
+    <a href="https://github.com/yennanliu" target="_blank" class="btn-nav">
+      <i class="fab fa-github"></i> GitHub
+    </a>
+  </div>
+</nav>
+
+<!-- ── Hero ── -->
+<header class="hero">
+  <div class="hero-text">
+    <div class="hero-badge">
+      <i class="fas fa-robot"></i> AI Builder Showcase
+    </div>
+    <h1>
+      Building AI<br>
+      agents that<br>
+      <span class="accent-green">actually</span>
+      <span class="accent-orange"> ship.</span>
+    </h1>
+    <p>
+      A collection of production-ready AI projects — from multi-agent office automation
+      to AI-powered ticket management and investment analysis frameworks.
+    </p>
+    <div class="hero-cta">
+      <a href="#projects" class="btn-primary-brand">
+        <i class="fas fa-layer-group"></i> Explore Projects
+      </a>
+      <a href="https://github.com/yennanliu" target="_blank" class="btn-secondary-brand">
+        <i class="fab fa-github"></i> GitHub Profile
+      </a>
+    </div>
+  </div>
+
+  <div class="hero-visual">
+    <div class="hero-blob">
+      <div class="blob-ring"></div>
+      <div class="blob-ring"></div>
+      <div class="blob-ring"></div>
+      <div class="blob-center">
+        <i class="fas fa-brain"></i>
+      </div>
+      <!-- floating labels -->
+      <div class="float-card">
+        <div class="dot" style="background:var(--green)"></div>CrewAI Agents
+      </div>
+      <div class="float-card">
+        <div class="dot" style="background:var(--orange)"></div>Auto Tickets
+      </div>
+      <div class="float-card">
+        <div class="dot" style="background:var(--blue)"></div>GPT-4o Powered
+      </div>
+      <div class="float-card">
+        <div class="dot" style="background:var(--purple)"></div>21 Frameworks
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ── Stats ── -->
+<div class="stats-strip">
+  <div class="stats-inner">
+    <div class="stat-item">
+      <div class="stat-num" style="color:var(--orange)">3</div>
+      <div class="stat-label">AI Projects</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num" style="color:var(--blue)">21</div>
+      <div class="stat-label">Analysis Frameworks</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num" style="color:var(--green)">Multi</div>
+      <div class="stat-label">Agent Architectures</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num" style="color:var(--purple)">LLM</div>
+      <div class="stat-label">Powered at Core</div>
+    </div>
+  </div>
+</div>
+
+<!-- ── Projects grid ── -->
+<section id="projects" class="section">
+  <div class="section-label" style="color:var(--purple)">
+    <i class="fas fa-cubes"></i> AI Projects
+  </div>
+  <h2 class="section-title">What I've built</h2>
+  <p class="section-sub">
+    Each project tackles a real workflow pain-point using LLMs and autonomous agents —
+    designed to be deployed, not just demoed.
+  </p>
+
+  <div class="projects-grid">
+
+    <!-- Card 1 — Agent Ticket System -->
+    <div class="project-card card-ticket">
+      <div class="card-icon icon-orange">
+        <i class="fas fa-ticket-alt"></i>
+      </div>
+      <div class="card-title">Agent Ticket System</div>
+      <p class="card-desc">
+        An AI-powered task ticket manager that analyses a software project
+        (local repo or GitHub URL) and automatically generates structured,
+        actionable tickets — no database required. Think Jira, but driven by
+        an LLM that reads your code.
+      </p>
+      <div class="tag-list">
+        <span class="tag tag-orange">LLM</span>
+        <span class="tag tag-purple">FastAPI</span>
+        <span class="tag tag-red">Python</span>
+        <span class="tag tag-orange">OpenAI</span>
+      </div>
+      <ul style="font-size:13.5px;color:var(--text-muted);line-height:1.9;padding-left:18px;margin-bottom:0;">
+        <li>Point at any repo → get structured tickets instantly</li>
+        <li>REST API with <code style="background:#f5f5f5;padding:1px 5px;border-radius:4px;">uvicorn</code> backend</li>
+        <li>Zero-database architecture — lightweight & portable</li>
+        <li>Full test suite included</li>
+      </ul>
+      <div class="card-footer-row">
+        <div class="card-lang">
+          <div class="lang-dot" style="background:#e34c26"></div> HTML / Python
+        </div>
+        <a href="https://github.com/yennanliu/agent_ticket_system" target="_blank" class="btn-gh">
+          <i class="fab fa-github"></i> View Repo
+        </a>
+      </div>
+    </div>
+
+    <!-- Card 2 — Agent Office System -->
+    <div class="project-card card-office">
+      <div class="card-icon icon-blue">
+        <i class="fas fa-building"></i>
+      </div>
+      <div class="card-title">Agent Office System</div>
+      <p class="card-desc">
+        Multi-agent office automation built on <strong>CrewAI</strong> and
+        <strong>GPT-4o</strong>. Handles email drafting, document summarisation,
+        and US stock analysis — all scheduled automatically and tracked in a
+        Streamlit dashboard with SQLite cost logging.
+      </p>
+      <div class="tag-list">
+        <span class="tag tag-blue">CrewAI</span>
+        <span class="tag tag-blue">GPT-4o</span>
+        <span class="tag tag-purple">Streamlit</span>
+        <span class="tag tag-red">Gmail API</span>
+        <span class="tag tag-blue">SQLite</span>
+      </div>
+      <ul style="font-size:13.5px;color:var(--text-muted);line-height:1.9;padding-left:18px;margin-bottom:0;">
+        <li><strong>EmailCrew</strong> — draft & send via Gmail SMTP</li>
+        <li><strong>DocSummaryCrew</strong> — PDF/DOCX → summary → email</li>
+        <li><strong>StockSummaryCrew</strong> — yfinance data + LLM insight</li>
+        <li>APScheduler + YAML for hands-free runs</li>
+        <li>SQLite tracks token cost, timing, status per run</li>
+      </ul>
+      <div class="card-footer-row">
+        <div class="card-lang">
+          <div class="lang-dot" style="background:#3572A5"></div> Python
+        </div>
+        <a href="https://github.com/yennanliu/agent_office_system" target="_blank" class="btn-gh">
+          <i class="fab fa-github"></i> View Repo
+        </a>
+      </div>
+    </div>
+
+    <!-- Card 3 — InvestSkill -->
+    <div class="project-card card-invest">
+      <div class="card-icon icon-green">
+        <i class="fas fa-chart-line"></i>
+      </div>
+      <div class="card-title">InvestSkill</div>
+      <p class="card-desc">
+        Professional investment analysis frameworks for US stocks — works on
+        <em>every</em> AI platform. 21 structured prompt skills turn any LLM
+        into an institutional-quality analyst. No runtime; just prompts that
+        plug into Claude Code, Cursor, Gemini CLI, or ChatGPT.
+      </p>
+      <div class="tag-list">
+        <span class="tag tag-green">Claude Code</span>
+        <span class="tag tag-green">Gemini CLI</span>
+        <span class="tag tag-purple">Cursor</span>
+        <span class="tag tag-orange">Finance</span>
+        <span class="tag tag-blue">21 Frameworks</span>
+      </div>
+      <ul style="font-size:13.5px;color:var(--text-muted);line-height:1.9;padding-left:18px;margin-bottom:0;">
+        <li>Piotroski score, ROIC, moat rating, buy/hold/sell signal</li>
+        <li>Sector rotation, insider trading & earnings-call analysis</li>
+        <li>Platform-agnostic — paste prompt, get analysis</li>
+        <li>Available as a Claude Code plugin marketplace package</li>
+      </ul>
+      <div class="card-footer-row">
+        <div class="card-lang">
+          <div class="lang-dot" style="background:#f1e05a"></div> JavaScript
+        </div>
+        <a href="https://github.com/yennanliu/InvestSkill" target="_blank" class="btn-gh">
+          <i class="fab fa-github"></i> View Repo
+        </a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── Deep-dive: Agent Office System architecture ── -->
+<div class="full-band band-blue">
+  <div class="band-inner">
+    <div class="section-label" style="color:var(--blue)">
+      <i class="fas fa-sitemap"></i> Architecture Deep-Dive
+    </div>
+    <h2 class="section-title">Agent Office System — how it works</h2>
+    <p class="section-sub">
+      Four specialised CrewAI crews run independently via APScheduler.
+      Every run is persisted to SQLite so you can audit token usage and cost.
+    </p>
+
+    <div class="feature-grid">
+      <div class="feature-item">
+        <div class="feature-icon icon-blue"><i class="fas fa-envelope-open-text"></i></div>
+        <div>
+          <h4>EmailCrew</h4>
+          <p>Drafts email body from natural-language intent, then sends via Gmail SMTP using GmailSendTool.</p>
+        </div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon icon-blue"><i class="fas fa-file-alt"></i></div>
+        <div>
+          <h4>DocSummaryCrew</h4>
+          <p>Reads PDF / DOCX / TXT → produces a structured summary → emails it automatically.</p>
+        </div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon icon-blue"><i class="fas fa-chart-bar"></i></div>
+        <div>
+          <h4>StockSummaryCrew</h4>
+          <p>Pulls live yfinance data, runs GPT-4o analysis, delivers a market summary to your inbox.</p>
+        </div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon icon-blue"><i class="fas fa-database"></i></div>
+        <div>
+          <h4>SQLite Cost Ledger</h4>
+          <p>Every crew run logs token count, cost, status, and timing — visible in the Streamlit dashboard.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="arch-box">
+main.py (CLI)
+  ├── email      → EmailCrew      → Gmail Agent       → GmailSendTool
+  ├── summarize  → DocSummaryCrew → Document Analyst   → DocReaderTool → GmailSendTool
+  ├── stock      → StockCrew      → US Stock Analyst   → yfinance → GmailSendTool
+  ├── scheduler  → APScheduler   (reads schedule.yaml)
+  └── ui         → Streamlit Dashboard
+
+All agents → LLM: OpenAI GPT-4o → runs.db (SQLite)
+    </div>
+  </div>
+</div>
+
+<!-- ── Deep-dive: InvestSkill frameworks ── -->
+<div class="full-band band-green">
+  <div class="band-inner">
+    <div class="section-label" style="color:var(--green)">
+      <i class="fas fa-brain"></i> 21 Analysis Frameworks
+    </div>
+    <h2 class="section-title">InvestSkill — what's inside</h2>
+    <p class="section-sub">
+      Every framework is a battle-tested prompt that works as a slash command in Claude Code
+      or as a plain-text input on any LLM. No installation for most platforms.
+    </p>
+
+    <div class="feature-grid">
+      <div class="feature-item">
+        <div class="feature-icon icon-green"><i class="fas fa-search-dollar"></i></div>
+        <div>
+          <h4>stock-eval</h4>
+          <p>Piotroski score, ROIC, moat rating, FCF yield, buy / hold / sell signal in one shot.</p>
+        </div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon icon-green"><i class="fas fa-industry"></i></div>
+        <div>
+          <h4>sector-analysis</h4>
+          <p>Identify rotation opportunities and relative strength across S&P 500 sectors.</p>
+        </div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon icon-green"><i class="fas fa-user-tie"></i></div>
+        <div>
+          <h4>insider-trading</h4>
+          <p>Track SEC Form 4 filings — spot clusters of insider buying before they move.</p>
+        </div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon icon-green"><i class="fas fa-microphone-alt"></i></div>
+        <div>
+          <h4>earnings-call-analysis</h4>
+          <p>Sentiment, key themes, and management tone extracted from earnings transcripts.</p>
+        </div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon icon-green"><i class="fas fa-university"></i></div>
+        <div>
+          <h4>institutional-ownership</h4>
+          <p>Track 13F filing changes — follow smart-money moves across hedge funds.</p>
+        </div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon icon-green"><i class="fas fa-briefcase"></i></div>
+        <div>
+          <h4>portfolio-review</h4>
+          <p>Evaluate allocation, risk-adjusted returns, and concentration for any portfolio.</p>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top:36px;">
+      <div class="arch-box">
+# Claude Code — recommended, full slash-command support
+claude
+/plugin marketplace add yennanliu/InvestSkill
+/plugin install us-stock-analysis
+/us-stock-analysis:stock-eval AAPL
+
+# Cursor / Gemini CLI / ChatGPT — zero install
+cat prompts/stock-eval.md | pbcopy
+# → paste into any LLM
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── Agent Ticket System deep-dive ── -->
+<div class="full-band band-purple">
+  <div class="band-inner">
+    <div class="section-label" style="color:var(--orange)">
+      <i class="fas fa-ticket-alt"></i> Feature Spotlight
+    </div>
+    <h2 class="section-title">Agent Ticket System — how it works</h2>
+    <p class="section-sub">
+      Point it at a repo, get structured tickets. The LLM reads your code,
+      infers missing context, and writes tickets an engineer would actually act on.
+    </p>
+
+    <div class="feature-grid">
+      <div class="feature-item">
+        <div class="feature-icon icon-orange"><i class="fas fa-code-branch"></i></div>
+        <div>
+          <h4>Repo Ingestion</h4>
+          <p>Feed a local path or a GitHub URL — the agent clones, indexes, and reads the codebase automatically.</p>
+        </div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon icon-orange"><i class="fas fa-magic"></i></div>
+        <div>
+          <h4>Auto-Generation</h4>
+          <p>LLM produces structured tickets with title, description, acceptance criteria, and priority.</p>
+        </div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon icon-orange"><i class="fas fa-server"></i></div>
+        <div>
+          <h4>FastAPI Backend</h4>
+          <p>Clean REST API served by uvicorn — integrate with Jira, Trello, or any issue tracker via webhook.</p>
+        </div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon icon-orange"><i class="fas fa-vial"></i></div>
+        <div>
+          <h4>Full Test Suite</h4>
+          <p>pytest suite covering API endpoints and storage layer — designed to run in CI from day one.</p>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top:36px;">
+      <div class="arch-box">
+# Quick Start
+uv sync --extra dev
+cp .env.example .env   # add OPENAI_API_KEY
+uv run uvicorn main:app --reload
+open http://localhost:8000
+
+# Tests
+uv run pytest tests/ -v
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── CTA ── -->
+<section class="cta-section">
+  <div class="section-label" style="color:var(--purple);justify-content:center;">
+    <i class="fas fa-handshake"></i> Let's build together
+  </div>
+  <h2>Interested in AI-powered systems?</h2>
+  <p>
+    I'm always open to collaborating on ambitious agent projects.<br>
+    Reach out or explore more of my work below.
+  </p>
+  <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;">
+    <a href="contact.html" class="btn-primary-brand">
+      <i class="fas fa-paper-plane"></i> Get in Touch
+    </a>
+    <a href="portfolios.html" class="btn-secondary-brand">
+      <i class="fas fa-th-large"></i> Full Portfolio
+    </a>
+    <a href="https://github.com/yennanliu" target="_blank" class="btn-secondary-brand">
+      <i class="fab fa-github"></i> GitHub
+    </a>
+  </div>
+</section>
+
+<!-- ── Footer ── -->
+<footer class="site-footer">
+  <p>
+    &copy; 2026 <a href="index.html">Yen Nan Liu</a> &mdash;
+    Built with curiosity &amp; caffeine &nbsp;·&nbsp;
+    <a href="https://github.com/yennanliu" target="_blank">GitHub</a> &nbsp;·&nbsp;
+    <a href="contact.html">Contact</a>
+  </p>
+</footer>
+
+<!-- Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+  // Smooth scroll for anchor links
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+    });
+  });
+</script>
+
+</body>
+</html>
