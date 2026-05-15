@@ -32,19 +32,20 @@
 
       <style>
          :root {
-            --primary-color: #4a90e2;
-            --accent-cyan: #5ce1e6;
-            --accent-magenta: #c471ed;
-            --accent-purple: #9945ff;
-            --accent-coral: #ff6b6b;
-            --accent-orange: #ff8e53;
-            --text-primary: #212529;
-            --text-secondary: #6c757d;
-            --text-muted: #adb5bd;
+            --primary-color: #1a5fd4;
+            --accent-cyan: #00cfe0;
+            --accent-magenta: #cc00ff;
+            --accent-purple: #6600ee;
+            --accent-coral: #ff1a3c;
+            --accent-orange: #ff6600;
+            --accent-mint: #70ffd8;
+            --text-primary: #0a0a10;
+            --text-secondary: #484862;
+            --text-muted: #888899;
             --bg-primary: #ffffff;
-            --bg-secondary: #f8f9fa;
-            --bg-tertiary: #e9ecef;
-            --border-color: #dee2e6;
+            --bg-secondary: #f2f2f8;
+            --bg-tertiary: #e4e4f0;
+            --border-color: #c8c8de;
             --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
          }
 
@@ -171,26 +172,27 @@
          /* Dark Mode Styles */
          body.dark-mode {
             --primary-color: #4a90e2;
-            --accent-cyan: #5ce1e6;
-            --accent-magenta: #c471ed;
-            --accent-purple: #9945ff;
-            --accent-coral: #ff6b6b;
-            --accent-orange: #ff8e53;
+            --accent-cyan: #00cfe0;
+            --accent-magenta: #cc00ff;
+            --accent-purple: #8800ff;
+            --accent-coral: #ff1a3c;
+            --accent-orange: #ff6600;
+            --accent-mint: #70ffd8;
             --text-primary: #ffffff;
-            --text-secondary: #a0a0b0;
-            --text-muted: #6b7280;
-            --bg-primary: #121212;
-            --bg-secondary: #1a1a1a;
-            --bg-tertiary: #252525;
-            --border-color: #2d2d2d;
+            --text-secondary: #7878a0;
+            --text-muted: #484858;
+            --bg-primary: #07070e;
+            --bg-secondary: #0f0f1a;
+            --bg-tertiary: #181825;
+            --border-color: #1e1e30;
          }
 
          body.dark-mode {
-            background-color: #121212 !important;
+            background-color: #07070e !important;
             background-image:
-               radial-gradient(ellipse at 20% 30%, rgba(92, 225, 230, 0.15) 0%, transparent 50%),
-               radial-gradient(ellipse at 80% 70%, rgba(196, 113, 237, 0.12) 0%, transparent 50%),
-               radial-gradient(ellipse at 50% 50%, rgba(255, 107, 107, 0.08) 0%, transparent 60%) !important;
+               radial-gradient(ellipse at 20% 30%, rgba(0, 207, 224, 0.18) 0%, transparent 50%),
+               radial-gradient(ellipse at 80% 70%, rgba(204, 0, 255, 0.14) 0%, transparent 50%),
+               radial-gradient(ellipse at 50% 50%, rgba(255, 26, 60, 0.08) 0%, transparent 60%) !important;
             color: #ffffff !important;
          }
 
@@ -241,13 +243,14 @@
          }
 
          body.dark-mode .hero-minimal h1 {
+            color: #ffffff;
+         }
+
+         body.dark-mode .hero-minimal h1 .hero-accent {
             background: linear-gradient(135deg,
-               var(--text-primary) 0%,
-               var(--text-primary) 40%,
-               var(--accent-cyan) 60%,
-               var(--accent-magenta) 80%,
-               var(--accent-coral) 100%);
-            background-size: 200% auto;
+               #70ffd8 0%,
+               #00cfe0 45%,
+               #a8e8ff 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -501,11 +504,17 @@
          /* Large tablets and small laptops */
          @media (min-width: 1024px) and (max-width: 1366px) {
             .hero-minimal h1 {
-               font-size: 4rem;
+               font-size: 5rem;
+               letter-spacing: -3.5px;
             }
 
             .section-title {
-               font-size: 2.8rem;
+               font-size: 3.5rem;
+            }
+
+            .hero-content-wrapper {
+               grid-template-columns: 1fr 420px;
+               gap: 50px;
             }
          }
 
@@ -658,38 +667,56 @@
 
          .hero-minimal h1 {
             font-family: 'Outfit', sans-serif;
-            font-size: 4.5rem;
-            font-weight: 800;
-            line-height: 1.1;
-            margin-bottom: 30px;
-            letter-spacing: -3px;
-            background: linear-gradient(135deg,
-               var(--text-primary) 0%,
-               var(--text-primary) 30%,
-               var(--accent-cyan) 50%,
-               var(--accent-magenta) 70%,
-               var(--accent-coral) 100%);
-            background-size: 200% auto;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            animation: gradient-flow 8s ease infinite;
+            font-size: 5.5rem;
+            font-weight: 900;
+            line-height: 1.05;
+            margin-bottom: 32px;
+            letter-spacing: -4px;
+            color: var(--text-primary);
             position: relative;
          }
 
-         @keyframes gradient-flow {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
+         .hero-minimal h1 .hero-accent {
+            display: block;
+            background: linear-gradient(135deg,
+               var(--accent-mint, #70ffd8) 0%,
+               var(--accent-cyan) 45%,
+               #60c8ff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+         }
+
+         /* 2-column hero layout */
+         .hero-content-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 480px;
+            gap: 60px;
+            align-items: center;
+         }
+
+         .hero-visual {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+         }
+
+         #planet-chart {
+            width: 100%;
+            max-width: 480px;
+            height: auto;
+            border-radius: 50%;
          }
 
          .hero-minimal .subtitle {
-            font-size: 1.5rem;
+            font-size: 1.35rem;
             color: var(--text-secondary);
-            font-weight: 400;
+            font-weight: 500;
             margin-bottom: 50px;
-            max-width: 650px;
+            max-width: 580px;
             animation: fadeInUp 0.8s ease 0.2s both;
-            line-height: 1.7;
+            line-height: 1.65;
          }
 
          @keyframes fadeInUp {
@@ -795,10 +822,10 @@
 
          .section-title {
             font-family: 'Outfit', sans-serif;
-            font-size: 3rem;
-            font-weight: 800;
+            font-size: 3.75rem;
+            font-weight: 900;
             margin-bottom: 70px;
-            letter-spacing: -2px;
+            letter-spacing: -2.5px;
             position: relative;
             display: inline-block;
             color: var(--text-primary);
@@ -963,12 +990,12 @@
 
          .expertise-title {
             font-family: 'Outfit', sans-serif;
-            font-size: 1.75rem;
-            font-weight: 700;
+            font-size: 2rem;
+            font-weight: 800;
             margin-bottom: 15px;
             color: var(--text-primary);
             transition: all 0.3s ease;
-            line-height: 1.3;
+            line-height: 1.2;
          }
 
          .expertise-item:hover .expertise-title {
@@ -1383,12 +1410,12 @@
             }
 
             .hero-minimal h1 {
-               font-size: 3.2rem;
-               letter-spacing: -2.5px;
+               font-size: 3.8rem;
+               letter-spacing: -3px;
             }
 
             .hero-minimal .subtitle {
-               font-size: 1.35rem;
+               font-size: 1.2rem;
             }
 
             .expertise-section {
@@ -1436,8 +1463,13 @@
          /* Large Devices (desktops, 992px and up) */
          @media (min-width: 992px) and (max-width: 1199.98px) {
             .hero-minimal h1 {
-               font-size: 3.7rem;
-               letter-spacing: -2.8px;
+               font-size: 4.5rem;
+               letter-spacing: -3px;
+            }
+
+            .hero-content-wrapper {
+               grid-template-columns: 1fr 400px;
+               gap: 40px;
             }
 
             .expertise-grid {
@@ -1449,8 +1481,13 @@
          /* Extra Large Devices (large desktops, 1200px and up) */
          @media (min-width: 1200px) {
             .hero-minimal h1 {
-               font-size: 5rem;
-               letter-spacing: -3.5px;
+               font-size: 6.5rem;
+               letter-spacing: -5px;
+            }
+
+            .hero-content-wrapper {
+               grid-template-columns: 1fr 520px;
+               gap: 80px;
             }
 
             .expertise-grid {
@@ -1459,7 +1496,18 @@
             }
 
             .section-title {
-               font-size: 3.5rem;
+               font-size: 4.5rem;
+            }
+         }
+
+         /* Collapse planet chart on tablet/mobile */
+         @media (max-width: 991.98px) {
+            .hero-content-wrapper {
+               grid-template-columns: 1fr;
+            }
+
+            .hero-visual {
+               display: none;
             }
          }
 
@@ -1690,9 +1738,16 @@
       <!-- Hero Section -->
       <section id="main-content" class="hero-minimal">
          <div class="container">
-            <h1>Platform Engineer.<br>Infra Architect.<br>AI Builder.</h1>
-            <p class="subtitle">Backend engineer with hands-on AI expertise — designing scalable platforms, owning the full tech stack, and shipping production AI systems end to end.</p>
-            <a href="#expertise" class="cta-button"><span>Explore My Expertise</span></a>
+            <div class="hero-content-wrapper">
+               <div class="hero-text">
+                  <h1>AI Infrastructure.<br><span class="hero-accent">Built for Tomorrow.</span></h1>
+                  <p class="subtitle">Platform &amp; infrastructure engineer with hands-on AI expertise — designing scalable systems, owning the full tech stack, and shipping production AI end to end.</p>
+                  <a href="#expertise" class="cta-button"><span>Explore My Expertise</span></a>
+               </div>
+               <div class="hero-visual">
+                  <canvas id="planet-chart" width="480" height="480" aria-label="Tech skills orbit visualization"></canvas>
+               </div>
+            </div>
          </div>
       </section>
 
@@ -2089,6 +2144,127 @@
                animateOnScroll.observe(el);
             });
          }
+
+         // Planet chart — orbiting tech skills
+         (function() {
+            const canvas = document.getElementById('planet-chart');
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+            const W = canvas.width;
+            const H = canvas.height;
+            const cx = W / 2;
+            const cy = H / 2;
+
+            const isDark = () => document.body.classList.contains('dark-mode');
+
+            const planets = [
+               { label: 'Python',  radius: 72,  speed: 0.009,  size: 11, angle: 0,                color: '#3b82f6', trailColor: '#3b82f640' },
+               { label: 'AWS',     radius: 118, speed: 0.006,  size: 13, angle: Math.PI * 0.4,    color: '#f59e0b', trailColor: '#f59e0b40' },
+               { label: 'K8s',     radius: 158, speed: 0.0045, size: 11, angle: Math.PI * 0.9,    color: '#00cfe0', trailColor: '#00cfe040' },
+               { label: 'LLM',     radius: 195, speed: 0.003,  size: 12, angle: Math.PI * 1.6,    color: '#cc00ff', trailColor: '#cc00ff40' },
+               { label: 'CI/CD',   radius: 224, speed: 0.002,  size: 9,  angle: Math.PI * 0.25,   color: '#ff6600', trailColor: '#ff660040' },
+               { label: 'RAG',     radius: 96,  speed: 0.007,  size: 8,  angle: Math.PI * 1.2,    color: '#70ffd8', trailColor: '#70ffd840' },
+            ];
+
+            // Trail history
+            planets.forEach(p => { p.trail = []; });
+
+            let animFrame;
+
+            function draw() {
+               const dark = isDark();
+               ctx.clearRect(0, 0, W, H);
+
+               // Orbit rings
+               planets.forEach(p => {
+                  ctx.beginPath();
+                  ctx.setLineDash([3, 10]);
+                  ctx.arc(cx, cy, p.radius, 0, Math.PI * 2);
+                  ctx.strokeStyle = dark ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,20,0.07)';
+                  ctx.lineWidth = 1;
+                  ctx.stroke();
+                  ctx.setLineDash([]);
+               });
+
+               // Center star glow
+               const glow = ctx.createRadialGradient(cx, cy, 0, cx, cy, 36);
+               glow.addColorStop(0, dark ? 'rgba(0,207,224,0.95)' : 'rgba(26,95,212,0.9)');
+               glow.addColorStop(0.4, dark ? 'rgba(0,207,224,0.3)' : 'rgba(26,95,212,0.2)');
+               glow.addColorStop(1, 'rgba(0,0,0,0)');
+               ctx.beginPath();
+               ctx.arc(cx, cy, 36, 0, Math.PI * 2);
+               ctx.fillStyle = glow;
+               ctx.fill();
+
+               // Center star core
+               ctx.beginPath();
+               ctx.arc(cx, cy, 14, 0, Math.PI * 2);
+               ctx.fillStyle = dark ? '#00cfe0' : '#1a5fd4';
+               ctx.fill();
+
+               // Center label
+               ctx.fillStyle = dark ? '#ffffff' : '#ffffff';
+               ctx.font = '700 10px Outfit, sans-serif';
+               ctx.textAlign = 'center';
+               ctx.textBaseline = 'middle';
+               ctx.fillText('YEN', cx, cy);
+
+               // Draw planets and trails
+               planets.forEach(p => {
+                  p.angle += p.speed;
+                  const px = cx + Math.cos(p.angle) * p.radius;
+                  const py = cy + Math.sin(p.angle) * p.radius;
+
+                  // Add to trail
+                  p.trail.push({ x: px, y: py });
+                  if (p.trail.length > 28) p.trail.shift();
+
+                  // Draw trail
+                  for (let i = 1; i < p.trail.length; i++) {
+                     const alpha = i / p.trail.length;
+                     ctx.beginPath();
+                     ctx.arc(p.trail[i].x, p.trail[i].y, p.size * 0.35 * alpha, 0, Math.PI * 2);
+                     ctx.fillStyle = p.color + Math.floor(alpha * 80).toString(16).padStart(2, '0');
+                     ctx.fill();
+                  }
+
+                  // Planet glow
+                  const pg = ctx.createRadialGradient(px, py, 0, px, py, p.size * 2.5);
+                  pg.addColorStop(0, p.color + 'bb');
+                  pg.addColorStop(1, p.color + '00');
+                  ctx.beginPath();
+                  ctx.arc(px, py, p.size * 2.5, 0, Math.PI * 2);
+                  ctx.fillStyle = pg;
+                  ctx.fill();
+
+                  // Planet body
+                  ctx.beginPath();
+                  ctx.arc(px, py, p.size, 0, Math.PI * 2);
+                  ctx.fillStyle = p.color;
+                  ctx.fill();
+
+                  // Planet label — offset slightly outward
+                  const lx = cx + Math.cos(p.angle) * (p.radius + p.size + 16);
+                  const ly = cy + Math.sin(p.angle) * (p.radius + p.size + 16);
+                  ctx.fillStyle = dark ? 'rgba(255,255,255,0.88)' : 'rgba(10,10,16,0.82)';
+                  ctx.font = '700 11px Outfit, sans-serif';
+                  ctx.textAlign = 'center';
+                  ctx.textBaseline = 'middle';
+                  ctx.fillText(p.label, lx, ly);
+               });
+
+               animFrame = requestAnimationFrame(draw);
+            }
+
+            draw();
+
+            // Redraw on theme change so colors update
+            document.getElementById('theme-checkbox')?.addEventListener('change', () => {
+               cancelAnimationFrame(animFrame);
+               planets.forEach(p => { p.trail = []; });
+               draw();
+            });
+         })();
 
          // Debounce scroll and resize events for better performance
          let scrollTimeout;
