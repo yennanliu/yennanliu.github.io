@@ -2033,6 +2033,196 @@
             text-decoration: none;
             background: linear-gradient(135deg, #0051d5 0%, #4FB3D9 100%);
          }
+
+         /* ══ AWS Mastery Section — Redesigned ══ */
+         .aws-mastery-section {
+            position: relative;
+            padding: 120px 0;
+            background: #060810;
+            overflow: hidden;
+         }
+         .aws-mastery-section .aws-bg-grid {
+            position: absolute;
+            inset: 0;
+            background-image:
+               linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+               linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+            background-size: 52px 52px;
+            pointer-events: none;
+         }
+         .aws-mastery-section .aws-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(100px);
+            pointer-events: none;
+         }
+         .aws-mastery-section .aws-orb-1 {
+            width: 700px; height: 700px;
+            background: rgba(255, 107, 107, 0.08);
+            top: -250px; left: -180px;
+         }
+         .aws-mastery-section .aws-orb-2 {
+            width: 600px; height: 600px;
+            background: rgba(78, 205, 196, 0.08);
+            bottom: -150px; right: -150px;
+         }
+         .aws-mastery-inner { position: relative; z-index: 2; }
+         .aws-mastery-eyebrow {
+            font-family: 'Outfit', sans-serif;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 3px;
+            color: rgba(255,255,255,0.3);
+            text-transform: uppercase;
+            margin-bottom: 16px;
+         }
+         .aws-mastery-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: clamp(42px, 7vw, 86px);
+            font-weight: 900;
+            color: #fff;
+            letter-spacing: -0.04em;
+            line-height: 1.0;
+            margin-bottom: 16px;
+         }
+         .aws-grad-text {
+            background: linear-gradient(135deg, #FF6B6B 0%, #4ECDC4 55%, #45B7D1 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+         }
+         .aws-mastery-sub {
+            font-size: 17px;
+            color: rgba(255,255,255,0.4);
+            margin-bottom: 72px;
+            font-weight: 400;
+         }
+         .aws-skills-list {
+            max-width: 860px;
+            margin: 0 auto 80px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+         }
+         .aws-skill-row {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            background: rgba(255,255,255,0.025);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 14px;
+            padding: 18px 22px;
+            transition: transform 0.25s ease, background 0.25s ease, border-color 0.25s ease;
+            cursor: default;
+         }
+         .aws-skill-row:hover {
+            background: rgba(255,255,255,0.055);
+            border-color: rgba(255,255,255,0.13);
+            transform: translateX(6px);
+         }
+         .aws-skill-left {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            min-width: 200px;
+            flex-shrink: 0;
+         }
+         .aws-skill-badge {
+            width: 42px; height: 42px;
+            border-radius: 11px;
+            border: 1px solid;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 16px;
+            flex-shrink: 0;
+            transition: transform 0.25s ease;
+         }
+         .aws-skill-row:hover .aws-skill-badge {
+            transform: scale(1.12) rotate(-5deg);
+         }
+         .aws-skill-name {
+            font-family: 'Outfit', sans-serif;
+            font-size: 15px;
+            font-weight: 700;
+            color: #fff;
+            letter-spacing: -0.01em;
+         }
+         .aws-skill-sub {
+            font-size: 11.5px;
+            color: rgba(255,255,255,0.35);
+            margin-top: 2px;
+         }
+         .aws-skill-bar-wrap {
+            flex: 1;
+            height: 5px;
+            background: rgba(255,255,255,0.07);
+            border-radius: 5px;
+            overflow: hidden;
+         }
+         .aws-skill-bar {
+            height: 100%;
+            border-radius: 5px;
+            width: 0;
+            transition: width 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+         }
+         .aws-skill-bar.animated { width: var(--starget); }
+         .aws-skill-pct {
+            font-family: 'Outfit', sans-serif;
+            font-size: 20px;
+            font-weight: 800;
+            min-width: 54px;
+            text-align: right;
+            letter-spacing: -0.03em;
+            white-space: nowrap;
+         }
+         /* Stats strip */
+         .aws-stats-row {
+            max-width: 860px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 14px;
+            border-top: 1px solid rgba(255,255,255,0.07);
+            padding-top: 48px;
+         }
+         .aws-stat-card {
+            text-align: center;
+            padding: 24px 12px;
+            background: rgba(255,255,255,0.025);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 14px;
+            transition: background 0.25s ease, border-color 0.25s ease;
+         }
+         .aws-stat-card:hover {
+            background: rgba(255,255,255,0.055);
+            border-color: rgba(255,255,255,0.13);
+         }
+         .aws-stat-num {
+            font-family: 'Outfit', sans-serif;
+            font-size: 32px;
+            font-weight: 900;
+            color: #fff;
+            letter-spacing: -0.04em;
+         }
+         .aws-stat-lbl {
+            font-size: 11.5px;
+            color: rgba(255,255,255,0.38);
+            font-weight: 500;
+            margin-top: 4px;
+         }
+         @media (max-width: 767px) {
+            .aws-mastery-section { padding: 80px 0; }
+            .aws-skill-left { min-width: 140px; }
+            .aws-skill-sub { display: none; }
+            .aws-skill-pct { font-size: 17px; min-width: 44px; }
+            .aws-stats-row { grid-template-columns: repeat(2, 1fr); }
+            .aws-mastery-sub { margin-bottom: 48px; }
+         }
+         @media (max-width: 480px) {
+            .aws-skill-row { gap: 12px; padding: 14px 16px; }
+            .aws-skill-left { min-width: 120px; }
+            .aws-skill-name { font-size: 13px; }
+            .aws-stat-num { font-size: 26px; }
+         }
       </style>
    </head>
    <body>
@@ -2321,127 +2511,142 @@
          </div>
       </div>
 
-      <!-- AWS Skills Section - Modernized -->
-      <div class="container mb-5" style="padding: 60px 0;">
-         <div class="text-center mb-5" data-aos="fade-up">
-            <h2 style="font-family: 'Outfit', sans-serif; font-size: 5rem; font-weight: 900; margin-bottom: 2rem; letter-spacing: -0.04em; line-height: 1;">
-               AWS Expertise Level
-            </h2>
-            <p style="font-size: 1.8rem; color: var(--apple-secondary-text); max-width: 800px; margin: 0 auto; font-weight: 400; line-height: 1.4;">
-               Comprehensive cloud infrastructure expertise<br>across AWS services
-            </p>
+      <!-- AWS Expertise — Redesigned Dark Section -->
+      <section class="aws-mastery-section">
+         <div class="aws-bg-grid"></div>
+         <div class="aws-orb aws-orb-1"></div>
+         <div class="aws-orb aws-orb-2"></div>
+
+         <div class="container aws-mastery-inner">
+
+            <div class="text-center aws-mastery-header" data-aos="fade-up">
+               <div class="aws-mastery-eyebrow">CLOUD MASTERY</div>
+               <h2 class="aws-mastery-title">AWS Expertise <span class="aws-grad-text">Level.</span></h2>
+               <p class="aws-mastery-sub">Six core domains. Hands-on production experience at scale.</p>
+            </div>
+
+            <div class="aws-skills-list" data-aos="fade-up" data-aos-delay="150">
+
+               <div class="aws-skill-row" data-target="95">
+                  <div class="aws-skill-left">
+                     <div class="aws-skill-badge" style="color:#FF6B6B; background:rgba(255,107,107,0.1); border-color:rgba(255,107,107,0.22)">
+                        <i class="fas fa-server"></i>
+                     </div>
+                     <div>
+                        <div class="aws-skill-name">Compute</div>
+                        <div class="aws-skill-sub">EC2 · Lambda · ECS/EKS</div>
+                     </div>
+                  </div>
+                  <div class="aws-skill-bar-wrap">
+                     <div class="aws-skill-bar" style="background: linear-gradient(90deg, #FF6B6B, #FF9E9E); --starget: 95%"></div>
+                  </div>
+                  <div class="aws-skill-pct" style="color:#FF6B6B"><span class="aws-pct-num">0</span>%</div>
+               </div>
+
+               <div class="aws-skill-row" data-target="90">
+                  <div class="aws-skill-left">
+                     <div class="aws-skill-badge" style="color:#4ECDC4; background:rgba(78,205,196,0.1); border-color:rgba(78,205,196,0.22)">
+                        <i class="fas fa-database"></i>
+                     </div>
+                     <div>
+                        <div class="aws-skill-name">Storage</div>
+                        <div class="aws-skill-sub">S3 · EBS · EFS</div>
+                     </div>
+                  </div>
+                  <div class="aws-skill-bar-wrap">
+                     <div class="aws-skill-bar" style="background: linear-gradient(90deg, #4ECDC4, #7DDDD9); --starget: 90%"></div>
+                  </div>
+                  <div class="aws-skill-pct" style="color:#4ECDC4"><span class="aws-pct-num">0</span>%</div>
+               </div>
+
+               <div class="aws-skill-row" data-target="88">
+                  <div class="aws-skill-left">
+                     <div class="aws-skill-badge" style="color:#45B7D1; background:rgba(69,183,209,0.1); border-color:rgba(69,183,209,0.22)">
+                        <i class="fas fa-table"></i>
+                     </div>
+                     <div>
+                        <div class="aws-skill-name">Database</div>
+                        <div class="aws-skill-sub">RDS · DynamoDB · Redshift</div>
+                     </div>
+                  </div>
+                  <div class="aws-skill-bar-wrap">
+                     <div class="aws-skill-bar" style="background: linear-gradient(90deg, #45B7D1, #7ECFE0); --starget: 88%"></div>
+                  </div>
+                  <div class="aws-skill-pct" style="color:#45B7D1"><span class="aws-pct-num">0</span>%</div>
+               </div>
+
+               <div class="aws-skill-row" data-target="92">
+                  <div class="aws-skill-left">
+                     <div class="aws-skill-badge" style="color:#6BCB77; background:rgba(107,203,119,0.1); border-color:rgba(107,203,119,0.22)">
+                        <i class="fas fa-code-branch"></i>
+                     </div>
+                     <div>
+                        <div class="aws-skill-name">DevOps</div>
+                        <div class="aws-skill-sub">CodePipeline · CloudFormation · CDK</div>
+                     </div>
+                  </div>
+                  <div class="aws-skill-bar-wrap">
+                     <div class="aws-skill-bar" style="background: linear-gradient(90deg, #6BCB77, #94D99E); --starget: 92%"></div>
+                  </div>
+                  <div class="aws-skill-pct" style="color:#6BCB77"><span class="aws-pct-num">0</span>%</div>
+               </div>
+
+               <div class="aws-skill-row" data-target="87">
+                  <div class="aws-skill-left">
+                     <div class="aws-skill-badge" style="color:#FFD93D; background:rgba(255,217,61,0.1); border-color:rgba(255,217,61,0.22)">
+                        <i class="fas fa-shield-alt"></i>
+                     </div>
+                     <div>
+                        <div class="aws-skill-name">Security</div>
+                        <div class="aws-skill-sub">IAM · KMS · GuardDuty · WAF</div>
+                     </div>
+                  </div>
+                  <div class="aws-skill-bar-wrap">
+                     <div class="aws-skill-bar" style="background: linear-gradient(90deg, #FFD93D, #FFE577); --starget: 87%"></div>
+                  </div>
+                  <div class="aws-skill-pct" style="color:#FFD93D"><span class="aws-pct-num">0</span>%</div>
+               </div>
+
+               <div class="aws-skill-row" data-target="83">
+                  <div class="aws-skill-left">
+                     <div class="aws-skill-badge" style="color:#A78BFA; background:rgba(167,139,250,0.1); border-color:rgba(167,139,250,0.22)">
+                        <i class="fas fa-chart-line"></i>
+                     </div>
+                     <div>
+                        <div class="aws-skill-name">Analytics</div>
+                        <div class="aws-skill-sub">Kinesis · Glue · Athena · EMR</div>
+                     </div>
+                  </div>
+                  <div class="aws-skill-bar-wrap">
+                     <div class="aws-skill-bar" style="background: linear-gradient(90deg, #A78BFA, #C4B0FD); --starget: 83%"></div>
+                  </div>
+                  <div class="aws-skill-pct" style="color:#A78BFA"><span class="aws-pct-num">0</span>%</div>
+               </div>
+
+            </div>
+
+            <!-- Stats strip -->
+            <div class="aws-stats-row" data-aos="fade-up" data-aos-delay="300">
+               <div class="aws-stat-card">
+                  <div class="aws-stat-num">50+</div>
+                  <div class="aws-stat-lbl">AWS Services</div>
+               </div>
+               <div class="aws-stat-card">
+                  <div class="aws-stat-num">10+</div>
+                  <div class="aws-stat-lbl">Production Systems</div>
+               </div>
+               <div class="aws-stat-card">
+                  <div class="aws-stat-num">5+</div>
+                  <div class="aws-stat-lbl">Years Experience</div>
+               </div>
+               <div class="aws-stat-card">
+                  <div class="aws-stat-num">3</div>
+                  <div class="aws-stat-lbl">Certifications</div>
+               </div>
+            </div>
+
          </div>
-
-         <div class="row g-4">
-            <!-- Skill Card 1 -->
-            <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
-               <div class="expertise-card">
-                  <div class="expertise-icon-wrapper">
-                     <i class="fas fa-server expertise-icon"></i>
-                  </div>
-                  <div class="expertise-progress-circle">
-                     <svg width="140" height="140" viewBox="0 0 140 140" class="circular-chart">
-                        <circle class="circle-bg" cx="70" cy="70" r="60" />
-                        <circle class="circle-progress" cx="70" cy="70" r="60" stroke-dasharray="377" stroke-dashoffset="18.85" />
-                        <text x="70" y="75" class="circle-percentage">95%</text>
-                     </svg>
-                  </div>
-                  <h4 class="expertise-title">Compute</h4>
-                  <p class="expertise-services">EC2 • Lambda • ECS/EKS</p>
-               </div>
-            </div>
-
-            <!-- Skill Card 2 -->
-            <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
-               <div class="expertise-card">
-                  <div class="expertise-icon-wrapper">
-                     <i class="fas fa-database expertise-icon"></i>
-                  </div>
-                  <div class="expertise-progress-circle">
-                     <svg width="140" height="140" viewBox="0 0 140 140" class="circular-chart">
-                        <circle class="circle-bg" cx="70" cy="70" r="60" />
-                        <circle class="circle-progress" cx="70" cy="70" r="60" stroke-dasharray="377" stroke-dashoffset="37.7" />
-                        <text x="70" y="75" class="circle-percentage">90%</text>
-                     </svg>
-                  </div>
-                  <h4 class="expertise-title">Storage</h4>
-                  <p class="expertise-services">S3 • EBS • EFS</p>
-               </div>
-            </div>
-
-            <!-- Skill Card 3 -->
-            <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
-               <div class="expertise-card">
-                  <div class="expertise-icon-wrapper">
-                     <i class="fas fa-table expertise-icon"></i>
-                  </div>
-                  <div class="expertise-progress-circle">
-                     <svg width="140" height="140" viewBox="0 0 140 140" class="circular-chart">
-                        <circle class="circle-bg" cx="70" cy="70" r="60" />
-                        <circle class="circle-progress" cx="70" cy="70" r="60" stroke-dasharray="377" stroke-dashoffset="45.24" />
-                        <text x="70" y="75" class="circle-percentage">88%</text>
-                     </svg>
-                  </div>
-                  <h4 class="expertise-title">Database</h4>
-                  <p class="expertise-services">RDS • DynamoDB • Redshift</p>
-               </div>
-            </div>
-
-            <!-- Skill Card 4 -->
-            <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="400">
-               <div class="expertise-card">
-                  <div class="expertise-icon-wrapper">
-                     <i class="fas fa-code-branch expertise-icon"></i>
-                  </div>
-                  <div class="expertise-progress-circle">
-                     <svg width="140" height="140" viewBox="0 0 140 140" class="circular-chart">
-                        <circle class="circle-bg" cx="70" cy="70" r="60" />
-                        <circle class="circle-progress" cx="70" cy="70" r="60" stroke-dasharray="377" stroke-dashoffset="30.16" />
-                        <text x="70" y="75" class="circle-percentage">92%</text>
-                     </svg>
-                  </div>
-                  <h4 class="expertise-title">DevOps</h4>
-                  <p class="expertise-services">CodePipeline • CloudFormation</p>
-               </div>
-            </div>
-
-            <!-- Skill Card 5 -->
-            <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="500">
-               <div class="expertise-card">
-                  <div class="expertise-icon-wrapper">
-                     <i class="fas fa-shield-alt expertise-icon"></i>
-                  </div>
-                  <div class="expertise-progress-circle">
-                     <svg width="140" height="140" viewBox="0 0 140 140" class="circular-chart">
-                        <circle class="circle-bg" cx="70" cy="70" r="60" />
-                        <circle class="circle-progress" cx="70" cy="70" r="60" stroke-dasharray="377" stroke-dashoffset="49.01" />
-                        <text x="70" y="75" class="circle-percentage">87%</text>
-                     </svg>
-                  </div>
-                  <h4 class="expertise-title">Security</h4>
-                  <p class="expertise-services">IAM • KMS • GuardDuty</p>
-               </div>
-            </div>
-
-            <!-- Skill Card 6 -->
-            <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="600">
-               <div class="expertise-card">
-                  <div class="expertise-icon-wrapper">
-                     <i class="fas fa-chart-line expertise-icon"></i>
-                  </div>
-                  <div class="expertise-progress-circle">
-                     <svg width="140" height="140" viewBox="0 0 140 140" class="circular-chart">
-                        <circle class="circle-bg" cx="70" cy="70" r="60" />
-                        <circle class="circle-progress" cx="70" cy="70" r="60" stroke-dasharray="377" stroke-dashoffset="64.09" />
-                        <text x="70" y="75" class="circle-percentage">83%</text>
-                     </svg>
-                  </div>
-                  <h4 class="expertise-title">Analytics</h4>
-                  <p class="expertise-services">Kinesis • Glue • Athena</p>
-               </div>
-            </div>
-         </div>
-      </div>
+      </section>
 
       <!-- AI LLM Infrastructure -->
       <section class="ai-infra-section apple-section">
@@ -2668,6 +2873,39 @@
                  behavior: 'smooth'
              });
          });
+
+         // ── AWS Mastery: animated bars + counter-up ──
+         (function () {
+            var rows = document.querySelectorAll('.aws-skill-row');
+            if (!rows.length) return;
+
+            var obs = new IntersectionObserver(function (entries) {
+               entries.forEach(function (entry) {
+                  if (!entry.isIntersecting) return;
+                  var row = entry.target;
+                  var bar = row.querySelector('.aws-skill-bar');
+                  var numEl = row.querySelector('.aws-pct-num');
+                  var target = parseInt(row.dataset.target, 10);
+
+                  if (bar && !bar.classList.contains('animated')) {
+                     bar.classList.add('animated');
+                  }
+                  if (numEl && !numEl.dataset.counted) {
+                     numEl.dataset.counted = '1';
+                     var cur = 0;
+                     var step = (target / 1400) * 16;
+                     var timer = setInterval(function () {
+                        cur = Math.min(cur + step, target);
+                        numEl.textContent = Math.round(cur);
+                        if (cur >= target) clearInterval(timer);
+                     }, 16);
+                  }
+                  obs.unobserve(row);
+               });
+            }, { threshold: 0.3 });
+
+            rows.forEach(function (row) { obs.observe(row); });
+         })();
 
          // AI Infrastructure Carousel functionality
          document.addEventListener('DOMContentLoaded', function() {

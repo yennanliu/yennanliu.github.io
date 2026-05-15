@@ -785,6 +785,32 @@
       .step-flow { grid-template-columns: 1fr 1fr; }
       .step-item:not(:last-child)::after { display: none; }
     }
+    /* ── Typing animation ── */
+    .arch-typed {
+      display: block;
+      white-space: pre;
+      font-family: inherit;
+      font-size: inherit;
+      color: inherit;
+      line-height: inherit;
+    }
+    .typing-cursor {
+      display: inline-block;
+      width: 2px;
+      height: 1.05em;
+      background: currentColor;
+      vertical-align: text-bottom;
+      margin-left: 1px;
+      opacity: 1;
+    }
+    .typing-cursor.blink {
+      animation: blink-cursor 0.75s step-end infinite;
+    }
+    @keyframes blink-cursor {
+      0%, 100% { opacity: 1; }
+      50%       { opacity: 0; }
+    }
+
     @media (max-width: 768px) {
       .topnav { padding: 14px 20px; }
       .topnav .nav-links { display: none; }
@@ -1145,14 +1171,14 @@
         <div class="arch-box-dot" style="background:#28c840"></div>
         <span class="arch-box-title">agent_office_system / architecture</span>
       </div>
-main.py (CLI)
+<code class="arch-typed">main.py (CLI)
   ├── email      → EmailCrew      → Gmail Agent       → GmailSendTool
   ├── summarize  → DocSummaryCrew → Document Analyst   → DocReaderTool → GmailSendTool
   ├── stock      → StockCrew      → US Stock Analyst   → yfinance → GmailSendTool
   ├── scheduler  → APScheduler   (reads schedule.yaml)
   └── ui         → Streamlit Dashboard
 
-All agents → LLM: OpenAI GPT-4o → runs.db (SQLite)
+All agents → LLM: OpenAI GPT-4o → runs.db (SQLite)</code>
     </div>
   </div>
 </div>
@@ -1210,7 +1236,7 @@ All agents → LLM: OpenAI GPT-4o → runs.db (SQLite)
           <div class="arch-box-dot" style="background:#28c840"></div>
           <span class="arch-box-title">InvestSkill / quick-start</span>
         </div>
-# Claude Code — recommended, full slash-command support
+<code class="arch-typed"># Claude Code — recommended, full slash-command support
 claude
 /plugin marketplace add yennanliu/InvestSkill
 /plugin install us-stock-analysis
@@ -1218,7 +1244,7 @@ claude
 
 # Cursor / Gemini CLI / ChatGPT — zero install
 cat prompts/stock-eval.md | pbcopy
-# → paste into any LLM
+# → paste into any LLM</code>
       </div>
     </div>
   </div>
@@ -1295,14 +1321,14 @@ cat prompts/stock-eval.md | pbcopy
           <div class="arch-box-dot" style="background:#28c840"></div>
           <span class="arch-box-title">agent_ticket_system / quick-start</span>
         </div>
-# Quick Start
+<code class="arch-typed"># Quick Start
 uv sync --extra dev
 cp .env.example .env   # add OPENAI_API_KEY
 uv run uvicorn main:app --reload
 open http://localhost:8000
 
 # Tests
-uv run pytest tests/ -v
+uv run pytest tests/ -v</code>
       </div>
     </div>
   </div>
@@ -1370,6 +1396,45 @@ uv run pytest tests/ -v
   // Init theme from storage or default dark
   const saved = localStorage.getItem('ai_builder_theme') || 'dark';
   applyTheme(saved);
+
+  // ── Typewriter effect for arch-boxes ──
+  (function () {
+    const els = document.querySelectorAll('.arch-typed');
+    if (!els.length) return;
+
+    els.forEach(el => {
+      el.dataset.original = el.textContent;
+      el.textContent = '';
+    });
+
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting || entry.target.dataset.typed) return;
+        entry.target.dataset.typed = '1';
+        obs.unobserve(entry.target);
+        typeOut(entry.target);
+      });
+    }, { threshold: 0.25 });
+
+    els.forEach(el => obs.observe(el));
+
+    function typeOut(el) {
+      const text = el.dataset.original;
+      let i = 0;
+      const cursor = document.createElement('span');
+      cursor.className = 'typing-cursor';
+      el.appendChild(cursor);
+      const speed = 12;
+      (function tick() {
+        if (i < text.length) {
+          cursor.insertAdjacentText('beforebegin', text[i++]);
+          setTimeout(tick, speed);
+        } else {
+          cursor.classList.add('blink');
+        }
+      })();
+    }
+  })();
 
   // Smooth scroll
   document.querySelectorAll('a[href^="#"]').forEach(a => {
