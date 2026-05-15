@@ -2034,6 +2034,129 @@
             background: linear-gradient(135deg, #0051d5 0%, #4FB3D9 100%);
          }
 
+         /* ══ AI Infrastructure — Redesigned Dark ══ */
+         .ai-infra-redesigned {
+            background: #060810 !important;
+            position: relative;
+            overflow: hidden;
+         }
+         .ai-infra-redesigned::before { display: none !important; }
+         .ai-infra-particles {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            overflow: hidden;
+         }
+         .ai-particle {
+            position: absolute;
+            width: 4px; height: 4px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.22);
+            animation: ai-pfloat 8s ease-in-out infinite;
+         }
+         @keyframes ai-pfloat {
+            0%, 100% { transform: translateY(0) scale(1); opacity: 0.22; }
+            50%       { transform: translateY(-28px) scale(1.9); opacity: 0.65; }
+         }
+         .ai-infra-eyebrow-tag {
+            font-family: 'Outfit', sans-serif;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 3px;
+            color: rgba(255,255,255,0.28);
+            text-transform: uppercase;
+            margin-bottom: 16px;
+         }
+         @keyframes ai-title-shine {
+            0%   { background-position:  200% center; }
+            100% { background-position: -100% center; }
+         }
+         .ai-glass-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+            margin: 56px 0 64px;
+         }
+         .ai-glass-card {
+            position: relative;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-top: 2px solid var(--card-accent, #4ECDC4);
+            border-radius: 20px;
+            padding: 28px 24px;
+            overflow: hidden;
+            transition: transform 0.35s ease, background 0.35s ease, box-shadow 0.35s ease;
+         }
+         .ai-glass-card:hover {
+            background: rgba(255,255,255,0.07);
+            transform: translateY(-8px);
+            box-shadow: 0 24px 48px rgba(0,0,0,0.35);
+         }
+         .ai-glass-glow {
+            position: absolute;
+            top: -60px; left: 50%;
+            transform: translateX(-50%);
+            width: 180px; height: 180px;
+            border-radius: 50%;
+            background: radial-gradient(circle, var(--card-accent, #4ECDC4), transparent 65%);
+            opacity: 0.06;
+            pointer-events: none;
+            transition: opacity 0.35s ease;
+         }
+         .ai-glass-card:hover .ai-glass-glow { opacity: 0.16; }
+         .ai-glass-icon {
+            width: 50px; height: 50px;
+            border-radius: 13px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.08);
+            display: flex; align-items: center; justify-content: center;
+            margin-bottom: 18px;
+            transition: transform 0.3s ease, background 0.3s ease;
+         }
+         .ai-glass-card:hover .ai-glass-icon {
+            background: rgba(255,255,255,0.1);
+            transform: scale(1.08) rotate(-4deg);
+         }
+         .ai-glass-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 17px;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 10px;
+            letter-spacing: -0.02em;
+         }
+         .ai-glass-desc {
+            font-size: 13.5px;
+            line-height: 1.6;
+            color: rgba(255,255,255,0.42);
+            margin-bottom: 18px;
+         }
+         .ai-glass-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+         }
+         .ai-glass-tag {
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 600;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.08);
+            color: rgba(255,255,255,0.45);
+            transition: all 0.25s ease;
+         }
+         .ai-glass-card:hover .ai-glass-tag {
+            border-color: var(--card-accent, #4ECDC4);
+            color: var(--card-accent, #4ECDC4);
+         }
+         @media (max-width: 900px) {
+            .ai-glass-grid { grid-template-columns: repeat(2, 1fr); }
+         }
+         @media (max-width: 576px) {
+            .ai-glass-grid { grid-template-columns: 1fr; }
+         }
+
          /* ══ AWS Mastery Section — Redesigned ══ */
          .aws-mastery-section {
             position: relative;
@@ -2648,137 +2771,118 @@
          </div>
       </section>
 
-      <!-- AI LLM Infrastructure -->
-      <section class="ai-infra-section apple-section">
-         <div class="container">
-            <div class="ai-infra-hero text-center mb-5" data-aos="fade-up">
-               <div class="ai-infra-title-wrapper">
-                  <h2 class="ai-infra-title">
-                     <span class="ai-title-main">AI Infrastructure.</span>
-                     <br>
-                     <span class="ai-title-sub glitch-text" data-text="Built for Tomorrow.">Built for Tomorrow.</span>
-                  </h2>
-                  <p class="ai-infra-subtitle">From neural networks to production systems, architect the future of artificial intelligence.</p>
-               </div>
+      <!-- AI Infrastructure — Redesigned Dark Grid -->
+      <section class="ai-infra-section ai-infra-redesigned apple-section">
+         <div class="ai-infra-particles">
+            <div class="ai-particle" style="top:12%;left:7%;animation-delay:0s;width:5px;height:5px"></div>
+            <div class="ai-particle" style="top:22%;left:90%;animation-delay:1.3s"></div>
+            <div class="ai-particle" style="top:58%;left:4%;animation-delay:2.2s;width:3px;height:3px"></div>
+            <div class="ai-particle" style="top:78%;left:85%;animation-delay:0.7s;width:5px;height:5px"></div>
+            <div class="ai-particle" style="top:40%;left:94%;animation-delay:1.9s"></div>
+            <div class="ai-particle" style="top:68%;left:48%;animation-delay:3.1s;width:3px;height:3px"></div>
+         </div>
+
+         <div class="container position-relative" style="z-index:2">
+            <div class="text-center" data-aos="fade-up">
+               <div class="ai-infra-eyebrow-tag">LLM INFRASTRUCTURE</div>
+               <h2 class="ai-infra-title">
+                  <span class="ai-title-main" style="background:linear-gradient(135deg,#fff 0%,rgba(255,255,255,0.72) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">AI Infrastructure.</span>
+                  <br>
+                  <span class="ai-title-sub glitch-text" data-text="Built for Tomorrow." style="background:linear-gradient(90deg,#4ECDC4,#fff 50%,#A78BFA);background-size:300% 100%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:ai-title-shine 4s linear infinite">Built for Tomorrow.</span>
+               </h2>
+               <p class="ai-infra-subtitle" style="color:rgba(255,255,255,0.42)">From neural networks to production systems, architect the future of artificial intelligence.</p>
             </div>
 
-            <div class="ai-carousel-container" data-aos="fade-up" data-aos-delay="200">
-               <div class="ai-carousel-wrapper">
-                  <div class="ai-carousel-track">
-                     <div class="ai-infra-card">
-                        <div class="ai-infra-card-icon">
-                           <svg viewBox="0 0 24 24" class="ai-icon">
-                              <path d="M12 2L2 7L12 12L22 7L12 2M2 17L12 22L22 17M2 12L12 17L22 12" fill="currentColor"/>
-                           </svg>
-                        </div>
-                        <div class="ai-infra-card-content">
-                           <h3 class="ai-infra-card-title">Neural Training</h3>
-                           <p class="ai-infra-card-description">Distributed training pipelines with automatic scaling and optimization</p>
-                           <div class="ai-infra-tech-stack">
-                              <span class="ai-tech-tag">SageMaker</span>
-                              <span class="ai-tech-tag">EC2 P4</span>
-                              <span class="ai-tech-tag">PyTorch</span>
-                           </div>
-                        </div>
-                     </div>
+            <div class="ai-glass-grid" data-aos="fade-up" data-aos-delay="150">
 
-                     <div class="ai-infra-card">
-                        <div class="ai-infra-card-icon">
-                           <svg viewBox="0 0 24 24" class="ai-icon">
-                              <path d="M4 6H20V16H4M20 18A2 2 0 0 0 22 16V6C22 4.89 21.1 4 20 4H4A2 2 0 0 0 2 6V16A2 2 0 0 0 4 18H4L6 20V18H18L20 18Z" fill="currentColor"/>
-                           </svg>
-                        </div>
-                        <div class="ai-infra-card-content">
-                           <h3 class="ai-infra-card-title">Cluster Orchestration</h3>
-                           <p class="ai-infra-card-description">GPU-accelerated compute clusters with intelligent resource allocation</p>
-                           <div class="ai-infra-tech-stack">
-                              <span class="ai-tech-tag">EKS</span>
-                              <span class="ai-tech-tag">Karpenter</span>
-                              <span class="ai-tech-tag">NVIDIA</span>
-                           </div>
-                        </div>
-                     </div>
-
-                     <div class="ai-infra-card">
-                        <div class="ai-infra-card-icon">
-                           <svg viewBox="0 0 24 24" class="ai-icon">
-                              <path d="M12 16L16 12H13V8H11V12H8L12 16M12 2A10 10 0 0 0 2 12A10 10 0 0 0 12 22A10 10 0 0 0 22 12A10 10 0 0 0 12 2Z" fill="currentColor"/>
-                           </svg>
-                        </div>
-                        <div class="ai-infra-card-content">
-                           <h3 class="ai-infra-card-title">Model Deployment</h3>
-                           <p class="ai-infra-card-description">Real-time inference endpoints with A/B testing and monitoring</p>
-                           <div class="ai-infra-tech-stack">
-                              <span class="ai-tech-tag">Bedrock</span>
-                              <span class="ai-tech-tag">Lambda</span>
-                              <span class="ai-tech-tag">API Gateway</span>
-                           </div>
-                        </div>
-                     </div>
-
-                     <div class="ai-infra-card">
-                        <div class="ai-infra-card-icon">
-                           <svg viewBox="0 0 24 24" class="ai-icon">
-                              <path d="M12 3C7.58 3 4 6.58 4 11C4 16.55 12 21 12 21S20 16.55 20 11C20 6.58 16.42 3 12 3M12 13A2 2 0 0 1 10 11A2 2 0 0 1 12 9A2 2 0 0 1 14 11A2 2 0 0 1 12 13Z" fill="currentColor"/>
-                           </svg>
-                        </div>
-                        <div class="ai-infra-card-content">
-                           <h3 class="ai-infra-card-title">Vector Intelligence</h3>
-                           <p class="ai-infra-card-description">High-performance embedding storage with semantic search capabilities</p>
-                           <div class="ai-infra-tech-stack">
-                              <span class="ai-tech-tag">OpenSearch</span>
-                              <span class="ai-tech-tag">Pinecone</span>
-                              <span class="ai-tech-tag">RAG</span>
-                           </div>
-                        </div>
-                     </div>
-
-                     <div class="ai-infra-card">
-                        <div class="ai-infra-card-icon">
-                           <svg viewBox="0 0 24 24" class="ai-icon">
-                              <path d="M9 3V18H12V3H9M12 5L16 6.5V9.5L12 8V5M12 10L16 11.5V14.5L12 13V10M12 15L16 16.5V19.5L12 18V15Z" fill="currentColor"/>
-                           </svg>
-                        </div>
-                        <div class="ai-infra-card-content">
-                           <h3 class="ai-infra-card-title">Data Pipeline</h3>
-                           <p class="ai-infra-card-description">Real-time data processing and feature engineering at scale</p>
-                           <div class="ai-infra-tech-stack">
-                              <span class="ai-tech-tag">Kinesis</span>
-                              <span class="ai-tech-tag">Glue</span>
-                              <span class="ai-tech-tag">EMR</span>
-                           </div>
-                        </div>
-                     </div>
-
-                     <div class="ai-infra-card">
-                        <div class="ai-infra-card-icon">
-                           <svg viewBox="0 0 24 24" class="ai-icon">
-                              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" fill="currentColor"/>
-                           </svg>
-                        </div>
-                        <div class="ai-infra-card-content">
-                           <h3 class="ai-infra-card-title">MLOps Platform</h3>
-                           <p class="ai-infra-card-description">End-to-end machine learning lifecycle management and automation</p>
-                           <div class="ai-infra-tech-stack">
-                              <span class="ai-tech-tag">MLflow</span>
-                              <span class="ai-tech-tag">Kubeflow</span>
-                              <span class="ai-tech-tag">Airflow</span>
-                           </div>
-                        </div>
-                     </div>
+               <div class="ai-glass-card" style="--card-accent:#FF6B6B">
+                  <div class="ai-glass-glow"></div>
+                  <div class="ai-glass-icon" style="color:#FF6B6B">
+                     <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L2 7L12 12L22 7L12 2M2 17L12 22L22 17M2 12L12 17L22 12"/></svg>
+                  </div>
+                  <h3 class="ai-glass-title">Neural Training</h3>
+                  <p class="ai-glass-desc">Distributed training pipelines with automatic scaling and optimization</p>
+                  <div class="ai-glass-tags">
+                     <span class="ai-glass-tag">SageMaker</span>
+                     <span class="ai-glass-tag">EC2 P4</span>
+                     <span class="ai-glass-tag">PyTorch</span>
                   </div>
                </div>
 
-               <!-- Carousel Indicators -->
-               <div class="ai-carousel-indicators">
-                  <span class="indicator active" data-slide="0"></span>
-                  <span class="indicator" data-slide="1"></span>
-                  <span class="indicator" data-slide="2"></span>
+               <div class="ai-glass-card" style="--card-accent:#4ECDC4">
+                  <div class="ai-glass-glow"></div>
+                  <div class="ai-glass-icon" style="color:#4ECDC4">
+                     <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M4 6H20V16H4M20 18A2 2 0 0 0 22 16V6C22 4.89 21.1 4 20 4H4A2 2 0 0 0 2 6V16A2 2 0 0 0 4 18H4L6 20V18H18L20 18Z"/></svg>
+                  </div>
+                  <h3 class="ai-glass-title">Cluster Orchestration</h3>
+                  <p class="ai-glass-desc">GPU-accelerated compute clusters with intelligent resource allocation</p>
+                  <div class="ai-glass-tags">
+                     <span class="ai-glass-tag">EKS</span>
+                     <span class="ai-glass-tag">Karpenter</span>
+                     <span class="ai-glass-tag">NVIDIA</span>
+                  </div>
                </div>
+
+               <div class="ai-glass-card" style="--card-accent:#45B7D1">
+                  <div class="ai-glass-glow"></div>
+                  <div class="ai-glass-icon" style="color:#45B7D1">
+                     <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 16L16 12H13V8H11V12H8L12 16M12 2A10 10 0 0 0 2 12A10 10 0 0 0 12 22A10 10 0 0 0 22 12A10 10 0 0 0 12 2Z"/></svg>
+                  </div>
+                  <h3 class="ai-glass-title">Model Deployment</h3>
+                  <p class="ai-glass-desc">Real-time inference endpoints with A/B testing and monitoring</p>
+                  <div class="ai-glass-tags">
+                     <span class="ai-glass-tag">Bedrock</span>
+                     <span class="ai-glass-tag">Lambda</span>
+                     <span class="ai-glass-tag">API Gateway</span>
+                  </div>
+               </div>
+
+               <div class="ai-glass-card" style="--card-accent:#A78BFA">
+                  <div class="ai-glass-glow"></div>
+                  <div class="ai-glass-icon" style="color:#A78BFA">
+                     <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3C7.58 3 4 6.58 4 11C4 16.55 12 21 12 21S20 16.55 20 11C20 6.58 16.42 3 12 3M12 13A2 2 0 0 1 10 11A2 2 0 0 1 12 9A2 2 0 0 1 14 11A2 2 0 0 1 12 13Z"/></svg>
+                  </div>
+                  <h3 class="ai-glass-title">Vector Intelligence</h3>
+                  <p class="ai-glass-desc">High-performance embedding storage with semantic search capabilities</p>
+                  <div class="ai-glass-tags">
+                     <span class="ai-glass-tag">OpenSearch</span>
+                     <span class="ai-glass-tag">Pinecone</span>
+                     <span class="ai-glass-tag">RAG</span>
+                  </div>
+               </div>
+
+               <div class="ai-glass-card" style="--card-accent:#FFD93D">
+                  <div class="ai-glass-glow"></div>
+                  <div class="ai-glass-icon" style="color:#FFD93D">
+                     <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M9 3V18H12V3H9M12 5L16 6.5V9.5L12 8V5M12 10L16 11.5V14.5L12 13V10M12 15L16 16.5V19.5L12 18V15Z"/></svg>
+                  </div>
+                  <h3 class="ai-glass-title">Data Pipeline</h3>
+                  <p class="ai-glass-desc">Real-time data processing and feature engineering at scale</p>
+                  <div class="ai-glass-tags">
+                     <span class="ai-glass-tag">Kinesis</span>
+                     <span class="ai-glass-tag">Glue</span>
+                     <span class="ai-glass-tag">EMR</span>
+                  </div>
+               </div>
+
+               <div class="ai-glass-card" style="--card-accent:#6BCB77">
+                  <div class="ai-glass-glow"></div>
+                  <div class="ai-glass-icon" style="color:#6BCB77">
+                     <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                  </div>
+                  <h3 class="ai-glass-title">MLOps Platform</h3>
+                  <p class="ai-glass-desc">End-to-end machine learning lifecycle management and automation</p>
+                  <div class="ai-glass-tags">
+                     <span class="ai-glass-tag">MLflow</span>
+                     <span class="ai-glass-tag">Kubeflow</span>
+                     <span class="ai-glass-tag">Airflow</span>
+                  </div>
+               </div>
+
             </div>
 
-            <div class="ai-infra-cta text-center mt-5" data-aos="fade-up" data-aos-delay="500">
-               <p class="ai-infra-cta-text">Ready to build the next generation of AI systems?</p>
+            <div class="ai-infra-cta text-center" data-aos="fade-up" data-aos-delay="350">
+               <p class="ai-infra-cta-text" style="color:rgba(255,255,255,0.42)">Ready to build the next generation of AI systems?</p>
                <a href="https://yennanliu.github.io/contact.html" class="ai-infra-cta-button">
                   <span>Let's Build Together</span>
                   <svg viewBox="0 0 24 24" class="cta-arrow">

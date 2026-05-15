@@ -235,12 +235,6 @@
     }
     .accent-cyan   { color: var(--cyan); }
     .accent-purple { color: var(--purple); }
-    .accent-grad {
-      background: var(--grad-accent);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
 
     .hero p {
       font-size: 18px;
@@ -785,6 +779,66 @@
       .step-flow { grid-template-columns: 1fr 1fr; }
       .step-item:not(:last-child)::after { display: none; }
     }
+    /* ── Hero text shine ── */
+    .accent-grad {
+      background: linear-gradient(
+        90deg,
+        var(--purple) 0%,
+        var(--cyan)   38%,
+        rgba(255,255,255,0.92) 50%,
+        var(--cyan)   62%,
+        var(--purple) 100%
+      );
+      background-size: 250% 100%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: accent-shine 3s linear infinite;
+    }
+    @keyframes accent-shine {
+      0%   { background-position:  200% center; }
+      100% { background-position: -200% center; }
+    }
+
+    /* ── Hero blob orbit rings ── */
+    .blob-orbit {
+      position: absolute;
+      border-radius: 50%;
+      animation: orbit-spin 12s linear infinite;
+      pointer-events: none;
+    }
+    .blob-orbit.orbit-outer {
+      inset: -18px;
+      border: 1px dashed rgba(155,94,245,0.22);
+      animation-duration: 16s;
+    }
+    .blob-orbit.orbit-inner {
+      inset: 18px;
+      border: 1px dashed rgba(0,212,255,0.22);
+      animation-duration: 9s;
+      animation-direction: reverse;
+    }
+    .blob-orbit::after {
+      content: '';
+      position: absolute;
+      top: -5px; left: 50%;
+      transform: translateX(-50%);
+      width: 10px; height: 10px;
+      border-radius: 50%;
+    }
+    .blob-orbit.orbit-outer::after {
+      background: var(--purple);
+      box-shadow: 0 0 12px var(--purple), 0 0 26px rgba(155,94,245,0.45);
+    }
+    .blob-orbit.orbit-inner::after {
+      background: var(--cyan);
+      box-shadow: 0 0 12px var(--cyan), 0 0 26px rgba(0,212,255,0.45);
+    }
+    @keyframes orbit-spin {
+      from { transform: rotate(0deg); }
+      to   { transform: rotate(360deg); }
+    }
+
     /* ── Typing animation ── */
     .arch-typed {
       display: block;
@@ -884,6 +938,8 @@
 
   <div class="hero-visual">
     <div class="hero-blob">
+      <div class="blob-orbit orbit-outer"></div>
+      <div class="blob-orbit orbit-inner"></div>
       <div class="blob-ring"></div>
       <div class="blob-ring"></div>
       <div class="blob-ring"></div>
