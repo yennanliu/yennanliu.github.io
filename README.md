@@ -16,6 +16,7 @@ Contents  | 1. applications projects  2. collections of utility codes
 # dev 
 ```
 
+
 ## Update 
 - 2020-04-03 : Move blog to : https://github.com/yennanliu/yennj12_blog_V2
 - 2020-01-07 : Fix all pages layout, update about_me, main_project, contact
