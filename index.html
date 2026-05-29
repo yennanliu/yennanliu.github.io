@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>Yen-Nan Liu — AI Engineer & Platform Architect</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
@@ -93,9 +93,11 @@
 
     /* ── HERO ──────────────────────────────────────────────── */
     #hero {
-      position:relative; width:100%; height:100vh; min-height:700px;
+      position:relative; width:100%;
+      height:100vh; height:100svh; /* svh excludes mobile browser chrome */
+      min-height:600px;
       overflow:hidden; display:flex; align-items:center; justify-content:center;
-      background: #000008;  /* always dark — canvas animation requires it */
+      background: #000008; /* always dark — canvas animation requires it */
     }
     #neural-canvas { position:absolute; inset:0; width:100%; height:100%; z-index:1; }
     .orb {
@@ -264,7 +266,7 @@
     body.light .car-dot.active { background:#0086cc; }
 
     .dm-card {
-      flex-shrink: 0; width: 420px;
+      flex-shrink: 0; width: clamp(260px,70vw,420px);
       border-radius:20px; overflow:hidden;
       height:470px; position:relative; cursor:default;
       transition:transform .38s cubic-bezier(.4,0,.2,1), box-shadow .38s;
@@ -508,27 +510,114 @@
     body.light .cta-title               { color:#0a0a1e; }
     body.light .cta-eyebrow             { color:#0086cc; }
 
+    /* ── GLOBAL DEVICE FIXES ───────────────────────────────── */
+    html { -webkit-text-size-adjust:100%; text-size-adjust:100%; }
+    body { -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale; }
+    * { -webkit-tap-highlight-color:transparent; }
+    .car-btn,.toggle-sw,.socials a { touch-action:manipulation; }
+
+    /* ── HAMBURGER ─────────────────────────────────────────── */
+    .nav-burger {
+      display:none; flex-direction:column; gap:6px;
+      background:none; border:none; cursor:pointer; padding:6px;
+      z-index:1001;
+    }
+    .nav-burger span {
+      display:block; width:26px; height:2px;
+      background:rgba(255,255,255,.9); border-radius:2px;
+      transition:transform .3s,opacity .3s;
+    }
+    .nav-burger.open span:nth-child(1){ transform:rotate(45deg) translate(5px,6px); }
+    .nav-burger.open span:nth-child(2){ opacity:0; transform:scaleX(0); }
+    .nav-burger.open span:nth-child(3){ transform:rotate(-45deg) translate(5px,-6px); }
+
+    /* ── MOBILE NAV OVERLAY ────────────────────────────────── */
+    #nav-mobile {
+      display:none; position:fixed; inset:0; z-index:880;
+      background:rgba(0,0,8,.97);
+      backdrop-filter:blur(20px); -webkit-backdrop-filter:blur(20px);
+      flex-direction:column; justify-content:center; align-items:center;
+    }
+    #nav-mobile.open{ display:flex; animation:fadeIn .22s ease; }
+    #nav-mobile a {
+      font-family:'Space Mono',monospace; font-size:1.05rem;
+      letter-spacing:.22em; text-transform:uppercase;
+      color:rgba(255,255,255,.78); text-decoration:none;
+      padding:20px 56px; width:100%; text-align:center;
+      border-bottom:1px solid rgba(255,255,255,.06);
+      transition:color .2s;
+    }
+    #nav-mobile a:first-child { border-top:1px solid rgba(255,255,255,.06); }
+    #nav-mobile a:hover,#nav-mobile a:active { color:var(--cyan); }
+
     /* ── RESPONSIVE ────────────────────────────────────────── */
-    @media (max-width:1024px) {
+    @media (max-width:1280px){
+      .dm-card { width:clamp(260px,32vw,420px); }
+    }
+    @media (max-width:1024px){
       .stats-grid  { grid-template-columns:repeat(2,1fr); }
       .ft-upper    { grid-template-columns:1fr; gap:44px; }
       .ft-nav-cols { grid-template-columns:repeat(2,1fr); }
-      .dm-card     { width:380px; }
+      .wrap        { padding:0 40px; }
+      .carousel-outer { padding:0 40px; }
+      .carousel-nav   { padding:0 40px; }
     }
-    @media (max-width:768px) {
-      nav { padding:20px 24px; }
-      .nav-links { display:none; }
-      .wrap { padding:0 24px; }
-      .carousel-outer { padding:0 24px; }
-      .carousel-nav   { padding:0 24px; }
-      .dm-card  { width:300px; height:400px; }
-      .stats-grid { grid-template-columns:repeat(2,1fr); }
-      .hero-title { font-size:clamp(3.2rem,14vw,7rem); }
-      .ft-lower { flex-direction:column; gap:12px; text-align:center; }
+    @media (max-width:768px){
+      nav { padding:20px 20px; }
+      .nav-links  { display:none !important; }
+      .nav-burger { display:flex; }
+      .wrap           { padding:0 20px; }
+      .carousel-outer { padding:0 20px; }
+      .carousel-nav   { padding:0 20px; }
+      .dm-card        { width:clamp(240px,74vw,360px); height:420px; }
+      .stats-grid     { grid-template-columns:repeat(2,1fr); }
+      .hero-title     { font-size:clamp(2.8rem,12vw,6.5rem); }
+      .hero-badge     { font-size:.62rem; margin-bottom:28px; }
+      .hero-sub       { font-size:.85rem; margin-bottom:38px; }
+      .btn            { padding:13px 26px; font-size:.65rem; }
+      .sec-title      { font-size:clamp(2rem,8vw,3.5rem); margin-bottom:44px; }
+      #expertise      { padding:72px 0; }
+      #contact        { padding:100px 0; }
+      .cta-title      { font-size:clamp(2rem,8vw,4rem); }
+      .ft-upper       { padding-top:60px; padding-bottom:60px; padding-left:20px; padding-right:20px; }
+      .ft-lower       { flex-direction:column; gap:12px; text-align:center; padding:20px; }
     }
-    @media (max-width:480px) {
+    @media (max-width:576px){
+      nav { padding:14px 16px; }
+      .hero-title  { font-size:clamp(2.2rem,13vw,5rem); line-height:.95; }
+      .hero-badge  { font-size:.56rem; padding:6px 14px; margin-bottom:20px; }
+      .hero-actions{ gap:10px; }
+      .btn         { padding:12px 20px; font-size:.62rem; }
+      .sec-title   { font-size:clamp(1.8rem,9vw,3rem); }
+      .carousel-outer { padding:0 14px; }
+      .carousel-nav   { padding:0 14px; }
+      .dm-card     { width:clamp(220px,80vw,320px); height:400px; }
+      .ft-nav-cols { grid-template-columns:repeat(2,1fr); gap:20px; }
+      .cta-title   { font-size:clamp(1.8rem,9vw,3rem); }
+      .socials a   { width:48px; height:48px; font-size:.95rem; }
+      .ticker-item { font-size:.62rem; padding:0 22px; }
+    }
+    @media (max-width:375px){
+      .hero-title  { font-size:clamp(1.9rem,13vw,4rem); }
+      .dm-card     { width:calc(100vw - 36px); height:380px; }
       .ft-nav-cols { grid-template-columns:1fr; }
-      .dm-card { width:270px; }
+    }
+    /* Safe area insets (notch / Dynamic Island) */
+    @supports (padding:env(safe-area-inset-top)){
+      nav {
+        padding-left:  max(64px, env(safe-area-inset-left));
+        padding-right: max(64px, env(safe-area-inset-right));
+      }
+      @media(max-width:768px){
+        nav { padding-left:max(20px,env(safe-area-inset-left)); padding-right:max(20px,env(safe-area-inset-right)); }
+        footer { padding-bottom:env(safe-area-inset-bottom); }
+      }
+    }
+    /* Reduce motion accessibility */
+    @media (prefers-reduced-motion:reduce){
+      *,*::before,*::after { animation-duration:.01ms!important; animation-iteration-count:1!important; transition-duration:.01ms!important; }
+      .orb { animation:none; }
+      .ticker-track { animation:none; }
     }
   </style>
 </head>
@@ -552,7 +641,20 @@
     </label>
     <i class="fas fa-moon" id="toggle-icon"></i>
   </div>
+  <button class="nav-burger" id="nav-burger" aria-label="Open navigation" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
+
+<!-- MOBILE NAV OVERLAY -->
+<div id="nav-mobile" role="dialog" aria-modal="true" aria-label="Navigation menu">
+  <a href="about_me.html">About Me</a>
+  <a href="portfolios.html">Portfolios</a>
+  <a href="ai_builder.html">AI Builder</a>
+  <a href="aws_architecture.html">AWS Architecture</a>
+  <a href="#contact">Contact</a>
+  <a href="https://yennj12.js.org/yennj12_blog_V4/" target="_blank">Blog ↗</a>
+</div>
 
 <!-- HERO -->
 <div id="hero">
@@ -949,6 +1051,24 @@
 (function(){
   const nav=document.getElementById('nav');
   window.addEventListener('scroll',()=>nav.classList.toggle('scrolled',window.scrollY>70),{passive:true});
+})();
+
+// ── MOBILE BURGER NAV ──
+(function(){
+  const burger = document.getElementById('nav-burger');
+  const mobile = document.getElementById('nav-mobile');
+  if (!burger || !mobile) return;
+  function toggle(open) {
+    burger.classList.toggle('open', open);
+    burger.setAttribute('aria-expanded', String(open));
+    mobile.classList.toggle('open', open);
+    document.body.style.overflow = open ? 'hidden' : '';
+  }
+  burger.addEventListener('click', () => toggle(!mobile.classList.contains('open')));
+  mobile.querySelectorAll('a').forEach(a => a.addEventListener('click', () => toggle(false)));
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') toggle(false); });
+  // Close if viewport grows past mobile
+  window.addEventListener('resize', () => { if (window.innerWidth > 768) toggle(false); }, { passive:true });
 })();
 
 // ── EXPERTISE CAROUSEL ──
