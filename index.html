@@ -55,7 +55,7 @@
     }
     .nav-logo {
       font-family: 'Space Mono', monospace;
-      font-size: .85rem; letter-spacing: .35em;
+      font-size: .95rem; letter-spacing: .35em;
       text-transform: uppercase;
       color: var(--white); text-decoration: none;
     }
@@ -64,7 +64,7 @@
     .nav-links a {
       color: rgba(255,255,255,.88); text-decoration: none;
       font-family: 'Space Mono', monospace;
-      font-size: .7rem; letter-spacing: .2em;
+      font-size: .82rem; letter-spacing: .15em;
       text-transform: uppercase; transition: color .25s;
     }
     .nav-links a:hover { color: var(--cyan); }
@@ -456,6 +456,24 @@
     body.light nav.scrolled .nav-links a { color:rgba(10,10,30,.7); }
     body.light nav.scrolled .nav-logo    { color:#0a0a1e; }
     body.light nav.scrolled .nav-logo span { color:#0086cc; }
+    /* Hero text must stay white — hero bg is always dark */
+    body.light .hero-title               { color:#ffffff; }
+    body.light .hero-title .outline      { -webkit-text-stroke:2px rgba(255,255,255,.32); }
+    body.light .hero-sub                 { color:rgba(255,255,255,.55); }
+    body.light .hero-badge               { color:var(--cyan); }
+    body.light .btn-ghost                { color:rgba(255,255,255,.7); border-color:rgba(255,255,255,.22); }
+    body.light .scroll-cue span          { color:rgba(255,255,255,.3); }
+    /* Card text must stay white — card backgrounds are always dark gradients */
+    body.light .dm-card-title            { color:#ffffff; }
+    body.light .dm-card-desc             { color:rgba(255,255,255,.58); }
+    body.light .dm-card-tag              { color:rgba(255,255,255,.38); }
+    body.light .dm-card-chips span       { color:rgba(255,255,255,.42); border-color:rgba(255,255,255,.12); }
+    /* Ticker stays legible */
+    body.light .ticker-item              { color:rgba(10,10,30,.5); }
+    /* Footer text fixes */
+    body.light .ft-nav-hd               { color:rgba(10,10,30,.5); }
+    body.light .cta-title               { color:#0a0a1e; }
+    body.light .cta-eyebrow             { color:#0086cc; }
 
     /* ── RESPONSIVE ────────────────────────────────────────── */
     @media (max-width:1024px) {
