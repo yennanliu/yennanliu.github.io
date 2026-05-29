@@ -766,20 +766,220 @@
       .tl-item { grid-template-columns: 80px 1px 1fr; gap: 0 20px; }
       .tl-item:hover { margin: 0 -24px; padding-left: 24px; padding-right: 24px; }
     }
+
+    /* ============================================================
+       THEME TOGGLE
+    ============================================================ */
+    .theme-toggle {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-left: 8px;
+    }
+    .toggle-sw {
+      display: inline-block;
+      width: 52px;
+      height: 28px;
+      position: relative;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+    .toggle-sw input { opacity:0; width:0; height:0; position:absolute; }
+    .toggle-trk {
+      position: absolute;
+      inset: 0;
+      border-radius: 28px;
+      background: linear-gradient(135deg, #06b6d4, #8b5cf6);
+      transition: background 0.35s;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.35);
+    }
+    .toggle-trk::before {
+      content: '';
+      position: absolute;
+      width: 20px; height: 20px;
+      background: #fff;
+      border-radius: 50%;
+      top: 4px; left: 4px;
+      transition: transform 0.35s cubic-bezier(.4,0,.2,1);
+      box-shadow: 0 2px 4px rgba(0,0,0,0.25);
+    }
+    .toggle-sw input:checked + .toggle-trk::before { transform: translateX(24px); }
+    #toggle-icon { font-size: 0.82rem; color: var(--muted); width: 14px; text-align: center; }
+
+    /* ============================================================
+       LIGHT MODE OVERRIDES
+    ============================================================ */
+    body.light { background: #f0f0f8; color: #0a0a1e; }
+    body.light::before {
+      background-image:
+        linear-gradient(rgba(0,0,0,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,0,0,0.04) 1px, transparent 1px);
+    }
+    body.light .ticker-wrap  { background:#e5e5f2; border-color:rgba(0,0,0,0.08); }
+    body.light .ticker-item  { color:rgba(10,10,30,0.45); }
+    body.light .ticker-item .sep { color:#0086cc; }
+    body.light .bento-grid,
+    body.light .stats-grid   { background:rgba(0,0,0,0.08); }
+    body.light .bento-card   { background:#f5f5fc; color:#0a0a1e; }
+    body.light .bento-card:hover { background:#ebebf5; }
+    body.light .exp-desc     { color:rgba(10,10,30,0.55); }
+    body.light .exp-num      { color:rgba(10,10,30,0.15); }
+    body.light .bento-tags span { color:rgba(10,10,30,0.35); border-color:rgba(0,0,0,0.1); }
+    body.light .bento-card:hover .bento-tags span { color:#0086cc; border-color:rgba(0,134,204,0.25); }
+    body.light #stats        { background:#e8e8f3; border-color:rgba(0,0,0,0.08); }
+    body.light .stat-cell    { background:#e8e8f3; }
+    body.light .stat-lbl     { color:rgba(10,10,30,0.45); }
+    body.light #stack        { border-color:rgba(0,0,0,0.08); }
+    body.light .stack-group-label { color:#7c3aed; }
+    body.light .tag          { border-color:rgba(0,0,0,0.12); color:rgba(10,10,30,0.5); }
+    body.light .tag:hover    { border-color:#0086cc; color:#0086cc; }
+    body.light #work         { border-color:rgba(0,0,0,0.08); }
+    body.light .proj-card    { border-color:rgba(0,0,0,0.1); }
+    body.light .proj-card:hover { border-color:rgba(0,0,0,0.25); }
+    body.light .proj-type    { color:#0086cc; }
+    body.light .proj-desc    { color:rgba(10,10,30,0.55); }
+    body.light .proj-tag     { color:rgba(10,10,30,0.3); border-color:rgba(0,0,0,0.08); }
+    body.light .sec-title    { color:#0a0a1e; }
+    body.light #contact::before { background:radial-gradient(circle,rgba(0,134,204,0.06) 0%,transparent 68%); }
+    body.light .cta-sub      { color:rgba(10,10,30,0.5); }
+    body.light .socials a    { border-color:rgba(0,0,0,0.1); color:rgba(10,10,30,0.45); }
+    body.light .socials a:hover { border-color:#0086cc; color:#0086cc; }
+    body.light footer        { border-top-color:rgba(0,0,0,0.08); }
+    body.light .ft-copy      { color:rgba(10,10,30,0.2); }
+    body.light .ft-links a   { color:rgba(10,10,30,0.35); }
+    body.light nav.scrolled  { background:rgba(240,240,248,0.94); border-bottom-color:rgba(0,0,0,0.08); }
+
+    /* ============================================================
+       BENTO EXPERTISE GRID
+    ============================================================ */
+    .bento-grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 1px;
+      background: var(--border);
+    }
+
+    .bento-card {
+      background: var(--bg);
+      padding: 52px 44px;
+      position: relative;
+      overflow: hidden;
+      transition: background 0.3s;
+      cursor: default;
+    }
+    .bento-card::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0;
+      width: 100%; height: 2px;
+      background: linear-gradient(90deg, var(--cyan), var(--purple));
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.45s;
+    }
+    .bento-card:hover { background: var(--bg2); }
+    .bento-card:hover::after { transform: scaleX(1); }
+
+    /* Bento grid slot sizes (12 col) */
+    .bento-ai { grid-column: span 7; }  /* AI/ML  — featured large */
+    .bento-be { grid-column: span 5; }  /* Backend */
+    .bento-cl { grid-column: span 4; }  /* Cloud */
+    .bento-fs { grid-column: span 4; }  /* Full Stack */
+    .bento-pe { grid-column: span 4; }  /* Platform */
+    .bento-de {                          /* Data — full-width horizontal */
+      grid-column: span 12;
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      gap: 0 60px;
+      align-items: center;
+    }
+
+    /* Accent corner stripe on featured cards */
+    .bento-ai::before,
+    .bento-pe::before {
+      content: '';
+      position: absolute;
+      top: 0; right: 0;
+      width: 1px; height: 72px;
+      background: linear-gradient(to bottom, var(--cyan), transparent);
+    }
+
+    /* Ambient glow blob (appears on hover) */
+    .bento-glow {
+      position: absolute;
+      width: 300px; height: 300px;
+      border-radius: 50%;
+      filter: blur(100px);
+      opacity: 0;
+      top: -80px; right: -80px;
+      transition: opacity 0.5s;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .bento-card:hover .bento-glow { opacity: 0.14; }
+    .bento-ai .bento-glow  { background: var(--cyan); }
+    .bento-be .bento-glow  { background: var(--blue); }
+    .bento-pe .bento-glow  { background: var(--purple); }
+
+    /* Make inner content sit above glow */
+    .bento-card > *:not(.bento-glow) { position: relative; z-index: 1; }
+
+    /* Skill chips */
+    .bento-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      margin-top: 22px;
+    }
+    .bento-tags span {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.56rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.28);
+      border: 1px solid rgba(255,255,255,0.08);
+      padding: 3px 11px;
+      transition: color 0.25s, border-color 0.25s;
+    }
+    .bento-card:hover .bento-tags span {
+      color: var(--cyan);
+      border-color: rgba(0,240,255,0.22);
+    }
+
+    @media (max-width: 1024px) {
+      .bento-ai { grid-column: span 12; }
+      .bento-be { grid-column: span 12; }
+      .bento-cl { grid-column: span 6; }
+      .bento-fs { grid-column: span 6; }
+      .bento-pe { grid-column: span 12; }
+      .bento-de { grid-column: span 12; grid-template-columns: 1fr; gap: 0; }
+    }
+    @media (max-width: 768px) {
+      .bento-card { grid-column: span 12 !important; padding: 40px 28px; }
+      .bento-de   { display: block; }
+    }
   </style>
 </head>
 <body>
 
 <!-- ===== NAV ===== -->
 <nav id="nav">
-  <a class="nav-logo" href="#">YNL<span> //</span></a>
+  <a class="nav-logo" href="index.html">YEN<span>.DEV</span></a>
   <ul class="nav-links">
-    <li><a href="#expertise">Expertise</a></li>
-    <li><a href="#stack">Stack</a></li>
-    <li><a href="#work">Work</a></li>
-    <li><a href="#experience">Experience</a></li>
+    <li><a href="about_me.html">About Me</a></li>
+    <li><a href="portfolios.html">Portfolios</a></li>
+    <li><a href="ai_builder.html">AI Builder</a></li>
+    <li><a href="aws_architecture.html">AWS Arch</a></li>
     <li><a href="#contact">Contact</a></li>
+    <li><a href="https://yennj12.js.org/yennj12_blog_V4/" target="_blank">Blog</a></li>
   </ul>
+  <div class="theme-toggle">
+    <label class="toggle-sw" for="theme-cb" aria-label="Toggle light/dark mode">
+      <input type="checkbox" id="theme-cb">
+      <span class="toggle-trk"></span>
+    </label>
+    <i class="fas fa-moon" id="toggle-icon"></i>
+  </div>
 </nav>
 
 <!-- ===== HERO ===== -->
@@ -851,48 +1051,79 @@
     <h2 class="sec-title reveal">Built for<br>the frontier.</h2>
   </div>
   <div class="wrap">
-    <div class="expertise-grid">
+    <div class="bento-grid">
 
-      <div class="exp-card reveal">
+      <!-- AI/ML — featured large (7 col) -->
+      <div class="bento-card bento-ai reveal">
+        <div class="bento-glow"></div>
         <div class="exp-num">01</div>
         <i class="fas fa-brain exp-icon c"></i>
         <div class="exp-name">AI / ML Engineering</div>
         <p class="exp-desc">Designing and shipping production AI systems — LLM integration, RAG pipelines, model fine-tuning, evaluation frameworks, and full MLOps lifecycle from experiment to serving at scale.</p>
+        <div class="bento-tags">
+          <span>LLMs</span><span>RAG</span><span>PyTorch</span><span>MLOps</span><span>LangChain</span>
+        </div>
       </div>
 
-      <div class="exp-card reveal">
+      <!-- Backend (5 col) -->
+      <div class="bento-card bento-be reveal">
+        <div class="bento-glow"></div>
         <div class="exp-num">02</div>
         <i class="fas fa-server exp-icon b"></i>
         <div class="exp-name">Backend Systems</div>
-        <p class="exp-desc">High-throughput, fault-tolerant services with distributed architectures — microservices, event streaming, and APIs handling millions of requests with sub-millisecond latency.</p>
+        <p class="exp-desc">High-throughput, fault-tolerant services — microservices, event streaming, APIs handling millions of requests with sub-millisecond latency.</p>
+        <div class="bento-tags">
+          <span>Go</span><span>Java</span><span>gRPC</span><span>Kafka</span>
+        </div>
       </div>
 
-      <div class="exp-card reveal">
+      <!-- Cloud (4 col) -->
+      <div class="bento-card bento-cl reveal">
         <div class="exp-num">03</div>
         <i class="fas fa-cloud exp-icon p"></i>
         <div class="exp-name">Cloud Infrastructure</div>
-        <p class="exp-desc">Cloud-native engineering on AWS/GCP. Kubernetes orchestration, Infrastructure-as-Code with Terraform, CI/CD pipelines, and observability stacks that scale with zero downtime.</p>
+        <p class="exp-desc">Cloud-native engineering on AWS/GCP — Kubernetes orchestration, Terraform IaC, CI/CD pipelines, and observability at scale with zero downtime.</p>
+        <div class="bento-tags">
+          <span>AWS</span><span>K8s</span><span>Terraform</span>
+        </div>
       </div>
 
-      <div class="exp-card reveal">
+      <!-- Full Stack (4 col) -->
+      <div class="bento-card bento-fs reveal">
         <div class="exp-num">04</div>
         <i class="fas fa-layer-group exp-icon g"></i>
-        <div class="exp-name">Full Stack Development</div>
-        <p class="exp-desc">End-to-end product ownership — React/TypeScript frontends to Python/Go/Java backends. Shipping complete features fast without sacrificing architecture, security, or performance.</p>
+        <div class="exp-name">Full Stack Dev</div>
+        <p class="exp-desc">End-to-end product ownership — React frontends to Python/Go backends. Shipping complete features fast without sacrificing architecture or performance.</p>
+        <div class="bento-tags">
+          <span>React</span><span>TypeScript</span><span>FastAPI</span>
+        </div>
       </div>
 
-      <div class="exp-card reveal">
+      <!-- Platform (4 col) -->
+      <div class="bento-card bento-pe reveal">
+        <div class="bento-glow"></div>
         <div class="exp-num">05</div>
         <i class="fas fa-sitemap exp-icon c"></i>
         <div class="exp-name">Platform Engineering</div>
-        <p class="exp-desc">Building developer platforms and internal tooling that multiply team velocity. Self-service infrastructure, golden paths, developer experience, and platform-as-product thinking.</p>
+        <p class="exp-desc">Developer platforms that multiply team velocity. Self-service infrastructure, golden paths, and platform-as-product thinking — deploy time from days to minutes.</p>
+        <div class="bento-tags">
+          <span>IDP</span><span>ArgoCD</span><span>Backstage</span><span>GitOps</span>
+        </div>
       </div>
 
-      <div class="exp-card reveal">
-        <div class="exp-num">06</div>
-        <i class="fas fa-database exp-icon b"></i>
-        <div class="exp-name">Data Engineering</div>
-        <p class="exp-desc">Architecting data pipelines, stream processing, and analytics platforms — Kafka, Spark, dbt, Airflow. Building the data backbone that powers AI features and business intelligence.</p>
+      <!-- Data Engineering — full-width horizontal (12 col) -->
+      <div class="bento-card bento-de reveal">
+        <div>
+          <div class="exp-num">06</div>
+          <i class="fas fa-database exp-icon b"></i>
+          <div class="exp-name">Data Engineering</div>
+        </div>
+        <div>
+          <p class="exp-desc">Architecting data pipelines, stream processing, and analytics platforms — Kafka, Spark, dbt, Airflow. Building the data backbone that powers AI features and business intelligence at scale.</p>
+          <div class="bento-tags">
+            <span>Kafka</span><span>Spark</span><span>Flink</span><span>dbt</span><span>Airflow</span><span>Pinot</span>
+          </div>
+        </div>
       </div>
 
     </div>
@@ -1051,75 +1282,26 @@
   </div>
 </section>
 
-<!-- ===== EXPERIENCE ===== -->
-<section id="experience">
-  <div class="wrap">
-    <p class="sec-tag reveal">04 / Experience</p>
-    <h2 class="sec-title reveal">Engineering<br>at the frontier.</h2>
-
-    <div class="timeline">
-
-      <div class="tl-item reveal">
-        <div class="tl-year">2023 — Now</div>
-        <div class="tl-line"></div>
-        <div>
-          <div class="tl-title">Senior AI / Platform Engineer</div>
-          <div class="tl-co">AI-First Product Company</div>
-          <p class="tl-desc">Leading AI platform initiatives — LLM infrastructure, RAG systems, and developer tooling that enables the entire engineering org to ship AI features 10× faster.</p>
-        </div>
-      </div>
-
-      <div class="tl-item reveal">
-        <div class="tl-year">2021 — 2023</div>
-        <div class="tl-line"></div>
-        <div>
-          <div class="tl-title">Senior Backend / Data Engineer</div>
-          <div class="tl-co">High-Scale Tech Platform</div>
-          <p class="tl-desc">Designed and owned distributed backend services and real-time data pipelines handling hundreds of millions of events per day across cloud infrastructure.</p>
-        </div>
-      </div>
-
-      <div class="tl-item reveal">
-        <div class="tl-year">2019 — 2021</div>
-        <div class="tl-line"></div>
-        <div>
-          <div class="tl-title">Full Stack Engineer</div>
-          <div class="tl-co">Growth-Stage Startup</div>
-          <p class="tl-desc">Built end-to-end features across the stack — React frontends, Python/Java microservices, and the data infrastructure powering product analytics and recommendations.</p>
-        </div>
-      </div>
-
-      <div class="tl-item reveal">
-        <div class="tl-year">2017 — 2019</div>
-        <div class="tl-line"></div>
-        <div>
-          <div class="tl-title">Software Engineer</div>
-          <div class="tl-co">Enterprise Software</div>
-          <p class="tl-desc">Shipped backend systems and API integrations for enterprise clients. Developed deep expertise in Java/Spring ecosystems and database optimization.</p>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
 
 <!-- ===== CONTACT CTA ===== -->
 <section id="contact">
   <div class="wrap" style="position:relative;z-index:1;">
-    <p class="cta-eyebrow reveal">05 / Contact</p>
+    <p class="cta-eyebrow reveal">04 / Connect</p>
     <h2 class="cta-title reveal">Let's build<br>something extraordinary.</h2>
     <p class="cta-sub reveal">Open to senior engineering roles, AI platform work, and high-impact consulting.</p>
-    <a href="mailto:f339339@gmail.com" class="cta-email reveal">f339339@gmail.com</a>
 
     <div class="socials reveal">
       <a href="https://github.com/yennanliu" target="_blank" title="GitHub">
         <i class="fab fa-github"></i>
       </a>
-      <a href="https://www.linkedin.com/in/yennanliu" target="_blank" title="LinkedIn">
+      <a href="https://linkedin.com/in/yennanliu" target="_blank" title="LinkedIn">
         <i class="fab fa-linkedin-in"></i>
       </a>
-      <a href="mailto:f339339@gmail.com" title="Email">
-        <i class="fas fa-envelope"></i>
+      <a href="https://huggingface.co/yennj12" target="_blank" title="Hugging Face">
+        <i class="fas fa-robot"></i>
+      </a>
+      <a href="https://gitlab.com/yennanliu" target="_blank" title="GitLab">
+        <i class="fab fa-gitlab"></i>
       </a>
     </div>
   </div>
@@ -1357,6 +1539,30 @@
   window.addEventListener('scroll', () => {
     nav.classList.toggle('scrolled', window.scrollY > 70);
   }, { passive: true });
+})();
+
+
+// ----------------------------------------------------------------
+// 6. THEME TOGGLE (light / dark)
+// ----------------------------------------------------------------
+(function () {
+  const cb   = document.getElementById('theme-cb');
+  const icon = document.getElementById('toggle-icon');
+  if (!cb || !icon) return;
+
+  function applyTheme(light) {
+    document.body.classList.toggle('light', light);
+    icon.className = light ? 'fas fa-sun' : 'fas fa-moon';
+    cb.checked = light;
+    try { localStorage.setItem('theme', light ? 'light' : 'dark'); } catch(e) {}
+  }
+
+  // Restore saved preference
+  try {
+    if (localStorage.getItem('theme') === 'light') applyTheme(true);
+  } catch(e) {}
+
+  cb.addEventListener('change', () => applyTheme(cb.checked));
 })();
 </script>
 
