@@ -223,15 +223,48 @@
     .ticker-item .sep { color:var(--cyan); margin:0 16px; }
     @keyframes ticker { from{transform:translateX(0)} to{transform:translateX(-50%)} }
 
-    /* ── EXPERTISE — DeepMind card style ──────────────────── */
+    /* ── EXPERTISE — horizontal carousel ──────────────────── */
     #expertise { padding:120px 0; }
 
-    .dm-grid {
-      display:grid;
-      grid-template-columns:repeat(3,1fr);
-      gap:20px;
+    .carousel-outer {
+      overflow: hidden; position: relative; padding: 0 64px;
     }
+    .carousel-track {
+      display: flex; gap: 20px;
+      transition: transform .55s cubic-bezier(.4,0,.2,1);
+      will-change: transform; cursor: grab; user-select: none;
+    }
+    .carousel-track.grabbing { cursor: grabbing; }
+
+    .carousel-nav {
+      display: flex; align-items: center; gap: 12px;
+      margin-top: 36px; padding: 0 64px;
+    }
+    .car-btn {
+      width: 48px; height: 48px; border-radius: 50%;
+      border: 1px solid rgba(255,255,255,.16);
+      background: transparent; color: rgba(255,255,255,.75);
+      font-size: 1.5rem; cursor: pointer; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      transition: all .25s; line-height: 1; font-family: sans-serif;
+    }
+    .car-btn:hover { background:rgba(255,255,255,.08); border-color:var(--cyan); color:var(--cyan); }
+    .car-btn:disabled { opacity:.22; cursor:not-allowed; pointer-events:none; }
+    .car-dots { display:flex; gap:8px; margin-left:8px; }
+    .car-dot {
+      width:6px; height:6px; border-radius:50%;
+      background:rgba(255,255,255,.18); cursor:pointer;
+      transition:background .25s, transform .25s;
+    }
+    .car-dot.active { background:var(--cyan); transform:scale(1.35); }
+
+    body.light .car-btn  { border-color:rgba(10,10,30,.15); color:rgba(10,10,30,.6); }
+    body.light .car-btn:hover { background:rgba(10,10,30,.06); border-color:#0086cc; color:#0086cc; }
+    body.light .car-dot  { background:rgba(10,10,30,.18); }
+    body.light .car-dot.active { background:#0086cc; }
+
     .dm-card {
+      flex-shrink: 0; width: 420px;
       border-radius:20px; overflow:hidden;
       height:470px; position:relative; cursor:default;
       transition:transform .38s cubic-bezier(.4,0,.2,1), box-shadow .38s;
@@ -477,23 +510,25 @@
 
     /* ── RESPONSIVE ────────────────────────────────────────── */
     @media (max-width:1024px) {
-      .dm-grid     { grid-template-columns:repeat(2,1fr); }
       .stats-grid  { grid-template-columns:repeat(2,1fr); }
       .ft-upper    { grid-template-columns:1fr; gap:44px; }
       .ft-nav-cols { grid-template-columns:repeat(2,1fr); }
+      .dm-card     { width:380px; }
     }
     @media (max-width:768px) {
       nav { padding:20px 24px; }
       .nav-links { display:none; }
       .wrap { padding:0 24px; }
-      .dm-grid  { grid-template-columns:1fr; }
-      .dm-card  { height:400px; }
+      .carousel-outer { padding:0 24px; }
+      .carousel-nav   { padding:0 24px; }
+      .dm-card  { width:300px; height:400px; }
       .stats-grid { grid-template-columns:repeat(2,1fr); }
       .hero-title { font-size:clamp(3.2rem,14vw,7rem); }
       .ft-lower { flex-direction:column; gap:12px; text-align:center; }
     }
     @media (max-width:480px) {
       .ft-nav-cols { grid-template-columns:1fr; }
+      .dm-card { width:270px; }
     }
   </style>
 </head>
@@ -572,16 +607,17 @@
   </div>
 </div>
 
-<!-- EXPERTISE — DeepMind card style -->
+<!-- EXPERTISE — horizontal scroll carousel -->
 <section id="expertise">
   <div class="wrap">
     <p class="sec-tag reveal">01 / Expertise</p>
     <h2 class="sec-title reveal">Built for<br>the frontier.</h2>
   </div>
-  <div class="wrap">
-    <div class="dm-grid">
 
-      <div class="dm-card dm-ai reveal">
+  <div class="carousel-outer">
+    <div class="carousel-track" id="car-track">
+
+      <div class="dm-card dm-ai">
         <div class="dm-card-text">
           <div class="dm-card-tag">01</div>
           <div class="dm-card-title">AI / ML Engineering</div>
@@ -591,7 +627,7 @@
         <div class="dm-card-vis"></div>
       </div>
 
-      <div class="dm-card dm-be reveal">
+      <div class="dm-card dm-be">
         <div class="dm-card-text">
           <div class="dm-card-tag">02</div>
           <div class="dm-card-title">Backend Systems</div>
@@ -601,7 +637,7 @@
         <div class="dm-card-vis"></div>
       </div>
 
-      <div class="dm-card dm-cl reveal">
+      <div class="dm-card dm-cl">
         <div class="dm-card-text">
           <div class="dm-card-tag">03</div>
           <div class="dm-card-title">Cloud Infrastructure</div>
@@ -611,7 +647,7 @@
         <div class="dm-card-vis"></div>
       </div>
 
-      <div class="dm-card dm-fs reveal">
+      <div class="dm-card dm-fs">
         <div class="dm-card-text">
           <div class="dm-card-tag">04</div>
           <div class="dm-card-title">Full Stack Development</div>
@@ -621,7 +657,7 @@
         <div class="dm-card-vis"></div>
       </div>
 
-      <div class="dm-card dm-pe reveal">
+      <div class="dm-card dm-pe">
         <div class="dm-card-text">
           <div class="dm-card-tag">05</div>
           <div class="dm-card-title">Platform Engineering</div>
@@ -631,7 +667,7 @@
         <div class="dm-card-vis"></div>
       </div>
 
-      <div class="dm-card dm-de reveal">
+      <div class="dm-card dm-de">
         <div class="dm-card-text">
           <div class="dm-card-tag">06</div>
           <div class="dm-card-title">Data Engineering</div>
@@ -642,6 +678,12 @@
       </div>
 
     </div>
+  </div>
+
+  <div class="carousel-nav wrap">
+    <button class="car-btn" id="car-prev" aria-label="Previous">&#8249;</button>
+    <button class="car-btn" id="car-next" aria-label="Next">&#8250;</button>
+    <div class="car-dots" id="car-dots"></div>
   </div>
 </section>
 
@@ -698,6 +740,50 @@
 </footer>
 
 <script>
+// ── RANDOM UNIVERSE THEME ──────────────────────────────────────
+(function () {
+  const themes = [
+    { // Neural Network — current default
+      bg:'#000008', bg2:'#07071a',
+      orbs:['rgba(0,240,255,.07)','rgba(168,85,247,.08)','rgba(59,130,246,.05)'],
+      hues:[[183,18],[260,30],[210,20]]
+    },
+    { // Starfield — Hubble galaxy feel (warm/gold stars)
+      bg:'#000003', bg2:'#04040a',
+      orbs:['rgba(200,220,255,.05)','rgba(255,210,90,.04)','rgba(160,190,255,.03)'],
+      hues:[[50,14],[45,18],[55,10]]
+    },
+    { // Nebula — JWST Carina feel (pink/violet clouds)
+      bg:'#040008', bg2:'#080010',
+      orbs:['rgba(255,80,130,.07)','rgba(80,0,200,.09)','rgba(255,110,40,.05)'],
+      hues:[[305,25],[335,18],[275,25]]
+    },
+    { // Cosmos — expansion diagram feel (warm pink + deep blue)
+      bg:'#020008', bg2:'#050012',
+      orbs:['rgba(0,100,255,.08)','rgba(255,40,90,.07)','rgba(0,200,180,.05)'],
+      hues:[[220,18],[350,20],[185,15]]
+    },
+  ];
+
+  const t = themes[Math.floor(Math.random() * themes.length)];
+  window._theme = t;
+
+  // Apply CSS vars
+  document.documentElement.style.setProperty('--bg',  t.bg);
+  document.documentElement.style.setProperty('--bg2', t.bg2);
+
+  // Apply orb colours immediately (orbs are CSS elements, set inline)
+  document.addEventListener('DOMContentLoaded', () => {
+    const orbs = document.querySelectorAll('.orb');
+    if (orbs[0]) orbs[0].style.background = t.orbs[0].replace(/[\d.]+\)$/,'1)');
+    if (orbs[1]) orbs[1].style.background = t.orbs[1].replace(/[\d.]+\)$/,'1)');
+    if (orbs[2]) orbs[2].style.background = t.orbs[2].replace(/[\d.]+\)$/,'1)');
+    // Also set hero bg
+    const hero = document.getElementById('hero');
+    if (hero) hero.style.background = t.bg;
+  });
+})();
+
 // ── NEURAL CANVAS — enhanced with shooting stars + pulsing hubs ──
 (function () {
   const canvas = document.getElementById('neural-canvas');
@@ -717,8 +803,10 @@
     this.r  = Math.random() * 2 + .4;
     this.isHub = Math.random() < .07;
     if (this.isHub) this.r = Math.random() * 3 + 2.5;
+    const hues = (window._theme && window._theme.hues) || [[183,18],[260,30],[210,20]];
     const roll = Math.random();
-    this.h = roll < .5 ? 183 + Math.random()*18 : roll < .75 ? 260 + Math.random()*30 : 210 + Math.random()*20;
+    const hi = roll < .5 ? 0 : roll < .78 ? 1 : 2;
+    this.h = hues[hi][0] + Math.random() * hues[hi][1];
     this.a = Math.random() * .7 + .3;
     this.phase = Math.random() * Math.PI * 2;
   };
@@ -861,6 +949,72 @@
 (function(){
   const nav=document.getElementById('nav');
   window.addEventListener('scroll',()=>nav.classList.toggle('scrolled',window.scrollY>70),{passive:true});
+})();
+
+// ── EXPERTISE CAROUSEL ──
+(function () {
+  const track   = document.getElementById('car-track');
+  const prevBtn = document.getElementById('car-prev');
+  const nextBtn = document.getElementById('car-next');
+  const dotsEl  = document.getElementById('car-dots');
+  if (!track || !prevBtn || !nextBtn) return;
+
+  const cards = Array.from(track.querySelectorAll('.dm-card'));
+  const GAP   = 20;
+  let idx = 0;
+
+  // Build dots
+  cards.forEach((_, i) => {
+    const d = document.createElement('span');
+    d.className = 'car-dot' + (i === 0 ? ' active' : '');
+    d.addEventListener('click', () => go(i));
+    dotsEl.appendChild(d);
+  });
+
+  function cardW() {
+    return cards[0].offsetWidth + GAP;
+  }
+
+  function visibleCount() {
+    return Math.round(track.parentElement.offsetWidth / cardW()) || 1;
+  }
+
+  function maxIdx() {
+    return Math.max(0, cards.length - visibleCount());
+  }
+
+  function go(i) {
+    idx = Math.max(0, Math.min(i, maxIdx()));
+    track.style.transform = `translateX(-${idx * cardW()}px)`;
+    prevBtn.disabled = idx === 0;
+    nextBtn.disabled = idx >= maxIdx();
+    document.querySelectorAll('.car-dot').forEach((d, j) => d.classList.toggle('active', j === idx));
+  }
+
+  prevBtn.addEventListener('click', () => go(idx - 1));
+  nextBtn.addEventListener('click', () => go(idx + 1));
+
+  // Drag / swipe
+  let startX = 0, dragging = false;
+  track.addEventListener('mousedown',  e => { startX = e.clientX; dragging = true; track.classList.add('grabbing'); });
+  track.addEventListener('touchstart', e => { startX = e.touches[0].clientX; dragging = true; }, { passive: true });
+  document.addEventListener('mouseup',  e => {
+    if (!dragging) return; dragging = false; track.classList.remove('grabbing');
+    const d = startX - e.clientX; if (Math.abs(d) > 40) go(idx + (d > 0 ? 1 : -1));
+  });
+  document.addEventListener('touchend', e => {
+    if (!dragging) return; dragging = false;
+    const d = startX - e.changedTouches[0].clientX; if (Math.abs(d) > 40) go(idx + (d > 0 ? 1 : -1));
+  });
+
+  // Keyboard
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight') go(idx + 1);
+    if (e.key === 'ArrowLeft')  go(idx - 1);
+  });
+
+  go(0); // init
+  window.addEventListener('resize', () => go(Math.min(idx, maxIdx())));
 })();
 
 // ── THEME TOGGLE ──
