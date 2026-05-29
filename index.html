@@ -514,7 +514,7 @@
     html { -webkit-text-size-adjust:100%; text-size-adjust:100%; }
     body { -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale; }
     * { -webkit-tap-highlight-color:transparent; }
-    .car-btn,.toggle-sw,.socials a { touch-action:manipulation; }
+    .car-btn,.toggle-sw { touch-action:manipulation; }
 
     /* ── HAMBURGER ─────────────────────────────────────────── */
     .nav-burger {
@@ -533,42 +533,37 @@
 
     /* ── MOBILE NAV OVERLAY ────────────────────────────────── */
     #nav-mobile {
-      display:none; position:fixed; inset:0; z-index:880;
+      display:flex; position:fixed; inset:0; z-index:880;
       background:rgba(0,0,8,.97);
       backdrop-filter:blur(20px); -webkit-backdrop-filter:blur(20px);
       flex-direction:column; justify-content:center; align-items:center;
+      opacity:0; pointer-events:none;
+      transition:opacity .22s ease;
     }
-    #nav-mobile.open{ display:flex; animation:fadeIn .22s ease; }
+    #nav-mobile.open{ opacity:1; pointer-events:auto; }
     #nav-mobile a {
       font-family:'Space Mono',monospace; font-size:1.05rem;
       letter-spacing:.22em; text-transform:uppercase;
       color:rgba(255,255,255,.78); text-decoration:none;
       padding:20px 56px; width:100%; text-align:center;
-      border-bottom:1px solid rgba(255,255,255,.06);
+      border-bottom:1px solid var(--border);
       transition:color .2s;
     }
-    #nav-mobile a:first-child { border-top:1px solid rgba(255,255,255,.06); }
+    #nav-mobile a:first-child { border-top:1px solid var(--border); }
     #nav-mobile a:hover,#nav-mobile a:active { color:var(--cyan); }
 
     /* ── RESPONSIVE ────────────────────────────────────────── */
-    @media (max-width:1280px){
-      .dm-card { width:clamp(260px,32vw,420px); }
-    }
     @media (max-width:1024px){
       .stats-grid  { grid-template-columns:repeat(2,1fr); }
       .ft-upper    { grid-template-columns:1fr; gap:44px; }
       .ft-nav-cols { grid-template-columns:repeat(2,1fr); }
-      .wrap        { padding:0 40px; }
-      .carousel-outer { padding:0 40px; }
-      .carousel-nav   { padding:0 40px; }
+      .wrap,.carousel-outer,.carousel-nav { padding:0 40px; }
     }
     @media (max-width:768px){
       nav { padding:20px 20px; }
-      .nav-links  { display:none !important; }
+      .nav-links  { display:none; }
       .nav-burger { display:flex; }
-      .wrap           { padding:0 20px; }
-      .carousel-outer { padding:0 20px; }
-      .carousel-nav   { padding:0 20px; }
+      .wrap,.carousel-outer,.carousel-nav { padding:0 20px; }
       .dm-card        { width:clamp(240px,74vw,360px); height:420px; }
       .stats-grid     { grid-template-columns:repeat(2,1fr); }
       .hero-title     { font-size:clamp(2.8rem,12vw,6.5rem); }
@@ -579,7 +574,7 @@
       #expertise      { padding:72px 0; }
       #contact        { padding:100px 0; }
       .cta-title      { font-size:clamp(2rem,8vw,4rem); }
-      .ft-upper       { padding-top:60px; padding-bottom:60px; padding-left:20px; padding-right:20px; }
+      .ft-upper       { padding-top:60px; padding-bottom:60px; }
       .ft-lower       { flex-direction:column; gap:12px; text-align:center; padding:20px; }
     }
     @media (max-width:576px){
@@ -589,8 +584,7 @@
       .hero-actions{ gap:10px; }
       .btn         { padding:12px 20px; font-size:.62rem; }
       .sec-title   { font-size:clamp(1.8rem,9vw,3rem); }
-      .carousel-outer { padding:0 14px; }
-      .carousel-nav   { padding:0 14px; }
+      .carousel-outer,.carousel-nav { padding:0 14px; }
       .dm-card     { width:clamp(220px,80vw,320px); height:400px; }
       .ft-nav-cols { grid-template-columns:repeat(2,1fr); gap:20px; }
       .cta-title   { font-size:clamp(1.8rem,9vw,3rem); }
@@ -615,9 +609,9 @@
     }
     /* Reduce motion accessibility */
     @media (prefers-reduced-motion:reduce){
-      *,*::before,*::after { animation-duration:.01ms!important; animation-iteration-count:1!important; transition-duration:.01ms!important; }
-      .orb { animation:none; }
-      .ticker-track { animation:none; }
+      .orb,.ticker-track,.dm-card-vis,.scroll-line,
+      .hero-badge,.hero-title,.hero-sub,.hero-actions,.scroll-cue,
+      .reveal,.carousel-track,.nav-burger span { animation:none!important; transition:none!important; }
     }
   </style>
 </head>
@@ -1058,17 +1052,19 @@
   const burger = document.getElementById('nav-burger');
   const mobile = document.getElementById('nav-mobile');
   if (!burger || !mobile) return;
+  let menuOpen = false;
   function toggle(open) {
+    menuOpen = open;
     burger.classList.toggle('open', open);
     burger.setAttribute('aria-expanded', String(open));
     mobile.classList.toggle('open', open);
     document.body.style.overflow = open ? 'hidden' : '';
   }
-  burger.addEventListener('click', () => toggle(!mobile.classList.contains('open')));
-  mobile.querySelectorAll('a').forEach(a => a.addEventListener('click', () => toggle(false)));
+  burger.addEventListener('click', () => toggle(!menuOpen));
+  mobile.addEventListener('click', e => { if (e.target.closest('a')) toggle(false); });
   document.addEventListener('keydown', e => { if (e.key === 'Escape') toggle(false); });
-  // Close if viewport grows past mobile
-  window.addEventListener('resize', () => { if (window.innerWidth > 768) toggle(false); }, { passive:true });
+  // matchMedia fires only on breakpoint cross, not every resize frame
+  window.matchMedia('(max-width:768px)').addEventListener('change', e => { if (!e.matches) toggle(false); });
 })();
 
 // ── EXPERTISE CAROUSEL ──
