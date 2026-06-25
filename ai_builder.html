@@ -1052,7 +1052,7 @@
       <div class="bento-icon icon-blue">
         <i class="fas fa-building"></i>
       </div>
-      <div class="bento-title">Agent Office System</div>
+      <div class="bento-title">Agent Auto System</div>
       <p class="bento-desc">
         Multi-agent office automation built on <strong>CrewAI</strong> and
         <strong>GPT-4o</strong>. Handles email drafting, document summarisation,
@@ -1084,7 +1084,7 @@
         <div class="card-lang">
           <div class="lang-dot" style="background:#3572A5"></div> Python
         </div>
-        <a href="https://github.com/yennanliu/agent_office_system" target="_blank" class="btn-gh">
+        <a href="https://github.com/yennanliu/agent_auto_system" target="_blank" class="btn-gh">
           <i class="fab fa-github"></i> View Repo
         </a>
       </div>
@@ -1163,7 +1163,7 @@
     <div class="section-label" style="color:var(--cyan)">
       <i class="fas fa-sitemap"></i> Architecture Deep-Dive
     </div>
-    <h2 class="section-title">Agent Office System — how it works</h2>
+    <h2 class="section-title">Agent Auto System — how it works</h2>
     <p class="section-sub">
       Four specialised CrewAI crews run independently via APScheduler.
       Every run is persisted to SQLite so you can audit token usage and cost.
@@ -1225,7 +1225,7 @@
         <div class="arch-box-dot" style="background:#ff5f57"></div>
         <div class="arch-box-dot" style="background:#febc2e"></div>
         <div class="arch-box-dot" style="background:#28c840"></div>
-        <span class="arch-box-title">agent_office_system / architecture</span>
+        <span class="arch-box-title">agent_auto_system / architecture</span>
       </div>
 <code class="arch-typed">main.py (CLI)
   ├── email      → EmailCrew      → Gmail Agent       → GmailSendTool
