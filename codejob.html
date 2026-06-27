@@ -449,6 +449,347 @@
           align-items: center;
           margin-left: 8px;
        }
+
+       /* ===== Enhanced components ===== */
+
+       /* Hero stat badges */
+       .hero-stats {
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: center;
+          gap: 12px;
+          margin-top: 36px;
+       }
+
+       .stat-badge {
+          background: rgba(255, 255, 255, 0.7);
+          border: 1px solid var(--apple-border);
+          border-radius: 980px;
+          padding: 8px 18px;
+          font-size: 14px;
+          font-weight: 500;
+          color: var(--apple-text);
+          backdrop-filter: blur(10px);
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+       }
+
+       .stat-badge i {
+          color: var(--apple-blue);
+       }
+
+       /* Section label */
+       .section-label {
+          font-size: 13px;
+          font-weight: 700;
+          letter-spacing: .06em;
+          text-transform: uppercase;
+          color: var(--apple-blue);
+          margin-bottom: 8px;
+          display: block;
+       }
+
+       .section-title {
+          font-size: 32px;
+          font-weight: 600;
+          letter-spacing: -.01em;
+          color: var(--apple-text);
+          margin-bottom: 12px;
+       }
+
+       .section-desc {
+          font-size: 18px;
+          color: var(--apple-secondary-text);
+          margin-bottom: 36px;
+          max-width: 680px;
+       }
+
+       @media (max-width: 480px) {
+          .section-title { font-size: 26px; }
+          .section-desc { font-size: 16px; margin-bottom: 28px; }
+       }
+
+       /* Feature grid */
+       .feature-grid {
+          display: grid;
+          grid-template-columns: 1fr;
+          gap: 20px;
+          margin-bottom: 24px;
+       }
+
+       @media (min-width: 600px) {
+          .feature-grid { grid-template-columns: repeat(2, 1fr); }
+       }
+
+       @media (min-width: 992px) {
+          .feature-grid.cols-3 { grid-template-columns: repeat(3, 1fr); }
+       }
+
+       .feature-card {
+          background: var(--apple-white);
+          border: 1px solid var(--apple-border);
+          border-radius: var(--apple-radius);
+          padding: 30px 28px;
+          transition: all var(--transition-speed) ease-in-out;
+          height: 100%;
+          display: flex;
+          flex-direction: column;
+       }
+
+       .feature-card:hover {
+          transform: translateY(-4px);
+          box-shadow: 0 14px 34px rgba(0, 0, 0, 0.1);
+          border-color: rgba(0, 122, 255, 0.4);
+       }
+
+       .feature-icon {
+          width: 54px;
+          height: 54px;
+          border-radius: 15px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 22px;
+          color: #fff;
+          margin-bottom: 20px;
+          flex-shrink: 0;
+       }
+
+       .icon-blue   { background: linear-gradient(135deg, #007AFF, #00C6FF); }
+       .icon-purple { background: linear-gradient(135deg, #5856D6, #AF52DE); }
+       .icon-green  { background: linear-gradient(135deg, #34C759, #30D158); }
+       .icon-orange { background: linear-gradient(135deg, #FF9500, #FF6482); }
+       .icon-teal   { background: linear-gradient(135deg, #32ADE6, #00C7BE); }
+       .icon-pink   { background: linear-gradient(135deg, #FF2D55, #FF6482); }
+
+       .feature-card h5 {
+          font-size: 19px;
+          font-weight: 600;
+          margin-bottom: 10px;
+          color: var(--apple-text);
+          letter-spacing: -.01em;
+       }
+
+       .feature-card p {
+          font-size: 15px;
+          color: var(--apple-secondary-text);
+          line-height: 1.55;
+          margin-bottom: 18px;
+          flex-grow: 1;
+       }
+
+       .tag-row {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 8px;
+       }
+
+       .tag {
+          font-size: 12px;
+          padding: 5px 12px;
+          border-radius: 980px;
+          background: var(--apple-light-gray);
+          color: var(--apple-text);
+          font-weight: 500;
+       }
+
+       /* AI highlight banner card */
+       .ai-banner {
+          background: linear-gradient(135deg, #0A2540 0%, #1d3a8a 45%, #5856D6 100%);
+          border-radius: var(--apple-radius);
+          padding: 44px 40px;
+          color: #fff;
+          margin-bottom: 24px;
+          position: relative;
+          overflow: hidden;
+       }
+
+       .ai-banner::after {
+          content: "\f544";
+          font-family: "Font Awesome 5 Free";
+          font-weight: 900;
+          position: absolute;
+          right: -10px;
+          bottom: -20px;
+          font-size: 180px;
+          opacity: 0.08;
+          color: #fff;
+       }
+
+       .ai-banner .ai-pill {
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          background: rgba(255, 255, 255, 0.16);
+          border-radius: 980px;
+          padding: 6px 16px;
+          font-size: 13px;
+          font-weight: 600;
+          letter-spacing: .04em;
+          margin-bottom: 18px;
+       }
+
+       .ai-banner h3 {
+          font-size: 30px;
+          font-weight: 600;
+          margin-bottom: 14px;
+          letter-spacing: -.01em;
+          position: relative;
+          z-index: 1;
+       }
+
+       .ai-banner p {
+          font-size: 17px;
+          color: rgba(255, 255, 255, 0.85);
+          max-width: 640px;
+          margin-bottom: 0;
+          position: relative;
+          z-index: 1;
+       }
+
+       .ai-banner .apple-button {
+          background: #fff;
+          color: var(--apple-blue);
+          margin-top: 22px;
+          margin-left: 0;
+          position: relative;
+          z-index: 1;
+          font-weight: 500;
+       }
+
+       .ai-banner .apple-button:hover {
+          background: rgba(255, 255, 255, 0.85);
+          color: var(--apple-blue);
+       }
+
+       @media (max-width: 480px) {
+          .ai-banner { padding: 32px 24px; }
+          .ai-banner h3 { font-size: 24px; }
+          .ai-banner p { font-size: 15px; }
+       }
+
+       /* Case list cards */
+       .case-grid {
+          display: grid;
+          grid-template-columns: 1fr;
+          gap: 18px;
+       }
+
+       @media (min-width: 768px) {
+          .case-grid { grid-template-columns: repeat(2, 1fr); }
+       }
+
+       .case-card {
+          background: var(--apple-white);
+          border: 1px solid var(--apple-border);
+          border-radius: var(--apple-radius);
+          padding: 26px 28px;
+          transition: all var(--transition-speed) ease-in-out;
+          display: flex;
+          gap: 18px;
+          align-items: flex-start;
+       }
+
+       .case-card:hover {
+          transform: translateY(-3px);
+          box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+       }
+
+       .case-card .case-ico {
+          width: 44px;
+          height: 44px;
+          border-radius: 12px;
+          background: var(--apple-light-gray);
+          color: var(--apple-blue);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 18px;
+          flex-shrink: 0;
+       }
+
+       .case-card h6 {
+          font-size: 17px;
+          font-weight: 600;
+          margin-bottom: 6px;
+          color: var(--apple-text);
+       }
+
+       .case-card p {
+          font-size: 14px;
+          color: var(--apple-secondary-text);
+          margin: 0;
+          line-height: 1.5;
+       }
+
+       /* CTA section */
+       .cta-card {
+          background: linear-gradient(180deg, var(--apple-light-gray) 0%, var(--apple-white) 100%);
+          border: 1px solid var(--apple-border);
+          border-radius: var(--apple-radius);
+          padding: 50px 40px;
+          text-align: center;
+       }
+
+       .cta-card h3 {
+          font-size: 30px;
+          font-weight: 600;
+          margin-bottom: 12px;
+          letter-spacing: -.01em;
+       }
+
+       .cta-card p {
+          font-size: 18px;
+          color: var(--apple-secondary-text);
+          margin-bottom: 28px;
+       }
+
+       /* Dark mode for enhanced components */
+       body.dark-mode .stat-badge {
+          background: rgba(45, 45, 47, 0.7);
+          border-color: #424245;
+          color: #f5f5f7;
+       }
+
+       body.dark-mode .section-title,
+       body.dark-mode .feature-card h5,
+       body.dark-mode .case-card h6,
+       body.dark-mode .cta-card h3 {
+          color: #f5f5f7;
+       }
+
+       body.dark-mode .section-desc,
+       body.dark-mode .feature-card p,
+       body.dark-mode .case-card p,
+       body.dark-mode .cta-card p {
+          color: #a1a1a6;
+       }
+
+       body.dark-mode .feature-card,
+       body.dark-mode .case-card {
+          background: #1d1d1f;
+          border-color: #424245;
+       }
+
+       body.dark-mode .feature-card:hover,
+       body.dark-mode .case-card:hover {
+          background: #2d2d2f;
+       }
+
+       body.dark-mode .case-card .case-ico {
+          background: #2d2d2f;
+       }
+
+       body.dark-mode .tag {
+          background: #2d2d2f;
+          color: #d1d1d6;
+       }
+
+       body.dark-mode .cta-card {
+          background: linear-gradient(180deg, #1d1d1f 0%, #000000 100%);
+          border-color: #424245;
+       }
     </style>
 </head>
 <body>
@@ -500,45 +841,213 @@
           <div class="row justify-content-center">
              <div class="col-lg-10 text-center" data-aos="fade-up" data-aos-delay="100">
                 <h1 class="apple-headline">接案軟體工程師</h1>
-                <p class="apple-subheadline">專業軟體開發與雲端架構服務</p>
+                <p class="apple-subheadline">AI 應用 · 全端開發 · 雲端架構</p>
                 <a href="#services" class="apple-button apple-button-large">查看服務</a>
-                <a href="https://yennanliu.github.io/contact.html" class="apple-button apple-button-large">聯絡我</a>
+                <a href="https://yennanliu.github.io/contact.html" class="apple-button apple-button-large">免費諮詢</a>
+                <div class="hero-stats">
+                   <span class="stat-badge"><i class="fas fa-briefcase"></i> 7 年 FAANG 大廠經驗</span>
+                   <span class="stat-badge"><i class="fas fa-globe-asia"></i> 英 / 日 / 新 跨國團隊</span>
+                   <span class="stat-badge"><i class="fas fa-robot"></i> AI Agent 系統開發</span>
+                   <span class="stat-badge"><i class="fas fa-cloud"></i> 雲端架構顧問</span>
+                </div>
              </div>
           </div>
        </div>
     </section>
 
-    <!-- Content -->
+    <!-- Intro / About -->
     <div class="container mt-5">
         <div class="row justify-content-center">
             <div class="col-lg-10 content-card" data-aos="fade-up" data-aos-delay="200">
-                <div class="apple-body-large mb-4">7年FANNG美商大廠資深後端工程師經驗，曾在英國、日本、新加坡等團隊工作。完整軟體開發經驗，熟悉演算法、資料結構、數據庫與後端/全端開發。主要使用Python、Java開發，並輔以 Javascript框架做出全端產品。</div>
-                <div class="apple-body-large mb-4">作品集：<a href="https://yennanliu.github.io/portfolios.html" style="color: var(--apple-blue); text-decoration: none;">portfolio</a> | Github：<a href="https://github.com/yennanliu" style="color: var(--apple-blue); text-decoration: none;">github</a></div>
+                <span class="section-label">About</span>
+                <h2 class="section-title">大廠級工程實力，交付可上線的產品</h2>
+                <div class="apple-body-large mb-4">7 年 FAANG 美商大廠資深後端工程師經驗，曾在英國、日本、新加坡等跨國團隊工作。完整軟體開發經驗，熟悉演算法、資料結構、資料庫與後端 / 全端開發。主要使用 Python、Java 開發，並輔以 JavaScript 框架打造全端產品。</div>
+                <div class="apple-body-large">作品集：<a href="https://yennanliu.github.io/portfolios.html" style="color: var(--apple-blue); text-decoration: none;">portfolio</a> &nbsp;|&nbsp; Github：<a href="https://github.com/yennanliu" style="color: var(--apple-blue); text-decoration: none;">github</a></div>
+            </div>
+        </div>
+    </div>
 
-                <h4 id="services">服務項目</h4>
-                <ul class="service-list">
-                    <li>後端開發 (Spring Boot、Flask、Django)</li>
-                    <li>全端開發 (Python/Java/NodeJS、Javascript/vue.js)</li>
-                    <li>資料平台建置設計 (Spark、Flink、Airflow、Hadoop)</li>
-                    <li>網路爬蟲開發 (Python)</li>
-                    <li>雲端基礎建設 (AWS、GCP、Azure、Databricks) 開發</li>
-                    <li>ETL開發 (Airflow、Python、Scala、Java、DB)</li>
-                    <li>Dashboard開發 (Looker、Tableau、PowerBI、SuperSet)</li>
-                    <li>AI應用開發 (NLP、OpenAI串接)</li>
-                    <li>技術架構顧問 (AWS、GCP)</li>
-                </ul>
+    <!-- AI Agent featured -->
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-10" data-aos="fade-up">
+                <span class="section-label" id="services">Featured</span>
+                <h2 class="section-title">AI 系統與 Agent 應用開發</h2>
+                <p class="section-desc">協助企業導入 AI，打造能自主執行任務、串接內部系統的智慧應用，把繁瑣流程交給 AI 自動完成。</p>
+                <div class="ai-banner">
+                    <span class="ai-pill"><i class="fas fa-bolt"></i> 主打服務</span>
+                    <h3>客製化 AI Agent 系統</h3>
+                    <p>從需求分析、架構設計到部署上線，量身打造 AI Agent 與自動化工作流，整合您現有的資料與業務系統，真正落地產生價值。</p>
+                    <a href="https://yennanliu.github.io/contact.html" class="apple-button apple-button-large">討論你的 AI 專案</a>
+                </div>
+                <div class="feature-grid cols-3">
+                    <div class="feature-card">
+                        <div class="feature-icon icon-purple"><i class="fas fa-robot"></i></div>
+                        <h5>AI Agent 系統</h5>
+                        <p>具備自主規劃、工具呼叫與多步驟任務執行能力的 AI Agent，自動處理複雜流程。</p>
+                        <div class="tag-row">
+                            <span class="tag">Agent</span>
+                            <span class="tag">Function Calling</span>
+                            <span class="tag">Workflow</span>
+                        </div>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon icon-purple"><i class="fas fa-comments"></i></div>
+                        <h5>LLM 應用與 RAG</h5>
+                        <p>串接 OpenAI / Claude API，打造客服機器人、知識庫問答與企業內部 AI 助理。</p>
+                        <div class="tag-row">
+                            <span class="tag">OpenAI</span>
+                            <span class="tag">Claude</span>
+                            <span class="tag">RAG</span>
+                        </div>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon icon-purple"><i class="fas fa-cogs"></i></div>
+                        <h5>流程自動化</h5>
+                        <p>結合 AI 與自動化腳本，串接 API 與資料系統，自動完成資料處理與重複性作業。</p>
+                        <div class="tag-row">
+                            <span class="tag">Automation</span>
+                            <span class="tag">API 串接</span>
+                            <span class="tag">NLP</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-                <h4>成功案例</h4>
-                <ul class="case-list">
-                    <li>開發分散式ML運算平台 (Python) - 提交ML任務，客戶非同步執行，並回傳結果</li>
-                    <li>優化遊戲CPU用量 (Java) - 降低20% VM CPU用量</li>
-                    <li>停車場管理Web App (Python、Javascript) - 優化Flask app Http、DB transaction邏輯</li>
-                    <li>貨倉Web App (Java、Vue) - 開發存貨管理app，CRUDL功能以及其他客製邏輯、API串接</li>
-                    <li>爬蟲程式開發 (Python) - 搜集台北餐廳資訊、評論以供業務開發</li>
-                </ul>
+    <!-- Other services -->
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-10" data-aos="fade-up">
+                <span class="section-label">Services</span>
+                <h2 class="section-title">其他服務項目</h2>
+                <p class="section-desc">從後端、全端到資料平台與雲端架構，提供完整的軟體開發與顧問服務。</p>
+                <div class="feature-grid cols-3">
+                    <div class="feature-card">
+                        <div class="feature-icon icon-green"><i class="fas fa-server"></i></div>
+                        <h5>後端開發</h5>
+                        <p>穩定可擴展的後端服務與 API 設計，採用主流後端框架。</p>
+                        <div class="tag-row">
+                            <span class="tag">Spring Boot</span>
+                            <span class="tag">Flask</span>
+                            <span class="tag">Django</span>
+                        </div>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon icon-blue"><i class="fas fa-laptop-code"></i></div>
+                        <h5>全端開發</h5>
+                        <p>從前端介面到後端服務一手包辦，交付完整可上線產品。</p>
+                        <div class="tag-row">
+                            <span class="tag">Python / Java</span>
+                            <span class="tag">NodeJS</span>
+                            <span class="tag">Vue.js</span>
+                        </div>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon icon-teal"><i class="fas fa-layer-group"></i></div>
+                        <h5>資料平台建置</h5>
+                        <p>大規模資料處理與分散式運算平台設計與建置。</p>
+                        <div class="tag-row">
+                            <span class="tag">Spark</span>
+                            <span class="tag">Flink</span>
+                            <span class="tag">Hadoop</span>
+                        </div>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon icon-orange"><i class="fas fa-project-diagram"></i></div>
+                        <h5>ETL 開發</h5>
+                        <p>資料管線設計與排程，建立穩定可維護的資料流程。</p>
+                        <div class="tag-row">
+                            <span class="tag">Airflow</span>
+                            <span class="tag">Python / Scala</span>
+                            <span class="tag">DB</span>
+                        </div>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon icon-pink"><i class="fas fa-chart-line"></i></div>
+                        <h5>Dashboard 開發</h5>
+                        <p>商業智慧儀表板設計，將資料轉化為可行動的洞察。</p>
+                        <div class="tag-row">
+                            <span class="tag">Looker</span>
+                            <span class="tag">Tableau</span>
+                            <span class="tag">Superset</span>
+                        </div>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon icon-blue"><i class="fas fa-cloud"></i></div>
+                        <h5>雲端架構顧問</h5>
+                        <p>雲端基礎建設設計、部署與技術架構諮詢。</p>
+                        <div class="tag-row">
+                            <span class="tag">AWS</span>
+                            <span class="tag">GCP</span>
+                            <span class="tag">Azure</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-                <h4>聯絡方式</h4>
-                <div class="apple-body-large">Email：f339339@hotmail.com</div>
+    <!-- Success cases -->
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-10" data-aos="fade-up">
+                <span class="section-label">Case studies</span>
+                <h2 class="section-title">成功案例</h2>
+                <p class="section-desc">實際交付的專案，涵蓋分散式系統、效能優化與全端應用。</p>
+                <div class="case-grid">
+                    <div class="case-card">
+                        <div class="case-ico"><i class="fas fa-network-wired"></i></div>
+                        <div>
+                            <h6>分散式 ML 運算平台</h6>
+                            <p>Python — 客戶可提交 ML 任務，非同步執行並回傳結果。</p>
+                        </div>
+                    </div>
+                    <div class="case-card">
+                        <div class="case-ico"><i class="fas fa-tachometer-alt"></i></div>
+                        <div>
+                            <h6>遊戲 CPU 用量優化</h6>
+                            <p>Java — 降低 20% VM CPU 用量，顯著節省成本。</p>
+                        </div>
+                    </div>
+                    <div class="case-card">
+                        <div class="case-ico"><i class="fas fa-parking"></i></div>
+                        <div>
+                            <h6>停車場管理 Web App</h6>
+                            <p>Python、JavaScript — 優化 Flask HTTP 與 DB transaction 邏輯。</p>
+                        </div>
+                    </div>
+                    <div class="case-card">
+                        <div class="case-ico"><i class="fas fa-warehouse"></i></div>
+                        <div>
+                            <h6>貨倉管理 Web App</h6>
+                            <p>Java、Vue — 存貨管理 CRUDL 功能、客製邏輯與 API 串接。</p>
+                        </div>
+                    </div>
+                    <div class="case-card">
+                        <div class="case-ico"><i class="fas fa-spider"></i></div>
+                        <div>
+                            <h6>爬蟲程式開發</h6>
+                            <p>Python — 搜集台北餐廳資訊與評論，供業務開發使用。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-10" data-aos="fade-up">
+                <div class="cta-card">
+                    <h3>有專案想開發嗎？</h3>
+                    <p>不論是 AI 應用、全端產品還是資料平台，歡迎與我聊聊你的需求。</p>
+                    <a href="https://yennanliu.github.io/contact.html" class="apple-button apple-button-large">免費諮詢</a>
+                    <a href="mailto:f339339@hotmail.com" class="apple-button apple-button-large">Email 聯絡</a>
+                    <div class="apple-body-large" style="margin-top: 22px; color: var(--apple-secondary-text);">Email：f339339@hotmail.com</div>
+                </div>
             </div>
         </div>
     </div>

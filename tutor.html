@@ -448,6 +448,315 @@
           align-items: center;
           margin-left: 8px;
        }
+
+       /* ===== Enhanced components ===== */
+
+       /* Hero stat badges */
+       .hero-stats {
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: center;
+          gap: 12px;
+          margin-top: 36px;
+       }
+
+       .stat-badge {
+          background: rgba(255, 255, 255, 0.7);
+          border: 1px solid var(--apple-border);
+          border-radius: 980px;
+          padding: 8px 18px;
+          font-size: 14px;
+          font-weight: 500;
+          color: var(--apple-text);
+          backdrop-filter: blur(10px);
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+       }
+
+       .stat-badge i {
+          color: var(--apple-blue);
+       }
+
+       /* Section label */
+       .section-label {
+          font-size: 13px;
+          font-weight: 700;
+          letter-spacing: .06em;
+          text-transform: uppercase;
+          color: var(--apple-blue);
+          margin-bottom: 8px;
+          display: block;
+       }
+
+       .section-title {
+          font-size: 32px;
+          font-weight: 600;
+          letter-spacing: -.01em;
+          color: var(--apple-text);
+          margin-bottom: 12px;
+       }
+
+       .section-desc {
+          font-size: 18px;
+          color: var(--apple-secondary-text);
+          margin-bottom: 36px;
+          max-width: 680px;
+       }
+
+       @media (max-width: 480px) {
+          .section-title { font-size: 26px; }
+          .section-desc { font-size: 16px; margin-bottom: 28px; }
+       }
+
+       /* Feature grid */
+       .feature-grid {
+          display: grid;
+          grid-template-columns: 1fr;
+          gap: 20px;
+          margin-bottom: 24px;
+       }
+
+       @media (min-width: 600px) {
+          .feature-grid { grid-template-columns: repeat(2, 1fr); }
+       }
+
+       @media (min-width: 992px) {
+          .feature-grid.cols-3 { grid-template-columns: repeat(3, 1fr); }
+       }
+
+       .feature-card {
+          background: var(--apple-white);
+          border: 1px solid var(--apple-border);
+          border-radius: var(--apple-radius);
+          padding: 30px 28px;
+          transition: all var(--transition-speed) ease-in-out;
+          height: 100%;
+          display: flex;
+          flex-direction: column;
+       }
+
+       .feature-card:hover {
+          transform: translateY(-4px);
+          box-shadow: 0 14px 34px rgba(0, 0, 0, 0.1);
+          border-color: rgba(0, 122, 255, 0.4);
+       }
+
+       .feature-icon {
+          width: 54px;
+          height: 54px;
+          border-radius: 15px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 22px;
+          color: #fff;
+          margin-bottom: 20px;
+          flex-shrink: 0;
+       }
+
+       .icon-blue   { background: linear-gradient(135deg, #007AFF, #00C6FF); }
+       .icon-purple { background: linear-gradient(135deg, #5856D6, #AF52DE); }
+       .icon-green  { background: linear-gradient(135deg, #34C759, #30D158); }
+       .icon-orange { background: linear-gradient(135deg, #FF9500, #FF6482); }
+       .icon-teal   { background: linear-gradient(135deg, #32ADE6, #00C7BE); }
+       .icon-pink   { background: linear-gradient(135deg, #FF2D55, #FF6482); }
+
+       .feature-card h5 {
+          font-size: 19px;
+          font-weight: 600;
+          margin-bottom: 10px;
+          color: var(--apple-text);
+          letter-spacing: -.01em;
+       }
+
+       .feature-card p {
+          font-size: 15px;
+          color: var(--apple-secondary-text);
+          line-height: 1.55;
+          margin-bottom: 18px;
+          flex-grow: 1;
+       }
+
+       .tag-row {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 8px;
+       }
+
+       .tag {
+          font-size: 12px;
+          padding: 5px 12px;
+          border-radius: 980px;
+          background: var(--apple-light-gray);
+          color: var(--apple-text);
+          font-weight: 500;
+       }
+
+       /* AI highlight banner card */
+       .ai-banner {
+          background: linear-gradient(135deg, #0A2540 0%, #1d3a8a 45%, #5856D6 100%);
+          border-radius: var(--apple-radius);
+          padding: 44px 40px;
+          color: #fff;
+          margin-bottom: 24px;
+          position: relative;
+          overflow: hidden;
+       }
+
+       .ai-banner::after {
+          content: "\f5dc";
+          font-family: "Font Awesome 5 Free";
+          font-weight: 900;
+          position: absolute;
+          right: -10px;
+          bottom: -20px;
+          font-size: 180px;
+          opacity: 0.08;
+          color: #fff;
+       }
+
+       .ai-banner .ai-pill {
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          background: rgba(255, 255, 255, 0.16);
+          border-radius: 980px;
+          padding: 6px 16px;
+          font-size: 13px;
+          font-weight: 600;
+          letter-spacing: .04em;
+          margin-bottom: 18px;
+       }
+
+       .ai-banner h3 {
+          font-size: 30px;
+          font-weight: 600;
+          margin-bottom: 14px;
+          letter-spacing: -.01em;
+          position: relative;
+          z-index: 1;
+       }
+
+       .ai-banner p {
+          font-size: 17px;
+          color: rgba(255, 255, 255, 0.85);
+          max-width: 640px;
+          margin-bottom: 0;
+          position: relative;
+          z-index: 1;
+       }
+
+       @media (max-width: 480px) {
+          .ai-banner { padding: 32px 24px; }
+          .ai-banner h3 { font-size: 24px; }
+          .ai-banner p { font-size: 15px; }
+       }
+
+       /* Process steps */
+       .step-grid {
+          display: grid;
+          grid-template-columns: 1fr;
+          gap: 18px;
+       }
+
+       @media (min-width: 768px) {
+          .step-grid { grid-template-columns: repeat(4, 1fr); }
+       }
+
+       .step-item {
+          text-align: center;
+          padding: 10px;
+       }
+
+       .step-num {
+          width: 44px;
+          height: 44px;
+          border-radius: 50%;
+          background: var(--apple-blue);
+          color: #fff;
+          font-weight: 600;
+          font-size: 18px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          margin: 0 auto 14px;
+       }
+
+       .step-item h6 {
+          font-size: 16px;
+          font-weight: 600;
+          margin-bottom: 6px;
+          color: var(--apple-text);
+       }
+
+       .step-item p {
+          font-size: 14px;
+          color: var(--apple-secondary-text);
+          margin: 0;
+       }
+
+       /* CTA section */
+       .cta-card {
+          background: linear-gradient(180deg, var(--apple-light-gray) 0%, var(--apple-white) 100%);
+          border: 1px solid var(--apple-border);
+          border-radius: var(--apple-radius);
+          padding: 50px 40px;
+          text-align: center;
+       }
+
+       .cta-card h3 {
+          font-size: 30px;
+          font-weight: 600;
+          margin-bottom: 12px;
+          letter-spacing: -.01em;
+       }
+
+       .cta-card p {
+          font-size: 18px;
+          color: var(--apple-secondary-text);
+          margin-bottom: 28px;
+       }
+
+       /* Dark mode for enhanced components */
+       body.dark-mode .stat-badge {
+          background: rgba(45, 45, 47, 0.7);
+          border-color: #424245;
+          color: #f5f5f7;
+       }
+
+       body.dark-mode .section-title,
+       body.dark-mode .feature-card h5,
+       body.dark-mode .step-item h6,
+       body.dark-mode .cta-card h3 {
+          color: #f5f5f7;
+       }
+
+       body.dark-mode .section-desc,
+       body.dark-mode .feature-card p,
+       body.dark-mode .step-item p,
+       body.dark-mode .cta-card p {
+          color: #a1a1a6;
+       }
+
+       body.dark-mode .feature-card {
+          background: #1d1d1f;
+          border-color: #424245;
+       }
+
+       body.dark-mode .feature-card:hover {
+          background: #2d2d2f;
+       }
+
+       body.dark-mode .tag {
+          background: #2d2d2f;
+          color: #d1d1d6;
+       }
+
+       body.dark-mode .cta-card {
+          background: linear-gradient(180deg, #1d1d1f 0%, #000000 100%);
+          border-color: #424245;
+       }
     </style>
 </head>
 <body>
@@ -499,39 +808,237 @@
           <div class="row justify-content-center">
              <div class="col-lg-10 text-center" data-aos="fade-up" data-aos-delay="100">
                 <h1 class="apple-headline">程式家教</h1>
-                <p class="apple-subheadline">專業程式教學與面試輔導服務</p>
+                <p class="apple-subheadline">演算法 · AI 開發 · 面試輔導</p>
                 <a href="#teaching" class="apple-button apple-button-large">查看教學項目</a>
-                <a href="https://yennanliu.github.io/contact.html" class="apple-button apple-button-large">聯絡我</a>
+                <a href="https://yennanliu.github.io/contact.html" class="apple-button apple-button-large">免費諮詢</a>
+                <div class="hero-stats">
+                   <span class="stat-badge"><i class="fas fa-briefcase"></i> 7 年 FAANG 大廠經驗</span>
+                   <span class="stat-badge"><i class="fas fa-globe-asia"></i> 英 / 日 / 新 跨國團隊</span>
+                   <span class="stat-badge"><i class="fas fa-user-check"></i> 面試官 & 職涯顧問</span>
+                   <span class="stat-badge"><i class="fas fa-robot"></i> AI / Agent 實戰</span>
+                </div>
              </div>
           </div>
        </div>
     </section>
 
-    <!-- Content -->
+    <!-- Intro / About -->
     <div class="container mt-5">
         <div class="row justify-content-center">
             <div class="col-lg-10 content-card" data-aos="fade-up" data-aos-delay="200">
-                <div class="apple-body-large mb-4">7年FANNG美商大廠資深後端工程師經驗，曾在英國、日本、新加坡等團隊工作。完整軟體開發經驗，熟悉演算法、資料結構、數據庫與後端開發。並熟悉軟體公司面試流程，擔任面試官與職涯顧問。</div>
+                <span class="section-label">About</span>
+                <h2 class="section-title">業界第一線經驗，帶你少走彎路</h2>
+                <div class="apple-body-large mb-4">7 年 FAANG 美商大廠資深後端工程師經驗，曾在英國、日本、新加坡等跨國團隊工作。完整軟體開發經驗，熟悉演算法、資料結構、資料庫與後端開發，並熟悉軟體公司面試流程，擔任面試官與職涯顧問。</div>
 
-                <div class="apple-body-large mb-4">曾經取得FANNG大廠、國際短影音平台、國際加密貨幣平台offer。並有Google、Meta、Microsoft、Palantir、Goldman Sachs等面試經驗。</div>
+                <div class="apple-body-large mb-4">曾取得 FAANG 大廠、國際短影音平台、國際加密貨幣平台 offer，並有 Google、Meta、Microsoft、Palantir、Goldman Sachs 等面試經驗。</div>
 
-                <div class="apple-body-large mb-4">教學方式：從基礎觀念出發，輔以簡單練習，給予回饋、幫助。最後透過小專案方式讓學員從做中學，扎實掌握CS知識與實作能力。小專案可當作作品集，對求職、面試都有幫助。</div>
+                <div class="apple-body-large">作品集：<a href="https://yennanliu.github.io/portfolios.html" style="color: var(--apple-blue); text-decoration: none;">portfolio</a> &nbsp;|&nbsp; Github：<a href="https://github.com/yennanliu" style="color: var(--apple-blue); text-decoration: none;">github</a> &nbsp;|&nbsp; CS 教材：<a href="https://github.com/yennanliu/CS_basics" style="color: var(--apple-blue); text-decoration: none;">CS_basics</a></div>
+            </div>
+        </div>
+    </div>
 
-                <div class="apple-body-large mb-4">作品集：<a href="https://yennanliu.github.io/portfolios.html" style="color: var(--apple-blue); text-decoration: none;">portfolio</a> | Github：<a href="https://github.com/yennanliu" style="color: var(--apple-blue); text-decoration: none;">github</a> | CS教材：<a href="https://github.com/yennanliu/CS_basics" style="color: var(--apple-blue); text-decoration: none;">CS_basics</a></div>
+    <!-- Teaching topics -->
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-10" data-aos="fade-up">
+                <span class="section-label" id="teaching">Curriculum</span>
+                <h2 class="section-title">教授項目</h2>
+                <p class="section-desc">從面試核心到最新 AI 開發，依你的目標量身規劃學習路徑。</p>
+            </div>
+        </div>
 
-                <h4 id="teaching">教授項目</h4>
-                <ul class="teaching-list">
-                    <li>Python、Java程式語言教學</li>
-                    <li>演算法與資料結構教學、程式面試輔導</li>
-                    <li>後端開發教學 (Spring Boot、Flask、Django)</li>
-                    <li>資料工程教學 (SQL、Airflow、DB)</li>
-                    <li>大數據教學 (Spark、Flink、Hadoop、Kafka)</li>
-                    <li>網路爬蟲教學</li>
-                    <li>雲端基礎建設 (AWS、GCP) 教學</li>
-                </ul>
+        <!-- Core: Algorithm & Data Structure -->
+        <div class="row justify-content-center">
+            <div class="col-lg-10" data-aos="fade-up">
+                <div class="feature-grid cols-3">
+                    <div class="feature-card">
+                        <div class="feature-icon icon-blue"><i class="fas fa-sitemap"></i></div>
+                        <h5>演算法與資料結構</h5>
+                        <p>從觀念到實作徹底掌握 Array、HashMap、Tree、Graph、DP 等核心主題，建立解題直覺。</p>
+                        <div class="tag-row">
+                            <span class="tag">Big-O</span>
+                            <span class="tag">Tree / Graph</span>
+                            <span class="tag">DP</span>
+                        </div>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon icon-blue"><i class="fas fa-code"></i></div>
+                        <h5>LeetCode 刷題與面試輔導</h5>
+                        <p>系統化題型分類、解題框架與模擬面試，針對白板題、行為面試與技術面試全面準備。</p>
+                        <div class="tag-row">
+                            <span class="tag">LeetCode</span>
+                            <span class="tag">Mock Interview</span>
+                            <span class="tag">System Design</span>
+                        </div>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon icon-blue"><i class="fab fa-python"></i></div>
+                        <h5>Python / Java 程式語言</h5>
+                        <p>從零基礎到進階語法、物件導向與最佳實踐，打好可長期累積的工程基本功。</p>
+                        <div class="tag-row">
+                            <span class="tag">Python</span>
+                            <span class="tag">Java</span>
+                            <span class="tag">OOP</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-                <h4>聯絡方式</h4>
-                <div class="apple-body-large">Email：f339339@hotmail.com</div>
+        <!-- AI highlight -->
+        <div class="row justify-content-center">
+            <div class="col-lg-10" data-aos="fade-up">
+                <div class="ai-banner">
+                    <span class="ai-pill"><i class="fas fa-bolt"></i> 熱門新主題</span>
+                    <h3>AI 開發與 Agent 自動化</h3>
+                    <p>掌握 AI 時代必備技能 — 從 Vibe Coding 到打造能自主執行任務的 AI Agent，學會用 AI 把想法快速變成可運作的產品。</p>
+                </div>
+                <div class="feature-grid cols-3">
+                    <div class="feature-card">
+                        <div class="feature-icon icon-purple"><i class="fas fa-magic"></i></div>
+                        <h5>Vibe Coding</h5>
+                        <p>運用 Cursor、Claude Code、Copilot 等 AI 工具，用自然語言高效開發，大幅提升生產力。</p>
+                        <div class="tag-row">
+                            <span class="tag">Cursor</span>
+                            <span class="tag">Claude Code</span>
+                            <span class="tag">Copilot</span>
+                        </div>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon icon-purple"><i class="fas fa-robot"></i></div>
+                        <h5>AI Agent 自動化</h5>
+                        <p>設計能自主規劃、呼叫工具與串接 API 的 AI Agent，把重複性工作交給 AI 自動完成。</p>
+                        <div class="tag-row">
+                            <span class="tag">Agent</span>
+                            <span class="tag">Workflow</span>
+                            <span class="tag">Automation</span>
+                        </div>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon icon-purple"><i class="fas fa-brain"></i></div>
+                        <h5>LLM 應用開發</h5>
+                        <p>學習 Prompt Engineering、RAG 知識庫與 OpenAI / Claude API 串接，打造專屬 AI 應用。</p>
+                        <div class="tag-row">
+                            <span class="tag">LLM</span>
+                            <span class="tag">RAG</span>
+                            <span class="tag">Prompt</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Engineering -->
+        <div class="row justify-content-center">
+            <div class="col-lg-10" data-aos="fade-up">
+                <div class="feature-grid cols-3">
+                    <div class="feature-card">
+                        <div class="feature-icon icon-green"><i class="fas fa-server"></i></div>
+                        <h5>後端開發</h5>
+                        <p>RESTful API、資料庫設計與服務架構，使用主流後端框架打造可上線的服務。</p>
+                        <div class="tag-row">
+                            <span class="tag">Spring Boot</span>
+                            <span class="tag">Flask</span>
+                            <span class="tag">Django</span>
+                        </div>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon icon-teal"><i class="fas fa-database"></i></div>
+                        <h5>資料工程</h5>
+                        <p>SQL 查詢優化、ETL pipeline 與資料排程，建立穩定可維護的資料流程。</p>
+                        <div class="tag-row">
+                            <span class="tag">SQL</span>
+                            <span class="tag">Airflow</span>
+                            <span class="tag">DB</span>
+                        </div>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon icon-orange"><i class="fas fa-layer-group"></i></div>
+                        <h5>大數據技術</h5>
+                        <p>分散式運算與串流處理，掌握業界常用的大數據生態系工具。</p>
+                        <div class="tag-row">
+                            <span class="tag">Spark</span>
+                            <span class="tag">Flink</span>
+                            <span class="tag">Kafka</span>
+                        </div>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon icon-pink"><i class="fas fa-bug"></i></div>
+                        <h5>網路爬蟲</h5>
+                        <p>網頁資料擷取、反爬蟲處理與自動化資料收集實作。</p>
+                        <div class="tag-row">
+                            <span class="tag">Python</span>
+                            <span class="tag">Scrapy</span>
+                            <span class="tag">Selenium</span>
+                        </div>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon icon-blue"><i class="fas fa-cloud"></i></div>
+                        <h5>雲端基礎建設</h5>
+                        <p>雲端服務架構、部署與維運，學會把應用程式上雲。</p>
+                        <div class="tag-row">
+                            <span class="tag">AWS</span>
+                            <span class="tag">GCP</span>
+                        </div>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon icon-green"><i class="fas fa-project-diagram"></i></div>
+                        <h5>實戰小專案</h5>
+                        <p>從做中學完成可放入作品集的專案，對求職與面試最有幫助。</p>
+                        <div class="tag-row">
+                            <span class="tag">Portfolio</span>
+                            <span class="tag">Hands-on</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Teaching method -->
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-10 content-card" data-aos="fade-up">
+                <span class="section-label">How it works</span>
+                <h2 class="section-title">教學方式</h2>
+                <p class="section-desc">從基礎觀念出發，輔以練習與回饋，最後透過小專案讓你從做中學，扎實掌握 CS 知識與實作能力。</p>
+                <div class="step-grid">
+                    <div class="step-item">
+                        <div class="step-num">1</div>
+                        <h6>觀念建立</h6>
+                        <p>從核心原理出發，打好穩固基礎</p>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-num">2</div>
+                        <h6>練習回饋</h6>
+                        <p>搭配練習題，即時給予回饋與指導</p>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-num">3</div>
+                        <h6>專案實作</h6>
+                        <p>完成小專案，做中學累積實力</p>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-num">4</div>
+                        <h6>求職應用</h6>
+                        <p>專案化為作品集，助攻面試求職</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-10" data-aos="fade-up">
+                <div class="cta-card">
+                    <h3>準備好開始學習了嗎？</h3>
+                    <p>不論你是想轉職、準備面試，還是想跟上 AI 開發浪潮，歡迎與我聊聊你的目標。</p>
+                    <a href="https://yennanliu.github.io/contact.html" class="apple-button apple-button-large">免費諮詢</a>
+                    <a href="mailto:f339339@hotmail.com" class="apple-button apple-button-large">Email 聯絡</a>
+                    <div class="apple-body-large" style="margin-top: 22px; color: var(--apple-secondary-text);">Email：f339339@hotmail.com</div>
+                </div>
             </div>
         </div>
     </div>
