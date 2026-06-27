@@ -757,6 +757,150 @@
           background: linear-gradient(180deg, #1d1d1f 0%, #000000 100%);
           border-color: #424245;
        }
+
+       /* ===== Premium / fancy layer ===== */
+
+       /* Animated mesh background in hero */
+       .hero-section { position: relative; overflow: hidden; }
+       .hero-section > .container { position: relative; z-index: 2; }
+       .hero-section::before {
+          content: "";
+          position: absolute;
+          inset: -25%;
+          background:
+             radial-gradient(circle at 18% 22%, rgba(0, 122, 255, 0.20), transparent 38%),
+             radial-gradient(circle at 82% 26%, rgba(175, 82, 222, 0.18), transparent 40%),
+             radial-gradient(circle at 50% 85%, rgba(88, 86, 214, 0.16), transparent 42%);
+          animation: meshFloat 20s ease-in-out infinite alternate;
+          z-index: 1;
+          pointer-events: none;
+       }
+
+       @keyframes meshFloat {
+          0%   { transform: translate3d(0, 0, 0) scale(1); }
+          50%  { transform: translate3d(2%, -2%, 0) scale(1.08); }
+          100% { transform: translate3d(-2%, 1%, 0) scale(1.05); }
+       }
+
+       @media (prefers-reduced-motion: reduce) {
+          .hero-section::before,
+          .ai-banner::before,
+          .tech-track { animation: none !important; }
+       }
+
+       /* Gradient accent text */
+       .gradient-text {
+          background: linear-gradient(110deg, #007AFF 0%, #5856D6 45%, #AF52DE 100%);
+          -webkit-background-clip: text;
+          background-clip: text;
+          -webkit-text-fill-color: transparent;
+          color: transparent;
+       }
+
+       .stat-badge { box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05); }
+
+       /* Premium gradient button */
+       .btn-gradient {
+          background: linear-gradient(120deg, #007AFF, #5856D6) !important;
+          box-shadow: 0 8px 22px rgba(0, 86, 214, 0.32);
+       }
+       .btn-gradient:hover {
+          background: linear-gradient(120deg, #0051d5, #4a47c4) !important;
+          box-shadow: 0 12px 30px rgba(0, 86, 214, 0.42);
+          transform: translateY(-2px);
+       }
+
+       /* Stats band with animated counters */
+       .stats-band {
+          display: grid;
+          grid-template-columns: repeat(2, 1fr);
+          gap: 16px;
+       }
+       @media (min-width: 768px) {
+          .stats-band { grid-template-columns: repeat(4, 1fr); }
+       }
+       .stat-block { text-align: center; padding: 18px 10px; }
+       .stat-block .num {
+          font-size: 46px;
+          font-weight: 700;
+          letter-spacing: -.02em;
+          line-height: 1;
+          background: linear-gradient(120deg, #007AFF, #5856D6);
+          -webkit-background-clip: text;
+          background-clip: text;
+          -webkit-text-fill-color: transparent;
+       }
+       @media (max-width: 480px) { .stat-block .num { font-size: 38px; } }
+       .stat-block .label {
+          font-size: 14px;
+          color: var(--apple-secondary-text);
+          margin-top: 8px;
+          font-weight: 500;
+       }
+
+       /* Feature card premium accents */
+       .feature-card { position: relative; overflow: hidden; }
+       .feature-card::before {
+          content: "";
+          position: absolute; top: 0; left: 0; right: 0; height: 3px;
+          background: linear-gradient(90deg, #007AFF, #AF52DE);
+          transform: scaleX(0); transform-origin: left;
+          transition: transform .35s ease;
+       }
+       .feature-card:hover::before { transform: scaleX(1); }
+       .feature-icon {
+          transition: transform .35s cubic-bezier(.2,.8,.2,1);
+          box-shadow: 0 8px 18px rgba(0, 0, 0, 0.14);
+       }
+       .feature-card:hover .feature-icon { transform: translateY(-3px) scale(1.06) rotate(-3deg); }
+
+       /* AI banner shimmer + depth */
+       .ai-banner { box-shadow: 0 20px 50px rgba(10, 37, 64, 0.30); }
+       .ai-banner::before {
+          content: "";
+          position: absolute; inset: 0;
+          background: linear-gradient(115deg, transparent 35%, rgba(255,255,255,0.13) 50%, transparent 65%);
+          background-size: 220% 100%;
+          animation: shimmer 7s linear infinite;
+          z-index: 0;
+       }
+       @keyframes shimmer {
+          0%   { background-position: 220% 0; }
+          100% { background-position: -220% 0; }
+       }
+
+       /* Tech marquee strip */
+       .tech-strip {
+          border-top: 1px solid var(--apple-border);
+          border-bottom: 1px solid var(--apple-border);
+          padding: 22px 0;
+          overflow: hidden;
+          background: var(--apple-light-gray);
+       }
+       .tech-track {
+          display: flex;
+          gap: 46px;
+          width: max-content;
+          animation: marquee 32s linear infinite;
+       }
+       .tech-track span {
+          font-size: 19px;
+          font-weight: 600;
+          color: var(--apple-secondary-text);
+          white-space: nowrap;
+          display: inline-flex;
+          align-items: center;
+          gap: 10px;
+          opacity: 0.8;
+       }
+       .tech-track span i { color: var(--apple-blue); }
+       @keyframes marquee {
+          0%   { transform: translateX(0); }
+          100% { transform: translateX(-50%); }
+       }
+
+       body.dark-mode .tech-strip { background: #161617; border-color: #424245; }
+       body.dark-mode .stat-block .label { color: #a1a1a6; }
     </style>
 </head>
 <body>
@@ -807,9 +951,9 @@
        <div class="container">
           <div class="row justify-content-center">
              <div class="col-lg-10 text-center" data-aos="fade-up" data-aos-delay="100">
-                <h1 class="apple-headline">程式家教</h1>
+                <h1 class="apple-headline gradient-text">程式家教</h1>
                 <p class="apple-subheadline">演算法 · AI 開發 · 面試輔導</p>
-                <a href="#teaching" class="apple-button apple-button-large">查看教學項目</a>
+                <a href="#teaching" class="apple-button apple-button-large btn-gradient">查看教學項目</a>
                 <a href="https://yennanliu.github.io/contact.html" class="apple-button apple-button-large">免費諮詢</a>
                 <div class="hero-stats">
                    <span class="stat-badge"><i class="fas fa-briefcase"></i> 7 年 FAANG 大廠經驗</span>
@@ -821,6 +965,59 @@
           </div>
        </div>
     </section>
+
+    <!-- Stats band -->
+    <div class="container" style="margin-top: 40px;">
+       <div class="row justify-content-center">
+          <div class="col-lg-10" data-aos="fade-up">
+             <div class="stats-band">
+                <div class="stat-block">
+                   <div class="num"><span class="counter" data-target="7">7</span>+</div>
+                   <div class="label">年 FAANG 大廠經驗</div>
+                </div>
+                <div class="stat-block">
+                   <div class="num"><span class="counter" data-target="3">3</span></div>
+                   <div class="label">國跨國團隊歷練</div>
+                </div>
+                <div class="stat-block">
+                   <div class="num"><span class="counter" data-target="5">5</span>+</div>
+                   <div class="label">頂尖大廠面試經驗</div>
+                </div>
+                <div class="stat-block">
+                   <div class="num">1:1</div>
+                   <div class="label">客製化教學</div>
+                </div>
+             </div>
+          </div>
+       </div>
+    </div>
+
+    <!-- Tech marquee -->
+    <div class="tech-strip" style="margin-top: 40px;">
+       <div class="tech-track">
+          <span><i class="fab fa-python"></i> Python</span>
+          <span><i class="fab fa-java"></i> Java</span>
+          <span><i class="fas fa-sitemap"></i> Algorithms</span>
+          <span><i class="fas fa-code"></i> LeetCode</span>
+          <span><i class="fas fa-robot"></i> AI Agent</span>
+          <span><i class="fas fa-brain"></i> LLM</span>
+          <span><i class="fas fa-server"></i> Spring Boot</span>
+          <span><i class="fas fa-database"></i> SQL</span>
+          <span><i class="fas fa-layer-group"></i> Spark</span>
+          <span><i class="fas fa-cloud"></i> AWS</span>
+          <!-- duplicate for seamless loop -->
+          <span><i class="fab fa-python"></i> Python</span>
+          <span><i class="fab fa-java"></i> Java</span>
+          <span><i class="fas fa-sitemap"></i> Algorithms</span>
+          <span><i class="fas fa-code"></i> LeetCode</span>
+          <span><i class="fas fa-robot"></i> AI Agent</span>
+          <span><i class="fas fa-brain"></i> LLM</span>
+          <span><i class="fas fa-server"></i> Spring Boot</span>
+          <span><i class="fas fa-database"></i> SQL</span>
+          <span><i class="fas fa-layer-group"></i> Spark</span>
+          <span><i class="fas fa-cloud"></i> AWS</span>
+       </div>
+    </div>
 
     <!-- Intro / About -->
     <div class="container mt-5">
@@ -1076,6 +1273,33 @@
            easing: 'ease-in-out',
            once: true
        });
+
+       // Animated number counters
+       (function() {
+          const counters = document.querySelectorAll('.counter');
+          if (!counters.length) return;
+          const animate = (el) => {
+             const target = parseInt(el.getAttribute('data-target'), 10) || 0;
+             const duration = 1200;
+             const start = performance.now();
+             const step = (now) => {
+                const progress = Math.min((now - start) / duration, 1);
+                const eased = 1 - Math.pow(1 - progress, 3);
+                el.textContent = Math.round(eased * target);
+                if (progress < 1) requestAnimationFrame(step);
+             };
+             requestAnimationFrame(step);
+          };
+          const observer = new IntersectionObserver((entries) => {
+             entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                   animate(entry.target);
+                   observer.unobserve(entry.target);
+                }
+             });
+          }, { threshold: 0.5 });
+          counters.forEach((c) => observer.observe(c));
+       })();
 
        // Dark mode toggle functionality
        document.addEventListener('DOMContentLoaded', function() {
