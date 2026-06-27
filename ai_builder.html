@@ -414,6 +414,7 @@
     .bento-card.card-ticket::before { background: linear-gradient(180deg, var(--orange) 0%, var(--purple) 100%); }
     .bento-card.card-office::before { background: linear-gradient(180deg, var(--cyan) 0%, var(--purple) 100%); }
     .bento-card.card-invest::before { background: linear-gradient(180deg, var(--green) 0%, var(--cyan) 100%); }
+    .bento-card.card-finance::before { background: linear-gradient(180deg, var(--purple) 0%, var(--blue) 100%); }
 
     /* Large ghost number */
     .bento-num {
@@ -445,6 +446,11 @@
     [data-theme="dark"] .bento-card.card-invest:hover {
       border-color: rgba(0,229,160,.35);
       box-shadow: 0 0 0 1px rgba(0,229,160,.08), 0 24px 60px rgba(0,0,0,.5);
+      transform: translateY(-8px);
+    }
+    [data-theme="dark"] .bento-card.card-finance:hover {
+      border-color: rgba(155,94,245,.35);
+      box-shadow: 0 0 0 1px rgba(155,94,245,.08), 0 24px 60px rgba(0,0,0,.5);
       transform: translateY(-8px);
     }
     [data-theme="light"] .bento-card:hover {
@@ -595,6 +601,25 @@
     }
     .fw-chip:hover { border-color: var(--green); background: rgba(0,229,160,.1); }
     .fw-chip i { font-size: 14px; color: var(--green); width: 16px; flex-shrink: 0; }
+    .fw-chip.fw-blue { background: rgba(79,163,255,.05); border-color: rgba(79,163,255,.12); }
+    .fw-chip.fw-blue:hover { border-color: var(--blue); background: rgba(79,163,255,.1); }
+    .fw-chip.fw-blue i { color: var(--blue); }
+
+    /* Live-demo button */
+    .btn-live {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 18px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      text-decoration: none;
+      background: var(--grad-accent);
+      color: #fff;
+      transition: opacity .2s, transform .15s;
+    }
+    .btn-live:hover { opacity: .88; transform: translateY(-1px); color: #fff; text-decoration: none; }
 
     /* code inline */
     code {
@@ -966,7 +991,7 @@
 <div class="stats-strip">
   <div class="stats-inner">
     <div class="stat-item">
-      <div class="stat-num" style="color:var(--orange)">3</div>
+      <div class="stat-num" style="color:var(--orange)">4</div>
       <div class="stat-label">AI Projects</div>
     </div>
     <div class="stat-item">
@@ -1090,9 +1115,72 @@
       </div>
     </div>
 
-    <!-- Card 3 — InvestSkill (featured full-width) -->
-    <div class="bento-card card-invest featured">
+    <!-- Card 3 — Finance Data (featured full-width) -->
+    <div class="bento-card card-finance featured">
       <div class="bento-num">03</div>
+      <div class="status-badge status-live">
+        <span class="status-dot"></span> Live Demo
+      </div>
+      <div class="featured-inner">
+        <div>
+          <div class="bento-icon icon-purple">
+            <i class="fas fa-database"></i>
+          </div>
+          <div class="bento-title">Finance Data</div>
+          <p class="bento-desc">
+            An AI-powered investment research platform that auto-generates
+            fundamental, insider-trading, and technical analysis reports for
+            30+ US equities. SEC filings (10-K / 10-Q / 13-F / 6-K) are collected
+            automatically and structured into reports via <strong>Claude AI</strong> —
+            then published daily through a GitHub Actions pipeline.
+          </p>
+          <div class="metrics-row">
+            <div class="metric">
+              <div class="metric-val" style="color:var(--purple)">30+</div>
+              <div class="metric-key">Tickers Covered</div>
+            </div>
+            <div class="metric">
+              <div class="metric-val" style="color:var(--purple)">Daily</div>
+              <div class="metric-key">Auto Pipeline</div>
+            </div>
+            <div class="metric">
+              <div class="metric-val" style="color:var(--purple)">SEC</div>
+              <div class="metric-key">Filings Indexed</div>
+            </div>
+          </div>
+          <div class="tag-list">
+            <span class="tag tag-purple">Claude AI</span>
+            <span class="tag tag-orange">Python</span>
+            <span class="tag tag-blue">yfinance</span>
+            <span class="tag tag-blue">GitHub Actions</span>
+            <span class="tag tag-purple">MkDocs</span>
+          </div>
+          <div class="bento-footer" style="border-top: none; padding-top: 0; gap: 10px; flex-wrap: wrap; justify-content: flex-start;">
+            <a href="https://yennj12.js.org/finance_data/" target="_blank" class="btn-live">
+              <i class="fas fa-external-link-alt"></i> Live Demo
+            </a>
+            <a href="https://github.com/yennanliu/finance_data" target="_blank" class="btn-gh">
+              <i class="fab fa-github"></i> View Repo
+            </a>
+          </div>
+        </div>
+        <div>
+          <div style="font-size: 12px; font-weight: 700; color: var(--text-muted); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 16px;">What It Generates</div>
+          <div class="framework-chips">
+            <div class="fw-chip fw-blue"><i class="fas fa-chart-line"></i> Fundamental Reports</div>
+            <div class="fw-chip fw-blue"><i class="fas fa-user-secret"></i> Insider Trading</div>
+            <div class="fw-chip fw-blue"><i class="fas fa-wave-square"></i> Technical Analysis</div>
+            <div class="fw-chip fw-blue"><i class="fas fa-file-contract"></i> SEC Filings</div>
+            <div class="fw-chip fw-blue"><i class="fas fa-newspaper"></i> Market News</div>
+            <div class="fw-chip fw-blue"><i class="fas fa-book-open"></i> NotebookLM</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 4 — InvestSkill (featured full-width) -->
+    <div class="bento-card card-invest featured">
+      <div class="bento-num">04</div>
       <div class="status-badge status-open">
         <span class="status-dot"></span> Open Source
       </div>
