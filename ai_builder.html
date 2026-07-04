@@ -573,6 +573,30 @@
     }
     .btn-gh:hover { border-color: var(--cyan); color: var(--cyan); text-decoration: none; }
 
+    /* Live demo button */
+    .btn-demo {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 18px;
+      background: linear-gradient(135deg, var(--green) 0%, var(--cyan) 100%);
+      border: 1.5px solid transparent;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      color: #06121a;
+      text-decoration: none;
+      transition: opacity .2s, transform .15s, box-shadow .2s;
+    }
+    .btn-demo:hover {
+      opacity: .9;
+      transform: translateY(-1px);
+      color: #06121a;
+      text-decoration: none;
+      box-shadow: 0 0 20px rgba(0,229,160,.25);
+    }
+    .footer-actions { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+
     /* Featured card (full-width) 2-col inner layout */
     .featured-inner {
       display: grid;
@@ -1220,9 +1244,14 @@
             <div class="card-lang">
               <div class="lang-dot" style="background:#f1e05a"></div> JavaScript
             </div>
-            <a href="https://github.com/yennanliu/InvestSkill" target="_blank" class="btn-gh">
-              <i class="fab fa-github"></i> View Repo
-            </a>
+            <div class="footer-actions">
+              <a href="https://yennj12.js.org/InvestSkill/index.html" target="_blank" class="btn-demo">
+                <i class="fas fa-external-link-alt"></i> Live Demo
+              </a>
+              <a href="https://github.com/yennanliu/InvestSkill" target="_blank" class="btn-gh">
+                <i class="fab fa-github"></i> View Repo
+              </a>
+            </div>
           </div>
         </div>
         <div>
