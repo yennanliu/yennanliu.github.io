@@ -3,12 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <meta name="description" content="Yen-Nan Liu — AI Engineer & Platform Architect. LLM integration, cloud infrastructure, backend systems.">
+  <meta name="description" content="Yen — AI full-stack engineer. System design through to shipped application, with backend services and cloud infrastructure underneath.">
   <title>yen.dev</title>
   <link rel="icon" href="img/icon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="img/icon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
   <script>
     // Apply saved theme before paint to avoid flash (default: dark)
@@ -20,9 +21,9 @@
     })();
   </script>
   <style>
-    /* LANGGRAPH DATA-DENSE SYSTEM
-       Dark navy console · JetBrains Mono UI chrome · periwinkle/sky-blue accent
-       Depth via bg progression · 1px borders · status colors reserved for state */
+    /* SIGNAL SYSTEM
+       Dark navy console · Bricolage Grotesque display · Space Grotesk body · JetBrains Mono chrome
+       One motion idea: signal moving through a system. Depth via bg progression · 1px borders */
     :root {
       --bg:            #0d1117;
       --bg-alt:        #111826;
@@ -57,6 +58,9 @@
       --max:           1280px;
       --cat-1:#7aa8ff; --cat-2:#b48cff; --cat-3:#35c98d;
       --cat-4:#f5a25d; --cat-5:#4cc9d6; --cat-6:#e879b9;
+      --display: 'Bricolage Grotesque', 'Space Grotesk', system-ui, sans-serif;
+      --sans:    'Space Grotesk', system-ui, -apple-system, sans-serif;
+      --mono:    'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
     }
 
     /* ── LIGHT THEME ── */
@@ -99,7 +103,7 @@
     html { scroll-behavior:smooth; -webkit-text-size-adjust:100%; }
     body {
       background:var(--bg); color:var(--ink);
-      font-family:'Inter', system-ui, -apple-system, sans-serif;
+      font-family:var(--sans);
       line-height:1.6; overflow-x:hidden;
       -webkit-font-smoothing:antialiased;
     }
@@ -119,14 +123,14 @@
     }
     nav.scrolled { background:var(--nav-bg-scroll); border-bottom-color:var(--rule); }
     .nav-logo {
-      font-family:'JetBrains Mono', monospace; font-size:.9rem; font-weight:600;
+      font-family:var(--mono); font-size:.9rem; font-weight:600;
       letter-spacing:.08em; text-transform:uppercase; color:var(--ink); text-decoration:none;
     }
     .nav-logo em { color:var(--blue); font-style:normal; }
     .nav-links { display:flex; gap:32px; list-style:none; align-items:center; }
     .nav-links a {
       color:var(--ink-3); text-decoration:none; font-size:.8rem; font-weight:500;
-      font-family:'JetBrains Mono', monospace; letter-spacing:.02em; transition:color .2s;
+      font-family:var(--mono); letter-spacing:.02em; transition:color .2s;
     }
     .nav-links a:hover { color:var(--ink); }
     .nav-links .nav-cta {
@@ -159,7 +163,7 @@
     }
     #nav-mobile.open { opacity:1; pointer-events:auto; }
     #nav-mobile a {
-      font-family:'JetBrains Mono', monospace;
+      font-family:var(--mono);
       font-size:1.1rem; font-weight:600; color:var(--ink); text-decoration:none;
       padding:18px 56px; width:100%; text-align:center;
       border-bottom:1px solid var(--rule); transition:color .2s;
@@ -171,29 +175,47 @@
     #hero {
       min-height:100vh; min-height:100svh;
       display:flex; align-items:center;
-      padding-top:88px; padding-bottom:72px;
+      padding-top:104px; padding-bottom:80px;
       position:relative; overflow:hidden; background:var(--bg);
     }
+    /* grid bed — drifts one cell, forever */
     #hero::before {
       content:''; position:absolute; inset:0;
       background-image:
         linear-gradient(var(--rule) 1px, transparent 1px),
         linear-gradient(90deg, var(--rule) 1px, transparent 1px);
-      background-size:56px 56px; opacity:.5; pointer-events:none;
+      background-size:56px 56px, 56px 56px;
+      background-position:0 0, 0 0;
+      opacity:.5; pointer-events:none;
       mask-image:var(--grid-mask);
       -webkit-mask-image:var(--grid-mask);
+      animation:drift 9s linear infinite;
     }
+    @keyframes drift { to { background-position:56px 56px, 56px 56px; } }
+
+    /* packets riding the grid lines */
+    .pk {
+      position:absolute; width:26px; height:2px; border-radius:2px;
+      background:var(--blue); opacity:0; pointer-events:none; z-index:0;
+    }
+    @keyframes pkRun  { 0%{transform:translateX(0);opacity:0} 8%{opacity:.9}  82%{opacity:.9}  100%{transform:translateX(760px);opacity:0} }
+    @keyframes pkRunB { 0%{transform:translateX(0);opacity:0} 8%{opacity:.75} 82%{opacity:.75} 100%{transform:translateX(520px);opacity:0} }
+    .pk1 { top:22%; left:2%;  animation:pkRun  6.5s linear infinite; }
+    .pk2 { top:46%; left:8%;  animation:pkRunB 8.2s linear 1.4s infinite; }
+    .pk3 { top:70%; left:0;   animation:pkRun  7.4s linear 3.1s infinite; }
+    .pk4 { top:34%; left:26%; animation:pkRunB 9.1s linear 4.6s infinite; }
+
     .hero-inner {
       position:relative; z-index:1; width:100%;
-      display:grid; grid-template-columns:1fr 400px; gap:72px; align-items:center;
+      display:grid; grid-template-columns:1fr 404px; gap:64px; align-items:center;
     }
     .hero-left { opacity:0; animation:riseIn .7s ease .15s forwards; }
     .hero-label {
       display:inline-flex; align-items:center; gap:8px;
-      background:var(--green-pale); border:1px solid rgba(53,201,141,.3);
+      background:var(--green-pale); border:1px solid color-mix(in oklab, var(--green) 32%, transparent);
       border-radius:6px; padding:6px 14px;
-      font-family:'JetBrains Mono', monospace; font-size:.68rem;
-      letter-spacing:.1em; text-transform:uppercase; color:var(--green); margin-bottom:32px;
+      font-family:var(--mono); font-size:.68rem;
+      letter-spacing:.1em; text-transform:uppercase; color:var(--green); margin-bottom:30px;
     }
     .hero-label .pulse {
       width:7px; height:7px; background:var(--green); border-radius:50%;
@@ -201,74 +223,87 @@
     }
     @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.25} }
     .hero-h1 {
-      font-size:clamp(3.8rem, 7.5vw, 7.5rem); font-weight:800;
-      letter-spacing:-.04em; line-height:1.02; color:var(--blue-disp);
-      margin-bottom:24px; text-wrap:balance;
+      font-family:var(--display);
+      font-size:clamp(3.2rem, 6.6vw, 6.6rem); font-weight:800;
+      letter-spacing:-.045em; line-height:.98; color:var(--blue-disp);
+      margin-bottom:22px; text-wrap:balance;
     }
     .hero-h1 .line-blue { color:var(--blue); }
     .hero-sub {
-      font-family:'JetBrains Mono', monospace;
-      font-size:clamp(1rem, 1.7vw, 1.15rem); color:var(--ink-3);
-      margin-bottom:40px; min-height:1.6em; font-weight:400;
+      font-family:var(--mono);
+      font-size:clamp(.94rem, 1.6vw, 1.12rem); color:var(--ink-3);
+      margin-bottom:14px; min-height:1.7em; font-weight:400;
     }
+    .hero-sub .chev { color:var(--ink-dim); }
     .tw { color:var(--ink); font-weight:500; }
     .cursor { color:var(--blue); font-weight:700; animation:blink .9s step-end infinite; }
     @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+    .hero-lead { max-width:490px; margin-bottom:34px; font-size:1rem; line-height:1.75; color:var(--ink-3); text-wrap:pretty; }
     .hero-btns { display:flex; gap:14px; flex-wrap:wrap; }
 
     /* ── BUTTONS ── */
     .btn {
-      display:inline-block; padding:12px 26px; font-size:.82rem; font-weight:600;
-      font-family:'JetBrains Mono', monospace; letter-spacing:.02em;
+      display:inline-block; padding:13px 26px; font-size:.82rem; font-weight:600;
+      font-family:var(--mono); letter-spacing:.02em;
       text-decoration:none; border-radius:6px; border:1px solid transparent;
       cursor:pointer; transition:all .22s; white-space:nowrap;
     }
     .btn-ink { background:var(--blue-disp); color:var(--btn-fg); border-color:var(--blue-disp); }
-    .btn-ink:hover { opacity:.88; transform:translateY(-2px); box-shadow:0 6px 20px rgba(122,168,255,.25); }
+    .btn-ink:hover { opacity:.88; transform:translateY(-2px); box-shadow:0 6px 20px color-mix(in oklab, var(--blue) 30%, transparent); }
     .btn-ring { background:transparent; color:var(--ink); border-color:var(--rule-strong); }
     .btn-ring:hover { background:var(--surface); border-color:var(--blue); color:var(--blue); }
 
-    /* ── TERMINAL CARD ── */
+    /* ── SYSTEM CARD (live topology) ── */
     .hero-right { opacity:0; animation:riseIn .7s ease .45s forwards; }
-    .terminal-card {
+    .sys-card {
       background:var(--surface); border:1px solid var(--rule-strong);
       border-radius:var(--r-lg); overflow:hidden; box-shadow:var(--sh-md);
+      animation:bob 5s ease-in-out infinite;
     }
+    @keyframes bob { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-5px)} }
     .tc-bar {
       background:var(--bg-alt); border-bottom:1px solid var(--rule);
       padding:11px 16px; display:flex; align-items:center; gap:7px;
     }
     .tc-dot { width:11px; height:11px; border-radius:50%; }
     .tc-dot-r { background:#fe5f57; } .tc-dot-y { background:#febc2e; } .tc-dot-g { background:#28c840; }
-    .tc-path {
-      margin-left:auto; font-family:'JetBrains Mono', monospace;
-      font-size:.62rem; color:var(--ink-dim); letter-spacing:.04em;
-    }
-    .tc-body { padding:20px 22px; }
+    .tc-path { margin-left:auto; font-family:var(--mono); font-size:.62rem; color:var(--ink-dim); letter-spacing:.04em; }
+    .tc-body { padding:18px 20px 20px; }
     .tc-label {
-      font-family:'JetBrains Mono', monospace; font-size:.6rem;
+      font-family:var(--mono); font-size:.6rem;
       letter-spacing:.18em; text-transform:uppercase; color:var(--blue);
-      margin-bottom:8px; display:block;
+      margin-bottom:12px; display:block;
     }
-    .tc-label.mt { margin-top:16px; }
-    .tc-row {
-      display:flex; justify-content:space-between; align-items:baseline;
-      padding:7px 0; border-bottom:1px solid var(--rule); font-size:.82rem;
+    .tc-label.mt { margin-top:20px; }
+
+    .topo { display:block; width:100%; overflow:visible; }
+    .edge-base { stroke:var(--rule-strong); stroke-width:1.25; fill:none; }
+    .edge-flow {
+      stroke:var(--blue); stroke-width:1.6; fill:none; stroke-linecap:round;
+      stroke-dasharray:5 44; animation:flow 2.6s linear infinite;
     }
-    .tc-row:last-of-type { border-bottom:none; }
-    .tc-key { color:var(--ink-dim); font-family:'JetBrains Mono', monospace; font-size:.72rem; }
-    .tc-val { color:var(--ink); font-weight:600; font-family:'JetBrains Mono', monospace; font-size:.78rem; }
-    .tc-val-green { color:var(--green); display:flex; align-items:center; gap:5px; }
-    .tc-val-green::before {
-      content:''; display:inline-block; width:7px; height:7px;
-      background:var(--green); border-radius:50%; animation:pulse 2.2s infinite;
+    .edge-flow.f2 { animation-duration:3.1s; animation-delay:.35s; }
+    .edge-flow.f3 { animation-duration:2.9s; animation-delay:.7s; }
+    .edge-flow.f4 { animation-duration:3.4s; animation-delay:.2s; }
+    .edge-flow.f5 { animation-duration:2.7s; animation-delay:.9s; }
+    @keyframes flow { from{stroke-dashoffset:0} to{stroke-dashoffset:-320} }
+    .node-ring {
+      fill:none; stroke:var(--blue); stroke-width:1.2;
+      transform-origin:center; transform-box:fill-box;
+      animation:ring 2.8s ease-out infinite;
     }
-    .tc-skills { margin-top:4px; }
-    .tc-skill { margin-bottom:10px; }
+    .node-ring.r2 { animation-delay:1.4s; }
+    @keyframes ring { 0%{transform:scale(.85);opacity:.6} 70%,100%{transform:scale(2.4);opacity:0} }
+    .node-box  { fill:var(--bg-alt); stroke:var(--rule-strong); }
+    .node-box.on { fill:var(--blue-pale); stroke:var(--blue); }
+    .node-txt  { fill:var(--ink-3); font-family:var(--mono); font-size:10px; }
+    .node-txt.on { fill:var(--ink); }
+
+    .tc-skill { margin-bottom:11px; }
     .tc-skill:last-child { margin-bottom:0; }
     .tc-skill-head {
       display:flex; justify-content:space-between;
-      font-family:'JetBrains Mono', monospace; font-size:.65rem; color:var(--ink-3); margin-bottom:5px;
+      font-family:var(--mono); font-size:.65rem; color:var(--ink-3); margin-bottom:5px;
     }
     .tc-skill-pct { color:var(--blue); font-weight:600; font-variant-numeric:tabular-nums; }
     .tc-skill-track { height:3px; background:var(--rule); border-radius:2px; overflow:hidden; }
@@ -283,11 +318,13 @@
     .ticker-wrap {
       background:var(--bg-alt); border-top:1px solid var(--rule); border-bottom:1px solid var(--rule);
       overflow:hidden; padding:14px 0;
+      mask-image:linear-gradient(to right, transparent 0, #000 96px, #000 calc(100% - 96px), transparent 100%);
+      -webkit-mask-image:linear-gradient(to right, transparent 0, #000 96px, #000 calc(100% - 96px), transparent 100%);
     }
-    .ticker-track { display:flex; white-space:nowrap; animation:ticker 32s linear infinite; }
+    .ticker-track { display:flex; white-space:nowrap; width:max-content; animation:ticker 34s linear infinite; }
     .ticker-item {
-      font-family:'JetBrains Mono', monospace; font-size:.7rem;
-      letter-spacing:.1em; text-transform:uppercase; color:var(--ink-3); padding:0 28px;
+      font-family:var(--mono); font-size:.7rem;
+      letter-spacing:.1em; text-transform:uppercase; color:var(--ink-3); padding:0 26px;
     }
     .t-sep { color:var(--blue); margin:0 4px; }
     @keyframes ticker { from{transform:translateX(0)} to{transform:translateX(-50%)} }
@@ -296,42 +333,43 @@
     #stats { background:var(--bg-alt); border-bottom:1px solid var(--rule); }
     .stats-row { display:grid; grid-template-columns:repeat(4,1fr); }
     .stat-cell {
-      padding:56px 40px; text-align:center;
+      padding:56px 32px; text-align:center;
       border-right:1px solid var(--rule); border-top:1px solid var(--rule);
     }
     .stat-cell:last-child { border-right:none; }
     .stat-num {
-      font-family:'JetBrains Mono', monospace; font-variant-numeric:tabular-nums;
-      font-size:clamp(3rem, 5vw, 5rem); font-weight:700;
+      font-family:var(--mono); font-variant-numeric:tabular-nums;
+      font-size:clamp(2.6rem, 4.4vw, 4.2rem); font-weight:700;
       color:var(--blue-disp); line-height:1; margin-bottom:12px;
     }
-    .stat-unit { font-size:.45em; color:var(--blue); font-weight:600; vertical-align:super; }
+    .stat-unit { font-size:.44em; color:var(--blue); font-weight:600; vertical-align:super; }
     .stat-lbl {
-      font-family:'JetBrains Mono', monospace; font-size:.62rem;
+      font-family:var(--mono); font-size:.62rem;
       letter-spacing:.15em; text-transform:uppercase; color:var(--ink-dim);
     }
 
     /* ── SECTION SCAFFOLD ── */
-    .section { padding:112px 0; }
+    .section { padding:104px 0; }
     .sec-eye {
-      font-family:'JetBrains Mono', monospace; font-size:.68rem;
+      font-family:var(--mono); font-size:.68rem;
       letter-spacing:.22em; text-transform:uppercase; color:var(--blue);
       margin-bottom:14px; display:block;
     }
     .sec-h2 {
-      font-size:clamp(2.4rem, 5vw, 4.5rem); font-weight:800;
-      letter-spacing:-.035em; line-height:1.06; color:var(--blue-disp);
+      font-family:var(--display);
+      font-size:clamp(2.2rem, 4.4vw, 4rem); font-weight:800;
+      letter-spacing:-.038em; line-height:1.04; color:var(--blue-disp);
       margin-bottom:16px; text-wrap:balance;
     }
-    .sec-lead { font-size:1.02rem; color:var(--ink-3); max-width:540px; margin-bottom:60px; line-height:1.7; }
+    .sec-lead { font-size:1rem; color:var(--ink-3); max-width:540px; margin-bottom:52px; line-height:1.72; }
 
     /* ── REVEAL ── */
     .reveal { opacity:0; transform:translateY(18px); transition:opacity .65s ease, transform .65s ease; }
     .reveal.in { opacity:1; transform:none; }
 
-    /* ── EXPERTISE MARQUEE ── */
-    #expertise { background:var(--bg-alt); padding:112px 0; overflow:hidden; }
-    #expertise .wrap { padding-bottom:56px; }
+    /* ── LAYERS MARQUEE ── */
+    #expertise { background:var(--bg-alt); padding:104px 0; overflow:hidden; }
+    #expertise .wrap { padding-bottom:52px; }
 
     .exp-marquee-outer {
       overflow:hidden; padding:8px 0;
@@ -340,12 +378,9 @@
     }
     .exp-mq-row { margin-bottom:16px; }
     .exp-mq-row:last-child { margin-bottom:0; }
-    .exp-mq-track {
-      display:flex; gap:16px; width:max-content;
-      will-change:transform;
-    }
-    .track-l { animation:mq-l 48s linear infinite; }
-    .track-r { animation:mq-r 52s linear infinite; }
+    .exp-mq-track { display:flex; gap:16px; width:max-content; will-change:transform; }
+    .track-l { animation:mq-l 52s linear infinite; }
+    .track-r { animation:mq-r 58s linear infinite; }
     @keyframes mq-l { from{transform:translateX(0)}    to{transform:translateX(-50%)} }
     @keyframes mq-r { from{transform:translateX(-50%)} to{transform:translateX(0)}    }
     .exp-marquee-outer:hover .exp-mq-track { animation-play-state:paused; }
@@ -353,7 +388,7 @@
     .exp-mcard {
       flex-shrink:0; width:340px;
       background:var(--surface); border:1px solid var(--rule);
-      border-radius:var(--r); padding:28px 28px 24px;
+      border-radius:var(--r); padding:26px 26px 22px;
       box-shadow:var(--sh-sm);
       border-top:3px solid var(--rule-strong);
       transition:box-shadow .22s, transform .22s, border-color .22s;
@@ -361,91 +396,157 @@
     .exp-mcard:hover { box-shadow:var(--sh-md); transform:translateY(-4px); border-color:var(--rule-strong); }
 
     .mc-ai  { border-top-color:var(--cat-1); }
+    .mc-sd  { border-top-color:var(--cat-2); }
     .mc-be  { border-top-color:var(--cat-5); }
-    .mc-cl  { border-top-color:var(--cat-2); }
-    .mc-fs  { border-top-color:var(--cat-3); }
-    .mc-pe  { border-top-color:var(--cat-4); }
-    .mc-de  { border-top-color:var(--cat-6); }
+    .mc-cl  { border-top-color:var(--cat-3); }
+    .mc-app { border-top-color:var(--cat-4); }
+    .mc-dp  { border-top-color:var(--cat-6); }
 
     .mc-icon {
       width:44px; height:44px; border-radius:8px;
-      display:flex; align-items:center; justify-content:center;
-      font-size:1.15rem; margin-bottom:18px;
+      display:flex; align-items:center; justify-content:center; margin-bottom:18px;
     }
-    .mc-ai .mc-icon { background:rgba(122,168,255,.12); color:var(--cat-1); }
-    .mc-be .mc-icon { background:rgba(76,201,214,.12);  color:var(--cat-5); }
-    .mc-cl .mc-icon { background:rgba(180,140,255,.12); color:var(--cat-2); }
-    .mc-fs .mc-icon { background:rgba(53,201,141,.12);  color:var(--cat-3); }
-    .mc-pe .mc-icon { background:rgba(245,162,93,.12);  color:var(--cat-4); }
-    .mc-de .mc-icon { background:rgba(232,121,185,.12); color:var(--cat-6); }
+    .mc-icon svg { width:20px; height:20px; }
+    .mc-ai  .mc-icon { background:color-mix(in oklab, var(--cat-1) 14%, transparent); color:var(--cat-1); }
+    .mc-sd  .mc-icon { background:color-mix(in oklab, var(--cat-2) 14%, transparent); color:var(--cat-2); }
+    .mc-be  .mc-icon { background:color-mix(in oklab, var(--cat-5) 14%, transparent); color:var(--cat-5); }
+    .mc-cl  .mc-icon { background:color-mix(in oklab, var(--cat-3) 14%, transparent); color:var(--cat-3); }
+    .mc-app .mc-icon { background:color-mix(in oklab, var(--cat-4) 14%, transparent); color:var(--cat-4); }
+    .mc-dp  .mc-icon { background:color-mix(in oklab, var(--cat-6) 14%, transparent); color:var(--cat-6); }
 
-    .mc-title { font-size:1.02rem; font-weight:700; color:var(--ink); margin-bottom:8px; }
-    .mc-desc  { font-size:.85rem; color:var(--ink-3); line-height:1.65; margin-bottom:14px; }
+    .mc-title { font-size:1.06rem; font-weight:700; color:var(--ink); margin-bottom:8px; letter-spacing:-.01em; }
+    .mc-desc  { font-size:.875rem; color:var(--ink-3); line-height:1.65; margin-bottom:14px; }
     .mc-tags  { display:flex; flex-wrap:wrap; gap:5px; }
     .mc-tag {
-      font-family:'JetBrains Mono', monospace; font-size:.58rem;
+      font-family:var(--mono); font-size:.58rem;
       letter-spacing:.06em; text-transform:uppercase;
       color:var(--ink-3); background:var(--bg-alt); border:1px solid var(--rule);
       border-radius:4px; padding:2px 8px;
     }
 
-    /* ── PROJECTS TABLE ── */
-    #projects { background:var(--bg); border-top:1px solid var(--rule); }
-    .tbl-outer {
-      overflow-x:auto; border:1px solid var(--rule); border-radius:var(--r);
+    /* ── CAREER TRACE ── */
+    #career { background:var(--bg); border-top:1px solid var(--rule); }
+    .trace-box {
+      border:1px solid var(--rule); border-radius:var(--r);
+      background:var(--bg-alt); padding:26px 26px 14px; overflow:hidden;
     }
-    .proj-tbl { width:100%; border-collapse:collapse; min-width:560px; }
-    .proj-tbl th {
-      padding:13px 20px; background:var(--bg-alt);
-      border-bottom:1px solid var(--rule);
-      font-family:'JetBrains Mono', monospace; font-size:.63rem;
-      letter-spacing:.14em; text-transform:uppercase; color:var(--ink-dim); font-weight:600; text-align:left;
+    .trace-svg { display:block; width:100%; overflow:visible; }
+    .axis { stroke:var(--rule); stroke-width:1; stroke-dasharray:2 5; }
+    .traceFill { fill:color-mix(in oklab, var(--blue) 11%, transparent); stroke:none; }
+    .trace {
+      fill:none; stroke:var(--blue); stroke-width:2.25;
+      stroke-linecap:round; stroke-linejoin:round;
+      stroke-dasharray:1400; stroke-dashoffset:1400;
+      transition:stroke-dashoffset 2.6s cubic-bezier(.4,0,.2,1);
     }
-    .proj-tbl th:last-child { text-align:right; }
-    .proj-tbl td {
-      padding:16px 20px; border-bottom:1px solid var(--rule);
-      font-size:.9rem; color:var(--ink); vertical-align:middle;
+    .trace.in { stroke-dashoffset:0; }
+    .stop {
+      cursor:pointer; opacity:0; transform:scale(.4);
+      transform-origin:center; transform-box:fill-box;
+      transition:opacity .5s ease, transform .5s cubic-bezier(.2,1.4,.4,1);
     }
-    .proj-tbl tbody tr:nth-child(even) td { background:var(--bg-alt); }
-    .proj-tbl tr:last-child td { border-bottom:none; }
-    .proj-tbl tbody tr:hover td { background:var(--surface); }
-    .proj-name a { color:var(--ink); text-decoration:none; font-weight:600; font-family:'JetBrains Mono', monospace; font-size:.85rem; }
-    .proj-name a:hover { color:var(--blue); }
-    .proj-desc { color:var(--ink-3); font-size:.85rem; max-width:300px; }
-    .lang-pill {
-      display:inline-flex; align-items:center; gap:6px;
-      font-family:'JetBrains Mono', monospace; font-size:.7rem; color:var(--ink-3);
+    .stop.in { opacity:1; transform:none; }
+    .stop:nth-of-type(1) { transition-delay:1.5s; }
+    .stop:nth-of-type(2) { transition-delay:1.9s; }
+    .stop:nth-of-type(3) { transition-delay:2.3s; }
+    .stop .hit { fill:var(--bg-alt); stroke:var(--blue); stroke-width:2; transition:fill .2s; }
+    .stop:hover .hit { fill:var(--blue); }
+    .stop.active .hit { fill:var(--blue); }
+    .stop .lbl { fill:var(--ink-dim); font-family:var(--mono); font-size:13px; transition:fill .2s; }
+    .stop.active .lbl, .stop:hover .lbl { fill:var(--ink); }
+    .trace-axis-lbl { fill:var(--ink-dim); font-family:var(--mono); font-size:11px; letter-spacing:1.6px; }
+
+    .era-box {
+      margin-top:26px; border:1px solid var(--rule-strong); border-radius:var(--r);
+      background:var(--surface); padding:28px 30px;
     }
+    .era-panel { display:none; }
+    .era-panel.active { display:block; animation:fadeUp .4s ease both; }
+    @keyframes fadeUp { from{opacity:0;transform:translateY(8px)} }
+    .era-head { display:flex; flex-wrap:wrap; align-items:baseline; gap:8px 18px; margin-bottom:14px; }
+    .era-years { font-family:var(--mono); font-size:.76rem; color:var(--blue); letter-spacing:.08em; }
+    .era-role  { font-size:1.36rem; font-weight:700; color:var(--ink); letter-spacing:-.015em; }
+    .era-place { font-family:var(--mono); font-size:.75rem; color:var(--ink-dim); margin-left:auto; }
+    .era-blurb { margin-bottom:18px; font-size:.97rem; line-height:1.75; color:var(--ink-3); max-width:720px; text-wrap:pretty; }
+    .era-metrics { display:flex; flex-wrap:wrap; gap:22px 40px; margin-bottom:20px; }
+    .era-mv { font-family:var(--mono); font-size:1.5rem; font-weight:700; color:var(--blue-disp); line-height:1; }
+    .era-mk { font-family:var(--mono); font-size:.62rem; letter-spacing:.14em; text-transform:uppercase; color:var(--ink-dim); margin-top:7px; }
+    .era-stack { display:flex; flex-wrap:wrap; gap:6px; }
+    .era-tag {
+      font-family:var(--mono); font-size:.62rem; letter-spacing:.06em; text-transform:uppercase;
+      color:var(--ink-3); background:var(--bg-alt); border:1px solid var(--rule);
+      border-radius:4px; padding:4px 10px;
+    }
+
+    /* ── PROJECTS ── */
+    #projects { background:var(--bg-alt); border-top:1px solid var(--rule); }
+    .filters { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:26px; }
+    .chip {
+      display:inline-flex; align-items:center; min-height:44px; padding:10px 18px;
+      border-radius:6px; font-family:var(--mono); font-size:.75rem; letter-spacing:.04em;
+      color:var(--ink-3); background:transparent; border:1px solid var(--rule);
+      cursor:pointer; transition:color .2s, border-color .2s, background .2s;
+    }
+    .chip:hover { color:var(--ink); border-color:var(--rule-strong); }
+    .chip.on { color:var(--btn-fg); background:var(--blue-disp); border-color:var(--blue-disp); }
+
+    .ptbl { border:1px solid var(--rule); border-radius:var(--r); overflow:hidden; background:var(--bg); }
+    .ptbl-row {
+      display:grid; grid-template-columns:236px minmax(0,1fr) 148px 44px;
+      align-items:center; border-bottom:1px solid var(--rule);
+      text-decoration:none; transition:background .18s;
+      animation:glide .4s ease both;
+    }
+    @keyframes glide { from{transform:translateX(-14px);opacity:0} }
+    .ptbl-row:last-child { border-bottom:none; }
+    .ptbl-row:nth-of-type(even) { background:var(--bg-alt); }
+    .ptbl-row:hover { background:var(--surface); }
+    .ptbl-row:hover .arrow { transform:translate(3px,-3px); color:var(--blue); }
+    .ptbl-row[hidden] { display:none; }
+    .ptbl-head { background:var(--bg-alt); animation:none; }
+    .ptbl-head > div {
+      padding:13px 20px; font-family:var(--mono); font-size:.63rem;
+      letter-spacing:.14em; text-transform:uppercase; color:var(--ink-dim); font-weight:600;
+    }
+    .p-name { padding:16px 20px; font-family:var(--mono); font-size:.875rem; font-weight:600; color:var(--ink); }
+    .p-desc { padding:16px 20px; font-size:.875rem; color:var(--ink-3); line-height:1.6; }
+    .p-lang { padding:16px 20px; display:flex; align-items:center; gap:8px; font-family:var(--mono); font-size:.75rem; color:var(--ink-3); }
     .lang-dot { width:9px; height:9px; border-radius:50%; flex-shrink:0; }
-    .stars {
-      font-family:'JetBrains Mono', monospace; font-variant-numeric:tabular-nums;
-      font-size:.8rem; color:var(--ink-3); display:inline-flex; align-items:center; gap:4px; float:right;
-    }
-    .stars i { color:var(--amber); font-size:.7rem; }
+    .p-go { padding:16px 20px 16px 0; display:flex; justify-content:flex-end; }
+    .arrow { color:var(--ink-dim); transition:transform .2s, color .2s; }
     .tbl-footer { margin-top:24px; text-align:right; }
 
     /* ── CONTACT ── */
     #contact {
-      padding:128px 0; text-align:center;
-      background:var(--bg-alt);
-      border-top:1px solid var(--rule);
+      padding:120px 0; text-align:center; position:relative; overflow:hidden;
+      background:var(--bg); border-top:1px solid var(--rule);
     }
+    .radar-bed {
+      position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
+      pointer-events:none; opacity:.5; width:600px; height:600px;
+    }
+    .radar   { animation:spin 44s linear infinite; transform-origin:center; }
+    .radar-b { animation:spinBack 62s linear infinite; transform-origin:center; }
+    @keyframes spin     { to { transform:rotate(360deg) } }
+    @keyframes spinBack { to { transform:rotate(-360deg) } }
+    #contact .wrap { position:relative; z-index:1; }
     .cta-label {
-      font-family:'JetBrains Mono', monospace; font-size:.7rem;
+      font-family:var(--mono); font-size:.7rem;
       letter-spacing:.2em; text-transform:uppercase; color:var(--blue);
       margin-bottom:20px; display:block;
     }
     .cta-h2 {
-      font-size:clamp(2.4rem, 6vw, 5.5rem); font-weight:800;
-      letter-spacing:-.04em; line-height:1.06; color:var(--blue-disp); margin-bottom:16px; text-wrap:balance;
+      font-family:var(--display);
+      font-size:clamp(2.4rem, 5.4vw, 5rem); font-weight:800;
+      letter-spacing:-.045em; line-height:1.04; color:var(--blue-disp); margin-bottom:16px; text-wrap:balance;
     }
-    .cta-sub { font-size:1.05rem; color:var(--ink-3); margin-bottom:52px; }
+    .cta-sub { font-size:1.05rem; color:var(--ink-3); margin:0 auto 46px; max-width:520px; }
     .social-row { display:flex; justify-content:center; gap:12px; flex-wrap:wrap; }
     .social-btn {
-      display:inline-flex; align-items:center; gap:8px; padding:10px 20px;
+      display:inline-flex; align-items:center; gap:9px; min-height:44px; padding:11px 20px;
       border-radius:6px; border:1px solid var(--rule-strong);
-      color:var(--ink-3); text-decoration:none; font-size:.82rem; font-weight:500;
-      font-family:'JetBrains Mono', monospace;
+      color:var(--ink-3); text-decoration:none; font-size:.8rem; font-weight:500;
+      font-family:var(--mono);
       background:var(--surface); transition:all .22s;
     }
     .social-btn:hover { border-color:var(--blue); color:var(--blue); background:var(--surface-raised); transform:translateY(-2px); }
@@ -453,31 +554,31 @@
     /* ── FOOTER ── */
     footer { background:var(--bg); border-top:1px solid var(--rule); }
     .ft-grid {
-      display:grid; grid-template-columns:1.3fr repeat(3,1fr); gap:56px;
-      padding-top:64px; padding-bottom:64px;
+      display:grid; grid-template-columns:1.4fr repeat(3,1fr); gap:52px;
+      padding-top:60px; padding-bottom:56px;
     }
     .ft-mark {
-      font-family:'JetBrains Mono', monospace; font-size:.95rem; font-weight:600;
+      font-family:var(--mono); font-size:.95rem; font-weight:600;
       letter-spacing:.1em; text-transform:uppercase; color:var(--ink); margin-bottom:12px;
     }
     .ft-mark em { color:var(--blue); font-style:normal; }
-    .ft-tagline { font-size:.9rem; line-height:1.7; color:var(--ink-dim); max-width:200px; }
+    .ft-tagline { font-size:.875rem; line-height:1.7; color:var(--ink-dim); max-width:220px; }
     .ft-col-hd {
-      font-family:'JetBrains Mono', monospace; font-size:.6rem; letter-spacing:.18em;
+      font-family:var(--mono); font-size:.6rem; letter-spacing:.18em;
       text-transform:uppercase; color:var(--ink-dim); margin-bottom:14px; display:block;
     }
     .ft-col a {
       display:block; font-size:.85rem; color:var(--ink-3);
       text-decoration:none; margin-bottom:9px; transition:color .2s;
-      font-family:'JetBrains Mono', monospace;
+      font-family:var(--mono);
     }
     .ft-col a:hover { color:var(--blue); }
     .ft-lower {
       display:flex; justify-content:space-between; align-items:center;
       padding:20px 0; border-top:1px solid var(--rule);
     }
-    .ft-copy { font-family:'JetBrains Mono', monospace; font-size:.63rem; letter-spacing:.06em; color:var(--ink-dim); }
-    .ft-sig  { font-family:'JetBrains Mono', monospace; font-size:.63rem; color:var(--ink-dim); }
+    .ft-copy { font-family:var(--mono); font-size:.63rem; letter-spacing:.06em; color:var(--ink-dim); }
+    .ft-sig  { font-family:var(--mono); font-size:.63rem; color:var(--ink-dim); }
 
     /* ── KEYFRAMES ── */
     @keyframes riseIn { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:none} }
@@ -489,8 +590,9 @@
     @media(max-width:960px){
       .wrap { padding:0 32px; }
       nav { padding:14px 32px; }
-      .hero-inner { grid-template-columns:1fr; gap:40px; }
-      .hero-right { order:-1; max-width:480px; margin:0 auto; }
+      .hero-inner { grid-template-columns:1fr; gap:44px; }
+      .hero-right { max-width:480px; }
+      #hero { min-height:0; padding-top:132px; }
       .stats-row { grid-template-columns:repeat(2,1fr); }
       .stat-cell:nth-child(2) { border-right:none; }
       .stat-cell:nth-child(3) { border-right:1px solid var(--rule); }
@@ -501,13 +603,18 @@
       nav { padding:12px 20px; }
       .nav-links { display:none; }
       .nav-burger { display:flex; }
-      .hero-right { display:none; }
       .section { padding:72px 0; }
       #expertise { padding:72px 0; }
       #contact { padding:80px 0; }
+      .ptbl-row { grid-template-columns:minmax(0,1fr) 44px; row-gap:2px; padding:8px 0; }
+      .ptbl-head, .p-desc { display:none; }
+      .p-name { padding-bottom:4px; }
+      .p-lang { padding-top:0; padding-bottom:12px; grid-column:1 / 2; }
+      .p-go { grid-row:1 / 3; grid-column:2 / 3; align-items:center; }
       .ft-grid { grid-template-columns:1fr; gap:28px; padding-top:48px; padding-bottom:48px; }
       .ft-lower { flex-direction:column; gap:8px; text-align:center; }
       .exp-mcard { width:290px; }
+      .era-place { margin-left:0; }
     }
     @media(max-width:480px){
       .stats-row { grid-template-columns:1fr 1fr; }
@@ -526,13 +633,13 @@
       }
     }
     @media(prefers-reduced-motion:reduce){
-      .reveal, .hero-left, .hero-right, .cursor, .tc-skill-fill,
-      .ticker-track, .exp-mq-track, .hero-label .pulse, .tc-val-green::before {
-        animation:none !important; transition:none !important;
-      }
+      *, *::before, *::after { animation:none !important; transition:none !important; }
       .reveal, .hero-left, .hero-right { opacity:1; transform:none; }
       .tc-skill-fill { transform:scaleX(1); }
+      .trace { stroke-dashoffset:0; }
+      .stop { opacity:1; transform:none; }
       .track-r { transform:translateX(-50%); }
+      .pk { display:none; }
     }
   </style>
 </head>
@@ -568,6 +675,11 @@
 
 <!-- HERO -->
 <section id="hero">
+  <span class="pk pk1" aria-hidden="true"></span>
+  <span class="pk pk2" aria-hidden="true"></span>
+  <span class="pk pk3" aria-hidden="true"></span>
+  <span class="pk pk4" aria-hidden="true"></span>
+
   <div class="wrap hero-inner">
 
     <div class="hero-left">
@@ -576,32 +688,63 @@
         Available for new challenges · 2026
       </div>
       <h1 class="hero-h1">
-        AI Engineer<br>
-        <span class="line-blue">&amp; Architect.</span>
+        AI products,<br>
+        diagram to<br>
+        <span class="line-blue">production.</span>
       </h1>
       <p class="hero-sub">
-        <span id="tw" class="tw"></span><span class="cursor">_</span>
+        <span class="chev">&gt;</span> <span id="tw" class="tw">AI full-stack engineer</span><span class="cursor">_</span>
+      </p>
+      <p class="hero-lead">
+        One person, the whole stack: the system design, the services underneath, the cloud it
+        runs on, and the screen someone actually touches. Eight years of it — data pipelines in
+        the UK, backend services in Japan and Ireland, platform work at AWS.
       </p>
       <div class="hero-btns">
-        <a href="#expertise" class="btn btn-ink">Explore Expertise</a>
-        <a href="#contact"   class="btn btn-ring">Get In Touch</a>
+        <a href="#projects" class="btn btn-ink">View The Work</a>
+        <a href="#contact"  class="btn btn-ring">Get In Touch</a>
       </div>
     </div>
 
     <div class="hero-right">
-      <div class="terminal-card">
+      <div class="sys-card">
         <div class="tc-bar">
           <span class="tc-dot tc-dot-r"></span>
           <span class="tc-dot tc-dot-y"></span>
           <span class="tc-dot tc-dot-g"></span>
-          <span class="tc-path">~/profile/yen-nan-liu.json</span>
+          <span class="tc-path">~/topology.live</span>
         </div>
         <div class="tc-body">
-          <span class="tc-label">identity</span>
-          <div class="tc-row"><span class="tc-key">role</span><span class="tc-val">AI / Platform Engineer</span></div>
-          <div class="tc-row"><span class="tc-key">level</span><span class="tc-val">Senior</span></div>
-          <div class="tc-row"><span class="tc-key">location</span><span class="tc-val">Remote · Global</span></div>
-          <div class="tc-row"><span class="tc-key">status</span><span class="tc-val tc-val-green">Available 2026</span></div>
+          <span class="tc-label">pipeline — ingest to serve</span>
+
+          <svg class="topo" viewBox="0 0 360 186" role="img" aria-label="System topology: ingest to stream to model to serve, with a store branch">
+            <path class="edge-base" d="M90,38 H138"></path>
+            <path class="edge-base" d="M222,38 H270"></path>
+            <path class="edge-base" d="M180,54 C180,96 102,92 102,132"></path>
+            <path class="edge-base" d="M312,54 C312,102 246,96 246,132"></path>
+            <path class="edge-base" d="M144,148 H204"></path>
+
+            <path class="edge-flow"    d="M90,38 H138"></path>
+            <path class="edge-flow f2" d="M222,38 H270"></path>
+            <path class="edge-flow f3" d="M180,54 C180,96 102,92 102,132"></path>
+            <path class="edge-flow f4" d="M312,54 C312,102 246,96 246,132"></path>
+            <path class="edge-flow f5" d="M144,148 H204"></path>
+
+            <circle class="node-ring"    cx="312" cy="38"  r="7"></circle>
+            <circle class="node-ring r2" cx="246" cy="148" r="7"></circle>
+
+            <rect class="node-box"    x="6"   y="22"  width="84" height="32" rx="5"></rect>
+            <rect class="node-box"    x="138" y="22"  width="84" height="32" rx="5"></rect>
+            <rect class="node-box on" x="270" y="22"  width="84" height="32" rx="5"></rect>
+            <rect class="node-box"    x="60"  y="132" width="84" height="32" rx="5"></rect>
+            <rect class="node-box on" x="204" y="132" width="84" height="32" rx="5"></rect>
+
+            <text class="node-txt"    x="48"  y="42"  text-anchor="middle">ingest</text>
+            <text class="node-txt"    x="180" y="42"  text-anchor="middle">stream</text>
+            <text class="node-txt on" x="312" y="42"  text-anchor="middle">model</text>
+            <text class="node-txt"    x="102" y="152" text-anchor="middle">store</text>
+            <text class="node-txt on" x="246" y="152" text-anchor="middle">serve</text>
+          </svg>
 
           <span class="tc-label mt">skill_confidence</span>
           <div class="tc-skills">
@@ -636,22 +779,27 @@
 <!-- TICKER -->
 <div class="ticker-wrap" aria-hidden="true">
   <div class="ticker-track">
-    <span class="ticker-item">AI Engineering <span class="t-sep">/</span></span>
-    <span class="ticker-item">Backend Systems <span class="t-sep">/</span></span>
-    <span class="ticker-item">Cloud Infrastructure <span class="t-sep">/</span></span>
-    <span class="ticker-item">Platform Engineering <span class="t-sep">/</span></span>
-    <span class="ticker-item">Full Stack Development <span class="t-sep">/</span></span>
-    <span class="ticker-item">Data Architecture <span class="t-sep">/</span></span>
-    <span class="ticker-item">MLOps &amp; LLMOps <span class="t-sep">/</span></span>
-    <span class="ticker-item">Distributed Systems <span class="t-sep">/</span></span>
-    <span class="ticker-item">AI Engineering <span class="t-sep">/</span></span>
-    <span class="ticker-item">Backend Systems <span class="t-sep">/</span></span>
-    <span class="ticker-item">Cloud Infrastructure <span class="t-sep">/</span></span>
-    <span class="ticker-item">Platform Engineering <span class="t-sep">/</span></span>
-    <span class="ticker-item">Full Stack Development <span class="t-sep">/</span></span>
-    <span class="ticker-item">Data Architecture <span class="t-sep">/</span></span>
-    <span class="ticker-item">MLOps &amp; LLMOps <span class="t-sep">/</span></span>
-    <span class="ticker-item">Distributed Systems <span class="t-sep">/</span></span>
+    <span class="ticker-item">AI full-stack <span class="t-sep">/</span></span>
+    <span class="ticker-item">System design <span class="t-sep">/</span></span>
+    <span class="ticker-item">LLM &amp; RAG <span class="t-sep">/</span></span>
+    <span class="ticker-item">Agent orchestration <span class="t-sep">/</span></span>
+    <span class="ticker-item">Backend services <span class="t-sep">/</span></span>
+    <span class="ticker-item">Cloud infrastructure <span class="t-sep">/</span></span>
+    <span class="ticker-item">API design <span class="t-sep">/</span></span>
+    <span class="ticker-item">Production ML <span class="t-sep">/</span></span>
+    <span class="ticker-item">Distributed systems <span class="t-sep">/</span></span>
+    <span class="ticker-item">Data pipelines <span class="t-sep">/</span></span>
+    <!-- duplicates for a seamless -50% loop -->
+    <span class="ticker-item">AI full-stack <span class="t-sep">/</span></span>
+    <span class="ticker-item">System design <span class="t-sep">/</span></span>
+    <span class="ticker-item">LLM &amp; RAG <span class="t-sep">/</span></span>
+    <span class="ticker-item">Agent orchestration <span class="t-sep">/</span></span>
+    <span class="ticker-item">Backend services <span class="t-sep">/</span></span>
+    <span class="ticker-item">Cloud infrastructure <span class="t-sep">/</span></span>
+    <span class="ticker-item">API design <span class="t-sep">/</span></span>
+    <span class="ticker-item">Production ML <span class="t-sep">/</span></span>
+    <span class="ticker-item">Distributed systems <span class="t-sep">/</span></span>
+    <span class="ticker-item">Data pipelines <span class="t-sep">/</span></span>
   </div>
 </div>
 
@@ -671,18 +819,18 @@
       <div class="stat-lbl">GitHub Stars</div>
     </div>
     <div class="stat-cell">
-      <div class="stat-num" data-target="5">0<span class="stat-unit">+</span></div>
-      <div class="stat-lbl">Cloud Certifications</div>
+      <div class="stat-num" data-target="31">0<span class="stat-unit"></span></div>
+      <div class="stat-lbl">Of 195 Countries</div>
     </div>
   </div>
 </div>
 
-<!-- EXPERTISE — animated two-row marquee -->
+<!-- LAYERS — animated two-row marquee -->
 <section id="expertise">
   <div class="wrap">
-    <span class="sec-eye reveal">Expertise</span>
-    <h2 class="sec-h2 reveal">Built for the frontier.</h2>
-    <p class="sec-lead reveal">End-to-end engineering from AI model integration to production-scale distributed systems.</p>
+    <span class="sec-eye reveal">End to end</span>
+    <h2 class="sec-h2 reveal">Six layers, one pair of hands.</h2>
+    <p class="sec-lead reveal">Most products get handed across five specialists and lose something at every seam. These are the layers I carry myself — from the first diagram to the thing that renders.</p>
   </div>
 
   <div class="exp-marquee-outer">
@@ -690,220 +838,235 @@
     <!-- Row 1: scrolls left -->
     <div class="exp-mq-row">
       <div class="exp-mq-track track-l">
-
         <div class="exp-mcard mc-ai">
-          <div class="mc-icon"><i class="fas fa-brain"></i></div>
-          <div class="mc-title">AI / ML Engineering</div>
-          <p class="mc-desc">LLM integration, RAG pipelines, model fine-tuning, and end-to-end MLOps at production scale.</p>
-          <div class="mc-tags"><span class="mc-tag">LLMs</span><span class="mc-tag">RAG</span><span class="mc-tag">PyTorch</span><span class="mc-tag">MLOps</span></div>
+          <div class="mc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v3m0 12v3M3 12h3m12 0h3M7.5 7.5 9.6 9.6m4.8 4.8 2.1 2.1m0-9-2.1 2.1M9.6 14.4l-2.1 2.1M12 9a3 3 0 1 0 0 6 3 3 0 0 0 0-6Z"></path></svg></div>
+          <div class="mc-title">AI &amp; LLM systems</div>
+          <p class="mc-desc">RAG, agent orchestration, evals and fine-tuning. The hard part was never the first prompt working — it is the hundredth.</p>
+          <div class="mc-tags"><span class="mc-tag">LLMs</span><span class="mc-tag">RAG</span><span class="mc-tag">Agents</span><span class="mc-tag">MLOps</span></div>
         </div>
-
+        <div class="exp-mcard mc-sd">
+          <div class="mc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v5H4zm0 9h16v5H4zM8 7.5h.01M8 16.5h.01"></path></svg></div>
+          <div class="mc-title">System design</div>
+          <p class="mc-desc">The diagram before the code — boundaries, failure modes, what breaks at ten times the load. Most production pain is a week-one decision.</p>
+          <div class="mc-tags"><span class="mc-tag">Architecture</span><span class="mc-tag">Trade-offs</span><span class="mc-tag">Scaling</span><span class="mc-tag">Reviews</span></div>
+        </div>
         <div class="exp-mcard mc-be">
-          <div class="mc-icon"><i class="fas fa-server"></i></div>
-          <div class="mc-title">Backend Systems</div>
-          <p class="mc-desc">High-throughput distributed services handling millions of requests with sub-millisecond latency.</p>
+          <div class="mc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M4 12h16M4 18h16M8 4v4m8 8v4"></path></svg></div>
+          <div class="mc-title">Backend services</div>
+          <p class="mc-desc">APIs built to be boring: high throughput, sub-millisecond, and still standing the morning after traffic triples.</p>
           <div class="mc-tags"><span class="mc-tag">Go</span><span class="mc-tag">Java</span><span class="mc-tag">gRPC</span><span class="mc-tag">Kafka</span></div>
         </div>
-
-        <div class="exp-mcard mc-cl">
-          <div class="mc-icon"><i class="fas fa-cloud"></i></div>
-          <div class="mc-title">Cloud Infrastructure</div>
-          <p class="mc-desc">Cloud-native engineering on AWS/GCP — Kubernetes, Terraform IaC, CI/CD, and full observability.</p>
-          <div class="mc-tags"><span class="mc-tag">AWS</span><span class="mc-tag">K8s</span><span class="mc-tag">Terraform</span><span class="mc-tag">ArgoCD</span></div>
-        </div>
-
-        <div class="exp-mcard mc-fs">
-          <div class="mc-icon"><i class="fas fa-layer-group"></i></div>
-          <div class="mc-title">Full Stack Development</div>
-          <p class="mc-desc">End-to-end product ownership — React frontends to Python/Go backends, shipping fast without compromise.</p>
-          <div class="mc-tags"><span class="mc-tag">React</span><span class="mc-tag">TypeScript</span><span class="mc-tag">FastAPI</span></div>
-        </div>
-
-        <div class="exp-mcard mc-pe">
-          <div class="mc-icon"><i class="fas fa-sitemap"></i></div>
-          <div class="mc-title">Platform Engineering</div>
-          <p class="mc-desc">Internal developer platforms with golden paths and self-service infra — deploy time from days to minutes.</p>
-          <div class="mc-tags"><span class="mc-tag">IDP</span><span class="mc-tag">ArgoCD</span><span class="mc-tag">Backstage</span></div>
-        </div>
-
-        <div class="exp-mcard mc-de">
-          <div class="mc-icon"><i class="fas fa-database"></i></div>
-          <div class="mc-title">Data Engineering</div>
-          <p class="mc-desc">Real-time data pipelines on Kafka, Spark, dbt, and Airflow — the backbone powering AI at scale.</p>
-          <div class="mc-tags"><span class="mc-tag">Kafka</span><span class="mc-tag">Spark</span><span class="mc-tag">Flink</span><span class="mc-tag">dbt</span></div>
-        </div>
-
-        <!-- Duplicates for seamless loop -->
+        <!-- duplicates for a seamless -50% loop -->
         <div class="exp-mcard mc-ai" aria-hidden="true">
-          <div class="mc-icon"><i class="fas fa-brain"></i></div>
-          <div class="mc-title">AI / ML Engineering</div>
-          <p class="mc-desc">LLM integration, RAG pipelines, model fine-tuning, and end-to-end MLOps at production scale.</p>
-          <div class="mc-tags"><span class="mc-tag">LLMs</span><span class="mc-tag">RAG</span><span class="mc-tag">PyTorch</span><span class="mc-tag">MLOps</span></div>
+          <div class="mc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v3m0 12v3M3 12h3m12 0h3M7.5 7.5 9.6 9.6m4.8 4.8 2.1 2.1m0-9-2.1 2.1M9.6 14.4l-2.1 2.1M12 9a3 3 0 1 0 0 6 3 3 0 0 0 0-6Z"></path></svg></div>
+          <div class="mc-title">AI &amp; LLM systems</div>
+          <p class="mc-desc">RAG, agent orchestration, evals and fine-tuning. The hard part was never the first prompt working — it is the hundredth.</p>
+          <div class="mc-tags"><span class="mc-tag">LLMs</span><span class="mc-tag">RAG</span><span class="mc-tag">Agents</span><span class="mc-tag">MLOps</span></div>
+        </div>
+        <div class="exp-mcard mc-sd" aria-hidden="true">
+          <div class="mc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v5H4zm0 9h16v5H4zM8 7.5h.01M8 16.5h.01"></path></svg></div>
+          <div class="mc-title">System design</div>
+          <p class="mc-desc">The diagram before the code — boundaries, failure modes, what breaks at ten times the load. Most production pain is a week-one decision.</p>
+          <div class="mc-tags"><span class="mc-tag">Architecture</span><span class="mc-tag">Trade-offs</span><span class="mc-tag">Scaling</span><span class="mc-tag">Reviews</span></div>
         </div>
         <div class="exp-mcard mc-be" aria-hidden="true">
-          <div class="mc-icon"><i class="fas fa-server"></i></div>
-          <div class="mc-title">Backend Systems</div>
-          <p class="mc-desc">High-throughput distributed services handling millions of requests with sub-millisecond latency.</p>
+          <div class="mc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M4 12h16M4 18h16M8 4v4m8 8v4"></path></svg></div>
+          <div class="mc-title">Backend services</div>
+          <p class="mc-desc">APIs built to be boring: high throughput, sub-millisecond, and still standing the morning after traffic triples.</p>
           <div class="mc-tags"><span class="mc-tag">Go</span><span class="mc-tag">Java</span><span class="mc-tag">gRPC</span><span class="mc-tag">Kafka</span></div>
         </div>
-        <div class="exp-mcard mc-cl" aria-hidden="true">
-          <div class="mc-icon"><i class="fas fa-cloud"></i></div>
-          <div class="mc-title">Cloud Infrastructure</div>
-          <p class="mc-desc">Cloud-native engineering on AWS/GCP — Kubernetes, Terraform IaC, CI/CD, and full observability.</p>
-          <div class="mc-tags"><span class="mc-tag">AWS</span><span class="mc-tag">K8s</span><span class="mc-tag">Terraform</span><span class="mc-tag">ArgoCD</span></div>
-        </div>
-        <div class="exp-mcard mc-fs" aria-hidden="true">
-          <div class="mc-icon"><i class="fas fa-layer-group"></i></div>
-          <div class="mc-title">Full Stack Development</div>
-          <p class="mc-desc">End-to-end product ownership — React frontends to Python/Go backends, shipping fast without compromise.</p>
-          <div class="mc-tags"><span class="mc-tag">React</span><span class="mc-tag">TypeScript</span><span class="mc-tag">FastAPI</span></div>
-        </div>
-        <div class="exp-mcard mc-pe" aria-hidden="true">
-          <div class="mc-icon"><i class="fas fa-sitemap"></i></div>
-          <div class="mc-title">Platform Engineering</div>
-          <p class="mc-desc">Internal developer platforms with golden paths and self-service infra — deploy time from days to minutes.</p>
-          <div class="mc-tags"><span class="mc-tag">IDP</span><span class="mc-tag">ArgoCD</span><span class="mc-tag">Backstage</span></div>
-        </div>
-        <div class="exp-mcard mc-de" aria-hidden="true">
-          <div class="mc-icon"><i class="fas fa-database"></i></div>
-          <div class="mc-title">Data Engineering</div>
-          <p class="mc-desc">Real-time data pipelines on Kafka, Spark, dbt, and Airflow — the backbone powering AI at scale.</p>
-          <div class="mc-tags"><span class="mc-tag">Kafka</span><span class="mc-tag">Spark</span><span class="mc-tag">Flink</span><span class="mc-tag">dbt</span></div>
-        </div>
-
       </div>
     </div>
 
-    <!-- Row 2: scrolls right (reversed order) -->
+    <!-- Row 2: scrolls right -->
     <div class="exp-mq-row">
       <div class="exp-mq-track track-r">
-
-        <div class="exp-mcard mc-de">
-          <div class="mc-icon"><i class="fas fa-database"></i></div>
-          <div class="mc-title">Data Engineering</div>
-          <p class="mc-desc">Real-time data pipelines on Kafka, Spark, dbt, and Airflow — the backbone powering AI at scale.</p>
-          <div class="mc-tags"><span class="mc-tag">Kafka</span><span class="mc-tag">Spark</span><span class="mc-tag">Flink</span><span class="mc-tag">dbt</span></div>
-        </div>
-        <div class="exp-mcard mc-pe">
-          <div class="mc-icon"><i class="fas fa-sitemap"></i></div>
-          <div class="mc-title">Platform Engineering</div>
-          <p class="mc-desc">Internal developer platforms with golden paths and self-service infra — deploy time from days to minutes.</p>
-          <div class="mc-tags"><span class="mc-tag">IDP</span><span class="mc-tag">ArgoCD</span><span class="mc-tag">Backstage</span></div>
-        </div>
-        <div class="exp-mcard mc-fs">
-          <div class="mc-icon"><i class="fas fa-layer-group"></i></div>
-          <div class="mc-title">Full Stack Development</div>
-          <p class="mc-desc">End-to-end product ownership — React frontends to Python/Go backends, shipping fast without compromise.</p>
-          <div class="mc-tags"><span class="mc-tag">React</span><span class="mc-tag">TypeScript</span><span class="mc-tag">FastAPI</span></div>
-        </div>
         <div class="exp-mcard mc-cl">
-          <div class="mc-icon"><i class="fas fa-cloud"></i></div>
-          <div class="mc-title">Cloud Infrastructure</div>
-          <p class="mc-desc">Cloud-native engineering on AWS/GCP — Kubernetes, Terraform IaC, CI/CD, and full observability.</p>
+          <div class="mc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M7 18a4 4 0 0 1 .6-8A5.5 5.5 0 0 1 18 10.5a3.75 3.75 0 0 1-.5 7.5H7Z"></path></svg></div>
+          <div class="mc-title">Cloud infrastructure</div>
+          <p class="mc-desc">AWS and GCP as code — Kubernetes, Terraform, CI/CD and observability you can actually debug at three in the morning.</p>
           <div class="mc-tags"><span class="mc-tag">AWS</span><span class="mc-tag">K8s</span><span class="mc-tag">Terraform</span><span class="mc-tag">ArgoCD</span></div>
         </div>
-        <div class="exp-mcard mc-be">
-          <div class="mc-icon"><i class="fas fa-server"></i></div>
-          <div class="mc-title">Backend Systems</div>
-          <p class="mc-desc">High-throughput distributed services handling millions of requests with sub-millisecond latency.</p>
-          <div class="mc-tags"><span class="mc-tag">Go</span><span class="mc-tag">Java</span><span class="mc-tag">gRPC</span><span class="mc-tag">Kafka</span></div>
-        </div>
-        <div class="exp-mcard mc-ai">
-          <div class="mc-icon"><i class="fas fa-brain"></i></div>
-          <div class="mc-title">AI / ML Engineering</div>
-          <p class="mc-desc">LLM integration, RAG pipelines, model fine-tuning, and end-to-end MLOps at production scale.</p>
-          <div class="mc-tags"><span class="mc-tag">LLMs</span><span class="mc-tag">RAG</span><span class="mc-tag">PyTorch</span><span class="mc-tag">MLOps</span></div>
-        </div>
-
-        <!-- Duplicates -->
-        <div class="exp-mcard mc-de" aria-hidden="true">
-          <div class="mc-icon"><i class="fas fa-database"></i></div>
-          <div class="mc-title">Data Engineering</div>
-          <p class="mc-desc">Real-time data pipelines on Kafka, Spark, dbt, and Airflow — the backbone powering AI at scale.</p>
-          <div class="mc-tags"><span class="mc-tag">Kafka</span><span class="mc-tag">Spark</span><span class="mc-tag">Flink</span><span class="mc-tag">dbt</span></div>
-        </div>
-        <div class="exp-mcard mc-pe" aria-hidden="true">
-          <div class="mc-icon"><i class="fas fa-sitemap"></i></div>
-          <div class="mc-title">Platform Engineering</div>
-          <p class="mc-desc">Internal developer platforms with golden paths and self-service infra — deploy time from days to minutes.</p>
-          <div class="mc-tags"><span class="mc-tag">IDP</span><span class="mc-tag">ArgoCD</span><span class="mc-tag">Backstage</span></div>
-        </div>
-        <div class="exp-mcard mc-fs" aria-hidden="true">
-          <div class="mc-icon"><i class="fas fa-layer-group"></i></div>
-          <div class="mc-title">Full Stack Development</div>
-          <p class="mc-desc">End-to-end product ownership — React frontends to Python/Go backends, shipping fast without compromise.</p>
+        <div class="exp-mcard mc-app">
+          <div class="mc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m8 8-4 4 4 4m8-8 4 4-4 4M14 5l-4 14"></path></svg></div>
+          <div class="mc-title">Application layer</div>
+          <p class="mc-desc">React and TypeScript wired straight through to Python and Go. The half of the product people actually judge you on.</p>
           <div class="mc-tags"><span class="mc-tag">React</span><span class="mc-tag">TypeScript</span><span class="mc-tag">FastAPI</span></div>
         </div>
+        <div class="exp-mcard mc-dp">
+          <div class="mc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6c0-1.7 3.6-3 8-3s8 1.3 8 3-3.6 3-8 3-8-1.3-8-3Zm0 0v12c0 1.7 3.6 3 8 3s8-1.3 8-3V6M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3"></path></svg></div>
+          <div class="mc-title">Data pipelines</div>
+          <p class="mc-desc">Kafka, Spark, dbt and Airflow — the plumbing that decides whether your model ever sees the truth.</p>
+          <div class="mc-tags"><span class="mc-tag">Kafka</span><span class="mc-tag">Spark</span><span class="mc-tag">Flink</span><span class="mc-tag">dbt</span></div>
+        </div>
+        <!-- duplicates for a seamless -50% loop -->
         <div class="exp-mcard mc-cl" aria-hidden="true">
-          <div class="mc-icon"><i class="fas fa-cloud"></i></div>
-          <div class="mc-title">Cloud Infrastructure</div>
-          <p class="mc-desc">Cloud-native engineering on AWS/GCP — Kubernetes, Terraform IaC, CI/CD, and full observability.</p>
+          <div class="mc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M7 18a4 4 0 0 1 .6-8A5.5 5.5 0 0 1 18 10.5a3.75 3.75 0 0 1-.5 7.5H7Z"></path></svg></div>
+          <div class="mc-title">Cloud infrastructure</div>
+          <p class="mc-desc">AWS and GCP as code — Kubernetes, Terraform, CI/CD and observability you can actually debug at three in the morning.</p>
           <div class="mc-tags"><span class="mc-tag">AWS</span><span class="mc-tag">K8s</span><span class="mc-tag">Terraform</span><span class="mc-tag">ArgoCD</span></div>
         </div>
-        <div class="exp-mcard mc-be" aria-hidden="true">
-          <div class="mc-icon"><i class="fas fa-server"></i></div>
-          <div class="mc-title">Backend Systems</div>
-          <p class="mc-desc">High-throughput distributed services handling millions of requests with sub-millisecond latency.</p>
-          <div class="mc-tags"><span class="mc-tag">Go</span><span class="mc-tag">Java</span><span class="mc-tag">gRPC</span><span class="mc-tag">Kafka</span></div>
+        <div class="exp-mcard mc-app" aria-hidden="true">
+          <div class="mc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m8 8-4 4 4 4m8-8 4 4-4 4M14 5l-4 14"></path></svg></div>
+          <div class="mc-title">Application layer</div>
+          <p class="mc-desc">React and TypeScript wired straight through to Python and Go. The half of the product people actually judge you on.</p>
+          <div class="mc-tags"><span class="mc-tag">React</span><span class="mc-tag">TypeScript</span><span class="mc-tag">FastAPI</span></div>
         </div>
-        <div class="exp-mcard mc-ai" aria-hidden="true">
-          <div class="mc-icon"><i class="fas fa-brain"></i></div>
-          <div class="mc-title">AI / ML Engineering</div>
-          <p class="mc-desc">LLM integration, RAG pipelines, model fine-tuning, and end-to-end MLOps at production scale.</p>
-          <div class="mc-tags"><span class="mc-tag">LLMs</span><span class="mc-tag">RAG</span><span class="mc-tag">PyTorch</span><span class="mc-tag">MLOps</span></div>
+        <div class="exp-mcard mc-dp" aria-hidden="true">
+          <div class="mc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6c0-1.7 3.6-3 8-3s8 1.3 8 3-3.6 3-8 3-8-1.3-8-3Zm0 0v12c0 1.7 3.6 3 8 3s8-1.3 8-3V6M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3"></path></svg></div>
+          <div class="mc-title">Data pipelines</div>
+          <p class="mc-desc">Kafka, Spark, dbt and Airflow — the plumbing that decides whether your model ever sees the truth.</p>
+          <div class="mc-tags"><span class="mc-tag">Kafka</span><span class="mc-tag">Spark</span><span class="mc-tag">Flink</span><span class="mc-tag">dbt</span></div>
         </div>
-
       </div>
     </div>
 
   </div>
 </section>
 
-<!-- PROJECTS TABLE -->
+<!-- CAREER TRACE -->
+<section id="career" class="section">
+  <div class="wrap">
+    <span class="sec-eye reveal">Trajectory</span>
+    <h2 class="sec-h2 reveal">The long way to full stack.</h2>
+    <p class="sec-lead reveal">Data first, then the services, then the cloud under them, then the models on top. Nobody handed me the stack — I picked it up a layer at a time. Pick a stop.</p>
+
+    <div class="trace-box reveal">
+      <svg class="trace-svg" viewBox="0 0 1000 250" role="img" aria-label="Career trajectory from 2016 to now">
+        <line class="axis" x1="0" y1="60"  x2="1000" y2="60"></line>
+        <line class="axis" x1="0" y1="125" x2="1000" y2="125"></line>
+        <line class="axis" x1="0" y1="190" x2="1000" y2="190"></line>
+
+        <path class="traceFill" d="M40,205 C170,205 210,168 300,168 C420,168 470,110 610,110 C760,110 830,52 960,44 L960,222 L40,222 Z"></path>
+        <path class="trace" d="M40,205 C170,205 210,168 300,168 C420,168 470,110 610,110 C760,110 830,52 960,44"></path>
+
+        <g class="stop" data-era="0" role="button" tabindex="0" aria-label="2016 to 2018, software engineer, data">
+          <circle cx="40" cy="205" r="16" fill="transparent"></circle>
+          <circle class="hit" cx="40" cy="205" r="6"></circle>
+          <text class="lbl" x="40" y="238" text-anchor="middle">2016</text>
+        </g>
+        <g class="stop" data-era="1" role="button" tabindex="0" aria-label="2018 to 2024, backend engineer">
+          <circle cx="300" cy="168" r="16" fill="transparent"></circle>
+          <circle class="hit" cx="300" cy="168" r="6"></circle>
+          <text class="lbl" x="300" y="201" text-anchor="middle">2018</text>
+        </g>
+        <g class="stop active" data-era="2" role="button" tabindex="0" aria-label="2024 to now, tech consultant">
+          <circle cx="820" cy="72" r="16" fill="transparent"></circle>
+          <circle class="hit" cx="820" cy="72" r="6"></circle>
+          <text class="lbl" x="820" y="52" text-anchor="middle">2024</text>
+        </g>
+
+        <text class="trace-axis-lbl" x="0" y="20">SCOPE</text>
+        <text class="trace-axis-lbl" x="1000" y="20" text-anchor="end">NOW</text>
+      </svg>
+    </div>
+
+    <div class="era-box reveal">
+
+      <div class="era-panel" data-era="0">
+        <div class="era-head">
+          <span class="era-years">2016 — 2018</span>
+          <span class="era-role">Software engineer, data</span>
+          <span class="era-place">United Kingdom</span>
+        </div>
+        <p class="era-blurb">Pipelines, ETL and warehousing on Hadoop and Spark — turning raw feeds into something a business could actually decide on. Lived in the UK and travelled Europe between deploys.</p>
+        <div class="era-metrics">
+          <div><div class="era-mv">50+</div><div class="era-mk">Pipelines built</div></div>
+          <div><div class="era-mv">10TB</div><div class="era-mk">Processed daily</div></div>
+          <div><div class="era-mv">3</div><div class="era-mk">Countries</div></div>
+        </div>
+        <div class="era-stack">
+          <span class="era-tag">Python</span><span class="era-tag">SQL</span><span class="era-tag">Hadoop</span><span class="era-tag">Spark</span><span class="era-tag">ETL</span>
+        </div>
+      </div>
+
+      <div class="era-panel" data-era="1">
+        <div class="era-head">
+          <span class="era-years">2018 — 2024</span>
+          <span class="era-role">Backend engineer</span>
+          <span class="era-place">Japan → Ireland → AWS</span>
+        </div>
+        <p class="era-blurb">Services and APIs across global teams: Japan first, then a relocation to Ireland and platform work at AWS. Robust beats clever when five teams depend on your endpoint.</p>
+        <div class="era-metrics">
+          <div><div class="era-mv">100+</div><div class="era-mk">APIs shipped</div></div>
+          <div><div class="era-mv">99.9%</div><div class="era-mk">Uptime</div></div>
+          <div><div class="era-mv">5</div><div class="era-mk">Global teams</div></div>
+        </div>
+        <div class="era-stack">
+          <span class="era-tag">Java</span><span class="era-tag">Spring Boot</span><span class="era-tag">Microservices</span><span class="era-tag">REST</span><span class="era-tag">DevOps</span>
+        </div>
+      </div>
+
+      <div class="era-panel active" data-era="2">
+        <div class="era-head">
+          <span class="era-years">2024 — now</span>
+          <span class="era-role">Tech consultant</span>
+          <span class="era-place">Remote / global</span>
+        </div>
+        <p class="era-blurb">Architecture and platform work for clients — and increasingly, dragging LLM systems out of the demo and into something that gets paged at 3am. The layers finally became one job.</p>
+        <div class="era-metrics">
+          <div><div class="era-mv">20+</div><div class="era-mk">Client projects</div></div>
+          <div><div class="era-mv">3x</div><div class="era-mk">Perf improvements</div></div>
+          <div><div class="era-mv">31</div><div class="era-mk">Countries visited</div></div>
+        </div>
+        <div class="era-stack">
+          <span class="era-tag">Architecture</span><span class="era-tag">Cloud infra</span><span class="era-tag">Team leadership</span><span class="era-tag">LLM systems</span><span class="era-tag">Strategy</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
 <section id="projects" class="section">
   <div class="wrap">
     <span class="sec-eye reveal">Selected Work</span>
-    <h2 class="sec-h2 reveal">Open Source Projects</h2>
-    <p class="sec-lead reveal">Production-grade work spanning AI, backend systems, and data engineering.</p>
+    <h2 class="sec-h2 reveal">Four repos, four layers.</h2>
+    <p class="sec-lead reveal">One from each layer — the infrastructure, the agents, the services, and the analysis tooling I actually run for myself. All of it public.</p>
 
-    <div class="tbl-outer reveal">
-      <table class="proj-tbl">
-        <thead>
-          <tr>
-            <th>Repository</th>
-            <th>Description</th>
-            <th>Language</th>
-            <th>Stars</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td class="proj-name"><a href="https://github.com/yennanliu/cdk-playground" target="_blank">cdk-playground</a></td>
-            <td class="proj-desc">AWS CDK infrastructure patterns — reusable constructs, multi-stack deployments, and IaC best practices</td>
-            <td><span class="lang-pill"><span class="lang-dot" style="background:#3178c6"></span>TypeScript</span></td>
-            <td><span class="stars"><i class="fas fa-star"></i>&nbsp;★</span></td>
-          </tr>
-          <tr>
-            <td class="proj-name"><a href="https://github.com/yennanliu/agent_ticket_system" target="_blank">agent_ticket_system</a></td>
-            <td class="proj-desc">AI-powered ticket management system with multi-agent orchestration and LLM-driven triage</td>
-            <td><span class="lang-pill"><span class="lang-dot" style="background:#3572A5"></span>Python</span></td>
-            <td><span class="stars"><i class="fas fa-star"></i>&nbsp;★</span></td>
-          </tr>
-          <tr>
-            <td class="proj-name"><a href="https://github.com/yennanliu/SpringPlayground" target="_blank">SpringPlayground</a></td>
-            <td class="proj-desc">Spring Boot microservices with REST, Kafka integration, and cloud-native patterns</td>
-            <td><span class="lang-pill"><span class="lang-dot" style="background:#b07219"></span>Java</span></td>
-            <td><span class="stars"><i class="fas fa-star"></i>&nbsp;★</span></td>
-          </tr>
-          <tr>
-            <td class="proj-name"><a href="https://github.com/yennanliu/InvestSkill" target="_blank">InvestSkill</a></td>
-            <td class="proj-desc">Stock market analysis and investment strategy tools with data-driven backtesting and signals</td>
-            <td><span class="lang-pill"><span class="lang-dot" style="background:#3572A5"></span>Python</span></td>
-            <td><span class="stars"><i class="fas fa-star"></i>&nbsp;★</span></td>
-          </tr>
-        </tbody>
-      </table>
+    <div class="filters reveal" role="group" aria-label="Filter projects by layer">
+      <button class="chip on" data-filter="all">all</button>
+      <button class="chip" data-filter="ai">ai</button>
+      <button class="chip" data-filter="backend">backend</button>
+      <button class="chip" data-filter="cloud">cloud</button>
+      <button class="chip" data-filter="data">data</button>
     </div>
+
+    <div class="ptbl reveal">
+      <div class="ptbl-row ptbl-head" aria-hidden="true">
+        <div>Repository</div><div>What it is</div><div>Language</div><div></div>
+      </div>
+
+      <a class="ptbl-row" data-tag="cloud" href="https://github.com/yennanliu/cdk-playground" target="_blank" rel="noreferrer">
+        <div class="p-name">cdk-playground</div>
+        <div class="p-desc">AWS CDK infrastructure patterns — reusable constructs, multi-stack deployments and IaC practice worth copying into a real account.</div>
+        <div class="p-lang"><span class="lang-dot" style="background:var(--cat-5)"></span>TypeScript</div>
+        <div class="p-go"><svg class="arrow" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M9 7h8v8"></path></svg></div>
+      </a>
+
+      <a class="ptbl-row" data-tag="ai" href="https://github.com/yennanliu/agent_ticket_system" target="_blank" rel="noreferrer">
+        <div class="p-name">agent_ticket_system</div>
+        <div class="p-desc">AI-powered ticket management with multi-agent orchestration and LLM-driven triage — routing and escalation without a human first touch.</div>
+        <div class="p-lang"><span class="lang-dot" style="background:var(--cat-4)"></span>Python</div>
+        <div class="p-go"><svg class="arrow" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M9 7h8v8"></path></svg></div>
+      </a>
+
+      <a class="ptbl-row" data-tag="backend" href="https://github.com/yennanliu/SpringPlayground" target="_blank" rel="noreferrer">
+        <div class="p-name">SpringPlayground</div>
+        <div class="p-desc">Spring Boot microservices with REST endpoints, Kafka integration and the cloud-native patterns that keep them boring in production.</div>
+        <div class="p-lang"><span class="lang-dot" style="background:var(--cat-2)"></span>Java</div>
+        <div class="p-go"><svg class="arrow" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M9 7h8v8"></path></svg></div>
+      </a>
+
+      <a class="ptbl-row" data-tag="data" href="https://github.com/yennanliu/InvestSkill" target="_blank" rel="noreferrer">
+        <div class="p-name">InvestSkill</div>
+        <div class="p-desc">Market analysis and strategy tooling — data-driven backtesting, signal generation and the plumbing to run both on a schedule.</div>
+        <div class="p-lang"><span class="lang-dot" style="background:var(--cat-4)"></span>Python</div>
+        <div class="p-go"><svg class="arrow" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M9 7h8v8"></path></svg></div>
+      </a>
+    </div>
+
     <div class="tbl-footer reveal">
       <a href="portfolios.html" class="btn btn-ring">View All Projects →</a>
     </div>
@@ -912,15 +1075,22 @@
 
 <!-- CONTACT -->
 <section id="contact">
+  <svg class="radar-bed" viewBox="0 0 600 600" aria-hidden="true">
+    <circle class="radar"   cx="300" cy="300" r="286" fill="none" stroke="var(--rule-strong)" stroke-width="1" stroke-dasharray="3 13"></circle>
+    <circle class="radar-b" cx="300" cy="300" r="214" fill="none" stroke="var(--rule)" stroke-width="1" stroke-dasharray="2 9"></circle>
+    <circle class="radar"   cx="300" cy="300" r="142" fill="none" stroke="var(--rule)" stroke-width="1" stroke-dasharray="1 7"></circle>
+  </svg>
+
   <div class="wrap">
-    <span class="cta-label reveal">Connect</span>
-    <h2 class="cta-h2 reveal">Let's build something<br>extraordinary.</h2>
-    <p class="cta-sub reveal">Open to senior engineering roles, AI platform work, and high-impact consulting.</p>
+    <span class="cta-label reveal">Open to work · 2026</span>
+    <h2 class="cta-h2 reveal">Let's put something<br>into production.</h2>
+    <p class="cta-sub reveal">AI product builds, senior engineering roles, and consulting where the whole stack is the job.</p>
     <div class="social-row reveal">
       <a href="https://github.com/yennanliu"       target="_blank" class="social-btn"><i class="fab fa-github"></i> GitHub</a>
       <a href="https://linkedin.com/in/yennanliu"  target="_blank" class="social-btn"><i class="fab fa-linkedin-in"></i> LinkedIn</a>
       <a href="https://huggingface.co/yennj12"     target="_blank" class="social-btn"><i class="fas fa-robot"></i> HuggingFace</a>
       <a href="https://gitlab.com/yennanliu"       target="_blank" class="social-btn"><i class="fab fa-gitlab"></i> GitLab</a>
+      <a href="mailto:f339339@gmail.com"                           class="social-btn"><i class="fas fa-envelope"></i> Email</a>
     </div>
   </div>
 </section>
@@ -930,7 +1100,7 @@
   <div class="ft-grid wrap">
     <div>
       <div class="ft-mark">YEN<em>.DEV</em></div>
-      <p class="ft-tagline">Building intelligent systems for the future of AI.</p>
+      <p class="ft-tagline">Physics first, full stack after. AI products built end to end — from 31 of 195 countries.</p>
     </div>
     <div class="ft-col">
       <span class="ft-col-hd">Work</span>
@@ -953,7 +1123,7 @@
     </div>
   </div>
   <div class="ft-lower wrap">
-    <span class="ft-copy">© 2026 Yen-Nan Liu · All rights reserved.</span>
+    <span class="ft-copy">© 2026 Yen · All rights reserved.</span>
     <span class="ft-sig">yennj12.js.org</span>
   </div>
 </footer>
@@ -1003,24 +1173,74 @@
   window.matchMedia('(max-width:768px)').addEventListener('change', e => { if (!e.matches) toggle(false); });
 })();
 
-// TYPEWRITER
+// CAREER — stop selection
+(function(){
+  const stops  = [...document.querySelectorAll('.stop')];
+  const panels = [...document.querySelectorAll('.era-panel')];
+  if (!stops.length) return;
+  function select(era) {
+    stops.forEach(s  => s.classList.toggle('active', s.dataset.era === era));
+    panels.forEach(p => p.classList.toggle('active', p.dataset.era === era));
+  }
+  stops.forEach(s => {
+    s.addEventListener('click', () => select(s.dataset.era));
+    s.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); select(s.dataset.era); }
+    });
+  });
+})();
+
+// CAREER — draw the trace when it scrolls into view
+(function(){
+  const box = document.querySelector('.trace-box');
+  if (!box) return;
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (!e.isIntersecting) return;
+      box.querySelectorAll('.trace, .stop').forEach(el => el.classList.add('in'));
+      obs.unobserve(e.target);
+    });
+  }, {threshold: .25});
+  obs.observe(box);
+})();
+
+// PROJECT FILTER
+(function(){
+  const chips = [...document.querySelectorAll('.chip[data-filter]')];
+  const rows  = [...document.querySelectorAll('.ptbl-row[data-tag]')];
+  if (!chips.length) return;
+  chips.forEach(chip => chip.addEventListener('click', () => {
+    const f = chip.dataset.filter;
+    chips.forEach(c => c.classList.toggle('on', c === chip));
+    rows.forEach((r, i) => {
+      const show = f === 'all' || r.dataset.tag === f;
+      r.hidden = !show;
+      if (show) { r.style.animation = 'none'; void r.offsetWidth; r.style.animation = ''; r.style.animationDelay = (i * 60) + 'ms'; }
+    });
+  }));
+})();
+
+// ROLE SCRAMBLE
 (function(){
   const el = document.getElementById('tw');
   if (!el) return;
-  const phrases = ['AI / ML Engineering','Backend Systems at Scale','Cloud & Infrastructure','Platform Engineering','Full Stack Development','Data Architecture & MLOps'];
-  let pi = 0, ci = 0, del = false;
-  function tick() {
-    const cur = phrases[pi];
-    if (!del) {
-      el.textContent = cur.slice(0, ++ci);
-      if (ci === cur.length) { del = true; return setTimeout(tick, 2000); }
-    } else {
-      el.textContent = cur.slice(0, --ci);
-      if (ci === 0) { del = false; pi = (pi + 1) % phrases.length; }
+  const CH = 'ABCDEFGHJKLMNPQRSTUVWXYZ0123456789/<>_#*';
+  const roles = ['AI full-stack engineer','system design → implementation','backend & cloud infrastructure','builds products, not demos'];
+  let idx = 0, frame = 0, hold = 0;
+  setInterval(() => {
+    if (hold > 0) { hold--; if (hold === 0) { idx = (idx + 1) % roles.length; frame = 0; } return; }
+    frame++;
+    const target = roles[idx];
+    const reveal = Math.floor(frame / 2);
+    let out = '';
+    for (let i = 0; i < target.length; i++) {
+      out += (i < reveal || !/[A-Za-z0-9]/.test(target[i]))
+        ? target[i]
+        : CH[Math.floor(Math.random() * CH.length)];
     }
-    setTimeout(tick, del ? 42 : 72);
-  }
-  setTimeout(tick, 1600);
+    el.textContent = out;
+    if (reveal >= target.length) hold = 42;
+  }, 46);
 })();
 
 // STATS COUNTER
