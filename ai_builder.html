@@ -1,1623 +1,687 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>yen.dev</title>
   <link rel="icon" href="img/icon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="img/icon.svg">
-  <meta name="description" content="A showcase of AI-powered projects built by Yen — from agent ticket systems to investment analysis frameworks.">
+  <meta name="description" content="Four AI agent systems that run unattended — repo-to-ticket generation, multi-agent office automation, an SEC filing pipeline, and 21 equity-analysis frameworks.">
 
-  <!-- Bootstrap CSS -->
-  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-  <!-- Font Awesome -->
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet">
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <style>
-    /* ── Design tokens — DARK (default) ── */
-    :root,
-    [data-theme="dark"] {
-      --bg:            #080c14;
-      --bg-alt:        #0d1220;
-      --bg-card:       #111827;
-      --bg-band:       #0d1220;
-      --text:          #e8eaf0;
-      --text-muted:    #7a8499;
-      --border:        #1e2a3a;
-      --border-bright: #2a3a50;
-
-      --cyan:   #00d4ff;
-      --purple: #9b5ef5;
-      --green:  #00e5a0;
-      --orange: #ff6b35;
-      --blue:   #4fa3ff;
-
-      --grad-hero: linear-gradient(135deg, #080c14 0%, #0d1525 60%, #0a1230 100%);
-      --grad-accent: linear-gradient(135deg, var(--purple) 0%, var(--cyan) 100%);
-
-      --radius-card: 16px;
-      --radius-pill: 999px;
-      --shadow-card: 0 8px 32px rgba(0, 0, 0, 0.5);
-      --glow-cyan:   0 0 28px rgba(0, 212, 255, 0.18);
-      --glow-purple: 0 0 28px rgba(155, 94, 245, 0.18);
+    /* ══════════════════════════════════════════════
+       BRUTALIST TERMINAL — two monos, one acid, no curves
+       ══════════════════════════════════════════════ */
+    :root {
+      --ink:#0b0b0b; --paper:#f2f2ec;
+      --bg:#0b0b0b; --fg:#f2f2ec; --dim:#7d7d75; --line:#2b2b28;
+      --acid:#d4ff00;
+    }
+    :root[data-mode="paper"] {
+      --bg:#f2f2ec; --fg:#0b0b0b; --dim:#61615a; --line:#cfcfc6;
     }
 
-    /* ── Design tokens — LIGHT ── */
-    [data-theme="light"] {
-      --bg:            #f4f6fb;
-      --bg-alt:        #ffffff;
-      --bg-card:       #ffffff;
-      --bg-band:       #eef1f8;
-      --text:          #0f1120;
-      --text-muted:    #5a6580;
-      --border:        #dde3ef;
-      --border-bright: #c5cedf;
+    *, *::before, *::after { box-sizing:border-box; margin:0; padding:0; }
 
-      --cyan:   #0099cc;
-      --purple: #6d28d9;
-      --green:  #059669;
-      --orange: #d95f1a;
-      --blue:   #2563eb;
-
-      --grad-hero: linear-gradient(135deg, #f4f6fb 0%, #eef1f8 100%);
-      --grad-accent: linear-gradient(135deg, var(--purple) 0%, var(--cyan) 100%);
-
-      --shadow-card: 0 4px 20px rgba(15, 17, 32, 0.10);
-      --glow-cyan:   none;
-      --glow-purple: none;
-    }
-
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-
+    html { scroll-behavior:smooth; }
     body {
-      font-family: 'Inter', sans-serif;
-      font-size: 16px;
-      color: var(--text);
-      background: var(--bg);
-      overflow-x: hidden;
-      transition: background .3s, color .3s;
+      font-family:'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size:15px; line-height:1.6;
+      background:var(--bg); color:var(--fg);
+      -webkit-font-smoothing:antialiased;
+      overflow-x:hidden;
+    }
+    h1, h2, h3 { font-weight:700; }
+    p { margin:0; }
+    a { color:var(--fg); text-decoration:none; }
+    ul { list-style:none; }
+    .disp { font-family:'Space Mono', ui-monospace, monospace; font-weight:700; text-transform:uppercase; }
+
+    /* ── Motion ── */
+    @keyframes blink   { 0%,49% { opacity:1; } 50%,100% { opacity:0; } }
+    @keyframes boot    { from { opacity:0; } to { opacity:1; } }
+    @keyframes marquee { from { transform:translateX(0); } to { transform:translateX(-50%); } }
+    @keyframes conn    { 0%,100% { color:var(--line); } 10%,22% { color:var(--acid); } }
+    @keyframes flick   { 0%,96%,100% { opacity:1; } 97% { opacity:.35; } 98.5% { opacity:1; } 99% { opacity:.6; } }
+    @keyframes sweep   { 0% { transform:translateY(0); opacity:0; } 12% { opacity:1; } 88% { opacity:1; } 100% { transform:translateY(var(--sweep-h,220px)); opacity:0; } }
+    @keyframes rise    { from { opacity:0; transform:translateY(14px); } to { opacity:1; transform:translateY(0); } }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior:auto; }
+      *, *::before, *::after { animation:none !important; transition:none !important; }
+      .reveal, .reveal.in { opacity:1 !important; }
     }
 
-    h1, h2, h3, h4 {
-      font-family: 'Space Grotesk', sans-serif;
-      font-weight: 700;
-    }
+    .cursor { display:inline-block; width:.62em; height:1em; background:var(--acid); vertical-align:-.14em; margin-left:.14em; animation:blink 1.05s steps(1) infinite; }
 
-    /* ── Top nav ── */
-    .topnav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 100;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 16px 40px;
-      background: rgba(8, 12, 20, 0.85);
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
-      border-bottom: 1px solid var(--border);
-      transition: background .3s, border-color .3s;
-    }
-    [data-theme="light"] .topnav {
-      background: rgba(244, 246, 251, 0.92);
-    }
+    /* reveal on scroll */
+    .reveal { opacity:0; }
+    .reveal.in { animation:rise .5s cubic-bezier(.2,.7,.3,1) both; }
 
-    .topnav .logo {
-      font-family: 'Space Grotesk', sans-serif;
-      font-weight: 800;
-      font-size: 20px;
-      color: var(--text);
-      text-decoration: none;
-    }
-    .topnav .logo span {
-      background: var(--grad-accent);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-    .topnav .nav-links { display: flex; align-items: center; }
-    .topnav .nav-links a {
-      margin-left: 22px;
-      font-size: 14px;
-      font-weight: 500;
-      color: var(--text-muted);
-      text-decoration: none;
-      transition: color .2s;
-    }
-    .topnav .nav-links a:hover { color: var(--text); }
+    /* ── Structure ── */
+    .strip { border-bottom:2px solid var(--fg); }
+    .pad   { padding:60px 48px; }
+    .lab   { font-size:11px; font-weight:600; letter-spacing:.2em; text-transform:uppercase; color:var(--dim); }
+    .lab-a { color:var(--acid); }
+    .dim   { color:var(--dim); }
 
-    .btn-nav {
-      margin-left: 22px;
-      padding: 8px 20px;
-      background: var(--grad-accent);
-      color: #fff !important;
-      border-radius: var(--radius-pill);
-      font-size: 14px;
-      font-weight: 600;
-      text-decoration: none;
-      transition: opacity .2s, transform .15s;
-      display: inline-flex; align-items: center; gap: 6px;
-    }
-    .btn-nav:hover { opacity: .85; transform: translateY(-1px); text-decoration: none; }
+    /* ── Top bar ── */
+    .bar { display:flex; align-items:stretch; border-bottom:2px solid var(--fg); position:sticky; top:0; z-index:60; background:var(--bg); }
+    .bar-logo { display:flex; align-items:center; gap:10px; padding:0 22px; height:52px; border-right:2px solid var(--fg);
+      font-family:'Space Mono',monospace; font-weight:700; font-size:17px; letter-spacing:-.02em; flex-shrink:0; }
+    .bar-nav { display:flex; align-items:stretch; flex:1; min-width:0; }
+    .bar-nav a { display:flex; align-items:center; padding:0 17px; font-size:12px; font-weight:500; letter-spacing:.09em;
+      text-transform:uppercase; border-right:1px solid var(--line); white-space:nowrap; }
+    .bar-nav a:hover { background:var(--acid); color:var(--ink); }
+    .bar-nav a.on { background:var(--fg); color:var(--bg); }
+    .bar-nav a.on:hover { background:var(--acid); color:var(--ink); }
+    .bar-btn { display:flex; align-items:center; gap:9px; padding:0 20px; border-left:2px solid var(--fg);
+      font-size:12px; letter-spacing:.09em; text-transform:uppercase; font-weight:600; background:none; color:var(--fg);
+      font-family:inherit; cursor:pointer; flex-shrink:0; }
+    .bar-btn:hover { background:var(--acid); color:var(--ink); }
+    .bar-menu { display:none; }
 
-    /* ── Theme toggle slider (matching other pages) ── */
-    .toggle-container {
-      display: flex;
-      align-items: center;
-      margin-left: 20px;
-      gap: 8px;
-    }
-    .theme-switch {
-      display: inline-block;
-      height: 26px;
-      position: relative;
-      width: 50px;
-      flex-shrink: 0;
-    }
-    .theme-switch input {
-      opacity: 0;
-      width: 0;
-      height: 0;
-      position: absolute;
-    }
-    .slider {
-      background: #2a3a50;
-      bottom: 0;
-      cursor: pointer;
-      left: 0;
-      position: absolute;
-      right: 0;
-      top: 0;
-      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-      border-radius: 26px;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-    }
-    .slider:before {
-      background-color: white;
-      bottom: 3px;
-      content: "";
-      height: 20px;
-      left: 3px;
-      position: absolute;
-      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-      width: 20px;
-      border-radius: 50%;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-    }
-    input:checked + .slider {
-      background: linear-gradient(135deg, #c5cedf 0%, #dde3ef 100%);
-    }
-    input:checked + .slider:before {
-      transform: translateX(24px);
-      background-color: #6d28d9;
-    }
-    [data-theme="dark"] .slider {
-      background: linear-gradient(135deg, var(--purple) 0%, var(--cyan) 100%);
-    }
-    .toggle-icon {
-      font-size: 13px;
-      color: var(--text-muted);
-      transition: color .3s;
-    }
+    /* ── Buttons ── */
+    .btn { display:inline-flex; align-items:center; gap:10px; padding:15px 26px; min-height:52px;
+      border:2px solid var(--fg); background:transparent; color:var(--fg);
+      font-family:inherit; font-size:13px; font-weight:700; letter-spacing:.12em; text-transform:uppercase; cursor:pointer; }
+    .btn:hover { background:var(--acid); border-color:var(--acid); color:var(--ink); }
+    .btn-solid { background:var(--acid); border-color:var(--acid); color:var(--ink); }
+    .btn-solid:hover { background:transparent; color:var(--fg); border-color:var(--fg); }
+    .btn-row { display:flex; flex-wrap:wrap; }
+    .btn-row .btn + .btn { margin-left:-2px; }
 
     /* ── Hero ── */
-    .hero {
-      padding: 140px 40px 80px;
-      max-width: 1280px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 60px;
-      align-items: center;
-    }
-    .hero-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 6px 16px;
-      background: rgba(155, 94, 245, 0.12);
-      border: 1px solid rgba(155, 94, 245, 0.25);
-      color: var(--purple);
-      border-radius: var(--radius-pill);
-      font-size: 13px;
-      font-weight: 600;
-      margin-bottom: 20px;
-    }
-    [data-theme="light"] .hero-badge {
-      background: rgba(109, 40, 217, 0.08);
-      border-color: rgba(109, 40, 217, 0.2);
-    }
-    .hero h1 {
-      font-size: clamp(36px, 5vw, 68px);
-      line-height: 1.1;
-      letter-spacing: -1.5px;
-      margin-bottom: 20px;
-    }
-    .accent-cyan   { color: var(--cyan); }
-    .accent-purple { color: var(--purple); }
+    .hero-eyebrow { display:flex; align-items:center; gap:14px; flex-wrap:wrap; border-bottom:1px solid var(--line); padding-bottom:16px; margin-bottom:34px; }
+    .h1 { font-size:clamp(46px, 8.4vw, 120px); line-height:.9; letter-spacing:-.045em; text-transform:uppercase;
+      font-family:'Space Mono',monospace; font-weight:700; }
+    .hero-grid { display:grid; grid-template-columns:minmax(0,1fr) 470px; gap:56px; margin-top:44px; align-items:start; }
+    .lede { font-size:17px; line-height:1.75; max-width:560px; }
 
-    .hero p {
-      font-size: 18px;
-      color: var(--text-muted);
-      line-height: 1.7;
-      margin-bottom: 36px;
-      max-width: 480px;
-    }
-    .hero-cta { display: flex; gap: 14px; flex-wrap: wrap; }
+    /* ── Terminal block ── */
+    .blk { border:2px solid var(--fg); position:relative; overflow:hidden; }
+    .blk-head { display:flex; align-items:center; justify-content:space-between; gap:12px; padding:9px 14px;
+      border-bottom:2px solid var(--fg); background:var(--fg); color:var(--bg);
+      font-size:10.5px; font-weight:700; letter-spacing:.18em; text-transform:uppercase; }
+    .blk-body { padding:18px 16px; font-size:13px; line-height:1.95; overflow-x:auto; }
+    .out { display:block; white-space:pre; animation:boot .01s steps(1) both; }
+    .ok { color:var(--acid); }
+    .scan { position:absolute; left:0; right:0; top:0; height:2px; background:var(--acid); opacity:.55;
+      animation:sweep 4.5s linear infinite; pointer-events:none; }
 
-    .btn-primary-brand {
-      padding: 14px 32px;
-      background: var(--grad-accent);
-      color: #fff;
-      border-radius: 10px;
-      font-weight: 600;
-      font-size: 15px;
-      text-decoration: none;
-      transition: opacity .2s, transform .15s, box-shadow .2s;
-      display: inline-flex; align-items: center; gap: 8px;
-    }
-    .btn-primary-brand:hover {
-      opacity: .88;
-      transform: translateY(-2px);
-      color: #fff;
-      text-decoration: none;
-      box-shadow: var(--glow-purple);
-    }
-    .btn-secondary-brand {
-      padding: 14px 32px;
-      border: 1.5px solid var(--border-bright);
-      color: var(--text);
-      border-radius: 10px;
-      font-weight: 600;
-      font-size: 15px;
-      text-decoration: none;
-      transition: border-color .2s, transform .15s, color .2s;
-      display: inline-flex; align-items: center; gap: 8px;
-    }
-    .btn-secondary-brand:hover {
-      border-color: var(--cyan);
-      color: var(--cyan);
-      transform: translateY(-2px);
-      text-decoration: none;
-    }
+    /* ── Register ── */
+    .reg { display:grid; grid-template-columns:repeat(4, minmax(0,1fr)); border-bottom:2px solid var(--fg); }
+    .reg > div { padding:34px 48px; border-right:2px solid var(--fg); display:flex; flex-direction:column; gap:6px; }
+    .reg > div:last-child { border-right:none; }
+    .reg-n { font-family:'Space Mono',monospace; font-weight:700; font-size:clamp(38px,4.4vw,64px); line-height:.9; letter-spacing:-.05em; }
 
-    /* hero visual */
-    .hero-visual { display: flex; justify-content: center; align-items: center; }
-    .hero-blob { width: 440px; height: 440px; position: relative; }
+    /* ── Marquee ── */
+    .tick { background:var(--acid); color:var(--ink); border-bottom:2px solid var(--fg); overflow:hidden; padding:10px 0; }
+    .tick-track { display:flex; width:max-content; animation:marquee 30s linear infinite; }
+    .tick-set { display:flex; gap:40px; padding-right:40px; font-size:12px; font-weight:700;
+      letter-spacing:.16em; text-transform:uppercase; white-space:nowrap; }
 
-    .blob-ring {
-      position: absolute;
-      border-radius: 50%;
-      animation: pulse 4s ease-in-out infinite;
-    }
-    .blob-ring:nth-child(1) { inset: 0; background: rgba(155,94,245,.12); animation-delay: 0s; }
-    .blob-ring:nth-child(2) { inset: 30px; background: rgba(0,212,255,.10); animation-delay: .8s; }
-    .blob-ring:nth-child(3) { inset: 60px; background: rgba(0,229,160,.08); animation-delay: 1.6s; }
-    @keyframes pulse {
-      0%,100% { transform: scale(1); opacity: 1; }
-      50% { transform: scale(1.06); opacity: .6; }
-    }
-    .blob-center {
-      position: absolute;
-      inset: 80px;
-      background: linear-gradient(135deg, var(--purple) 0%, var(--cyan) 100%);
-      border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      box-shadow: 0 0 60px rgba(155,94,245,.35), 0 0 120px rgba(0,212,255,.15);
-    }
-    .blob-center i { font-size: 72px; color: rgba(255,255,255,.92); }
+    /* ── The loop ── */
+    .rail { display:grid; grid-template-columns:repeat(5, minmax(0,1fr)); border:2px solid var(--fg); margin-top:40px; }
+    .stage { position:relative; display:flex; flex-direction:column; gap:9px; align-items:flex-start;
+      padding:22px 20px; border:0; border-right:2px solid var(--fg); cursor:pointer;
+      background:transparent; color:var(--fg); font-family:inherit; text-align:left; }
+    .stage:last-child { border-right:none; }
+    .stage:hover { background:var(--line); }
+    .stage[aria-selected="true"] { background:var(--acid); color:var(--ink); }
+    .stage[aria-selected="true"]:hover { background:var(--acid); }
+    .stage:focus-visible { outline:3px solid var(--acid); outline-offset:-6px; }
+    .stage-txt { display:flex; flex-direction:column; gap:4px; }
+    .stage-ix { font-family:'Space Mono',monospace; font-weight:700; font-size:13px; letter-spacing:.06em; }
+    .stage-t { font-family:'Space Mono',monospace; font-weight:700; font-size:21px; text-transform:uppercase; letter-spacing:-.02em; }
+    .stage-c { font-size:12px; line-height:1.5; opacity:.72; }
+    .stage-ar { position:absolute; right:-11px; top:22px; font-size:15px; z-index:2; background:var(--bg);
+      animation:conn 2.6s steps(1) infinite; }
+    .stage[aria-selected="true"] .stage-ar { background:var(--acid); color:var(--ink); animation:none; }
 
-    .float-card {
-      position: absolute;
-      background: var(--bg-card);
-      border: 1px solid var(--border-bright);
-      border-radius: 12px;
-      padding: 10px 16px;
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--text);
-      box-shadow: var(--shadow-card);
-      display: flex; align-items: center; gap: 8px;
-      animation: float 3s ease-in-out infinite;
-    }
-    .float-card:nth-child(5) { top: 30px; left: 10px; animation-delay: 0s; }
-    .float-card:nth-child(6) { top: 60px; right: 0px; animation-delay: .7s; }
-    .float-card:nth-child(7) { bottom: 50px; left: 20px; animation-delay: 1.4s; }
-    .float-card:nth-child(8) { bottom: 30px; right: 10px; animation-delay: 2.1s; }
-    @keyframes float {
-      0%,100% { transform: translateY(0); }
-      50% { transform: translateY(-8px); }
-    }
-    .dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+    .detail { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1.1fr); border:2px solid var(--fg); border-top:none; }
+    .detail-l { padding:30px 28px; border-right:2px solid var(--fg); display:flex; flex-direction:column; gap:16px; }
+    .kv { display:flex; flex-wrap:wrap; gap:8px; }
+    .kv span { border:1px solid var(--line); padding:4px 10px; font-size:11px; letter-spacing:.08em;
+      text-transform:uppercase; color:var(--dim); }
 
-    /* ── Stats strip ── */
-    .stats-strip {
-      background: var(--bg-alt);
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-      padding: 28px 40px;
-    }
-    .stats-inner {
-      max-width: 1280px;
-      margin: 0 auto;
-      display: flex;
-      justify-content: space-around;
-      flex-wrap: wrap;
-      gap: 20px;
-    }
-    .stat-item { text-align: center; }
-    .stat-num {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 36px;
-      font-weight: 800;
-    }
-    .stat-label { font-size: 13px; color: var(--text-muted); font-weight: 500; margin-top: 2px; }
+    /* ── System records ── */
+    .rec { display:grid; grid-template-columns:150px minmax(0,1fr) 330px; border:2px solid var(--fg); border-bottom:none; }
+    .rec:last-of-type { border-bottom:2px solid var(--fg); }
+    .rec-ix { border-right:2px solid var(--fg); padding:30px 24px; display:flex; flex-direction:column; justify-content:space-between; gap:16px; }
+    .rec:hover .rec-ix { background:var(--acid); color:var(--ink); }
+    .rec-n { font-family:'Space Mono',monospace; font-weight:700; font-size:56px; line-height:.85; letter-spacing:-.05em; }
+    .rec-mid { padding:30px; display:flex; flex-direction:column; gap:15px; }
+    .rec-t { font-family:'Space Mono',monospace; font-weight:700; font-size:clamp(22px,2.2vw,30px);
+      text-transform:uppercase; letter-spacing:-.03em; line-height:1.05; }
+    .rec-d { font-size:14px; line-height:1.72; color:var(--dim); max-width:640px; }
+    .rec-r { border-left:2px solid var(--fg); display:flex; flex-direction:column; }
+    .rec-kv { display:flex; justify-content:space-between; gap:14px; padding:11px 22px;
+      border-bottom:1px solid var(--line); font-size:12px; letter-spacing:.06em; }
+    .rec-kv b { font-weight:700; text-transform:uppercase; }
+    .rec-act { display:flex; margin-top:auto; }
+    .rec-act a { flex:1; display:flex; align-items:center; justify-content:center; gap:8px; padding:16px 10px;
+      border-top:2px solid var(--fg); border-right:1px solid var(--line);
+      font-size:11.5px; font-weight:700; letter-spacing:.12em; text-transform:uppercase; }
+    .rec-act a:last-child { border-right:none; }
+    .rec-act a:hover { background:var(--acid); color:var(--ink); }
+    .live { color:var(--acid); }
 
-    /* ── Section wrapper ── */
-    .section {
-      padding: 80px 40px;
-      max-width: 1280px;
-      margin: 0 auto;
-    }
-    .section-label {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 12px;
-      font-weight: 700;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-      margin-bottom: 12px;
-    }
-    .section-title {
-      font-size: clamp(28px, 4vw, 44px);
-      letter-spacing: -1px;
-      margin-bottom: 14px;
-    }
-    .section-sub {
-      font-size: 17px;
-      color: var(--text-muted);
-      max-width: 560px;
-      line-height: 1.7;
-      margin-bottom: 56px;
-    }
+    /* ── ASCII ── */
+    .ascii { font-family:'IBM Plex Mono',monospace; font-size:13px; line-height:1.5; white-space:pre; overflow-x:auto; }
+    .ascii-wrap { padding:30px 28px; overflow-x:auto; }
 
-    /* ── Bento project grid ── */
-    .bento-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 24px;
-    }
-    .bento-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 20px;
-      padding: 40px;
-      position: relative;
-      overflow: hidden;
-      transition: transform .35s ease, border-color .3s, box-shadow .35s;
-      display: flex;
-      flex-direction: column;
-    }
-    .bento-card.featured {
-      grid-column: span 2;
-    }
+    /* ── CTA / footer ── */
+    .cta { background:var(--acid); color:var(--ink); border-bottom:2px solid var(--ink); }
+    .cta .btn { border-color:var(--ink); color:var(--ink); }
+    .cta .btn:hover { background:var(--ink); color:var(--acid); border-color:var(--ink); }
+    .cta-h { font-size:clamp(34px,5.2vw,72px); line-height:.94; letter-spacing:-.045em; margin-top:18px; max-width:1000px; }
+    .foot { display:flex; justify-content:space-between; align-items:center; gap:24px; flex-wrap:wrap;
+      padding:26px 48px; font-size:12px; letter-spacing:.06em; color:var(--dim); }
+    .foot a { color:var(--dim); }
+    .foot a:hover { color:var(--acid); }
 
-    /* Glowing left accent bar */
-    .bento-card::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0;
-      width: 3px; height: 100%;
-      border-radius: 20px 0 0 20px;
-    }
-    .bento-card.card-ticket::before { background: linear-gradient(180deg, var(--orange) 0%, var(--purple) 100%); }
-    .bento-card.card-office::before { background: linear-gradient(180deg, var(--cyan) 0%, var(--purple) 100%); }
-    .bento-card.card-invest::before { background: linear-gradient(180deg, var(--green) 0%, var(--cyan) 100%); }
-    .bento-card.card-finance::before { background: linear-gradient(180deg, var(--purple) 0%, var(--blue) 100%); }
+    .h2 { font-size:clamp(30px,4vw,52px); line-height:1; letter-spacing:-.04em; margin-top:16px;
+      font-family:'Space Mono',monospace; font-weight:700; text-transform:uppercase; }
 
-    /* Large ghost number */
-    .bento-num {
-      position: absolute;
-      top: 16px; right: 24px;
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 120px;
-      font-weight: 900;
-      line-height: 1;
-      opacity: .04;
-      letter-spacing: -4px;
-      pointer-events: none;
-      user-select: none;
-      transition: opacity .3s;
+    /* ══ Responsive ══ */
+    @media (max-width: 1180px) {
+      .hero-grid { grid-template-columns:1fr; gap:34px; }
+      .rec { grid-template-columns:120px minmax(0,1fr) 280px; }
     }
-    .bento-card:hover .bento-num { opacity: .08; }
-
-    /* Hover effects */
-    [data-theme="dark"] .bento-card.card-ticket:hover {
-      border-color: rgba(255,107,53,.35);
-      box-shadow: 0 0 0 1px rgba(255,107,53,.08), 0 24px 60px rgba(0,0,0,.5);
-      transform: translateY(-8px);
+    @media (max-width: 960px) {
+      .pad { padding:44px 26px; }
+      .reg > div { padding:26px; }
+      .rail { grid-template-columns:1fr; }
+      .stage { border-right:none; border-bottom:2px solid var(--fg); flex-direction:row; align-items:center; gap:14px; min-height:74px; }
+      .stage:last-child { border-bottom:none; }
+      .stage-ar { display:none; }
+      .stage-txt { display:flex; flex-direction:column; gap:2px; }
+      .detail { grid-template-columns:1fr; }
+      .detail-l { border-right:none; border-bottom:2px solid var(--fg); }
+      .rec { grid-template-columns:1fr; }
+      .rec-ix { flex-direction:row; align-items:center; justify-content:flex-start; gap:16px;
+        border-right:none; border-bottom:2px solid var(--fg); padding:18px 22px; }
+      .rec-n { font-size:40px; color:var(--acid); }
+      .rec:hover .rec-ix { background:transparent; color:var(--fg); }
+      .rec-r { border-left:none; border-top:2px solid var(--fg); }
     }
-    [data-theme="dark"] .bento-card.card-office:hover {
-      border-color: rgba(0,212,255,.35);
-      box-shadow: 0 0 0 1px rgba(0,212,255,.08), 0 24px 60px rgba(0,0,0,.5);
-      transform: translateY(-8px);
-    }
-    [data-theme="dark"] .bento-card.card-invest:hover {
-      border-color: rgba(0,229,160,.35);
-      box-shadow: 0 0 0 1px rgba(0,229,160,.08), 0 24px 60px rgba(0,0,0,.5);
-      transform: translateY(-8px);
-    }
-    [data-theme="dark"] .bento-card.card-finance:hover {
-      border-color: rgba(155,94,245,.35);
-      box-shadow: 0 0 0 1px rgba(155,94,245,.08), 0 24px 60px rgba(0,0,0,.5);
-      transform: translateY(-8px);
-    }
-    [data-theme="light"] .bento-card:hover {
-      border-color: var(--border-bright);
-      box-shadow: 0 12px 40px rgba(15,17,32,.12);
-      transform: translateY(-6px);
-    }
-
-    /* Status badge */
-    .status-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 4px 12px;
-      border-radius: 999px;
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: .5px;
-      text-transform: uppercase;
-      margin-bottom: 18px;
-      width: fit-content;
-    }
-    .status-dot {
-      width: 6px; height: 6px;
-      border-radius: 50%;
-      animation: blink 2s ease-in-out infinite;
-    }
-    @keyframes blink {
-      0%, 100% { opacity: 1; }
-      50% { opacity: .25; }
-    }
-    .status-live { background: rgba(0,229,160,.1); color: var(--green); border: 1px solid rgba(0,229,160,.2); }
-    .status-live .status-dot { background: var(--green); }
-    .status-open { background: rgba(0,212,255,.1); color: var(--cyan); border: 1px solid rgba(0,212,255,.2); }
-    .status-open .status-dot { background: var(--cyan); }
-
-    /* Card icon */
-    .bento-icon {
-      width: 52px; height: 52px;
-      border-radius: 14px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 22px;
-      margin-bottom: 18px;
-      flex-shrink: 0;
-    }
-    .icon-orange { background: rgba(255,107,53,.12); color: var(--orange); }
-    .icon-blue   { background: rgba(0,212,255,.12);  color: var(--cyan); }
-    .icon-green  { background: rgba(0,229,160,.12);  color: var(--green); }
-    .icon-purple { background: rgba(155,94,245,.12); color: var(--purple); }
-
-    .bento-title { font-size: 22px; font-weight: 700; margin-bottom: 12px; letter-spacing: -.3px; }
-    .bento-desc {
-      font-size: 14.5px;
-      color: var(--text-muted);
-      line-height: 1.7;
-      margin-bottom: 22px;
-      flex: 1;
-    }
-
-    /* Metrics row */
-    .metrics-row {
-      display: flex;
-      gap: 24px;
-      padding: 14px 0;
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-      margin-bottom: 20px;
-    }
-    .metric { display: flex; flex-direction: column; gap: 2px; }
-    .metric-val {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 17px;
-      font-weight: 700;
-    }
-    .metric-key {
-      font-size: 10px;
-      color: var(--text-muted);
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: .6px;
-    }
-
-    /* Tags */
-    .tag-list { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 22px; }
-    .tag {
-      padding: 4px 11px;
-      border-radius: var(--radius-pill);
-      font-size: 11.5px;
-      font-weight: 600;
-      border: 1px solid transparent;
-    }
-    .tag-orange { background: rgba(255,107,53,.10); color: var(--orange); border-color: rgba(255,107,53,.15); }
-    .tag-blue   { background: rgba(0,212,255,.10);  color: var(--cyan);   border-color: rgba(0,212,255,.15); }
-    .tag-green  { background: rgba(0,229,160,.10);  color: var(--green);  border-color: rgba(0,229,160,.15); }
-    .tag-purple { background: rgba(155,94,245,.10); color: var(--purple); border-color: rgba(155,94,245,.15); }
-
-    /* Card footer */
-    .bento-footer {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-top: auto;
-      padding-top: 16px;
-      border-top: 1px solid var(--border);
-    }
-    .card-lang { display: flex; align-items: center; gap: 6px; font-size: 13px; color: var(--text-muted); font-weight: 500; }
-    .lang-dot { width: 10px; height: 10px; border-radius: 50%; }
-    .btn-gh {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 8px 18px;
-      border: 1.5px solid var(--border-bright);
-      border-radius: 8px;
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--text-muted);
-      text-decoration: none;
-      transition: border-color .2s, color .2s;
-    }
-    .btn-gh:hover { border-color: var(--cyan); color: var(--cyan); text-decoration: none; }
-
-    /* Live demo button */
-    .btn-demo {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 8px 18px;
-      background: linear-gradient(135deg, var(--green) 0%, var(--cyan) 100%);
-      border: 1.5px solid transparent;
-      border-radius: 8px;
-      font-size: 13px;
-      font-weight: 600;
-      color: #06121a;
-      text-decoration: none;
-      transition: opacity .2s, transform .15s, box-shadow .2s;
-    }
-    .btn-demo:hover {
-      opacity: .9;
-      transform: translateY(-1px);
-      color: #06121a;
-      text-decoration: none;
-      box-shadow: 0 0 20px rgba(0,229,160,.25);
-    }
-    .footer-actions { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
-
-    /* Featured card (full-width) 2-col inner layout */
-    .featured-inner {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 48px;
-      align-items: start;
-    }
-    .framework-chips {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-    }
-    .fw-chip {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      padding: 12px 16px;
-      background: rgba(0,229,160,.05);
-      border: 1px solid rgba(0,229,160,.12);
-      border-radius: 12px;
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--text);
-      transition: border-color .2s, background .2s;
-      cursor: default;
-    }
-    .fw-chip:hover { border-color: var(--green); background: rgba(0,229,160,.1); }
-    .fw-chip i { font-size: 14px; color: var(--green); width: 16px; flex-shrink: 0; }
-    .fw-chip.fw-blue { background: rgba(79,163,255,.05); border-color: rgba(79,163,255,.12); }
-    .fw-chip.fw-blue:hover { border-color: var(--blue); background: rgba(79,163,255,.1); }
-    .fw-chip.fw-blue i { color: var(--blue); }
-
-    /* Live-demo button */
-    .btn-live {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 8px 18px;
-      border-radius: 8px;
-      font-size: 13px;
-      font-weight: 600;
-      text-decoration: none;
-      background: var(--grad-accent);
-      color: #fff;
-      transition: opacity .2s, transform .15s;
-    }
-    .btn-live:hover { opacity: .88; transform: translateY(-1px); color: #fff; text-decoration: none; }
-
-    /* code inline */
-    code {
-      background: rgba(0,212,255,.08);
-      color: var(--cyan);
-      padding: 1px 6px;
-      border-radius: 4px;
-      font-size: .9em;
-    }
-    [data-theme="light"] code {
-      background: rgba(0,153,204,.08);
-    }
-
-    /* ── Feature bands ── */
-    .full-band { padding: 80px 40px; background: var(--bg-band); border-top: 1px solid var(--border); }
-    .band-inner { max-width: 1280px; margin: 0 auto; }
-
-    /* ── Step-flow for deep-dives ── */
-    .step-flow {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-      gap: 0;
-      margin-top: 40px;
-      position: relative;
-    }
-    .step-item {
-      display: flex;
-      flex-direction: column;
-      padding: 24px 28px;
-      position: relative;
-    }
-    .step-item:not(:last-child)::after {
-      content: '→';
-      position: absolute;
-      right: -10px;
-      top: 30px;
-      font-size: 20px;
-      color: var(--border-bright);
-      font-weight: 700;
-      z-index: 1;
-    }
-    .step-num {
-      width: 36px; height: 36px;
-      border-radius: 50%;
-      border: 2px solid var(--border-bright);
-      display: flex; align-items: center; justify-content: center;
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 13px;
-      font-weight: 700;
-      margin-bottom: 14px;
-      flex-shrink: 0;
-      transition: border-color .2s, color .2s;
-    }
-    .step-item:hover .step-num { border-color: var(--cyan); color: var(--cyan); }
-    .step-item h4 { font-size: 15px; margin-bottom: 6px; color: var(--text); }
-    .step-item p { font-size: 13.5px; color: var(--text-muted); line-height: 1.6; }
-
-    /* Colored step numbers per section */
-    .step-flow.orange .step-num { border-color: rgba(255,107,53,.3); color: var(--orange); }
-    .step-flow.orange .step-item:not(:last-child)::after { color: rgba(255,107,53,.3); }
-    .step-flow.orange .step-item:hover .step-num { border-color: var(--orange); }
-
-    .step-flow.blue .step-num { border-color: rgba(0,212,255,.3); color: var(--cyan); }
-    .step-flow.blue .step-item:not(:last-child)::after { color: rgba(0,212,255,.3); }
-    .step-flow.blue .step-item:hover .step-num { border-color: var(--cyan); }
-
-    .step-flow.green .step-num { border-color: rgba(0,229,160,.3); color: var(--green); }
-    .step-flow.green .step-item:not(:last-child)::after { color: rgba(0,229,160,.3); }
-    .step-flow.green .step-item:hover .step-num { border-color: var(--green); }
-
-    /* arch / code box */
-    .arch-box {
-      background: var(--bg);
-      border: 1px solid var(--border-bright);
-      border-radius: var(--radius-card);
-      padding: 28px;
-      font-family: 'Courier New', monospace;
-      font-size: 12.5px;
-      color: var(--cyan);
-      line-height: 1.9;
-      overflow-x: auto;
-      margin-top: 32px;
-      position: relative;
-    }
-    [data-theme="light"] .arch-box { color: var(--purple); }
-    .arch-box-header {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      margin-bottom: 16px;
-      padding-bottom: 12px;
-      border-bottom: 1px solid var(--border);
-    }
-    .arch-box-dot {
-      width: 12px; height: 12px;
-      border-radius: 50%;
-    }
-    .arch-box-title {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 12px;
-      font-weight: 600;
-      color: var(--text-muted);
-      letter-spacing: .5px;
-    }
-
-    /* Flow diagram for arch */
-    .flow-diagram {
-      display: flex;
-      align-items: center;
-      gap: 0;
-      flex-wrap: wrap;
-      margin: 32px 0;
-      padding: 24px 28px;
-      background: var(--bg);
-      border: 1px solid var(--border-bright);
-      border-radius: var(--radius-card);
-      overflow-x: auto;
-    }
-    .flow-node {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 6px;
-      padding: 12px 18px;
-      background: var(--bg-card);
-      border: 1px solid var(--border-bright);
-      border-radius: 10px;
-      font-size: 12px;
-      font-weight: 600;
-      white-space: nowrap;
-      flex-shrink: 0;
-    }
-    .flow-node i { font-size: 18px; }
-    .flow-arrow {
-      font-size: 18px;
-      color: var(--border-bright);
-      padding: 0 8px;
-      flex-shrink: 0;
-    }
-
-    /* ── CTA section ── */
-    .cta-section {
-      padding: 100px 40px;
-      text-align: center;
-      background: var(--bg-alt);
-      border-top: 1px solid var(--border);
-      position: relative;
-      overflow: hidden;
-    }
-    .cta-section::before {
-      content: '';
-      position: absolute;
-      top: -200px; left: 50%; transform: translateX(-50%);
-      width: 800px; height: 600px;
-      background: radial-gradient(ellipse, rgba(155,94,245,.12) 0%, rgba(0,212,255,.06) 50%, transparent 70%);
-      pointer-events: none;
-    }
-    [data-theme="light"] .cta-section::before {
-      background: radial-gradient(ellipse, rgba(109,40,217,.06) 0%, rgba(0,153,204,.04) 50%, transparent 70%);
-    }
-    .cta-section h2 { font-size: clamp(28px, 4vw, 48px); letter-spacing: -1px; margin-bottom: 16px; position: relative; }
-    .cta-section p { font-size: 17px; color: var(--text-muted); margin-bottom: 36px; position: relative; }
-
-    /* ── Footer ── */
-    .site-footer {
-      padding: 40px;
-      border-top: 1px solid var(--border);
-      text-align: center;
-      font-size: 13px;
-      color: var(--text-muted);
-      background: var(--bg);
-    }
-    .site-footer a { color: var(--text-muted); }
-    .site-footer a:hover { color: var(--cyan); }
-
-    /* ── Responsive ── */
-    @media (max-width: 900px) {
-      .bento-grid { grid-template-columns: 1fr; }
-      .bento-card.featured { grid-column: span 1; }
-      .featured-inner { grid-template-columns: 1fr; gap: 32px; }
-      .framework-chips { grid-template-columns: 1fr 1fr; }
-      .step-flow { grid-template-columns: 1fr 1fr; }
-      .step-item:not(:last-child)::after { display: none; }
-    }
-    /* ── Hero text shine ── */
-    .accent-grad {
-      background: linear-gradient(
-        90deg,
-        var(--purple) 0%,
-        var(--cyan)   38%,
-        rgba(255,255,255,0.92) 50%,
-        var(--cyan)   62%,
-        var(--purple) 100%
-      );
-      background-size: 250% 100%;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      animation: accent-shine 3s linear infinite;
-    }
-    @keyframes accent-shine {
-      0%   { background-position:  200% center; }
-      100% { background-position: -200% center; }
-    }
-
-    /* ── Hero blob orbit rings ── */
-    .blob-orbit {
-      position: absolute;
-      border-radius: 50%;
-      animation: orbit-spin 12s linear infinite;
-      pointer-events: none;
-    }
-    .blob-orbit.orbit-outer {
-      inset: -18px;
-      border: 1px dashed rgba(155,94,245,0.22);
-      animation-duration: 16s;
-    }
-    .blob-orbit.orbit-inner {
-      inset: 18px;
-      border: 1px dashed rgba(0,212,255,0.22);
-      animation-duration: 9s;
-      animation-direction: reverse;
-    }
-    .blob-orbit::after {
-      content: '';
-      position: absolute;
-      top: -5px; left: 50%;
-      transform: translateX(-50%);
-      width: 10px; height: 10px;
-      border-radius: 50%;
-    }
-    .blob-orbit.orbit-outer::after {
-      background: var(--purple);
-      box-shadow: 0 0 12px var(--purple), 0 0 26px rgba(155,94,245,0.45);
-    }
-    .blob-orbit.orbit-inner::after {
-      background: var(--cyan);
-      box-shadow: 0 0 12px var(--cyan), 0 0 26px rgba(0,212,255,0.45);
-    }
-    @keyframes orbit-spin {
-      from { transform: rotate(0deg); }
-      to   { transform: rotate(360deg); }
-    }
-
-    /* ── Typing animation ── */
-    .arch-typed {
-      display: block;
-      white-space: pre;
-      font-family: inherit;
-      font-size: inherit;
-      color: inherit;
-      line-height: inherit;
-    }
-    .typing-cursor {
-      display: inline-block;
-      width: 2px;
-      height: 1.05em;
-      background: currentColor;
-      vertical-align: text-bottom;
-      margin-left: 1px;
-      opacity: 1;
-    }
-    .typing-cursor.blink {
-      animation: blink-cursor 0.75s step-end infinite;
-    }
-    @keyframes blink-cursor {
-      0%, 100% { opacity: 1; }
-      50%       { opacity: 0; }
-    }
-
-    @media (max-width: 768px) {
-      .topnav { padding: 14px 20px; }
-      .topnav .nav-links { display: none; }
-      .hero { grid-template-columns: 1fr; padding: 110px 20px 60px; gap: 40px; }
-      .hero-visual { display: none; }
-      .section { padding: 60px 20px; }
-      .full-band { padding: 60px 20px; }
-      .stats-strip { padding: 24px 20px; }
-      .cta-section { padding: 70px 20px; }
-      .site-footer { padding: 30px 20px; }
-      .step-flow { grid-template-columns: 1fr; }
-      .framework-chips { grid-template-columns: 1fr; }
-      .bento-card { padding: 28px 24px; }
-      .bento-num { font-size: 80px; }
+    @media (max-width: 720px) {
+      .bar-nav { display:none; position:absolute; top:52px; left:0; right:0; flex-direction:column;
+        background:var(--bg); border-bottom:2px solid var(--fg); }
+      .bar-nav.open { display:flex; }
+      .bar-nav a { border-right:none; border-bottom:1px solid var(--line); height:52px; padding:0 22px; }
+      .bar-menu { display:flex; }
+      .bar-logo { flex:1; min-width:0; border-right:none; padding:0 16px; font-size:15px; }
+      .bar-btn { padding:0 14px; }
+      .btn-lbl { display:none; }
+      .reg { grid-template-columns:1fr 1fr; }
+      .reg > div:nth-child(2n) { border-right:none; }
+      .reg > div:nth-child(-n+2) { border-bottom:2px solid var(--fg); }
+      .btn-row { flex-direction:column; align-items:stretch; }
+      .btn-row .btn + .btn { margin-left:0; margin-top:-2px; }
+      .btn { justify-content:center; }
+      .foot { padding:24px 26px 34px; flex-direction:column; align-items:flex-start; }
+      .ascii { font-size:10px; }
+      .ascii-wrap { padding:20px 16px; }
+      .blk-body { font-size:11px; }
+      .rec-mid, .detail-l { padding:22px 20px; }
     }
   </style>
 </head>
 <body>
 
-<!-- ── Navigation ── -->
-<nav class="topnav">
-  <a href="https://yennanliu.github.io/" class="logo">yen<span>.</span>dev</a>
-  <div class="nav-links">
+<!-- ══════════ BAR ══════════ -->
+<nav class="bar">
+  <a href="https://yennanliu.github.io/" class="bar-logo">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="2" y="2" width="20" height="20"/><rect x="7" y="7" width="10" height="10" fill="currentColor" stroke="none"/></svg>
+    YEN.DEV
+  </a>
+  <div class="bar-nav" id="navLinks">
     <a href="https://yennanliu.github.io/">Home</a>
-    <a href="https://yennanliu.github.io/about_me.html">About Me</a>
-    <a href="https://yennanliu.github.io/portfolios.html">Portfolios</a>
-    <a href="https://yennanliu.github.io/ai_builder.html" style="color:var(--cyan)">AI Builder</a>
-    <a href="https://yennanliu.github.io/aws_architecture.html">AWS Architecture</a>
+    <a href="https://yennanliu.github.io/about_me.html">About</a>
+    <a href="https://yennanliu.github.io/portfolios.html">Portfolio</a>
+    <a href="https://yennanliu.github.io/ai_builder.html" class="on" aria-current="page">AI&nbsp;Builder</a>
+    <a href="https://yennanliu.github.io/aws_architecture.html">AWS</a>
     <a href="https://yennanliu.github.io/contact.html">Contact</a>
     <a href="https://yennj12.js.org/yennj12_blog_V4/">Blog</a>
-
-    <!-- Theme toggle slider -->
-    <div class="toggle-container">
-      <label class="theme-switch" for="theme-checkbox-ai" aria-label="Toggle dark/light mode">
-        <input type="checkbox" id="theme-checkbox-ai" />
-        <span class="slider"></span>
-      </label>
-      <span class="toggle-icon" id="themeIcon"><i class="fas fa-moon"></i></span>
-    </div>
-
-    <a href="https://github.com/yennanliu" target="_blank" class="btn-nav">
-      <i class="fab fa-github"></i> GitHub
-    </a>
   </div>
+  <button class="bar-btn" id="modeBtn" type="button" aria-label="Toggle paper mode">
+    <span id="modeGlyph">&#9646;</span><span class="btn-lbl" id="modeText">Paper</span>
+  </button>
+  <a href="https://github.com/yennanliu" target="_blank" rel="noopener" class="bar-btn" style="text-decoration:none;">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 1.8a10.2 10.2 0 0 0-3.2 19.9c.5.1.7-.2.7-.5v-1.8c-2.8.6-3.4-1.3-3.4-1.3-.5-1.2-1.1-1.5-1.1-1.5-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.5 2.3 1.1 2.9.8.1-.6.3-1.1.6-1.3-2.2-.3-4.6-1.1-4.6-5 0-1.1.4-2 1-2.7-.1-.3-.4-1.3.1-2.7 0 0 .8-.3 2.8 1a9.6 9.6 0 0 1 5 0c2-1.3 2.8-1 2.8-1 .5 1.4.2 2.4.1 2.7.6.7 1 1.6 1 2.7 0 3.9-2.4 4.7-4.6 5 .3.3.7 1 .7 2v2.9c0 .3.2.6.7.5A10.2 10.2 0 0 0 12 1.8z"/></svg>
+    <span class="btn-lbl">Source</span>
+  </a>
+  <button class="bar-btn bar-menu" id="menuBtn" type="button" aria-label="Toggle menu" aria-expanded="false">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+  </button>
 </nav>
 
-<!-- ── Hero ── -->
-<header class="hero">
-  <div class="hero-text">
-    <div class="hero-badge">
-      <i class="fas fa-robot"></i> AI Builder Showcase
-    </div>
-    <h1>
-      Building AI<br>
-      agents that<br>
-      <span class="accent-grad">actually ship.</span>
-    </h1>
-    <p>
-      A collection of production-ready AI projects — from multi-agent office automation
-      to AI-powered ticket management and investment analysis frameworks.
-    </p>
-    <div class="hero-cta">
-      <a href="#projects" class="btn-primary-brand">
-        <i class="fas fa-layer-group"></i> Explore Projects
-      </a>
-      <a href="https://github.com/yennanliu" target="_blank" class="btn-secondary-brand">
-        <i class="fab fa-github"></i> GitHub Profile
-      </a>
-    </div>
+<!-- ══════════ HERO ══════════ -->
+<header class="pad strip">
+  <div class="hero-eyebrow">
+    <span class="lab lab-a" style="animation:flick 7s steps(1) infinite;">&#9646;&#9646;&#9646;</span>
+    <span class="lab">SYS.LOG &nbsp;//&nbsp; 04 agents deployed &nbsp;//&nbsp; unattended since day one</span>
   </div>
 
-  <div class="hero-visual">
-    <div class="hero-blob">
-      <div class="blob-orbit orbit-outer"></div>
-      <div class="blob-orbit orbit-inner"></div>
-      <div class="blob-ring"></div>
-      <div class="blob-ring"></div>
-      <div class="blob-ring"></div>
-      <div class="blob-center">
-        <i class="fas fa-brain"></i>
+  <h1 class="h1">Agents<br>that run<br>unattended<span class="cursor"></span></h1>
+
+  <div class="hero-grid">
+    <div style="display:flex; flex-direction:column; gap:32px;">
+      <p class="lede">
+        Four systems that read a repo, draft the mail, pull the filings and publish the
+        report. No prompt box, no operator, no demo mode &mdash; a schedule, a toolbelt,
+        and a ledger that records what every run cost.
+      </p>
+      <div class="btn-row">
+        <a href="#loop" class="btn btn-solid">Trace the loop &nbsp;&darr;</a>
+        <a href="https://github.com/yennanliu" target="_blank" rel="noopener" class="btn">Read the source &nearr;</a>
       </div>
-      <div class="float-card">
-        <div class="dot" style="background:var(--green)"></div>CrewAI Agents
-      </div>
-      <div class="float-card">
-        <div class="dot" style="background:var(--orange)"></div>Auto Tickets
-      </div>
-      <div class="float-card">
-        <div class="dot" style="background:var(--cyan)"></div>GPT-4o Powered
-      </div>
-      <div class="float-card">
-        <div class="dot" style="background:var(--purple)"></div>21 Frameworks
+    </div>
+
+    <div class="blk" style="--sweep-h:238px;">
+      <span class="scan"></span>
+      <div class="blk-head"><span>boot &mdash; all systems</span><span>&#9646;</span></div>
+      <div class="blk-body">
+        <span class="out ok" style="animation-delay:.05s;">$ ./boot --all</span>
+        <span class="out" style="animation-delay:.45s;"><span class="ok">[OK]</span> agent_ticket_system   <span class="dim">repo &rarr; tickets</span></span>
+        <span class="out" style="animation-delay:.75s;"><span class="ok">[OK]</span> agent_auto_system     <span class="dim">4 crews / cron</span></span>
+        <span class="out" style="animation-delay:1.05s;"><span class="ok">[OK]</span> finance_data          <span class="dim">sec &rarr; reports</span></span>
+        <span class="out" style="animation-delay:1.35s;"><span class="ok">[OK]</span> investskill           <span class="dim">21 frameworks</span></span>
+        <span class="out dim" style="animation-delay:1.7s;"> </span>
+        <span class="out" style="animation-delay:1.95s;">$ status<span class="cursor"></span></span>
       </div>
     </div>
   </div>
 </header>
 
-<!-- ── Stats ── -->
-<div class="stats-strip">
-  <div class="stats-inner">
-    <div class="stat-item">
-      <div class="stat-num" style="color:var(--orange)">4</div>
-      <div class="stat-label">AI Projects</div>
+<!-- ══════════ REGISTER ══════════ -->
+<div class="reg">
+  <div><span class="reg-n">04</span><span class="lab">Systems shipped</span></div>
+  <div><span class="reg-n">21</span><span class="lab">Analysis frameworks</span></div>
+  <div><span class="reg-n">30+</span><span class="lab">Tickers covered / day</span></div>
+  <div><span class="reg-n" style="color:var(--acid); animation:flick 6s steps(1) infinite;">00</span><span class="lab">Humans in the loop</span></div>
+</div>
+
+<!-- ══════════ MARQUEE ══════════ -->
+<div class="tick">
+  <div class="tick-track">
+    <div class="tick-set">
+      <span>&#9646; agent_ticket_system / live</span><span>&#9646; agent_auto_system / 4 crews scheduled</span>
+      <span>&#9646; finance_data / daily pipeline</span><span>&#9646; investskill / open source</span>
+      <span>&#9646; every run written to sqlite</span>
     </div>
-    <div class="stat-item">
-      <div class="stat-num" style="color:var(--cyan)">21</div>
-      <div class="stat-label">Analysis Frameworks</div>
-    </div>
-    <div class="stat-item">
-      <div class="stat-num" style="color:var(--green)">Multi</div>
-      <div class="stat-label">Agent Architectures</div>
-    </div>
-    <div class="stat-item">
-      <div class="stat-num accent-grad">LLM</div>
-      <div class="stat-label">Powered at Core</div>
+    <div class="tick-set" aria-hidden="true">
+      <span>&#9646; agent_ticket_system / live</span><span>&#9646; agent_auto_system / 4 crews scheduled</span>
+      <span>&#9646; finance_data / daily pipeline</span><span>&#9646; investskill / open source</span>
+      <span>&#9646; every run written to sqlite</span>
     </div>
   </div>
 </div>
 
-<!-- ── Projects bento grid ── -->
-<section id="projects" class="section">
-  <div class="section-label" style="color:var(--purple)">
-    <i class="fas fa-cubes"></i> AI Projects
-  </div>
-  <h2 class="section-title">What I've built</h2>
-  <p class="section-sub">
-    Each project tackles a real workflow pain-point using LLMs and autonomous agents —
-    designed to be deployed, not just demoed.
+<!-- ══════════ THE LOOP ══════════ -->
+<section class="pad strip" id="loop">
+  <span class="lab lab-a">[ 001 ] &nbsp;The loop</span>
+  <h2 class="h2 reveal">Five stages,<br>no hand-offs</h2>
+  <p class="lede dim reveal" style="margin-top:20px;">
+    Every system on this page walks the same five stages. Only the source and the toolbelt
+    change. Pick one.
   </p>
 
-  <div class="bento-grid">
+  <div class="rail" id="rail" role="tablist" aria-label="Build loop stages"></div>
 
-    <!-- Card 1 — Agent Ticket System -->
-    <div class="bento-card card-ticket">
-      <div class="bento-num">01</div>
-      <div class="status-badge status-live">
-        <span class="status-dot"></span> Live
-      </div>
-      <div class="bento-icon icon-orange">
-        <i class="fas fa-ticket-alt"></i>
-      </div>
-      <div class="bento-title">Agent Ticket System</div>
-      <p class="bento-desc">
-        AI-powered task ticket manager that analyses a software project
-        (local repo or GitHub URL) and automatically generates structured,
-        actionable tickets — no database required. Think Jira, but driven by
-        an LLM that reads your code.
-      </p>
-      <div class="metrics-row">
-        <div class="metric">
-          <div class="metric-val" style="color:var(--orange)">0-DB</div>
-          <div class="metric-key">Architecture</div>
-        </div>
-        <div class="metric">
-          <div class="metric-val" style="color:var(--orange)">REST</div>
-          <div class="metric-key">API Layer</div>
-        </div>
-        <div class="metric">
-          <div class="metric-val" style="color:var(--orange)">Full</div>
-          <div class="metric-key">Test Suite</div>
-        </div>
-      </div>
-      <div class="tag-list">
-        <span class="tag tag-orange">LLM</span>
-        <span class="tag tag-purple">FastAPI</span>
-        <span class="tag tag-orange">Python</span>
-        <span class="tag tag-orange">OpenAI</span>
-      </div>
-      <div class="bento-footer">
-        <div class="card-lang">
-          <div class="lang-dot" style="background:#e34c26"></div> HTML / Python
-        </div>
-        <a href="https://github.com/yennanliu/agent_ticket_system" target="_blank" class="btn-gh">
-          <i class="fab fa-github"></i> View Repo
-        </a>
-      </div>
+  <div class="detail">
+    <div class="detail-l">
+      <span class="lab lab-a" id="dCode">Stage 01 / 05</span>
+      <h3 class="disp" id="dTitle" style="font-size:clamp(26px,3vw,34px); letter-spacing:-.03em; line-height:1;">Signal</h3>
+      <p class="dim" id="dDesc" style="font-size:14.5px; line-height:1.75;"></p>
+      <div style="flex:1;"></div>
+      <span class="lab">Touches</span>
+      <div class="kv" id="dKv"></div>
     </div>
+    <div class="blk" style="border:none;">
+      <div class="blk-head"><span id="dTerm">signal / sources</span><span>&#9646;</span></div>
+      <div class="blk-body" id="dOut"></div>
+    </div>
+  </div>
+</section>
 
-    <!-- Card 2 — Agent Office System -->
-    <div class="bento-card card-office">
-      <div class="bento-num">02</div>
-      <div class="status-badge status-live">
-        <span class="status-dot"></span> Live
-      </div>
-      <div class="bento-icon icon-blue">
-        <i class="fas fa-building"></i>
-      </div>
-      <div class="bento-title">Agent Auto System</div>
-      <p class="bento-desc">
-        Multi-agent office automation built on <strong>CrewAI</strong> and
-        <strong>GPT-4o</strong>. Handles email drafting, document summarisation,
-        and US stock analysis — all scheduled automatically and tracked in a
-        Streamlit dashboard with SQLite cost logging.
-      </p>
-      <div class="metrics-row">
-        <div class="metric">
-          <div class="metric-val" style="color:var(--cyan)">4</div>
-          <div class="metric-key">AI Crews</div>
-        </div>
-        <div class="metric">
-          <div class="metric-val" style="color:var(--cyan)">Auto</div>
-          <div class="metric-key">Scheduled</div>
-        </div>
-        <div class="metric">
-          <div class="metric-val" style="color:var(--cyan)">Cost</div>
-          <div class="metric-key">Tracked</div>
-        </div>
-      </div>
-      <div class="tag-list">
-        <span class="tag tag-blue">CrewAI</span>
-        <span class="tag tag-blue">GPT-4o</span>
-        <span class="tag tag-purple">Streamlit</span>
-        <span class="tag tag-blue">Gmail API</span>
-        <span class="tag tag-blue">SQLite</span>
-      </div>
-      <div class="bento-footer">
-        <div class="card-lang">
-          <div class="lang-dot" style="background:#3572A5"></div> Python
-        </div>
-        <a href="https://github.com/yennanliu/agent_auto_system" target="_blank" class="btn-gh">
-          <i class="fab fa-github"></i> View Repo
-        </a>
-      </div>
-    </div>
+<!-- ══════════ SYSTEMS ══════════ -->
+<section class="pad strip" id="systems">
+  <span class="lab lab-a">[ 002 ] &nbsp;The systems</span>
+  <h2 class="h2 reveal">Four things I<br>built and kept running</h2>
+  <div style="margin-top:44px;">
 
-    <!-- Card 3 — Finance Data (featured full-width) -->
-    <div class="bento-card card-finance featured">
-      <div class="bento-num">03</div>
-      <div class="status-badge status-live">
-        <span class="status-dot"></span> Live Demo
+    <article class="rec reveal">
+      <div class="rec-ix"><span class="rec-n">01</span><span class="lab" style="color:inherit;">2025</span></div>
+      <div class="rec-mid">
+        <h3 class="rec-t">Agent Ticket System</h3>
+        <p class="rec-d">Give it a local path or a GitHub URL. It clones, indexes and reads the codebase, then writes tickets an engineer can actually act on &mdash; title, description, acceptance criteria, priority. Served over REST. No database anywhere in it.</p>
+        <div class="kv"><span>llm</span><span>fastapi</span><span>uvicorn</span><span>python</span><span>pytest</span></div>
       </div>
-      <div class="featured-inner">
-        <div>
-          <div class="bento-icon icon-purple">
-            <i class="fas fa-database"></i>
-          </div>
-          <div class="bento-title">Finance Data</div>
-          <p class="bento-desc">
-            An AI-powered investment research platform that auto-generates
-            fundamental, insider-trading, and technical analysis reports for
-            30+ US equities. SEC filings (10-K / 10-Q / 13-F / 6-K) are collected
-            automatically and structured into reports via <strong>Claude AI</strong> —
-            then published daily through a GitHub Actions pipeline.
-          </p>
-          <div class="metrics-row">
-            <div class="metric">
-              <div class="metric-val" style="color:var(--purple)">30+</div>
-              <div class="metric-key">Tickers Covered</div>
-            </div>
-            <div class="metric">
-              <div class="metric-val" style="color:var(--purple)">Daily</div>
-              <div class="metric-key">Auto Pipeline</div>
-            </div>
-            <div class="metric">
-              <div class="metric-val" style="color:var(--purple)">SEC</div>
-              <div class="metric-key">Filings Indexed</div>
-            </div>
-          </div>
-          <div class="tag-list">
-            <span class="tag tag-purple">Claude AI</span>
-            <span class="tag tag-orange">Python</span>
-            <span class="tag tag-blue">yfinance</span>
-            <span class="tag tag-blue">GitHub Actions</span>
-            <span class="tag tag-purple">MkDocs</span>
-          </div>
-          <div class="bento-footer" style="border-top: none; padding-top: 0; gap: 10px; flex-wrap: wrap; justify-content: flex-start;">
-            <a href="https://yennj12.js.org/finance_data/" target="_blank" class="btn-live">
-              <i class="fas fa-external-link-alt"></i> Live Demo
-            </a>
-            <a href="https://github.com/yennanliu/finance_data" target="_blank" class="btn-gh">
-              <i class="fab fa-github"></i> View Repo
-            </a>
-          </div>
-        </div>
-        <div>
-          <div style="font-size: 12px; font-weight: 700; color: var(--text-muted); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 16px;">What It Generates</div>
-          <div class="framework-chips">
-            <div class="fw-chip fw-blue"><i class="fas fa-chart-line"></i> Fundamental Reports</div>
-            <div class="fw-chip fw-blue"><i class="fas fa-user-secret"></i> Insider Trading</div>
-            <div class="fw-chip fw-blue"><i class="fas fa-wave-square"></i> Technical Analysis</div>
-            <div class="fw-chip fw-blue"><i class="fas fa-file-contract"></i> SEC Filings</div>
-            <div class="fw-chip fw-blue"><i class="fas fa-newspaper"></i> Market News</div>
-            <div class="fw-chip fw-blue"><i class="fas fa-book-open"></i> NotebookLM</div>
-          </div>
-        </div>
+      <div class="rec-r">
+        <span class="rec-kv"><b>Stack</b><span class="dim">FastAPI / Python</span></span>
+        <span class="rec-kv"><b>Store</b><span class="dim">none &mdash; 0-DB</span></span>
+        <span class="rec-kv"><b>Tests</b><span class="dim">pytest in CI</span></span>
+        <span class="rec-kv"><b>Status</b><span class="live">&#9646; live</span></span>
+        <span class="rec-act"><a href="https://github.com/yennanliu/agent_ticket_system" target="_blank" rel="noopener">View repo &nearr;</a></span>
       </div>
-    </div>
+    </article>
 
-    <!-- Card 4 — InvestSkill (featured full-width) -->
-    <div class="bento-card card-invest featured">
-      <div class="bento-num">04</div>
-      <div class="status-badge status-open">
-        <span class="status-dot"></span> Open Source
+    <article class="rec reveal">
+      <div class="rec-ix"><span class="rec-n">02</span><span class="lab" style="color:inherit;">2025</span></div>
+      <div class="rec-mid">
+        <h3 class="rec-t">Agent Auto System</h3>
+        <p class="rec-d">Multi-agent office automation on CrewAI and GPT-4o. Four crews draft email, summarise documents and run US equity analysis on a schedule. Every run is costed into SQLite and surfaced in a Streamlit dashboard, so the bill is never a surprise.</p>
+        <div class="kv"><span>crewai</span><span>gpt-4o</span><span>apscheduler</span><span>streamlit</span><span>sqlite</span></div>
       </div>
-      <div class="featured-inner">
-        <div>
-          <div class="bento-icon icon-green">
-            <i class="fas fa-chart-line"></i>
-          </div>
-          <div class="bento-title">InvestSkill</div>
-          <p class="bento-desc">
-            Professional investment analysis frameworks for US stocks — works on
-            <em>every</em> AI platform. 21 structured prompt skills turn any LLM
-            into an institutional-quality analyst. No runtime; just prompts that
-            plug into Claude Code, Cursor, Gemini CLI, or ChatGPT.
-          </p>
-          <div class="metrics-row">
-            <div class="metric">
-              <div class="metric-val" style="color:var(--green)">21</div>
-              <div class="metric-key">Frameworks</div>
-            </div>
-            <div class="metric">
-              <div class="metric-val" style="color:var(--green)">4+</div>
-              <div class="metric-key">Platforms</div>
-            </div>
-            <div class="metric">
-              <div class="metric-val" style="color:var(--green)">0</div>
-              <div class="metric-key">Install Needed</div>
-            </div>
-          </div>
-          <div class="tag-list">
-            <span class="tag tag-green">Claude Code</span>
-            <span class="tag tag-green">Gemini CLI</span>
-            <span class="tag tag-purple">Cursor</span>
-            <span class="tag tag-orange">Finance</span>
-          </div>
-          <div class="bento-footer" style="border-top: none; padding-top: 0;">
-            <div class="card-lang">
-              <div class="lang-dot" style="background:#f1e05a"></div> JavaScript
-            </div>
-            <div class="footer-actions">
-              <a href="https://yennj12.js.org/InvestSkill/index.html" target="_blank" class="btn-demo">
-                <i class="fas fa-external-link-alt"></i> Live Demo
-              </a>
-              <a href="https://github.com/yennanliu/InvestSkill" target="_blank" class="btn-gh">
-                <i class="fab fa-github"></i> View Repo
-              </a>
-            </div>
-          </div>
-        </div>
-        <div>
-          <div style="font-size: 12px; font-weight: 700; color: var(--text-muted); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 16px;">Included Frameworks</div>
-          <div class="framework-chips">
-            <div class="fw-chip"><i class="fas fa-search-dollar"></i> stock-eval</div>
-            <div class="fw-chip"><i class="fas fa-industry"></i> sector-analysis</div>
-            <div class="fw-chip"><i class="fas fa-user-tie"></i> insider-trading</div>
-            <div class="fw-chip"><i class="fas fa-microphone-alt"></i> earnings-call</div>
-            <div class="fw-chip"><i class="fas fa-university"></i> institutional</div>
-            <div class="fw-chip"><i class="fas fa-briefcase"></i> portfolio-review</div>
-            <div class="fw-chip"><i class="fas fa-chart-bar"></i> dcf-valuation</div>
-            <div class="fw-chip"><i class="fas fa-fire"></i> short-interest</div>
-            <div class="fw-chip"><i class="fas fa-star"></i> + 13 more</div>
-          </div>
-        </div>
+      <div class="rec-r">
+        <span class="rec-kv"><b>Stack</b><span class="dim">CrewAI / GPT-4o</span></span>
+        <span class="rec-kv"><b>Store</b><span class="dim">SQLite runs.db</span></span>
+        <span class="rec-kv"><b>Crews</b><span class="dim">4, independent</span></span>
+        <span class="rec-kv"><b>Status</b><span class="live">&#9646; live</span></span>
+        <span class="rec-act"><a href="https://github.com/yennanliu/agent_auto_system" target="_blank" rel="noopener">View repo &nearr;</a></span>
       </div>
-    </div>
+    </article>
+
+    <article class="rec reveal">
+      <div class="rec-ix"><span class="rec-n">03</span><span class="lab" style="color:inherit;">2026</span></div>
+      <div class="rec-mid">
+        <h3 class="rec-t">Finance Data</h3>
+        <p class="rec-d">Collects SEC filings &mdash; 10-K, 10-Q, 13-F, 6-K &mdash; for 30+ US equities, structures them into fundamental, insider and technical reports with Claude, then rebuilds and publishes the whole site daily from GitHub Actions. Nobody presses build.</p>
+        <div class="kv"><span>claude</span><span>python</span><span>yfinance</span><span>github actions</span><span>mkdocs</span></div>
+      </div>
+      <div class="rec-r">
+        <span class="rec-kv"><b>Stack</b><span class="dim">Claude / Python</span></span>
+        <span class="rec-kv"><b>Publish</b><span class="dim">MkDocs + Actions</span></span>
+        <span class="rec-kv"><b>Cadence</b><span class="dim">daily</span></span>
+        <span class="rec-kv"><b>Status</b><span class="live">&#9646; live</span></span>
+        <span class="rec-act">
+          <a href="https://yennj12.js.org/finance_data/" target="_blank" rel="noopener">Live demo &nearr;</a>
+          <a href="https://github.com/yennanliu/finance_data" target="_blank" rel="noopener">Repo &nearr;</a>
+        </span>
+      </div>
+    </article>
+
+    <article class="rec reveal">
+      <div class="rec-ix"><span class="rec-n">04</span><span class="lab" style="color:inherit;">2026</span></div>
+      <div class="rec-mid">
+        <h3 class="rec-t">InvestSkill</h3>
+        <p class="rec-d">21 structured prompt frameworks that turn any LLM into an equity analyst &mdash; Piotroski scoring, DCF, 13-F tracking, earnings-call sentiment. Slash commands inside Claude Code, plain text everywhere else. Nothing to install, nothing to run.</p>
+        <div class="kv"><span>claude code</span><span>cursor</span><span>gemini cli</span><span>chatgpt</span><span>prompts</span></div>
+      </div>
+      <div class="rec-r">
+        <span class="rec-kv"><b>Runs on</b><span class="dim">4+ platforms</span></span>
+        <span class="rec-kv"><b>Install</b><span class="dim">none</span></span>
+        <span class="rec-kv"><b>Count</b><span class="dim">21 frameworks</span></span>
+        <span class="rec-kv"><b>Status</b><span class="live">&#9646; open source</span></span>
+        <span class="rec-act">
+          <a href="https://yennj12.js.org/InvestSkill/index.html" target="_blank" rel="noopener">Live demo &nearr;</a>
+          <a href="https://github.com/yennanliu/InvestSkill" target="_blank" rel="noopener">Repo &nearr;</a>
+        </span>
+      </div>
+    </article>
 
   </div>
 </section>
 
-<!-- ── Deep-dive: Agent Office System ── -->
-<div class="full-band">
-  <div class="band-inner">
-    <div class="section-label" style="color:var(--cyan)">
-      <i class="fas fa-sitemap"></i> Architecture Deep-Dive
-    </div>
-    <h2 class="section-title">Agent Auto System — how it works</h2>
-    <p class="section-sub">
-      Four specialised CrewAI crews run independently via APScheduler.
-      Every run is persisted to SQLite so you can audit token usage and cost.
-    </p>
-
-    <!-- Flow diagram -->
-    <div class="flow-diagram">
-      <div class="flow-node" style="border-color:rgba(0,212,255,.3); color:var(--cyan)">
-        <i class="fas fa-terminal"></i>
-        <span>main.py</span>
-      </div>
-      <div class="flow-arrow">→</div>
-      <div class="flow-node" style="border-color:rgba(0,212,255,.3)">
-        <i class="fas fa-clock"></i>
-        <span>APScheduler</span>
-      </div>
-      <div class="flow-arrow">→</div>
-      <div class="flow-node" style="border-color:rgba(155,94,245,.3); color:var(--purple)">
-        <i class="fas fa-robot"></i>
-        <span>CrewAI Crews</span>
-      </div>
-      <div class="flow-arrow">→</div>
-      <div class="flow-node" style="border-color:rgba(0,229,160,.3); color:var(--cyan)">
-        <i class="fas fa-brain"></i>
-        <span>GPT-4o</span>
-      </div>
-      <div class="flow-arrow">→</div>
-      <div class="flow-node" style="border-color:rgba(0,229,160,.3); color:var(--green)">
-        <i class="fas fa-database"></i>
-        <span>SQLite Ledger</span>
-      </div>
-    </div>
-
-    <div class="step-flow blue">
-      <div class="step-item">
-        <div class="step-num">01</div>
-        <h4>EmailCrew</h4>
-        <p>Drafts email body from natural-language intent, then sends via Gmail SMTP using GmailSendTool.</p>
-      </div>
-      <div class="step-item">
-        <div class="step-num">02</div>
-        <h4>DocSummaryCrew</h4>
-        <p>Reads PDF / DOCX / TXT → produces a structured summary → emails it automatically.</p>
-      </div>
-      <div class="step-item">
-        <div class="step-num">03</div>
-        <h4>StockSummaryCrew</h4>
-        <p>Pulls live yfinance data, runs GPT-4o analysis, delivers a market summary to your inbox.</p>
-      </div>
-      <div class="step-item">
-        <div class="step-num">04</div>
-        <h4>SQLite Cost Ledger</h4>
-        <p>Every crew run logs token count, cost, status, and timing — visible in the Streamlit dashboard.</p>
-      </div>
-    </div>
-
-    <div class="arch-box">
-      <div class="arch-box-header">
-        <div class="arch-box-dot" style="background:#ff5f57"></div>
-        <div class="arch-box-dot" style="background:#febc2e"></div>
-        <div class="arch-box-dot" style="background:#28c840"></div>
-        <span class="arch-box-title">agent_auto_system / architecture</span>
-      </div>
-<code class="arch-typed">main.py (CLI)
-  ├── email      → EmailCrew      → Gmail Agent       → GmailSendTool
-  ├── summarize  → DocSummaryCrew → Document Analyst   → DocReaderTool → GmailSendTool
-  ├── stock      → StockCrew      → US Stock Analyst   → yfinance → GmailSendTool
-  ├── scheduler  → APScheduler   (reads schedule.yaml)
-  └── ui         → Streamlit Dashboard
-
-All agents → LLM: OpenAI GPT-4o → runs.db (SQLite)</code>
-    </div>
-  </div>
-</div>
-
-<!-- ── Deep-dive: InvestSkill ── -->
-<div class="full-band" style="background:var(--bg);">
-  <div class="band-inner">
-    <div class="section-label" style="color:var(--green)">
-      <i class="fas fa-brain"></i> 21 Analysis Frameworks
-    </div>
-    <h2 class="section-title">InvestSkill — what's inside</h2>
-    <p class="section-sub">
-      Every framework is a battle-tested prompt that works as a slash command in Claude Code
-      or as a plain-text input on any LLM. No installation for most platforms.
-    </p>
-
-    <div class="step-flow green">
-      <div class="step-item">
-        <div class="step-num">01</div>
-        <h4>stock-eval</h4>
-        <p>Piotroski score, ROIC, moat rating, FCF yield, buy / hold / sell signal in one shot.</p>
-      </div>
-      <div class="step-item">
-        <div class="step-num">02</div>
-        <h4>sector-analysis</h4>
-        <p>Identify rotation opportunities and relative strength across S&amp;P 500 sectors.</p>
-      </div>
-      <div class="step-item">
-        <div class="step-num">03</div>
-        <h4>insider-trading</h4>
-        <p>Track SEC Form 4 filings — spot clusters of insider buying before they move.</p>
-      </div>
-      <div class="step-item">
-        <div class="step-num">04</div>
-        <h4>earnings-call-analysis</h4>
-        <p>Sentiment, key themes, and management tone extracted from earnings transcripts.</p>
-      </div>
-      <div class="step-item">
-        <div class="step-num">05</div>
-        <h4>institutional-ownership</h4>
-        <p>Track 13F filing changes — follow smart-money moves across hedge funds.</p>
-      </div>
-      <div class="step-item">
-        <div class="step-num">06</div>
-        <h4>portfolio-review</h4>
-        <p>Evaluate allocation, risk-adjusted returns, and concentration for any portfolio.</p>
-      </div>
-    </div>
-
-    <div style="margin-top:36px;">
-      <div class="arch-box">
-        <div class="arch-box-header">
-          <div class="arch-box-dot" style="background:#ff5f57"></div>
-          <div class="arch-box-dot" style="background:#febc2e"></div>
-          <div class="arch-box-dot" style="background:#28c840"></div>
-          <span class="arch-box-title">InvestSkill / quick-start</span>
-        </div>
-<code class="arch-typed"># Claude Code — recommended, full slash-command support
-claude
-/plugin marketplace add yennanliu/InvestSkill
-/plugin install us-stock-analysis
-/us-stock-analysis:stock-eval AAPL
-
-# Cursor / Gemini CLI / ChatGPT — zero install
-cat prompts/stock-eval.md | pbcopy
-# → paste into any LLM</code>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- ── Agent Ticket System deep-dive ── -->
-<div class="full-band">
-  <div class="band-inner">
-    <div class="section-label" style="color:var(--orange)">
-      <i class="fas fa-ticket-alt"></i> Feature Spotlight
-    </div>
-    <h2 class="section-title">Agent Ticket System — how it works</h2>
-    <p class="section-sub">
-      Point it at a repo, get structured tickets. The LLM reads your code,
-      infers missing context, and writes tickets an engineer would actually act on.
-    </p>
-
-    <!-- Flow diagram -->
-    <div class="flow-diagram">
-      <div class="flow-node" style="border-color:rgba(255,107,53,.3); color:var(--orange)">
-        <i class="fas fa-code-branch"></i>
-        <span>Repo / URL</span>
-      </div>
-      <div class="flow-arrow">→</div>
-      <div class="flow-node" style="border-color:rgba(255,107,53,.3)">
-        <i class="fas fa-search"></i>
-        <span>Indexer</span>
-      </div>
-      <div class="flow-arrow">→</div>
-      <div class="flow-node" style="border-color:rgba(155,94,245,.3); color:var(--purple)">
-        <i class="fas fa-brain"></i>
-        <span>LLM Analysis</span>
-      </div>
-      <div class="flow-arrow">→</div>
-      <div class="flow-node" style="border-color:rgba(255,107,53,.3); color:var(--orange)">
-        <i class="fas fa-ticket-alt"></i>
-        <span>Structured Tickets</span>
-      </div>
-      <div class="flow-arrow">→</div>
-      <div class="flow-node" style="border-color:rgba(0,212,255,.3); color:var(--cyan)">
-        <i class="fas fa-plug"></i>
-        <span>REST API</span>
-      </div>
-    </div>
-
-    <div class="step-flow orange">
-      <div class="step-item">
-        <div class="step-num">01</div>
-        <h4>Repo Ingestion</h4>
-        <p>Feed a local path or a GitHub URL — the agent clones, indexes, and reads the codebase automatically.</p>
-      </div>
-      <div class="step-item">
-        <div class="step-num">02</div>
-        <h4>Auto-Generation</h4>
-        <p>LLM produces structured tickets with title, description, acceptance criteria, and priority.</p>
-      </div>
-      <div class="step-item">
-        <div class="step-num">03</div>
-        <h4>FastAPI Backend</h4>
-        <p>Clean REST API served by uvicorn — integrate with Jira, Trello, or any issue tracker via webhook.</p>
-      </div>
-      <div class="step-item">
-        <div class="step-num">04</div>
-        <h4>Full Test Suite</h4>
-        <p>pytest suite covering API endpoints and storage layer — designed to run in CI from day one.</p>
-      </div>
-    </div>
-
-    <div style="margin-top:36px;">
-      <div class="arch-box">
-        <div class="arch-box-header">
-          <div class="arch-box-dot" style="background:#ff5f57"></div>
-          <div class="arch-box-dot" style="background:#febc2e"></div>
-          <div class="arch-box-dot" style="background:#28c840"></div>
-          <span class="arch-box-title">agent_ticket_system / quick-start</span>
-        </div>
-<code class="arch-typed"># Quick Start
-uv sync --extra dev
-cp .env.example .env   # add OPENAI_API_KEY
-uv run uvicorn main:app --reload
-open http://localhost:8000
-
-# Tests
-uv run pytest tests/ -v</code>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- ── CTA ── -->
-<section class="cta-section">
-  <div class="section-label" style="color:var(--purple);justify-content:center;">
-    <i class="fas fa-handshake"></i> Let's build together
-  </div>
-  <h2>Interested in AI-powered systems?</h2>
-  <p>
-    I'm always open to collaborating on ambitious agent projects.<br>
-    Reach out or explore more of my work below.
+<!-- ══════════ RUN GRAPH ══════════ -->
+<section class="pad strip">
+  <span class="lab lab-a">[ 003 ] &nbsp;Run graph</span>
+  <h2 class="h2 reveal">agent_auto_system,<br>end to end</h2>
+  <p class="lede dim reveal" style="margin-top:20px;">
+    One entry point, four crews that share nothing, one ledger. That is the whole trick:
+    a failed crew is a failed crew, not a failed system.
   </p>
-  <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;position:relative;">
-    <a href="https://yennanliu.github.io/contact.html" class="btn-primary-brand">
-      <i class="fas fa-paper-plane"></i> Get in Touch
-    </a>
-    <a href="https://yennanliu.github.io/portfolios.html" class="btn-secondary-brand">
-      <i class="fas fa-th-large"></i> Full Portfolio
-    </a>
-    <a href="https://github.com/yennanliu" target="_blank" class="btn-secondary-brand">
-      <i class="fab fa-github"></i> GitHub
-    </a>
+
+  <div class="blk reveal" style="margin-top:38px;">
+    <div class="blk-head"><span>agent_auto_system / architecture</span><span>ASCII</span></div>
+    <div class="ascii-wrap">
+<pre class="ascii">                      ┌────────────────────┐
+                      │      main.py       │
+                      │   cli entrypoint   │
+                      └──────────┬─────────┘
+                                 │
+                      ┌──────────▼─────────┐
+                      │    APScheduler     │
+                      │reads schedule.yaml │
+                      └──────────┬─────────┘
+                                 │
+       ┌────────────────┬────────┴───────┬────────────────┐
+       ▼                ▼                ▼                ▼
+┌─────────────┐  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐
+│ TicketCrew  │  │  EmailCrew  │  │ DocSummary  │  │  StockCrew  │
+│ repo index  │  │ gmail smtp  │  │ pdf / docx  │  │  yfinance   │
+└──────┬──────┘  └──────┬──────┘  └──────┬──────┘  └──────┬──────┘
+       │                │                │                │
+       └────────────────┴────────┬───────┴────────────────┘
+                                 │
+                      ┌──────────▼─────────┐
+                      │   OpenAI GPT-4o    │
+                      └──────────┬─────────┘
+                                 │
+                    ┌────────────▼───────────┐
+                    │   runs.db  (SQLite)    │
+                    │ tokens · cost · status │
+                    └────────────────────────┘</pre>
+    </div>
   </div>
 </section>
 
-<!-- ── Footer ── -->
-<footer class="site-footer">
-  <p>
-    &copy; 2026 <a href="https://yennanliu.github.io/">Yen Nan Liu</a> &mdash;
-    Built with curiosity &amp; caffeine &nbsp;·&nbsp;
-    <a href="https://github.com/yennanliu" target="_blank">GitHub</a> &nbsp;·&nbsp;
-    <a href="https://yennanliu.github.io/contact.html">Contact</a>
+<!-- ══════════ CTA ══════════ -->
+<section class="cta pad">
+  <span class="lab" style="color:var(--ink); opacity:.65;">[ 004 ] &nbsp;Open to build</span>
+  <h2 class="disp cta-h">Got something that<br>has to run without<br>anyone watching?</h2>
+  <p style="font-size:17px; line-height:1.7; margin-top:24px; max-width:600px;">
+    That is the part I enjoy &mdash; the agent being right when nobody is checking.
+    Every repo above is open. Mail me if one of them is useful to you.
   </p>
+  <div class="btn-row" style="margin-top:34px;">
+    <a href="https://yennanliu.github.io/contact.html" class="btn" style="background:var(--ink); color:var(--acid);">Get in touch</a>
+    <a href="https://yennanliu.github.io/portfolios.html" class="btn">Full portfolio</a>
+    <a href="https://github.com/yennanliu" target="_blank" rel="noopener" class="btn">GitHub &nearr;</a>
+  </div>
+</section>
+
+<footer class="foot">
+  <span>&copy; 2026 YEN NAN LIU &nbsp;//&nbsp; BUILT WITH CURIOSITY &amp; CAFFEINE</span>
+  <span style="display:flex; gap:22px; flex-wrap:wrap;">
+    <a href="https://github.com/yennanliu" target="_blank" rel="noopener">GITHUB</a>
+    <a href="https://yennj12.js.org/yennj12_blog_V4/">BLOG</a>
+    <a href="https://yennanliu.github.io/contact.html">CONTACT</a>
+  </span>
 </footer>
 
-<!-- Bootstrap JS -->
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
-
 <script>
-  // ── Theme management (slider toggle) ──
-  const html = document.documentElement;
+(function () {
+  'use strict';
 
-  function applyTheme(theme) {
-    html.setAttribute('data-theme', theme);
-    localStorage.setItem('ai_builder_theme', theme);
-    const icon = document.getElementById('themeIcon');
-    const checkbox = document.getElementById('theme-checkbox-ai');
-    if (theme === 'dark') {
-      icon.innerHTML = '<i class="fas fa-moon"></i>';
-      checkbox.checked = false;
-    } else {
-      icon.innerHTML = '<i class="fas fa-sun"></i>';
-      checkbox.checked = true;
-    }
+  /* ── The five stages of the loop ── */
+  var STAGES = [
+    { code: '01', title: 'Signal', term: 'signal / sources',
+      desc: 'A repo URL, an inbox, a filing, a ticker. Every system starts from a source it can poll by itself. Nothing here waits for someone to paste something into a box.',
+      blurb: 'Poll the source. No operator.',
+      kv: ['github', 'gmail api', 'sec edgar', 'yfinance'],
+      lines: [
+        ['$ ingest --repo yennanliu/agent_ticket_system', 'ok'],
+        ['  cloned · indexed · ready', 'dim'],
+        ['$ cat schedule.yaml', 'ok'],
+        ['  stock.summary    0 8 * * 1-5', ''],
+        ['  doc.digest       0 18 * * 5', ''],
+        ['$ edgar watch 10-K 10-Q 13-F 6-K', 'ok']
+      ] },
+    { code: '02', title: 'Plan', term: 'plan / decomposition',
+      desc: 'The model reads the source and cuts it into work: tickets with acceptance criteria, a report outline, an analysis plan. The one stage that actually needs judgement.',
+      blurb: 'Cut it into real work items.',
+      kv: ['gpt-4o', 'claude', 'prompt frameworks'],
+      lines: [
+        ['$ plan --from repo', 'ok'],
+        ['  emit: title · description · acceptance · priority', 'dim'],
+        ['  P0  auth: rotate refresh tokens on reuse', ''],
+        ['  P1  api: paginate GET /tickets', ''],
+        ['  P2  test: cover the storage layer', '']
+      ] },
+    { code: '03', title: 'Crew', term: 'crew / orchestration',
+      desc: 'Four CrewAI crews under one scheduler. Each owns one job and one toolbelt, and no crew reaches into another. A crew that fails, fails alone.',
+      blurb: 'One job, one toolbelt, each.',
+      kv: ['crewai', 'apscheduler', 'python'],
+      lines: [
+        ['$ crew ls', 'ok'],
+        ['  EmailCrew          RUNNING', ''],
+        ['  DocSummaryCrew     QUEUED', ''],
+        ['  StockSummaryCrew   RUNNING', ''],
+        ['  TicketCrew         IDLE', 'dim']
+      ] },
+    { code: '04', title: 'Tool', term: 'tool / side effects',
+      desc: 'An agent only matters when it touches something real: send the mail, pull the prices, write the ticket, publish the site. Every call here is a side effect, not a suggestion.',
+      blurb: 'Side effects, not suggestions.',
+      kv: ['gmail smtp', 'yfinance', 'uvicorn', 'mkdocs'],
+      lines: [
+        ['$ tools --trace', 'ok'],
+        ['  GmailSendTool    -> message sent', ''],
+        ['  DocReaderTool    -> summary.md', ''],
+        ['  yfinance         -> ohlcv pulled', ''],
+        ['  uvicorn          -> POST /tickets 201', '']
+      ] },
+    { code: '05', title: 'Ledger', term: 'ledger / runs.db',
+      desc: 'Every run is written down before anyone reads the output: tokens, cost, latency, status. A system you can audit beats a system you have to trust.',
+      blurb: 'Cost and status, written down.',
+      kv: ['sqlite', 'streamlit', 'github actions'],
+      lines: [
+        ['$ sqlite3 runs.db .schema', 'ok'],
+        ['  run_id   crew   model   tokens_in   tokens_out', 'dim'],
+        ['  cost_usd status duration_ms created_at', 'dim'],
+        ['$ streamlit run dashboard.py', 'ok']
+      ] }
+  ];
+
+  var rail   = document.getElementById('rail');
+  var dCode  = document.getElementById('dCode');
+  var dTitle = document.getElementById('dTitle');
+  var dDesc  = document.getElementById('dDesc');
+  var dKv    = document.getElementById('dKv');
+  var dTerm  = document.getElementById('dTerm');
+  var dOut   = document.getElementById('dOut');
+  var active = 0;
+
+  function el(tag, cls, text) {
+    var n = document.createElement(tag);
+    if (cls) n.className = cls;
+    if (text != null) n.textContent = text;
+    return n;
   }
 
-  document.getElementById('theme-checkbox-ai').addEventListener('change', function() {
-    applyTheme(this.checked ? 'light' : 'dark');
-  });
-
-  // Init theme from storage or default dark
-  const saved = localStorage.getItem('ai_builder_theme') || 'dark';
-  applyTheme(saved);
-
-  // ── Typewriter effect for arch-boxes ──
-  (function () {
-    const els = document.querySelectorAll('.arch-typed');
-    if (!els.length) return;
-
-    els.forEach(el => {
-      el.dataset.original = el.textContent;
-      el.textContent = '';
-    });
-
-    const obs = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (!entry.isIntersecting || entry.target.dataset.typed) return;
-        entry.target.dataset.typed = '1';
-        obs.unobserve(entry.target);
-        typeOut(entry.target);
-      });
-    }, { threshold: 0.25 });
-
-    els.forEach(el => obs.observe(el));
-
-    function typeOut(el) {
-      const text = el.dataset.original;
-      let i = 0;
-      const cursor = document.createElement('span');
-      cursor.className = 'typing-cursor';
-      el.appendChild(cursor);
-      const speed = 12;
-      (function tick() {
-        if (i < text.length) {
-          cursor.insertAdjacentText('beforebegin', text[i++]);
-          setTimeout(tick, speed);
-        } else {
-          cursor.classList.add('blink');
-        }
-      })();
+  /* Build the rail */
+  STAGES.forEach(function (s, i) {
+    var b = el('button', 'stage');
+    b.type = 'button';
+    b.setAttribute('role', 'tab');
+    b.appendChild(el('span', 'stage-ix', '[' + s.code + ']'));
+    var txt = el('span', 'stage-txt');
+    txt.appendChild(el('span', 'stage-t', s.title));
+    txt.appendChild(el('span', 'stage-c', s.blurb));
+    b.appendChild(txt);
+    if (i < STAGES.length - 1) {
+      var ar = el('span', 'stage-ar', '▶');
+      ar.style.animationDelay = (i * 0.4) + 's';
+      ar.setAttribute('aria-hidden', 'true');
+      b.appendChild(ar);
     }
-  })();
-
-  // Smooth scroll
-  document.querySelectorAll('a[href^="#"]').forEach(a => {
-    a.addEventListener('click', e => {
-      const target = document.querySelector(a.getAttribute('href'));
-      if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
-    });
+    b.addEventListener('click', function () { select(i); });
+    rail.appendChild(b);
   });
+
+  var buttons = rail.querySelectorAll('.stage');
+
+  function select(i) {
+    active = i;
+    var s = STAGES[i];
+
+    for (var b = 0; b < buttons.length; b++) {
+      buttons[b].setAttribute('aria-selected', b === i ? 'true' : 'false');
+    }
+
+    dCode.textContent  = 'Stage ' + s.code + ' / 05';
+    dTitle.textContent = s.title;
+    dDesc.textContent  = s.desc;
+    dTerm.textContent  = s.term;
+
+    dKv.textContent = '';
+    s.kv.forEach(function (k) { dKv.appendChild(el('span', null, k)); });
+
+    /* rebuilding the nodes replays the boot animation on every switch */
+    dOut.textContent = '';
+    s.lines.forEach(function (l, k) {
+      var line = el('span', 'out' + (l[1] ? ' ' + l[1] : ''), l[0]);
+      line.style.animationDelay = (k * 0.12).toFixed(2) + 's';
+      dOut.appendChild(line);
+    });
+    var tail = el('span', 'out');
+    tail.style.animationDelay = (s.lines.length * 0.12).toFixed(2) + 's';
+    tail.appendChild(el('span', 'cursor'));
+    dOut.appendChild(tail);
+  }
+
+  /* Arrow keys move between stages, as a tablist should */
+  rail.addEventListener('keydown', function (e) {
+    if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft' &&
+        e.key !== 'ArrowDown'  && e.key !== 'ArrowUp') return;
+    e.preventDefault();
+    var step = (e.key === 'ArrowRight' || e.key === 'ArrowDown') ? 1 : -1;
+    var next = (active + step + STAGES.length) % STAGES.length;
+    select(next);
+    buttons[next].focus();
+  });
+
+  select(0);
+
+  /* ── Paper / ink mode ── */
+  var root     = document.documentElement;
+  var modeBtn  = document.getElementById('modeBtn');
+  var modeText = document.getElementById('modeText');
+
+  function applyMode(mode) {
+    root.setAttribute('data-mode', mode);
+    modeText.textContent = (mode === 'paper') ? 'Ink' : 'Paper';
+    try { localStorage.setItem('aib_mode', mode); } catch (err) { /* private mode */ }
+  }
+
+  var saved = 'ink';
+  try { saved = localStorage.getItem('aib_mode') || 'ink'; } catch (err) { /* private mode */ }
+  applyMode(saved);
+
+  modeBtn.addEventListener('click', function () {
+    applyMode(root.getAttribute('data-mode') === 'paper' ? 'ink' : 'paper');
+  });
+
+  /* ── Mobile nav ── */
+  var menuBtn = document.getElementById('menuBtn');
+  var navLinks = document.getElementById('navLinks');
+  menuBtn.addEventListener('click', function () {
+    var open = navLinks.classList.toggle('open');
+    menuBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+
+  /* ── Reveal on scroll ── */
+  var targets = document.querySelectorAll('.reveal');
+  if (!('IntersectionObserver' in window)) {
+    for (var t = 0; t < targets.length; t++) { targets[t].classList.add('in'); }
+  } else {
+    var obs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('in');
+        obs.unobserve(entry.target);
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+    for (var u = 0; u < targets.length; u++) { obs.observe(targets[u]); }
+  }
+})();
 </script>
 
 </body>
