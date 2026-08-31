@@ -20,9 +20,13 @@
       --ink:#0b0b0b; --paper:#f2f2ec;
       --bg:#0b0b0b; --fg:#f2f2ec; --dim:#7d7d75; --line:#2b2b28;
       --acid:#d4ff00;
+      --acid-ink:#d4ff00;              /* acid used as TEXT on the page ground */
+      --wire:rgba(212,255,0,.22);      /* idle diagram wires */
     }
     :root[data-mode="paper"] {
       --bg:#f2f2ec; --fg:#0b0b0b; --dim:#61615a; --line:#cfcfc6;
+      --acid-ink:#5c7000;
+      --wire:rgba(92,112,0,.42);
     }
 
     *, *::before, *::after { box-sizing:border-box; margin:0; padding:0; }
@@ -66,7 +70,7 @@
     .strip { border-bottom:2px solid var(--fg); }
     .pad   { padding:60px 48px; }
     .lab   { font-size:11px; font-weight:600; letter-spacing:.2em; text-transform:uppercase; color:var(--dim); }
-    .lab-a { color:var(--acid); }
+    .lab-a { color:var(--acid-ink); }
     .dim   { color:var(--dim); }
 
     /* ── Top bar ── */
@@ -109,7 +113,7 @@
       font-size:10.5px; font-weight:700; letter-spacing:.18em; text-transform:uppercase; }
     .blk-body { padding:18px 16px; font-size:13px; line-height:1.95; overflow-x:auto; }
     .out { display:block; white-space:pre; animation:boot .01s steps(1) both; }
-    .ok { color:var(--acid); }
+    .ok { color:var(--acid-ink); }
     .scan { position:absolute; left:0; right:0; top:0; height:2px; background:var(--acid); opacity:.55;
       animation:sweep 4.5s linear infinite; pointer-events:none; }
 
@@ -169,7 +173,7 @@
       font-size:11.5px; font-weight:700; letter-spacing:.12em; text-transform:uppercase; }
     .rec-act a:last-child { border-right:none; }
     .rec-act a:hover { background:var(--acid); color:var(--ink); }
-    .live { color:var(--acid); }
+    .live { color:var(--acid-ink); }
 
     /* ── ASCII ── */
     .ascii { font-family:'IBM Plex Mono',monospace; font-size:13px; line-height:1.5; white-space:pre; overflow-x:auto; }
@@ -188,7 +192,86 @@
     .h2 { font-size:clamp(30px,4vw,52px); line-height:1; letter-spacing:-.04em; margin-top:16px;
       font-family:'Space Mono',monospace; font-weight:700; text-transform:uppercase; }
 
+
+    /* ══ Fan-out graph ══ */
+    .fan { position:relative; width:100%; max-width:1100px; aspect-ratio:1100/420; margin-top:38px; }
+    .fan-wire { position:absolute; inset:0; width:100%; height:100%; overflow:visible; }
+    .fan-wire .w { stroke:var(--wire); stroke-width:1.5; fill:none; }
+    .fan-wire .c { stroke:var(--acid); stroke-width:2.4; fill:none; stroke-linecap:round;
+      stroke-dasharray:14 300; animation:fanrun 2.4s linear infinite;
+      filter:drop-shadow(0 0 4px var(--acid)); }
+    @keyframes fanrun { from { stroke-dashoffset:314; } to { stroke-dashoffset:0; } }
+
+    .fan-nodes { position:absolute; inset:0; }
+    .fan-hub { position:absolute; left:10%; top:50%; transform:translate(-50%,-50%);
+      display:flex; flex-direction:column; align-items:center; gap:11px; text-align:center; }
+    .fan-sq { display:flex; align-items:center; justify-content:center; width:68px; height:68px;
+      border:2px solid var(--acid-ink); background:var(--bg); color:var(--acid-ink);
+      font-family:'Space Mono',monospace; font-weight:700; font-size:13px; letter-spacing:.06em;
+      animation:hubpulse 3.2s ease-in-out infinite; }
+    @keyframes hubpulse {
+      0%,100% { box-shadow:0 0 0 5px rgba(212,255,0,.06), 0 0 18px rgba(212,255,0,.18); }
+      50%     { box-shadow:0 0 0 10px rgba(212,255,0,.11), 0 0 32px rgba(212,255,0,.34); } }
+
+    .fan-node { position:absolute; left:63.6%; transform:translateY(-50%); display:flex; align-items:center; gap:14px; }
+    .fan-dot { width:34px; height:34px; flex-shrink:0; border:2px solid var(--fg); background:var(--bg);
+      display:flex; align-items:center; justify-content:center; color:var(--acid-ink); }
+    .fan-node:hover .fan-dot { border-color:var(--acid); box-shadow:0 0 18px rgba(212,255,0,.4); }
+    .fan-txt { display:flex; flex-direction:column; gap:2px; min-width:0; }
+    .fan-txt b { font-family:'Space Mono',monospace; font-size:15px; letter-spacing:-.02em; }
+    .fan-txt i { font-style:normal; font-size:11px; letter-spacing:.05em; color:var(--dim); }
+    .fan-foot { display:flex; align-items:center; gap:11px; margin-top:22px; }
+
+    /* ══ Isometric layer stack ══ */
+    .stack-grid { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:44px;
+      align-items:center; margin-top:38px; }
+    .iso { width:100%; max-width:560px; margin:0 auto; }
+    .iso svg { width:100%; height:auto; overflow:visible; display:block; }
+    .iso .guide { stroke:var(--dim); stroke-width:1; opacity:.3; }
+    .iso .edge  { stroke:var(--fg); stroke-width:1.6; fill:none; }
+    .iso .face  { transition:fill .25s; }
+    .iso .l1 .face { fill:rgba(212,255,0,.03); }
+    .iso .l2 .face { fill:rgba(212,255,0,.07); }
+    .iso .l3 .face { fill:rgba(212,255,0,.12); }
+    .iso[data-active="1"] .l1 .face,
+    .iso[data-active="2"] .l2 .face,
+    .iso[data-active="3"] .l3 .face { fill:rgba(212,255,0,.28); }
+    .iso .spine-b { stroke:var(--wire); stroke-width:2; }
+    .iso .spine-c { stroke:var(--acid); stroke-width:3; stroke-linecap:round; stroke-dasharray:44 620;
+      animation:spinerun 3.4s linear infinite; filter:drop-shadow(0 0 6px var(--acid)); }
+    @keyframes spinerun { from { stroke-dashoffset:664; } to { stroke-dashoffset:0; } }
+    .iso .halo { fill:rgba(212,255,0,.3); transform-box:fill-box; transform-origin:center;
+      animation:halo 3.4s ease-in-out infinite; }
+    @keyframes halo { 0%,100% { transform:scale(.55); opacity:.3; } 50% { transform:scale(1.6); opacity:.9; } }
+    .iso .node { fill:var(--acid); stroke:var(--ink); stroke-width:2; }
+    .iso .lyr-n { fill:var(--fg); font-family:'Space Mono',monospace; font-weight:700; font-size:17px; }
+    .iso .lyr-t { fill:var(--dim); font-family:'IBM Plex Mono',monospace; font-size:9.5px; letter-spacing:.16em; }
+
+    .layers { display:flex; flex-direction:column; border:2px solid var(--fg); }
+    .layer { display:flex; flex-direction:column; gap:9px; align-items:flex-start; text-align:left; width:100%;
+      padding:22px 24px; border:0; border-bottom:2px solid var(--fg); background:transparent;
+      color:var(--fg); font-family:inherit; cursor:pointer; }
+    .layer:last-child { border-bottom:none; }
+    .layer:hover, .layer[aria-current="true"] { background:var(--acid); color:var(--ink); }
+    .layer:focus-visible { outline:3px solid var(--acid); outline-offset:-6px; }
+    .layer-h { display:flex; align-items:baseline; gap:12px; }
+    .layer-n { font-family:'Space Mono',monospace; font-weight:700; font-size:13px; opacity:.7; }
+    .layer-t { font-family:'Space Mono',monospace; font-weight:700; font-size:21px;
+      text-transform:uppercase; letter-spacing:-.02em; }
+    .layer-d { font-size:12.5px; line-height:1.6; opacity:.75; }
+    .layer .kv span { border-color:currentColor; color:inherit; opacity:.75; }
+
     /* ══ Responsive ══ */
+
+    @media (max-width: 900px) {
+      .fan { aspect-ratio:auto; max-width:none; display:flex; flex-direction:column; gap:16px; }
+      .fan-wire { display:none; }
+      .fan-nodes { position:static; display:flex; flex-direction:column; border:2px solid var(--fg); }
+      .fan-hub { position:static; transform:none; flex-direction:row; gap:14px; align-items:center; text-align:left; }
+      .fan-node { position:static; transform:none; padding:14px 16px; border-bottom:2px solid var(--fg); }
+      .fan-node:last-child { border-bottom:none; }
+      .stack-grid { grid-template-columns:1fr; gap:28px; }
+    }
     @media (max-width: 1180px) {
       .hero-grid { grid-template-columns:1fr; gap:34px; }
       .rec { grid-template-columns:120px minmax(0,1fr) 280px; }
@@ -302,10 +385,10 @@
 
 <!-- ══════════ REGISTER ══════════ -->
 <div class="reg">
-  <div><span class="reg-n">04</span><span class="lab">Systems shipped</span></div>
-  <div><span class="reg-n">21</span><span class="lab">Analysis frameworks</span></div>
-  <div><span class="reg-n">30+</span><span class="lab">Tickers covered / day</span></div>
-  <div><span class="reg-n" style="color:var(--acid); animation:flick 6s steps(1) infinite;">00</span><span class="lab">Humans in the loop</span></div>
+  <div><span class="reg-n" data-count="4" data-pad="1">04</span><span class="lab">Systems shipped</span></div>
+  <div><span class="reg-n" data-count="21">21</span><span class="lab">Analysis frameworks</span></div>
+  <div><span class="reg-n" data-count="30" data-suffix="+">30+</span><span class="lab">Tickers covered / day</span></div>
+  <div><span class="reg-n" data-count="0" data-pad="1" style="color:var(--acid); animation:flick 6s steps(1) infinite;">00</span><span class="lab">Humans in the loop</span></div>
 </div>
 
 <!-- ══════════ MARQUEE ══════════ -->
@@ -430,14 +513,123 @@
   </div>
 </section>
 
+<!-- ══════════ THE STACK ══════════ -->
+<section class="pad strip" id="stack">
+  <span class="lab lab-a">[ 003 ] &nbsp;The stack</span>
+  <h2 class="h2 reveal">Three layers,<br>one signal through them</h2>
+  <p class="lede dim reveal" style="margin-top:20px;">
+    Cut the same four systems the other way and you get three layers. A run enters at the
+    top and does not stop until it has left a row at the bottom.
+  </p>
+
+  <div class="stack-grid">
+    <div class="iso" id="iso">
+      <svg viewBox="0 0 700 620" fill="none" aria-hidden="true">
+        <line class="guide" x1="170" y1="130" x2="170" y2="490"/>
+        <line class="guide" x1="630" y1="130" x2="630" y2="490"/>
+
+        <g class="l1">
+          <polygon class="face" points="400,72 630,130 400,188 170,130"/>
+          <polygon class="edge" points="400,72 630,130 400,188 170,130"/>
+        </g>
+        <g class="l2">
+          <polygon class="face" points="400,252 630,310 400,368 170,310"/>
+          <polygon class="edge" points="400,252 630,310 400,368 170,310"/>
+        </g>
+        <g class="l3">
+          <polygon class="face" points="400,432 630,490 400,548 170,490"/>
+          <polygon class="edge" points="400,432 630,490 400,548 170,490"/>
+        </g>
+
+        <line class="spine-b" x1="400" y1="40" x2="400" y2="580"/>
+        <line class="spine-c" x1="400" y1="40" x2="400" y2="580"/>
+
+        <circle class="halo" cx="400" cy="130" r="16" style="animation-delay:0s"/>
+        <circle class="halo" cx="400" cy="310" r="16" style="animation-delay:.45s"/>
+        <circle class="halo" cx="400" cy="490" r="16" style="animation-delay:.9s"/>
+        <circle class="node" cx="400" cy="130" r="9"/>
+        <circle class="node" cx="400" cy="310" r="9"/>
+        <circle class="node" cx="400" cy="490" r="9"/>
+
+        <text class="lyr-n" x="140" y="126" text-anchor="end">01</text>
+        <text class="lyr-t" x="140" y="143" text-anchor="end">SURFACE</text>
+        <text class="lyr-n" x="140" y="306" text-anchor="end">02</text>
+        <text class="lyr-t" x="140" y="323" text-anchor="end">AGENTS</text>
+        <text class="lyr-n" x="140" y="486" text-anchor="end">03</text>
+        <text class="lyr-t" x="140" y="503" text-anchor="end">SUBSTRATE</text>
+      </svg>
+    </div>
+
+    <div class="layers" id="layers">
+      <button class="layer" type="button" data-layer="1">
+        <span class="layer-h"><span class="layer-n">01</span><span class="layer-t">Surface</span></span>
+        <span class="layer-d">The only part a human ever touches &mdash; and mostly they do not.</span>
+        <span class="kv"><span>main.py cli</span><span>rest /tickets</span><span>streamlit</span><span>mkdocs site</span></span>
+      </button>
+      <button class="layer" type="button" data-layer="2">
+        <span class="layer-h"><span class="layer-n">02</span><span class="layer-t">Agents</span></span>
+        <span class="layer-d">Where the judgement lives. Swap the model here and nothing else moves.</span>
+        <span class="kv"><span>crewai crews</span><span>gpt-4o</span><span>claude</span><span>21 frameworks</span></span>
+      </button>
+      <button class="layer" type="button" data-layer="3">
+        <span class="layer-h"><span class="layer-n">03</span><span class="layer-t">Substrate</span></span>
+        <span class="layer-d">What remembers and what repeats. No run is finished until it lands here.</span>
+        <span class="kv"><span>sqlite runs.db</span><span>apscheduler</span><span>github actions</span></span>
+      </button>
+    </div>
+  </div>
+</section>
+
 <!-- ══════════ RUN GRAPH ══════════ -->
 <section class="pad strip">
-  <span class="lab lab-a">[ 003 ] &nbsp;Run graph</span>
+  <span class="lab lab-a">[ 004 ] &nbsp;Run graph</span>
   <h2 class="h2 reveal">agent_auto_system,<br>end to end</h2>
   <p class="lede dim reveal" style="margin-top:20px;">
     One entry point, four crews that share nothing, one ledger. That is the whole trick:
     a failed crew is a failed crew, not a failed system.
   </p>
+
+  <div class="fan">
+    <svg class="fan-wire" viewBox="0 0 1100 420" preserveAspectRatio="xMidYMid meet" fill="none" aria-hidden="true">
+      <path class="w" d="M150 210 C 340 210, 420 60, 700 60"/>
+      <path class="w" d="M150 210 C 340 210, 420 160, 700 160"/>
+      <path class="w" d="M150 210 C 340 210, 420 260, 700 260"/>
+      <path class="w" d="M150 210 C 340 210, 420 360, 700 360"/>
+      <path class="c" style="animation-delay:0s"   d="M150 210 C 340 210, 420 60, 700 60"/>
+      <path class="c" style="animation-delay:.35s" d="M150 210 C 340 210, 420 160, 700 160"/>
+      <path class="c" style="animation-delay:.7s"  d="M150 210 C 340 210, 420 260, 700 260"/>
+      <path class="c" style="animation-delay:1.05s" d="M150 210 C 340 210, 420 360, 700 360"/>
+    </svg>
+
+    <div class="fan-nodes">
+      <div class="fan-hub">
+        <span class="fan-sq">CRON</span>
+        <span class="lab">One scheduler</span>
+      </div>
+
+      <div class="fan-node" style="top:14.29%;">
+        <span class="fan-dot">&#9646;</span>
+        <span class="fan-txt"><b>TicketCrew</b><i>repo &rarr; structured tickets</i></span>
+      </div>
+      <div class="fan-node" style="top:38.10%;">
+        <span class="fan-dot">&#9646;</span>
+        <span class="fan-txt"><b>EmailCrew</b><i>intent &rarr; sent mail</i></span>
+      </div>
+      <div class="fan-node" style="top:61.90%;">
+        <span class="fan-dot">&#9646;</span>
+        <span class="fan-txt"><b>DocSummaryCrew</b><i>pdf / docx &rarr; summary.md</i></span>
+      </div>
+      <div class="fan-node" style="top:85.71%;">
+        <span class="fan-dot">&#9646;</span>
+        <span class="fan-txt"><b>StockSummaryCrew</b><i>yfinance &rarr; market digest</i></span>
+      </div>
+    </div>
+  </div>
+
+  <div class="fan-foot">
+    <span class="lab lab-a">&#9675;</span>
+    <span class="lab">Four lanes out, one ledger back &mdash; every edge is a row in runs.db &nbsp;&rarr;</span>
+  </div>
 
   <div class="blk reveal" style="margin-top:38px;">
     <div class="blk-head"><span>agent_auto_system / architecture</span><span>ASCII</span></div>
@@ -475,7 +667,7 @@
 
 <!-- ══════════ CTA ══════════ -->
 <section class="cta pad">
-  <span class="lab" style="color:var(--ink); opacity:.65;">[ 004 ] &nbsp;Open to build</span>
+  <span class="lab" style="color:var(--ink); opacity:.65;">[ 005 ] &nbsp;Open to build</span>
   <h2 class="disp cta-h">Got something that<br>has to run without<br>anyone watching?</h2>
   <p style="font-size:17px; line-height:1.7; margin-top:24px; max-width:600px;">
     That is the part I enjoy &mdash; the agent being right when nobody is checking.
@@ -489,7 +681,7 @@
 </section>
 
 <footer class="foot">
-  <span>&copy; 2026 YEN NAN LIU &nbsp;//&nbsp; BUILT WITH CURIOSITY &amp; CAFFEINE</span>
+  <span>&copy; 2026 yen &nbsp;//&nbsp; BUILT WITH CURIOSITY &amp; CAFFEINE</span>
   <span style="display:flex; gap:22px; flex-wrap:wrap;">
     <a href="https://github.com/yennanliu" target="_blank" rel="noopener">GITHUB</a>
     <a href="https://yennj12.js.org/yennj12_blog_V4/">BLOG</a>
@@ -680,6 +872,65 @@
       });
     }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
     for (var u = 0; u < targets.length; u++) { obs.observe(targets[u]); }
+  }
+
+  /* ── Layer stack: hover previews, click pins ── */
+  var iso    = document.getElementById('iso');
+  var layers = document.getElementById('layers');
+  if (iso && layers) {
+    var rows   = layers.querySelectorAll('.layer');
+    var pinned = null;
+
+    function paint(which) {
+      if (which) { iso.setAttribute('data-active', which); }
+      else       { iso.removeAttribute('data-active'); }
+      for (var r = 0; r < rows.length; r++) {
+        rows[r].setAttribute('aria-current', rows[r].getAttribute('data-layer') === pinned ? 'true' : 'false');
+      }
+    }
+
+    Array.prototype.forEach.call(rows, function (row) {
+      var id = row.getAttribute('data-layer');
+      row.addEventListener('mouseenter', function () { paint(id); });
+      row.addEventListener('focus',      function () { paint(id); });
+      row.addEventListener('click', function () {
+        pinned = (pinned === id) ? null : id;
+        paint(pinned || id);
+      });
+    });
+
+    layers.addEventListener('mouseleave', function () { paint(pinned); });
+  }
+
+  /* ── Register counts up when it scrolls into view ── */
+  var still = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var regs  = document.querySelectorAll('.reg-n[data-count]');
+
+  function countUp(node) {
+    var target = parseInt(node.getAttribute('data-count'), 10) || 0;
+    var pad    = node.getAttribute('data-pad') === '1';
+    var suffix = node.getAttribute('data-suffix') || '';
+    var start  = null;
+
+    function frame(ts) {
+      if (start === null) start = ts;
+      var p = Math.min((ts - start) / 900, 1);
+      var v = Math.round(target * (1 - Math.pow(1 - p, 3)));
+      node.textContent = (pad && v < 10 ? '0' + v : String(v)) + (p === 1 ? suffix : '');
+      if (p < 1) requestAnimationFrame(frame);
+    }
+    requestAnimationFrame(frame);
+  }
+
+  if (!still && regs.length && 'IntersectionObserver' in window) {
+    var regObs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        regObs.unobserve(entry.target);
+        countUp(entry.target);
+      });
+    }, { threshold: 0.6 });
+    for (var g = 0; g < regs.length; g++) { regObs.observe(regs[g]); }
   }
 })();
 </script>
