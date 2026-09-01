@@ -193,6 +193,57 @@
     .fan:hover .fan-i { animation-play-state: paused; }
     .fan:hover .fan-i img { filter: var(--duo-off); }
 
+    /* kinetic masthead — a colour sweeping the plate, and the plate slipping */
+    .kin-1 {
+      background-image: linear-gradient(100deg, var(--ink) 0%, var(--ink) 46%, var(--accent) 100%);
+      -webkit-background-clip: text; background-clip: text;
+      -webkit-text-fill-color: transparent; color: transparent;
+    }
+    .kin {
+      position: relative; display: inline-block;
+      background-image: linear-gradient(100deg,
+        var(--ink) 0%, var(--ink) 20%, var(--accent) 35%, var(--accent-2) 50%,
+        var(--accent) 65%, var(--ink) 80%, var(--ink) 100%);
+      background-size: 260% 100%;
+      -webkit-background-clip: text; background-clip: text;
+      -webkit-text-fill-color: transparent; color: transparent;
+      animation: sweep 9s linear infinite, flick 9s steps(1, end) infinite;
+    }
+    .kin::before, .kin::after {
+      content: attr(data-text); position: absolute; left: 0; top: 0;
+      background: none; z-index: -1; opacity: 0; pointer-events: none;
+    }
+    .kin::before { -webkit-text-fill-color: var(--accent-2); color: var(--accent-2); animation: slipA 9s steps(1, end) infinite; }
+    .kin::after  { -webkit-text-fill-color: var(--accent);   color: var(--accent);   animation: slipB 9s steps(1, end) infinite; }
+    @keyframes sweep { from { background-position: 150% 0; } to { background-position: -150% 0; } }
+    @keyframes slipA {
+      0%, 90.4% { opacity: 0; transform: none; }
+      90.5% { opacity: 1; transform: translate(-.075em, .008em) skewX(-1.5deg); }
+      92%   { opacity: .8; transform: translate(.055em, -.012em); }
+      93.5% { opacity: 1; transform: translate(-.038em, .004em) skewX(1deg); }
+      95%   { opacity: .55; transform: translate(.018em, 0); }
+      96.5%, 100% { opacity: 0; transform: none; }
+    }
+    @keyframes slipB {
+      0%, 90.4% { opacity: 0; transform: none; }
+      90.5% { opacity: 1; transform: translate(.075em, -.008em) skewX(1.5deg); }
+      92%   { opacity: .8; transform: translate(-.055em, .012em); }
+      93.5% { opacity: 1; transform: translate(.038em, -.004em) skewX(-1deg); }
+      95%   { opacity: .55; transform: translate(-.018em, 0); }
+      96.5%, 100% { opacity: 0; transform: none; }
+    }
+    @keyframes flick {
+      0%, 90.4% { opacity: 1; }
+      90.5% { opacity: .55; }
+      92%   { opacity: .9; }
+      93.5% { opacity: .6; }
+      95%   { opacity: .95; }
+      96.5%, 100% { opacity: 1; }
+    }
+    @supports not ((-webkit-background-clip: text) or (background-clip: text)) {
+      .kin, .kin-1 { color: var(--ink); -webkit-text-fill-color: currentColor; }
+    }
+
     h1.title sup {
       font-family: 'JetBrains Mono', ui-monospace, monospace;
       font-size: .25em; letter-spacing: 0; color: var(--accent); vertical-align: super; top: 0;
@@ -344,7 +395,9 @@
     .spine {
       position: fixed; left: 16px; top: 50%; transform: translateY(-50%); z-index: 45;
       display: flex; flex-direction: column;
+      opacity: 0; pointer-events: none; transition: opacity .45s ease;
     }
+    .spine.live { opacity: 1; pointer-events: auto; }
     .spine .tick {
       display: flex; align-items: center; gap: 7px; width: 40px;
       padding: 9px 0; border: 0; background: none; cursor: pointer;
@@ -470,6 +523,8 @@
       html { scroll-behavior: auto; }
       *, *::before, *::after { animation: none !important; transition: none !important; }
       .rev { opacity: 1; transform: none; }
+      .kin { background-position: 42% 0; }
+      .kin::before, .kin::after { display: none; }
     }
   </style>
 </head>
@@ -513,8 +568,8 @@
       <div>
         <p class="eyebrow mono">Index &mdash; an archive of shipped systems</p>
         <h1 class="title serif">
-          <span class="ln"><span>Selected</span></span>
-          <span class="ln"><span>Works<sup>09</sup></span></span>
+          <span class="ln"><span class="kin-1">Selected</span></span>
+          <span class="ln"><span><span class="kin" data-text="Works">Works</span><sup>09</sup></span></span>
         </h1>
         <p class="lede">Nine systems, each carried from architecture sketch to a deployment that answers on a public address &mdash; full-stack products, a streaming data platform, and the cloud infrastructure underneath them.</p>
       </div>
@@ -1067,6 +1122,13 @@
         });
       }, { rootMargin: '-45% 0px -45% 0px' });
       records.forEach(function (r) { spineIo.observe(r); });
+    }
+
+    var spineEl = document.getElementById('spine');
+    if ('IntersectionObserver' in window && spineEl) {
+      new IntersectionObserver(function (entries) {
+        spineEl.classList.toggle('live', entries[0].isIntersecting);
+      }, { rootMargin: '-20% 0px -20% 0px' }).observe(document.getElementById('index'));
     }
 
     /* ── Reveal on scroll ── */
