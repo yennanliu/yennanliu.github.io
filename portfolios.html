@@ -59,6 +59,9 @@
       --rule:       #3a362c;
       --tag-border: #3a362c;
       --accent:     #e0703f;
+      --accent-2:   #7f8fe0;
+      --duo:        grayscale(1) sepia(.34) saturate(1.2) hue-rotate(-16deg) brightness(1.04) contrast(1.02);
+      --duo-off:    saturate(.88) contrast(1.02);
       --grain:      .07;
       --shade:      rgba(242,239,231,.10);
       --nav-bg:     rgba(20,19,14,.93);
@@ -73,6 +76,9 @@
       --rule:       #d3cec1;
       --tag-border: #d3cec1;
       --accent:     #b34320;
+      --accent-2:   #3f56b8;
+      --duo:        grayscale(1) sepia(.5) saturate(1.5) hue-rotate(-12deg) contrast(1.04);
+      --duo-off:    saturate(.88) contrast(1.02);
       --grain:      .05;
       --shade:      rgba(23,21,15,.09);
       --nav-bg:     rgba(242,239,231,.93);
@@ -159,6 +165,34 @@
     h1.title {
       font-size: clamp(52px, 10.4vw, 158px); line-height: .84; letter-spacing: -.035em;
     }
+    h1.title .ln { display: block; overflow: hidden; padding-top: .14em; margin-top: -.14em; }
+    h1.title .ln > span { display: block; animation: rise .95s cubic-bezier(.16,.84,.3,1) both; }
+    h1.title .ln:nth-child(1) > span { animation-delay: .12s; }
+    h1.title .ln:nth-child(2) > span { animation-delay: .25s; }
+    .eyebrow { animation: fadeUp .7s .04s both; }
+    .lede { animation: fadeUp .8s .52s both; }
+    .keys div:nth-child(1) { animation: fadeUp .6s .62s both; }
+    .keys div:nth-child(2) { animation: fadeUp .6s .70s both; }
+    .keys div:nth-child(3) { animation: fadeUp .6s .78s both; }
+    .keys div:nth-child(4) { animation: fadeUp .6s .86s both; }
+
+    /* specimen fan */
+    .mast-side { display: flex; flex-direction: column; justify-content: flex-end; gap: 36px; }
+    .fan { position: relative; height: 172px; animation: fadeUp .9s .34s both; }
+    .fan-i {
+      position: absolute; top: 12px; display: block; width: 190px;
+      background: var(--paper); border: 1px solid var(--ink); padding: 8px; line-height: 0;
+      box-shadow: 10px 12px 0 var(--shade);
+      transform: rotate(var(--r));
+      animation: drift 11s var(--d) ease-in-out infinite;
+    }
+    .fan-i:nth-child(1) { left: 0; z-index: 1; }
+    .fan-i:nth-child(2) { left: 76px; z-index: 2; }
+    .fan-i:nth-child(3) { left: 152px; z-index: 3; }
+    .fan-i img { display: block; width: 100%; height: 112px; object-fit: cover; object-position: top left; filter: var(--duo); transition: filter .5s ease; }
+    .fan:hover .fan-i { animation-play-state: paused; }
+    .fan:hover .fan-i img { filter: var(--duo-off); }
+
     h1.title sup {
       font-family: 'JetBrains Mono', ui-monospace, monospace;
       font-size: .25em; letter-spacing: 0; color: var(--accent); vertical-align: super; top: 0;
@@ -205,8 +239,15 @@
       font-family: 'JetBrains Mono', ui-monospace, monospace; }
 
     /* ── RECORDS ────────────────────────────────────────── */
-    .rec { border-bottom: 1px solid var(--rule); position: relative; }
-    .rec:last-of-type { border-bottom: 1px solid var(--ink); }
+    .rec { position: relative; scroll-margin-top: 124px; }
+    .rec::after {
+      content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 1px;
+      background: var(--rule); transform: scaleX(0); transform-origin: left;
+      transition: transform .8s cubic-bezier(.2,.7,.3,1);
+    }
+    .rec.in::after { transform: scaleX(1); }
+    .rec:last-of-type::after { background: var(--ink); }
+    .rec.pop { animation: fadeUp .45s var(--pd, 0ms) both; }
     .rec.is-hidden { display: none; }
     .rec::before {
       content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 0;
@@ -232,9 +273,11 @@
     .rec-t {
       font-family: 'Instrument Serif', Georgia, serif;
       font-size: clamp(28px, 3vw, 42px); line-height: 1.05; letter-spacing: -.02em;
-      transition: color .18s ease;
+      transition: color .18s ease, text-shadow .3s cubic-bezier(.2,.7,.3,1);
     }
-    .rec:hover .rec-t, .rec.open .rec-t, .rec.open .rec-n { color: var(--accent); }
+    .rec:hover .rec-t { text-shadow: -2px 0 0 var(--accent-2), 2px 0 0 var(--accent); }
+    .rec.open .rec-t, .rec.open .rec-n { color: var(--accent); }
+    .rec:hover .rec-plate img, .rec.open .rec-plate img, .rec.open .plate img { filter: var(--duo-off); }
     .rec-plate {
       display: block; background: var(--paper); border: 1px solid var(--ink);
       padding: 5px; line-height: 0; transition: border-color .18s ease;
@@ -242,7 +285,7 @@
     .rec-plate img {
       display: block; width: 100%; height: 70px;
       object-fit: cover; object-position: top left;
-      filter: saturate(.82) contrast(1.02);
+      filter: var(--duo); transition: filter .5s ease;
     }
     .rec-plate.contain img { object-fit: contain; background: var(--paper-2); padding: 6px; }
     .rec:hover .rec-plate, .rec.open .rec-plate { border-color: var(--accent); }
@@ -267,7 +310,7 @@
     .plate { background: var(--paper); border: 1px solid var(--ink); padding: 12px; }
     .plate img {
       display: block; width: 100%; height: 232px; object-fit: cover; object-position: top left;
-      filter: saturate(.82) contrast(1.02);
+      filter: var(--duo); transition: filter .5s ease;
     }
     .plate.contain img { object-fit: contain; background: var(--paper-2); padding: 22px; }
     .plate figcaption {
@@ -298,6 +341,25 @@
 
     .empty { padding: 60px 0; font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: var(--ink-3); }
 
+    .spine {
+      position: fixed; left: 16px; top: 50%; transform: translateY(-50%); z-index: 45;
+      display: flex; flex-direction: column;
+    }
+    .spine .tick {
+      display: flex; align-items: center; gap: 7px; width: 40px;
+      padding: 9px 0; border: 0; background: none; cursor: pointer;
+    }
+    .spine .tick[hidden] { display: none; }
+    .spine i { display: block; width: 12px; height: 1px; background: var(--ink-3); transition: width .3s ease, background .3s ease; }
+    .spine em {
+      font-family: 'JetBrains Mono', ui-monospace, monospace; font-style: normal;
+      font-size: 8px; letter-spacing: .1em; color: var(--ink-3);
+      opacity: 0; transition: opacity .3s ease, color .3s ease;
+    }
+    .spine .tick:hover i, .spine .tick.on i { width: 24px; background: var(--accent); }
+    .spine .tick:hover em, .spine .tick.on em { opacity: 1; color: var(--accent); }
+    @media (max-width: 1380px) { .spine { display: none; } }
+
     /* ── PEEK PLATE ─────────────────────────────────────── */
     .peek {
       position: fixed; top: 0; left: 0; z-index: 40; width: 320px;
@@ -309,7 +371,7 @@
       will-change: transform;
     }
     .peek.on { opacity: 1; visibility: visible; transition-delay: 0s; }
-    .peek img { display: block; width: 100%; height: 186px; object-fit: cover; object-position: top left; filter: saturate(.82) contrast(1.02); }
+    .peek img { display: block; width: 100%; height: 186px; object-fit: cover; object-position: top left; filter: var(--duo-off); }
     .peek figcaption {
       display: flex; justify-content: space-between; margin-top: 9px;
       font-family: 'JetBrains Mono', ui-monospace, monospace;
@@ -328,6 +390,10 @@
       font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 10px; letter-spacing: .12em; line-height: 1.9; text-transform: uppercase; color: var(--ink-3); }
     .to-top { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; color: var(--ink); }
     .to-top:hover { color: var(--accent); }
+
+    @keyframes rise   { from { transform: translateY(108%); } to { transform: translateY(0); } }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+    @keyframes drift  { 0%, 100% { transform: rotate(var(--r)) translateY(0); } 50% { transform: rotate(var(--r)) translateY(-9px); } }
 
     /* ── REVEAL ─────────────────────────────────────────── */
     .rev { opacity: 0; transform: translateY(14px); transition: opacity .5s ease, transform .5s cubic-bezier(.2,.7,.3,1); }
@@ -349,15 +415,16 @@
       .margin-col i { width: 40px; }
       .margin-col span { writing-mode: horizontal-tb; }
       .keys { max-width: 420px; }
+      .fan { display: none; }
       .rec-head { grid-template-columns: 40px minmax(0, 1fr) 20px; gap: 16px; row-gap: 12px; padding: 22px 36px; }
+      .rec-n { grid-row: 1; align-self: start; }
+      .rec-cat { grid-row: 1; grid-column: 2; }
+      .chev { grid-row: 1; grid-column: 3; align-self: start; }
       .rec-t { grid-row: 2; grid-column: 2; }
       .tags { grid-row: 3; grid-column: 2; }
       .rec-plate { grid-row: 4; grid-column: 2; margin-top: 4px; }
       .rec-plate img { height: 150px; }
       .rec.open .rec-plate { display: none; }
-      .rec-cat { grid-row: 1; grid-column: 2; }
-      .chev { grid-row: 1; grid-column: 3; align-self: start; }
-      .rec-n { grid-row: 1; align-self: start; }
       .panel-grid { grid-template-columns: minmax(0, 1fr); gap: 22px; padding: 0 36px 32px; }
       .plate img { height: 220px; }
       .panel-meta { max-width: 420px; }
@@ -445,16 +512,26 @@
 
       <div>
         <p class="eyebrow mono">Index &mdash; an archive of shipped systems</p>
-        <h1 class="title serif">Selected<br>Works<sup>09</sup></h1>
+        <h1 class="title serif">
+          <span class="ln"><span>Selected</span></span>
+          <span class="ln"><span>Works<sup>09</sup></span></span>
+        </h1>
         <p class="lede">Nine systems, each carried from architecture sketch to a deployment that answers on a public address &mdash; full-stack products, a streaming data platform, and the cloud infrastructure underneath them.</p>
       </div>
 
+      <div class="mast-side">
+      <div class="fan" aria-hidden="true">
+        <span class="fan-i" style="--r: -8deg; --d: 0s"><img src="img/plate/p01.jpg" alt="" decoding="async"></span>
+        <span class="fan-i" style="--r: 3deg; --d: 1.4s"><img src="img/plate/p03.jpg" alt="" decoding="async"></span>
+        <span class="fan-i" style="--r: 11deg; --d: 2.8s"><img src="img/plate/p09.jpg" alt="" decoding="async"></span>
+      </div>
       <dl class="keys">
         <div><dt class="k">Systems</dt><dd class="v">09</dd></div>
         <div><dt class="k">Domains</dt><dd class="v">03</dd></div>
         <div><dt class="k">Live demos</dt><dd class="v">09</dd></div>
         <div><dt class="k">Stack</dt><dd class="v small">Java &middot; Vue &middot; Python<br>TypeScript &middot; AWS CDK</dd></div>
       </dl>
+      </div>
     </div>
   </header>
 
@@ -471,15 +548,28 @@
     </div>
   </div>
 
+  <!-- ══ CATALOGUE SPINE ══ -->
+  <nav class="spine" id="spine" aria-label="Catalogue position">
+      <button class="tick" type="button" data-go="record-01" aria-label="Record 01"><i></i><em>01</em></button>
+      <button class="tick" type="button" data-go="record-02" aria-label="Record 02"><i></i><em>02</em></button>
+      <button class="tick" type="button" data-go="record-03" aria-label="Record 03"><i></i><em>03</em></button>
+      <button class="tick" type="button" data-go="record-04" aria-label="Record 04"><i></i><em>04</em></button>
+      <button class="tick" type="button" data-go="record-05" aria-label="Record 05"><i></i><em>05</em></button>
+      <button class="tick" type="button" data-go="record-06" aria-label="Record 06"><i></i><em>06</em></button>
+      <button class="tick" type="button" data-go="record-07" aria-label="Record 07"><i></i><em>07</em></button>
+      <button class="tick" type="button" data-go="record-08" aria-label="Record 08"><i></i><em>08</em></button>
+      <button class="tick" type="button" data-go="record-09" aria-label="Record 09"><i></i><em>09</em></button>
+  </nav>
+
   <!-- ══ THE INDEX ══ -->
   <main id="index">
 
     <!-- 01 -->
-    <article class="rec rev open" id="record-01" data-cat="product" data-plate="img/shopping_cart_2.png" data-n="01">
+    <article class="rec rev open" id="record-01" data-cat="product" data-plate="img/plate/p01.jpg" data-n="01">
       <h2>
         <button class="rec-head" type="button" aria-expanded="true" aria-controls="panel-01">
           <span class="rec-n">01</span>
-          <span class="rec-plate"><img src="img/shopping_cart_2.png" alt="" loading="lazy" decoding="async"></span>
+          <span class="rec-plate"><img src="img/plate/p01.jpg" alt="" loading="lazy" decoding="async"></span>
           <span class="rec-t">Shopping Cart System</span>
           <span class="tags"><span>Java</span><span>Vue</span><span>Stripe</span></span>
           <span class="rec-cat">Product</span>
@@ -489,7 +579,7 @@
       <div class="panel" id="panel-01"><div class="panel-clip"><div class="wrap panel-grid">
         <div></div>
         <figure class="plate">
-          <img src="img/shopping_cart_2.png" alt="Shopping Cart System — storefront and checkout" loading="lazy" decoding="async">
+          <img src="img/plate/p01.jpg" alt="Shopping Cart System — storefront and checkout" loading="lazy" decoding="async">
           <figcaption><span>Plate 01</span><span>SpringPlayground/ShoppingCart</span></figcaption>
         </figure>
         <div class="panel-copy">
@@ -510,11 +600,11 @@
     </article>
 
     <!-- 02 -->
-    <article class="rec rev" id="record-02" data-cat="product" data-plate="img/spotify_app_v2_1.png" data-n="02">
+    <article class="rec rev" id="record-02" data-cat="product" data-plate="img/plate/p02.jpg" data-n="02">
       <h2>
         <button class="rec-head" type="button" aria-expanded="false" aria-controls="panel-02">
           <span class="rec-n">02</span>
-          <span class="rec-plate"><img src="img/spotify_app_v2_1.png" alt="" loading="lazy" decoding="async"></span>
+          <span class="rec-plate"><img src="img/plate/p02.jpg" alt="" loading="lazy" decoding="async"></span>
           <span class="rec-t">Spotify PlayList App</span>
           <span class="tags"><span>Java</span><span>Vue</span><span>ML</span></span>
           <span class="rec-cat">Product</span>
@@ -524,7 +614,7 @@
       <div class="panel" id="panel-02"><div class="panel-clip"><div class="wrap panel-grid">
         <div></div>
         <figure class="plate">
-          <img src="img/spotify_app_v2_1.png" alt="Spotify PlayList App — playlist and song query views" loading="lazy" decoding="async">
+          <img src="img/plate/p02.jpg" alt="Spotify PlayList App — playlist and song query views" loading="lazy" decoding="async">
           <figcaption><span>Plate 02</span><span>springSpotifyPlayList</span></figcaption>
         </figure>
         <div class="panel-copy">
@@ -545,11 +635,11 @@
     </article>
 
     <!-- 03 -->
-    <article class="rec rev" id="record-03" data-cat="data" data-plate="img/dataplatform_v2_1.png" data-n="03">
+    <article class="rec rev" id="record-03" data-cat="data" data-plate="img/plate/p03.jpg" data-n="03">
       <h2>
         <button class="rec-head" type="button" aria-expanded="false" aria-controls="panel-03">
           <span class="rec-n">03</span>
-          <span class="rec-plate"><img src="img/dataplatform_v2_1.png" alt="" loading="lazy" decoding="async"></span>
+          <span class="rec-plate"><img src="img/plate/p03.jpg" alt="" loading="lazy" decoding="async"></span>
           <span class="rec-t">Flink Data Platform</span>
           <span class="tags"><span>Java</span><span>Vue</span><span>Flink</span></span>
           <span class="rec-cat">Data &amp; AI</span>
@@ -559,7 +649,7 @@
       <div class="panel" id="panel-03"><div class="panel-clip"><div class="wrap panel-grid">
         <div></div>
         <figure class="plate">
-          <img src="img/dataplatform_v2_1.png" alt="Flink Data Platform — job submission view" loading="lazy" decoding="async">
+          <img src="img/plate/p03.jpg" alt="Flink Data Platform — job submission view" loading="lazy" decoding="async">
           <figcaption><span>Plate 03</span><span>SpringDataPlatform</span></figcaption>
         </figure>
         <div class="panel-copy">
@@ -580,11 +670,11 @@
     </article>
 
     <!-- 04 -->
-    <article class="rec rev" id="record-04" data-cat="product" data-plate="img/employee_demo_2.png" data-n="04">
+    <article class="rec rev" id="record-04" data-cat="product" data-plate="img/plate/p04.jpg" data-n="04">
       <h2>
         <button class="rec-head" type="button" aria-expanded="false" aria-controls="panel-04">
           <span class="rec-n">04</span>
-          <span class="rec-plate"><img src="img/employee_demo_2.png" alt="" loading="lazy" decoding="async"></span>
+          <span class="rec-plate"><img src="img/plate/p04.jpg" alt="" loading="lazy" decoding="async"></span>
           <span class="rec-t">Employee System</span>
           <span class="tags"><span>Java</span><span>Vue</span><span>SMTP</span></span>
           <span class="rec-cat">Product</span>
@@ -594,7 +684,7 @@
       <div class="panel" id="panel-04"><div class="panel-clip"><div class="wrap panel-grid">
         <div></div>
         <figure class="plate">
-          <img src="img/employee_demo_2.png" alt="Employee System — record management view" loading="lazy" decoding="async">
+          <img src="img/plate/p04.jpg" alt="Employee System — record management view" loading="lazy" decoding="async">
           <figcaption><span>Plate 04</span><span>springEmployeeSystem</span></figcaption>
         </figure>
         <div class="panel-copy">
@@ -615,11 +705,11 @@
     </article>
 
     <!-- 05 -->
-    <article class="rec rev" id="record-05" data-cat="data" data-plate="img/ai_experiment.avif" data-n="05">
+    <article class="rec rev" id="record-05" data-cat="data" data-plate="img/plate/p05.jpg" data-n="05">
       <h2>
         <button class="rec-head" type="button" aria-expanded="false" aria-controls="panel-05">
           <span class="rec-n">05</span>
-          <span class="rec-plate"><img src="img/ai_experiment.avif" alt="" loading="lazy" decoding="async"></span>
+          <span class="rec-plate"><img src="img/plate/p05.jpg" alt="" loading="lazy" decoding="async"></span>
           <span class="rec-t">AI Experiment</span>
           <span class="tags"><span>Python</span><span>AI / ML</span></span>
           <span class="rec-cat">Data &amp; AI</span>
@@ -629,7 +719,7 @@
       <div class="panel" id="panel-05"><div class="panel-clip"><div class="wrap panel-grid">
         <div></div>
         <figure class="plate">
-          <img src="img/ai_experiment.avif" alt="AI Experiment — collection of AI and ML experiments" loading="lazy" decoding="async">
+          <img src="img/plate/p05.jpg" alt="AI Experiment — collection of AI and ML experiments" loading="lazy" decoding="async">
           <figcaption><span>Plate 05</span><span>ai_experiment</span></figcaption>
         </figure>
         <div class="panel-copy">
@@ -650,11 +740,11 @@
     </article>
 
     <!-- 06 -->
-    <article class="rec rev" id="record-06" data-cat="cloud" data-plate="img/aws_eks_logo.png" data-n="06">
+    <article class="rec rev" id="record-06" data-cat="cloud" data-plate="img/plate/p06.jpg" data-n="06">
       <h2>
         <button class="rec-head" type="button" aria-expanded="false" aria-controls="panel-06">
           <span class="rec-n">06</span>
-          <span class="rec-plate contain"><img src="img/aws_eks_logo.png" alt="" loading="lazy" decoding="async"></span>
+          <span class="rec-plate contain"><img src="img/plate/p06.jpg" alt="" loading="lazy" decoding="async"></span>
           <span class="rec-t">EKS AWS Infra</span>
           <span class="tags"><span>TypeScript</span><span>AWS CDK</span></span>
           <span class="rec-cat">Cloud</span>
@@ -664,7 +754,7 @@
       <div class="panel" id="panel-06"><div class="panel-clip"><div class="wrap panel-grid">
         <div></div>
         <figure class="plate contain">
-          <img src="img/aws_eks_logo.png" alt="AWS EKS" loading="lazy" decoding="async">
+          <img src="img/plate/p06.jpg" alt="AWS EKS" loading="lazy" decoding="async">
           <figcaption><span>Plate 06</span><span>cdk-playground/eks-stack-2</span></figcaption>
         </figure>
         <div class="panel-copy">
@@ -685,11 +775,11 @@
     </article>
 
     <!-- 07 -->
-    <article class="rec rev" id="record-07" data-cat="cloud" data-plate="img/yt_stream.png" data-n="07">
+    <article class="rec rev" id="record-07" data-cat="cloud" data-plate="img/plate/p07.jpg" data-n="07">
       <h2>
         <button class="rec-head" type="button" aria-expanded="false" aria-controls="panel-07">
           <span class="rec-n">07</span>
-          <span class="rec-plate"><img src="img/yt_stream.png" alt="" loading="lazy" decoding="async"></span>
+          <span class="rec-plate"><img src="img/plate/p07.jpg" alt="" loading="lazy" decoding="async"></span>
           <span class="rec-t">YouTube Stream Stack</span>
           <span class="tags"><span>TypeScript</span><span>Lambda</span><span>EventBridge</span></span>
           <span class="rec-cat">Cloud</span>
@@ -699,7 +789,7 @@
       <div class="panel" id="panel-07"><div class="panel-clip"><div class="wrap panel-grid">
         <div></div>
         <figure class="plate">
-          <img src="img/yt_stream.png" alt="YouTube Stream Stack — stream ingestion pipeline" loading="lazy" decoding="async">
+          <img src="img/plate/p07.jpg" alt="YouTube Stream Stack — stream ingestion pipeline" loading="lazy" decoding="async">
           <figcaption><span>Plate 07</span><span>cdk-playground/yt-stream-stack-1</span></figcaption>
         </figure>
         <div class="panel-copy">
@@ -720,11 +810,11 @@
     </article>
 
     <!-- 08 -->
-    <article class="rec rev" id="record-08" data-cat="cloud" data-plate="img/opensearch_logo.png" data-n="08">
+    <article class="rec rev" id="record-08" data-cat="cloud" data-plate="img/plate/p08.jpg" data-n="08">
       <h2>
         <button class="rec-head" type="button" aria-expanded="false" aria-controls="panel-08">
           <span class="rec-n">08</span>
-          <span class="rec-plate contain"><img src="img/opensearch_logo.png" alt="" loading="lazy" decoding="async"></span>
+          <span class="rec-plate contain"><img src="img/plate/p08.jpg" alt="" loading="lazy" decoding="async"></span>
           <span class="rec-t">OpenSearch AWS Infra</span>
           <span class="tags"><span>TypeScript</span><span>API Gateway</span></span>
           <span class="rec-cat">Cloud</span>
@@ -734,7 +824,7 @@
       <div class="panel" id="panel-08"><div class="panel-clip"><div class="wrap panel-grid">
         <div></div>
         <figure class="plate contain">
-          <img src="img/opensearch_logo.png" alt="OpenSearch" loading="lazy" decoding="async">
+          <img src="img/plate/p08.jpg" alt="OpenSearch" loading="lazy" decoding="async">
           <figcaption><span>Plate 08</span><span>cdk-playground/opensearch-stack-1</span></figcaption>
         </figure>
         <div class="panel-copy">
@@ -755,11 +845,11 @@
     </article>
 
     <!-- 09 -->
-    <article class="rec rev" id="record-09" data-cat="cloud" data-plate="img/permission_control.png" data-n="09">
+    <article class="rec rev" id="record-09" data-cat="cloud" data-plate="img/plate/p09.jpg" data-n="09">
       <h2>
         <button class="rec-head" type="button" aria-expanded="false" aria-controls="panel-09">
           <span class="rec-n">09</span>
-          <span class="rec-plate"><img src="img/permission_control.png" alt="" loading="lazy" decoding="async"></span>
+          <span class="rec-plate"><img src="img/plate/p09.jpg" alt="" loading="lazy" decoding="async"></span>
           <span class="rec-t">Permission Control Stack</span>
           <span class="tags"><span>IAM</span><span>Cognito</span></span>
           <span class="rec-cat">Cloud</span>
@@ -769,7 +859,7 @@
       <div class="panel" id="panel-09"><div class="panel-clip"><div class="wrap panel-grid">
         <div></div>
         <figure class="plate">
-          <img src="img/permission_control.png" alt="Permission Control Stack — access control architecture" loading="lazy" decoding="async">
+          <img src="img/plate/p09.jpg" alt="Permission Control Stack — access control architecture" loading="lazy" decoding="async">
           <figcaption><span>Plate 09</span><span>cdk-playground/permission-control-stack</span></figcaption>
         </figure>
         <div class="panel-copy">
@@ -903,6 +993,22 @@
         count.textContent = (f === 'all') ? 'Sorted by catalogue no.' : 'Showing ' + shown + ' of ' + records.length;
         empty.hidden = shown > 0;
         hidePeek();
+
+        var live = records.filter(function (r) { return !r.classList.contains('is-hidden'); });
+        live.forEach(function (r, i) {
+          var t = document.querySelector('.spine .tick[data-go="' + r.id + '"]');
+          if (t) t.hidden = false;
+          if (calm) return;
+          r.classList.remove('pop');
+          void r.offsetWidth;
+          r.style.setProperty('--pd', (i * 45) + 'ms');
+          r.classList.add('pop');
+        });
+        records.forEach(function (r) {
+          if (!r.classList.contains('is-hidden')) return;
+          var t = document.querySelector('.spine .tick[data-go="' + r.id + '"]');
+          if (t) t.hidden = true;
+        });
       });
     });
 
@@ -926,8 +1032,10 @@
     if (fine && !calm) {
       records.forEach(function (rec) {
         var head = rec.querySelector('.rec-head');
-        head.addEventListener('mouseenter', function () {
+        head.addEventListener('mouseenter', function (e) {
           if (rec.classList.contains('open')) return;
+          px = e.clientX; py = e.clientY;
+          place();
           peekImg.src = rec.dataset.plate;
           peekN.textContent = 'Plate ' + rec.dataset.n;
           peek.classList.add('on');
@@ -939,6 +1047,26 @@
         });
       });
       window.addEventListener('scroll', hidePeek, { passive: true });
+    }
+
+    /* ── Catalogue spine ── */
+    var ticks = Array.prototype.slice.call(document.querySelectorAll('.spine .tick'));
+    var byId = {};
+    ticks.forEach(function (t) {
+      byId[t.dataset.go] = t;
+      t.addEventListener('click', function () {
+        var rec = document.getElementById(t.dataset.go);
+        if (rec) rec.scrollIntoView({ behavior: calm ? 'auto' : 'smooth', block: 'start' });
+      });
+    });
+    if ('IntersectionObserver' in window && ticks.length) {
+      var spineIo = new IntersectionObserver(function (entries) {
+        entries.forEach(function (en) {
+          var t = byId[en.target.id];
+          if (t) t.classList.toggle('on', en.isIntersecting);
+        });
+      }, { rootMargin: '-45% 0px -45% 0px' });
+      records.forEach(function (r) { spineIo.observe(r); });
     }
 
     /* ── Reveal on scroll ── */
