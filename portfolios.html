@@ -1,1156 +1,1155 @@
 <!DOCTYPE html>
 <html lang="en">
-   <head>
-      <meta charset="UTF-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-      <title>yen.dev</title>
-      <!-- Google analytics -->
-      <script async src="https://www.googletagmanager.com/gtag/js?id=G-X2DJ8VW74E"></script>
-      <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="description" content="Selected works — an index of nine shipped systems: full-stack products, a streaming data platform, and the AWS infrastructure underneath them.">
+  <title>yen.dev</title>
 
-        gtag('config', 'G-X2DJ8VW74E');
-      </script>
-      <!-- Google analytics -->
-      
-      <!-- PWA Meta Tags -->
-      <meta name="theme-color" content="#4a6bff">
-      <meta name="apple-mobile-web-app-capable" content="yes">
-      <meta name="apple-mobile-web-app-status-bar-style" content="default">
-      <meta name="apple-mobile-web-app-title" content="Yen.Dev">
-      <meta name="mobile-web-app-capable" content="yes">
-      <meta name="msapplication-TileColor" content="#4a6bff">
-      <meta name="msapplication-tap-highlight" content="no">
-      
-      <!-- PWA Icons -->
-      <link rel="icon" href="img/icon.svg" type="image/svg+xml">
-      <link rel="apple-touch-icon" href="img/icon.svg">
-      <link rel="mask-icon" href="img/icon.svg" color="#4a6bff">
-      
-      <!-- PWA Manifest -->
-      <link rel="manifest" href="manifest.json">
-      
-      <!-- Bootstrap CSS -->
-      <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-      <!-- AOS Animation Library -->
-      <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-      <!-- Custom CSS -->
-      <style>
-         :root {
-            --primary-color: #4a6bff;
-            --secondary-color: #25d366;
-            --light-bg: #f8f9fa;
-            --dark-bg: #121212;
-            --light-text: #f8f9fa;
-            --dark-text: #212529;
-            --transition-speed: 0.3s;
-         }
-         
-         /* Base styles */
-         body {
-            font-family: 'Poppins', sans-serif;
-            transition: background-color var(--transition-speed), color var(--transition-speed);
-            scroll-behavior: smooth;
-            padding-top: 76px; /* Add padding for fixed navbar */
-         }
-         
-         /* Responsive typography */
-         h1.display-4 {
-            font-size: 2.5rem;
-         }
-         
-         .lead {
-            font-size: 1.1rem;
-         }
-         
-         @media (min-width: 768px) {
-            h1.display-4 {
-               font-size: 3.5rem;
-            }
-            
-            .lead {
-               font-size: 1.25rem;
-            }
-         }
-         
-         /* Responsive navbar */
-         .navbar {
-            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
-            transition: all var(--transition-speed);
-            padding: 15px 0;
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            background-color: rgba(255, 255, 255, 0.9) !important;
-         }
-         
-         @media (max-width: 991.98px) {
-            .navbar-collapse {
-               background-color: rgba(255, 255, 255, 0.95);
-               padding: 20px;
-               border-radius: 10px;
-               margin-top: 10px;
-            }
-            
-            .nav-link {
-               margin: 10px 0;
-            }
-            
-            .toggle-container {
-               margin: 15px 0;
-            }
-         }
-         
-         /* Responsive hero section */
-         .hero-section {
-            height: auto;
-            min-height: 30vh;
-            padding: 40px 0;
-         }
-         
-         @media (min-width: 768px) {
-            .hero-section {
-               height: 40vh;
-               padding: 60px 0;
-            }
-         }
-         
-         /* Responsive portfolio cards */
-         .card {
-            margin-bottom: 20px;
-         }
-         
-         .card-img-top {
-            height: 150px;
-         }
-         
-         .card-body {
-            padding: 15px;
-         }
-         
-         @media (min-width: 768px) {
-            .card {
-               margin-bottom: 30px;
-            }
-            
-            .card-img-top {
-               height: 200px;
-            }
-            
-            .card-body {
-               padding: 25px;
-            }
-         }
-         
-         /* Responsive buttons */
-         .btn-primary, .btn-outline-primary {
-            padding: 8px 16px;
-            font-size: 0.9rem;
-         }
-         
-         @media (min-width: 768px) {
-            .btn-primary, .btn-outline-primary {
-               padding: 10px 20px;
-               font-size: 1rem;
-            }
-         }
-         
-         /* Responsive social icons */
-         .social-icons {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 15px;
-         }
-         
-         .social-icon {
-            width: 40px;
-            height: 40px;
-         }
-         
-         .social-icon img {
-            width: 20px;
-            height: 20px;
-         }
-         
-         @media (min-width: 768px) {
-            .social-icons {
-               gap: 20px;
-            }
-            
-            .social-icon {
-               width: 60px;
-               height: 60px;
-            }
-            
-            .social-icon img {
-               width: 30px;
-               height: 30px;
-            }
-         }
-         
-         /* Responsive footer */
-         footer {
-            padding: 30px 0 20px;
-         }
-         
-         .list-inline {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 15px;
-         }
-         
-         @media (min-width: 768px) {
-            footer {
-               padding: 40px 0 20px;
-            }
-            
-            .list-inline {
-               gap: 20px;
-            }
-         }
-         
-         /* Scroll to top button */
-         .scroll-top {
-            width: 40px;
-            height: 40px;
-            bottom: 20px;
-            right: 20px;
-         }
-         
-         @media (min-width: 768px) {
-            .scroll-top {
-               width: 50px;
-               height: 50px;
-               bottom: 30px;
-               right: 30px;
-            }
-         }
-         
-         .skills-item {
-            font-size: 1.1rem;
-            margin: 15px 0;
-            font-weight: 500;
-            color: var(--primary-color);
-            transition: all var(--transition-speed);
-            text-decoration: none;
-            display: inline-block;
-            padding: 8px 16px;
-            border-radius: 25px;
-            background: rgba(74, 107, 255, 0.1);
-         }
-         
-         .skills-item:hover,
-         .skills-item:focus,
-         .skills-item:active {
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            text-decoration: none;
-         }
-         
-         .navbar-brand {
-            font-weight: 700;
-            font-size: 1.5rem;
-            color: var(--primary-color) !important;
-         }
-         
-         .nav-link {
-            font-weight: 500;
-            position: relative;
-            margin: 0 10px;
-         }
-         
-         .nav-link::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: 0;
-            left: 0;
-            background-color: var(--primary-color);
-            transition: width var(--transition-speed);
-         }
-         
-         .nav-link:hover::after,
-         .nav-link:focus::after,
-         .nav-link:active::after {
-            width: 100%;
-         }
-         
-         footer {
-            background-color: var(--light-bg);
-            transition: background-color var(--transition-speed), color var(--transition-speed);
-         }
-         
-         .hero-content {
-            position: relative;
-            z-index: 2;
-         }
-         
-         .hero-bg {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            z-index: 1;
-            opacity: 0.3;
-            background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1IiBoZWlnaHQ9IjUiPgo8cmVjdCB3aWR0aD0iNSIgaGVpZ2h0PSI1IiBmaWxsPSIjZmZmIj48L3JlY3Q+CjxyZWN0IHdpZHRoPSIxIiBoZWlnaHQ9IjEiIGZpbGw9IiNjY2MiPjwvcmVjdD4KPC9zdmc+');
-         }
-         
-         .display-4 {
-            font-weight: 700;
-            margin-bottom: 20px;
-            font-size: 3.5rem;
-            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-         }
-         
-         .lead {
-            font-size: 1.25rem;
-            font-weight: 400;
-            margin-bottom: 30px;
-            line-height: 1.8;
-         }
-         
-         .card {
-            border: none;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-            transition: all var(--transition-speed);
-            margin-bottom: 30px;
-            overflow: hidden;
-            height: 100%;
-         }
-         
-         .card:hover,
-         .card:focus,
-         .card:active {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
-         }
-         
-         .card-title {
-            font-weight: 600;
-            color: var(--primary-color);
-            margin-bottom: 15px;
-         }
-         
-         .card-text {
-            flex-grow: 1;
-            margin-bottom: 20px;
-         }
-         
-         .btn-primary {
-            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
-            border: none;
-            padding: 10px 20px;
-            border-radius: 30px;
-            transition: all var(--transition-speed);
-            margin-right: 10px;
-         }
-         
-         .btn-primary:hover,
-         .btn-primary:focus,
-         .btn-primary:active {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(74, 107, 255, 0.3);
-         }
-         
-         .btn-outline-primary {
-            border: 2px solid var(--primary-color);
-            color: var(--primary-color);
-            padding: 10px 20px;
-            border-radius: 30px;
-            transition: all var(--transition-speed);
-         }
-         
-         .btn-outline-primary:hover,
-         .btn-outline-primary:focus,
-         .btn-outline-primary:active {
-            background-color: var(--primary-color);
-            color: white;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(74, 107, 255, 0.3);
-         }
-         
-         /* Social media icons */
-         .social-icons {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin: 40px 0;
-         }
-         
-         .social-icon {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all var(--transition-speed);
-            background-color: #fff;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-         }
-         
-         .social-icon:hover,
-         .social-icon:focus,
-         .social-icon:active {
-            transform: translateY(-10px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
-         }
-         
-         .social-icon img {
-            width: 30px;
-            height: 30px;
-            transition: all var(--transition-speed);
-         }
-         
-         /* Dark mode styles */
-         body.dark-mode {
-            background-color: var(--dark-bg);
-            color: var(--light-text);
-         }
-         
-         body.dark-mode .navbar {
-            background-color: rgba(18, 18, 18, 0.9) !important;
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-         }
-         
-         body.dark-mode .navbar-light .navbar-brand,
-         body.dark-mode .navbar-light .nav-link {
-            color: var(--light-text) !important;
-         }
+  <!-- Google analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-X2DJ8VW74E"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-X2DJ8VW74E');
+  </script>
 
-         /* Improve toggler button visibility in light mode */
-         .navbar-light .navbar-toggler {
-            border-color: rgba(0, 0, 0, 0.3) !important;
-         }
-         .navbar-light .navbar-toggler-icon {
-            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(0, 0, 0, 0.7)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
-         }
-         body.dark-mode .navbar-light .navbar-toggler {
-            border-color: rgba(255, 255, 255, 0.4) !important;
-         }
-         body.dark-mode .navbar-light .navbar-toggler-icon {
-            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(255, 255, 255, 0.8)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
-         }
+  <!-- Theme before paint (shared with the rest of the site) -->
+  <script>
+    (function(){
+      try {
+        var t = localStorage.getItem('theme');
+        if (t) document.documentElement.setAttribute('data-theme', t);
+      } catch(e){}
+    })();
+  </script>
 
-         /* Dark mode mobile navbar styles */
-         @media (max-width: 991.98px) {
-            body.dark-mode .navbar-collapse {
-               background-color: rgba(30, 30, 30, 0.95) !important;
-            }
-         }
-         
-         body.dark-mode .card {
-            background-color: #1e1e1e;
-            color: var(--light-text);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-         }
-         
-         body.dark-mode footer {
-            background-color: #1e1e1e;
-            color: var(--light-text);
-         }
-         
-         body.dark-mode a {
-            color: #9ba4ff;
-         }
-         
-         body.dark-mode .social-icon {
-            background-color: #2d2d2d;
-         }
-         
-         body.dark-mode .hero-section {
-            background: linear-gradient(135deg, rgba(74, 107, 255, 0.15) 0%, rgba(37, 211, 102, 0.15) 100%);
-         }
-         
-         body.dark-mode .btn-outline-primary {
-            color: #9ba4ff;
-            border-color: #9ba4ff;
-         }
-         
-         body.dark-mode .btn-outline-primary:hover {
-            background-color: #4a6bff;
-            color: var(--light-text);
-         }
-         
-         /* Toggle button styles */
-         .toggle-container {
-            display: flex;
-            align-items: center;
-            margin-left: 15px;
-         }
-         
-         .theme-switch {
-            display: inline-block;
-            height: 24px;
-            position: relative;
-            width: 48px;
-         }
-         
-         .theme-switch input {
-            display: none;
-         }
-         
-         .slider {
-            background-color: #ccc;
-            bottom: 0;
-            cursor: pointer;
-            left: 0;
-            position: absolute;
-            right: 0;
-            top: 0;
-            transition: .4s;
-            border-radius: 24px;
-         }
-         
-         .slider:before {
-            background-color: white;
-            bottom: 4px;
-            content: "";
-            height: 16px;
-            left: 4px;
-            position: absolute;
-            transition: .4s;
-            width: 16px;
-            border-radius: 50%;
-         }
-         
-         input:checked + .slider {
-            background-color: var(--primary-color);
-         }
-         
-         input:checked + .slider:before {
-            transform: translateX(24px);
-         }
-         
-         .toggle-icons {
-            font-size: 14px;
-            display: flex;
-            align-items: center;
-            margin-left: 8px;
-         }
-         
-         /* Floating scroll-to-top button */
-         .scroll-top {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background-color: var(--primary-color);
-            color: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            opacity: 0;
-            transition: all 0.3s;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            z-index: 999;
-         }
-         
-         .scroll-top.visible {
-            opacity: 1;
-         }
-         
-         .scroll-top:hover,
-         .scroll-top:focus,
-         .scroll-top:active {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-         }
-         
-         .project-number {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
-            color: white;
-            font-weight: bold;
-            margin-right: 10px;
-         }
+  <!-- PWA -->
+  <meta name="theme-color" content="#14130e">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="Yen.Dev">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="msapplication-TileColor" content="#14130e">
+  <meta name="msapplication-tap-highlight" content="no">
+  <link rel="icon" href="img/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="img/icon.svg">
+  <link rel="mask-icon" href="img/icon.svg" color="#e0703f">
+  <link rel="manifest" href="manifest.json">
 
-         /* Touch-specific optimizations */
-         @media (hover: none) and (pointer: coarse) {
-            .skills-item:active {
-               transform: translateY(-3px);
-               box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-               text-decoration: none;
-               transition: all 0.1s ease;
-            }
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 
-            .card:active {
-               transform: translateY(-5px);
-               box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
-               transition: all 0.1s ease;
-            }
+  <style>
+    /* ══════════════════════════════════════════════════════════════
+       ARCHIVE INDEX — a catalogue of works
+       Instrument Serif display · Instrument Sans body · JetBrains Mono chrome
+       Hairline rules, one vermilion accent, no radii, no gradients
+       ══════════════════════════════════════════════════════════════ */
 
-            .btn-primary:active {
-               transform: translateY(-2px);
-               box-shadow: 0 5px 15px rgba(74, 107, 255, 0.3);
-               transition: all 0.1s ease;
-            }
+    /* INK (default, matches the rest of the site) */
+    :root {
+      --paper:      #14130e;
+      --paper-2:    #1c1a14;
+      --ink:        #f2efe7;
+      --ink-2:      #cbc4b4;
+      --ink-3:      #8f887a;
+      --rule:       #3a362c;
+      --tag-border: #3a362c;
+      --accent:     #e0703f;
+      --accent-2:   #7f8fe0;
+      --duo:        grayscale(1) sepia(.34) saturate(1.2) hue-rotate(-16deg) brightness(1.04) contrast(1.02);
+      --duo-off:    saturate(.88) contrast(1.02);
+      --grain:      .07;
+      --shade:      rgba(242,239,231,.10);
+      --nav-bg:     rgba(20,19,14,.93);
+    }
+    /* PAPER */
+    :root[data-theme="light"] {
+      --paper:      #f2efe7;
+      --paper-2:    #ebe7dc;
+      --ink:        #17150f;
+      --ink-2:      #45413a;
+      --ink-3:      #6f6a5e;
+      --rule:       #d3cec1;
+      --tag-border: #d3cec1;
+      --accent:     #b34320;
+      --accent-2:   #3f56b8;
+      --duo:        grayscale(1) sepia(.5) saturate(1.5) hue-rotate(-12deg) contrast(1.04);
+      --duo-off:    saturate(.88) contrast(1.02);
+      --grain:      .05;
+      --shade:      rgba(23,21,15,.09);
+      --nav-bg:     rgba(242,239,231,.93);
+    }
+    :root { color-scheme: dark; }
+    :root[data-theme="light"] { color-scheme: light; }
 
-            .btn-outline-primary:active {
-               background-color: var(--primary-color);
-               color: white;
-               transform: translateY(-2px);
-               box-shadow: 0 5px 15px rgba(74, 107, 255, 0.3);
-               transition: all 0.1s ease;
-            }
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
 
-            .social-icon:active {
-               transform: translateY(-10px);
-               box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
-               transition: all 0.1s ease;
-            }
+    body {
+      background: var(--paper);
+      color: var(--ink);
+      font-family: 'Instrument Sans', ui-sans-serif, system-ui, -apple-system, sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+      transition: background .3s ease, color .3s ease;
+    }
 
-            .scroll-top:active {
-               transform: translateY(-5px);
-               box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-               transition: all 0.1s ease;
-            }
+    /* paper grain */
+    body::before {
+      content: '';
+      position: fixed; inset: 0; z-index: 0; pointer-events: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+      opacity: var(--grain);
+    }
+    body > * { position: relative; z-index: 1; }
 
-            .nav-link:active::after {
-               width: 100%;
-               transition: width 0.1s ease;
-            }
+    a { color: inherit; text-decoration: none; }
+    ::selection { background: var(--accent); color: var(--paper); }
+    :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
 
-            /* Enhanced touch targets */
-            .btn, .nav-link, .skills-item {
-               min-height: 44px;
-               min-width: 44px;
-               display: inline-flex;
-               align-items: center;
-               justify-content: center;
-            }
+    .wrap { max-width: 1560px; margin: 0 auto; padding: 0 56px; }
+    .mono {
+      font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+      letter-spacing: .16em; text-transform: uppercase;
+    }
+    .serif { font-family: 'Instrument Serif', Georgia, 'Times New Roman', serif; font-weight: 400; }
 
-            .nav-link {
-               padding: 12px 16px;
-            }
-         }
+    /* ── NAV ────────────────────────────────────────────── */
+    .topbar {
+      position: sticky; top: 0; z-index: 60;
+      border-bottom: 1px solid var(--ink);
+      background: var(--nav-bg);
+      backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+    }
+    .nav-in { display: flex; align-items: center; justify-content: space-between; gap: 32px; height: 58px; }
+    .brand { font-size: 23px; letter-spacing: -.01em; line-height: 1; }
+    .brand em { font-style: italic; }
+    .brand span { color: var(--accent); }
+    .nav-links { display: flex; align-items: center; gap: 28px; list-style: none; font-size: 10.5px; }
+    .nav-links a { color: var(--ink-3); transition: color .18s ease; padding: 6px 0; }
+    .nav-links a:hover { color: var(--ink); }
+    .nav-links a[aria-current="page"] { color: var(--ink); border-bottom: 1px solid var(--accent); padding-bottom: 3px; }
+    .mode {
+      display: inline-flex; align-items: center; gap: 8px;
+      min-height: 34px; padding: 7px 12px;
+      border: 1px solid var(--rule); background: none; color: var(--ink-2);
+      font-family: inherit; font-size: 10.5px; letter-spacing: .16em; text-transform: uppercase;
+      cursor: pointer; transition: border-color .18s ease, color .18s ease;
+    }
+    .mode:hover { border-color: var(--accent); color: var(--accent); }
+    .mode .m-ink { display: inline-flex; }
+    .mode .m-paper { display: none; }
+    :root[data-theme="light"] .mode .m-ink { display: none; }
+    :root[data-theme="light"] .mode .m-paper { display: inline-flex; }
+    .nav-toggle { display: none; }
 
-         /* Mobile-specific social icons stacking */
-         @media (max-width: 480px) {
-            .social-icons {
-               flex-direction: column;
-               align-items: center;
-               gap: 20px;
-               max-width: 200px;
-               margin: 40px auto;
-            }
+    /* ── MASTHEAD ───────────────────────────────────────── */
+    .masthead { border-bottom: 1px solid var(--ink); }
+    .masthead-in {
+      display: grid; grid-template-columns: 88px minmax(0, 1fr) 400px;
+      gap: 48px; padding-top: 76px; padding-bottom: 60px;
+    }
+    .margin-col { display: flex; flex-direction: column; align-items: flex-start; gap: 18px; }
+    .margin-col i { display: block; width: 100%; height: 1px; background: var(--ink); }
+    .margin-col span {
+      writing-mode: vertical-rl; font-size: 10px; letter-spacing: .3em;
+      text-transform: uppercase; color: var(--ink-3);
+    }
+    .eyebrow { font-size: 10.5px; letter-spacing: .24em; color: var(--accent); margin-bottom: 22px; }
+    h1.title {
+      font-size: clamp(52px, 10.4vw, 158px); line-height: .84; letter-spacing: -.035em;
+    }
+    h1.title .ln { display: block; overflow: hidden; padding-top: .14em; margin-top: -.14em; }
+    h1.title .ln > span { display: block; animation: rise .95s cubic-bezier(.16,.84,.3,1) both; }
+    h1.title .ln:nth-child(1) > span { animation-delay: .12s; }
+    h1.title .ln:nth-child(2) > span { animation-delay: .25s; }
+    .eyebrow { animation: fadeUp .7s .04s both; }
+    .lede { animation: fadeUp .8s .52s both; }
+    .keys div:nth-child(1) { animation: fadeUp .6s .62s both; }
+    .keys div:nth-child(2) { animation: fadeUp .6s .70s both; }
+    .keys div:nth-child(3) { animation: fadeUp .6s .78s both; }
+    .keys div:nth-child(4) { animation: fadeUp .6s .86s both; }
 
-            .social-icon {
-               width: 55px;
-               height: 55px;
-            }
-         }
+    /* specimen fan */
+    .mast-side { display: flex; flex-direction: column; justify-content: flex-end; gap: 36px; }
+    .fan { position: relative; height: 172px; animation: fadeUp .9s .34s both; }
+    .fan-i {
+      position: absolute; top: 12px; display: block; width: 190px;
+      background: var(--paper); border: 1px solid var(--ink); padding: 8px; line-height: 0;
+      box-shadow: 10px 12px 0 var(--shade);
+      transform: rotate(var(--r));
+      animation: drift 11s var(--d) ease-in-out infinite;
+    }
+    .fan-i:nth-child(1) { left: 0; z-index: 1; }
+    .fan-i:nth-child(2) { left: 76px; z-index: 2; }
+    .fan-i:nth-child(3) { left: 152px; z-index: 3; }
+    .fan-i img { display: block; width: 100%; height: 112px; object-fit: cover; object-position: top left; filter: var(--duo); transition: filter .5s ease; }
+    .fan:hover .fan-i { animation-play-state: paused; }
+    .fan:hover .fan-i img { filter: var(--duo-off); }
 
-         @media (min-width: 481px) and (max-width: 767px) {
-            .social-icons {
-               gap: 18px;
-               max-width: 400px;
-               margin: 40px auto;
-            }
-         }
+    /* kinetic masthead — a colour sweeping the plate, and the plate slipping */
+    .kin-1 {
+      background-image: linear-gradient(100deg, var(--ink) 0%, var(--ink) 46%, var(--accent) 100%);
+      -webkit-background-clip: text; background-clip: text;
+      -webkit-text-fill-color: transparent; color: transparent;
+    }
+    .kin {
+      position: relative; display: inline-block;
+      background-image: linear-gradient(100deg,
+        var(--ink) 0%, var(--ink) 20%, var(--accent) 35%, var(--accent-2) 50%,
+        var(--accent) 65%, var(--ink) 80%, var(--ink) 100%);
+      background-size: 260% 100%;
+      -webkit-background-clip: text; background-clip: text;
+      -webkit-text-fill-color: transparent; color: transparent;
+      animation: sweep 9s linear infinite, flick 9s steps(1, end) infinite;
+    }
+    .kin::before, .kin::after {
+      content: attr(data-text); position: absolute; left: 0; top: 0;
+      background: none; z-index: -1; opacity: 0; pointer-events: none;
+    }
+    .kin::before { -webkit-text-fill-color: var(--accent-2); color: var(--accent-2); animation: slipA 9s steps(1, end) infinite; }
+    .kin::after  { -webkit-text-fill-color: var(--accent);   color: var(--accent);   animation: slipB 9s steps(1, end) infinite; }
+    @keyframes sweep { from { background-position: 150% 0; } to { background-position: -150% 0; } }
+    @keyframes slipA {
+      0%, 90.4% { opacity: 0; transform: none; }
+      90.5% { opacity: 1; transform: translate(-.075em, .008em) skewX(-1.5deg); }
+      92%   { opacity: .8; transform: translate(.055em, -.012em); }
+      93.5% { opacity: 1; transform: translate(-.038em, .004em) skewX(1deg); }
+      95%   { opacity: .55; transform: translate(.018em, 0); }
+      96.5%, 100% { opacity: 0; transform: none; }
+    }
+    @keyframes slipB {
+      0%, 90.4% { opacity: 0; transform: none; }
+      90.5% { opacity: 1; transform: translate(.075em, -.008em) skewX(1.5deg); }
+      92%   { opacity: .8; transform: translate(-.055em, .012em); }
+      93.5% { opacity: 1; transform: translate(.038em, -.004em) skewX(-1deg); }
+      95%   { opacity: .55; transform: translate(-.018em, 0); }
+      96.5%, 100% { opacity: 0; transform: none; }
+    }
+    @keyframes flick {
+      0%, 90.4% { opacity: 1; }
+      90.5% { opacity: .55; }
+      92%   { opacity: .9; }
+      93.5% { opacity: .6; }
+      95%   { opacity: .95; }
+      96.5%, 100% { opacity: 1; }
+    }
+    @supports not ((-webkit-background-clip: text) or (background-clip: text)) {
+      .kin, .kin-1 { color: var(--ink); -webkit-text-fill-color: currentColor; }
+    }
 
-         /* Creative Projects Title - Inspired by AI Infrastructure */
-         .projects-hero {
-            position: relative;
-            z-index: 2;
-         }
+    h1.title sup {
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-size: .25em; letter-spacing: 0; color: var(--accent); vertical-align: super; top: 0;
+    }
+    .lede {
+      margin-top: 30px; max-width: 620px;
+      font-family: 'Instrument Serif', Georgia, serif; font-style: italic;
+      font-size: clamp(18px, 1.7vw, 24px); line-height: 1.45; color: var(--ink-2);
+      text-wrap: pretty;
+    }
+    .keys { display: flex; flex-direction: column; justify-content: flex-end; font-size: 11px; color: var(--ink-2); }
+    .keys div {
+      display: flex; align-items: baseline; justify-content: space-between; gap: 20px;
+      padding: 13px 0; border-top: 1px solid var(--rule);
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+    }
+    .keys div:first-child { border-top-color: var(--ink); }
+    .keys div:last-child { border-bottom: 1px solid var(--rule); }
+    .keys dt, .keys .k { font-size: 10px; letter-spacing: .16em; text-transform: uppercase; color: var(--ink-3); }
+    .keys .v { font-size: 15px; color: var(--ink); }
+    .keys .v.small { font-size: 11px; text-align: right; line-height: 1.6; }
 
-         .projects-title {
-            font-size: 48px;
-            line-height: 1.1;
-            font-weight: 700;
-            color: #1a1a1a;
-            margin-bottom: 20px;
-         }
+    /* ── FILTER RAIL ────────────────────────────────────── */
+    .rail {
+      position: sticky; top: 58px; z-index: 50;
+      background: var(--paper); border-bottom: 1px solid var(--ink);
+    }
+    .rail-in { display: flex; align-items: center; justify-content: space-between; gap: 32px; }
+    .tabs { display: flex; align-items: stretch; gap: 36px; overflow-x: auto; scrollbar-width: none; }
+    .tabs::-webkit-scrollbar { display: none; }
+    .tab {
+      display: inline-flex; align-items: center; gap: 7px;
+      min-height: 44px; padding: 15px 0;
+      border: 0; background: none; color: var(--ink-3);
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-size: 11px; letter-spacing: .16em; text-transform: uppercase;
+      white-space: nowrap; cursor: pointer; transition: color .18s ease, box-shadow .18s ease;
+    }
+    .tab b { font-weight: 400; font-size: 9px; }
+    .tab:hover { color: var(--ink); }
+    .tab[aria-pressed="true"] { color: var(--ink); box-shadow: inset 0 -2px 0 var(--accent); }
+    .tab[aria-pressed="true"] b { color: var(--accent); }
+    .count { font-size: 10px; letter-spacing: .18em; text-transform: uppercase; color: var(--ink-3); white-space: nowrap;
+      font-family: 'JetBrains Mono', ui-monospace, monospace; }
 
-         .projects-title-main {
-            background: linear-gradient(135deg, #1a1a1a 0%, var(--primary-color) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            display: inline-block;
-         }
+    /* ── RECORDS ────────────────────────────────────────── */
+    .rec { position: relative; scroll-margin-top: 124px; }
+    .rec::after {
+      content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 1px;
+      background: var(--rule); transform: scaleX(0); transform-origin: left;
+      transition: transform .8s cubic-bezier(.2,.7,.3,1);
+    }
+    .rec.in::after { transform: scaleX(1); }
+    .rec:last-of-type::after { background: var(--ink); }
+    .rec.pop { animation: fadeUp .45s var(--pd, 0ms) both; }
+    .rec.is-hidden { display: none; }
+    .rec::before {
+      content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 0;
+      background: var(--accent); transition: width .18s ease; z-index: 2;
+    }
+    .rec:hover::before, .rec.open::before { width: 3px; }
 
-         .projects-title-sub {
-            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color), #ff6b6b, #4ecdc4);
-            background-size: 400% 400%;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            animation: gradient-shift 3s ease-in-out infinite;
-            display: inline-block;
-            position: relative;
-         }
+    .rec-head {
+      display: grid; grid-template-columns: 44px 128px minmax(0, 1fr) 260px 116px 20px;
+      gap: 20px; align-items: center; width: 100%;
+      padding: 26px 0; border: 0; background: none; color: inherit;
+      font: inherit; text-align: left; cursor: pointer;
+      transition: background .18s ease;
+    }
+    .rec-head::after {
+      content: ''; position: absolute; inset: 0; z-index: -1;
+      background: transparent; transition: background .18s ease;
+    }
+    .rec:hover .rec-head, .rec.open .rec-head { background: var(--paper-2); }
+    .rec-head { padding-left: 56px; padding-right: 56px; }
+    .rec-in { max-width: 1560px; margin: 0 auto; }
+    .rec-n { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 12px; letter-spacing: .08em; color: var(--ink-3); }
+    .rec-t {
+      font-family: 'Instrument Serif', Georgia, serif;
+      font-size: clamp(28px, 3vw, 42px); line-height: 1.05; letter-spacing: -.02em;
+      transition: color .18s ease, text-shadow .3s cubic-bezier(.2,.7,.3,1);
+    }
+    .rec:hover .rec-t { text-shadow: -2px 0 0 var(--accent-2), 2px 0 0 var(--accent); }
+    .rec.open .rec-t, .rec.open .rec-n { color: var(--accent); }
+    .rec:hover .rec-plate img, .rec.open .rec-plate img, .rec.open .plate img { filter: var(--duo-off); }
+    .rec-plate {
+      display: block; background: var(--paper); border: 1px solid var(--ink);
+      padding: 5px; line-height: 0; transition: border-color .18s ease;
+    }
+    .rec-plate img {
+      display: block; width: 100%; height: 70px;
+      object-fit: cover; object-position: top left;
+      filter: var(--duo); transition: filter .5s ease;
+    }
+    .rec-plate.contain img { object-fit: contain; background: var(--paper-2); padding: 6px; }
+    .rec:hover .rec-plate, .rec.open .rec-plate { border-color: var(--accent); }
+    .tags { display: flex; flex-wrap: wrap; gap: 6px; }
+    .tags span {
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-size: 9.5px; letter-spacing: .12em; text-transform: uppercase;
+      color: var(--ink-2); border: 1px solid var(--tag-border); padding: 5px 8px;
+    }
+    .rec-cat { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 10px; letter-spacing: .16em; text-transform: uppercase; color: var(--ink-3); }
+    .chev { justify-self: end; color: var(--ink-3); transition: transform .3s cubic-bezier(.2,.7,.3,1), color .18s ease; }
+    .rec.open .chev { transform: rotate(180deg); color: var(--accent); }
 
-         @keyframes gradient-shift {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-         }
+    .panel { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .42s cubic-bezier(.2,.7,.3,1); background: var(--paper-2); }
+    .rec.open .panel { grid-template-rows: 1fr; }
+    .panel > .panel-clip { overflow: hidden; visibility: hidden; transition: visibility 0s linear .42s; }
+    .rec.open .panel > .panel-clip { visibility: visible; transition-delay: 0s; }
+    .panel-grid {
+      display: grid; grid-template-columns: 44px 400px minmax(0, 1fr) 240px;
+      gap: 20px; padding: 6px 56px 44px;
+    }
+    .plate { background: var(--paper); border: 1px solid var(--ink); padding: 12px; }
+    .plate img {
+      display: block; width: 100%; height: 232px; object-fit: cover; object-position: top left;
+      filter: var(--duo); transition: filter .5s ease;
+    }
+    .plate.contain img { object-fit: contain; background: var(--paper-2); padding: 22px; }
+    .plate figcaption {
+      display: flex; justify-content: space-between; gap: 12px; align-items: baseline; margin-top: 11px;
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-size: 9px; letter-spacing: .18em; text-transform: uppercase; color: var(--ink-3);
+    }
+    .panel-copy { display: flex; flex-direction: column; gap: 18px; }
+    .p-lede { font-family: 'Instrument Serif', Georgia, serif; font-style: italic; font-size: 22px; line-height: 1.4; text-wrap: pretty; }
+    .p-body { font-size: 15px; line-height: 1.72; color: var(--ink-2); max-width: 480px; text-wrap: pretty; }
+    .actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 4px; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 9px; min-height: 48px; padding: 0 22px;
+      border: 1px solid var(--ink); color: var(--ink);
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-size: 11px; letter-spacing: .14em; text-transform: uppercase;
+      transition: background .18s ease, color .18s ease, border-color .18s ease;
+    }
+    .btn-fill { background: var(--ink); color: var(--paper); }
+    .btn-fill:hover { background: var(--accent); border-color: var(--accent); color: var(--paper); }
+    .btn-line:hover { background: var(--ink); color: var(--paper); }
+    .panel-meta { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 11px; color: var(--ink-2); }
+    .panel-meta div { display: flex; justify-content: space-between; gap: 12px; padding: 11px 0; border-top: 1px solid var(--tag-border); }
+    .panel-meta div:first-child { border-top-color: var(--ink); }
+    .panel-meta div:last-child { border-bottom: 1px solid var(--tag-border); }
+    .panel-meta .k { font-size: 9.5px; letter-spacing: .16em; text-transform: uppercase; color: var(--ink-3); }
+    .panel-meta .live { color: var(--accent); }
 
-         /* Glitch effect for "& Innovation" */
-         .projects-glitch-text {
-            position: relative;
-         }
+    .empty { padding: 60px 0; font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: var(--ink-3); }
 
-         .projects-glitch-text::before,
-         .projects-glitch-text::after {
-            content: attr(data-text);
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: inherit;
-            -webkit-background-clip: text;
-            background-clip: text;
-         }
+    .spine {
+      position: fixed; left: 16px; top: 50%; transform: translateY(-50%); z-index: 45;
+      display: flex; flex-direction: column;
+      opacity: 0; pointer-events: none; transition: opacity .45s ease;
+    }
+    .spine.live { opacity: 1; pointer-events: auto; }
+    .spine .tick {
+      display: flex; align-items: center; gap: 7px; width: 40px;
+      padding: 9px 0; border: 0; background: none; cursor: pointer;
+    }
+    .spine .tick[hidden] { display: none; }
+    .spine i { display: block; width: 12px; height: 1px; background: var(--ink-3); transition: width .3s ease, background .3s ease; }
+    .spine em {
+      font-family: 'JetBrains Mono', ui-monospace, monospace; font-style: normal;
+      font-size: 8px; letter-spacing: .1em; color: var(--ink-3);
+      opacity: 0; transition: opacity .3s ease, color .3s ease;
+    }
+    .spine .tick:hover i, .spine .tick.on i { width: 24px; background: var(--accent); }
+    .spine .tick:hover em, .spine .tick.on em { opacity: 1; color: var(--accent); }
+    @media (max-width: 1380px) { .spine { display: none; } }
 
-         .projects-glitch-text::before {
-            animation: projects-glitch-1 2s infinite;
-            color: #ff6b6b;
-            z-index: -1;
-         }
+    /* ── PEEK PLATE ─────────────────────────────────────── */
+    .peek {
+      position: fixed; top: 0; left: 0; z-index: 40; width: 320px;
+      background: var(--paper); border: 1px solid var(--ink); padding: 10px;
+      box-shadow: 14px 18px 0 var(--shade);
+      pointer-events: none; opacity: 0; visibility: hidden;
+      transform: translate3d(0,0,0) rotate(-2.2deg);
+      transition: opacity .2s ease, visibility 0s linear .2s;
+      will-change: transform;
+    }
+    .peek.on { opacity: 1; visibility: visible; transition-delay: 0s; }
+    .peek img { display: block; width: 100%; height: 186px; object-fit: cover; object-position: top left; filter: var(--duo-off); }
+    .peek figcaption {
+      display: flex; justify-content: space-between; margin-top: 9px;
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-size: 9px; letter-spacing: .18em; text-transform: uppercase; color: var(--ink-3);
+    }
+    .peek figcaption em { font-style: normal; color: var(--accent); }
 
-         .projects-glitch-text::after {
-            animation: projects-glitch-2 2s infinite;
-            color: var(--secondary-color);
-            z-index: -2;
-         }
+    /* ── COLOPHON ───────────────────────────────────────── */
+    .colophon-in { display: grid; grid-template-columns: 88px minmax(0, 1fr) 300px 240px; gap: 48px; padding: 52px 0 48px; }
+    .colophon-mark { font-family: 'Instrument Serif', Georgia, serif; font-style: italic; font-size: 34px; line-height: 1.1; }
+    .colophon-note { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 10px; letter-spacing: .18em; text-transform: uppercase; color: var(--ink-3); margin-top: 10px; }
+    .colophon-nav { display: flex; flex-direction: column; gap: 0; font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 10.5px; letter-spacing: .14em; text-transform: uppercase; }
+    .colophon-nav a { display: flex; align-items: center; min-height: 44px; color: var(--ink-2); transition: color .18s ease; }
+    .colophon-nav a:hover { color: var(--accent); }
+    .colophon-set { display: flex; flex-direction: column; justify-content: space-between; gap: 20px;
+      font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 10px; letter-spacing: .12em; line-height: 1.9; text-transform: uppercase; color: var(--ink-3); }
+    .to-top { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; color: var(--ink); }
+    .to-top:hover { color: var(--accent); }
 
-         @keyframes projects-glitch-1 {
-            0%, 14%, 15%, 49%, 50%, 99%, 100% {
-               transform: translate(0);
-            }
-            15% {
-               transform: translate(-2px, 2px);
-            }
-            50% {
-               transform: translate(2px, -2px);
-            }
-         }
+    @keyframes rise   { from { transform: translateY(108%); } to { transform: translateY(0); } }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+    @keyframes drift  { 0%, 100% { transform: rotate(var(--r)) translateY(0); } 50% { transform: rotate(var(--r)) translateY(-9px); } }
 
-         @keyframes projects-glitch-2 {
-            0%, 20%, 21%, 62%, 63%, 99%, 100% {
-               transform: translate(0);
-            }
-            21% {
-               transform: translate(2px, -2px);
-            }
-            63% {
-               transform: translate(-2px, 2px);
-            }
-         }
+    /* ── REVEAL ─────────────────────────────────────────── */
+    .rev { opacity: 0; transform: translateY(14px); transition: opacity .5s ease, transform .5s cubic-bezier(.2,.7,.3,1); }
+    .rev.in { opacity: 1; transform: none; }
 
-         /* Enhanced Responsive Design for Projects Title */
+    /* ── RESPONSIVE ─────────────────────────────────────── */
+    @media (max-width: 1240px) {
+      .wrap, .rec-head { padding-left: 36px; padding-right: 36px; }
+      .masthead-in { grid-template-columns: 64px minmax(0, 1fr) 320px; gap: 32px; }
+      .rec-head { grid-template-columns: 40px 108px minmax(0, 1fr) 200px 104px 18px; gap: 16px; }
+      .panel-grid { grid-template-columns: 40px 330px minmax(0, 1fr) 210px; gap: 16px; padding-left: 36px; padding-right: 36px; }
+      .colophon-in { grid-template-columns: 64px minmax(0, 1fr) 220px 200px; gap: 32px; }
+      .nav-links { gap: 20px; }
+    }
 
-         /* Large Desktop (1920px+) */
-         @media (min-width: 1920px) {
-            .projects-title {
-               font-size: 64px;
-            }
-         }
+    @media (max-width: 1000px) {
+      .masthead-in { grid-template-columns: minmax(0, 1fr); gap: 40px; padding-top: 56px; padding-bottom: 44px; }
+      .margin-col { flex-direction: row; align-items: center; gap: 14px; }
+      .margin-col i { width: 40px; }
+      .margin-col span { writing-mode: horizontal-tb; }
+      .keys { max-width: 420px; }
+      .fan { display: none; }
+      .rec-head { grid-template-columns: 40px minmax(0, 1fr) 20px; gap: 16px; row-gap: 12px; padding: 22px 36px; }
+      .rec-n { grid-row: 1; align-self: start; }
+      .rec-cat { grid-row: 1; grid-column: 2; }
+      .chev { grid-row: 1; grid-column: 3; align-self: start; }
+      .rec-t { grid-row: 2; grid-column: 2; }
+      .tags { grid-row: 3; grid-column: 2; }
+      .rec-plate { grid-row: 4; grid-column: 2; margin-top: 4px; }
+      .rec-plate img { height: 150px; }
+      .rec.open .rec-plate { display: none; }
+      .panel-grid { grid-template-columns: minmax(0, 1fr); gap: 22px; padding: 0 36px 32px; }
+      .plate img { height: 220px; }
+      .panel-meta { max-width: 420px; }
+      .colophon-in { grid-template-columns: minmax(0, 1fr) 200px; gap: 32px; }
+      .colophon-in .margin-col { display: none; }
+      .colophon-set { grid-column: 1 / -1; flex-direction: row; align-items: center; justify-content: space-between; }
+      .peek { display: none; }
+    }
 
-         /* Large Desktop (1440px-1919px) */
-         @media (min-width: 1440px) and (max-width: 1919px) {
-            .projects-title {
-               font-size: 58px;
-            }
-         }
+    @media (max-width: 720px) {
+      .wrap { padding-left: 20px; padding-right: 20px; }
+      .rec-head { padding: 22px 20px; }
+      .panel-grid { padding: 0 20px 28px; }
+      .nav-in { height: 54px; }
+      .rail { top: 54px; }
+      .nav-links {
+        position: fixed; inset: 54px 0 auto 0; z-index: 55;
+        flex-direction: column; align-items: flex-start; gap: 0;
+        background: var(--paper); border-bottom: 1px solid var(--ink);
+        padding: 8px 20px 20px; display: none;
+      }
+      .nav-links.open { display: flex; }
+      .nav-links li { width: 100%; border-top: 1px solid var(--rule); }
+      .nav-links li:first-child { border-top: 0; }
+      .nav-links a { display: block; width: 100%; padding: 16px 0; font-size: 12px; }
+      .nav-links .mode-li { padding: 16px 0; border-top: 1px solid var(--rule); }
+      .nav-toggle {
+        display: inline-flex; align-items: center; justify-content: center;
+        width: 44px; height: 44px; margin-right: -10px;
+        border: 0; background: none; color: var(--ink); cursor: pointer;
+      }
+      .rail-in { gap: 16px; }
+      .tabs { gap: 18px; }
+      .tab { font-size: 10.5px; letter-spacing: .12em; }
+      .count { display: none; }
+      .actions { flex-direction: column; align-items: stretch; }
+      .btn { justify-content: space-between; }
+      .colophon-in { grid-template-columns: minmax(0, 1fr); gap: 24px; padding: 36px 0 40px; }
+      .colophon-set { flex-direction: column; align-items: flex-start; gap: 16px; }
+    }
 
-         /* Standard Desktop (1024px-1439px) */
-         @media (min-width: 1024px) and (max-width: 1439px) {
-            .projects-title {
-               font-size: 52px;
-            }
-         }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+      .rev { opacity: 1; transform: none; }
+      .kin { background-position: 42% 0; }
+      .kin::before, .kin::after { display: none; }
+    }
+  </style>
+</head>
 
-         /* Tablets Landscape (768px-1023px) */
-         @media (min-width: 768px) and (max-width: 1023px) {
-            .projects-title {
-               font-size: 42px;
-            }
-         }
+<body>
 
-         /* Tablets Portrait (481px-767px) */
-         @media (min-width: 481px) and (max-width: 767px) {
-            .projects-title {
-               font-size: 36px;
-               padding: 0 20px;
-            }
-         }
+  <!-- ══ NAV ══ -->
+  <nav class="topbar">
+    <div class="wrap nav-in">
+      <a class="brand serif" href="https://yennanliu.github.io"><em>yen</em><span>.</span>dev</a>
+      <button class="nav-toggle" id="navToggle" type="button" aria-label="Toggle navigation" aria-expanded="false" aria-controls="navLinks">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M3 7h18M3 12h18M3 17h18"/></svg>
+      </button>
+      <ul class="nav-links mono" id="navLinks">
+        <li><a href="https://yennanliu.github.io/about_me.html">About</a></li>
+        <li><a href="https://yennanliu.github.io/portfolios.html" aria-current="page">Portfolio</a></li>
+        <li><a href="https://yennanliu.github.io/ai_builder.html">AI Builder</a></li>
+        <li><a href="https://yennanliu.github.io/aws_architecture.html">AWS</a></li>
+        <li><a href="https://yennanliu.github.io/contact.html">Contact</a></li>
+        <li><a href="https://yennj12.js.org/yennj12_blog_V4/">Blog</a></li>
+        <li class="mode-li">
+          <button class="mode" id="modeBtn" type="button" aria-label="Switch between ink and paper mode">
+            <span class="m-ink">
+              <svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M13.4 9.6A5.6 5.6 0 0 1 6.4 2.6a5.7 5.7 0 1 0 7 7Z"/></svg>
+            </span>
+            <span class="m-paper">
+              <svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"><circle cx="8" cy="8" r="3.4"/><path d="M8 1.4v1.7M8 12.9v1.7M14.6 8h-1.7M3.1 8H1.4M12.7 3.3l-1.2 1.2M4.5 11.5l-1.2 1.2M12.7 12.7l-1.2-1.2M4.5 4.5 3.3 3.3"/></svg>
+            </span>
+            <span id="modeLabel">Ink</span>
+          </button>
+        </li>
+      </ul>
+    </div>
+  </nav>
 
-         /* Mobile Phones (320px-480px) */
-         @media (max-width: 480px) {
-            .projects-title {
-               font-size: 28px;
-               line-height: 1.3;
-               padding: 0 15px;
-            }
+  <!-- ══ MASTHEAD ══ -->
+  <header class="masthead">
+    <div class="wrap masthead-in">
+      <div class="margin-col"><i></i><span class="mono">Cat. 001&ndash;009</span></div>
 
-            .projects-title-main, .projects-title-sub {
-               display: block;
-               margin-bottom: 5px;
-            }
-         }
+      <div>
+        <p class="eyebrow mono">Index &mdash; an archive of shipped systems</p>
+        <h1 class="title serif">
+          <span class="ln"><span class="kin-1">Selected</span></span>
+          <span class="ln"><span><span class="kin" data-text="Works">Works</span><sup>09</sup></span></span>
+        </h1>
+        <p class="lede">Nine systems, each carried from architecture sketch to a deployment that answers on a public address &mdash; full-stack products, a streaming data platform, and the cloud infrastructure underneath them.</p>
+      </div>
 
-         /* Extra Small Mobile (max-width: 320px) */
-         @media (max-width: 320px) {
-            .projects-title {
-               font-size: 24px;
-               padding: 0 10px;
-            }
-         }
+      <div class="mast-side">
+      <div class="fan" aria-hidden="true">
+        <span class="fan-i" style="--r: -8deg; --d: 0s"><img src="img/plate/p01.jpg" alt="" decoding="async"></span>
+        <span class="fan-i" style="--r: 3deg; --d: 1.4s"><img src="img/plate/p03.jpg" alt="" decoding="async"></span>
+        <span class="fan-i" style="--r: 11deg; --d: 2.8s"><img src="img/plate/p09.jpg" alt="" decoding="async"></span>
+      </div>
+      <dl class="keys">
+        <div><dt class="k">Systems</dt><dd class="v">09</dd></div>
+        <div><dt class="k">Domains</dt><dd class="v">03</dd></div>
+        <div><dt class="k">Live demos</dt><dd class="v">09</dd></div>
+        <div><dt class="k">Stack</dt><dd class="v small">Java &middot; Vue &middot; Python<br>TypeScript &middot; AWS CDK</dd></div>
+      </dl>
+      </div>
+    </div>
+  </header>
 
-         /* Dark Mode Support for Projects Title */
-         body.dark-mode .projects-title-main {
-            background: linear-gradient(135deg, #f5f5f7 0%, var(--primary-color) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-         }
+  <!-- ══ FILTER RAIL ══ -->
+  <div class="rail">
+    <div class="wrap rail-in">
+      <div class="tabs" role="group" aria-label="Filter works by domain">
+        <button class="tab" type="button" data-filter="all" aria-pressed="true">All<b>09</b></button>
+        <button class="tab" type="button" data-filter="product" aria-pressed="false">Product<b>03</b></button>
+        <button class="tab" type="button" data-filter="data" aria-pressed="false">Data &amp; AI<b>02</b></button>
+        <button class="tab" type="button" data-filter="cloud" aria-pressed="false">Cloud<b>04</b></button>
+      </div>
+      <p class="count" id="count">Sorted by catalogue no.</p>
+    </div>
+  </div>
 
-         body.dark-mode .projects-title-sub {
-            background: linear-gradient(45deg, #7ba7ff, var(--secondary-color), #ff6b6b, #4ecdc4);
-            background-size: 400% 400%;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-         }
-      </style>
-      <!-- Font Awesome -->
-      <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet">
-      <!-- Google Fonts -->
-      <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-   </head>
-   <body>
-      <!-- Navigation -->
-      <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
-         <div class="container">
-            <a class="navbar-brand" href="https://yennanliu.github.io">Yen.Dev</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-               <ul class="navbar-nav ml-auto">
-                  <li class="nav-item">
-                     <a class="nav-link" href="https://yennanliu.github.io/about_me.html">About Me</a>
-                  </li>
-                  <li class="nav-item">
-                     <a class="nav-link" href="https://yennanliu.github.io/portfolios.html">Portfolios</a>
-                  </li>
-                  <li class="nav-item">
-                     <a class="nav-link" href="https://yennanliu.github.io/ai_builder.html">AI Builder</a>
-                  </li>
-                  <li class="nav-item">
-                     <a class="nav-link" href="https://yennanliu.github.io/aws_architecture.html">AWS Architecture</a>
-                  </li>
-                  <li class="nav-item">
-                     <a class="nav-link" href="https://yennanliu.github.io/contact.html">Contact</a>
-                  </li>
-                  <li class="nav-item">
-                     <a class="nav-link" href="https://yennj12.js.org/yennj12_blog_V4/">Blog</a>
-                  </li>
-                  <!-- Dark mode toggle button -->
-                  <li class="nav-item toggle-container">
-                     <label class="theme-switch" for="theme-checkbox">
-                        <input type="checkbox" id="theme-checkbox" />
-                        <span class="slider"></span>
-                     </label>
-                     <div class="toggle-icons">
-                        <i class="fas fa-sun"></i>/<i class="fas fa-moon"></i>
-                     </div>
-                  </li>
-               </ul>
-            </div>
-         </div>
+  <!-- ══ CATALOGUE SPINE ══ -->
+  <nav class="spine" id="spine" aria-label="Catalogue position">
+      <button class="tick" type="button" data-go="record-01" aria-label="Record 01"><i></i><em>01</em></button>
+      <button class="tick" type="button" data-go="record-02" aria-label="Record 02"><i></i><em>02</em></button>
+      <button class="tick" type="button" data-go="record-03" aria-label="Record 03"><i></i><em>03</em></button>
+      <button class="tick" type="button" data-go="record-04" aria-label="Record 04"><i></i><em>04</em></button>
+      <button class="tick" type="button" data-go="record-05" aria-label="Record 05"><i></i><em>05</em></button>
+      <button class="tick" type="button" data-go="record-06" aria-label="Record 06"><i></i><em>06</em></button>
+      <button class="tick" type="button" data-go="record-07" aria-label="Record 07"><i></i><em>07</em></button>
+      <button class="tick" type="button" data-go="record-08" aria-label="Record 08"><i></i><em>08</em></button>
+      <button class="tick" type="button" data-go="record-09" aria-label="Record 09"><i></i><em>09</em></button>
+  </nav>
+
+  <!-- ══ THE INDEX ══ -->
+  <main id="index">
+
+    <!-- 01 -->
+    <article class="rec rev open" id="record-01" data-cat="product" data-plate="img/plate/p01.jpg" data-n="01">
+      <h2>
+        <button class="rec-head" type="button" aria-expanded="true" aria-controls="panel-01">
+          <span class="rec-n">01</span>
+          <span class="rec-plate"><img src="img/plate/p01.jpg" alt="" loading="lazy" decoding="async"></span>
+          <span class="rec-t">Shopping Cart System</span>
+          <span class="tags"><span>Java</span><span>Vue</span><span>Stripe</span></span>
+          <span class="rec-cat">Product</span>
+          <svg class="chev" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6.5 8 10.5 12 6.5"/></svg>
+        </button>
+      </h2>
+      <div class="panel" id="panel-01"><div class="panel-clip"><div class="wrap panel-grid">
+        <div></div>
+        <figure class="plate">
+          <img src="img/plate/p01.jpg" alt="Shopping Cart System — storefront and checkout" loading="lazy" decoding="async">
+          <figcaption><span>Plate 01</span><span>SpringPlayground/ShoppingCart</span></figcaption>
+        </figure>
+        <div class="panel-copy">
+          <p class="p-lede">An Amazon-shaped storefront with a real payment path, not a mock one.</p>
+          <p class="p-body">Stripe handles payment; the Spring service carries products, cart, orders, checkout and login, with a Vue storefront in front of it.</p>
+          <div class="actions">
+            <a class="btn btn-fill" href="http://35.77.224.4:7777/" target="_blank" rel="noopener">View demo <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 11 11 5"/><path d="M6 5h5v5"/></svg></a>
+            <a class="btn btn-line" href="https://github.com/yennanliu/SpringPlayground/tree/main/ShoppingCart" target="_blank" rel="noopener">Read code <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 11 11 5"/><path d="M6 5h5v5"/></svg></a>
+          </div>
+        </div>
+        <div class="panel-meta">
+          <div><span class="k">Role</span><span>Design &amp; build</span></div>
+          <div><span class="k">Surface</span><span>Storefront</span></div>
+          <div><span class="k">Repo</span><span>SpringPlayground</span></div>
+          <div><span class="k">Status</span><span class="live">Live demo</span></div>
+        </div>
+      </div></div></div>
+    </article>
+
+    <!-- 02 -->
+    <article class="rec rev" id="record-02" data-cat="product" data-plate="img/plate/p02.jpg" data-n="02">
+      <h2>
+        <button class="rec-head" type="button" aria-expanded="false" aria-controls="panel-02">
+          <span class="rec-n">02</span>
+          <span class="rec-plate"><img src="img/plate/p02.jpg" alt="" loading="lazy" decoding="async"></span>
+          <span class="rec-t">Spotify PlayList App</span>
+          <span class="tags"><span>Java</span><span>Vue</span><span>ML</span></span>
+          <span class="rec-cat">Product</span>
+          <svg class="chev" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6.5 8 10.5 12 6.5"/></svg>
+        </button>
+      </h2>
+      <div class="panel" id="panel-02"><div class="panel-clip"><div class="wrap panel-grid">
+        <div></div>
+        <figure class="plate">
+          <img src="img/plate/p02.jpg" alt="Spotify PlayList App — playlist and song query views" loading="lazy" decoding="async">
+          <figcaption><span>Plate 02</span><span>springSpotifyPlayList</span></figcaption>
+        </figure>
+        <div class="panel-copy">
+          <p class="p-lede">A Spotify client that recommends as well as it retrieves.</p>
+          <p class="p-body">Song recommendations come from an ML model; the app shows user playlists and queries songs and artists with preview playback, over the Spotify API and third-party libraries.</p>
+          <div class="actions">
+            <a class="btn btn-fill" href="http://35.77.224.4:7777/" target="_blank" rel="noopener">View demo <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 11 11 5"/><path d="M6 5h5v5"/></svg></a>
+            <a class="btn btn-line" href="https://github.com/yennanliu/SpringPlayground/tree/main/springSpotifyPlayList" target="_blank" rel="noopener">Read code <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 11 11 5"/><path d="M6 5h5v5"/></svg></a>
+          </div>
+        </div>
+        <div class="panel-meta">
+          <div><span class="k">Role</span><span>Design &amp; build</span></div>
+          <div><span class="k">Surface</span><span>Web app</span></div>
+          <div><span class="k">Repo</span><span>SpringPlayground</span></div>
+          <div><span class="k">Status</span><span class="live">Live demo</span></div>
+        </div>
+      </div></div></div>
+    </article>
+
+    <!-- 03 -->
+    <article class="rec rev" id="record-03" data-cat="data" data-plate="img/plate/p03.jpg" data-n="03">
+      <h2>
+        <button class="rec-head" type="button" aria-expanded="false" aria-controls="panel-03">
+          <span class="rec-n">03</span>
+          <span class="rec-plate"><img src="img/plate/p03.jpg" alt="" loading="lazy" decoding="async"></span>
+          <span class="rec-t">Flink Data Platform</span>
+          <span class="tags"><span>Java</span><span>Vue</span><span>Flink</span></span>
+          <span class="rec-cat">Data &amp; AI</span>
+          <svg class="chev" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6.5 8 10.5 12 6.5"/></svg>
+        </button>
+      </h2>
+      <div class="panel" id="panel-03"><div class="panel-clip"><div class="wrap panel-grid">
+        <div></div>
+        <figure class="plate">
+          <img src="img/plate/p03.jpg" alt="Flink Data Platform — job submission view" loading="lazy" decoding="async">
+          <figcaption><span>Plate 03</span><span>SpringDataPlatform</span></figcaption>
+        </figure>
+        <div class="panel-copy">
+          <p class="p-lede">A control plane for Apache Flink: submit and manage streaming jobs without touching the cluster.</p>
+          <p class="p-body">Jobs go in three ways &mdash; a packaged jar, raw SQL, or a notebook session &mdash; and the platform handles submission and lifecycle behind one Spring service with a Vue console in front of it.</p>
+          <div class="actions">
+            <a class="btn btn-fill" href="http://35.77.224.4:7777/" target="_blank" rel="noopener">View demo <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 11 11 5"/><path d="M6 5h5v5"/></svg></a>
+            <a class="btn btn-line" href="https://github.com/yennanliu/SpringPlayground/tree/main/SpringDataPlatform" target="_blank" rel="noopener">Read code <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 11 11 5"/><path d="M6 5h5v5"/></svg></a>
+          </div>
+        </div>
+        <div class="panel-meta">
+          <div><span class="k">Role</span><span>Design &amp; build</span></div>
+          <div><span class="k">Surface</span><span>Web console</span></div>
+          <div><span class="k">Repo</span><span>SpringPlayground</span></div>
+          <div><span class="k">Status</span><span class="live">Live demo</span></div>
+        </div>
+      </div></div></div>
+    </article>
+
+    <!-- 04 -->
+    <article class="rec rev" id="record-04" data-cat="product" data-plate="img/plate/p04.jpg" data-n="04">
+      <h2>
+        <button class="rec-head" type="button" aria-expanded="false" aria-controls="panel-04">
+          <span class="rec-n">04</span>
+          <span class="rec-plate"><img src="img/plate/p04.jpg" alt="" loading="lazy" decoding="async"></span>
+          <span class="rec-t">Employee System</span>
+          <span class="tags"><span>Java</span><span>Vue</span><span>SMTP</span></span>
+          <span class="rec-cat">Product</span>
+          <svg class="chev" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6.5 8 10.5 12 6.5"/></svg>
+        </button>
+      </h2>
+      <div class="panel" id="panel-04"><div class="panel-clip"><div class="wrap panel-grid">
+        <div></div>
+        <figure class="plate">
+          <img src="img/plate/p04.jpg" alt="Employee System — record management view" loading="lazy" decoding="async">
+          <figcaption><span>Plate 04</span><span>springEmployeeSystem</span></figcaption>
+        </figure>
+        <div class="panel-copy">
+          <p class="p-lede">Back-office plumbing: the parts of an HR tool people actually open every day.</p>
+          <p class="p-body">CRUD over employee records, a ticket system, a calendar and asynchronous email jobs, built as one full-stack Spring and Vue application.</p>
+          <div class="actions">
+            <a class="btn btn-fill" href="http://35.77.224.4:7777/" target="_blank" rel="noopener">View demo <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 11 11 5"/><path d="M6 5h5v5"/></svg></a>
+            <a class="btn btn-line" href="https://github.com/yennanliu/SpringPlayground/tree/main/springEmployeeSystem" target="_blank" rel="noopener">Read code <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 11 11 5"/><path d="M6 5h5v5"/></svg></a>
+          </div>
+        </div>
+        <div class="panel-meta">
+          <div><span class="k">Role</span><span>Design &amp; build</span></div>
+          <div><span class="k">Surface</span><span>Web app</span></div>
+          <div><span class="k">Repo</span><span>SpringPlayground</span></div>
+          <div><span class="k">Status</span><span class="live">Live demo</span></div>
+        </div>
+      </div></div></div>
+    </article>
+
+    <!-- 05 -->
+    <article class="rec rev" id="record-05" data-cat="data" data-plate="img/plate/p05.jpg" data-n="05">
+      <h2>
+        <button class="rec-head" type="button" aria-expanded="false" aria-controls="panel-05">
+          <span class="rec-n">05</span>
+          <span class="rec-plate"><img src="img/plate/p05.jpg" alt="" loading="lazy" decoding="async"></span>
+          <span class="rec-t">AI Experiment</span>
+          <span class="tags"><span>Python</span><span>AI / ML</span></span>
+          <span class="rec-cat">Data &amp; AI</span>
+          <svg class="chev" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6.5 8 10.5 12 6.5"/></svg>
+        </button>
+      </h2>
+      <div class="panel" id="panel-05"><div class="panel-clip"><div class="wrap panel-grid">
+        <div></div>
+        <figure class="plate">
+          <img src="img/plate/p05.jpg" alt="AI Experiment — collection of AI and ML experiments" loading="lazy" decoding="async">
+          <figcaption><span>Plate 05</span><span>ai_experiment</span></figcaption>
+        </figure>
+        <div class="panel-copy">
+          <p class="p-lede">A working notebook of AI ideas, kept in the open.</p>
+          <p class="p-body">A collection of AI/ML experiments &mdash; techniques, models and applications tried end to end rather than described.</p>
+          <div class="actions">
+            <a class="btn btn-fill" href="http://35.77.224.4:7777/" target="_blank" rel="noopener">View demo <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 11 11 5"/><path d="M6 5h5v5"/></svg></a>
+            <a class="btn btn-line" href="https://github.com/yennanliu/ai_experiment/tree/main" target="_blank" rel="noopener">Read code <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 11 11 5"/><path d="M6 5h5v5"/></svg></a>
+          </div>
+        </div>
+        <div class="panel-meta">
+          <div><span class="k">Role</span><span>Research &amp; build</span></div>
+          <div><span class="k">Surface</span><span>Repository</span></div>
+          <div><span class="k">Repo</span><span>ai_experiment</span></div>
+          <div><span class="k">Status</span><span class="live">Live demo</span></div>
+        </div>
+      </div></div></div>
+    </article>
+
+    <!-- 06 -->
+    <article class="rec rev" id="record-06" data-cat="cloud" data-plate="img/plate/p06.jpg" data-n="06">
+      <h2>
+        <button class="rec-head" type="button" aria-expanded="false" aria-controls="panel-06">
+          <span class="rec-n">06</span>
+          <span class="rec-plate contain"><img src="img/plate/p06.jpg" alt="" loading="lazy" decoding="async"></span>
+          <span class="rec-t">EKS AWS Infra</span>
+          <span class="tags"><span>TypeScript</span><span>AWS CDK</span></span>
+          <span class="rec-cat">Cloud</span>
+          <svg class="chev" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6.5 8 10.5 12 6.5"/></svg>
+        </button>
+      </h2>
+      <div class="panel" id="panel-06"><div class="panel-clip"><div class="wrap panel-grid">
+        <div></div>
+        <figure class="plate contain">
+          <img src="img/plate/p06.jpg" alt="AWS EKS" loading="lazy" decoding="async">
+          <figcaption><span>Plate 06</span><span>cdk-playground/eks-stack-2</span></figcaption>
+        </figure>
+        <div class="panel-copy">
+          <p class="p-lede">A Kubernetes cluster you can stand up from a repository, not a console.</p>
+          <p class="p-body">AWS EKS infrastructure written as an AWS CDK app: a CloudFormation stack that provisions and manages the cluster.</p>
+          <div class="actions">
+            <a class="btn btn-fill" href="http://35.77.224.4:7777/" target="_blank" rel="noopener">View demo <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 11 11 5"/><path d="M6 5h5v5"/></svg></a>
+            <a class="btn btn-line" href="https://github.com/yennanliu/cdk-playground/tree/main/eks-stack-2" target="_blank" rel="noopener">Read code <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 11 11 5"/><path d="M6 5h5v5"/></svg></a>
+          </div>
+        </div>
+        <div class="panel-meta">
+          <div><span class="k">Role</span><span>Infrastructure</span></div>
+          <div><span class="k">Surface</span><span>CDK stack</span></div>
+          <div><span class="k">Repo</span><span>cdk-playground</span></div>
+          <div><span class="k">Status</span><span class="live">Live demo</span></div>
+        </div>
+      </div></div></div>
+    </article>
+
+    <!-- 07 -->
+    <article class="rec rev" id="record-07" data-cat="cloud" data-plate="img/plate/p07.jpg" data-n="07">
+      <h2>
+        <button class="rec-head" type="button" aria-expanded="false" aria-controls="panel-07">
+          <span class="rec-n">07</span>
+          <span class="rec-plate"><img src="img/plate/p07.jpg" alt="" loading="lazy" decoding="async"></span>
+          <span class="rec-t">YouTube Stream Stack</span>
+          <span class="tags"><span>TypeScript</span><span>Lambda</span><span>EventBridge</span></span>
+          <span class="rec-cat">Cloud</span>
+          <svg class="chev" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6.5 8 10.5 12 6.5"/></svg>
+        </button>
+      </h2>
+      <div class="panel" id="panel-07"><div class="panel-clip"><div class="wrap panel-grid">
+        <div></div>
+        <figure class="plate">
+          <img src="img/plate/p07.jpg" alt="YouTube Stream Stack — stream ingestion pipeline" loading="lazy" decoding="async">
+          <figcaption><span>Plate 07</span><span>cdk-playground/yt-stream-stack-1</span></figcaption>
+        </figure>
+        <div class="panel-copy">
+          <p class="p-lede">An ingestion pipeline for video streams that nobody has to babysit.</p>
+          <p class="p-body">AWS CDK infrastructure for ingesting and processing YouTube video streams, with Lambda, S3 and EventBridge wired for automated handling.</p>
+          <div class="actions">
+            <a class="btn btn-fill" href="http://35.77.224.4:7777/" target="_blank" rel="noopener">View demo <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 11 11 5"/><path d="M6 5h5v5"/></svg></a>
+            <a class="btn btn-line" href="https://github.com/yennanliu/cdk-playground/tree/main/yt-stream-stack-1" target="_blank" rel="noopener">Read code <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 11 11 5"/><path d="M6 5h5v5"/></svg></a>
+          </div>
+        </div>
+        <div class="panel-meta">
+          <div><span class="k">Role</span><span>Infrastructure</span></div>
+          <div><span class="k">Surface</span><span>CDK stack</span></div>
+          <div><span class="k">Repo</span><span>cdk-playground</span></div>
+          <div><span class="k">Status</span><span class="live">Live demo</span></div>
+        </div>
+      </div></div></div>
+    </article>
+
+    <!-- 08 -->
+    <article class="rec rev" id="record-08" data-cat="cloud" data-plate="img/plate/p08.jpg" data-n="08">
+      <h2>
+        <button class="rec-head" type="button" aria-expanded="false" aria-controls="panel-08">
+          <span class="rec-n">08</span>
+          <span class="rec-plate contain"><img src="img/plate/p08.jpg" alt="" loading="lazy" decoding="async"></span>
+          <span class="rec-t">OpenSearch AWS Infra</span>
+          <span class="tags"><span>TypeScript</span><span>API Gateway</span></span>
+          <span class="rec-cat">Cloud</span>
+          <svg class="chev" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6.5 8 10.5 12 6.5"/></svg>
+        </button>
+      </h2>
+      <div class="panel" id="panel-08"><div class="panel-clip"><div class="wrap panel-grid">
+        <div></div>
+        <figure class="plate contain">
+          <img src="img/plate/p08.jpg" alt="OpenSearch" loading="lazy" decoding="async">
+          <figcaption><span>Plate 08</span><span>cdk-playground/opensearch-stack-1</span></figcaption>
+        </figure>
+        <div class="panel-copy">
+          <p class="p-lede">Search infrastructure defined once and reproducible on demand.</p>
+          <p class="p-body">AWS OpenSearch infrastructure built with CDK &mdash; a CloudFormation stack leveraging OpenSearch, Lambda and API Gateway.</p>
+          <div class="actions">
+            <a class="btn btn-fill" href="http://35.77.224.4:7777/" target="_blank" rel="noopener">View demo <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 11 11 5"/><path d="M6 5h5v5"/></svg></a>
+            <a class="btn btn-line" href="https://github.com/yennanliu/cdk-playground/tree/main/opensearch-stack-1" target="_blank" rel="noopener">Read code <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 11 11 5"/><path d="M6 5h5v5"/></svg></a>
+          </div>
+        </div>
+        <div class="panel-meta">
+          <div><span class="k">Role</span><span>Infrastructure</span></div>
+          <div><span class="k">Surface</span><span>CDK stack</span></div>
+          <div><span class="k">Repo</span><span>cdk-playground</span></div>
+          <div><span class="k">Status</span><span class="live">Live demo</span></div>
+        </div>
+      </div></div></div>
+    </article>
+
+    <!-- 09 -->
+    <article class="rec rev" id="record-09" data-cat="cloud" data-plate="img/plate/p09.jpg" data-n="09">
+      <h2>
+        <button class="rec-head" type="button" aria-expanded="false" aria-controls="panel-09">
+          <span class="rec-n">09</span>
+          <span class="rec-plate"><img src="img/plate/p09.jpg" alt="" loading="lazy" decoding="async"></span>
+          <span class="rec-t">Permission Control Stack</span>
+          <span class="tags"><span>IAM</span><span>Cognito</span></span>
+          <span class="rec-cat">Cloud</span>
+          <svg class="chev" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6.5 8 10.5 12 6.5"/></svg>
+        </button>
+      </h2>
+      <div class="panel" id="panel-09"><div class="panel-clip"><div class="wrap panel-grid">
+        <div></div>
+        <figure class="plate">
+          <img src="img/plate/p09.jpg" alt="Permission Control Stack — access control architecture" loading="lazy" decoding="async">
+          <figcaption><span>Plate 09</span><span>cdk-playground/permission-control-stack</span></figcaption>
+        </figure>
+        <div class="panel-copy">
+          <p class="p-lede">Multi-tenant authorisation handled at the infrastructure layer.</p>
+          <p class="p-body">Fine-grained permission and access control as a CDK stack: IAM, Cognito and Lambda authorizers wired for multi-tenant auth.</p>
+          <div class="actions">
+            <a class="btn btn-fill" href="http://35.77.224.4:7777/" target="_blank" rel="noopener">View demo <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 11 11 5"/><path d="M6 5h5v5"/></svg></a>
+            <a class="btn btn-line" href="https://github.com/yennanliu/cdk-playground/tree/main/permission-control-stack" target="_blank" rel="noopener">Read code <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 11 11 5"/><path d="M6 5h5v5"/></svg></a>
+          </div>
+        </div>
+        <div class="panel-meta">
+          <div><span class="k">Role</span><span>Infrastructure</span></div>
+          <div><span class="k">Surface</span><span>CDK stack</span></div>
+          <div><span class="k">Repo</span><span>cdk-playground</span></div>
+          <div><span class="k">Status</span><span class="live">Live demo</span></div>
+        </div>
+      </div></div></div>
+    </article>
+
+    <p class="wrap empty" id="empty" hidden>No records in this domain.</p>
+  </main>
+
+  <!-- ══ PEEK PLATE ══ -->
+  <figure class="peek" id="peek" aria-hidden="true">
+    <img id="peekImg" src="" alt="">
+    <figcaption><span id="peekN">Plate</span><em>Peek</em></figcaption>
+  </figure>
+
+  <!-- ══ COLOPHON ══ -->
+  <footer>
+    <div class="wrap colophon-in">
+      <div class="margin-col"></div>
+      <div>
+        <p class="colophon-mark">Index of works</p>
+        <p class="colophon-note">&copy; 2026 yen.dev &mdash; all rights reserved</p>
+      </div>
+      <nav class="colophon-nav" aria-label="Footer">
+        <a href="https://yennanliu.github.io/">Home</a>
+        <a href="https://yennanliu.github.io/about_me.html">About me</a>
+        <a href="https://yennanliu.github.io/aws_architecture.html">AWS architecture</a>
+        <a href="https://yennanliu.github.io/contact.html">Contact</a>
+        <a href="https://yennj12.js.org/yennj12_blog_V4/">Blog</a>
+        <a href="https://yennj12.js.org/index.html.backup.html">Old site</a>
       </nav>
-      
-      <!-- Hero Section -->
-      <section class="hero-section">
-         <div class="hero-bg"></div>
-         <div class="container hero-content">
-            <div class="row">
-               <div class="col-lg-12 text-center" data-aos="fade-up" data-aos-delay="100">
-                  <div class="projects-hero">
-                     <h1 class="projects-title">
-                        <span class="projects-title-main">My Projects.</span>
-                        <br>
-                        <span class="projects-title-sub projects-glitch-text" data-text="& Innovation.">& Innovation.</span>
-                     </h1>
-                  </div>
-                  <p class="lead">A selection of my work and personal projects</p>
-               </div>
-            </div>
-         </div>
-      </section>
-      
-      <!-- Portfolio Content -->
-      <div class="container mt-5">
-         <div class="row">
-            <!-- 1) ShoppingCart System -->
-            <div class="col-md-6 col-lg-4 mb-4" data-aos="fade-up" data-aos-delay="100">
-               <div class="card h-100">
-                  <img src="img/shopping_cart_2.png" class="card-img-top" alt="Shopping Cart System">
-                  <div class="card-body">
-                     <h5 class="card-title"><span class="project-number">1</span>Shopping Cart System</h5>
-                     <p class="card-text">Amazon like e-commerce system. `Stripe` payment API integrate, order, checkout, login, product features (Java, Vue)</p>
-                     <div class="mt-auto">
-                        <a href="http://35.77.224.4:7777/" target="_blank" class="btn btn-primary">Demo</a>
-                        <a href="https://github.com/yennanliu/SpringPlayground/tree/main/ShoppingCart" target="_blank" class="btn btn-outline-primary">Code</a>
-                     </div>
-                  </div>
-               </div>
-            </div>
-
-            <!-- 2) springSpotifyPlayList -->
-            <div class="col-md-6 col-lg-4 mb-4" data-aos="fade-up" data-aos-delay="200">
-               <div class="card h-100">
-                  <img src="img/spotify_app_v2_1.png" class="card-img-top" alt="Spotify PlayList App">
-                  <div class="card-body">
-                     <h5 class="card-title"><span class="project-number">2</span>Spotify PlayList App</h5>
-                     <p class="card-text">Spotify app recommend song via ML, show user playList, query songs, artist with preview feature.  integrate with Spotify API, 3rd party lib(Java, Vue)</p>
-                     <div class="mt-auto">
-                        <a href="http://35.77.224.4:7777/" target="_blank" class="btn btn-primary">Demo</a>
-                        <a href="https://github.com/yennanliu/SpringPlayground/tree/main/springSpotifyPlayList" target="_blank" class="btn btn-outline-primary">Code</a>
-                     </div>
-                  </div>
-               </div>
-            </div>
-
-            <!-- 3) Data platform System -->
-            <div class="col-md-6 col-lg-4 mb-4" data-aos="fade-up" data-aos-delay="300">
-               <div class="card h-100">
-                  <img src="img/dataplatform_v2_1.png" class="card-img-top" alt="Flink Data Platform">
-                  <div class="card-body">
-                     <h5 class="card-title"><span class="project-number">3</span>Flink Data Platform</h5>
-                     <p class="card-text">Big Data platform for Apache Flink job management, submit Flink job via Jar, SQL, notebook. (Java, Vue)</p>
-                     <div class="mt-auto">
-                        <a href="http://35.77.224.4:7777/" target="_blank" class="btn btn-primary">Demo</a>
-                        <a href="https://github.com/yennanliu/SpringPlayground/tree/main/SpringDataPlatform" target="_blank" class="btn btn-outline-primary">Code</a>
-                     </div>
-                  </div>
-               </div>
-            </div>
-
-            <!-- 4) Employee System -->
-            <div class="col-md-6 col-lg-4 mb-4" data-aos="fade-up" data-aos-delay="100">
-               <div class="card h-100">
-                  <img src="img/employee_demo_2.png" class="card-img-top" alt="Employee System">
-                  <div class="card-body">
-                     <h5 class="card-title"><span class="project-number">4</span>Employee System</h5>
-                     <p class="card-text">Full stack Employee management system Feature: Email, CRUD, ticket system, calendar, Async email job (Java, Vue)</p>
-                     <div class="mt-auto">
-                        <a href="http://35.77.224.4:7777/" target="_blank" class="btn btn-primary">Demo</a>
-                        <a href="https://github.com/yennanliu/SpringPlayground/tree/main/springEmployeeSystem" target="_blank" class="btn btn-outline-primary">Code</a>
-                     </div>
-                  </div>
-               </div>
-            </div>
-
-            <!-- 5) AI experiment -->
-            <div class="col-md-6 col-lg-4 mb-4" data-aos="fade-up" data-aos-delay="200">
-               <div class="card h-100">
-                  <img src="img/ai_experiment.avif" class="card-img-top" alt="AI experiment">
-                  <div class="card-body">
-                     <h5 class="card-title"><span class="project-number">5</span>AI experiment</h5>
-                     <p class="card-text">Collection of AI experiments and projects. Exploring various AI/ML techniques, models, and applications. (Python, AI/ML)</p>
-                     <div class="mt-auto">
-                        <a href="http://35.77.224.4:7777/" target="_blank" class="btn btn-primary">Demo</a>
-                        <a href="https://github.com/yennanliu/ai_experiment/tree/main" target="_blank" class="btn btn-outline-primary">Code</a>
-                     </div>
-                  </div>
-               </div>
-            </div>
-
-            <!-- 6) EKS AWS Infra -->
-            <div class="col-md-6 col-lg-4 mb-4" data-aos="fade-up" data-aos-delay="300">
-               <div class="card h-100">
-                  <img src="img/aws_eks_logo.png" class="card-img-top" alt="EKS AWS Infra">
-                  <div class="card-body">
-                     <h5 class="card-title"><span class="project-number">6</span>EKS AWS Infra</h5>
-                     <p class="card-text">AWS EKS (Elastic Kubernetes Service) infrastructure built with AWS CDK. Cloudformation stack for Kubernetes cluster management (TypeScript, AWS CDK)</p>
-                     <div class="mt-auto">
-                        <a href="http://35.77.224.4:7777/" target="_blank" class="btn btn-primary">Demo</a>
-                        <a href="https://github.com/yennanliu/cdk-playground/tree/main/eks-stack-2" target="_blank" class="btn btn-outline-primary">Code</a>
-                     </div>
-                  </div>
-               </div>
-            </div>
-
-            <!-- 7) YouTube Stream Stack -->
-            <div class="col-md-6 col-lg-4 mb-4" data-aos="fade-up" data-aos-delay="100">
-               <div class="card h-100">
-                  <img src="img/yt_stream.png" class="card-img-top" alt="YouTube Stream Stack">
-                  <div class="card-body">
-                     <h5 class="card-title"><span class="project-number">7</span>YouTube Stream Stack</h5>
-                     <p class="card-text">AWS CDK infrastructure for ingesting and processing YouTube video streams. Cloudformation stack leveraging Lambda, S3, and EventBridge for automated stream handling (TypeScript, AWS CDK)</p>
-                     <div class="mt-auto">
-                        <a href="http://35.77.224.4:7777/" target="_blank" class="btn btn-primary">Demo</a>
-                        <a href="https://github.com/yennanliu/cdk-playground/tree/main/yt-stream-stack-1" target="_blank" class="btn btn-outline-primary">Code</a>
-                     </div>
-                  </div>
-               </div>
-            </div>
-
-            <!-- 8) OpenSearch AWS Infra -->
-            <div class="col-md-6 col-lg-4 mb-4" data-aos="fade-up" data-aos-delay="200">
-               <div class="card h-100">
-                  <img src="img/opensearch_logo.png" class="card-img-top" alt="OpenSearch AWS Infra">
-                  <div class="card-body">
-                     <h5 class="card-title"><span class="project-number">8</span>OpenSearch AWS Infra</h5>
-                     <p class="card-text">AWS OpenSearch infrastructure built with AWS CDK. Cloudformation stack leveraging OpenSearch, Lambda, API Gateway (TypeScript, AWS CDK)</p>
-                     <div class="mt-auto">
-                        <a href="http://35.77.224.4:7777/" target="_blank" class="btn btn-primary">Demo</a>
-                        <a href="https://github.com/yennanliu/cdk-playground/tree/main/opensearch-stack-1" target="_blank" class="btn btn-outline-primary">Code</a>
-                     </div>
-                  </div>
-               </div>
-            </div>
-
-            <!-- 9) Permission Control Stack -->
-            <div class="col-md-6 col-lg-4 mb-4" data-aos="fade-up" data-aos-delay="300">
-               <div class="card h-100">
-                  <img src="img/permission_control.png" class="card-img-top" alt="Permission Control Stack">
-                  <div class="card-body">
-                     <h5 class="card-title"><span class="project-number">9</span>Permission Control Stack</h5>
-                     <p class="card-text">AWS CDK infrastructure for fine-grained permission and access control management. Cloudformation stack using IAM, Cognito, and Lambda authorizers for multi-tenant auth (TypeScript, AWS CDK)</p>
-                     <div class="mt-auto">
-                        <a href="http://35.77.224.4:7777/" target="_blank" class="btn btn-primary">Demo</a>
-                        <a href="https://github.com/yennanliu/cdk-playground/tree/main/permission-control-stack" target="_blank" class="btn btn-outline-primary">Code</a>
-                     </div>
-                  </div>
-               </div>
-            </div>
-         </div>
+      <div class="colophon-set">
+        <span>Set in Instrument Serif,<br>Instrument Sans &amp; JetBrains Mono</span>
+        <a class="to-top" href="#top" id="toTop">
+          <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8 12.5v-9"/><path d="M4 7.5 8 3.5l4 4"/></svg>
+          Top of index
+        </a>
       </div>
+    </div>
+  </footer>
 
-      <!-- Scroll to top button -->
-      <div class="scroll-top">
-         <i class="fas fa-arrow-up"></i>
-      </div>
+  <script>
+  (function () {
+    'use strict';
 
-      <!-- Footer -->
-      <footer class="mt-5">
-         <div class="container">
-            <div class="row">
-               <div class="col-lg-12 text-center">
-                  <ul class="list-inline">
-                     <li class="list-inline-item"><a href="https://yennanliu.github.io/">Home</a></li>
-                     <li class="list-inline-item"><a href="https://yennanliu.github.io/about_me.html">About Me</a></li>
-                     <li class="list-inline-item"><a href="https://yennanliu.github.io/portfolios.html">Portfolios</a></li>
-                     <li class="list-inline-item"><a href="https://yennanliu.github.io/aws_architecture.html">AWS Architecture</a></li>
-                     <li class="list-inline-item"><a href="https://yennanliu.github.io/contact.html">Contact</a></li>
-                     <li class="list-inline-item"><a href="https://yennj12.js.org/yennj12_blog_V4/">Blog</a></li>
-                     <li class="list-inline-item"><a href="https://yennj12.js.org/index.html.backup.html">Old Site</a></li>                
-                  </ul>
-                  <p>&copy; 2026 yen.dev.com All Rights Reserved.</p>
-               </div>
-            </div>
-         </div>
-      </footer>
-      
-      <!-- jQuery, Popper.js, Bootstrap JS -->
-      <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-      <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
-      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-      <!-- AOS Animation Library -->
-      <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-      <!-- Custom JavaScript -->
-      <script>
-         // Initialize AOS animation
-         AOS.init({
-             duration: 800,
-             easing: 'ease-in-out',
-             once: true
-         });
-         
-         // Scroll to top button functionality
-         const scrollTopBtn = document.querySelector('.scroll-top');
-         
-         window.addEventListener('scroll', function() {
-             if (window.pageYOffset > 300) {
-                 scrollTopBtn.classList.add('visible');
-             } else {
-                 scrollTopBtn.classList.remove('visible');
-             }
-         });
-         
-         scrollTopBtn.addEventListener('click', function() {
-             window.scrollTo({
-                 top: 0,
-                 behavior: 'smooth'
-             });
-         });
-         
-         // Dark mode toggle functionality
-         document.addEventListener('DOMContentLoaded', function() {
-             const toggleSwitch = document.getElementById('theme-checkbox');
-             
-             // Check for saved theme preference or use device preference
-             const currentTheme = localStorage.getItem('theme') || 
-                 (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-             
-             if (currentTheme === 'dark') {
-                 document.body.classList.add('dark-mode');
-                 toggleSwitch.checked = true;
-             }
-             
-             // Switch theme function
-             function switchTheme(event) {
-                 if (event.target.checked) {
-                     document.body.classList.add('dark-mode');
-                     localStorage.setItem('theme', 'dark');
-                 } else {
-                     document.body.classList.remove('dark-mode');
-                     localStorage.setItem('theme', 'light');
-                 }
-             }
-             
-             // Event listener for toggle switch
-             toggleSwitch.addEventListener('change', switchTheme);
-         });
-         
-         // Register Service Worker for PWA functionality
-         if ('serviceWorker' in navigator) {
-            window.addEventListener('load', function() {
-               navigator.serviceWorker.register('/sw.js')
-                  .then(function(registration) {
-                     console.log('ServiceWorker registration successful with scope: ', registration.scope);
-                     
-                     // Check for updates
-                     registration.addEventListener('updatefound', () => {
-                        const newWorker = registration.installing;
-                        newWorker.addEventListener('statechange', () => {
-                           if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
-                              // Show update available notification
-                              if (confirm('A new version is available. Refresh to update?')) {
-                                 window.location.reload();
-                              }
-                           }
-                        });
-                     });
-                  })
-                  .catch(function(err) {
-                     console.log('ServiceWorker registration failed: ', err);
-                  });
-            });
-         }
-      </script>
-   </body>
+    /* ── Ink / paper ── */
+    var root = document.documentElement;
+    var modeBtn = document.getElementById('modeBtn');
+    var modeLabel = document.getElementById('modeLabel');
+    function paintMode() {
+      var light = root.getAttribute('data-theme') === 'light';
+      modeLabel.textContent = light ? 'Paper' : 'Ink';
+      var meta = document.querySelector('meta[name="theme-color"]');
+      if (meta) meta.setAttribute('content', light ? '#f2efe7' : '#14130e');
+    }
+    modeBtn.addEventListener('click', function () {
+      var light = root.getAttribute('data-theme') === 'light';
+      if (light) { root.removeAttribute('data-theme'); } else { root.setAttribute('data-theme', 'light'); }
+      try { localStorage.setItem('theme', light ? 'dark' : 'light'); } catch (e) {}
+      paintMode();
+    });
+    paintMode();
+
+    /* ── Mobile nav ── */
+    var navToggle = document.getElementById('navToggle');
+    var navLinks = document.getElementById('navLinks');
+    navToggle.addEventListener('click', function () {
+      var open = navLinks.classList.toggle('open');
+      navToggle.setAttribute('aria-expanded', String(open));
+    });
+    navLinks.addEventListener('click', function (e) {
+      if (e.target.tagName === 'A') { navLinks.classList.remove('open'); navToggle.setAttribute('aria-expanded', 'false'); }
+    });
+
+    /* ── Records: expand / collapse ── */
+    var records = Array.prototype.slice.call(document.querySelectorAll('.rec'));
+
+    function setOpen(rec, open) {
+      var head = rec.querySelector('.rec-head');
+      rec.classList.toggle('open', open);
+      head.setAttribute('aria-expanded', String(open));
+    }
+
+    records.forEach(function (rec) {
+      rec.querySelector('.rec-head').addEventListener('click', function () {
+        var wasOpen = rec.classList.contains('open');
+        records.forEach(function (r) { if (r !== rec) setOpen(r, false); });
+        setOpen(rec, !wasOpen);
+        if (!wasOpen) hidePeek();
+      });
+    });
+
+    /* deep link: portfolios.html#record-03 opens that record */
+    if (location.hash && /^#record-0[1-9]$/.test(location.hash)) {
+      var target = document.querySelector(location.hash);
+      if (target) {
+        records.forEach(function (r) { setOpen(r, r === target); });
+      }
+    }
+
+    /* ── Filters ── */
+    var tabs = Array.prototype.slice.call(document.querySelectorAll('.tab'));
+    var count = document.getElementById('count');
+    var empty = document.getElementById('empty');
+
+    tabs.forEach(function (tab) {
+      tab.addEventListener('click', function () {
+        var f = tab.dataset.filter;
+        tabs.forEach(function (t) { t.setAttribute('aria-pressed', String(t === tab)); });
+
+        var shown = 0;
+        records.forEach(function (rec) {
+          var match = (f === 'all' || rec.dataset.cat === f);
+          rec.classList.toggle('is-hidden', !match);
+          if (match) { shown++; } else { setOpen(rec, false); }
+        });
+
+        count.textContent = (f === 'all') ? 'Sorted by catalogue no.' : 'Showing ' + shown + ' of ' + records.length;
+        empty.hidden = shown > 0;
+        hidePeek();
+
+        var live = records.filter(function (r) { return !r.classList.contains('is-hidden'); });
+        live.forEach(function (r, i) {
+          var t = document.querySelector('.spine .tick[data-go="' + r.id + '"]');
+          if (t) t.hidden = false;
+          if (calm) return;
+          r.classList.remove('pop');
+          void r.offsetWidth;
+          r.style.setProperty('--pd', (i * 45) + 'ms');
+          r.classList.add('pop');
+        });
+        records.forEach(function (r) {
+          if (!r.classList.contains('is-hidden')) return;
+          var t = document.querySelector('.spine .tick[data-go="' + r.id + '"]');
+          if (t) t.hidden = true;
+        });
+      });
+    });
+
+    /* ── Peek plate (fine pointers only) ── */
+    var peek = document.getElementById('peek');
+    var peekImg = document.getElementById('peekImg');
+    var peekN = document.getElementById('peekN');
+    var fine = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+    var calm = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var px = 0, py = 0, raf = null;
+
+    function place() {
+      raf = null;
+      var w = 320, h = peek.offsetHeight || 230;
+      var x = Math.min(px + 28, window.innerWidth - w - 20);
+      var y = Math.min(Math.max(py - h / 2, 16), window.innerHeight - h - 16);
+      peek.style.transform = 'translate3d(' + x + 'px,' + y + 'px,0) rotate(-2.2deg)';
+    }
+    function hidePeek() { peek.classList.remove('on'); }
+
+    if (fine && !calm) {
+      records.forEach(function (rec) {
+        var head = rec.querySelector('.rec-head');
+        head.addEventListener('mouseenter', function (e) {
+          if (rec.classList.contains('open')) return;
+          px = e.clientX; py = e.clientY;
+          place();
+          peekImg.src = rec.dataset.plate;
+          peekN.textContent = 'Plate ' + rec.dataset.n;
+          peek.classList.add('on');
+        });
+        head.addEventListener('mouseleave', hidePeek);
+        head.addEventListener('mousemove', function (e) {
+          px = e.clientX; py = e.clientY;
+          if (!raf) raf = requestAnimationFrame(place);
+        });
+      });
+      window.addEventListener('scroll', hidePeek, { passive: true });
+    }
+
+    /* ── Catalogue spine ── */
+    var ticks = Array.prototype.slice.call(document.querySelectorAll('.spine .tick'));
+    var byId = {};
+    ticks.forEach(function (t) {
+      byId[t.dataset.go] = t;
+      t.addEventListener('click', function () {
+        var rec = document.getElementById(t.dataset.go);
+        if (rec) rec.scrollIntoView({ behavior: calm ? 'auto' : 'smooth', block: 'start' });
+      });
+    });
+    if ('IntersectionObserver' in window && ticks.length) {
+      var spineIo = new IntersectionObserver(function (entries) {
+        entries.forEach(function (en) {
+          var t = byId[en.target.id];
+          if (t) t.classList.toggle('on', en.isIntersecting);
+        });
+      }, { rootMargin: '-45% 0px -45% 0px' });
+      records.forEach(function (r) { spineIo.observe(r); });
+    }
+
+    var spineEl = document.getElementById('spine');
+    if ('IntersectionObserver' in window && spineEl) {
+      new IntersectionObserver(function (entries) {
+        spineEl.classList.toggle('live', entries[0].isIntersecting);
+      }, { rootMargin: '-20% 0px -20% 0px' }).observe(document.getElementById('index'));
+    }
+
+    /* ── Reveal on scroll ── */
+    if ('IntersectionObserver' in window && !calm) {
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (en) {
+          if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); }
+        });
+      }, { rootMargin: '0px 0px -8% 0px', threshold: 0.06 });
+      document.querySelectorAll('.rev').forEach(function (el) { io.observe(el); });
+    } else {
+      document.querySelectorAll('.rev').forEach(function (el) { el.classList.add('in'); });
+    }
+
+    /* ── Service worker (PWA) ── */
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', function () {
+        navigator.serviceWorker.register('/sw.js').catch(function () {});
+      });
+    }
+  })();
+  </script>
+</body>
 </html>
