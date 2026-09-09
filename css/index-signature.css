@@ -459,3 +459,106 @@ section[data-sig] > * { position: relative; z-index: 1; }
   .stack.arming .plate { opacity: 1; transform: none; }
   .stack.arming.built .plate.is-on { transform: none; }
 }
+
+/* ── 7. THE TRAJECTORY, AS AN INSTRUMENT ───────────────────────────────
+   The copy says "Pick a stop", so the chart behaves like something you
+   scrub rather than a picture with three dots on it.
+
+     · the scope fills only as far as the era you have taken
+     · a lead line carries the accent up to that point; the curve beyond
+       it stays as a faint trace of where the story is going
+     · a packet runs the whole path on a loop, so the chart reads as
+       live even when nobody has touched it
+     · the taken stop pulses; its metrics count up as the panel changes
+
+   The clip and the lead offset are driven from script, because both
+   depend on where along the path a given year actually falls.          */
+
+.trace-svg { overflow: visible; }
+
+/* the base curve is now the ghost of the whole story */
+.trace {
+  stroke: color-mix(in oklab, var(--blue) 30%, transparent);
+  stroke-width: 1.75;
+}
+
+/* and this one is the part you have travelled */
+.traceLead {
+  fill: none;
+  stroke: var(--blue);
+  stroke-width: 2.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: var(--lead-len, 1400);
+  stroke-dashoffset: var(--lead-len, 1400);
+  transition: stroke-dashoffset .95s cubic-bezier(.22, .8, .25, 1);
+  filter: drop-shadow(0 1px 5px color-mix(in oklab, var(--blue) 35%, transparent));
+}
+
+/* the scope fills up to the same point. Width, not transform: a
+   transform on a clipPath child is not honoured, and the fill silently
+   keeps its full extent. */
+.traceClipRect {
+  transition: width .95s cubic-bezier(.22, .8, .25, 1);
+}
+
+/* a packet running the length of the path, forever */
+.tracePacket {
+  fill: var(--blue);
+  offset-distance: 0%;
+  offset-rotate: 0deg;
+  opacity: 0;
+  filter: drop-shadow(0 0 6px color-mix(in oklab, var(--blue) 70%, transparent));
+}
+.trace-box.running .tracePacket {
+  animation: sigPacket 7.5s cubic-bezier(.5, 0, .5, 1) infinite;
+}
+@keyframes sigPacket {
+  0%        { offset-distance: 0%;   opacity: 0; }
+  6%, 88%   { opacity: .95; }
+  100%      { offset-distance: 100%; opacity: 0; }
+}
+
+/* the taken stop keeps a ring going out of it */
+.stopRing {
+  fill: none;
+  stroke: var(--blue);
+  stroke-width: 1.4;
+  opacity: 0;
+  transform-origin: center;
+  transform-box: fill-box;
+}
+.stop.active .stopRing { animation: sigStopRing 2.6s ease-out infinite; }
+@keyframes sigStopRing {
+  0%        { transform: scale(1);   opacity: .6; }
+  70%, 100% { transform: scale(2.9); opacity: 0; }
+}
+
+.stop .hit { r: 6; transition: r .25s cubic-bezier(.2, .9, .3, 1.4), fill .2s ease; }
+.stop.active .hit { r: 7.5; }
+.stop:hover .hit { r: 8; }
+
+/* The stops are revealed by a transition carrying up to a 2.3s delay,
+   which means a stalled transition clock leaves the years invisible.
+   Script lights them unconditionally once the entrance has had its
+   time, so the labels can never be lost to a dropped animation. */
+.trace-box.stops-lit .stop {
+  opacity: 1;
+  transform: none;
+  /* the delays live on .stop:nth-of-type(), so the backstop has to
+     opt out of transitioning or it inherits the same stall */
+  transition: none;
+}
+
+/* the year on the taken stop steps forward with it */
+.stop .lbl { transition: fill .2s ease, font-size .25s ease; }
+.stop.active .lbl { fill: var(--ink); }
+
+/* the panel's figures roll rather than swap */
+.era-mv { font-variant-numeric: tabular-nums; }
+
+@media (prefers-reduced-motion: reduce) {
+  .traceLead, .traceClipRect { transition: none; }
+  .trace-box.running .tracePacket { animation: none; opacity: 0; }
+  .stop.active .stopRing { animation: none; opacity: 0; }
+}

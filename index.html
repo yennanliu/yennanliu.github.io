@@ -994,21 +994,33 @@
         <line class="axis" x1="0" y1="125" x2="1000" y2="125"></line>
         <line class="axis" x1="0" y1="190" x2="1000" y2="190"></line>
 
-        <path class="traceFill" d="M40,205 C170,205 210,168 300,168 C420,168 470,110 610,110 C760,110 830,52 960,44 L960,222 L40,222 Z"></path>
-        <path class="trace" d="M40,205 C170,205 210,168 300,168 C420,168 470,110 610,110 C760,110 830,52 960,44"></path>
+        <defs>
+          <clipPath id="traceClip">
+            <rect class="traceClipRect" x="0" y="0" width="1000" height="250"></rect>
+          </clipPath>
+        </defs>
 
-        <g class="stop" data-era="0" role="button" tabindex="0" aria-label="2016 to 2018, software engineer, data">
+        <path class="traceFill" clip-path="url(#traceClip)" d="M40,205 C170,205 210,168 300,168 C420,168 470,110 610,110 C760,110 830,52 960,44 L960,222 L40,222 Z"></path>
+
+        <path class="trace" id="tracePath" d="M40,205 C170,205 210,168 300,168 C420,168 470,110 610,110 C760,110 830,52 960,44"></path>
+        <path class="traceLead" d="M40,205 C170,205 210,168 300,168 C420,168 470,110 610,110 C760,110 830,52 960,44"></path>
+        <circle class="tracePacket" r="3.6" cx="0" cy="0" aria-hidden="true"></circle>
+
+        <g class="stop" data-era="0" data-x="40" role="button" tabindex="0" aria-label="2016 to 2018, software engineer, data">
           <circle cx="40" cy="205" r="16" fill="transparent"></circle>
+          <circle class="stopRing" cx="40" cy="205" r="6" aria-hidden="true"></circle>
           <circle class="hit" cx="40" cy="205" r="6"></circle>
           <text class="lbl" x="40" y="238" text-anchor="middle">2016</text>
         </g>
-        <g class="stop" data-era="1" role="button" tabindex="0" aria-label="2018 to 2024, backend engineer">
+        <g class="stop" data-era="1" data-x="300" role="button" tabindex="0" aria-label="2018 to 2024, backend engineer">
           <circle cx="300" cy="168" r="16" fill="transparent"></circle>
+          <circle class="stopRing" cx="300" cy="168" r="6" aria-hidden="true"></circle>
           <circle class="hit" cx="300" cy="168" r="6"></circle>
           <text class="lbl" x="300" y="201" text-anchor="middle">2018</text>
         </g>
-        <g class="stop active" data-era="2" role="button" tabindex="0" aria-label="2024 to now, tech consultant">
+        <g class="stop active" data-era="2" data-x="820" role="button" tabindex="0" aria-label="2024 to now, tech consultant">
           <circle cx="820" cy="72" r="16" fill="transparent"></circle>
+          <circle class="stopRing" cx="820" cy="72" r="6" aria-hidden="true"></circle>
           <circle class="hit" cx="820" cy="72" r="6"></circle>
           <text class="lbl" x="820" y="52" text-anchor="middle">2024</text>
         </g>

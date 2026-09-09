@@ -1,7 +1,7 @@
 /*
  * INDEX — SIGNATURE LAYER
  *
- * Four behaviours, all additive: the page works without any of them.
+ * Five behaviours, all additive: the page works without any of them.
  *
  *   1. a read-progress hairline across the top
  *   2. a pipeline rail down the left edge that tracks which section you
@@ -9,7 +9,8 @@
  *   3. the hero topology wired to the confidence bars underneath it, so
  *      taking a node tells you which layer it belongs to
  *   4. the layer stack: six plates you can take apart, as a tablist
- *   5. a pointer spotlight on the hero grid
+ *   5. the trajectory chart: a scrubbable curve with a live packet
+ *   6. a pointer spotlight on the hero grid
  *
  * Anything motion-driven is skipped outright when the reader has asked
  * for reduced motion.
@@ -247,9 +248,147 @@
     setTimeout(build, 4000);
   })();
 
+
+  /* ── 5. THE TRAJECTORY ────────────────────────────────────────────────
+     The page already had a handler toggling .active on the stops and
+     panels; this adds what that handler cannot know — where along the
+     curve a given year actually sits.
+
+     Everything below is measured off the path itself rather than
+     hard-coded, so the numbers stay right if the curve is ever redrawn. */
+
+  (function trajectory() {
+    var box = document.querySelector('.trace-box');
+    var path = document.getElementById('tracePath');
+    if (!box || !path) return;
+
+    var lead = box.querySelector('.traceLead');
+    var clip = box.querySelector('.traceClipRect');
+    var packet = box.querySelector('.tracePacket');
+    var stops = [].slice.call(box.querySelectorAll('.stop'));
+    var panels = [].slice.call(document.querySelectorAll('.era-panel'));
+    if (!lead || !clip || !stops.length) return;
+
+    var total = path.getTotalLength();
+    lead.style.setProperty('--lead-len', total.toFixed(1));
+
+    /* walk the path to find how far along it a given x falls */
+    function lengthAtX(x) {
+      var lo = 0, hi = total;
+      for (var i = 0; i < 22; i++) {
+        var mid = (lo + hi) / 2;
+        if (path.getPointAtLength(mid).x < x) lo = mid; else hi = mid;
+      }
+      return (lo + hi) / 2;
+    }
+
+    var marks = stops.map(function (s) {
+      var x = parseFloat(s.getAttribute('data-x'));
+      return { el: s, era: s.getAttribute('data-era'), x: x, len: lengthAtX(x) };
+    });
+
+    /* the packet follows the real path, so the d string is never copied
+       into the stylesheet where it could drift out of sync */
+    if (packet && 'offsetPath' in packet.style) {
+      packet.style.offsetPath = 'path("' + path.getAttribute('d') + '")';
+    }
+
+    function scrub(era) {
+      var m = null;
+      marks.forEach(function (k) { if (k.era === era) m = k; });
+      if (!m) return;
+      lead.style.strokeDashoffset = (total - m.len).toFixed(1);
+      clip.setAttribute('width', m.x.toFixed(1));
+    }
+
+    /* ── the figures roll to their new values ── */
+
+    function countUp(panel) {
+      if (reduced) return;
+      panel.querySelectorAll('.era-mv').forEach(function (el) {
+        var raw = el.getAttribute('data-v') || el.textContent.trim();
+        el.setAttribute('data-v', raw);
+        var m = /^([\d.]+)(.*)$/.exec(raw);
+        if (!m) return;
+        var target = parseFloat(m[1]);
+        var suffix = m[2];
+        var decimals = (m[1].split('.')[1] || '').length;
+        var t0 = 0;
+        function step(now) {
+          if (!t0) t0 = now;
+          var p = Math.min(1, (now - t0) / 620);
+          var e = 1 - Math.pow(1 - p, 3);
+          el.textContent = (target * e).toFixed(decimals) + suffix;
+          if (p < 1) raf(step);
+        }
+        el.textContent = (0).toFixed(decimals) + suffix;
+        raf(step);
+      });
+    }
+
+    function activePanel() {
+      var found = null;
+      panels.forEach(function (p) {
+        if (p.classList.contains('active')) found = p;
+      });
+      return found;
+    }
+
+    marks.forEach(function (m) {
+      function take() {
+        scrub(m.era);
+        /* the page's own handler flips .active; read it back rather than
+           duplicating that logic here */
+        raf(function () {
+          var p = activePanel();
+          if (p && p.getAttribute('data-era') === m.era) countUp(p);
+        });
+      }
+      m.el.addEventListener('click', take);
+      m.el.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') take();
+      });
+    });
+
+    /* ── first draw, once the chart is on screen ── */
+
+    function start() {
+      if (box.classList.contains('running')) return;
+      box.classList.add('running');
+
+      /* collapse the scope without animating, so the first draw reads as
+         filling up rather than retracting from full width */
+      clip.style.transition = 'none';
+      clip.setAttribute('width', '0');
+      void clip.getBoundingClientRect();
+      clip.style.transition = '';
+
+      var on = marks[marks.length - 1];
+      marks.forEach(function (k) {
+        if (k.el.classList.contains('active')) on = k;
+      });
+      scrub(on.era);
+      var p = activePanel();
+      if (p) countUp(p);
+      /* the years must survive a dropped transition */
+      setTimeout(function () { box.classList.add('stops-lit'); }, 2800);
+    }
+
+    if (!('IntersectionObserver' in window)) { start(); return; }
+    var obs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (!en.isIntersecting) return;
+        start();
+        obs.disconnect();
+      });
+    }, { threshold: 0.25 });
+    obs.observe(box);
+    setTimeout(start, 4000);      /* never leave the chart undrawn */
+  })();
+
   if (reduced) return;
 
-  /* ── 5. pointer spotlight on the hero grid ────────────────────────── */
+  /* ── 6. pointer spotlight on the hero grid ────────────────────────── */
 
   (function spotlight() {
     var hero = document.getElementById('hero');

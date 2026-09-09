@@ -102,6 +102,12 @@ it changes is scale, composition and responsiveness:
   a staircase, one open at a time, wired to its detail panel by a
   hairline that tracks whichever plate you took. It is a real tablist —
   arrow keys, Home/End, one tab stop.
+- The trajectory chart is an instrument, not a picture: the scope fills
+  only as far as the era you take, a lead path carries the accent up to
+  that point over a ghost of the whole curve, a packet runs the path on
+  a loop, and the panel's figures count up. Where a year sits along the
+  curve is measured off the path with `getPointAtLength`, never
+  hard-coded, so the numbers stay right if the curve is redrawn.
 - Pointer spotlight on the hero grid.
 
 Two rules the stack exists to respect, worth keeping if you extend it:
