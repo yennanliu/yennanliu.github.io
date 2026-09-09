@@ -98,8 +98,22 @@ it changes is scale, composition and responsiveness:
   `.topo .node[data-skill="n"]` lights `.tc-skill` number `n`. It adds no
   new labels — it only makes a correspondence the card already had
   visible.
-- Pointer spotlight on the hero grid, two degrees of tilt on the layer
-  plates.
+- The six layers are a **stack**, not a marquee: six plates offset into
+  a staircase, one open at a time, wired to its detail panel by a
+  hairline that tracks whichever plate you took. It is a real tablist —
+  arrow keys, Home/End, one tab stop.
+- Pointer spotlight on the hero grid.
+
+Two rules the stack exists to respect, worth keeping if you extend it:
+
+- **Decoration must never be able to hide content.** The entrance is a
+  transition, not a filled keyframe animation (`animation-fill-mode:
+  both` pins the *from* state until the animation runs, so a stalled
+  clock leaves the text invisible), and the class driving it is removed
+  once it has played.
+- **Script subtracts, markup is complete.** Nothing starts with `hidden`
+  or `opacity: 0` in the HTML/CSS; the script adds those once it is
+  running, so no-JS or a failed observer degrades to everything visible.
 
 All of it is additive: the page works with the JS removed, and every
 motion-driven part is skipped under `prefers-reduced-motion`.

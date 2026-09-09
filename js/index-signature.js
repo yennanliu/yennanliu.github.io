@@ -1,17 +1,15 @@
 /*
  * INDEX — SIGNATURE LAYER
  *
- * Five behaviours, all additive: the page works without any of them.
+ * Four behaviours, all additive: the page works without any of them.
  *
  *   1. a read-progress hairline across the top
  *   2. a pipeline rail down the left edge that tracks which section you
  *      are in, and jumps you to one when clicked
  *   3. the hero topology wired to the confidence bars underneath it, so
  *      taking a node tells you which layer it belongs to
- *   4. the layer belts: scroll-momentum marquee, a torch that lifts what
- *      is under the cursor, and a beam round the card you are on
- *   5. a pointer spotlight on the hero grid, and a two-degree tilt on the
- *      layer plates
+ *   4. the layer stack: six plates you can take apart, as a tablist
+ *   5. a pointer spotlight on the hero grid
  *
  * Anything motion-driven is skipped outright when the reader has asked
  * for reduced motion.
@@ -143,120 +141,115 @@
     });
   })();
 
-  /* ── 4. THE LAYER BELTS ───────────────────────────────────────────────
-     Two conveyor belts carrying the six layers.
 
-     Taking them off CSS keyframes and onto a frame loop buys three
-     things the keyframes could not do: they carry the momentum of your
-     scroll, they ease down when you reach for a card instead of
-     stopping dead, and they stay in step when the tab is backgrounded.
+  /* ── 4. THE STACK ─────────────────────────────────────────────────────
+     Six plates, one open seam. A proper tablist: arrows and Home/End
+     move between plates, the selected one is the only tab stop, and the
+     panels carry hidden so assistive tech and the eye agree.
 
-     Everything degrades: under reduced motion the belts are left alone
-     as a pair of ordinary scrollable rows. */
+     Pointing at a plate opens it — there is nothing destructive behind
+     it, so making you click would only add a step. */
 
-  (function belts() {
-    var outer = document.querySelector('.exp-marquee-outer');
-    if (!outer || reduced) return;
+  (function stack() {
+    var root = document.getElementById('stack');
+    if (!root) return;
 
-    var tracks = [].slice.call(outer.querySelectorAll('.exp-mq-track'));
-    if (!tracks.length) return;
+    var plates = [].slice.call(root.querySelectorAll('.plate'));
+    var seams = [].slice.call(root.querySelectorAll('.seam'));
+    if (plates.length !== seams.length || !plates.length) return;
 
-    outer.classList.add('js');
+    plates.forEach(function (p, i) { p.style.setProperty('--i', i); });
 
-    /* The row duplicates its cards for a seamless loop, so one cycle is
-       half the content — but scrollWidth counts the gaps *between* cards
-       and there is one fewer gap than card. Half of scrollWidth is
-       therefore half a gap short, which is what makes a naive -50%
-       marquee drift into a visible seam. Add the gap back before
-       halving. */
-    function cycle(el) {
-      var gap = parseFloat(getComputedStyle(el).columnGap) || 0;
-      return (el.scrollWidth + gap) / 2;
-    }
-
-    var belts = tracks.map(function (el) {
-      var span = cycle(el);
-      var right = el.classList.contains('track-r');
-      return {
-        el: el,
-        span: span,
-        dir: right ? 1 : -1,
-        base: right ? 26 : 30,          // px per second
-        x: right ? -span : 0
-      };
+    /* script is live, so it may now take responsibility for what shows */
+    root.classList.add('arming');
+    seams.forEach(function (sm, i) {
+      sm.hidden = i !== 0;
+      sm.classList.toggle('is-on', i === 0);
     });
 
-    function remeasure() {
-      belts.forEach(function (b) {
-        b.span = cycle(b.el);
-        if (b.x < -b.span) b.x = -b.span;
+    var current = 0;
+
+    function open(i, moveFocus) {
+      if (i === current) return;
+      current = i;
+      plates.forEach(function (p, k) {
+        var on = k === i;
+        p.classList.toggle('is-on', on);
+        p.setAttribute('aria-selected', on ? 'true' : 'false');
+        p.tabIndex = on ? 0 : -1;
       });
+      seams.forEach(function (s, k) {
+        var on = k === i;
+        s.hidden = !on;
+        s.classList.toggle('is-on', on);
+      });
+      wire(i);
+      if (moveFocus) plates[i].focus();
     }
-    window.addEventListener('resize', remeasure, { passive: true });
-    window.addEventListener('load', remeasure);   // fonts settle the widths
 
-    /* momentum picked up from the page scroll, decaying every frame */
-    var boost = 0, lastY = window.scrollY;
-    window.addEventListener('scroll', function () {
-      var dy = window.scrollY - lastY;
-      lastY = window.scrollY;
-      boost += dy * 0.9;
-      if (boost > 900) boost = 900;
-      if (boost < -900) boost = -900;
-    }, { passive: true });
-
-    /* reaching for a card slows the belt rather than freezing it */
-    var slow = 1;
-    outer.addEventListener('mouseenter', function () { slow = 0.12; });
-    outer.addEventListener('mouseleave', function () { slow = 1; });
-
-    var last = 0;
-    function frame(now) {
-      var dt = last ? Math.min((now - last) / 1000, 0.05) : 0;
-      last = now;
-      boost *= 0.94;
-
-      belts.forEach(function (b) {
-        if (!b.span) { b.span = cycle(b.el); return; }
-        b.x += b.dir * (b.base * slow + Math.abs(boost) * 0.35) * dt;
-        // wrap on the duplicated half so the seam never shows
-        if (b.x <= -b.span) b.x += b.span;
-        if (b.x >= 0) b.x -= b.span;
-        b.el.style.transform = 'translate3d(' + b.x.toFixed(2) + 'px,0,0)';
-      });
-
-      requestAnimationFrame(frame);
+    /* line the connector up with the middle of the open plate, so the
+       pair reads as wired together rather than merely adjacent */
+    function wire(i) {
+      var seam = seams[i];
+      if (!seam || seam.hidden) return;
+      var pr = plates[i].getBoundingClientRect();
+      var sr = seam.getBoundingClientRect();
+      if (!sr.height) return;
+      seam.style.setProperty(
+        '--seam-y', (pr.top + pr.height / 2 - sr.top).toFixed(1) + 'px');
     }
-    requestAnimationFrame(frame);
 
-    /* ── the torch ── */
-    if (!window.matchMedia('(hover: hover)').matches) return;
+    window.addEventListener('resize', function () { wire(current); },
+                            { passive: true });
 
-    var torch = document.createElement('div');
-    torch.className = 'exp-torch';
-    outer.appendChild(torch);
+    plates.forEach(function (p, i) {
+      p.addEventListener('mouseenter', function () { open(i); });
+      p.addEventListener('focus', function () { open(i); });
+      p.addEventListener('click', function () { open(i); });
 
-    var pending = false, tx = 50, ty = 50;
-    outer.addEventListener('mousemove', function (e) {
-      var r = outer.getBoundingClientRect();
-      tx = ((e.clientX - r.left) / r.width) * 100;
-      ty = ((e.clientY - r.top) / r.height) * 100;
-      if (pending) return;
-      pending = true;
-      requestAnimationFrame(function () {
-        pending = false;
-        torch.style.setProperty('--sig-tx', tx.toFixed(2) + '%');
-        torch.style.setProperty('--sig-ty', ty.toFixed(2) + '%');
+      p.addEventListener('keydown', function (e) {
+        var k = e.key, next = null;
+        if (k === 'ArrowDown' || k === 'ArrowRight') next = (i + 1) % plates.length;
+        else if (k === 'ArrowUp' || k === 'ArrowLeft') next = (i - 1 + plates.length) % plates.length;
+        else if (k === 'Home') next = 0;
+        else if (k === 'End') next = plates.length - 1;
+        if (next === null) return;
+        e.preventDefault();
+        open(next, true);
       });
-    }, { passive: true });
+    });
 
-    outer.addEventListener('mouseenter', function () { outer.classList.add('lit'); });
-    outer.addEventListener('mouseleave', function () { outer.classList.remove('lit'); });
+    /* the stack assembles itself once it is on screen */
+    function build() {
+      if (root.classList.contains('built')) return;
+      root.classList.add('built');
+      wire(current);
+      /* once the entrance has played, drop the class that drives it, so
+         the resting state carries no rule that could hide a plate */
+      setTimeout(function () { root.classList.remove('arming'); }, 1200);
+    }
+
+    if (reduced || !('IntersectionObserver' in window)) {
+      build();
+      return;
+    }
+
+    var obs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (!en.isIntersecting) return;
+        build();
+        obs.disconnect();
+      });
+    }, { threshold: 0.2 });
+    obs.observe(root);
+
+    /* a stack that is never scrolled to must still end up visible */
+    setTimeout(build, 4000);
   })();
 
   if (reduced) return;
 
-  /* ── 5a. pointer spotlight on the hero grid ───────────────────────── */
+  /* ── 5. pointer spotlight on the hero grid ────────────────────────── */
 
   (function spotlight() {
     var hero = document.getElementById('hero');
@@ -275,36 +268,5 @@
         hero.style.setProperty('--sig-my', my.toFixed(2) + '%');
       });
     }, { passive: true });
-  })();
-
-  /* ── 5b. two degrees of tilt on the layer plates ──────────────────── */
-
-  (function tilt() {
-    if (!window.matchMedia('(hover: hover)').matches) return;
-    var MAX = 2;   // degrees; the whole effect
-
-    document.querySelectorAll('.exp-mcard').forEach(function (card) {
-      var pending = false, rx = 0, ry = 0;
-
-      card.addEventListener('mousemove', function (e) {
-        var r = card.getBoundingClientRect();
-        ry = (((e.clientX - r.left) / r.width) - 0.5) * (MAX * 2);
-        rx = (0.5 - ((e.clientY - r.top) / r.height)) * (MAX * 2);
-        if (pending) return;
-        pending = true;
-        raf(function () {
-          pending = false;
-          card.style.setProperty('--sig-ry', ry.toFixed(2) + 'deg');
-          card.style.setProperty('--sig-rx', rx.toFixed(2) + 'deg');
-          card.classList.add('tilt');
-        });
-      }, { passive: true });
-
-      card.addEventListener('mouseleave', function () {
-        card.classList.remove('tilt');
-        card.style.removeProperty('--sig-rx');
-        card.style.removeProperty('--sig-ry');
-      });
-    });
   })();
 })();
