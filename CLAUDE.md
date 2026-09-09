@@ -76,6 +76,54 @@ The rules the system is built on:
   them follow the OS preference any more.
 - 0.16s ease for state changes, and `prefers-reduced-motion` honoured.
 
+### The landing page
+
+`index.html` alone carries a signature layer on top of the system —
+`css/index-signature.css` and `js/index-signature.js`, both loaded last
+and only there. The front door is allowed to speak up; the rest of the
+site stays quiet.
+
+It keeps the palette, the hairlines, the two weights and the mono. What
+it changes is scale, composition and responsiveness:
+
+- The hero headline is **the one deliberate break of the 2.5rem cap** —
+  it goes to 5.25rem at weight 300. If you raise the cap anywhere else,
+  the break stops reading as intentional.
+- A pipeline rail down the left edge marks the five sections and fills
+  as you scroll; a hairline across the top tracks read progress.
+- Each section gets an oversized outline numeral in the margin
+  (`data-sig="02"` on the `<section>`), drawn as a stroke so it stays
+  texture rather than hierarchy.
+- The hero topology is wired to the confidence bars beneath it: each
+  `.topo .node[data-skill="n"]` lights `.tc-skill` number `n`. It adds no
+  new labels — it only makes a correspondence the card already had
+  visible.
+- The six layers are a **stack**, not a marquee: six plates offset into
+  a staircase, one open at a time, wired to its detail panel by a
+  hairline that tracks whichever plate you took. It is a real tablist —
+  arrow keys, Home/End, one tab stop.
+- The trajectory chart is an instrument, not a picture: the scope fills
+  only as far as the era you take, a lead path carries the accent up to
+  that point over a ghost of the whole curve, a packet runs the path on
+  a loop, and the panel's figures count up. Where a year sits along the
+  curve is measured off the path with `getPointAtLength`, never
+  hard-coded, so the numbers stay right if the curve is redrawn.
+- Pointer spotlight on the hero grid.
+
+Two rules the stack exists to respect, worth keeping if you extend it:
+
+- **Decoration must never be able to hide content.** The entrance is a
+  transition, not a filled keyframe animation (`animation-fill-mode:
+  both` pins the *from* state until the animation runs, so a stalled
+  clock leaves the text invisible), and the class driving it is removed
+  once it has played.
+- **Script subtracts, markup is complete.** Nothing starts with `hidden`
+  or `opacity: 0` in the HTML/CSS; the script adds those once it is
+  running, so no-JS or a failed observer degrades to everything visible.
+
+All of it is additive: the page works with the JS removed, and every
+motion-driven part is skipped under `prefers-reduced-motion`.
+
 Per-page `:root` blocks still exist and still drive each page's own CSS —
 they now hold FinLab values, so retheming a page means editing its tokens
 rather than hunting colour literals.
