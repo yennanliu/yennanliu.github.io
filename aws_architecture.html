@@ -246,28 +246,6 @@
             }
          }
          
-         /* Responsive footer */
-         footer {
-            padding: 30px 0 20px;
-         }
-         
-         .list-inline {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 15px;
-         }
-         
-         @media (min-width: 768px) {
-            footer {
-               padding: 40px 0 20px;
-            }
-            
-            .list-inline {
-               gap: 20px;
-            }
-         }
-         
          /* Scroll to top button */
          .scroll-top {
             width: 40px;
@@ -305,12 +283,6 @@
          .nav-link:hover {
             opacity: 1;
             color: var(--apple-text) !important;
-         }
-         
-         footer {
-            background-color: var(--apple-light-gray);
-            border-top: 1px solid var(--apple-border);
-            transition: all var(--transition-speed) ease-in-out;
          }
          
          /* Apple-style buttons - Mobile First */
@@ -675,20 +647,6 @@
          
          body.dark-mode .apple-button:hover {
             background: #7aa8ff;
-         }
-         
-         body.dark-mode footer {
-            background-color: #1f1f24;
-            border-top: 1px solid #2e2e35;
-            color: #9aa5b5;
-         }
-         
-         body.dark-mode footer a {
-            color: #7aa8ff;
-         }
-         
-         body.dark-mode footer a:hover {
-            color: #7aa8ff;
          }
          
          /* Improve toggler button visibility in light mode */
@@ -2421,6 +2379,7 @@
   </style>
       <link rel="stylesheet" href="css/finlab-theme.css">
      <link rel="stylesheet" href="css/site-nav.css">
+     <link rel="stylesheet" href="css/site-footer.css">
 </head>
    <body>
       <!-- Navigation -->
@@ -2960,25 +2919,38 @@
          <i class="fas fa-arrow-up"></i>
       </div>
 
-      <!-- Footer -->
-      <footer class="mt-5">
-         <div class="container">
-            <div class="row">
-               <div class="col-lg-12 text-center">
-                  <ul class="list-inline">
-                     <li class="list-inline-item"><a href="https://yennanliu.github.io/">Home</a></li>
-                     <li class="list-inline-item"><a href="https://yennanliu.github.io/about_me.html">About Me</a></li>
-                     <li class="list-inline-item"><a href="https://yennanliu.github.io/portfolios.html">Portfolios</a></li>
-                     <li class="list-inline-item"><a href="https://yennanliu.github.io/aws_architecture.html">AWS Architecture</a></li>
-                     <li class="list-inline-item"><a href="https://yennanliu.github.io/contact.html">Contact</a></li>
-                     <li class="list-inline-item"><a href="https://yennj12.js.org/yennj12_blog_V4/">Blog</a></li>
-                     <li class="list-inline-item"><a href="https://yennj12.js.org/index.html.backup.html">Old Site</a></li>
-                  </ul>
-                  <p>&copy; 2026 yen.dev.com All Rights Reserved.</p>
-               </div>
-            </div>
-         </div>
-      </footer>
+<!-- ══ FOOTER — shared; see css/site-footer.css ══ -->
+<footer class="site-footer" id="site-footer">
+  <div class="ft-grid ft-wrap">
+    <div>
+      <div class="ft-mark">YEN<em>.DEV</em></div>
+      <p class="ft-tagline">Physics first, full stack after. AI products built end to end — from 31 of 195 countries.</p>
+    </div>
+    <div class="ft-col">
+      <span class="ft-col-hd">Work</span>
+      <a href="portfolios.html">Portfolios</a>
+      <a href="ai_builder.html">AI Builder</a>
+      <a href="aws_architecture.html">AWS Architecture</a>
+    </div>
+    <div class="ft-col">
+      <span class="ft-col-hd">Navigate</span>
+      <a href="about_me.html">About Me</a>
+      <a href="contact.html">Contact</a>
+      <a href="https://yennj12.js.org/yennj12_blog_V4/" target="_blank" rel="noreferrer">Blog ↗</a>
+    </div>
+    <div class="ft-col">
+      <span class="ft-col-hd">Connect</span>
+      <a href="https://github.com/yennanliu"      target="_blank" rel="noreferrer">GitHub</a>
+      <a href="https://linkedin.com/in/yennanliu" target="_blank" rel="noreferrer">LinkedIn</a>
+      <a href="https://huggingface.co/yennj12"    target="_blank" rel="noreferrer">HuggingFace</a>
+      <a href="https://gitlab.com/yennanliu"      target="_blank" rel="noreferrer">GitLab</a>
+    </div>
+  </div>
+  <div class="ft-lower ft-wrap">
+    <span class="ft-copy">© 2026 Yen · All rights reserved.</span>
+    <span class="ft-sig">yennj12.js.org</span>
+  </div>
+</footer>
 
       <!-- Scripts -->
       <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>

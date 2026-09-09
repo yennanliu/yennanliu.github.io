@@ -169,6 +169,35 @@ four different heights, and one page had none.
 If you add a page, copy the nav block, the inline head script, and the
 two file references. Do not write a fifth nav.
 
+### The footer
+
+Same story at the bottom of the page: `<footer class="site-footer"
+id="site-footer">` plus `css/site-footer.css`. It is the landing page's
+four-column footer — mark and tagline, then Work / Navigate / Connect in
+mono, over a hairline lower bar — lifted out of `index.html` and
+rewritten against the `--fl-*` tokens.
+
+**It goes on the six pages the nav bar reaches, and only those:**
+`index`, `about_me`, `portfolios`, `ai_builder`, `aws_architecture`,
+`contact`. The pages off the nav — `codejob`, `tutor`, `main_project`,
+`nobody` — keep whatever footer they had. That boundary is deliberate;
+do not widen it without being asked.
+
+- It **brings its own container** (`.ft-wrap`), so it does not care what
+  a page calls its wrapper or whether Bootstrap's `.container` is in
+  play. That is what made it portable.
+- It **anchors its own em ladder at 16px** rather than inheriting the
+  root size, since `css/bootstrap.css` sets `html { font-size: 10px }`
+  and a `rem` would then mean two different things on two pages.
+- Every rule is scoped to `.site-footer`, which outranks the bare
+  `footer { }` rules those six pages used to carry. Those have been
+  deleted anyway — including the `body.dark-mode footer` overrides,
+  since the shared footer reads dark straight off the tokens.
+- `footer.html` holds the same block as a reference copy. Nothing loads
+  it at runtime; keep it in step when the markup changes.
+
+If you add a page to the nav, give it this footer too.
+
 Per-page `:root` blocks still exist and still drive each page's own CSS —
 they now hold FinLab values, so retheming a page means editing its tokens
 rather than hunting colour literals.
