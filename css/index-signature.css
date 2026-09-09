@@ -432,3 +432,144 @@ section[data-sig] > * { position: relative; z-index: 1; }
   .exp-mcard:hover .mc-tag { transform: none; }
   .exp-torch { display: none; }
 }
+
+/* ── 11. THE MACHINE ROOM ──────────────────────────────────────────────
+   The layer band is the one place on the page where the work itself is
+   on display, and on a white ground none of it read: a glow needs
+   something to glow against, and a torch needs a dark room.
+
+   So this section inverts. It is the page's single dark moment — which
+   also earns the belts their metaphor, because a rack of running
+   machines is exactly what it now looks like. Light travels along every
+   card's top rule whether or not you are pointing at it, so the section
+   is alive before you touch it.                                         */
+
+#expertise {
+  --band-bg:      #0a0c11;
+  --band-surface: rgba(255, 255, 255, .038);
+  --band-line:    rgba(255, 255, 255, .10);
+  --band-ink:     #eef2f8;
+  --band-ink-2:   #9fb0c8;
+  --band-dim:     #6b7a90;
+
+  /* the accents lift for a dark ground */
+  --cat-1: #7aa8ff; --cat-2: #b48cff; --cat-3: #34d399;
+  --cat-4: #fbbf24; --cat-5: #5ec8dd; --cat-6: #f0a0cd;
+
+  position: relative;
+  background: var(--band-bg);
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+  color: var(--band-ink-2);
+  isolation: isolate;
+}
+
+/* the same grid bed as the hero, so the two dark surfaces rhyme */
+#expertise::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, .045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, .045) 1px, transparent 1px);
+  background-size: 56px 56px;
+  -webkit-mask-image: radial-gradient(ellipse 80% 70% at 50% 40%, #000 20%, transparent 100%);
+          mask-image: radial-gradient(ellipse 80% 70% at 50% 40%, #000 20%, transparent 100%);
+  animation: sigDrift 9s linear infinite;
+}
+@keyframes sigDrift { to { background-position: 56px 56px, 56px 56px; } }
+
+#expertise > *, #expertise .exp-marquee-outer { position: relative; z-index: 1; }
+
+/* the heading inverts with the room */
+#expertise .sec-h2  { color: var(--band-ink); }
+#expertise .sec-lead { color: var(--band-ink-2); }
+#expertise .sec-eye  { color: var(--cat-1); }
+#expertise[data-sig]::before { -webkit-text-stroke-color: rgba(255, 255, 255, .10); }
+
+/* ── the plates ── */
+
+#expertise .exp-mcard {
+  background: var(--band-surface);
+  border-color: var(--band-line);
+  border-top-width: 2px;
+  box-shadow: none;
+  -webkit-backdrop-filter: blur(6px);
+          backdrop-filter: blur(6px);
+}
+#expertise .mc-ai  { border-top-color: color-mix(in oklab, var(--cat-1) 45%, transparent); }
+#expertise .mc-sd  { border-top-color: color-mix(in oklab, var(--cat-2) 45%, transparent); }
+#expertise .mc-be  { border-top-color: color-mix(in oklab, var(--cat-5) 45%, transparent); }
+#expertise .mc-cl  { border-top-color: color-mix(in oklab, var(--cat-3) 45%, transparent); }
+#expertise .mc-app { border-top-color: color-mix(in oklab, var(--cat-4) 45%, transparent); }
+#expertise .mc-dp  { border-top-color: color-mix(in oklab, var(--cat-6) 45%, transparent); }
+
+#expertise .mc-title { color: var(--band-ink); }
+#expertise .mc-desc  { color: var(--band-ink-2); }
+#expertise .mc-tag {
+  color: var(--band-dim);
+  background: rgba(255, 255, 255, .04);
+  border-color: var(--band-line);
+}
+
+/* a current running the length of every top rule, always on and
+   staggered so the rack never pulses in unison */
+#expertise .exp-mcard::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  z-index: 2;
+  pointer-events: none;
+  background-image: linear-gradient(90deg,
+                    transparent 0%,
+                    var(--mc, var(--blue)) 50%,
+                    transparent 100%);
+  background-size: 45% 100%;
+  background-repeat: no-repeat;
+  filter: drop-shadow(0 0 5px var(--mc, var(--blue)));
+  animation: sigCurrent 4.2s linear infinite;
+}
+@keyframes sigCurrent {
+  from { background-position: -50% 0; }
+  to   { background-position: 150% 0; }
+}
+#expertise .exp-mq-row:nth-child(1) .exp-mcard:nth-child(3n+1)::before { animation-delay: -.4s; }
+#expertise .exp-mq-row:nth-child(1) .exp-mcard:nth-child(3n+2)::before { animation-delay: -1.9s; }
+#expertise .exp-mq-row:nth-child(1) .exp-mcard:nth-child(3n+3)::before { animation-delay: -3.1s; }
+#expertise .exp-mq-row:nth-child(2) .exp-mcard:nth-child(3n+1)::before { animation-delay: -2.6s; }
+#expertise .exp-mq-row:nth-child(2) .exp-mcard:nth-child(3n+2)::before { animation-delay: -1.1s; }
+#expertise .exp-mq-row:nth-child(2) .exp-mcard:nth-child(3n+3)::before { animation-delay: -3.7s; }
+
+/* the icon plate glows rather than sits on a pale wash */
+#expertise .mc-ai  .mc-icon { background: color-mix(in oklab, var(--cat-1) 16%, transparent); color: var(--cat-1); }
+#expertise .mc-sd  .mc-icon { background: color-mix(in oklab, var(--cat-2) 16%, transparent); color: var(--cat-2); }
+#expertise .mc-be  .mc-icon { background: color-mix(in oklab, var(--cat-5) 16%, transparent); color: var(--cat-5); }
+#expertise .mc-cl  .mc-icon { background: color-mix(in oklab, var(--cat-3) 16%, transparent); color: var(--cat-3); }
+#expertise .mc-app .mc-icon { background: color-mix(in oklab, var(--cat-4) 16%, transparent); color: var(--cat-4); }
+#expertise .mc-dp  .mc-icon { background: color-mix(in oklab, var(--cat-6) 16%, transparent); color: var(--cat-6); }
+#expertise .mc-icon { box-shadow: 0 0 22px -6px var(--mc, var(--blue)); }
+
+/* hover: the plate comes forward and the glow bites */
+#expertise .exp-mcard:hover {
+  background: rgba(255, 255, 255, .06);
+  border-color: color-mix(in oklab, var(--mc, var(--blue)) 38%, var(--band-line));
+  box-shadow: 0 14px 40px -10px color-mix(in oklab, var(--mc, var(--blue)) 45%, transparent);
+}
+#expertise .exp-mcard:hover .mc-tag {
+  color: var(--band-ink-2);
+  border-color: color-mix(in oklab, var(--mc, var(--blue)) 45%, var(--band-line));
+}
+
+/* the torch finally has a dark room to work in */
+#expertise .exp-torch { background: var(--band-bg); }
+#expertise .exp-marquee-outer.lit .exp-torch { opacity: .78; }
+
+@media (prefers-reduced-motion: reduce) {
+  #expertise::after { animation: none; }
+  #expertise .exp-mcard::before { animation: none; background-position: 50% 0; opacity: .6; }
+}
