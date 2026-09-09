@@ -53,28 +53,32 @@
       <!-- Font Awesome -->
       <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet">
       <!-- Google Fonts -->
-      <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400&family=Space+Grotesk:wght@300;400;500&display=swap" rel="stylesheet">
       
       <!-- Custom CSS -->
+      <link rel="stylesheet" href="css/finlab.css">
       <style>
          :root {
-            --primary-color: #000000;
-            --apple-blue: #000000;
-            --apple-gray: #1d1d1f;
-            --apple-light-gray: #f5f5f7;
-            --apple-white: #ffffff;
-            --apple-text: #1d1d1f;
-            --apple-secondary-text: #737373;
-            --apple-border: #e5e5e5;
-            --transition-speed: 0.28s;
-            --apple-radius: 18px;
-            --apple-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
-            --gradient-black: linear-gradient(135deg, #000000 0%, #262626 100%);
-         }
+          /* FinLab palette */
+          --apple-blue: #2563eb;
+          --apple-gray: #111827;
+          --apple-light-gray: #f8fafc;
+          --apple-white: #ffffff;
+          --apple-text: #111827;
+          --apple-secondary-text: #647084;
+          --apple-border: #e5e7eb;
+          --transition-speed: 0.16s;
+          --apple-radius: 16px;
+          --apple-shadow: 0 2px 6px rgba(15, 23, 42, .06);
+          --primary-color: #111827;
+          --gradient-black: #111827;
+       }
          
          /* Base styles */
          body {
-            font-family: 'Manrope', -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', Roboto, sans-serif;
+            font-family: var(--fl-body);
             background-color: var(--apple-white);
             color: var(--apple-text);
             line-height: 1.6;
@@ -87,18 +91,18 @@
 
          /* Global Heading Styles */
          h1, h2, h3, h4, h5, h6 {
-            font-family: 'Outfit', sans-serif;
-            font-weight: 700;
+            font-family: var(--fl-display);
+            font-weight: 400;
             letter-spacing: -.02em;
             color: var(--apple-text);
          }
 
          /* Apple Typography */
          .apple-headline {
-            font-family: 'Outfit', sans-serif;
-            font-size: 90px;
+            font-family: var(--fl-display);
+            font-size: 40px;
             line-height: 1;
-            font-weight: 900;
+            font-weight: 300;
             letter-spacing: -.04em;
             color: var(--apple-text);
             margin-bottom: 30px;
@@ -123,7 +127,7 @@
          }
 
          .apple-subheadline {
-            font-size: 52px;
+            font-size: 40px;
             line-height: 1.2;
             font-weight: 400;
             letter-spacing: -.01em;
@@ -158,7 +162,7 @@
             .navbar-collapse {
                background-color: rgba(255, 255, 255, 0.95);
                padding: 20px;
-               border-radius: 10px;
+               border-radius: var(--fl-r);
                margin-top: 10px;
             }
             
@@ -173,7 +177,7 @@
          
          /* Apple-style hero section - Mobile First */
          .hero-section {
-            background: linear-gradient(180deg, var(--apple-light-gray) 0%, var(--apple-white) 100%);
+            background: var(--apple-light-gray);
             padding: 40px 0 60px;
             text-align: center;
          }
@@ -203,7 +207,7 @@
          
          .architecture-card:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            box-shadow: var(--fl-sh-lg);
          }
          
          .architecture-card-body {
@@ -269,14 +273,14 @@
          }
          
          .navbar-brand {
-            font-weight: 700;
+            font-weight: 400;
             font-size: 1.5rem;
             color: var(--apple-text) !important;
             letter-spacing: .011em;
          }
 
          .nav-link {
-            font-weight: 500;
+            font-weight: 400;
             font-size: 1rem;
             color: var(--apple-text) !important;
             position: relative;
@@ -316,7 +320,7 @@
          }
          
          .apple-button:hover {
-            background: #0051d5;
+            background: #2563eb;
             color: var(--apple-white);
             text-decoration: none;
          }
@@ -363,7 +367,7 @@
          .apple-product-title {
             font-size: 24px;
             line-height: 1.16667;
-            font-weight: 600;
+            font-weight: 400;
             letter-spacing: .009em;
             color: var(--apple-text);
             margin-bottom: 8px;
@@ -420,10 +424,10 @@
             height: auto;
             min-height: 400px;
             max-width: none;
-            border-radius: 20px;
+            border-radius: var(--fl-r-xl);
             object-fit: cover;
             object-position: center;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+            box-shadow: var(--fl-sh-lg);
             transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
          }
 
@@ -431,8 +435,8 @@
             width: 100%;
             height: auto;
             min-height: 400px;
-            border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+            border-radius: var(--fl-r-xl);
+            box-shadow: var(--fl-sh-lg);
             background: white;
             transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             display: block;
@@ -448,7 +452,7 @@
          .architecture-visual:hover img,
          .architecture-visual:hover svg {
             transform: scale(1.02);
-            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.15);
+            box-shadow: var(--fl-sh-lg);
          }
 
          @media (min-width: 768px) {
@@ -460,7 +464,7 @@
             .architecture-visual img,
             .architecture-visual svg {
                min-height: 500px;
-               border-radius: 24px;
+               border-radius: var(--fl-r-xl);
             }
 
             .architecture-visual svg[viewBox="0 0 700 400"] {
@@ -477,7 +481,7 @@
             .architecture-visual img,
             .architecture-visual svg {
                min-height: 600px;
-               border-radius: 28px;
+               border-radius: var(--fl-r-xl);
             }
 
             .architecture-visual svg[viewBox="0 0 700 400"] {
@@ -494,7 +498,7 @@
             .architecture-visual img,
             .architecture-visual svg {
                min-height: 700px;
-               border-radius: 32px;
+               border-radius: var(--fl-r-xl);
             }
 
             .architecture-visual svg[viewBox="0 0 700 400"] {
@@ -538,7 +542,7 @@
             background: var(--apple-light-gray);
             color: var(--apple-secondary-text);
             padding: 4px 12px;
-            border-radius: 16px;
+            border-radius: var(--fl-r-lg);
             font-size: 12px;
             font-weight: 400;
             margin: 2px 4px 2px 0;
@@ -562,13 +566,13 @@
          
          /* Apple dark mode - Enhanced */
          body.dark-mode {
-            background-color: #000000;
+            background-color: #111827;
             color: #f5f5f7;
          }
          
          body.dark-mode .navbar {
-            background-color: rgba(29, 29, 31, 0.92) !important;
-            border-bottom: 1px solid #424245;
+            background-color: rgba(31, 41, 55, 0.92) !important;
+            border-bottom: 1px solid #374151;
          }
          
          body.dark-mode .navbar-brand,
@@ -577,7 +581,7 @@
          }
          
          body.dark-mode .hero-section {
-            background: linear-gradient(180deg, #1d1d1f 0%, #000000 100%);
+            background: #1f2937;
          }
          
          body.dark-mode .apple-headline {
@@ -589,18 +593,18 @@
          }
          
          body.dark-mode .apple-subheadline {
-            color: #a1a1a6;
+            color: #98a2b3;
          }
          
          body.dark-mode .architecture-card {
-            background: #1d1d1f;
-            border-color: #424245;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            background: #1f2937;
+            border-color: #374151;
+            box-shadow: var(--fl-sh-sm);
          }
          
          body.dark-mode .architecture-card:hover {
-            background: #2d2d2f;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+            background: #28303b;
+            box-shadow: var(--fl-sh-lg);
          }
          
          body.dark-mode .architecture-visual {
@@ -609,16 +613,16 @@
 
          body.dark-mode .architecture-visual img,
          body.dark-mode .architecture-visual svg {
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            box-shadow: var(--fl-sh-lg);
          }
 
          body.dark-mode .architecture-visual:hover img,
          body.dark-mode .architecture-visual:hover svg {
-            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.4);
+            box-shadow: var(--fl-sh-lg);
          }
 
          body.dark-mode .architecture-visual svg {
-            background: #1d1d1f;
+            background: #1f2937;
          }
          
          body.dark-mode .architecture-card-body {
@@ -630,56 +634,56 @@
          }
          
          body.dark-mode .apple-product-subtitle {
-            color: #a1a1a6;
+            color: #98a2b3;
          }
          
          body.dark-mode .apple-body-large {
-            color: #d1d1d6;
+            color: #dbe1e8;
          }
          
          body.dark-mode .tech-tag {
-            background: #424245;
-            color: #a1a1a6;
-            border: 1px solid #525255;
+            background: #374151;
+            color: #98a2b3;
+            border: 1px solid #4b5565;
          }
          
          body.dark-mode .apple-link {
-            color: #7ba7ff;
+            color: #2563eb;
          }
          
          body.dark-mode .apple-link:hover {
-            color: #9bb9ff;
+            color: #2563eb;
          }
          
          body.dark-mode .apple-button {
             background: #ffffff;
-            color: #000000;
+            color: #111827;
          }
          
          body.dark-mode .apple-button:hover {
-            background: #0051d5;
+            background: #2563eb;
          }
          
          body.dark-mode footer {
-            background-color: #1d1d1f;
-            border-top: 1px solid #424245;
-            color: #a1a1a6;
+            background-color: #1f2937;
+            border-top: 1px solid #374151;
+            color: #98a2b3;
          }
          
          body.dark-mode footer a {
-            color: #7ba7ff;
+            color: #2563eb;
          }
          
          body.dark-mode footer a:hover {
-            color: #9bb9ff;
+            color: #2563eb;
          }
          
          /* Improve toggler button visibility in light mode */
          .navbar-light .navbar-toggler {
-            border-color: rgba(0, 0, 0, 0.3) !important;
+            border-color: rgba(17, 24, 39, 0.3) !important;
          }
          .navbar-light .navbar-toggler-icon {
-            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(0, 0, 0, 0.7)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(17, 24, 39, 0.7)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
          }
          body.dark-mode .navbar-light .navbar-toggler {
             border-color: rgba(255, 255, 255, 0.4) !important;
@@ -691,14 +695,14 @@
          /* Dark mode mobile navbar styles */
          @media (max-width: 991.98px) {
             body.dark-mode .navbar-collapse {
-               background-color: rgba(29, 29, 31, 0.95) !important;
-               border: 1px solid #424245;
+               background-color: rgba(31, 41, 55, 0.95) !important;
+               border: 1px solid #374151;
             }
          }
          
          /* Dark mode progress bars (if any) */
          body.dark-mode .progress {
-            background-color: #424245;
+            background-color: #374151;
          }
          
          body.dark-mode .progress-bar {
@@ -707,18 +711,18 @@
          
          /* Dark mode certification badges */
          body.dark-mode .cert-badge {
-            background: linear-gradient(135deg, #ffffff 0%, #d4d4d4 100%);
-            color: #000000;
-            box-shadow: 0 5px 15px rgba(255, 255, 255, 0.2);
+            background: #ffffff;
+            color: #111827;
+            box-shadow: var(--fl-sh);
          }
          
          body.dark-mode .cert-badge:hover {
-            box-shadow: 0 10px 25px rgba(0, 122, 255, 0.4);
+            box-shadow: var(--fl-sh-lg);
          }
 
          /* AI Infrastructure Section - Creative Design */
          .ai-infra-section {
-            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            background: #f8fafc;
             position: relative;
             overflow: hidden;
          }
@@ -731,9 +735,9 @@
             right: 0;
             bottom: 0;
             background:
-               radial-gradient(circle at 20% 20%, rgba(74, 107, 255, 0.03) 0%, transparent 50%),
-               radial-gradient(circle at 80% 80%, rgba(0, 122, 255, 0.03) 0%, transparent 50%),
-               linear-gradient(45deg, transparent 0%, rgba(74, 107, 255, 0.01) 50%, transparent 100%);
+               radial-gradient(circle at 20% 20%, rgba(37, 99, 235, 0.03) 0%, transparent 50%),
+               radial-gradient(circle at 80% 80%, rgba(37, 99, 235, 0.03) 0%, transparent 50%),
+               linear-gradient(45deg, transparent 0%, rgba(37, 99, 235, 0.01) 50%, transparent 100%);
             pointer-events: none;
          }
 
@@ -743,33 +747,27 @@
          }
 
          .ai-infra-title {
-            font-size: 72px;
+            font-size: 40px;
             line-height: 1;
-            font-weight: 900;
-            color: #1a1a1a;
+            font-weight: 300;
+            color: #1f2937;
             margin-bottom: 30px;
             letter-spacing: -0.03em;
          }
 
          .ai-title-main {
-            background: linear-gradient(135deg, #000000 0%, #404040 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
             display: inline-block;
-            font-family: 'Outfit', sans-serif;
+            font-family: var(--fl-display);
+            color: inherit;
          }
 
          .ai-title-sub {
-            background: linear-gradient(45deg, #000000, #404040, #737373, #525252);
             background-size: 400% 400%;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
             animation: gradient-shift 3s ease-in-out infinite;
             display: inline-block;
             position: relative;
-            font-family: 'Outfit', sans-serif;
+            font-family: var(--fl-display);
+            color: inherit;
          }
 
          @keyframes gradient-shift {
@@ -797,13 +795,13 @@
 
          .glitch-text::before {
             animation: glitch-1 2s infinite;
-            color: #ff6b6b;
+            color: #dc2626;
             z-index: -1;
          }
 
          .glitch-text::after {
             animation: glitch-2 2s infinite;
-            color: #4ecdc4;
+            color: #059669;
             z-index: -2;
          }
 
@@ -849,7 +847,7 @@
 
          .ai-carousel-wrapper {
             overflow: hidden;
-            border-radius: 20px;
+            border-radius: var(--fl-r-xl);
             position: relative;
          }
 
@@ -863,7 +861,7 @@
             background: rgba(255, 255, 255, 0.8);
             backdrop-filter: blur(20px);
             border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 20px;
+            border-radius: var(--fl-r-xl);
             padding: 40px 30px;
             position: relative;
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
@@ -880,7 +878,7 @@
             left: -50%;
             width: 200%;
             height: 200%;
-            background: linear-gradient(45deg, transparent, rgba(74, 107, 255, 0.1), transparent);
+            background: linear-gradient(45deg, transparent, rgba(37, 99, 235, 0.1), transparent);
             transform: rotate(45deg);
             transition: all 0.6s ease;
             opacity: 0;
@@ -907,17 +905,16 @@
          .ai-infra-card:hover {
             transform: translateY(-8px) scale(1.02);
             box-shadow:
-               0 20px 40px rgba(74, 107, 255, 0.15),
-               0 10px 20px rgba(0, 0, 0, 0.1);
-            border-color: rgba(74, 107, 255, 0.3);
+               var(--fl-sh-lg);
+            border-color: rgba(37, 99, 235, 0.3);
          }
 
          .ai-infra-card-icon {
             width: 60px;
             height: 60px;
             margin: 0 auto 25px;
-            background: linear-gradient(135deg, #4a6bff 0%, #007bff 100%);
-            border-radius: 16px;
+            background: #2563eb;
+            border-radius: var(--fl-r-lg);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -949,10 +946,10 @@
          }
 
          .ai-infra-card-title {
-            font-family: 'Outfit', sans-serif;
+            font-family: var(--fl-display);
             font-size: 28px;
-            font-weight: 800;
-            color: #000000;
+            font-weight: 300;
+            color: #111827;
             margin-bottom: 16px;
             text-align: center;
             letter-spacing: -0.02em;
@@ -975,22 +972,22 @@
          }
 
          .ai-tech-tag {
-            background: linear-gradient(135deg, rgba(0, 0, 0, 0.05) 0%, rgba(0, 0, 0, 0.08) 100%);
-            color: #000000;
-            border: 2px solid rgba(0, 0, 0, 0.15);
+            background: linear-gradient(135deg, rgba(17, 24, 39, 0.05) 0%, rgba(17, 24, 39, 0.08) 100%);
+            color: #111827;
+            border: 2px solid rgba(17, 24, 39, 0.15);
             padding: 10px 20px;
-            border-radius: 25px;
+            border-radius: var(--fl-r-xl);
             font-size: 15px;
-            font-weight: 600;
+            font-weight: 400;
             transition: all 0.3s ease;
             letter-spacing: 0.01em;
          }
 
          .ai-tech-tag:hover {
-            background: linear-gradient(135deg, #000000 0%, #262626 100%);
+            background: #111827;
             color: white;
             transform: scale(1.05);
-            border-color: #000000;
+            border-color: #111827;
          }
 
          .ai-infra-cta {
@@ -1001,7 +998,7 @@
 
          .ai-infra-cta-text {
             font-size: 32px;
-            color: #6c757d;
+            color: #2563eb;
             margin-bottom: 40px;
             font-weight: 400;
             letter-spacing: -0.02em;
@@ -1011,17 +1008,17 @@
             display: inline-flex;
             align-items: center;
             gap: 16px;
-            background: linear-gradient(135deg, #000000 0%, #333333 100%);
+            background: #111827;
             color: white;
             padding: 24px 48px;
-            border-radius: 50px;
+            border-radius: var(--fl-r-xl);
             font-size: 20px;
-            font-weight: 700;
+            font-weight: 400;
             text-decoration: none;
             position: relative;
             overflow: hidden;
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+            box-shadow: var(--fl-sh-lg);
          }
 
          .ai-infra-cta-button::before {
@@ -1041,7 +1038,7 @@
 
          .ai-infra-cta-button:hover {
             transform: translateY(-2px);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+            box-shadow: var(--fl-sh-lg);
             color: white;
             text-decoration: none;
          }
@@ -1068,18 +1065,18 @@
             width: 12px;
             height: 12px;
             border-radius: 50%;
-            background: rgba(74, 107, 255, 0.3);
+            background: rgba(37, 99, 235, 0.3);
             cursor: pointer;
             transition: all 0.3s ease;
          }
 
          .indicator.active {
-            background: #4a6bff;
+            background: #2563eb;
             transform: scale(1.2);
          }
 
          .indicator:hover {
-            background: rgba(74, 107, 255, 0.6);
+            background: rgba(37, 99, 235, 0.6);
             transform: scale(1.1);
          }
 
@@ -1092,11 +1089,11 @@
             }
 
             .apple-headline {
-               font-size: 120px;
+               font-size: 40px;
             }
 
             .apple-subheadline {
-               font-size: 48px;
+               font-size: 40px;
             }
 
             .architecture-card-body {
@@ -1104,7 +1101,7 @@
             }
 
             .ai-infra-title {
-               font-size: 64px;
+               font-size: 40px;
             }
 
             .ai-infra-subtitle {
@@ -1121,11 +1118,11 @@
          /* Large Desktop (1440px-1919px) */
          @media (min-width: 1440px) and (max-width: 1919px) {
             .apple-headline {
-               font-size: 110px;
+               font-size: 40px;
             }
 
             .apple-subheadline {
-               font-size: 44px;
+               font-size: 40px;
             }
 
             .architecture-card-body {
@@ -1133,7 +1130,7 @@
             }
 
             .ai-infra-title {
-               font-size: 58px;
+               font-size: 40px;
             }
 
             .ai-infra-subtitle {
@@ -1144,7 +1141,7 @@
          /* Standard Desktop (1024px-1439px) */
          @media (min-width: 1024px) and (max-width: 1439px) {
             .apple-headline {
-               font-size: 90px;
+               font-size: 40px;
             }
 
             .apple-subheadline {
@@ -1156,7 +1153,7 @@
             }
 
             .ai-infra-title {
-               font-size: 52px;
+               font-size: 40px;
             }
 
             .ai-infra-subtitle {
@@ -1176,7 +1173,7 @@
             }
 
             .apple-headline {
-               font-size: 64px;
+               font-size: 40px;
             }
 
             .apple-subheadline {
@@ -1194,7 +1191,7 @@
             }
 
             .ai-infra-title {
-               font-size: 42px;
+               font-size: 40px;
             }
 
             .ai-infra-subtitle {
@@ -1227,13 +1224,13 @@
             }
 
             .apple-headline {
-               font-size: 48px;
+               font-size: 40px;
                line-height: 1.1;
                padding: 0 20px;
             }
 
             .headline-chinese-line {
-               font-size: 48px;
+               font-size: 40px;
                line-height: 1.1;
                margin: 0;
                text-align: center;
@@ -1382,7 +1379,7 @@
 
             .tech-tag {
                padding: 3px 10px;
-               font-size: 11px;
+               font-size: 12px;
                margin: 1px 3px 1px 0;
             }
 
@@ -1446,8 +1443,8 @@
 
             .ai-tech-tag {
                padding: 4px 8px;
-               font-size: 10px;
-               border-radius: 15px;
+               font-size: 12px;
+               border-radius: var(--fl-r-lg);
             }
 
             .ai-infra-cta {
@@ -1462,7 +1459,7 @@
             .ai-infra-cta-button {
                padding: 16px 32px;
                font-size: 16px;
-               border-radius: 40px;
+               border-radius: var(--fl-r-xl);
             }
 
             .cta-arrow {
@@ -1525,7 +1522,7 @@
             }
 
             .ai-infra-card-description {
-               font-size: 11px;
+               font-size: 12px;
             }
 
             .ai-infra-cta-text {
@@ -1574,7 +1571,7 @@
 
          /* Dark Mode Support */
          body.dark-mode .ai-infra-section {
-            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            background: #1f2937;
          }
 
          body.dark-mode .ai-infra-section::before {
@@ -1585,33 +1582,27 @@
          }
 
          body.dark-mode .ai-title-main {
-            background: linear-gradient(135deg, #f5f5f7 0%, #888888 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            color: inherit;
          }
 
          body.dark-mode .ai-title-sub {
-            background: linear-gradient(45deg, #f5f5f7, #cccccc, #888888, #aaaaaa);
             background-size: 400% 400%;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            color: inherit;
          }
 
          body.dark-mode .ai-infra-subtitle {
-            color: #a1a1a6;
+            color: #98a2b3;
          }
 
          body.dark-mode .ai-infra-card {
-            background: rgba(29, 29, 31, 0.8);
+            background: rgba(31, 41, 55, 0.8);
             border-color: rgba(255, 255, 255, 0.1);
          }
 
          body.dark-mode .ai-infra-card:hover {
-            background: rgba(45, 45, 47, 0.9);
+            background: rgba(40, 48, 59, 0.9);
             box-shadow:
-               0 20px 40px rgba(255, 255, 255, 0.1),
-               0 10px 20px rgba(0, 0, 0, 0.3);
+               var(--fl-sh-lg);
          }
 
          body.dark-mode .ai-infra-card-title {
@@ -1619,30 +1610,30 @@
          }
 
          body.dark-mode .ai-infra-card-description {
-            color: #a1a1a6;
+            color: #98a2b3;
          }
 
          body.dark-mode .ai-infra-cta-text {
-            color: #a1a1a6;
+            color: #98a2b3;
          }
 
          body.dark-mode .indicator {
-            background: rgba(74, 107, 255, 0.4);
+            background: rgba(37, 99, 235, 0.4);
          }
 
          body.dark-mode .indicator.active {
-            background: #7ba7ff;
+            background: #2563eb;
          }
 
          body.dark-mode .indicator:hover {
-            background: rgba(74, 107, 255, 0.7);
+            background: rgba(37, 99, 235, 0.7);
          }
 
          /* AWS Expertise Cards - Modern Design */
          .expertise-card {
             background: white;
-            border: 2px solid #e5e5e5;
-            border-radius: 20px;
+            border: 2px solid #e5e7eb;
+            border-radius: var(--fl-r-xl);
             padding: 40px 30px;
             text-align: center;
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
@@ -1658,7 +1649,7 @@
             left: 0;
             width: 100%;
             height: 4px;
-            background: linear-gradient(90deg, #000000, #404040);
+            background: #111827;
             transform: scaleX(0);
             transform-origin: left;
             transition: transform 0.4s ease;
@@ -1670,15 +1661,15 @@
 
          .expertise-card:hover {
             transform: translateY(-8px);
-            border-color: #000000;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+            border-color: #111827;
+            box-shadow: var(--fl-sh-lg);
          }
 
          .expertise-icon-wrapper {
             width: 60px;
             height: 60px;
-            background: linear-gradient(135deg, #000000, #262626);
-            border-radius: 16px;
+            background: #111827;
+            border-radius: var(--fl-r-lg);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -1711,13 +1702,13 @@
 
          .circle-bg {
             fill: none;
-            stroke: #f0f0f0;
+            stroke: #f3f4f6;
             stroke-width: 8;
          }
 
          .circle-progress {
             fill: none;
-            stroke: #000000;
+            stroke: #111827;
             stroke-width: 8;
             stroke-linecap: round;
             transition: stroke-dashoffset 1.5s ease-in-out;
@@ -1731,10 +1722,10 @@
          }
 
          .circle-percentage {
-            fill: #000000;
-            font-family: 'Outfit', sans-serif;
+            fill: #111827;
+            font-family: var(--fl-display);
             font-size: 2.2rem;
-            font-weight: 900;
+            font-weight: 300;
             transform: rotate(90deg);
             transform-origin: center;
             text-anchor: middle;
@@ -1742,11 +1733,11 @@
          }
 
          .expertise-title {
-            font-family: 'Outfit', sans-serif;
+            font-family: var(--fl-display);
             font-size: 2rem;
-            font-weight: 800;
+            font-weight: 300;
             margin: 25px 0 15px;
-            color: #000000;
+            color: #111827;
             letter-spacing: -0.03em;
          }
 
@@ -1754,7 +1745,7 @@
             font-size: 1.1rem;
             color: var(--apple-secondary-text);
             margin: 0;
-            font-weight: 500;
+            font-weight: 400;
             letter-spacing: 0.02em;
          }
 
@@ -1796,30 +1787,30 @@
 
          /* AWS Expertise Level - Dark Mode */
          body.dark-mode .expertise-card {
-            background-color: #1d1d1f;
-            border-color: #424245;
+            background-color: #1f2937;
+            border-color: #374151;
             color: #f5f5f7;
          }
 
          body.dark-mode .expertise-card::before {
-            background: linear-gradient(90deg, #ffffff, #d4d4d4);
+            background: #ffffff;
          }
 
          body.dark-mode .expertise-card:hover {
             border-color: #ffffff;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            box-shadow: var(--fl-sh-lg);
          }
 
          body.dark-mode .expertise-icon-wrapper {
-            background: linear-gradient(135deg, #ffffff, #d4d4d4);
+            background: #ffffff;
          }
 
          body.dark-mode .expertise-icon {
-            color: #000000;
+            color: #111827;
          }
 
          body.dark-mode .circle-bg {
-            stroke: #424245;
+            stroke: #374151;
          }
 
          body.dark-mode .circle-progress {
@@ -1835,7 +1826,7 @@
          }
 
          body.dark-mode .expertise-services {
-            color: #a3a3a3;
+            color: #98a2b3;
          }
          
          /* Toggle button styles */
@@ -1857,7 +1848,7 @@
          }
          
          .slider {
-            background-color: #ccc;
+            background-color: #dbe1e8;
             bottom: 0;
             cursor: pointer;
             left: 0;
@@ -1865,7 +1856,7 @@
             right: 0;
             top: 0;
             transition: .4s;
-            border-radius: 24px;
+            border-radius: var(--fl-r-xl);
          }
          
          .slider:before {
@@ -1911,7 +1902,7 @@
             cursor: pointer;
             opacity: 0;
             transition: all 0.3s;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            box-shadow: var(--fl-sh);
             z-index: 999;
          }
          
@@ -1921,7 +1912,7 @@
          
          .scroll-top:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            box-shadow: var(--fl-sh);
          }
          
          .project-number {
@@ -1931,7 +1922,7 @@
             width: 30px;
             height: 30px;
             border-radius: 50%;
-            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            background: var(--primary-color);
             color: white;
             font-weight: bold;
             margin-right: 10px;
@@ -1946,18 +1937,18 @@
          }
          
          .tech-tag {
-            background: rgba(74, 107, 255, 0.1);
+            background: rgba(37, 99, 235, 0.1);
             color: var(--primary-color);
             padding: 5px 12px;
-            border-radius: 15px;
+            border-radius: var(--fl-r-lg);
             font-size: 0.85rem;
-            font-weight: 500;
-            border: 1px solid rgba(74, 107, 255, 0.3);
+            font-weight: 400;
+            border: 1px solid rgba(37, 99, 235, 0.3);
          }
          
          body.dark-mode .tech-tag {
-            background: rgba(74, 107, 255, 0.2);
-            color: #9ba4ff;
+            background: rgba(37, 99, 235, 0.2);
+            color: #2563eb;
          }
          
          /* Touch-friendly and accessibility optimizations */
@@ -1976,12 +1967,12 @@
             
             .architecture-card:active {
                transform: translateY(-2px);
-               box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+               box-shadow: var(--fl-sh-lg);
                transition: all 0.1s ease;
             }
             
             .apple-button:active {
-               background: #0051d5;
+               background: #2563eb;
                transform: scale(0.98);
                transition: all 0.1s ease;
             }
@@ -1990,7 +1981,7 @@
          /* Performance optimizations for mobile */
          @media (max-width: 768px) {
             * {
-               -webkit-tap-highlight-color: rgba(0, 0, 0, 0.1);
+               -webkit-tap-highlight-color: rgba(17, 24, 39, 0.1);
             }
             
             .architecture-card {
@@ -2013,30 +2004,30 @@
          
          /* Certification badges - Light Mode */
          .cert-badge {
-            background: linear-gradient(135deg, var(--apple-blue) 0%, #5AC8FA 100%);
+            background: var(--apple-blue);
             color: var(--apple-white);
             padding: 10px 20px;
-            border-radius: 25px;
-            font-weight: 600;
+            border-radius: var(--fl-r-xl);
+            font-weight: 400;
             text-decoration: none;
             display: inline-block;
             margin: 10px;
             transition: all 0.3s ease;
-            box-shadow: 0 5px 15px rgba(0, 122, 255, 0.3);
+            box-shadow: var(--fl-sh);
             border: 1px solid transparent;
          }
 
          .cert-badge:hover {
             transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(0, 122, 255, 0.4);
+            box-shadow: var(--fl-sh-lg);
             color: var(--apple-white);
             text-decoration: none;
-            background: linear-gradient(135deg, #0051d5 0%, #4FB3D9 100%);
+            background: #2563eb;
          }
 
          /* ══ AI Infrastructure — Redesigned Dark ══ */
          .ai-infra-redesigned {
-            background: #060810 !important;
+            background: #111827 !important;
             position: relative;
             overflow: hidden;
          }
@@ -2051,7 +2042,7 @@
             position: absolute;
             width: 4px; height: 4px;
             border-radius: 50%;
-            background: rgba(255,255,255,0.22);
+            background: rgba(255, 255, 255, 0.22);
             animation: ai-pfloat 8s ease-in-out infinite;
          }
          @keyframes ai-pfloat {
@@ -2059,11 +2050,11 @@
             50%       { transform: translateY(-28px) scale(1.9); opacity: 0.65; }
          }
          .ai-infra-eyebrow-tag {
-            font-family: 'Outfit', sans-serif;
-            font-size: 11px;
-            font-weight: 700;
+            font-family: var(--fl-display);
+            font-size: 12px;
+            font-weight: 400;
             letter-spacing: 3px;
-            color: rgba(255,255,255,0.28);
+            color: rgba(255, 255, 255, 0.28);
             text-transform: uppercase;
             margin-bottom: 16px;
          }
@@ -2079,18 +2070,18 @@
          }
          .ai-glass-card {
             position: relative;
-            background: rgba(255,255,255,0.03);
-            border: 1px solid rgba(255,255,255,0.06);
-            border-top: 2px solid var(--card-accent, #4ECDC4);
-            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-top: 2px solid var(--card-accent, #059669);
+            border-radius: var(--fl-r-xl);
             padding: 28px 24px;
             overflow: hidden;
             transition: transform 0.35s ease, background 0.35s ease, box-shadow 0.35s ease;
          }
          .ai-glass-card:hover {
-            background: rgba(255,255,255,0.07);
+            background: rgba(255, 255, 255, 0.07);
             transform: translateY(-8px);
-            box-shadow: 0 24px 48px rgba(0,0,0,0.35);
+            box-shadow: var(--fl-sh-lg);
          }
          .ai-glass-glow {
             position: absolute;
@@ -2098,7 +2089,7 @@
             transform: translateX(-50%);
             width: 180px; height: 180px;
             border-radius: 50%;
-            background: radial-gradient(circle, var(--card-accent, #4ECDC4), transparent 65%);
+            background: radial-gradient(circle, var(--card-accent, #059669), transparent 65%);
             opacity: 0.06;
             pointer-events: none;
             transition: opacity 0.35s ease;
@@ -2106,29 +2097,29 @@
          .ai-glass-card:hover .ai-glass-glow { opacity: 0.16; }
          .ai-glass-icon {
             width: 50px; height: 50px;
-            border-radius: 13px;
-            background: rgba(255,255,255,0.05);
-            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: var(--fl-r);
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.08);
             display: flex; align-items: center; justify-content: center;
             margin-bottom: 18px;
             transition: transform 0.3s ease, background 0.3s ease;
          }
          .ai-glass-card:hover .ai-glass-icon {
-            background: rgba(255,255,255,0.1);
+            background: rgba(255, 255, 255, 0.1);
             transform: scale(1.08) rotate(-4deg);
          }
          .ai-glass-title {
-            font-family: 'Outfit', sans-serif;
+            font-family: var(--fl-display);
             font-size: 17px;
-            font-weight: 700;
-            color: #fff;
+            font-weight: 400;
+            color: #ffffff;
             margin-bottom: 10px;
             letter-spacing: -0.02em;
          }
          .ai-glass-desc {
             font-size: 13.5px;
             line-height: 1.6;
-            color: rgba(255,255,255,0.42);
+            color: rgba(255, 255, 255, 0.42);
             margin-bottom: 18px;
          }
          .ai-glass-tags {
@@ -2138,17 +2129,17 @@
          }
          .ai-glass-tag {
             padding: 4px 10px;
-            border-radius: 20px;
-            font-size: 11px;
-            font-weight: 600;
-            background: rgba(255,255,255,0.05);
-            border: 1px solid rgba(255,255,255,0.08);
-            color: rgba(255,255,255,0.45);
+            border-radius: var(--fl-r-xl);
+            font-size: 12px;
+            font-weight: 400;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            color: rgba(255, 255, 255, 0.45);
             transition: all 0.25s ease;
          }
          .ai-glass-card:hover .ai-glass-tag {
-            border-color: var(--card-accent, #4ECDC4);
-            color: var(--card-accent, #4ECDC4);
+            border-color: var(--card-accent, #059669);
+            color: var(--card-accent, #059669);
          }
          @media (max-width: 900px) {
             .ai-glass-grid { grid-template-columns: repeat(2, 1fr); }
@@ -2161,15 +2152,15 @@
          .aws-mastery-section {
             position: relative;
             padding: 120px 0;
-            background: #060810;
+            background: #111827;
             overflow: hidden;
          }
          .aws-mastery-section .aws-bg-grid {
             position: absolute;
             inset: 0;
             background-image:
-               linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
-               linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+               linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+               linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
             background-size: 52px 52px;
             pointer-events: none;
          }
@@ -2181,42 +2172,39 @@
          }
          .aws-mastery-section .aws-orb-1 {
             width: 700px; height: 700px;
-            background: rgba(255, 107, 107, 0.08);
+            background: rgba(220, 38, 38, 0.08);
             top: -250px; left: -180px;
          }
          .aws-mastery-section .aws-orb-2 {
             width: 600px; height: 600px;
-            background: rgba(78, 205, 196, 0.08);
+            background: rgba(5, 150, 105, 0.08);
             bottom: -150px; right: -150px;
          }
          .aws-mastery-inner { position: relative; z-index: 2; }
          .aws-mastery-eyebrow {
-            font-family: 'Outfit', sans-serif;
-            font-size: 11px;
-            font-weight: 700;
+            font-family: var(--fl-display);
+            font-size: 12px;
+            font-weight: 400;
             letter-spacing: 3px;
-            color: rgba(255,255,255,0.3);
+            color: rgba(255, 255, 255, 0.3);
             text-transform: uppercase;
             margin-bottom: 16px;
          }
          .aws-mastery-title {
-            font-family: 'Outfit', sans-serif;
-            font-size: clamp(42px, 7vw, 86px);
-            font-weight: 900;
-            color: #fff;
+            font-family: var(--fl-display);
+            font-size: clamp( 28.8px, 7vw, 40px);
+            font-weight: 400;
+            color: #ffffff;
             letter-spacing: -0.04em;
             line-height: 1.0;
             margin-bottom: 16px;
          }
          .aws-grad-text {
-            background: linear-gradient(135deg, #FF6B6B 0%, #4ECDC4 55%, #45B7D1 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            color: inherit;
          }
          .aws-mastery-sub {
             font-size: 17px;
-            color: rgba(255,255,255,0.4);
+            color: rgba(255, 255, 255, 0.4);
             margin-bottom: 72px;
             font-weight: 400;
          }
@@ -2231,16 +2219,16 @@
             display: flex;
             align-items: center;
             gap: 20px;
-            background: rgba(255,255,255,0.025);
-            border: 1px solid rgba(255,255,255,0.06);
-            border-radius: 14px;
+            background: rgba(255, 255, 255, 0.025);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: var(--fl-r);
             padding: 18px 22px;
             transition: transform 0.25s ease, background 0.25s ease, border-color 0.25s ease;
             cursor: default;
          }
          .aws-skill-row:hover {
-            background: rgba(255,255,255,0.055);
-            border-color: rgba(255,255,255,0.13);
+            background: rgba(255, 255, 255, 0.055);
+            border-color: rgba(255, 255, 255, 0.13);
             transform: translateX(6px);
          }
          .aws-skill-left {
@@ -2252,7 +2240,7 @@
          }
          .aws-skill-badge {
             width: 42px; height: 42px;
-            border-radius: 11px;
+            border-radius: var(--fl-r);
             border: 1px solid;
             display: flex; align-items: center; justify-content: center;
             font-size: 16px;
@@ -2263,35 +2251,35 @@
             transform: scale(1.12) rotate(-5deg);
          }
          .aws-skill-name {
-            font-family: 'Outfit', sans-serif;
+            font-family: var(--fl-display);
             font-size: 15px;
-            font-weight: 700;
-            color: #fff;
+            font-weight: 400;
+            color: #ffffff;
             letter-spacing: -0.01em;
          }
          .aws-skill-sub {
-            font-size: 11.5px;
-            color: rgba(255,255,255,0.35);
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.35);
             margin-top: 2px;
          }
          .aws-skill-bar-wrap {
             flex: 1;
             height: 5px;
-            background: rgba(255,255,255,0.07);
-            border-radius: 5px;
+            background: rgba(255, 255, 255, 0.07);
+            border-radius: var(--fl-r-sm);
             overflow: hidden;
          }
          .aws-skill-bar {
             height: 100%;
-            border-radius: 5px;
+            border-radius: var(--fl-r-sm);
             width: 0;
             transition: width 1.5s cubic-bezier(0.4, 0, 0.2, 1);
          }
          .aws-skill-bar.animated { width: var(--starget); }
          .aws-skill-pct {
-            font-family: 'Outfit', sans-serif;
+            font-family: var(--fl-display);
             font-size: 20px;
-            font-weight: 800;
+            font-weight: 400;
             min-width: 54px;
             text-align: right;
             letter-spacing: -0.03em;
@@ -2304,32 +2292,32 @@
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             gap: 14px;
-            border-top: 1px solid rgba(255,255,255,0.07);
+            border-top: 1px solid rgba(255, 255, 255, 0.07);
             padding-top: 48px;
          }
          .aws-stat-card {
             text-align: center;
             padding: 24px 12px;
-            background: rgba(255,255,255,0.025);
-            border: 1px solid rgba(255,255,255,0.06);
-            border-radius: 14px;
+            background: rgba(255, 255, 255, 0.025);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: var(--fl-r);
             transition: background 0.25s ease, border-color 0.25s ease;
          }
          .aws-stat-card:hover {
-            background: rgba(255,255,255,0.055);
-            border-color: rgba(255,255,255,0.13);
+            background: rgba(255, 255, 255, 0.055);
+            border-color: rgba(255, 255, 255, 0.13);
          }
          .aws-stat-num {
-            font-family: 'Outfit', sans-serif;
+            font-family: var(--fl-display);
             font-size: 32px;
-            font-weight: 900;
-            color: #fff;
+            font-weight: 300;
+            color: #ffffff;
             letter-spacing: -0.04em;
          }
          .aws-stat-lbl {
-            font-size: 11.5px;
-            color: rgba(255,255,255,0.38);
-            font-weight: 500;
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.38);
+            font-weight: 400;
             margin-top: 4px;
          }
          @media (max-width: 767px) {
@@ -2346,7 +2334,79 @@
             .aws-skill-name { font-size: 13px; }
             .aws-stat-num { font-size: 26px; }
          }
-      </style>
+      
+       /* ── FinLab: flat surfaces, hairline rules, one accent ────────── */
+       body { line-height: 1.7; letter-spacing: 0; }
+       .apple-headline, .apple-subheadline { letter-spacing: -.01em; }
+       .apple-subheadline { color: var(--fl-muted); }
+       section, .section { border-bottom: 1px solid var(--fl-hair); }
+       .card, .feature-card, .stat-card, .project-card, .skill-card,
+       .timeline-content, .apple-card {
+          background: var(--fl-surface);
+          border: 1px solid var(--fl-hair);
+          box-shadow: none;
+       }
+       .card:hover, .feature-card:hover, .project-card:hover,
+       .skill-card:hover, .apple-card:hover {
+          border-color: var(--fl-line);
+          box-shadow: var(--fl-sh-sm);
+          transform: none;
+       }
+
+       /* One filled action per pair; the second is a hairline ghost. */
+       .apple-button {
+          background: var(--fl-ink);
+          border: 1px solid var(--fl-ink);
+          color: #fff;
+          border-radius: var(--fl-r-pill);
+       }
+       .apple-button:hover {
+          background: var(--fl-ink-soft);
+          border-color: var(--fl-ink-soft);
+          color: #fff;
+       }
+       .apple-button + .apple-button {
+          background: var(--fl-surface);
+          border-color: var(--fl-line);
+          color: var(--fl-ink);
+       }
+       .apple-button + .apple-button:hover {
+          background: var(--fl-inset);
+          color: var(--fl-ink);
+       }
+
+       /* The "premium" layer — drifting mesh, shimmer sweep, gradient
+          buttons, cards that lift and rotate — is the opposite register
+          from the reference site. Take it out and leave the structure. */
+       .hero-section::before, .ai-banner::before { display: none; }
+       .btn-gradient, .btn-gradient:hover {
+          background: var(--fl-ink) !important;
+          border-color: var(--fl-ink);
+          color: #fff;
+          box-shadow: none;
+          transform: none;
+       }
+       .ai-banner {
+          box-shadow: none;
+          border: 1px solid var(--fl-hair);
+       }
+       .stat-badge, .feature-icon { box-shadow: none; }
+       .feature-card:hover .feature-icon { transform: none; }
+       .feature-card::before, .case-card::before { background: var(--fl-ink); }
+       .tech-strip {
+          background: var(--fl-raised);
+          border-color: var(--fl-hair);
+       }
+       .tech-track span { opacity: 1; color: var(--fl-muted); }
+       .tech-track span i { color: var(--fl-ghost); }
+       .aws-mastery-section .aws-orb { display: none; }
+       .stat-badge {
+          background: var(--fl-surface);
+          border: 1px solid var(--fl-hair);
+          color: var(--fl-muted);
+       }
+  </style>
+      <link rel="stylesheet" href="css/finlab-theme.css">
    </head>
    <body>
       <!-- Navigation -->
@@ -2652,7 +2712,7 @@
 
                <div class="aws-skill-row" data-target="95">
                   <div class="aws-skill-left">
-                     <div class="aws-skill-badge" style="color:#FF6B6B; background:rgba(255,107,107,0.1); border-color:rgba(255,107,107,0.22)">
+                     <div class="aws-skill-badge" style="color:#dc2626; background:rgba(220, 38, 38, 0.1); border-color:rgba(220, 38, 38, 0.22)">
                         <i class="fas fa-server"></i>
                      </div>
                      <div>
@@ -2661,14 +2721,14 @@
                      </div>
                   </div>
                   <div class="aws-skill-bar-wrap">
-                     <div class="aws-skill-bar" style="background: linear-gradient(90deg, #FF6B6B, #FF9E9E); --starget: 95%"></div>
+                     <div class="aws-skill-bar" style="background: linear-gradient(90deg, #dc2626, #dc2626); --starget: 95%"></div>
                   </div>
-                  <div class="aws-skill-pct" style="color:#FF6B6B"><span class="aws-pct-num">0</span>%</div>
+                  <div class="aws-skill-pct" style="color:#dc2626"><span class="aws-pct-num">0</span>%</div>
                </div>
 
                <div class="aws-skill-row" data-target="90">
                   <div class="aws-skill-left">
-                     <div class="aws-skill-badge" style="color:#4ECDC4; background:rgba(78,205,196,0.1); border-color:rgba(78,205,196,0.22)">
+                     <div class="aws-skill-badge" style="color:#059669; background:rgba(5, 150, 105, 0.1); border-color:rgba(5, 150, 105, 0.22)">
                         <i class="fas fa-database"></i>
                      </div>
                      <div>
@@ -2677,14 +2737,14 @@
                      </div>
                   </div>
                   <div class="aws-skill-bar-wrap">
-                     <div class="aws-skill-bar" style="background: linear-gradient(90deg, #4ECDC4, #7DDDD9); --starget: 90%"></div>
+                     <div class="aws-skill-bar" style="background: linear-gradient(90deg, #059669, #0891b2); --starget: 90%"></div>
                   </div>
-                  <div class="aws-skill-pct" style="color:#4ECDC4"><span class="aws-pct-num">0</span>%</div>
+                  <div class="aws-skill-pct" style="color:#059669"><span class="aws-pct-num">0</span>%</div>
                </div>
 
                <div class="aws-skill-row" data-target="88">
                   <div class="aws-skill-left">
-                     <div class="aws-skill-badge" style="color:#45B7D1; background:rgba(69,183,209,0.1); border-color:rgba(69,183,209,0.22)">
+                     <div class="aws-skill-badge" style="color:#0891b2; background:rgba(8, 145, 178, 0.1); border-color:rgba(8, 145, 178, 0.22)">
                         <i class="fas fa-table"></i>
                      </div>
                      <div>
@@ -2693,14 +2753,14 @@
                      </div>
                   </div>
                   <div class="aws-skill-bar-wrap">
-                     <div class="aws-skill-bar" style="background: linear-gradient(90deg, #45B7D1, #7ECFE0); --starget: 88%"></div>
+                     <div class="aws-skill-bar" style="background: linear-gradient(90deg, #0891b2, #0891b2); --starget: 88%"></div>
                   </div>
-                  <div class="aws-skill-pct" style="color:#45B7D1"><span class="aws-pct-num">0</span>%</div>
+                  <div class="aws-skill-pct" style="color:#0891b2"><span class="aws-pct-num">0</span>%</div>
                </div>
 
                <div class="aws-skill-row" data-target="92">
                   <div class="aws-skill-left">
-                     <div class="aws-skill-badge" style="color:#6BCB77; background:rgba(107,203,119,0.1); border-color:rgba(107,203,119,0.22)">
+                     <div class="aws-skill-badge" style="color:#059669; background:rgba(5, 150, 105, 0.1); border-color:rgba(5, 150, 105, 0.22)">
                         <i class="fas fa-code-branch"></i>
                      </div>
                      <div>
@@ -2709,14 +2769,14 @@
                      </div>
                   </div>
                   <div class="aws-skill-bar-wrap">
-                     <div class="aws-skill-bar" style="background: linear-gradient(90deg, #6BCB77, #94D99E); --starget: 92%"></div>
+                     <div class="aws-skill-bar" style="background: linear-gradient(90deg, #059669, #059669); --starget: 92%"></div>
                   </div>
-                  <div class="aws-skill-pct" style="color:#6BCB77"><span class="aws-pct-num">0</span>%</div>
+                  <div class="aws-skill-pct" style="color:#059669"><span class="aws-pct-num">0</span>%</div>
                </div>
 
                <div class="aws-skill-row" data-target="87">
                   <div class="aws-skill-left">
-                     <div class="aws-skill-badge" style="color:#FFD93D; background:rgba(255,217,61,0.1); border-color:rgba(255,217,61,0.22)">
+                     <div class="aws-skill-badge" style="color:#d97706; background:rgba(217, 119, 6, 0.1); border-color:rgba(217, 119, 6, 0.22)">
                         <i class="fas fa-shield-alt"></i>
                      </div>
                      <div>
@@ -2725,14 +2785,14 @@
                      </div>
                   </div>
                   <div class="aws-skill-bar-wrap">
-                     <div class="aws-skill-bar" style="background: linear-gradient(90deg, #FFD93D, #FFE577); --starget: 87%"></div>
+                     <div class="aws-skill-bar" style="background: linear-gradient(90deg, #d97706, #d97706); --starget: 87%"></div>
                   </div>
-                  <div class="aws-skill-pct" style="color:#FFD93D"><span class="aws-pct-num">0</span>%</div>
+                  <div class="aws-skill-pct" style="color:#d97706"><span class="aws-pct-num">0</span>%</div>
                </div>
 
                <div class="aws-skill-row" data-target="83">
                   <div class="aws-skill-left">
-                     <div class="aws-skill-badge" style="color:#A78BFA; background:rgba(167,139,250,0.1); border-color:rgba(167,139,250,0.22)">
+                     <div class="aws-skill-badge" style="color:#7c3aed; background:rgba(124, 58, 237, 0.1); border-color:rgba(124, 58, 237, 0.22)">
                         <i class="fas fa-chart-line"></i>
                      </div>
                      <div>
@@ -2741,9 +2801,9 @@
                      </div>
                   </div>
                   <div class="aws-skill-bar-wrap">
-                     <div class="aws-skill-bar" style="background: linear-gradient(90deg, #A78BFA, #C4B0FD); --starget: 83%"></div>
+                     <div class="aws-skill-bar" style="background: linear-gradient(90deg, #7c3aed, #d9cdec); --starget: 83%"></div>
                   </div>
-                  <div class="aws-skill-pct" style="color:#A78BFA"><span class="aws-pct-num">0</span>%</div>
+                  <div class="aws-skill-pct" style="color:#7c3aed"><span class="aws-pct-num">0</span>%</div>
                </div>
 
             </div>
@@ -2786,18 +2846,18 @@
             <div class="text-center" data-aos="fade-up">
                <div class="ai-infra-eyebrow-tag">LLM INFRASTRUCTURE</div>
                <h2 class="ai-infra-title">
-                  <span class="ai-title-main" style="background:linear-gradient(135deg,#fff 0%,rgba(255,255,255,0.72) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">AI Infrastructure.</span>
+                  <span class="ai-title-main" style="background:linear-gradient(135deg,#ffffff 0%,rgba(255, 255, 255, 0.72) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">AI Infrastructure.</span>
                   <br>
-                  <span class="ai-title-sub glitch-text" data-text="Built for Tomorrow." style="background:linear-gradient(90deg,#4ECDC4,#fff 50%,#A78BFA);background-size:300% 100%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:ai-title-shine 4s linear infinite">Built for Tomorrow.</span>
+                  <span class="ai-title-sub glitch-text" data-text="Built for Tomorrow." style="background:linear-gradient(90deg,#059669,#ffffff 50%,#7c3aed);background-size:300% 100%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:ai-title-shine 4s linear infinite">Built for Tomorrow.</span>
                </h2>
-               <p class="ai-infra-subtitle" style="color:rgba(255,255,255,0.42)">From neural networks to production systems, architect the future of artificial intelligence.</p>
+               <p class="ai-infra-subtitle" style="color:rgba(255, 255, 255, 0.42)">From neural networks to production systems, architect the future of artificial intelligence.</p>
             </div>
 
             <div class="ai-glass-grid" data-aos="fade-up" data-aos-delay="150">
 
-               <div class="ai-glass-card" style="--card-accent:#FF6B6B">
+               <div class="ai-glass-card" style="--card-accent:#dc2626">
                   <div class="ai-glass-glow"></div>
-                  <div class="ai-glass-icon" style="color:#FF6B6B">
+                  <div class="ai-glass-icon" style="color:#dc2626">
                      <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L2 7L12 12L22 7L12 2M2 17L12 22L22 17M2 12L12 17L22 12"/></svg>
                   </div>
                   <h3 class="ai-glass-title">Neural Training</h3>
@@ -2809,9 +2869,9 @@
                   </div>
                </div>
 
-               <div class="ai-glass-card" style="--card-accent:#4ECDC4">
+               <div class="ai-glass-card" style="--card-accent:#059669">
                   <div class="ai-glass-glow"></div>
-                  <div class="ai-glass-icon" style="color:#4ECDC4">
+                  <div class="ai-glass-icon" style="color:#059669">
                      <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M4 6H20V16H4M20 18A2 2 0 0 0 22 16V6C22 4.89 21.1 4 20 4H4A2 2 0 0 0 2 6V16A2 2 0 0 0 4 18H4L6 20V18H18L20 18Z"/></svg>
                   </div>
                   <h3 class="ai-glass-title">Cluster Orchestration</h3>
@@ -2823,9 +2883,9 @@
                   </div>
                </div>
 
-               <div class="ai-glass-card" style="--card-accent:#45B7D1">
+               <div class="ai-glass-card" style="--card-accent:#0891b2">
                   <div class="ai-glass-glow"></div>
-                  <div class="ai-glass-icon" style="color:#45B7D1">
+                  <div class="ai-glass-icon" style="color:#0891b2">
                      <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 16L16 12H13V8H11V12H8L12 16M12 2A10 10 0 0 0 2 12A10 10 0 0 0 12 22A10 10 0 0 0 22 12A10 10 0 0 0 12 2Z"/></svg>
                   </div>
                   <h3 class="ai-glass-title">Model Deployment</h3>
@@ -2837,9 +2897,9 @@
                   </div>
                </div>
 
-               <div class="ai-glass-card" style="--card-accent:#A78BFA">
+               <div class="ai-glass-card" style="--card-accent:#7c3aed">
                   <div class="ai-glass-glow"></div>
-                  <div class="ai-glass-icon" style="color:#A78BFA">
+                  <div class="ai-glass-icon" style="color:#7c3aed">
                      <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3C7.58 3 4 6.58 4 11C4 16.55 12 21 12 21S20 16.55 20 11C20 6.58 16.42 3 12 3M12 13A2 2 0 0 1 10 11A2 2 0 0 1 12 9A2 2 0 0 1 14 11A2 2 0 0 1 12 13Z"/></svg>
                   </div>
                   <h3 class="ai-glass-title">Vector Intelligence</h3>
@@ -2851,9 +2911,9 @@
                   </div>
                </div>
 
-               <div class="ai-glass-card" style="--card-accent:#FFD93D">
+               <div class="ai-glass-card" style="--card-accent:#d97706">
                   <div class="ai-glass-glow"></div>
-                  <div class="ai-glass-icon" style="color:#FFD93D">
+                  <div class="ai-glass-icon" style="color:#d97706">
                      <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M9 3V18H12V3H9M12 5L16 6.5V9.5L12 8V5M12 10L16 11.5V14.5L12 13V10M12 15L16 16.5V19.5L12 18V15Z"/></svg>
                   </div>
                   <h3 class="ai-glass-title">Data Pipeline</h3>
@@ -2865,9 +2925,9 @@
                   </div>
                </div>
 
-               <div class="ai-glass-card" style="--card-accent:#6BCB77">
+               <div class="ai-glass-card" style="--card-accent:#059669">
                   <div class="ai-glass-glow"></div>
-                  <div class="ai-glass-icon" style="color:#6BCB77">
+                  <div class="ai-glass-icon" style="color:#059669">
                      <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
                   </div>
                   <h3 class="ai-glass-title">MLOps Platform</h3>
@@ -2882,7 +2942,7 @@
             </div>
 
             <div class="ai-infra-cta text-center" data-aos="fade-up" data-aos-delay="350">
-               <p class="ai-infra-cta-text" style="color:rgba(255,255,255,0.42)">Ready to build the next generation of AI systems?</p>
+               <p class="ai-infra-cta-text" style="color:rgba(255, 255, 255, 0.42)">Ready to build the next generation of AI systems?</p>
                <a href="https://yennanliu.github.io/contact.html" class="ai-infra-cta-button">
                   <span>Let's Build Together</span>
                   <svg viewBox="0 0 24 24" class="cta-arrow">
@@ -2937,8 +2997,7 @@
             const toggleSwitch = document.getElementById('theme-checkbox');
             
             // Check for saved theme preference or use device preference
-            const currentTheme = localStorage.getItem('theme') || 
-                (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+            const currentTheme = localStorage.getItem('theme') || 'light';
             
             if (currentTheme === 'dark') {
                 document.body.classList.add('dark-mode');
