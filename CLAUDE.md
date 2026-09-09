@@ -72,8 +72,8 @@ The rules the system is built on:
   `#fff` → `#fbfcfe` → `#f8fafc` → `#f5f5f7`.
 - **One blue for action** (`--fl-link`), ink for the single filled button
   per view; green/red are reserved for data that moves.
-- **Light is the default.** Pages with a toggle opt in to dark; none of
-  them follow the OS preference any more.
+- **Light is the default.** Dark is opt-in; no page follows the OS
+  preference any more.
 - 0.16s ease for state changes, and `prefers-reduced-motion` honoured.
 
 ### The landing page
@@ -123,6 +123,51 @@ Two rules the stack exists to respect, worth keeping if you extend it:
 
 All of it is additive: the page works with the JS removed, and every
 motion-driven part is skipped under `prefers-reduced-motion`.
+
+### Dark
+
+Every page's dark switch resolves to one palette, declared once in
+`finlab.css` under all three selectors the site uses:
+
+```css
+:root[data-theme="dark"],   /* index, portfolios */
+:root[data-mode="ink"],     /* ai_builder        */
+body.dark-mode              /* the Bootstrap pages */
+```
+
+It is a true near-black ground (`#0a0a0b`) with the ink/surface ramp
+turned inside out. Two things to know when adding to it:
+
+- **Use `--fl-on-ink`, never `#fff`,** for text on an ink-filled control.
+  `--fl-ink` inverts, so a hardcoded white foreground goes ink-on-ink and
+  disappears.
+- Pages driven by their own tokens need a `body.dark-mode { … }` block
+  re-pointing those tokens; `finlab.css` cannot reach them.
+
+All pages share the `theme` localStorage key (`light` / `dark`), so a
+choice follows the reader across the site.
+
+### Navigation and the theme switch
+
+One bar on every page: `<nav class="site-nav">` plus `css/site-nav.css`
+and `js/site-nav.js`. Before this there were five nav implementations at
+four different heights, and one page had none.
+
+- It is **sticky, not fixed**. That is the detail that makes it
+  portable — a sticky bar takes up layout space, so no page needs a
+  `body { padding-top }` to compensate. `site-nav.css` zeroes any that
+  are left over.
+- `site-nav.css` loads **last**, after the page's own `<style>`, because
+  it has to win over the nav rules it replaces.
+- The switch sets **all three** dark mechanisms at once
+  (`data-theme`, `data-mode`, `body.dark-mode`), so each page's existing
+  dark CSS keeps working without being rewritten.
+- Theme is applied by a small **inline, synchronous** script in each
+  `<head>`. It has to run before first paint; a deferred script lets the
+  page flash light before turning dark.
+
+If you add a page, copy the nav block, the inline head script, and the
+two file references. Do not write a fifth nav.
 
 Per-page `:root` blocks still exist and still drive each page's own CSS —
 they now hold FinLab values, so retheming a page means editing its tokens

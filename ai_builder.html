@@ -1,6 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <script>
+    /* Theme, before first paint. The site has three dark mechanisms from
+       three eras; one saved value drives all of them. Inline and
+       synchronous on purpose — a deferred script would let the page
+       flash light before turning dark. */
+    (function () {
+      var d = false;
+      try { d = localStorage.getItem('theme') === 'dark'; } catch (e) {}
+      var r = document.documentElement;
+      r.setAttribute('data-theme', d ? 'dark' : 'light');
+      if (d) r.setAttribute('data-mode', 'ink');
+    })();
+  </script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>yen.dev</title>
@@ -25,10 +38,10 @@
       --wire:rgba(37,99,235,.30);      /* idle diagram wires */
     }
     :root[data-mode="ink"] {
-      --bg:#0f1115; --fg:#f2f4f7; --dim:#98a2b3; --line:#232833;
+      --bg:#0f0f11; --fg:#f5f7fa; --dim:#9aa5b5; --line:#1f1f24;
       --acid:#7aa8ff;
       --acid-ink:#7aa8ff;
-      --wire:rgba(122,168,255,.42);
+      --wire:rgba(122, 168, 255, .42);
     }
 
     *, *::before, *::after { box-sizing:border-box; margin:0; padding:0; }
@@ -74,22 +87,6 @@
     .lab   { font-size:12px; font-weight:400; letter-spacing:.2em; text-transform:uppercase; color:var(--dim); }
     .lab-a { color:var(--acid-ink); }
     .dim   { color:var(--dim); }
-
-    /* ── Top bar ── */
-    .bar { display:flex; align-items:stretch; border-bottom:1px solid var(--line); position:sticky; top:0; z-index:60; background:var(--bg); }
-    .bar-logo { display:flex; align-items:center; gap:10px; padding:0 22px; height:52px; border-right:1px solid var(--line);
-      font-family:var(--fl-mono); font-weight:400; font-size:17px; letter-spacing:-.02em; flex-shrink:0; }
-    .bar-nav { display:flex; align-items:stretch; flex:1; min-width:0; }
-    .bar-nav a { display:flex; align-items:center; padding:0 17px; font-size:12px; font-weight:400; letter-spacing:.09em;
-      text-transform:uppercase; border-right:1px solid var(--line); white-space:nowrap; }
-    .bar-nav a:hover { background:var(--acid); color:var(--ink); }
-    .bar-nav a.on { background:var(--fg); color:var(--bg); }
-    .bar-nav a.on:hover { background:var(--acid); color:var(--ink); }
-    .bar-btn { display:flex; align-items:center; gap:9px; padding:0 20px; border-left:1px solid var(--line);
-      font-size:12px; letter-spacing:.09em; text-transform:uppercase; font-weight:400; background:none; color:var(--fg);
-      font-family:inherit; cursor:pointer; flex-shrink:0; }
-    .bar-btn:hover { background:var(--acid); color:var(--ink); }
-    .bar-menu { display:none; }
 
     /* ── Buttons ── */
     .btn { display:inline-flex; align-items:center; gap:10px; padding:15px 26px; min-height:52px;
@@ -194,7 +191,6 @@
     .h2 { font-size:clamp( 28.8px,4vw, 40px); line-height:1; letter-spacing:-.04em; margin-top:16px;
       font-family:var(--fl-mono); font-weight:400; text-transform:uppercase; }
 
-
     /* ══ Fan-out graph ══ */
     .fan { position:relative; width:100%; max-width:1100px; aspect-ratio:1100/420; margin-top:38px; }
     .fan-wire { position:absolute; inset:0; width:100%; height:100%; overflow:visible; }
@@ -296,13 +292,6 @@
       .rec-r { border-left:none; border-top:1px solid var(--line); }
     }
     @media (max-width: 720px) {
-      .bar-nav { display:none; position:absolute; top:52px; left:0; right:0; flex-direction:column;
-        background:var(--bg); border-bottom:1px solid var(--line); }
-      .bar-nav.open { display:flex; }
-      .bar-nav a { border-right:none; border-bottom:1px solid var(--line); height:52px; padding:0 22px; }
-      .bar-menu { display:flex; }
-      .bar-logo { flex:1; min-width:0; border-right:none; padding:0 16px; font-size:15px; }
-      .bar-btn { padding:0 14px; }
       .btn-lbl { display:none; }
       .reg { grid-template-columns:1fr 1fr; }
       .reg > div:nth-child(2n) { border-right:none; }
@@ -326,8 +315,6 @@
     .blk, .fan, .iso, .detail, .cta { border-radius: var(--fl-r-lg); }
     .btn, .bar-btn { border-radius: var(--fl-r-pill); }
     .btn-solid { background: var(--fg); color: var(--bg); }
-    .bar-nav a:hover { background: var(--fl-inset); color: var(--fg); }
-    .bar-nav a.on { background: var(--fg); color: var(--bg); }
     /* the ticker was a full-bleed band of accent; make it a quiet rule */
     .tick {
       background: var(--fl-raised);
@@ -337,34 +324,38 @@
     }
   </style>
   <link rel="stylesheet" href="css/finlab-theme.css">
+  <link rel="stylesheet" href="css/site-nav.css">
 </head>
 <body>
 
 <!-- ══════════ BAR ══════════ -->
-<nav class="bar">
-  <a href="https://yennanliu.github.io/" class="bar-logo">
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="2" y="2" width="20" height="20"/><rect x="7" y="7" width="10" height="10" fill="currentColor" stroke="none"/></svg>
-    YEN.DEV
-  </a>
-  <div class="bar-nav" id="navLinks">
-    <a href="https://yennanliu.github.io/">Home</a>
-    <a href="https://yennanliu.github.io/about_me.html">About</a>
-    <a href="https://yennanliu.github.io/portfolios.html">Portfolio</a>
-    <a href="https://yennanliu.github.io/ai_builder.html" class="on" aria-current="page">AI&nbsp;Builder</a>
-    <a href="https://yennanliu.github.io/aws_architecture.html">AWS</a>
-    <a href="https://yennanliu.github.io/contact.html">Contact</a>
-    <a href="https://yennj12.js.org/yennj12_blog_V4/">Blog</a>
+<!-- SITE NAV -->
+<nav class="site-nav" id="site-nav" aria-label="Primary">
+  <a class="sn-brand" href="index.html">YEN<em>.DEV</em></a>
+
+  <button class="sn-burger" id="sn-burger" type="button"
+          aria-label="Open menu" aria-expanded="false" aria-controls="sn-menu">
+    <span></span><span></span><span></span>
+  </button>
+
+  <div class="sn-menu" id="sn-menu">
+    <ul class="sn-links">
+      <li><a href="about_me.html">About</a></li>
+      <li><a href="portfolios.html">Portfolios</a></li>
+      <li><a href="ai_builder.html" aria-current="page">AI Builder</a></li>
+      <li><a href="aws_architecture.html">AWS</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><a href="https://yennj12.js.org/yennj12_blog_V4/" target="_blank" rel="noreferrer">Blog</a></li>
+    </ul>
+    <div class="sn-right">
+      <button class="sn-theme" id="sn-theme" type="button" role="switch"
+              aria-checked="false" aria-label="Switch to dark theme">
+        <span class="sn-knob"></span>
+      </button>
+      <span class="sn-icons" aria-hidden="true">&#9728;<i>/</i>&#9790;</span>
+      <a class="sn-cta" href="contact.html">Get In Touch</a>
+    </div>
   </div>
-  <button class="bar-btn" id="modeBtn" type="button" aria-label="Toggle paper mode">
-    <span id="modeGlyph">&#9646;</span><span class="btn-lbl" id="modeText">Paper</span>
-  </button>
-  <a href="https://github.com/yennanliu" target="_blank" rel="noopener" class="bar-btn" style="text-decoration:none;">
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 1.8a10.2 10.2 0 0 0-3.2 19.9c.5.1.7-.2.7-.5v-1.8c-2.8.6-3.4-1.3-3.4-1.3-.5-1.2-1.1-1.5-1.1-1.5-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.5 2.3 1.1 2.9.8.1-.6.3-1.1.6-1.3-2.2-.3-4.6-1.1-4.6-5 0-1.1.4-2 1-2.7-.1-.3-.4-1.3.1-2.7 0 0 .8-.3 2.8 1a9.6 9.6 0 0 1 5 0c2-1.3 2.8-1 2.8-1 .5 1.4.2 2.4.1 2.7.6.7 1 1.6 1 2.7 0 3.9-2.4 4.7-4.6 5 .3.3.7 1 .7 2v2.9c0 .3.2.6.7.5A10.2 10.2 0 0 0 12 1.8z"/></svg>
-    <span class="btn-lbl">Source</span>
-  </a>
-  <button class="bar-btn bar-menu" id="menuBtn" type="button" aria-label="Toggle menu" aria-expanded="false">
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
-  </button>
 </nav>
 
 <!-- ══════════ HERO ══════════ -->
@@ -854,32 +845,8 @@
 
   select(0);
 
-  /* ── Paper / ink mode ── */
-  var root     = document.documentElement;
-  var modeBtn  = document.getElementById('modeBtn');
-  var modeText = document.getElementById('modeText');
-
-  function applyMode(mode) {
-    root.setAttribute('data-mode', mode);
-    modeText.textContent = (mode === 'ink') ? 'Paper' : 'Ink';
-    try { localStorage.setItem('aib_mode', mode); } catch (err) { /* private mode */ }
-  }
-
-  var saved = 'ink';
-  try { saved = localStorage.getItem('aib_mode') || 'paper'; } catch (err) { /* private mode */ }
-  applyMode(saved);
-
-  modeBtn.addEventListener('click', function () {
-    applyMode(root.getAttribute('data-mode') === 'ink' ? 'paper' : 'ink');
-  });
-
-  /* ── Mobile nav ── */
-  var menuBtn = document.getElementById('menuBtn');
-  var navLinks = document.getElementById('navLinks');
-  menuBtn.addEventListener('click', function () {
-    var open = navLinks.classList.toggle('open');
-    menuBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
-  });
+  /* Paper/ink and the mobile nav are the shared nav's job now —
+     see js/site-nav.js. */
 
   /* ── Reveal on scroll ── */
   var targets = document.querySelectorAll('.reveal');
@@ -957,5 +924,6 @@
 })();
 </script>
 
+  <script src="js/site-nav.js" defer></script>
 </body>
 </html>

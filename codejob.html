@@ -1,6 +1,19 @@
 <!DOCTYPE html>
 <html lang="zh-TW">
 <head>
+  <script>
+    /* Theme, before first paint. The site has three dark mechanisms from
+       three eras; one saved value drives all of them. Inline and
+       synchronous on purpose — a deferred script would let the page
+       flash light before turning dark. */
+    (function () {
+      var d = false;
+      try { d = localStorage.getItem('theme') === 'dark'; } catch (e) {}
+      var r = document.documentElement;
+      r.setAttribute('data-theme', d ? 'dark' : 'light');
+      if (d) r.setAttribute('data-mode', 'ink');
+    })();
+  </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>接案軟體工程師 - Yen.Dev</title>
@@ -328,72 +341,72 @@
 
        /* Apple dark mode */
        body.dark-mode {
-          background-color: #111827;
-          color: #f5f5f7;
+          background-color: #141417;
+          color: #f5f7fa;
        }
 
        body.dark-mode .navbar {
-          background-color: rgba(31, 41, 55, 0.92) !important;
-          border-bottom: 1px solid #374151;
+          background-color: rgba(31, 31, 36, 0.92) !important;
+          border-bottom: 1px solid #2e2e35;
        }
 
        body.dark-mode .navbar-brand,
        body.dark-mode .nav-link {
-          color: #f5f5f7 !important;
+          color: #f5f7fa !important;
        }
 
        body.dark-mode .hero-section {
-          background: #1f2937;
+          background: #1f1f24;
        }
 
        body.dark-mode .apple-headline {
-          color: #f5f5f7;
+          color: #f5f7fa;
        }
 
        body.dark-mode .apple-subheadline {
-          color: #98a2b3;
+          color: #9aa5b5;
        }
 
        body.dark-mode .content-card {
-          background: #1f2937;
-          border-color: #374151;
+          background: #1f1f24;
+          border-color: #2e2e35;
           box-shadow: var(--fl-sh-sm);
        }
 
        body.dark-mode .content-card:hover {
-          background: #28303b;
+          background: #212126;
           box-shadow: var(--fl-sh-lg);
        }
 
        body.dark-mode h4 {
-          color: #f5f5f7;
+          color: #f5f7fa;
        }
 
        body.dark-mode .service-list li,
        body.dark-mode .case-list li {
-          color: #dbe1e8;
-          border-bottom-color: rgba(255, 255, 255, 0.08);
+          color: #d3dae4;
+          border-bottom-color: rgba(245, 247, 250, 0.08);
        }
 
        body.dark-mode footer {
-          background-color: #1f2937;
-          border-top: 1px solid #374151;
-          color: #98a2b3;
+          background-color: #1f1f24;
+          border-top: 1px solid #2e2e35;
+          color: #9aa5b5;
        }
 
        body.dark-mode footer a {
-          color: #2563eb;
+          color: #7aa8ff;
        }
 
        body.dark-mode footer a:hover {
-          color: #2563eb;
+          color: #7aa8ff;
        }
 
        /* Dark mode mobile navbar styles */
        @media (max-width: 991.98px) {
           body.dark-mode .navbar-collapse {
-             background-color: rgba(31, 41, 55, 0.95) !important;
-             border: 1px solid #374151;
+             background-color: rgba(31, 31, 36, 0.95) !important;
+             border: 1px solid #2e2e35;
           }
        }
 
@@ -751,48 +764,48 @@
 
        /* Dark mode for enhanced components */
        body.dark-mode .stat-badge {
-          background: rgba(40, 48, 59, 0.7);
-          border-color: #374151;
-          color: #f5f5f7;
+          background: rgba(33, 33, 38, 0.7);
+          border-color: #2e2e35;
+          color: #f5f7fa;
        }
 
        body.dark-mode .section-title,
        body.dark-mode .feature-card h5,
        body.dark-mode .case-card h6,
        body.dark-mode .cta-card h3 {
-          color: #f5f5f7;
+          color: #f5f7fa;
        }
 
        body.dark-mode .section-desc,
        body.dark-mode .feature-card p,
        body.dark-mode .case-card p,
        body.dark-mode .cta-card p {
-          color: #98a2b3;
+          color: #9aa5b5;
        }
 
        body.dark-mode .feature-card,
        body.dark-mode .case-card {
-          background: #1f2937;
-          border-color: #374151;
+          background: #1f1f24;
+          border-color: #2e2e35;
        }
 
        body.dark-mode .feature-card:hover,
        body.dark-mode .case-card:hover {
-          background: #28303b;
+          background: #212126;
        }
 
        body.dark-mode .case-card .case-ico {
-          background: #28303b;
+          background: #212126;
        }
 
        body.dark-mode .tag {
-          background: #28303b;
-          color: #dbe1e8;
+          background: #212126;
+          color: #d3dae4;
        }
 
        body.dark-mode .cta-card {
-          background: #1f2937;
-          border-color: #374151;
+          background: #1f1f24;
+          border-color: #2e2e35;
        }
 
        /* ===== Premium / fancy layer ===== */
@@ -940,8 +953,8 @@
           100% { transform: translateX(-50%); }
        }
 
-       body.dark-mode .tech-strip { background: #111827; border-color: #374151; }
-       body.dark-mode .stat-block .label { color: #98a2b3; }
+       body.dark-mode .tech-strip { background: #141417; border-color: #2e2e35; }
+       body.dark-mode .stat-block .label { color: #9aa5b5; }
     
        /* ── FinLab: flat surfaces, hairline rules, one accent ────────── */
        body { line-height: 1.7; letter-spacing: 0; }
@@ -965,13 +978,13 @@
        .apple-button {
           background: var(--fl-ink);
           border: 1px solid var(--fl-ink);
-          color: #fff;
+          color: var(--fl-on-ink);
           border-radius: var(--fl-r-pill);
        }
        .apple-button:hover {
           background: var(--fl-ink-soft);
           border-color: var(--fl-ink-soft);
-          color: #fff;
+          color: var(--fl-on-ink);
        }
        .apple-button + .apple-button {
           background: var(--fl-surface);
@@ -990,7 +1003,7 @@
        .btn-gradient, .btn-gradient:hover {
           background: var(--fl-ink) !important;
           border-color: var(--fl-ink);
-          color: #fff;
+          color: var(--fl-on-ink);
           box-shadow: none;
           transform: none;
        }
@@ -1015,49 +1028,38 @@
        }
   </style>
     <link rel="stylesheet" href="css/finlab-theme.css">
+  <link rel="stylesheet" href="css/site-nav.css">
 </head>
 <body>
     <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
-       <div class="container">
-          <a class="navbar-brand" href="https://yennanliu.github.io">Yen.Dev</a>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-             <ul class="navbar-nav ml-auto">
-                <li class="nav-item">
-                   <a class="nav-link" href="https://yennanliu.github.io/about_me.html">About Me</a>
-                </li>
-                <li class="nav-item">
-                   <a class="nav-link" href="https://yennanliu.github.io/portfolios.html">Portfolios</a>
-                </li>
-                <li class="nav-item">
-                   <a class="nav-link" href="https://yennanliu.github.io/aws_architecture.html">AWS Architecture</a>
-                </li>
-                <li class="nav-item">
-                   <a class="nav-link" href="https://yennanliu.github.io/contact.html">Contact</a>
-                </li>
-                <li class="nav-item">
-                   <a class="nav-link" href="https://yennj12.js.org/yennj12_blog_V4/">Blog</a>
-                </li>
-                <li class="nav-item">
-                   <a class="nav-link" href="https://yennj12.js.org/index.html.backup.html">Old Site</a>
-                </li>
-                <!-- Dark mode toggle button -->
-                <li class="nav-item toggle-container">
-                   <label class="theme-switch" for="theme-checkbox">
-                      <input type="checkbox" id="theme-checkbox" />
-                      <span class="slider"></span>
-                   </label>
-                   <div class="toggle-icons">
-                      <i class="fas fa-sun"></i>/<i class="fas fa-moon"></i>
-                   </div>
-                </li>
-             </ul>
-          </div>
-       </div>
-    </nav>
+    <!-- SITE NAV -->
+<nav class="site-nav" id="site-nav" aria-label="Primary">
+  <a class="sn-brand" href="index.html">YEN<em>.DEV</em></a>
+
+  <button class="sn-burger" id="sn-burger" type="button"
+          aria-label="Open menu" aria-expanded="false" aria-controls="sn-menu">
+    <span></span><span></span><span></span>
+  </button>
+
+  <div class="sn-menu" id="sn-menu">
+    <ul class="sn-links">
+      <li><a href="about_me.html">About</a></li>
+      <li><a href="portfolios.html">Portfolios</a></li>
+      <li><a href="ai_builder.html">AI Builder</a></li>
+      <li><a href="aws_architecture.html">AWS</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><a href="https://yennj12.js.org/yennj12_blog_V4/" target="_blank" rel="noreferrer">Blog</a></li>
+    </ul>
+    <div class="sn-right">
+      <button class="sn-theme" id="sn-theme" type="button" role="switch"
+              aria-checked="false" aria-label="Switch to dark theme">
+        <span class="sn-knob"></span>
+      </button>
+      <span class="sn-icons" aria-hidden="true">&#9728;<i>/</i>&#9790;</span>
+      <a class="sn-cta" href="contact.html">Get In Touch</a>
+    </div>
+  </div>
+</nav>
 
     <!-- Hero Section -->
     <section class="hero-section">
@@ -1390,34 +1392,7 @@
              });
           }, { threshold: 0.5 });
           counters.forEach((c) => observer.observe(c));
-       })();
-
-       // Dark mode toggle functionality
-       document.addEventListener('DOMContentLoaded', function() {
-          const toggleSwitch = document.getElementById('theme-checkbox');
-
-          // Check for saved theme preference or use device preference
-          const currentTheme = localStorage.getItem('theme') || 'light';
-
-          if (currentTheme === 'dark') {
-              document.body.classList.add('dark-mode');
-              toggleSwitch.checked = true;
-          }
-
-          // Switch theme function
-          function switchTheme(event) {
-              if (event.target.checked) {
-                  document.body.classList.add('dark-mode');
-                  localStorage.setItem('theme', 'dark');
-              } else {
-                  document.body.classList.remove('dark-mode');
-                  localStorage.setItem('theme', 'light');
-              }
-          }
-
-          // Event listener for toggle switch
-          toggleSwitch.addEventListener('change', switchTheme);
-       });
-    </script>
+       })();    </script>
+  <script src="js/site-nav.js" defer></script>
 </body>
 </html>

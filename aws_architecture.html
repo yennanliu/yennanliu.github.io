@@ -1,6 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
    <head>
+  <script>
+    /* Theme, before first paint. The site has three dark mechanisms from
+       three eras; one saved value drives all of them. Inline and
+       synchronous on purpose — a deferred script would let the page
+       flash light before turning dark. */
+    (function () {
+      var d = false;
+      try { d = localStorage.getItem('theme') === 'dark'; } catch (e) {}
+      var r = document.documentElement;
+      r.setAttribute('data-theme', d ? 'dark' : 'light');
+      if (d) r.setAttribute('data-mode', 'ink');
+    })();
+  </script>
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
       <title>AWS Architecture - Yen.Dev</title>
@@ -566,44 +579,44 @@
          
          /* Apple dark mode - Enhanced */
          body.dark-mode {
-            background-color: #111827;
-            color: #f5f5f7;
+            background-color: #141417;
+            color: #f5f7fa;
          }
          
          body.dark-mode .navbar {
-            background-color: rgba(31, 41, 55, 0.92) !important;
-            border-bottom: 1px solid #374151;
+            background-color: rgba(31, 31, 36, 0.92) !important;
+            border-bottom: 1px solid #2e2e35;
          }
          
          body.dark-mode .navbar-brand,
          body.dark-mode .nav-link {
-            color: #f5f5f7 !important;
+            color: #f5f7fa !important;
          }
          
          body.dark-mode .hero-section {
-            background: #1f2937;
+            background: #1f1f24;
          }
          
          body.dark-mode .apple-headline {
-            color: #f5f5f7;
+            color: #f5f7fa;
          }
 
          body.dark-mode .headline-chinese-line {
-            color: #f5f5f7;
+            color: #f5f7fa;
          }
          
          body.dark-mode .apple-subheadline {
-            color: #98a2b3;
+            color: #9aa5b5;
          }
          
          body.dark-mode .architecture-card {
-            background: #1f2937;
-            border-color: #374151;
+            background: #1f1f24;
+            border-color: #2e2e35;
             box-shadow: var(--fl-sh-sm);
          }
          
          body.dark-mode .architecture-card:hover {
-            background: #28303b;
+            background: #212126;
             box-shadow: var(--fl-sh-lg);
          }
          
@@ -622,60 +635,60 @@
          }
 
          body.dark-mode .architecture-visual svg {
-            background: #1f2937;
+            background: #1f1f24;
          }
          
          body.dark-mode .architecture-card-body {
-            color: #f5f5f7;
+            color: #f5f7fa;
          }
          
          body.dark-mode .apple-product-title {
-            color: #f5f5f7;
+            color: #f5f7fa;
          }
          
          body.dark-mode .apple-product-subtitle {
-            color: #98a2b3;
+            color: #9aa5b5;
          }
          
          body.dark-mode .apple-body-large {
-            color: #dbe1e8;
+            color: #d3dae4;
          }
          
          body.dark-mode .tech-tag {
-            background: #374151;
-            color: #98a2b3;
-            border: 1px solid #4b5565;
+            background: #2e2e35;
+            color: #9aa5b5;
+            border: 1px solid #3a3a43;
          }
          
          body.dark-mode .apple-link {
-            color: #2563eb;
+            color: #7aa8ff;
          }
          
          body.dark-mode .apple-link:hover {
-            color: #2563eb;
+            color: #7aa8ff;
          }
          
          body.dark-mode .apple-button {
-            background: #ffffff;
-            color: #111827;
+            background: #f5f7fa;
+            color: #141417;
          }
          
          body.dark-mode .apple-button:hover {
-            background: #2563eb;
+            background: #7aa8ff;
          }
          
          body.dark-mode footer {
-            background-color: #1f2937;
-            border-top: 1px solid #374151;
-            color: #98a2b3;
+            background-color: #1f1f24;
+            border-top: 1px solid #2e2e35;
+            color: #9aa5b5;
          }
          
          body.dark-mode footer a {
-            color: #2563eb;
+            color: #7aa8ff;
          }
          
          body.dark-mode footer a:hover {
-            color: #2563eb;
+            color: #7aa8ff;
          }
          
          /* Improve toggler button visibility in light mode */
@@ -686,33 +699,33 @@
             background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(17, 24, 39, 0.7)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
          }
          body.dark-mode .navbar-light .navbar-toggler {
-            border-color: rgba(255, 255, 255, 0.4) !important;
+            border-color: rgba(245, 247, 250, 0.4) !important;
          }
          body.dark-mode .navbar-light .navbar-toggler-icon {
-            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(255, 255, 255, 0.8)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(245, 247, 250, 0.8)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
          }
 
          /* Dark mode mobile navbar styles */
          @media (max-width: 991.98px) {
             body.dark-mode .navbar-collapse {
-               background-color: rgba(31, 41, 55, 0.95) !important;
-               border: 1px solid #374151;
+               background-color: rgba(31, 31, 36, 0.95) !important;
+               border: 1px solid #2e2e35;
             }
          }
          
          /* Dark mode progress bars (if any) */
          body.dark-mode .progress {
-            background-color: #374151;
+            background-color: #2e2e35;
          }
          
          body.dark-mode .progress-bar {
-            background-color: #f5f5f7 !important;
+            background-color: #f5f7fa !important;
          }
          
          /* Dark mode certification badges */
          body.dark-mode .cert-badge {
-            background: #ffffff;
-            color: #111827;
+            background: #f5f7fa;
+            color: #141417;
             box-shadow: var(--fl-sh);
          }
          
@@ -1571,14 +1584,14 @@
 
          /* Dark Mode Support */
          body.dark-mode .ai-infra-section {
-            background: #1f2937;
+            background: #1f1f24;
          }
 
          body.dark-mode .ai-infra-section::before {
             background:
-               radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.05) 0%, transparent 50%),
-               radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.05) 0%, transparent 50%),
-               linear-gradient(45deg, transparent 0%, rgba(255, 255, 255, 0.02) 50%, transparent 100%);
+               radial-gradient(circle at 20% 20%, rgba(245, 247, 250, 0.05) 0%, transparent 50%),
+               radial-gradient(circle at 80% 80%, rgba(245, 247, 250, 0.05) 0%, transparent 50%),
+               linear-gradient(45deg, transparent 0%, rgba(245, 247, 250, 0.02) 50%, transparent 100%);
          }
 
          body.dark-mode .ai-title-main {
@@ -1591,42 +1604,42 @@
          }
 
          body.dark-mode .ai-infra-subtitle {
-            color: #98a2b3;
+            color: #9aa5b5;
          }
 
          body.dark-mode .ai-infra-card {
-            background: rgba(31, 41, 55, 0.8);
-            border-color: rgba(255, 255, 255, 0.1);
+            background: rgba(31, 31, 36, 0.8);
+            border-color: rgba(245, 247, 250, 0.1);
          }
 
          body.dark-mode .ai-infra-card:hover {
-            background: rgba(40, 48, 59, 0.9);
+            background: rgba(33, 33, 38, 0.9);
             box-shadow:
                var(--fl-sh-lg);
          }
 
          body.dark-mode .ai-infra-card-title {
-            color: #f5f5f7;
+            color: #f5f7fa;
          }
 
          body.dark-mode .ai-infra-card-description {
-            color: #98a2b3;
+            color: #9aa5b5;
          }
 
          body.dark-mode .ai-infra-cta-text {
-            color: #98a2b3;
+            color: #9aa5b5;
          }
 
          body.dark-mode .indicator {
-            background: rgba(37, 99, 235, 0.4);
+            background: rgba(122, 168, 255, 0.4);
          }
 
          body.dark-mode .indicator.active {
-            background: #2563eb;
+            background: #7aa8ff;
          }
 
          body.dark-mode .indicator:hover {
-            background: rgba(37, 99, 235, 0.7);
+            background: rgba(122, 168, 255, 0.7);
          }
 
          /* AWS Expertise Cards - Modern Design */
@@ -1787,46 +1800,46 @@
 
          /* AWS Expertise Level - Dark Mode */
          body.dark-mode .expertise-card {
-            background-color: #1f2937;
-            border-color: #374151;
-            color: #f5f5f7;
+            background-color: #1f1f24;
+            border-color: #2e2e35;
+            color: #f5f7fa;
          }
 
          body.dark-mode .expertise-card::before {
-            background: #ffffff;
+            background: #f5f7fa;
          }
 
          body.dark-mode .expertise-card:hover {
-            border-color: #ffffff;
+            border-color: #f5f7fa;
             box-shadow: var(--fl-sh-lg);
          }
 
          body.dark-mode .expertise-icon-wrapper {
-            background: #ffffff;
+            background: #f5f7fa;
          }
 
          body.dark-mode .expertise-icon {
-            color: #111827;
+            color: #141417;
          }
 
          body.dark-mode .circle-bg {
-            stroke: #374151;
+            stroke: #2e2e35;
          }
 
          body.dark-mode .circle-progress {
-            stroke: #ffffff;
+            stroke: #f5f7fa;
          }
 
          body.dark-mode .circle-percentage {
-            fill: #ffffff;
+            fill: #f5f7fa;
          }
 
          body.dark-mode .expertise-title {
-            color: #ffffff;
+            color: #f5f7fa;
          }
 
          body.dark-mode .expertise-services {
-            color: #98a2b3;
+            color: #9aa5b5;
          }
          
          /* Toggle button styles */
@@ -1947,8 +1960,8 @@
          }
          
          body.dark-mode .tech-tag {
-            background: rgba(37, 99, 235, 0.2);
-            color: #2563eb;
+            background: rgba(122, 168, 255, 0.2);
+            color: #7aa8ff;
          }
          
          /* Touch-friendly and accessibility optimizations */
@@ -2357,13 +2370,13 @@
        .apple-button {
           background: var(--fl-ink);
           border: 1px solid var(--fl-ink);
-          color: #fff;
+          color: var(--fl-on-ink);
           border-radius: var(--fl-r-pill);
        }
        .apple-button:hover {
           background: var(--fl-ink-soft);
           border-color: var(--fl-ink-soft);
-          color: #fff;
+          color: var(--fl-on-ink);
        }
        .apple-button + .apple-button {
           background: var(--fl-surface);
@@ -2382,7 +2395,7 @@
        .btn-gradient, .btn-gradient:hover {
           background: var(--fl-ink) !important;
           border-color: var(--fl-ink);
-          color: #fff;
+          color: var(--fl-on-ink);
           box-shadow: none;
           transform: none;
        }
@@ -2407,49 +2420,38 @@
        }
   </style>
       <link rel="stylesheet" href="css/finlab-theme.css">
-   </head>
+     <link rel="stylesheet" href="css/site-nav.css">
+</head>
    <body>
       <!-- Navigation -->
-      <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
-         <div class="container">
-            <a class="navbar-brand" href="https://yennanliu.github.io">Yen.Dev</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-               <ul class="navbar-nav ml-auto">
-                  <li class="nav-item">
-                     <a class="nav-link" href="https://yennanliu.github.io/about_me.html">About Me</a>
-                  </li>
-                  <li class="nav-item">
-                     <a class="nav-link" href="https://yennanliu.github.io/portfolios.html">Portfolios</a>
-                  </li>
-                  <li class="nav-item">
-                     <a class="nav-link" href="https://yennanliu.github.io/ai_builder.html">AI Builder</a>
-                  </li>
-                  <li class="nav-item">
-                     <a class="nav-link" href="https://yennanliu.github.io/aws_architecture.html">AWS Architecture</a>
-                  </li>
-                  <li class="nav-item">
-                     <a class="nav-link" href="https://yennanliu.github.io/contact.html">Contact</a>
-                  </li>
-                  <li class="nav-item">
-                     <a class="nav-link" href="https://yennj12.js.org/yennj12_blog_V4/">Blog</a>
-                  </li>
-                  <!-- Dark mode toggle button -->
-                  <li class="nav-item toggle-container">
-                     <label class="theme-switch" for="theme-checkbox">
-                        <input type="checkbox" id="theme-checkbox" />
-                        <span class="slider"></span>
-                     </label>
-                     <div class="toggle-icons">
-                        <i class="fas fa-sun"></i>/<i class="fas fa-moon"></i>
-                     </div>
-                  </li>
-               </ul>
-            </div>
-         </div>
-      </nav>
+      <!-- SITE NAV -->
+<nav class="site-nav" id="site-nav" aria-label="Primary">
+  <a class="sn-brand" href="index.html">YEN<em>.DEV</em></a>
+
+  <button class="sn-burger" id="sn-burger" type="button"
+          aria-label="Open menu" aria-expanded="false" aria-controls="sn-menu">
+    <span></span><span></span><span></span>
+  </button>
+
+  <div class="sn-menu" id="sn-menu">
+    <ul class="sn-links">
+      <li><a href="about_me.html">About</a></li>
+      <li><a href="portfolios.html">Portfolios</a></li>
+      <li><a href="ai_builder.html">AI Builder</a></li>
+      <li><a href="aws_architecture.html" aria-current="page">AWS</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><a href="https://yennj12.js.org/yennj12_blog_V4/" target="_blank" rel="noreferrer">Blog</a></li>
+    </ul>
+    <div class="sn-right">
+      <button class="sn-theme" id="sn-theme" type="button" role="switch"
+              aria-checked="false" aria-label="Switch to dark theme">
+        <span class="sn-knob"></span>
+      </button>
+      <span class="sn-icons" aria-hidden="true">&#9728;<i>/</i>&#9790;</span>
+      <a class="sn-cta" href="contact.html">Get In Touch</a>
+    </div>
+  </div>
+</nav>
 
       <!-- Hero Section -->
       <section class="hero-section">
@@ -2991,34 +2993,6 @@
              easing: 'ease-in-out',
              once: true
          });
-
-         // Dark mode toggle functionality
-         document.addEventListener('DOMContentLoaded', function() {
-            const toggleSwitch = document.getElementById('theme-checkbox');
-            
-            // Check for saved theme preference or use device preference
-            const currentTheme = localStorage.getItem('theme') || 'light';
-            
-            if (currentTheme === 'dark') {
-                document.body.classList.add('dark-mode');
-                toggleSwitch.checked = true;
-            }
-            
-            // Switch theme function
-            function switchTheme(event) {
-                if (event.target.checked) {
-                    document.body.classList.add('dark-mode');
-                    localStorage.setItem('theme', 'dark');
-                } else {
-                    document.body.classList.remove('dark-mode');
-                    localStorage.setItem('theme', 'light');
-                }
-            }
-            
-            // Event listener for toggle switch
-            toggleSwitch.addEventListener('change', switchTheme);
-         });
-
          // Scroll to top button functionality
          const scrollTopBtn = document.querySelector('.scroll-top');
          
@@ -3147,5 +3121,6 @@
             });
          });
       </script>
-   </body>
+     <script src="js/site-nav.js" defer></script>
+</body>
 </html>

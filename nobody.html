@@ -1,6 +1,19 @@
 <!DOCTYPE html>
 <html lang="zh-TW">
 <head>
+  <script>
+    /* Theme, before first paint. The site has three dark mechanisms from
+       three eras; one saved value drives all of them. Inline and
+       synchronous on purpose — a deferred script would let the page
+       flash light before turning dark. */
+    (function () {
+      var d = false;
+      try { d = localStorage.getItem('theme') === 'dark'; } catch (e) {}
+      var r = document.documentElement;
+      r.setAttribute('data-theme', d ? 'dark' : 'light');
+      if (d) r.setAttribute('data-mode', 'ink');
+    })();
+  </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>小小帶我魯 — 躺平導師計畫</title>
@@ -756,10 +769,70 @@
            margin: 0;
         }
         .wave-divider svg { display: none; }
+
+        /* This page had no dark theme at all. Its own tokens are what
+           drive it, so dark means re-pointing them at the black ramp. */
+        body.dark-mode {
+           --cream:       #0a0a0b;
+           --card-bg:     #0f0f11;
+           --coral:       #7aa8ff;
+           --coral-light: #141417;
+           --coral-dark:  #7aa8ff;
+           --sun:         #fbbf24;
+           --sun-light:   #141417;
+           --sage:        #34d399;
+           --sage-light:  #141417;
+           --lavender:    #b48cff;
+           --lav-light:   #1a1a1e;
+           --sky:         #5ec8dd;
+           --sky-light:   #141417;
+           --pink:        #f0a0cd;
+           --pink-light:  #141417;
+           --text:        #d3dae4;
+           --text-soft:   #9aa5b5;
+           --border:      #212126;
+           --shadow:      0 6px 14px rgba(10, 10, 11, .6);
+        }
+        body.dark-mode .hero { background: var(--fl-raised); }
+        body.dark-mode .hero-badge,
+        body.dark-mode .urgency-bar {
+           background: var(--fl-quiet);
+           border-color: var(--fl-hair);
+        }
   </style>
     <link rel="stylesheet" href="css/finlab-theme.css">
+  <link rel="stylesheet" href="css/site-nav.css">
 </head>
 <body>
+
+<!-- SITE NAV -->
+<nav class="site-nav" id="site-nav" aria-label="Primary">
+  <a class="sn-brand" href="index.html">YEN<em>.DEV</em></a>
+
+  <button class="sn-burger" id="sn-burger" type="button"
+          aria-label="Open menu" aria-expanded="false" aria-controls="sn-menu">
+    <span></span><span></span><span></span>
+  </button>
+
+  <div class="sn-menu" id="sn-menu">
+    <ul class="sn-links">
+      <li><a href="about_me.html">About</a></li>
+      <li><a href="portfolios.html">Portfolios</a></li>
+      <li><a href="ai_builder.html">AI Builder</a></li>
+      <li><a href="aws_architecture.html">AWS</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><a href="https://yennj12.js.org/yennj12_blog_V4/" target="_blank" rel="noreferrer">Blog</a></li>
+    </ul>
+    <div class="sn-right">
+      <button class="sn-theme" id="sn-theme" type="button" role="switch"
+              aria-checked="false" aria-label="Switch to dark theme">
+        <span class="sn-knob"></span>
+      </button>
+      <span class="sn-icons" aria-hidden="true">&#9728;<i>/</i>&#9790;</span>
+      <a class="sn-cta" href="contact.html">Get In Touch</a>
+    </div>
+  </div>
+</nav>
 
     <!-- Floating CTA button -->
     <a href="#contact" class="float-badge">
@@ -1161,5 +1234,6 @@
             });
         });
     </script>
+  <script src="js/site-nav.js" defer></script>
 </body>
 </html>

@@ -17,11 +17,16 @@
 
   <!-- Theme before paint (shared with the rest of the site) -->
   <script>
-    (function(){
-      try {
-        var t = localStorage.getItem('theme');
-        if (t) document.documentElement.setAttribute('data-theme', t);
-      } catch(e){}
+    /* Theme, before first paint. The site has three dark mechanisms from
+       three eras; one saved value drives all of them. Inline and
+       synchronous on purpose — a deferred script would let the page
+       flash light before turning dark. */
+    (function () {
+      var d = false;
+      try { d = localStorage.getItem('theme') === 'dark'; } catch (e) {}
+      var r = document.documentElement;
+      r.setAttribute('data-theme', d ? 'dark' : 'light');
+      if (d) r.setAttribute('data-mode', 'ink');
     })();
   </script>
 
@@ -70,20 +75,20 @@
     }
     /* INK */
     :root[data-theme="dark"] {
-      --paper:      #0f1115;
-      --paper-2:    #14171d;
-      --ink:        #f2f4f7;
-      --ink-2:      #98a2b3;
-      --ink-3:      #647084;
-      --rule:       #232833;
-      --tag-border: #232833;
+      --paper:      #0f0f11;
+      --paper-2:    #0f0f11;
+      --ink:        #f5f7fa;
+      --ink-2:      #9aa5b5;
+      --ink-3:      #5b6675;
+      --rule:       #1f1f24;
+      --tag-border: #1f1f24;
       --accent:     #7aa8ff;
       --accent-2:   #b48cff;
       --duo:        saturate(.7) contrast(1.02) brightness(.92);
       --duo-off:    saturate(1) contrast(1);
       --grain:      0;
-      --shade:      rgba(0,0,0,.42);
-      --nav-bg:     rgba(15,17,21,.86);
+      --shade:      rgba(10, 10, 11, .42);
+      --nav-bg:     rgba(15, 15, 17, .86);
     }
     :root { color-scheme: light; }
     :root[data-theme="dark"] { color-scheme: dark; }
@@ -121,35 +126,9 @@
       letter-spacing: .16em; text-transform: uppercase;
     }
     .serif { font-family: var(--fl-display); font-weight: 400; }
-
-    /* ── NAV ────────────────────────────────────────────── */
-    .topbar {
-      position: sticky; top: 0; z-index: 60;
-      border-bottom: 1px solid var(--rule);
-      background: var(--nav-bg);
-      backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
-    }
-    .nav-in { display: flex; align-items: center; justify-content: space-between; gap: 32px; height: 58px; }
     .brand { font-size: 23px; letter-spacing: -.01em; line-height: 1; }
     .brand em { font-style: italic; }
     .brand span { color: var(--accent); }
-    .nav-links { display: flex; align-items: center; gap: 28px; list-style: none; font-size: 12px; }
-    .nav-links a { color: var(--ink-3); transition: color .18s ease; padding: 6px 0; }
-    .nav-links a:hover { color: var(--ink); }
-    .nav-links a[aria-current="page"] { color: var(--ink); border-bottom: 1px solid var(--accent); padding-bottom: 3px; }
-    .mode {
-      display: inline-flex; align-items: center; gap: 8px;
-      min-height: 34px; padding: 7px 12px;
-      border: 1px solid var(--rule); background: none; color: var(--ink-2);
-      font-family: inherit; font-size: 12px; letter-spacing: .16em; text-transform: uppercase;
-      cursor: pointer; transition: border-color .18s ease, color .18s ease;
-    }
-    .mode:hover { border-color: var(--accent); color: var(--accent); }
-    .mode .m-ink { display: none; }
-    .mode .m-paper { display: inline-flex; }
-    :root[data-theme="dark"] .mode .m-ink { display: inline-flex; }
-    :root[data-theme="dark"] .mode .m-paper { display: none; }
-    .nav-toggle { display: none; }
 
     /* ── MASTHEAD ───────────────────────────────────────── */
     .masthead { border-bottom: 1px solid var(--rule); }
@@ -453,7 +432,6 @@
       .rec-head { grid-template-columns: 40px 108px minmax(0, 1fr) 200px 104px 18px; gap: 16px; }
       .panel-grid { grid-template-columns: 40px 330px minmax(0, 1fr) 210px; gap: 16px; padding-left: 36px; padding-right: 36px; }
       .colophon-in { grid-template-columns: 64px minmax(0, 1fr) 220px 200px; gap: 32px; }
-      .nav-links { gap: 20px; }
     }
 
     @media (max-width: 1000px) {
@@ -485,24 +463,7 @@
       .wrap { padding-left: 20px; padding-right: 20px; }
       .rec-head { padding: 22px 20px; }
       .panel-grid { padding: 0 20px 28px; }
-      .nav-in { height: 54px; }
       .rail { top: 54px; }
-      .nav-links {
-        position: fixed; inset: 54px 0 auto 0; z-index: 55;
-        flex-direction: column; align-items: flex-start; gap: 0;
-        background: var(--paper); border-bottom: 1px solid var(--rule);
-        padding: 8px 20px 20px; display: none;
-      }
-      .nav-links.open { display: flex; }
-      .nav-links li { width: 100%; border-top: 1px solid var(--rule); }
-      .nav-links li:first-child { border-top: 0; }
-      .nav-links a { display: block; width: 100%; padding: 16px 0; font-size: 12px; }
-      .nav-links .mode-li { padding: 16px 0; border-top: 1px solid var(--rule); }
-      .nav-toggle {
-        display: inline-flex; align-items: center; justify-content: center;
-        width: 44px; height: 44px; margin-right: -10px;
-        border: 0; background: none; color: var(--ink); cursor: pointer;
-      }
       .rail-in { gap: 16px; }
       .tabs { gap: 18px; }
       .tab { font-size: 12px; letter-spacing: .12em; }
@@ -539,38 +500,40 @@
     .tags span { border-radius: var(--fl-r-pill); }
   </style>
   <link rel="stylesheet" href="css/finlab-theme.css">
+  <link rel="stylesheet" href="css/site-nav.css">
 </head>
 
 <body>
 
   <!-- ══ NAV ══ -->
-  <nav class="topbar">
-    <div class="wrap nav-in">
-      <a class="brand serif" href="https://yennanliu.github.io"><em>yen</em><span>.</span>dev</a>
-      <button class="nav-toggle" id="navToggle" type="button" aria-label="Toggle navigation" aria-expanded="false" aria-controls="navLinks">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M3 7h18M3 12h18M3 17h18"/></svg>
+  <!-- SITE NAV -->
+<nav class="site-nav" id="site-nav" aria-label="Primary">
+  <a class="sn-brand" href="index.html">YEN<em>.DEV</em></a>
+
+  <button class="sn-burger" id="sn-burger" type="button"
+          aria-label="Open menu" aria-expanded="false" aria-controls="sn-menu">
+    <span></span><span></span><span></span>
+  </button>
+
+  <div class="sn-menu" id="sn-menu">
+    <ul class="sn-links">
+      <li><a href="about_me.html">About</a></li>
+      <li><a href="portfolios.html" aria-current="page">Portfolios</a></li>
+      <li><a href="ai_builder.html">AI Builder</a></li>
+      <li><a href="aws_architecture.html">AWS</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><a href="https://yennj12.js.org/yennj12_blog_V4/" target="_blank" rel="noreferrer">Blog</a></li>
+    </ul>
+    <div class="sn-right">
+      <button class="sn-theme" id="sn-theme" type="button" role="switch"
+              aria-checked="false" aria-label="Switch to dark theme">
+        <span class="sn-knob"></span>
       </button>
-      <ul class="nav-links mono" id="navLinks">
-        <li><a href="https://yennanliu.github.io/about_me.html">About</a></li>
-        <li><a href="https://yennanliu.github.io/portfolios.html" aria-current="page">Portfolio</a></li>
-        <li><a href="https://yennanliu.github.io/ai_builder.html">AI Builder</a></li>
-        <li><a href="https://yennanliu.github.io/aws_architecture.html">AWS</a></li>
-        <li><a href="https://yennanliu.github.io/contact.html">Contact</a></li>
-        <li><a href="https://yennj12.js.org/yennj12_blog_V4/">Blog</a></li>
-        <li class="mode-li">
-          <button class="mode" id="modeBtn" type="button" aria-label="Switch between ink and paper mode">
-            <span class="m-ink">
-              <svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M13.4 9.6A5.6 5.6 0 0 1 6.4 2.6a5.7 5.7 0 1 0 7 7Z"/></svg>
-            </span>
-            <span class="m-paper">
-              <svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"><circle cx="8" cy="8" r="3.4"/><path d="M8 1.4v1.7M8 12.9v1.7M14.6 8h-1.7M3.1 8H1.4M12.7 3.3l-1.2 1.2M4.5 11.5l-1.2 1.2M12.7 12.7l-1.2-1.2M4.5 4.5 3.3 3.3"/></svg>
-            </span>
-            <span id="modeLabel">Ink</span>
-          </button>
-        </li>
-      </ul>
+      <span class="sn-icons" aria-hidden="true">&#9728;<i>/</i>&#9790;</span>
+      <a class="sn-cta" href="contact.html">Get In Touch</a>
     </div>
-  </nav>
+  </div>
+</nav>
 
   <!-- ══ MASTHEAD ══ -->
   <header class="masthead">
@@ -985,35 +948,6 @@
   (function () {
     'use strict';
 
-    /* ── Ink / paper ── */
-    var root = document.documentElement;
-    var modeBtn = document.getElementById('modeBtn');
-    var modeLabel = document.getElementById('modeLabel');
-    function paintMode() {
-      var dark = root.getAttribute('data-theme') === 'dark';
-      modeLabel.textContent = dark ? 'Ink' : 'Paper';
-      var meta = document.querySelector('meta[name="theme-color"]');
-      if (meta) meta.setAttribute('content', dark ? '#0f1115' : '#ffffff');
-    }
-    modeBtn.addEventListener('click', function () {
-      var dark = root.getAttribute('data-theme') === 'dark';
-      if (dark) { root.removeAttribute('data-theme'); } else { root.setAttribute('data-theme', 'dark'); }
-      try { localStorage.setItem('theme', dark ? 'light' : 'dark'); } catch (e) {}
-      paintMode();
-    });
-    paintMode();
-
-    /* ── Mobile nav ── */
-    var navToggle = document.getElementById('navToggle');
-    var navLinks = document.getElementById('navLinks');
-    navToggle.addEventListener('click', function () {
-      var open = navLinks.classList.toggle('open');
-      navToggle.setAttribute('aria-expanded', String(open));
-    });
-    navLinks.addEventListener('click', function (e) {
-      if (e.target.tagName === 'A') { navLinks.classList.remove('open'); navToggle.setAttribute('aria-expanded', 'false'); }
-    });
-
     /* ── Records: expand / collapse ── */
     var records = Array.prototype.slice.call(document.querySelectorAll('.rec'));
 
@@ -1163,5 +1097,6 @@
     }
   })();
   </script>
+  <script src="js/site-nav.js" defer></script>
 </body>
 </html>
