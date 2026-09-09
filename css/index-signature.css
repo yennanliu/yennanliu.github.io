@@ -295,3 +295,140 @@ section[data-sig] > * { position: relative; z-index: 1; }
   #hero::before { animation: none; mask-image: var(--grid-mask); -webkit-mask-image: var(--grid-mask); }
   .sys-card { animation: none; }
 }
+
+/* ── 10. THE LAYER BELTS ───────────────────────────────────────────────
+   "Six layers, one pair of hands" was two plain scrolling rows. It is
+   the one place on the page where the work itself is on display, so it
+   gets the most machinery:
+
+     · the belts carry scroll momentum — shove the page and they surge,
+       then settle, which is what a running system looks like
+     · a torch veils the band and lifts only what is under the cursor
+     · the card you are on gets a light running once round its edge, in
+       its own layer colour
+
+   Each variant already had an accent for its top rule; that colour is
+   promoted to a variable so the beam, the glow and the icon can all
+   speak with it.                                                        */
+
+@property --sig-beam {
+  syntax: '<angle>';
+  inherits: false;
+  initial-value: 0deg;
+}
+
+.mc-ai  { --mc: var(--cat-1); }
+.mc-sd  { --mc: var(--cat-2); }
+.mc-be  { --mc: var(--cat-5); }
+.mc-cl  { --mc: var(--cat-3); }
+.mc-app { --mc: var(--cat-4); }
+.mc-dp  { --mc: var(--cat-6); }
+
+.exp-marquee-outer { position: relative; }
+
+/* the belts are driven from script once it loads, so the CSS keyframes
+   have to stand down or the two fight over the same transform */
+.exp-marquee-outer.js .exp-mq-track { animation: none; }
+
+.exp-mcard {
+  position: relative;
+  isolation: isolate;
+}
+
+/* a light running once around the edge, in the card's own layer colour */
+.exp-mcard::after {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  z-index: -1;
+  border-radius: inherit;
+  padding: 1px;
+  background: conic-gradient(from var(--sig-beam),
+              transparent 0 62%,
+              color-mix(in oklab, var(--mc, var(--blue)) 85%, transparent) 78%,
+              transparent 92% 100%);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+          mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+          mask-composite: exclude;
+  opacity: 0;
+  transition: opacity .22s ease;
+  pointer-events: none;
+}
+
+.exp-mcard:hover::after {
+  opacity: 1;
+  animation: sigBeam 1.5s linear infinite;
+}
+@keyframes sigBeam { to { --sig-beam: 360deg; } }
+
+/* the accent bleeds off the top rule as the card lifts */
+.exp-mcard:hover {
+  box-shadow:
+    0 10px 30px color-mix(in oklab, var(--mc, var(--blue)) 20%, transparent),
+    var(--sh-sm);
+}
+
+/* the icon comes alive rather than just sitting there */
+.mc-icon {
+  position: relative;
+  transition: transform .35s cubic-bezier(.2, .9, .3, 1.2), background .25s ease;
+}
+.exp-mcard:hover .mc-icon { transform: translateY(-2px) scale(1.08) rotate(-4deg); }
+.mc-icon::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  border: 1px solid var(--mc, var(--blue));
+  opacity: 0;
+  pointer-events: none;
+}
+.exp-mcard:hover .mc-icon::after { animation: sigRing 1.4s ease-out infinite; }
+@keyframes sigRing {
+  0%   { transform: scale(1);    opacity: .55; }
+  70%  { transform: scale(1.55); opacity: 0; }
+  100% { transform: scale(1.55); opacity: 0; }
+}
+
+/* the tags step up behind the rest */
+.exp-mcard .mc-tag {
+  transition: color .2s ease, border-color .2s ease, transform .25s ease;
+}
+.exp-mcard:hover .mc-tag {
+  border-color: color-mix(in oklab, var(--mc, var(--blue)) 40%, var(--rule));
+}
+.exp-mcard:hover .mc-tag:nth-child(1) { transform: translateY(-2px); transition-delay: .02s; }
+.exp-mcard:hover .mc-tag:nth-child(2) { transform: translateY(-2px); transition-delay: .06s; }
+.exp-mcard:hover .mc-tag:nth-child(3) { transform: translateY(-2px); transition-delay: .10s; }
+.exp-mcard:hover .mc-tag:nth-child(4) { transform: translateY(-2px); transition-delay: .14s; }
+
+/* the torch: the band is veiled, and the cursor burns a hole in it */
+.exp-torch {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  pointer-events: none;
+  background: var(--bg-alt);
+  opacity: 0;
+  transition: opacity .45s ease;
+  -webkit-mask-image: radial-gradient(19rem 15rem at var(--sig-tx, 50%) var(--sig-ty, 50%),
+                      transparent 0%, rgba(0, 0, 0, .55) 46%, #000 74%);
+          mask-image: radial-gradient(19rem 15rem at var(--sig-tx, 50%) var(--sig-ty, 50%),
+                      transparent 0%, rgba(0, 0, 0, .55) 46%, #000 74%);
+}
+.exp-marquee-outer.lit .exp-torch { opacity: .6; }
+
+@media (max-width: 900px) { .exp-torch { display: none; } }
+
+/* ── reduced motion: the belts stop, and become something you can push ── */
+@media (prefers-reduced-motion: reduce) {
+  .exp-marquee-outer { -webkit-mask-image: none; mask-image: none; }
+  .exp-mq-row { overflow-x: auto; }
+  .exp-mq-track { animation: none !important; transform: none !important; }
+  .exp-mcard:hover::after { animation: none; }
+  .exp-mcard:hover .mc-icon { transform: none; }
+  .exp-mcard:hover .mc-icon::after { animation: none; }
+  .exp-mcard:hover .mc-tag { transform: none; }
+  .exp-torch { display: none; }
+}
