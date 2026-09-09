@@ -25,10 +25,10 @@
       --wire:rgba(37,99,235,.30);      /* idle diagram wires */
     }
     :root[data-mode="ink"] {
-      --bg:#0f1115; --fg:#f2f4f7; --dim:#98a2b3; --line:#232833;
+      --bg:#0f0f11; --fg:#f5f7fa; --dim:#9aa5b5; --line:#1f1f24;
       --acid:#7aa8ff;
       --acid-ink:#7aa8ff;
-      --wire:rgba(122,168,255,.42);
+      --wire:rgba(122, 168, 255, .42);
     }
 
     *, *::before, *::after { box-sizing:border-box; margin:0; padding:0; }
@@ -862,11 +862,11 @@
   function applyMode(mode) {
     root.setAttribute('data-mode', mode);
     modeText.textContent = (mode === 'ink') ? 'Paper' : 'Ink';
-    try { localStorage.setItem('aib_mode', mode); } catch (err) { /* private mode */ }
+    try { localStorage.setItem('theme', mode === 'ink' ? 'dark' : 'light'); } catch (err) { /* private mode */ }
   }
 
   var saved = 'ink';
-  try { saved = localStorage.getItem('aib_mode') || 'paper'; } catch (err) { /* private mode */ }
+  try { saved = (localStorage.getItem('theme') === 'dark') ? 'ink' : 'paper'; } catch (err) { /* private mode */ }
   applyMode(saved);
 
   modeBtn.addEventListener('click', function () {
