@@ -1,6 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
    <head>
+  <script>
+    /* Theme, before first paint. The site has three dark mechanisms from
+       three eras; one saved value drives all of them. Inline and
+       synchronous on purpose — a deferred script would let the page
+       flash light before turning dark. */
+    (function () {
+      var d = false;
+      try { d = localStorage.getItem('theme') === 'dark'; } catch (e) {}
+      var r = document.documentElement;
+      r.setAttribute('data-theme', d ? 'dark' : 'light');
+      if (d) r.setAttribute('data-mode', 'ink');
+    })();
+  </script>
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
       <title>yen.dev</title>
@@ -876,49 +889,38 @@
       <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400&family=Space+Grotesk:wght@300;400;500&display=swap" rel="stylesheet">
-   </head>
+     <link rel="stylesheet" href="css/site-nav.css">
+</head>
    <body>
       <!-- Navigation -->
-      <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
-         <div class="container">
-            <a class="navbar-brand" href="https://yennanliu.github.io">Yen.Dev</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-               <ul class="navbar-nav ml-auto">
-                  <li class="nav-item">
-                     <a class="nav-link" href="https://yennanliu.github.io/about_me.html">About Me</a>
-                  </li>
-                  <li class="nav-item">
-                     <a class="nav-link" href="https://yennanliu.github.io/portfolios.html">Portfolios</a>
-                  </li>
-                  <li class="nav-item">
-                     <a class="nav-link" href="https://yennanliu.github.io/ai_builder.html">AI Builder</a>
-                  </li>
-                  <li class="nav-item">
-                     <a class="nav-link" href="https://yennanliu.github.io/aws_architecture.html">AWS Architecture</a>
-                  </li>
-                  <li class="nav-item">
-                     <a class="nav-link" href="https://yennanliu.github.io/contact.html">Contact</a>
-                  </li>
-                  <li class="nav-item">
-                     <a class="nav-link" href="https://yennj12.js.org/yennj12_blog_V4/">Blog</a>
-                  </li>
-                  <!-- Dark mode toggle button -->
-                  <li class="nav-item toggle-container">
-                     <label class="theme-switch" for="theme-checkbox">
-                        <input type="checkbox" id="theme-checkbox" />
-                        <span class="slider"></span>
-                     </label>
-                     <div class="toggle-icons">
-                        <i class="fas fa-sun"></i>/<i class="fas fa-moon"></i>
-                     </div>
-                  </li>
-               </ul>
-            </div>
-         </div>
-      </nav>
+      <!-- SITE NAV -->
+<nav class="site-nav" id="site-nav" aria-label="Primary">
+  <a class="sn-brand" href="index.html">YEN<em>.DEV</em></a>
+
+  <button class="sn-burger" id="sn-burger" type="button"
+          aria-label="Open menu" aria-expanded="false" aria-controls="sn-menu">
+    <span></span><span></span><span></span>
+  </button>
+
+  <div class="sn-menu" id="sn-menu">
+    <ul class="sn-links">
+      <li><a href="about_me.html">About</a></li>
+      <li><a href="portfolios.html">Portfolios</a></li>
+      <li><a href="ai_builder.html">AI Builder</a></li>
+      <li><a href="aws_architecture.html">AWS</a></li>
+      <li><a href="contact.html" aria-current="page">Contact</a></li>
+      <li><a href="https://yennj12.js.org/yennj12_blog_V4/" target="_blank" rel="noreferrer">Blog</a></li>
+    </ul>
+    <div class="sn-right">
+      <button class="sn-theme" id="sn-theme" type="button" role="switch"
+              aria-checked="false" aria-label="Switch to dark theme">
+        <span class="sn-knob"></span>
+      </button>
+      <span class="sn-icons" aria-hidden="true">&#9728;<i>/</i>&#9790;</span>
+      <a class="sn-cta" href="contact.html">Get In Touch</a>
+    </div>
+  </div>
+</nav>
       
       <!-- Hero Section -->
       <section class="hero-section">
@@ -1050,35 +1052,7 @@
                  top: 0,
                  behavior: 'smooth'
              });
-         });
-         
-         // Dark mode toggle functionality
-         document.addEventListener('DOMContentLoaded', function() {
-             const toggleSwitch = document.getElementById('theme-checkbox');
-             
-             // Check for saved theme preference or use device preference
-             const currentTheme = localStorage.getItem('theme') || 'light';
-             
-             if (currentTheme === 'dark') {
-                 document.body.classList.add('dark-mode');
-                 toggleSwitch.checked = true;
-             }
-             
-             // Switch theme function
-             function switchTheme(event) {
-                 if (event.target.checked) {
-                     document.body.classList.add('dark-mode');
-                     localStorage.setItem('theme', 'dark');
-                 } else {
-                     document.body.classList.remove('dark-mode');
-                     localStorage.setItem('theme', 'light');
-                 }
-             }
-             
-             // Event listener for toggle switch
-             toggleSwitch.addEventListener('change', switchTheme);
-         });
-         
+         });         
          // Handle contact form submission
          document.addEventListener('DOMContentLoaded', function() {
              const contactForm = document.querySelector('.contact-form');
@@ -1125,5 +1099,6 @@
             });
          }
       </script>
-   </body>
+     <script src="js/site-nav.js" defer></script>
+</body>
 </html>

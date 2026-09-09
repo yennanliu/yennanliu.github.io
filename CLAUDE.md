@@ -145,9 +145,29 @@ turned inside out. Two things to know when adding to it:
   re-pointing those tokens; `finlab.css` cannot reach them.
 
 All pages share the `theme` localStorage key (`light` / `dark`), so a
-choice follows the reader across the site. `js/theme-toggle.js` injects a
-floating switch for pages whose markup carries no nav of its own
-(`nobody`, `main_project`).
+choice follows the reader across the site.
+
+### Navigation and the theme switch
+
+One bar on every page: `<nav class="site-nav">` plus `css/site-nav.css`
+and `js/site-nav.js`. Before this there were five nav implementations at
+four different heights, and one page had none.
+
+- It is **sticky, not fixed**. That is the detail that makes it
+  portable — a sticky bar takes up layout space, so no page needs a
+  `body { padding-top }` to compensate. `site-nav.css` zeroes any that
+  are left over.
+- `site-nav.css` loads **last**, after the page's own `<style>`, because
+  it has to win over the nav rules it replaces.
+- The switch sets **all three** dark mechanisms at once
+  (`data-theme`, `data-mode`, `body.dark-mode`), so each page's existing
+  dark CSS keeps working without being rewritten.
+- Theme is applied by a small **inline, synchronous** script in each
+  `<head>`. It has to run before first paint; a deferred script lets the
+  page flash light before turning dark.
+
+If you add a page, copy the nav block, the inline head script, and the
+two file references. Do not write a fifth nav.
 
 Per-page `:root` blocks still exist and still drive each page's own CSS —
 they now hold FinLab values, so retheming a page means editing its tokens

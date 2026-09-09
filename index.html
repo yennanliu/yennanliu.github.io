@@ -12,12 +12,16 @@
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400&family=Space+Grotesk:wght@300;400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
   <script>
-    // Apply saved theme before paint to avoid flash (default: light)
-    (function(){
-      try {
-        var t = localStorage.getItem('theme');
-        if (t) document.documentElement.setAttribute('data-theme', t);
-      } catch(e){}
+    /* Theme, before first paint. The site has three dark mechanisms from
+       three eras; one saved value drives all of them. Inline and
+       synchronous on purpose — a deferred script would let the page
+       flash light before turning dark. */
+    (function () {
+      var d = false;
+      try { d = localStorage.getItem('theme') === 'dark'; } catch (e) {}
+      var r = document.documentElement;
+      r.setAttribute('data-theme', d ? 'dark' : 'light');
+      if (d) r.setAttribute('data-mode', 'ink');
     })();
   </script>
   <link rel="stylesheet" href="css/finlab.css">
@@ -158,66 +162,6 @@
 
     /* ── LAYOUT ── */
     .wrap { max-width:var(--max); margin:0 auto; padding:0 48px; }
-
-    /* ── NAV ── */
-    nav {
-      position:fixed; top:0; left:0; right:0; z-index:900;
-      padding:16px 48px;
-      display:flex; justify-content:space-between; align-items:center;
-      background:var(--nav-bg);
-      backdrop-filter:blur(18px); -webkit-backdrop-filter:blur(18px);
-      border-bottom:1px solid transparent;
-      transition:background .3s, border-color .3s;
-    }
-    nav.scrolled { background:var(--nav-bg-scroll); border-bottom-color:var(--rule); }
-    .nav-logo {
-      font-family:var(--mono); font-size:.9rem; font-weight:400;
-      letter-spacing:.08em; text-transform:uppercase; color:var(--ink); text-decoration:none;
-    }
-    .nav-logo em { color:var(--blue); font-style:normal; }
-    .nav-links { display:flex; gap:32px; list-style:none; align-items:center; }
-    .nav-links a {
-      color:var(--ink-3); text-decoration:none; font-size:.8rem; font-weight:400;
-      font-family:var(--mono); letter-spacing:.02em; transition:color .2s;
-    }
-    .nav-links a:hover { color:var(--ink); }
-    .nav-links .nav-cta {
-      padding:8px 18px; background:var(--blue-disp); color:var(--btn-fg) !important;
-      border-radius:var(--r-sm); font-weight:400; font-size:.8rem; transition:opacity .2s, transform .2s;
-    }
-    .nav-links .nav-cta:hover { opacity:.85; transform:translateY(-1px); }
-    /* THEME TOGGLE */
-    .theme-toggle {
-      display:inline-flex; align-items:center; justify-content:center;
-      width:36px; height:36px; border-radius:var(--r);
-      background:var(--surface); border:1px solid var(--rule-strong);
-      color:var(--ink-3); cursor:pointer; font-size:.9rem;
-      transition:color .2s, border-color .2s, background .2s, transform .2s;
-    }
-    .theme-toggle:hover { color:var(--blue); border-color:var(--blue); transform:translateY(-1px); }
-    .nav-burger {
-      display:none; flex-direction:column; gap:5px;
-      background:none; border:none; cursor:pointer; padding:6px; z-index:1001;
-    }
-    .nav-burger span { display:block; width:24px; height:2px; background:var(--ink); border-radius:2px; transition:transform .28s, opacity .28s; }
-    .nav-burger.open span:nth-child(1){ transform:rotate(45deg) translate(5px,5px); }
-    .nav-burger.open span:nth-child(2){ opacity:0; }
-    .nav-burger.open span:nth-child(3){ transform:rotate(-45deg) translate(5px,-5px); }
-    #nav-mobile {
-      display:flex; position:fixed; inset:0; z-index:880;
-      background:var(--nav-mobile-bg);
-      flex-direction:column; justify-content:center; align-items:center;
-      opacity:0; pointer-events:none; transition:opacity .22s;
-    }
-    #nav-mobile.open { opacity:1; pointer-events:auto; }
-    #nav-mobile a {
-      font-family:var(--mono);
-      font-size:1.1rem; font-weight:400; color:var(--ink); text-decoration:none;
-      padding:18px 56px; width:100%; text-align:center;
-      border-bottom:1px solid var(--rule); transition:color .2s;
-    }
-    #nav-mobile a:first-child { border-top:1px solid var(--rule); }
-    #nav-mobile a:hover { color:var(--blue); }
 
     /* ── HERO ── */
     #hero {
@@ -637,7 +581,6 @@
     }
     @media(max-width:960px){
       .wrap { padding:0 32px; }
-      nav { padding:14px 32px; }
       .hero-inner { grid-template-columns:1fr; gap:44px; }
       .hero-right { max-width:480px; }
       #hero { min-height:0; padding-top:132px; }
@@ -648,9 +591,6 @@
     }
     @media(max-width:768px){
       .wrap { padding:0 20px; }
-      nav { padding:12px 20px; }
-      .nav-links { display:none; }
-      .nav-burger { display:flex; }
       .section { padding:72px 0; }
       #expertise { padding:72px 0; }
       #contact { padding:80px 0; }
@@ -671,12 +611,7 @@
       .stat-cell:nth-child(3) { border-right:none; }
     }
     @supports (padding:env(safe-area-inset-top)){
-      nav {
-        padding-left:max(48px,env(safe-area-inset-left));
-        padding-right:max(48px,env(safe-area-inset-right));
-      }
       @media(max-width:768px){
-        nav { padding-left:max(20px,env(safe-area-inset-left)); padding-right:max(20px,env(safe-area-inset-right)); }
         footer { padding-bottom:env(safe-area-inset-bottom); }
       }
     }
@@ -692,36 +627,38 @@
   </style>
   <link rel="stylesheet" href="css/finlab-theme.css">
   <link rel="stylesheet" href="css/index-signature.css">
+  <link rel="stylesheet" href="css/site-nav.css">
 </head>
 <body>
 
-<!-- NAV -->
-<nav id="main-nav">
-  <a class="nav-logo" href="index.html">YEN<em>.DEV</em></a>
-  <ul class="nav-links">
-    <li><a href="about_me.html">About</a></li>
-    <li><a href="portfolios.html">Portfolios</a></li>
-    <li><a href="ai_builder.html">AI Builder</a></li>
-    <li><a href="aws_architecture.html">AWS Arch</a></li>
-    <li><a href="https://yennj12.js.org/yennj12_blog_V4/" target="_blank">Blog</a></li>
-    <li><button class="theme-toggle" id="theme-toggle" aria-label="Toggle color theme"><i class="fas fa-moon"></i></button></li>
-    <li><a href="#contact" class="nav-cta">Get In Touch</a></li>
-  </ul>
-  <button class="nav-burger" id="nav-burger" aria-label="Open navigation" aria-expanded="false">
+<!-- SITE NAV -->
+<nav class="site-nav" id="site-nav" aria-label="Primary">
+  <a class="sn-brand" href="index.html">YEN<em>.DEV</em></a>
+
+  <button class="sn-burger" id="sn-burger" type="button"
+          aria-label="Open menu" aria-expanded="false" aria-controls="sn-menu">
     <span></span><span></span><span></span>
   </button>
-</nav>
 
-<!-- MOBILE NAV -->
-<div id="nav-mobile" role="dialog" aria-modal="true" aria-label="Navigation menu">
-  <a href="about_me.html">About</a>
-  <a href="portfolios.html">Portfolios</a>
-  <a href="ai_builder.html">AI Builder</a>
-  <a href="aws_architecture.html">AWS Architecture</a>
-  <a href="https://yennj12.js.org/yennj12_blog_V4/" target="_blank">Blog ↗</a>
-  <a href="#contact">Get In Touch</a>
-  <a href="#" id="theme-toggle-mobile" role="button">Toggle Theme</a>
-</div>
+  <div class="sn-menu" id="sn-menu">
+    <ul class="sn-links">
+      <li><a href="about_me.html">About</a></li>
+      <li><a href="portfolios.html">Portfolios</a></li>
+      <li><a href="ai_builder.html">AI Builder</a></li>
+      <li><a href="aws_architecture.html">AWS</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><a href="https://yennj12.js.org/yennj12_blog_V4/" target="_blank" rel="noreferrer">Blog</a></li>
+    </ul>
+    <div class="sn-right">
+      <button class="sn-theme" id="sn-theme" type="button" role="switch"
+              aria-checked="false" aria-label="Switch to dark theme">
+        <span class="sn-knob"></span>
+      </button>
+      <span class="sn-icons" aria-hidden="true">&#9728;<i>/</i>&#9790;</span>
+      <a class="sn-cta" href="contact.html">Get In Touch</a>
+    </div>
+  </div>
+</nav>
 
 <!-- HERO -->
 <section id="hero">
@@ -1198,67 +1135,6 @@
 </footer>
 
 <script>
-// NAV SCROLL
-(function(){
-  const nav = document.getElementById('main-nav');
-  window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 60), {passive:true});
-})();
-
-// THEME TOGGLE
-(function(){
-  const root = document.documentElement;
-  const btn = document.getElementById('theme-toggle');
-  const btnMobile = document.getElementById('theme-toggle-mobile');
-  const icon = btn ? btn.querySelector('i') : null;
-  function current() { return root.getAttribute('data-theme') || 'light'; }
-  function apply(theme) {
-    root.setAttribute('data-theme', theme);
-    try { localStorage.setItem('theme', theme); } catch(e){}
-    if (icon) icon.className = theme === 'light' ? 'fas fa-sun' : 'fas fa-moon';
-    if (btn) btn.setAttribute('aria-label', theme === 'light' ? 'Switch to dark theme' : 'Switch to light theme');
-  }
-  apply(current());
-  function toggle() { apply(current() === 'light' ? 'dark' : 'light'); }
-  if (btn) btn.addEventListener('click', toggle);
-  if (btnMobile) btnMobile.addEventListener('click', e => { e.preventDefault(); toggle(); });
-})();
-
-// MOBILE BURGER
-(function(){
-  const burger = document.getElementById('nav-burger');
-  const mobile = document.getElementById('nav-mobile');
-  if (!burger || !mobile) return;
-  let open = false;
-  function toggle(o) {
-    open = o;
-    burger.classList.toggle('open', o);
-    burger.setAttribute('aria-expanded', String(o));
-    mobile.classList.toggle('open', o);
-    document.body.style.overflow = o ? 'hidden' : '';
-  }
-  burger.addEventListener('click', () => toggle(!open));
-  mobile.addEventListener('click', e => { if (e.target.closest('a')) toggle(false); });
-  document.addEventListener('keydown', e => { if (e.key === 'Escape') toggle(false); });
-  window.matchMedia('(max-width:768px)').addEventListener('change', e => { if (!e.matches) toggle(false); });
-})();
-
-// CAREER — stop selection
-(function(){
-  const stops  = [...document.querySelectorAll('.stop')];
-  const panels = [...document.querySelectorAll('.era-panel')];
-  if (!stops.length) return;
-  function select(era) {
-    stops.forEach(s  => s.classList.toggle('active', s.dataset.era === era));
-    panels.forEach(p => p.classList.toggle('active', p.dataset.era === era));
-  }
-  stops.forEach(s => {
-    s.addEventListener('click', () => select(s.dataset.era));
-    s.addEventListener('keydown', e => {
-      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); select(s.dataset.era); }
-    });
-  });
-})();
-
 // CAREER — draw the trace when it scrolls into view
 (function(){
   const box = document.querySelector('.trace-box');
@@ -1363,5 +1239,6 @@
 })();
 </script>
   <script src="js/index-signature.js" defer></script>
+  <script src="js/site-nav.js" defer></script>
 </body>
 </html>
