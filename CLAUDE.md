@@ -72,9 +72,34 @@ The rules the system is built on:
   `#fff` → `#fbfcfe` → `#f8fafc` → `#f5f5f7`.
 - **One blue for action** (`--fl-link`), ink for the single filled button
   per view; green/red are reserved for data that moves.
-- **Light is the default.** Pages with a toggle opt in to dark; none of
-  them follow the OS preference any more.
+- **Light is the default.** Dark is opt-in; no page follows the OS
+  preference any more.
 - 0.16s ease for state changes, and `prefers-reduced-motion` honoured.
+
+### Dark
+
+Every page's dark switch resolves to one palette, declared once in
+`finlab.css` under all three selectors the site uses:
+
+```css
+:root[data-theme="dark"],   /* index, portfolios */
+:root[data-mode="ink"],     /* ai_builder        */
+body.dark-mode              /* the Bootstrap pages */
+```
+
+It is a true near-black ground (`#0a0a0b`) with the ink/surface ramp
+turned inside out. Two things to know when adding to it:
+
+- **Use `--fl-on-ink`, never `#fff`,** for text on an ink-filled control.
+  `--fl-ink` inverts, so a hardcoded white foreground goes ink-on-ink and
+  disappears.
+- Pages driven by their own tokens need a `body.dark-mode { … }` block
+  re-pointing those tokens; `finlab.css` cannot reach them.
+
+All pages share the `theme` localStorage key (`light` / `dark`), so a
+choice follows the reader across the site. `js/theme-toggle.js` injects a
+floating switch for pages whose markup carries no nav of its own
+(`nobody`, `main_project`).
 
 Per-page `:root` blocks still exist and still drive each page's own CSS —
 they now hold FinLab values, so retheming a page means editing its tokens

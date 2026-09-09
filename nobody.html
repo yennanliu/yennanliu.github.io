@@ -756,6 +756,36 @@
            margin: 0;
         }
         .wave-divider svg { display: none; }
+
+        /* This page had no dark theme at all. Its own tokens are what
+           drive it, so dark means re-pointing them at the black ramp. */
+        body.dark-mode {
+           --cream:       #0a0a0b;
+           --card-bg:     #0f0f11;
+           --coral:       #7aa8ff;
+           --coral-light: #141417;
+           --coral-dark:  #7aa8ff;
+           --sun:         #fbbf24;
+           --sun-light:   #141417;
+           --sage:        #34d399;
+           --sage-light:  #141417;
+           --lavender:    #b48cff;
+           --lav-light:   #1a1a1e;
+           --sky:         #5ec8dd;
+           --sky-light:   #141417;
+           --pink:        #f0a0cd;
+           --pink-light:  #141417;
+           --text:        #d3dae4;
+           --text-soft:   #9aa5b5;
+           --border:      #212126;
+           --shadow:      0 6px 14px rgba(10, 10, 11, .6);
+        }
+        body.dark-mode .hero { background: var(--fl-raised); }
+        body.dark-mode .hero-badge,
+        body.dark-mode .urgency-bar {
+           background: var(--fl-quiet);
+           border-color: var(--fl-hair);
+        }
   </style>
     <link rel="stylesheet" href="css/finlab-theme.css">
 </head>
@@ -1161,5 +1191,6 @@
             });
         });
     </script>
+  <script src="js/theme-toggle.js" defer></script>
 </body>
 </html>
