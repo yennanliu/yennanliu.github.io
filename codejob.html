@@ -22,21 +22,25 @@
     <!-- Font Awesome -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet">
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400&family=Space+Grotesk:wght@300;400;500&display=swap" rel="stylesheet">
 
     <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/finlab.css">
     <style>
        :root {
-          --apple-blue: #007AFF;
-          --apple-gray: #1d1d1f;
-          --apple-light-gray: #f5f5f7;
+          /* FinLab palette */
+          --apple-blue: #2563eb;
+          --apple-gray: #111827;
+          --apple-light-gray: #f8fafc;
           --apple-white: #ffffff;
-          --apple-text: #1d1d1f;
-          --apple-secondary-text: #86868b;
-          --apple-border: #d2d2d7;
-          --transition-speed: 0.28s;
-          --apple-radius: 18px;
-          --apple-shadow: 0 4px 8px rgba(0, 0, 0, 0.12);
+          --apple-text: #111827;
+          --apple-secondary-text: #647084;
+          --apple-border: #e5e7eb;
+          --transition-speed: 0.16s;
+          --apple-radius: 16px;
+          --apple-shadow: 0 2px 6px rgba(15, 23, 42, .06);
        }
 
        /* Base styles */
@@ -54,9 +58,9 @@
 
        /* Apple Typography */
        .apple-headline {
-          font-size: 60px;
+          font-size: 40px;
           line-height: 1.0833333333;
-          font-weight: 600;
+          font-weight: 300;
           letter-spacing: -.003em;
           color: var(--apple-text);
           margin-bottom: 6px;
@@ -101,7 +105,7 @@
 
        @media (min-width: 481px) and (max-width: 768px) {
           .apple-headline {
-             font-size: 50px;
+             font-size: 40px;
              line-height: 1.08;
              letter-spacing: -.008em;
           }
@@ -113,7 +117,7 @@
 
        @media (min-width: 769px) and (max-width: 1023px) {
           .apple-headline {
-             font-size: 70px;
+             font-size: 40px;
              line-height: 1.07;
              letter-spacing: -.012em;
           }
@@ -125,7 +129,7 @@
 
        @media (min-width: 1024px) {
           .apple-headline {
-             font-size: 80px;
+             font-size: 40px;
              line-height: 1.05;
              letter-spacing: -.015em;
           }
@@ -149,7 +153,7 @@
           .navbar-collapse {
              background-color: rgba(255, 255, 255, 0.95);
              padding: 20px;
-             border-radius: 10px;
+             border-radius: var(--fl-r);
              margin-top: 10px;
           }
 
@@ -164,7 +168,7 @@
 
        /* Apple-style hero section - Mobile First */
        .hero-section {
-          background: linear-gradient(180deg, var(--apple-light-gray) 0%, var(--apple-white) 100%);
+          background: var(--apple-light-gray);
           padding: 40px 0 60px;
           text-align: center;
        }
@@ -195,7 +199,7 @@
 
        .content-card:hover {
           transform: translateY(-2px);
-          box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+          box-shadow: var(--fl-sh-lg);
        }
 
        @media (min-width: 1024px) {
@@ -205,7 +209,7 @@
        }
 
        .navbar-brand {
-          font-weight: 600;
+          font-weight: 400;
           font-size: 21px;
           color: var(--apple-text) !important;
           letter-spacing: .011em;
@@ -253,7 +257,7 @@
        }
 
        .apple-button:hover {
-          background: #0051d5;
+          background: #2563eb;
           color: var(--apple-white);
           text-decoration: none;
        }
@@ -290,7 +294,7 @@
           font-size: 17px;
           line-height: 1.5;
           color: var(--apple-text);
-          border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+          border-bottom: 1px solid rgba(17, 24, 39, 0.05);
        }
 
        .service-list li:last-child, .case-list li:last-child {
@@ -300,7 +304,7 @@
        .service-list li::before, .case-list li::before {
           content: "\f058";
           font-family: 'Font Awesome 5 Free';
-          font-weight: 900;
+          font-weight: 400;
           color: var(--apple-blue);
           position: absolute;
           left: 0;
@@ -311,7 +315,7 @@
        h4 {
           font-size: 24px;
           line-height: 1.16667;
-          font-weight: 600;
+          font-weight: 400;
           letter-spacing: .009em;
           color: var(--apple-text);
           margin-bottom: 20px;
@@ -324,13 +328,13 @@
 
        /* Apple dark mode */
        body.dark-mode {
-          background-color: #000000;
+          background-color: #111827;
           color: #f5f5f7;
        }
 
        body.dark-mode .navbar {
-          background-color: rgba(29, 29, 31, 0.92) !important;
-          border-bottom: 1px solid #424245;
+          background-color: rgba(31, 41, 55, 0.92) !important;
+          border-bottom: 1px solid #374151;
        }
 
        body.dark-mode .navbar-brand,
@@ -339,7 +343,7 @@
        }
 
        body.dark-mode .hero-section {
-          background: linear-gradient(180deg, #1d1d1f 0%, #000000 100%);
+          background: #1f2937;
        }
 
        body.dark-mode .apple-headline {
@@ -347,18 +351,18 @@
        }
 
        body.dark-mode .apple-subheadline {
-          color: #a1a1a6;
+          color: #98a2b3;
        }
 
        body.dark-mode .content-card {
-          background: #1d1d1f;
-          border-color: #424245;
-          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+          background: #1f2937;
+          border-color: #374151;
+          box-shadow: var(--fl-sh-sm);
        }
 
        body.dark-mode .content-card:hover {
-          background: #2d2d2f;
-          box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+          background: #28303b;
+          box-shadow: var(--fl-sh-lg);
        }
 
        body.dark-mode h4 {
@@ -367,29 +371,29 @@
 
        body.dark-mode .service-list li,
        body.dark-mode .case-list li {
-          color: #d1d1d6;
+          color: #dbe1e8;
           border-bottom-color: rgba(255, 255, 255, 0.08);
        }
 
        body.dark-mode footer {
-          background-color: #1d1d1f;
-          border-top: 1px solid #424245;
-          color: #a1a1a6;
+          background-color: #1f2937;
+          border-top: 1px solid #374151;
+          color: #98a2b3;
        }
 
        body.dark-mode footer a {
-          color: #7ba7ff;
+          color: #2563eb;
        }
 
        body.dark-mode footer a:hover {
-          color: #9bb9ff;
+          color: #2563eb;
        }
 
        /* Dark mode mobile navbar styles */
        @media (max-width: 991.98px) {
           body.dark-mode .navbar-collapse {
-             background-color: rgba(29, 29, 31, 0.95) !important;
-             border: 1px solid #424245;
+             background-color: rgba(31, 41, 55, 0.95) !important;
+             border: 1px solid #374151;
           }
        }
 
@@ -412,7 +416,7 @@
        }
 
        .slider {
-          background-color: #ccc;
+          background-color: #dbe1e8;
           bottom: 0;
           cursor: pointer;
           left: 0;
@@ -420,7 +424,7 @@
           right: 0;
           top: 0;
           transition: .4s;
-          border-radius: 24px;
+          border-radius: var(--fl-r-xl);
        }
 
        .slider:before {
@@ -467,7 +471,7 @@
           border-radius: 980px;
           padding: 8px 18px;
           font-size: 14px;
-          font-weight: 500;
+          font-weight: 400;
           color: var(--apple-text);
           backdrop-filter: blur(10px);
           display: inline-flex;
@@ -482,7 +486,7 @@
        /* Section label */
        .section-label {
           font-size: 13px;
-          font-weight: 700;
+          font-weight: 400;
           letter-spacing: .06em;
           text-transform: uppercase;
           color: var(--apple-blue);
@@ -492,7 +496,7 @@
 
        .section-title {
           font-size: 32px;
-          font-weight: 600;
+          font-weight: 300;
           letter-spacing: -.01em;
           color: var(--apple-text);
           margin-bottom: 12px;
@@ -539,33 +543,33 @@
 
        .feature-card:hover {
           transform: translateY(-4px);
-          box-shadow: 0 14px 34px rgba(0, 0, 0, 0.1);
-          border-color: rgba(0, 122, 255, 0.4);
+          box-shadow: var(--fl-sh-lg);
+          border-color: rgba(37, 99, 235, 0.4);
        }
 
        .feature-icon {
           width: 54px;
           height: 54px;
-          border-radius: 15px;
+          border-radius: var(--fl-r-lg);
           display: flex;
           align-items: center;
           justify-content: center;
           font-size: 22px;
-          color: #fff;
+          color: #ffffff;
           margin-bottom: 20px;
           flex-shrink: 0;
        }
 
-       .icon-blue   { background: linear-gradient(135deg, #007AFF, #00C6FF); }
-       .icon-purple { background: linear-gradient(135deg, #5856D6, #AF52DE); }
-       .icon-green  { background: linear-gradient(135deg, #34C759, #30D158); }
-       .icon-orange { background: linear-gradient(135deg, #FF9500, #FF6482); }
-       .icon-teal   { background: linear-gradient(135deg, #32ADE6, #00C7BE); }
-       .icon-pink   { background: linear-gradient(135deg, #FF2D55, #FF6482); }
+       .icon-blue   { background: #2563eb; }
+       .icon-purple { background: #7c3aed; }
+       .icon-green  { background: #059669; }
+       .icon-orange { background: #d97706; }
+       .icon-teal   { background: #0891b2; }
+       .icon-pink   { background: #dc2626; }
 
        .feature-card h5 {
           font-size: 19px;
-          font-weight: 600;
+          font-weight: 400;
           margin-bottom: 10px;
           color: var(--apple-text);
           letter-spacing: -.01em;
@@ -591,15 +595,15 @@
           border-radius: 980px;
           background: var(--apple-light-gray);
           color: var(--apple-text);
-          font-weight: 500;
+          font-weight: 400;
        }
 
        /* AI highlight banner card */
        .ai-banner {
-          background: linear-gradient(135deg, #0A2540 0%, #1d3a8a 45%, #5856D6 100%);
+          background: #273249;
           border-radius: var(--apple-radius);
           padding: 44px 40px;
-          color: #fff;
+          color: #ffffff;
           margin-bottom: 24px;
           position: relative;
           overflow: hidden;
@@ -608,13 +612,13 @@
        .ai-banner::after {
           content: "\f544";
           font-family: "Font Awesome 5 Free";
-          font-weight: 900;
+          font-weight: 300;
           position: absolute;
           right: -10px;
           bottom: -20px;
-          font-size: 180px;
+          font-size: 40px;
           opacity: 0.08;
-          color: #fff;
+          color: #ffffff;
        }
 
        .ai-banner .ai-pill {
@@ -625,14 +629,14 @@
           border-radius: 980px;
           padding: 6px 16px;
           font-size: 13px;
-          font-weight: 600;
+          font-weight: 400;
           letter-spacing: .04em;
           margin-bottom: 18px;
        }
 
        .ai-banner h3 {
           font-size: 30px;
-          font-weight: 600;
+          font-weight: 300;
           margin-bottom: 14px;
           letter-spacing: -.01em;
           position: relative;
@@ -649,13 +653,13 @@
        }
 
        .ai-banner .apple-button {
-          background: #fff;
+          background: #ffffff;
           color: var(--apple-blue);
           margin-top: 22px;
           margin-left: 0;
           position: relative;
           z-index: 1;
-          font-weight: 500;
+          font-weight: 400;
        }
 
        .ai-banner .apple-button:hover {
@@ -693,13 +697,13 @@
 
        .case-card:hover {
           transform: translateY(-3px);
-          box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+          box-shadow: var(--fl-sh-lg);
        }
 
        .case-card .case-ico {
           width: 44px;
           height: 44px;
-          border-radius: 12px;
+          border-radius: var(--fl-r);
           background: var(--apple-light-gray);
           color: var(--apple-blue);
           display: flex;
@@ -711,7 +715,7 @@
 
        .case-card h6 {
           font-size: 17px;
-          font-weight: 600;
+          font-weight: 400;
           margin-bottom: 6px;
           color: var(--apple-text);
        }
@@ -725,7 +729,7 @@
 
        /* CTA section */
        .cta-card {
-          background: linear-gradient(180deg, var(--apple-light-gray) 0%, var(--apple-white) 100%);
+          background: var(--apple-light-gray);
           border: 1px solid var(--apple-border);
           border-radius: var(--apple-radius);
           padding: 50px 40px;
@@ -734,7 +738,7 @@
 
        .cta-card h3 {
           font-size: 30px;
-          font-weight: 600;
+          font-weight: 300;
           margin-bottom: 12px;
           letter-spacing: -.01em;
        }
@@ -747,8 +751,8 @@
 
        /* Dark mode for enhanced components */
        body.dark-mode .stat-badge {
-          background: rgba(45, 45, 47, 0.7);
-          border-color: #424245;
+          background: rgba(40, 48, 59, 0.7);
+          border-color: #374151;
           color: #f5f5f7;
        }
 
@@ -763,32 +767,32 @@
        body.dark-mode .feature-card p,
        body.dark-mode .case-card p,
        body.dark-mode .cta-card p {
-          color: #a1a1a6;
+          color: #98a2b3;
        }
 
        body.dark-mode .feature-card,
        body.dark-mode .case-card {
-          background: #1d1d1f;
-          border-color: #424245;
+          background: #1f2937;
+          border-color: #374151;
        }
 
        body.dark-mode .feature-card:hover,
        body.dark-mode .case-card:hover {
-          background: #2d2d2f;
+          background: #28303b;
        }
 
        body.dark-mode .case-card .case-ico {
-          background: #2d2d2f;
+          background: #28303b;
        }
 
        body.dark-mode .tag {
-          background: #2d2d2f;
-          color: #d1d1d6;
+          background: #28303b;
+          color: #dbe1e8;
        }
 
        body.dark-mode .cta-card {
-          background: linear-gradient(180deg, #1d1d1f 0%, #000000 100%);
-          border-color: #424245;
+          background: #1f2937;
+          border-color: #374151;
        }
 
        /* ===== Premium / fancy layer ===== */
@@ -801,9 +805,9 @@
           position: absolute;
           inset: -25%;
           background:
-             radial-gradient(circle at 18% 22%, rgba(0, 122, 255, 0.20), transparent 38%),
-             radial-gradient(circle at 82% 26%, rgba(175, 82, 222, 0.18), transparent 40%),
-             radial-gradient(circle at 50% 85%, rgba(88, 86, 214, 0.16), transparent 42%);
+             radial-gradient(circle at 18% 22%, rgba(37, 99, 235, 0.20), transparent 38%),
+             radial-gradient(circle at 82% 26%, rgba(124, 58, 237, 0.18), transparent 40%),
+             radial-gradient(circle at 50% 85%, rgba(124, 58, 237, 0.16), transparent 42%);
           animation: meshFloat 20s ease-in-out infinite alternate;
           z-index: 1;
           pointer-events: none;
@@ -823,23 +827,19 @@
 
        /* Gradient accent text */
        .gradient-text {
-          background: linear-gradient(110deg, #007AFF 0%, #5856D6 45%, #AF52DE 100%);
-          -webkit-background-clip: text;
-          background-clip: text;
-          -webkit-text-fill-color: transparent;
-          color: transparent;
+          color: inherit;
        }
 
-       .stat-badge { box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05); }
+       .stat-badge { box-shadow: var(--fl-sh); }
 
        /* Premium gradient button */
        .btn-gradient {
-          background: linear-gradient(120deg, #007AFF, #5856D6) !important;
-          box-shadow: 0 8px 22px rgba(0, 86, 214, 0.32);
+          background: #2563eb !important;
+          box-shadow: var(--fl-sh);
        }
        .btn-gradient:hover {
-          background: linear-gradient(120deg, #0051d5, #4a47c4) !important;
-          box-shadow: 0 12px 30px rgba(0, 86, 214, 0.42);
+          background: #2563eb !important;
+          box-shadow: var(--fl-sh-lg);
           transform: translateY(-2px);
        }
 
@@ -854,21 +854,18 @@
        }
        .stat-block { text-align: center; padding: 18px 10px; }
        .stat-block .num {
-          font-size: 46px;
-          font-weight: 700;
+          font-size: 40px;
+          font-weight: 300;
           letter-spacing: -.02em;
           line-height: 1;
-          background: linear-gradient(120deg, #007AFF, #5856D6);
-          -webkit-background-clip: text;
-          background-clip: text;
-          -webkit-text-fill-color: transparent;
-       }
+            color: inherit;
+         }
        @media (max-width: 480px) { .stat-block .num { font-size: 38px; } }
        .stat-block .label {
           font-size: 14px;
           color: var(--apple-secondary-text);
           margin-top: 8px;
-          font-weight: 500;
+          font-weight: 400;
        }
 
        /* Feature card premium accents */
@@ -876,14 +873,14 @@
        .feature-card::before {
           content: "";
           position: absolute; top: 0; left: 0; right: 0; height: 3px;
-          background: linear-gradient(90deg, #007AFF, #AF52DE);
+          background: #2563eb;
           transform: scaleX(0); transform-origin: left;
           transition: transform .35s ease;
        }
        .feature-card:hover::before { transform: scaleX(1); }
        .feature-icon {
           transition: transform .35s cubic-bezier(.2,.8,.2,1);
-          box-shadow: 0 8px 18px rgba(0, 0, 0, 0.14);
+          box-shadow: var(--fl-sh);
        }
        .feature-card:hover .feature-icon { transform: translateY(-3px) scale(1.06) rotate(-3deg); }
 
@@ -892,18 +889,18 @@
        .case-card::before {
           content: "";
           position: absolute; top: 0; bottom: 0; left: 0; width: 3px;
-          background: linear-gradient(180deg, #007AFF, #AF52DE);
+          background: #2563eb;
           transform: scaleY(0); transform-origin: top;
           transition: transform .35s ease;
        }
        .case-card:hover::before { transform: scaleY(1); }
 
        /* AI banner shimmer + depth */
-       .ai-banner { box-shadow: 0 20px 50px rgba(10, 37, 64, 0.30); }
+       .ai-banner { box-shadow: var(--fl-sh-lg); }
        .ai-banner::before {
           content: "";
           position: absolute; inset: 0;
-          background: linear-gradient(115deg, transparent 35%, rgba(255,255,255,0.13) 50%, transparent 65%);
+          background: linear-gradient(115deg, transparent 35%, rgba(255, 255, 255, 0.13) 50%, transparent 65%);
           background-size: 220% 100%;
           animation: shimmer 7s linear infinite;
           z-index: 0;
@@ -929,7 +926,7 @@
        }
        .tech-track span {
           font-size: 19px;
-          font-weight: 600;
+          font-weight: 400;
           color: var(--apple-secondary-text);
           white-space: nowrap;
           display: inline-flex;
@@ -943,9 +940,81 @@
           100% { transform: translateX(-50%); }
        }
 
-       body.dark-mode .tech-strip { background: #161617; border-color: #424245; }
-       body.dark-mode .stat-block .label { color: #a1a1a6; }
-    </style>
+       body.dark-mode .tech-strip { background: #111827; border-color: #374151; }
+       body.dark-mode .stat-block .label { color: #98a2b3; }
+    
+       /* ── FinLab: flat surfaces, hairline rules, one accent ────────── */
+       body { line-height: 1.7; letter-spacing: 0; }
+       .apple-headline, .apple-subheadline { letter-spacing: -.01em; }
+       .apple-subheadline { color: var(--fl-muted); }
+       section, .section { border-bottom: 1px solid var(--fl-hair); }
+       .card, .feature-card, .stat-card, .project-card, .skill-card,
+       .timeline-content, .apple-card {
+          background: var(--fl-surface);
+          border: 1px solid var(--fl-hair);
+          box-shadow: none;
+       }
+       .card:hover, .feature-card:hover, .project-card:hover,
+       .skill-card:hover, .apple-card:hover {
+          border-color: var(--fl-line);
+          box-shadow: var(--fl-sh-sm);
+          transform: none;
+       }
+
+       /* One filled action per pair; the second is a hairline ghost. */
+       .apple-button {
+          background: var(--fl-ink);
+          border: 1px solid var(--fl-ink);
+          color: #fff;
+          border-radius: var(--fl-r-pill);
+       }
+       .apple-button:hover {
+          background: var(--fl-ink-soft);
+          border-color: var(--fl-ink-soft);
+          color: #fff;
+       }
+       .apple-button + .apple-button {
+          background: var(--fl-surface);
+          border-color: var(--fl-line);
+          color: var(--fl-ink);
+       }
+       .apple-button + .apple-button:hover {
+          background: var(--fl-inset);
+          color: var(--fl-ink);
+       }
+
+       /* The "premium" layer — drifting mesh, shimmer sweep, gradient
+          buttons, cards that lift and rotate — is the opposite register
+          from the reference site. Take it out and leave the structure. */
+       .hero-section::before, .ai-banner::before { display: none; }
+       .btn-gradient, .btn-gradient:hover {
+          background: var(--fl-ink) !important;
+          border-color: var(--fl-ink);
+          color: #fff;
+          box-shadow: none;
+          transform: none;
+       }
+       .ai-banner {
+          box-shadow: none;
+          border: 1px solid var(--fl-hair);
+       }
+       .stat-badge, .feature-icon { box-shadow: none; }
+       .feature-card:hover .feature-icon { transform: none; }
+       .feature-card::before, .case-card::before { background: var(--fl-ink); }
+       .tech-strip {
+          background: var(--fl-raised);
+          border-color: var(--fl-hair);
+       }
+       .tech-track span { opacity: 1; color: var(--fl-muted); }
+       .tech-track span i { color: var(--fl-ghost); }
+       .aws-mastery-section .aws-orb { display: none; }
+       .stat-badge {
+          background: var(--fl-surface);
+          border: 1px solid var(--fl-hair);
+          color: var(--fl-muted);
+       }
+  </style>
+    <link rel="stylesheet" href="css/finlab-theme.css">
 </head>
 <body>
     <!-- Navigation -->
@@ -1328,8 +1397,7 @@
           const toggleSwitch = document.getElementById('theme-checkbox');
 
           // Check for saved theme preference or use device preference
-          const currentTheme = localStorage.getItem('theme') ||
-              (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+          const currentTheme = localStorage.getItem('theme') || 'light';
 
           if (currentTheme === 'dark') {
               document.body.classList.add('dark-mode');

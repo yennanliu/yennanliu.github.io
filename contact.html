@@ -37,20 +37,22 @@
       <!-- AOS Animation Library -->
       <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
       <!-- Custom CSS -->
+      <link rel="stylesheet" href="css/finlab.css">
       <style>
          :root {
-            --primary-color: #4a6bff;
-            --secondary-color: #25d366;
-            --light-bg: #f8f9fa;
-            --dark-bg: #121212;
-            --light-text: #f8f9fa;
-            --dark-text: #212529;
-            --transition-speed: 0.3s;
+            /* FinLab palette */
+            --primary-color: #2563eb;
+            --secondary-color: #059669;
+            --light-bg: #f8fafc;
+            --dark-bg: #0f1115;
+            --light-text: #ffffff;
+            --dark-text: #28303b;
+            --transition-speed: 0.16s;
          }
          
          /* Base styles */
          body {
-            font-family: 'Poppins', sans-serif;
+            font-family: var(--fl-body);
             transition: background-color var(--transition-speed), color var(--transition-speed);
             scroll-behavior: smooth;
             padding-top: 76px; /* Add padding for fixed navbar */
@@ -67,7 +69,7 @@
          
          @media (min-width: 768px) {
             h1.display-4 {
-               font-size: 3.5rem;
+               font-size: 2.5rem;
             }
             
             .lead {
@@ -77,7 +79,7 @@
          
          /* Responsive navbar */
          .navbar {
-            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+            box-shadow: var(--fl-sh);
             transition: all var(--transition-speed);
             padding: 15px 0;
             backdrop-filter: blur(10px);
@@ -89,7 +91,7 @@
             .navbar-collapse {
                background-color: rgba(255, 255, 255, 0.95);
                padding: 20px;
-               border-radius: 10px;
+               border-radius: var(--fl-r);
                margin-top: 10px;
             }
             
@@ -200,7 +202,7 @@
          }
          
          body {
-            font-family: 'Poppins', sans-serif;
+            font-family: var(--fl-body);
             transition: background-color var(--transition-speed), color var(--transition-speed);
             scroll-behavior: smooth;
          }
@@ -208,32 +210,32 @@
          .skills-item {
             font-size: 1.1rem;
             margin: 15px 0;
-            font-weight: 500;
+            font-weight: 400;
             color: var(--primary-color);
             transition: all var(--transition-speed);
             text-decoration: none;
             display: inline-block;
             padding: 8px 16px;
-            border-radius: 25px;
-            background: rgba(74, 107, 255, 0.1);
+            border-radius: var(--fl-r-xl);
+            background: rgba(37, 99, 235, 0.1);
          }
          
          .skills-item:hover,
          .skills-item:focus,
          .skills-item:active {
             transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            box-shadow: var(--fl-sh);
             text-decoration: none;
          }
          
          .navbar-brand {
-            font-weight: 700;
+            font-weight: 400;
             font-size: 1.5rem;
             color: var(--primary-color) !important;
          }
          
          .nav-link {
-            font-weight: 500;
+            font-weight: 400;
             position: relative;
             margin: 0 10px;
          }
@@ -265,8 +267,8 @@
             height: 40vh;
             display: flex;
             align-items: center;
-            background: linear-gradient(135deg, rgba(74, 107, 255, 0.1) 0%, rgba(37, 211, 102, 0.1) 100%);
-            border-radius: 0 0 50px 50px;
+            background: linear-gradient(135deg, rgba(37, 99, 235, 0.1) 0%, rgba(5, 150, 105, 0.1) 100%);
+            border-radius: 0 0 var(--fl-r-xl) var(--fl-r-xl);
             margin-bottom: 40px;
             position: relative;
             overflow: hidden;
@@ -289,12 +291,10 @@
          }
          
          .display-4 {
-            font-weight: 700;
+            font-weight: 300;
             margin-bottom: 20px;
-            font-size: 3.5rem;
-            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            font-size: 2.5rem;
+            color: inherit;
          }
          
          .lead {
@@ -306,8 +306,8 @@
          
          .card {
             border: none;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            border-radius: var(--fl-r-lg);
+            box-shadow: var(--fl-sh-lg);
             transition: all var(--transition-speed);
             margin-bottom: 30px;
             overflow: hidden;
@@ -317,7 +317,7 @@
          .card:focus,
          .card:active {
             transform: translateY(-5px);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            box-shadow: var(--fl-sh-lg);
          }
          
          .card-body {
@@ -340,15 +340,15 @@
             align-items: center;
             justify-content: center;
             transition: all var(--transition-speed);
-            background-color: #fff;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            background-color: #ffffff;
+            box-shadow: var(--fl-sh);
          }
          
          .social-icon:hover,
          .social-icon:focus,
          .social-icon:active {
             transform: translateY(-10px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+            box-shadow: var(--fl-sh);
          }
          
          .social-icon img {
@@ -369,25 +369,25 @@
          }
          
          .contact-form .form-control {
-            border-radius: 15px;
+            border-radius: var(--fl-r-lg);
             padding: 15px;
             margin-bottom: 20px;
-            border: 1px solid #ddd;
+            border: 1px solid #dbe1e8;
             transition: all var(--transition-speed);
          }
          
          .contact-form .form-control:focus {
-            box-shadow: 0 0 0 0.2rem rgba(74, 107, 255, 0.25);
+            box-shadow: var(--fl-sh-xs);
             border-color: var(--primary-color);
          }
          
          .btn-submit {
-            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            background: var(--primary-color);
             border: none;
             padding: 12px 30px;
-            border-radius: 30px;
+            border-radius: var(--fl-r-xl);
             color: white;
-            font-weight: 500;
+            font-weight: 400;
             transition: all var(--transition-speed);
          }
          
@@ -395,7 +395,7 @@
          .btn-submit:focus,
          .btn-submit:active {
             transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(74, 107, 255, 0.3);
+            box-shadow: var(--fl-sh);
          }
          
          /* Dark mode styles */
@@ -405,7 +405,7 @@
          }
          
          body.dark-mode .navbar {
-            background-color: rgba(18, 18, 18, 0.9) !important;
+            background-color: rgba(17, 24, 39, 0.9) !important;
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
          }
@@ -417,10 +417,10 @@
 
          /* Improve toggler button visibility in light mode */
          .navbar-light .navbar-toggler {
-            border-color: rgba(0, 0, 0, 0.3) !important;
+            border-color: rgba(17, 24, 39, 0.3) !important;
          }
          .navbar-light .navbar-toggler-icon {
-            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(0, 0, 0, 0.7)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(17, 24, 39, 0.7)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
          }
          body.dark-mode .navbar-light .navbar-toggler {
             border-color: rgba(255, 255, 255, 0.4) !important;
@@ -432,36 +432,36 @@
          /* Dark mode mobile navbar styles */
          @media (max-width: 991.98px) {
             body.dark-mode .navbar-collapse {
-               background-color: rgba(30, 30, 30, 0.95) !important;
+               background-color: rgba(31, 41, 55, 0.95) !important;
             }
          }
          
          body.dark-mode .card {
-            background-color: #1e1e1e;
+            background-color: #1f2937;
             color: var(--light-text);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            box-shadow: var(--fl-sh-lg);
          }
          
          body.dark-mode footer {
-            background-color: #1e1e1e;
+            background-color: #1f2937;
             color: var(--light-text);
          }
          
          body.dark-mode a {
-            color: #9ba4ff;
+            color: #2563eb;
          }
          
          body.dark-mode .social-icon {
-            background-color: #2d2d2d;
+            background-color: #28303b;
          }
          
          body.dark-mode .hero-section {
-            background: linear-gradient(135deg, rgba(74, 107, 255, 0.15) 0%, rgba(37, 211, 102, 0.15) 100%);
+            background: linear-gradient(135deg, rgba(37, 99, 235, 0.15) 0%, rgba(5, 150, 105, 0.15) 100%);
          }
          
          body.dark-mode .contact-form .form-control {
-            background-color: #2d2d2d;
-            border-color: #444;
+            background-color: #28303b;
+            border-color: #374151;
             color: var(--light-text);
          }
          
@@ -484,7 +484,7 @@
          }
          
          .slider {
-            background-color: #ccc;
+            background-color: #dbe1e8;
             bottom: 0;
             cursor: pointer;
             left: 0;
@@ -492,7 +492,7 @@
             right: 0;
             top: 0;
             transition: .4s;
-            border-radius: 24px;
+            border-radius: var(--fl-r-xl);
          }
          
          .slider:before {
@@ -538,7 +538,7 @@
             cursor: pointer;
             opacity: 0;
             transition: all 0.3s;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            box-shadow: var(--fl-sh);
             z-index: 999;
          }
          
@@ -550,39 +550,39 @@
          .scroll-top:focus,
          .scroll-top:active {
             transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            box-shadow: var(--fl-sh);
          }
 
          /* Touch-specific optimizations */
          @media (hover: none) and (pointer: coarse) {
             .skills-item:active {
                transform: translateY(-3px);
-               box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+               box-shadow: var(--fl-sh);
                text-decoration: none;
                transition: all 0.1s ease;
             }
 
             .card:active {
                transform: translateY(-5px);
-               box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+               box-shadow: var(--fl-sh-lg);
                transition: all 0.1s ease;
             }
 
             .social-icon:active {
                transform: translateY(-10px);
-               box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+               box-shadow: var(--fl-sh);
                transition: all 0.1s ease;
             }
 
             .btn-submit:active {
                transform: translateY(-3px);
-               box-shadow: 0 5px 15px rgba(74, 107, 255, 0.3);
+               box-shadow: var(--fl-sh);
                transition: all 0.1s ease;
             }
 
             .scroll-top:active {
                transform: translateY(-5px);
-               box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+               box-shadow: var(--fl-sh);
                transition: all 0.1s ease;
             }
 
@@ -636,30 +636,24 @@
          }
 
          .contact-title {
-            font-size: 48px;
+            font-size: 40px;
             line-height: 1.1;
-            font-weight: 700;
-            color: #1a1a1a;
+            font-weight: 300;
+            color: #1f2937;
             margin-bottom: 20px;
          }
 
          .contact-title-main {
-            background: linear-gradient(135deg, #1a1a1a 0%, var(--primary-color) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
             display: inline-block;
+            color: inherit;
          }
 
          .contact-title-sub {
-            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color), #ff6b6b, #4ecdc4);
             background-size: 400% 400%;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
             animation: contact-gradient-shift 3s ease-in-out infinite;
             display: inline-block;
             position: relative;
+            color: inherit;
          }
 
          @keyframes contact-gradient-shift {
@@ -687,7 +681,7 @@
 
          .contact-glitch-text::before {
             animation: contact-glitch-1 2s infinite;
-            color: #ff6b6b;
+            color: #dc2626;
             z-index: -1;
          }
 
@@ -726,28 +720,28 @@
          /* Large Desktop (1920px+) */
          @media (min-width: 1920px) {
             .contact-title {
-               font-size: 64px;
+               font-size: 40px;
             }
          }
 
          /* Large Desktop (1440px-1919px) */
          @media (min-width: 1440px) and (max-width: 1919px) {
             .contact-title {
-               font-size: 58px;
+               font-size: 40px;
             }
          }
 
          /* Standard Desktop (1024px-1439px) */
          @media (min-width: 1024px) and (max-width: 1439px) {
             .contact-title {
-               font-size: 52px;
+               font-size: 40px;
             }
          }
 
          /* Tablets Landscape (768px-1023px) */
          @media (min-width: 768px) and (max-width: 1023px) {
             .contact-title {
-               font-size: 42px;
+               font-size: 40px;
             }
          }
 
@@ -783,23 +777,105 @@
 
          /* Dark Mode Support for Contact Title */
          body.dark-mode .contact-title-main {
-            background: linear-gradient(135deg, #f5f5f7 0%, var(--primary-color) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            color: inherit;
          }
 
          body.dark-mode .contact-title-sub {
-            background: linear-gradient(45deg, #7ba7ff, var(--secondary-color), #ff6b6b, #4ecdc4);
             background-size: 400% 400%;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            color: inherit;
          }
-      </style>
+      
+         /* ── FinLab: quiet the page down ─────────────────────────────
+            Flat surfaces, hairline rules, one accent, nothing shouts. */
+         body { line-height: 1.7; letter-spacing: 0; }
+         .navbar { border-bottom: 1px solid var(--fl-hair); }
+         .about-section, .career-section, .contact-section {
+            background: var(--fl-raised);
+            border-bottom: 1px solid var(--fl-hair);
+         }
+         .display-4, .section-title { color: var(--fl-ink); }
+         .section-subtitle, .lead { color: var(--fl-muted); }
+         .card, .timeline-content, .info-card {
+            border: 1px solid var(--fl-hair);
+            background: var(--fl-surface);
+         }
+         body.dark-mode { background-color: var(--fl-ink); }
+         body.dark-mode .card, body.dark-mode .timeline-content {
+            background: #1a1e26; border-color: #2f3644;
+         }
+
+         /* The career journey set its text straight onto photography. The
+            reference site never does that — copy sits on a real surface. */
+         .career-item::before { background: rgba(15, 23, 42, .22); }
+         .career-item:hover { transform: none; }
+         .career-content {
+            background: rgba(255, 255, 255, .93);
+            backdrop-filter: saturate(180%) blur(14px);
+            -webkit-backdrop-filter: saturate(180%) blur(14px);
+            border: 1px solid var(--fl-hair);
+            border-radius: var(--fl-r-lg);
+            padding: 40px;
+            color: var(--fl-text);
+         }
+         .career-title, .stat-number { color: var(--fl-ink); text-shadow: none; }
+         .career-description, .stat-label { color: var(--fl-muted); text-shadow: none; }
+         .career-year-badge {
+            background: var(--fl-ink); color: #fff; border: 0;
+            border-radius: var(--fl-r-pill);
+         }
+         .skill-tag {
+            background: var(--fl-raised);
+            border: 1px solid var(--fl-hair);
+            border-radius: var(--fl-r-pill);
+            color: var(--fl-muted);
+         }
+         .skill-tag:hover {
+            background: var(--fl-inset); color: var(--fl-ink); transform: none;
+         }
+
+         /* Hero grounds are flat on the reference site, and the one filled
+            action on a page is ink, not the accent. */
+         .about-section, .hero-section, .contact-hero {
+            background: var(--fl-raised) !important;
+         }
+         .btn-submit {
+            background: var(--fl-ink);
+            border: 1px solid var(--fl-ink);
+            color: #fff;
+            border-radius: var(--fl-r-pill);
+            box-shadow: none;
+         }
+         .btn-submit:hover, .btn-submit:focus, .btn-submit:active {
+            background: var(--fl-ink-soft);
+            border-color: var(--fl-ink-soft);
+            color: #fff;
+            box-shadow: none;
+         }
+         .social-icon {
+            border: 1px solid var(--fl-hair);
+            background: var(--fl-surface);
+            box-shadow: none;
+         }
+         .social-icon:hover { background: var(--fl-inset); }
+         .form-control {
+            border: 1px solid var(--fl-hair);
+            box-shadow: none;
+         }
+         .form-control:focus {
+            border-color: var(--fl-link);
+            box-shadow: none;
+         }
+         /* the RGB-split heading effect belongs to a louder site */
+         .contact-glitch-text::before,
+         .contact-glitch-text::after { display: none; }
+  </style>
+      <link rel="stylesheet" href="css/finlab-theme.css">
       <!-- Font Awesome -->
       <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet">
       <!-- Google Fonts -->
-      <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400&family=Space+Grotesk:wght@300;400;500&display=swap" rel="stylesheet">
    </head>
    <body>
       <!-- Navigation -->
@@ -981,8 +1057,7 @@
              const toggleSwitch = document.getElementById('theme-checkbox');
              
              // Check for saved theme preference or use device preference
-             const currentTheme = localStorage.getItem('theme') || 
-                 (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+             const currentTheme = localStorage.getItem('theme') || 'light';
              
              if (currentTheme === 'dark') {
                  document.body.classList.add('dark-mode');

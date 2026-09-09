@@ -4,30 +4,35 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>小小帶我魯 — 躺平導師計畫</title>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400&family=Space+Grotesk:wght@300;400;500&display=swap" rel="stylesheet">
 
+    <link rel="stylesheet" href="css/finlab.css">
     <style>
         :root {
-            --cream:       #FFF8F0;
-            --card-bg:     #FFFFFF;
-            --coral:       #FF7F5C;
-            --coral-light: #FFEEE8;
-            --coral-dark:  #E8623B;
-            --sun:         #FFD166;
-            --sun-light:   #FFF8DC;
-            --sage:        #6DBE8C;
-            --sage-light:  #E8F6EE;
-            --lavender:    #A78BFA;
-            --lav-light:   #F0EBFF;
-            --sky:         #5BC0EB;
-            --sky-light:   #E8F6FF;
-            --pink:        #FF9BC1;
-            --pink-light:  #FFECF4;
-            --text:        #3A3A3A;
-            --text-soft:   #7A7A7A;
-            --border:      #F0E6DC;
-            --shadow:      0 4px 20px rgba(255,127,92,0.12);
-            --radius:      20px;
+            /* FinLab palette — the pastels become the categorical set,
+               the cream ground becomes the near-white surface ramp. */
+            --cream:       #f8fafc;
+            --card-bg:     #ffffff;
+            --coral:       #2563eb;
+            --coral-light: #eff6ff;
+            --coral-dark:  #1d4ed8;
+            --sun:         #d97706;
+            --sun-light:   #fffbeb;
+            --sage:        #059669;
+            --sage-light:  #ecfdf5;
+            --lavender:    #7c3aed;
+            --lav-light:   #f5f3ff;
+            --sky:         #0891b2;
+            --sky-light:   #ecfeff;
+            --pink:        #db2777;
+            --pink-light:  #fdf2f8;
+            --text:        #28303b;
+            --text-soft:   #647084;
+            --border:      #e5e7eb;
+            --shadow:      0 6px 12px rgba(15, 23, 42, .08);
+            --radius:      16px;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -36,7 +41,7 @@
         body {
             background: var(--cream);
             color: var(--text);
-            font-family: 'Noto Sans TC', 'Nunito', sans-serif;
+            font-family: var(--fl-body);
             line-height: 1.7;
             overflow-x: hidden;
         }
@@ -46,7 +51,7 @@
 
         .section-eyebrow {
             font-size: 0.78rem;
-            font-weight: 700;
+            font-weight: 400;
             letter-spacing: 3px;
             text-transform: uppercase;
             color: var(--coral);
@@ -60,12 +65,12 @@
             display: inline-block;
             width: 24px; height: 2px;
             background: var(--coral);
-            border-radius: 2px;
+            border-radius: 4px;
         }
 
         .section-title {
-            font-size: clamp(1.8rem, 5vw, 2.8rem);
-            font-weight: 900;
+            font-size: clamp( 1.8rem, 5vw, 2.5rem);
+            font-weight: 300;
             color: var(--text);
             line-height: 1.2;
             margin-bottom: 10px;
@@ -89,30 +94,30 @@
             right: 24px;
             z-index: 999;
             background: var(--coral);
-            color: #fff;
+            color: #ffffff;
             border-radius: 50%;
             width: 68px; height: 68px;
             display: flex; flex-direction: column;
             align-items: center; justify-content: center;
-            font-size: 0.62rem;
-            font-weight: 800;
+            font-size: 0.75rem;
+            font-weight: 400;
             text-align: center;
             line-height: 1.25;
-            box-shadow: 0 6px 24px rgba(255,127,92,0.45);
+            box-shadow: var(--fl-sh-lg);
             cursor: pointer;
             animation: pulse-badge 2.5s ease-in-out infinite;
             text-decoration: none;
         }
-        .float-badge:hover { background: var(--coral-dark); transform: scale(1.08); color: #fff; text-decoration: none; }
+        .float-badge:hover { background: var(--coral-dark); transform: scale(1.08); color: #ffffff; text-decoration: none; }
         .float-badge .badge-emoji { font-size: 1.3rem; margin-bottom: 2px; }
         @keyframes pulse-badge {
-            0%, 100% { box-shadow: 0 6px 24px rgba(255,127,92,0.45); }
-            50% { box-shadow: 0 6px 32px rgba(255,127,92,0.7), 0 0 0 8px rgba(255,127,92,0.15); }
+            0%, 100% { box-shadow: var(--fl-sh-lg); }
+            50% { box-shadow: var(--fl-sh-lg); }
         }
 
         /* ── HERO ─────────────────────────────────────────── */
         .hero {
-            background: linear-gradient(160deg, #FFF0E6 0%, #FFEEDD 50%, #FFF8F0 100%);
+            background: #fbf6f1;
             padding: 80px 24px 50px;
             text-align: center;
             position: relative;
@@ -123,7 +128,7 @@
             position: absolute;
             width: 420px; height: 420px;
             border-radius: 50%;
-            background: radial-gradient(circle, rgba(255,209,102,0.28) 0%, transparent 70%);
+            background: radial-gradient(circle, rgba(217, 119, 6, 0.28) 0%, transparent 70%);
             top: -160px; right: -100px;
             pointer-events: none;
         }
@@ -132,7 +137,7 @@
             position: absolute;
             width: 320px; height: 320px;
             border-radius: 50%;
-            background: radial-gradient(circle, rgba(255,127,92,0.15) 0%, transparent 70%);
+            background: radial-gradient(circle, rgba(217, 119, 6, 0.15) 0%, transparent 70%);
             bottom: -100px; left: -80px;
             pointer-events: none;
         }
@@ -140,19 +145,19 @@
         .hero-badge {
             display: inline-block;
             background: var(--sun-light);
-            color: #B8860B;
+            color: #d97706;
             border: 1.5px solid var(--sun);
             border-radius: 100px;
             font-size: 0.82rem;
-            font-weight: 700;
+            font-weight: 400;
             letter-spacing: 1.5px;
             padding: 6px 18px;
             margin-bottom: 28px;
         }
 
         .hero h1 {
-            font-size: clamp(2.6rem, 8vw, 5rem);
-            font-weight: 900;
+            font-size: clamp( 1.8rem, 8vw, 2.5rem);
+            font-weight: 300;
             line-height: 1.12;
             color: var(--coral);
             letter-spacing: -1px;
@@ -202,7 +207,7 @@
             border-radius: 100px;
             padding: 8px 22px;
             font-size: 0.88rem;
-            font-weight: 700;
+            font-weight: 400;
             color: var(--coral-dark);
             margin-top: 8px;
             position: relative; z-index: 1;
@@ -221,7 +226,7 @@
         /* ── SOCIAL PROOF TICKER ──────────────────────────── */
         .ticker-wrap {
             background: var(--coral);
-            color: #fff;
+            color: #ffffff;
             padding: 12px 0;
             overflow: hidden;
             white-space: nowrap;
@@ -234,7 +239,7 @@
             display: inline-block;
             padding: 0 40px;
             font-size: 0.88rem;
-            font-weight: 600;
+            font-weight: 400;
             letter-spacing: 0.5px;
         }
         .ticker-inner span::after {
@@ -264,7 +269,7 @@
             gap: 16px;
             background: var(--cream);
             border: 1.5px solid var(--border);
-            border-radius: 14px;
+            border-radius: var(--fl-r);
             padding: 18px 22px;
             font-size: 1.02rem;
             transition: transform 0.2s, box-shadow 0.2s;
@@ -277,7 +282,7 @@
 
         /* ── MENTORS ──────────────────────────────────────── */
         .mentors-section {
-            background: linear-gradient(180deg, #FFF8F0 0%, #FFF0E6 100%);
+            background: #fbf6f1;
             padding: 80px 24px;
         }
         .mentors-grid {
@@ -290,7 +295,7 @@
             background: var(--card-bg);
             border-radius: var(--radius);
             padding: 32px 26px;
-            box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+            box-shadow: var(--fl-sh);
             border: 1.5px solid var(--border);
             transition: transform 0.25s, box-shadow 0.25s;
             position: relative;
@@ -303,19 +308,19 @@
             height: 4px;
             border-radius: var(--radius) var(--radius) 0 0;
         }
-        .mentor-card:nth-child(1)::before { background: linear-gradient(90deg,#FF7F5C,#FFD166); }
-        .mentor-card:nth-child(2)::before { background: linear-gradient(90deg,#FFD166,#6DBE8C); }
-        .mentor-card:nth-child(3)::before { background: linear-gradient(90deg,#6DBE8C,#A78BFA); }
-        .mentor-card:nth-child(4)::before { background: linear-gradient(90deg,#A78BFA,#5BC0EB); }
-        .mentor-card:nth-child(5)::before { background: linear-gradient(90deg,#5BC0EB,#FF9BC1); }
-        .mentor-card:nth-child(6)::before { background: linear-gradient(90deg,#FF9BC1,#FF7F5C); }
+        .mentor-card:nth-child(1)::before { background: #d97706; }
+        .mentor-card:nth-child(2)::before { background: #d97706; }
+        .mentor-card:nth-child(3)::before { background: #059669; }
+        .mentor-card:nth-child(4)::before { background: #7c3aed; }
+        .mentor-card:nth-child(5)::before { background: #0891b2; }
+        .mentor-card:nth-child(6)::before { background: #db2777; }
         .mentor-card:hover {
             transform: translateY(-7px);
-            box-shadow: 0 14px 40px rgba(0,0,0,0.1);
+            box-shadow: var(--fl-sh-lg);
         }
-        .mentor-emoji { font-size: 3.2rem; display: block; margin-bottom: 14px; }
-        .mentor-name { font-size: 1.2rem; font-weight: 800; color: var(--text); margin-bottom: 4px; }
-        .mentor-title { font-size: 0.8rem; font-weight: 600; color: var(--coral); margin-bottom: 14px; letter-spacing: 0.3px; }
+        .mentor-emoji { font-size: 2.5rem; display: block; margin-bottom: 14px; }
+        .mentor-name { font-size: 1.2rem; font-weight: 400; color: var(--text); margin-bottom: 4px; }
+        .mentor-title { font-size: 0.8rem; font-weight: 400; color: var(--coral); margin-bottom: 14px; letter-spacing: 0.3px; }
         .mentor-quote {
             font-size: 0.92rem;
             color: var(--text-soft);
@@ -329,9 +334,9 @@
             position: absolute;
             top: 14px; right: 14px;
             background: var(--sun);
-            color: #7A5800;
-            font-size: 0.62rem;
-            font-weight: 800;
+            color: #493927;
+            font-size: 0.75rem;
+            font-weight: 400;
             letter-spacing: 1px;
             text-transform: uppercase;
             padding: 3px 9px;
@@ -360,33 +365,33 @@
         }
         .program-card:hover {
             transform: translateY(-6px);
-            box-shadow: 0 16px 44px rgba(0,0,0,0.1);
+            box-shadow: var(--fl-sh-lg);
         }
-        .program-card.coral-card  { background: var(--coral-light);  border-color: rgba(255,127,92,0.25); }
-        .program-card.sun-card    { background: var(--sun-light);    border-color: rgba(255,209,102,0.35); }
-        .program-card.sage-card   { background: var(--sage-light);   border-color: rgba(109,190,140,0.3); }
-        .program-card.lav-card    { background: var(--lav-light);    border-color: rgba(167,139,250,0.3); }
+        .program-card.coral-card  { background: var(--coral-light);  border-color: rgba(217, 119, 6, 0.25); }
+        .program-card.sun-card    { background: var(--sun-light);    border-color: rgba(217, 119, 6, 0.35); }
+        .program-card.sage-card   { background: var(--sage-light);   border-color: rgba(5, 150, 105, 0.3); }
+        .program-card.lav-card    { background: var(--lav-light);    border-color: rgba(124, 58, 237, 0.3); }
 
         .program-card.popular::after {
             content: '⭐ 最受歡迎';
             position: absolute;
             top: 18px; right: -28px;
             background: var(--coral);
-            color: #fff;
-            font-size: 0.7rem;
-            font-weight: 800;
+            color: #ffffff;
+            font-size: 0.75rem;
+            font-weight: 400;
             letter-spacing: 0.5px;
             padding: 5px 36px;
             transform: rotate(40deg);
         }
 
-        .program-icon { font-size: 2.8rem; margin-bottom: 16px; display: block; }
-        .program-name { font-size: 1.2rem; font-weight: 800; color: var(--text); margin-bottom: 6px; }
-        .program-tagline { font-size: 0.82rem; font-weight: 600; margin-bottom: 16px; }
+        .program-icon { font-size: 2.5rem; margin-bottom: 16px; display: block; }
+        .program-name { font-size: 1.2rem; font-weight: 400; color: var(--text); margin-bottom: 6px; }
+        .program-tagline { font-size: 0.82rem; font-weight: 400; margin-bottom: 16px; }
         .program-card.coral-card .program-tagline { color: var(--coral-dark); }
-        .program-card.sun-card   .program-tagline { color: #9A7000; }
-        .program-card.sage-card  .program-tagline { color: #3A8C5C; }
-        .program-card.lav-card   .program-tagline { color: #6D4FD4; }
+        .program-card.sun-card   .program-tagline { color: #d97706; }
+        .program-card.sage-card  .program-tagline { color: #059669; }
+        .program-card.lav-card   .program-tagline { color: #7c3aed; }
 
         .program-desc { font-size: 0.92rem; color: var(--text-soft); line-height: 1.75; margin-bottom: 24px; }
 
@@ -406,16 +411,16 @@
         }
         .program-perks li::before {
             content: '✓';
-            font-weight: 800;
+            font-weight: 400;
             flex-shrink: 0;
         }
         .program-card.coral-card .program-perks li::before { color: var(--coral); }
-        .program-card.sun-card   .program-perks li::before { color: #B8860B; }
+        .program-card.sun-card   .program-perks li::before { color: #d97706; }
         .program-card.sage-card  .program-perks li::before { color: var(--sage); }
         .program-card.lav-card   .program-perks li::before { color: var(--lavender); }
 
-        .program-price { font-size: 1.5rem; font-weight: 900; color: var(--text); margin-bottom: 16px; }
-        .program-price .price-unit { font-size: 0.82rem; font-weight: 500; color: var(--text-soft); margin-left: 4px; }
+        .program-price { font-size: 1.5rem; font-weight: 400; color: var(--text); margin-bottom: 16px; }
+        .program-price .price-unit { font-size: 0.82rem; font-weight: 400; color: var(--text-soft); margin-left: 4px; }
         .program-price .price-free { color: var(--sage); }
 
         .program-btn {
@@ -424,22 +429,22 @@
             padding: 12px 20px;
             border-radius: 100px;
             font-size: 0.92rem;
-            font-weight: 700;
+            font-weight: 400;
             text-decoration: none;
             transition: transform 0.2s, box-shadow 0.2s;
             border: none;
             cursor: pointer;
             width: 100%;
         }
-        .program-card.coral-card .program-btn { background: var(--coral); color: #fff; }
-        .program-card.sun-card   .program-btn { background: var(--sun); color: #5A3800; }
-        .program-card.sage-card  .program-btn { background: var(--sage); color: #fff; }
-        .program-card.lav-card   .program-btn { background: var(--lavender); color: #fff; }
-        .program-btn:hover { transform: scale(1.04); box-shadow: 0 6px 20px rgba(0,0,0,0.15); text-decoration: none; }
+        .program-card.coral-card .program-btn { background: var(--coral); color: #ffffff; }
+        .program-card.sun-card   .program-btn { background: var(--sun); color: #493927; }
+        .program-card.sage-card  .program-btn { background: var(--sage); color: #ffffff; }
+        .program-card.lav-card   .program-btn { background: var(--lavender); color: #ffffff; }
+        .program-btn:hover { transform: scale(1.04); box-shadow: var(--fl-sh); text-decoration: none; }
 
         /* ── METRICS ──────────────────────────────────────── */
         .metrics-section {
-            background: linear-gradient(180deg, #FFF8F0 0%, #FFF0E6 100%);
+            background: #fbf6f1;
             padding: 80px 24px;
         }
         .metrics-grid {
@@ -462,18 +467,18 @@
         .metric-card:nth-child(5) { background: var(--sky-light); }
         .metric-card:nth-child(6) { background: var(--pink-light); }
         .metric-value {
-            font-size: 2.8rem;
-            font-weight: 900;
+            font-size: 2.5rem;
+            font-weight: 300;
             line-height: 1;
             margin-bottom: 10px;
         }
         .metric-card:nth-child(1) .metric-value { color: var(--coral); }
-        .metric-card:nth-child(2) .metric-value { color: #C89A00; }
+        .metric-card:nth-child(2) .metric-value { color: #d97706; }
         .metric-card:nth-child(3) .metric-value { color: var(--sage); }
         .metric-card:nth-child(4) .metric-value { color: var(--lavender); }
         .metric-card:nth-child(5) .metric-value { color: var(--sky); }
         .metric-card:nth-child(6) .metric-value { color: var(--pink); }
-        .metric-label { font-size: 0.88rem; font-weight: 600; color: var(--text-soft); }
+        .metric-label { font-size: 0.88rem; font-weight: 400; color: var(--text-soft); }
 
         /* ── TESTIMONIALS ─────────────────────────────────── */
         .testimonials-section {
@@ -501,14 +506,14 @@
             content: '\201C';
             position: absolute;
             top: 14px; left: 22px;
-            font-size: 5rem;
+            font-size: 2.5rem;
             line-height: 1;
             color: var(--coral-light);
             font-family: Georgia, serif;
             pointer-events: none;
         }
         .testimonial-header {
-            font-weight: 800;
+            font-weight: 400;
             font-size: 0.92rem;
             color: var(--coral);
             margin-bottom: 10px;
@@ -518,14 +523,14 @@
 
         /* ── CONTACT ──────────────────────────────────────── */
         .contact-section {
-            background: linear-gradient(160deg, #FFF0E6 0%, #FFF8F0 100%);
+            background: #fbf6f1;
             padding: 80px 24px;
         }
         .contact-card {
             background: var(--card-bg);
-            border-radius: 28px;
+            border-radius: var(--fl-r-xl);
             padding: 56px 48px;
-            box-shadow: 0 8px 48px rgba(255,127,92,0.1);
+            box-shadow: var(--fl-sh-lg);
             border: 1.5px solid var(--border);
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -538,7 +543,7 @@
 
         .contact-info h3 {
             font-size: 1.6rem;
-            font-weight: 900;
+            font-weight: 400;
             color: var(--text);
             margin-bottom: 14px;
             letter-spacing: -0.4px;
@@ -563,7 +568,7 @@
         }
         .channel-icon {
             width: 38px; height: 38px;
-            border-radius: 10px;
+            border-radius: var(--fl-r);
             display: flex; align-items: center; justify-content: center;
             font-size: 1.1rem;
             flex-shrink: 0;
@@ -572,14 +577,14 @@
         .channel-icon.sun    { background: var(--sun-light); }
         .channel-icon.sage   { background: var(--sage-light); }
         .channel-icon.lav    { background: var(--lav-light); }
-        .channel-label { font-weight: 600; color: var(--text); }
+        .channel-label { font-weight: 400; color: var(--text); }
         .channel-value { font-size: 0.85rem; color: var(--text-soft); }
 
         /* form */
         .contact-form { display: flex; flex-direction: column; gap: 16px; }
         .contact-form label {
             font-size: 0.82rem;
-            font-weight: 700;
+            font-weight: 400;
             color: var(--text);
             margin-bottom: 4px;
             display: block;
@@ -590,8 +595,8 @@
             width: 100%;
             padding: 12px 16px;
             border: 1.5px solid var(--border);
-            border-radius: 12px;
-            font-family: 'Noto Sans TC', sans-serif;
+            border-radius: var(--fl-r);
+            font-family: var(--fl-body);
             font-size: 0.95rem;
             color: var(--text);
             background: var(--cream);
@@ -602,13 +607,13 @@
         .contact-form select:focus,
         .contact-form textarea:focus {
             border-color: var(--coral);
-            box-shadow: 0 0 0 3px rgba(255,127,92,0.12);
+            box-shadow: var(--fl-sh-xs);
         }
         .contact-form textarea { resize: vertical; min-height: 110px; }
         .contact-form .submit-btn {
             background: var(--coral);
-            color: #fff;
-            font-weight: 800;
+            color: #ffffff;
+            font-weight: 400;
             font-size: 1rem;
             padding: 14px 32px;
             border-radius: 100px;
@@ -620,7 +625,7 @@
         }
         .contact-form .submit-btn:hover {
             transform: translateY(-3px);
-            box-shadow: 0 8px 24px rgba(255,127,92,0.35);
+            box-shadow: var(--fl-sh-lg);
         }
         .form-note {
             font-size: 0.78rem;
@@ -630,7 +635,7 @@
 
         /* ── CTA SECTION ──────────────────────────────────── */
         .cta-section {
-            background: linear-gradient(135deg, var(--coral) 0%, #FF9472 100%);
+            background: var(--coral);
             padding: 80px 24px;
             text-align: center;
             position: relative;
@@ -639,21 +644,21 @@
         .cta-section::before {
             content: '🛌';
             position: absolute;
-            font-size: 14rem;
+            font-size: 2.5rem;
             opacity: 0.06;
             top: -30px; right: -30px;
             pointer-events: none;
         }
         .cta-section h2 {
-            font-size: clamp(2rem, 6vw, 3.2rem);
-            font-weight: 900;
-            color: #fff;
+            font-size: clamp( 1.8rem, 6vw, 2.5rem);
+            font-weight: 300;
+            color: #ffffff;
             margin-bottom: 16px;
             letter-spacing: -0.5px;
         }
         .cta-section p {
             font-size: 1.08rem;
-            color: rgba(255,255,255,0.9);
+            color: rgba(255, 255, 255, 0.9);
             margin-bottom: 40px;
             max-width: 440px;
             margin-left: auto;
@@ -663,9 +668,9 @@
         .cta-btn-group { display: flex; justify-content: center; gap: 14px; flex-wrap: wrap; }
         .cta-btn-white {
             display: inline-block;
-            background: #fff;
+            background: #ffffff;
             color: var(--coral);
-            font-weight: 800;
+            font-weight: 400;
             font-size: 1rem;
             padding: 16px 36px;
             border-radius: 100px;
@@ -673,43 +678,43 @@
             cursor: pointer;
             text-decoration: none;
             transition: transform 0.2s, box-shadow 0.2s;
-            box-shadow: 0 6px 24px rgba(0,0,0,0.15);
+            box-shadow: var(--fl-sh-lg);
         }
         .cta-btn-white:hover {
             transform: translateY(-4px) scale(1.03);
-            box-shadow: 0 14px 36px rgba(0,0,0,0.2);
+            box-shadow: var(--fl-sh-lg);
             color: var(--coral); text-decoration: none;
         }
         .cta-btn-outline {
             display: inline-block;
             background: transparent;
-            color: #fff;
-            font-weight: 700;
+            color: #ffffff;
+            font-weight: 400;
             font-size: 1rem;
             padding: 15px 32px;
             border-radius: 100px;
-            border: 2px solid rgba(255,255,255,0.7);
+            border: 2px solid rgba(255, 255, 255, 0.7);
             cursor: pointer;
             text-decoration: none;
             transition: all 0.2s;
         }
         .cta-btn-outline:hover {
-            background: rgba(255,255,255,0.15);
-            border-color: #fff;
-            color: #fff; text-decoration: none;
+            background: rgba(255, 255, 255, 0.15);
+            border-color: #ffffff;
+            color: #ffffff; text-decoration: none;
             transform: translateY(-3px);
         }
 
         /* ── FOOTER ───────────────────────────────────────── */
         footer {
             background: var(--text);
-            color: rgba(255,255,255,0.5);
+            color: rgba(255, 255, 255, 0.5);
             padding: 40px 24px;
             text-align: center;
             font-size: 0.88rem;
         }
-        footer a { color: var(--sun); text-decoration: none; font-weight: 600; }
-        footer a:hover { color: #fff; }
+        footer a { color: var(--sun); text-decoration: none; font-weight: 400; }
+        footer a:hover { color: #ffffff; }
         footer p + p { margin-top: 10px; }
 
         /* ── RESPONSIVE ───────────────────────────────────── */
@@ -718,7 +723,41 @@
             .hero h1 { letter-spacing: -0.5px; }
             .program-card.popular::after { display: none; }
         }
-    </style>
+    
+        /* ── FinLab: hairline cards on a near-white ground ───────────── */
+        body { font-family: var(--fl-body); line-height: 1.7; }
+        .section-eyebrow { letter-spacing: .08em; color: var(--fl-faint); }
+        .section-eyebrow::before { background: var(--fl-ghost); }
+        .section-title { color: var(--fl-ink); }
+        .card, [class*="-card"] {
+           border: 1px solid var(--fl-hair);
+           box-shadow: none;
+        }
+        .card:hover, [class*="-card"]:hover {
+           border-color: var(--fl-line);
+           box-shadow: var(--fl-sh-sm);
+        }
+
+        /* Decoration the reference site would not carry: blurred colour
+           blobs behind the hero, a full-bleed accent ticker, and wave
+           dividers between sections. A hairline does that job. */
+        .hero { background: var(--fl-raised); }
+        .hero::before, .hero::after { display: none; }
+        .hero h1 { color: var(--fl-ink); }
+        .ticker-wrap {
+           background: var(--fl-raised) !important;
+           color: var(--fl-muted);
+           border-top: 1px solid var(--fl-hair);
+           border-bottom: 1px solid var(--fl-hair);
+        }
+        .wave-divider {
+           background: transparent !important;
+           border-top: 1px solid var(--fl-hair);
+           margin: 0;
+        }
+        .wave-divider svg { display: none; }
+  </style>
+    <link rel="stylesheet" href="css/finlab-theme.css">
 </head>
 <body>
 
@@ -765,9 +804,9 @@
     </div>
 
     <!-- wave -->
-    <div class="wave-divider" style="background:#FF7F5C;">
+    <div class="wave-divider" style="background:#d97706;">
         <svg viewBox="0 0 1440 60" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
-            <path d="M0,30 C240,60 480,0 720,30 C960,60 1200,0 1440,30 L1440,60 L0,60 Z" fill="#FFFFFF"/>
+            <path d="M0,30 C240,60 480,0 720,30 C960,60 1200,0 1440,30 L1440,60 L0,60 Z" fill="#ffffff"/>
         </svg>
     </div>
 
@@ -788,9 +827,9 @@
     </section>
 
     <!-- wave -->
-    <div class="wave-divider" style="background:#FFFFFF;">
+    <div class="wave-divider" style="background:#ffffff;">
         <svg viewBox="0 0 1440 60" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
-            <path d="M0,20 C360,60 1080,0 1440,40 L1440,60 L0,60 Z" fill="#FFF8F0"/>
+            <path d="M0,20 C360,60 1080,0 1440,40 L1440,60 L0,60 Z" fill="#fbf6f1"/>
         </svg>
     </div>
 
@@ -851,9 +890,9 @@
     </section>
 
     <!-- wave -->
-    <div class="wave-divider" style="background:#FFF0E6;">
+    <div class="wave-divider" style="background:#fbf6f1;">
         <svg viewBox="0 0 1440 60" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
-            <path d="M0,30 C240,60 480,0 720,30 C960,60 1200,0 1440,30 L1440,60 L0,60 Z" fill="#FFFFFF"/>
+            <path d="M0,30 C240,60 480,0 720,30 C960,60 1200,0 1440,30 L1440,60 L0,60 Z" fill="#ffffff"/>
         </svg>
     </div>
 
@@ -951,9 +990,9 @@
     </section>
 
     <!-- wave -->
-    <div class="wave-divider" style="background:#FFF0E6;">
+    <div class="wave-divider" style="background:#fbf6f1;">
         <svg viewBox="0 0 1440 60" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
-            <path d="M0,40 C480,0 960,60 1440,20 L1440,60 L0,60 Z" fill="#FFFFFF"/>
+            <path d="M0,40 C480,0 960,60 1440,20 L1440,60 L0,60 Z" fill="#ffffff"/>
         </svg>
     </div>
 
@@ -985,9 +1024,9 @@
     </section>
 
     <!-- wave -->
-    <div class="wave-divider" style="background:#FFFFFF;">
+    <div class="wave-divider" style="background:#ffffff;">
         <svg viewBox="0 0 1440 60" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
-            <path d="M0,20 C360,60 1080,0 1440,40 L1440,60 L0,60 Z" fill="#FFF0E6"/>
+            <path d="M0,20 C360,60 1080,0 1440,40 L1440,60 L0,60 Z" fill="#fbf6f1"/>
         </svg>
     </div>
 

@@ -48,11 +48,40 @@ bundle exec jekyll serve
 - `yen_blog_Jeklly/` - Jekyll blog with separate Gemfile and _config.yml
 
 ## Styling System
-- CSS variables in `:root` for consistent theming (primary/secondary colors, light/dark modes)
-- Bootstrap 4.5.2 for responsive grid and components
-- Custom CSS for video headers, parallax effects, and portfolio galleries
-- Font Awesome for icons
-- AOS (Animate On Scroll) library for animations
+
+The whole site runs on one design system, adapted from finlab.finance:
+a quiet, light research-desk look. Two shared stylesheets carry it.
+
+- `css/finlab.css` — tokens (`--fl-*`) plus base and primitives. Load it
+  **before** a page's own `<style>` block.
+- `css/finlab-theme.css` — the normalisation layer: type, weight, radius,
+  shadow and nav appearance. Load it **after** the page's `<style>` block
+  so it wins the cascade. It never sets layout properties.
+
+The rules the system is built on:
+
+- **Two weights only** — 300 for display, 400 for everything else. Nothing
+  on the site is bold; hierarchy comes from size and colour.
+- **A capped scale** — 2.5rem is the largest character on any page; body
+  is 1rem at line-height 1.7; the floor is 12px.
+- **Space Grotesk** display, **DM Sans** body, system mono for figures
+  and chrome. Reference them as `var(--fl-display|body|mono)`.
+- **Hairline rules, not shadows** — 1px `--fl-hair` does the structural
+  work; the four shadow tokens are a whisper.
+- **Flat surfaces** — no gradients. The ground steps
+  `#fff` → `#fbfcfe` → `#f8fafc` → `#f5f5f7`.
+- **One blue for action** (`--fl-link`), ink for the single filled button
+  per view; green/red are reserved for data that moves.
+- **Light is the default.** Pages with a toggle opt in to dark; none of
+  them follow the OS preference any more.
+- 0.16s ease for state changes, and `prefers-reduced-motion` honoured.
+
+Per-page `:root` blocks still exist and still drive each page's own CSS —
+they now hold FinLab values, so retheming a page means editing its tokens
+rather than hunting colour literals.
+
+Also in use: Bootstrap 4.5.2 for grid and components, Font Awesome for
+icons, AOS for scroll animations.
 
 ## Deployment
 - Hosted on GitHub Pages
