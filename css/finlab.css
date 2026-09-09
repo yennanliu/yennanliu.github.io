@@ -36,6 +36,8 @@
   --fl-inset:        #f3f4f6;   /* hover wash on nav & list rows       */
 
   /* ── Action ──────────────────────────────────────────────────────── */
+  --fl-on-ink:       #ffffff;   /* text on an ink-filled control        */
+
   --fl-link:         #2563eb;
   --fl-link-hover:   #1d4ed8;
   --fl-accent:       #0071e3;
@@ -107,6 +109,71 @@
 @media (max-width: 640px) {
   :root { --fl-pad: 1rem; --fl-fs-zone: 2rem; --fl-fs-title: 1.5rem; }
 }
+
+/* ==========================================================================
+   DARK
+   The same system with the ground inverted: a true near-black page, the
+   ink/surface ramp turned inside out, and the accents lifted just enough
+   to hold their contrast. Every page's dark switch resolves to this one
+   palette — [data-theme] for the console and the archive, [data-mode]
+   for the terminal, .dark-mode for the Bootstrap pages.
+   ========================================================================== */
+
+:root[data-theme="dark"],
+:root[data-mode="ink"],
+body.dark-mode {
+  /* Ink inverts: what was the darkest text is now the brightest. */
+  --fl-ink:          #f5f7fa;
+  --fl-ink-soft:     #e3e8ef;
+  --fl-text:         #d3dae4;
+  --fl-prose:        #c2cad6;
+  --fl-muted:        #9aa5b5;
+  --fl-faint:        #7d8899;
+  --fl-ghost:        #5b6675;
+  --fl-on-ink:       #0a0a0b;
+
+  /* Rules stay hairlines; they just sit a step above the ground. */
+  --fl-hair:         #212126;
+  --fl-line:         #2e2e35;
+
+  /* The ground is black, and the surfaces step up from it. */
+  --fl-surface:      #0a0a0b;
+  --fl-quiet:        #0f0f11;
+  --fl-raised:       #141417;
+  --fl-page:         #1a1a1e;
+  --fl-inset:        #1f1f24;
+
+  --fl-link:         #7aa8ff;
+  --fl-link-hover:   #9cc0ff;
+  --fl-accent:       #7aa8ff;
+  --fl-accent-wash:  #111a2b;
+  --fl-accent-edge:  #2a3b55;
+
+  --fl-green:        #34d399;
+  --fl-green-ink:    #6ee7b7;
+  --fl-green-wash:   #0c2a20;
+  --fl-green-edge:   #1d4535;
+  --fl-red:          #f87171;
+  --fl-red-ink:      #fca5a5;
+  --fl-red-wash:     #2a1416;
+  --fl-red-edge:     #4a2226;
+  --fl-amber:        #fbbf24;
+  --fl-amber-2:      #fcd34d;
+  --fl-amber-wash:   #2a2010;
+  --fl-amber-edge:   #4a3a18;
+
+  --fl-cat-1:#7aa8ff; --fl-cat-2:#b48cff; --fl-cat-3:#34d399;
+  --fl-cat-4:#fbbf24; --fl-cat-5:#5ec8dd; --fl-cat-6:#f0a0cd;
+
+  /* On a black ground a shadow reads as a void, not a lift. */
+  --fl-sh-xs: 0 1px 2px rgba(0, 0, 0, .5);
+  --fl-sh-sm: 0 2px 6px rgba(0, 0, 0, .55);
+  --fl-sh:    0 6px 14px rgba(0, 0, 0, .6);
+  --fl-sh-lg: 0 14px 32px rgba(0, 0, 0, .65);
+
+  color-scheme: dark;
+}
+
 
 /* ==========================================================================
    BASE
@@ -217,8 +284,8 @@ hr { border: 0; border-top: 1px solid var(--fl-hair); }
   transition: background var(--fl-t), color var(--fl-t),
               border-color var(--fl-t), opacity var(--fl-t);
 }
-.fl-btn--primary { background: var(--fl-ink); color: #fff; }
-.fl-btn--primary:hover { background: var(--fl-ink-soft); color: #fff; }
+.fl-btn--primary { background: var(--fl-ink); color: var(--fl-on-ink); }
+.fl-btn--primary:hover { background: var(--fl-ink-soft); color: var(--fl-on-ink); }
 .fl-btn--ghost {
   background: var(--fl-surface);
   color: var(--fl-ink);
@@ -284,6 +351,37 @@ hr { border: 0; border-top: 1px solid var(--fl-hair); }
   font-variant-numeric: tabular-nums;
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .fl-ul::after, .fl-card, .fl-btn { transition: none; }
+/* The injected theme switch, for pages whose markup carries no nav */
+.fl-theme-toggle {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  z-index: 950;
+  width: 2.25rem;
+  height: 2.25rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: 1px solid var(--fl-hair);
+  border-radius: var(--fl-r-pill);
+  background: var(--fl-surface);
+  color: var(--fl-muted);
+  font-family: var(--fl-body);
+  font-size: var(--fl-fs-base);
+  line-height: 1;
+  cursor: pointer;
+  box-shadow: var(--fl-sh-xs);
+  transition: color var(--fl-t), border-color var(--fl-t),
+              background var(--fl-t);
 }
+.fl-theme-toggle:hover {
+  color: var(--fl-ink);
+  border-color: var(--fl-line);
+  background: var(--fl-inset);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fl-ul::after, .fl-card, .fl-btn, .fl-theme-toggle { transition: none; }
+}
+

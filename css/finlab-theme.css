@@ -134,11 +134,12 @@ a { transition: color var(--fl-t), opacity var(--fl-t); }
 .btn-primary, .btn-dark, .btn-secondary {
   background: var(--fl-ink) !important;
   border-color: var(--fl-ink) !important;
-  color: #fff !important;
+  color: var(--fl-on-ink) !important;
 }
 .btn-primary:hover, .btn-dark:hover, .btn-secondary:hover {
   background: var(--fl-ink-soft) !important;
   border-color: var(--fl-ink-soft) !important;
+  color: var(--fl-on-ink) !important;
 }
 .btn-outline-primary, .btn-outline-dark, .btn-outline-secondary,
 .btn-light, .btn-outline-light {
@@ -178,3 +179,51 @@ a { transition: color var(--fl-t), opacity var(--fl-t); }
     scroll-behavior: auto !important;
   }
 }
+
+/* ── 8. DARK ───────────────────────────────────────────────────────────
+   The tokens in finlab.css do most of the work. What is left is the
+   handful of places the old pages painted a colour literal straight
+   into a rule: the translucent nav, and any surface that assumed a
+   white page underneath it.                                            */
+
+:root[data-theme="dark"] body,
+:root[data-mode="ink"] body,
+body.dark-mode {
+  background: var(--fl-surface);
+  color: var(--fl-text);
+}
+
+body.dark-mode .navbar,
+:root[data-theme="dark"] .navbar {
+  background: rgba(10, 10, 11, .82) !important;
+  border-bottom-color: var(--fl-hair);
+}
+
+body.dark-mode .card,
+body.dark-mode .modal-content,
+body.dark-mode .dropdown-menu,
+body.dark-mode [class*="-card"],
+body.dark-mode .tile,
+body.dark-mode .panel {
+  background: var(--fl-quiet);
+  border-color: var(--fl-hair) !important;
+  color: var(--fl-text);
+}
+
+body.dark-mode .form-control,
+body.dark-mode input,
+body.dark-mode select,
+body.dark-mode textarea {
+  background: var(--fl-quiet);
+  border-color: var(--fl-hair) !important;
+  color: var(--fl-text);
+}
+body.dark-mode ::placeholder { color: var(--fl-ghost); }
+
+body.dark-mode hr,
+body.dark-mode .divider,
+body.dark-mode [class*="divider"] { border-color: var(--fl-hair) !important; }
+
+/* A white logo mark or diagram on a black ground needs its own plate. */
+body.dark-mode .navbar-brand img,
+:root[data-theme="dark"] .navbar-brand img { filter: invert(1) hue-rotate(180deg); }

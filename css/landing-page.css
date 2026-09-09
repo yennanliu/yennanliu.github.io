@@ -198,5 +198,23 @@ h1, h2, h3, h4, h5, h6 { font-family: var(--fl-display); font-weight: var(--fl-f
   text-shadow: none;
   box-shadow: none;
 }
-.btn-primary { background: var(--fl-ink); border-color: var(--fl-ink); color: #fff; }
+.btn-primary { background: var(--fl-ink); border-color: var(--fl-ink); color: var(--fl-on-ink); }
 footer { background: var(--fl-raised); border-top: 1px solid var(--fl-hair); }
+
+/* Bootstrap 3 paints the navbar and footer with its own greys, so dark
+   has to name them again. */
+body.dark-mode .topnav,
+body.dark-mode .navbar-default {
+  background: rgba(10, 10, 11, .86);
+  border-bottom-color: var(--fl-hair);
+}
+body.dark-mode .navbar-default .navbar-nav > .active > a,
+body.dark-mode .navbar-default .navbar-nav > .active > a:hover,
+body.dark-mode .navbar-default .navbar-nav > li > a:hover {
+  background: var(--fl-inset);
+  color: var(--fl-ink);
+}
+body.dark-mode .intro-header,
+body.dark-mode .content-section-b,
+body.dark-mode footer { background-color: var(--fl-raised); }
+body.dark-mode .content-section-a { background-color: var(--fl-surface); }
