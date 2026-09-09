@@ -691,6 +691,7 @@
     }
   </style>
   <link rel="stylesheet" href="css/finlab-theme.css">
+  <link rel="stylesheet" href="css/index-signature.css">
 </head>
 <body>
 
@@ -737,9 +738,9 @@
         Available for new challenges · 2026
       </div>
       <h1 class="hero-h1">
-        AI products,<br>
-        diagram to<br>
-        <span class="line-blue">production.</span>
+        <span class="ln"><span>AI products,</span></span>
+        <span class="ln"><span>diagram to</span></span>
+        <span class="ln"><span class="line-blue">production.</span></span>
       </h1>
       <p class="hero-sub">
         <span class="chev">&gt;</span> <span id="tw" class="tw">AI full-stack engineer</span><span class="cursor">_</span>
@@ -781,18 +782,36 @@
 
             <circle class="node-ring"    cx="312" cy="38"  r="7"></circle>
             <circle class="node-ring r2" cx="246" cy="148" r="7"></circle>
-
-            <rect class="node-box"    x="6"   y="22"  width="84" height="32" rx="5"></rect>
-            <rect class="node-box"    x="138" y="22"  width="84" height="32" rx="5"></rect>
-            <rect class="node-box on" x="270" y="22"  width="84" height="32" rx="5"></rect>
-            <rect class="node-box"    x="60"  y="132" width="84" height="32" rx="5"></rect>
-            <rect class="node-box on" x="204" y="132" width="84" height="32" rx="5"></rect>
-
-            <text class="node-txt"    x="48"  y="42"  text-anchor="middle">ingest</text>
-            <text class="node-txt"    x="180" y="42"  text-anchor="middle">stream</text>
-            <text class="node-txt on" x="312" y="42"  text-anchor="middle">model</text>
-            <text class="node-txt"    x="102" y="152" text-anchor="middle">store</text>
-            <text class="node-txt on" x="246" y="152" text-anchor="middle">serve</text>
+            <g class="node" data-skill="3" role="button" tabindex="0"
+               aria-label="ingest layer">
+              <rect class="hitpad" x="0" y="16" width="96" height="44"></rect>
+              <rect class="node-box" x="6" y="22" width="84" height="32" rx="5"></rect>
+              <text class="node-txt" x="48" y="42" text-anchor="middle">ingest</text>
+            </g>
+            <g class="node" data-skill="4" role="button" tabindex="0"
+               aria-label="stream layer">
+              <rect class="hitpad" x="132" y="16" width="96" height="44"></rect>
+              <rect class="node-box" x="138" y="22" width="84" height="32" rx="5"></rect>
+              <text class="node-txt" x="180" y="42" text-anchor="middle">stream</text>
+            </g>
+            <g class="node" data-skill="0" role="button" tabindex="0"
+               aria-label="model layer">
+              <rect class="hitpad" x="264" y="16" width="96" height="44"></rect>
+              <rect class="node-box on" x="270" y="22" width="84" height="32" rx="5"></rect>
+              <text class="node-txt on" x="312" y="42" text-anchor="middle">model</text>
+            </g>
+            <g class="node" data-skill="2" role="button" tabindex="0"
+               aria-label="store layer">
+              <rect class="hitpad" x="54" y="126" width="96" height="44"></rect>
+              <rect class="node-box" x="60" y="132" width="84" height="32" rx="5"></rect>
+              <text class="node-txt" x="102" y="152" text-anchor="middle">store</text>
+            </g>
+            <g class="node" data-skill="1" role="button" tabindex="0"
+               aria-label="serve layer">
+              <rect class="hitpad" x="198" y="126" width="96" height="44"></rect>
+              <rect class="node-box on" x="204" y="132" width="84" height="32" rx="5"></rect>
+              <text class="node-txt on" x="246" y="152" text-anchor="middle">serve</text>
+            </g>
           </svg>
 
           <span class="tc-label mt">skill_confidence</span>
@@ -875,7 +894,7 @@
 </div>
 
 <!-- LAYERS — animated two-row marquee -->
-<section id="expertise">
+<section id="expertise" data-sig="02">
   <div class="wrap">
     <span class="sec-eye reveal">End to end</span>
     <h2 class="sec-h2 reveal">Six layers, one pair of hands.</h2>
@@ -974,7 +993,7 @@
 </section>
 
 <!-- CAREER TRACE -->
-<section id="career" class="section">
+<section id="career" class="section" data-sig="03">
   <div class="wrap">
     <span class="sec-eye reveal">Trajectory</span>
     <h2 class="sec-h2 reveal">The long way to full stack.</h2>
@@ -1068,7 +1087,7 @@
 </section>
 
 <!-- PROJECTS -->
-<section id="projects" class="section">
+<section id="projects" class="section" data-sig="04">
   <div class="wrap">
     <span class="sec-eye reveal">Selected Work</span>
     <h2 class="sec-h2 reveal">Four repos, four layers.</h2>
@@ -1123,7 +1142,7 @@
 </section>
 
 <!-- CONTACT -->
-<section id="contact">
+<section id="contact" data-sig="05">
   <svg class="radar-bed" viewBox="0 0 600 600" aria-hidden="true">
     <circle class="radar"   cx="300" cy="300" r="286" fill="none" stroke="var(--rule-strong)" stroke-width="1" stroke-dasharray="3 13"></circle>
     <circle class="radar-b" cx="300" cy="300" r="214" fill="none" stroke="var(--rule)" stroke-width="1" stroke-dasharray="2 9"></circle>
@@ -1342,5 +1361,6 @@
   document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 })();
 </script>
+  <script src="js/index-signature.js" defer></script>
 </body>
 </html>

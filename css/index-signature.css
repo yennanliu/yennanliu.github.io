@@ -1,0 +1,297 @@
+/* ==========================================================================
+   INDEX — SIGNATURE LAYER
+   Loaded last, only on the landing page.
+
+   The rest of the site is deliberately quiet. The front door is allowed
+   to speak up, but in the same voice: same palette, same hairlines, same
+   two weights, same mono. What changes is scale, composition and how much
+   the page responds to you.
+
+   The organising idea is the page's own claim — one person carrying every
+   layer, diagram to production. So the page is built as a system diagram
+   that assembles while you read it: a pipeline rail down the left edge
+   that fills as you descend, nodes you can actually interrogate, and
+   plates that tilt under the cursor.
+
+   Everything here degrades to the quiet version when a reader asks for
+   reduced motion.
+   ========================================================================== */
+
+:root {
+  --sig-rail-w: 4.5rem;   /* the left pipeline rail        */
+  --sig-ghost: .55;       /* opacity of the outline numeral */
+}
+
+/* ── 1. SCROLL PROGRESS ────────────────────────────────────────────────
+   A hairline across the top of the nav that fills with the read. The
+   whole page is a pipeline; this is its completion bar.                */
+
+#sig-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 2px;
+  width: 100%;
+  z-index: 1000;
+  transform: scaleX(var(--sig-p, 0));
+  transform-origin: left;
+  background: var(--blue);
+  opacity: .9;
+  pointer-events: none;
+  will-change: transform;
+}
+
+/* ── 2. THE PIPELINE RAIL ──────────────────────────────────────────────
+   Five stops down the left edge, one per section, wired together with a
+   hairline that fills as you pass each one. It reads as a station map,
+   which is exactly what the page is.                                    */
+
+#sig-rail {
+  position: fixed;
+  top: 50%;
+  left: 1.5rem;
+  transform: translateY(-50%);
+  z-index: 880;
+  display: none;                       /* only where there is room */
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.5rem;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+@media (min-width: 1320px) {
+  #sig-rail { display: flex; }
+}
+
+#sig-rail::before {
+  content: '';
+  position: absolute;
+  left: 5px;
+  top: .55rem;
+  bottom: .55rem;
+  width: 1px;
+  background: var(--rule);
+}
+
+/* the travelled part of the line */
+#sig-rail::after {
+  content: '';
+  position: absolute;
+  left: 5px;
+  top: .55rem;
+  width: 1px;
+  height: calc((100% - 1.1rem) * var(--sig-rail-p, 0));
+  background: var(--blue);
+  transition: height .25s linear;
+}
+
+.sig-stop {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: .65rem;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  font-family: var(--mono);
+  font-size: .58rem;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--ink-dim);
+  line-height: 1;
+  transition: color .2s ease;
+}
+
+.sig-stop i {
+  position: relative;
+  z-index: 1;
+  display: block;
+  width: 11px;
+  height: 11px;
+  flex-shrink: 0;
+  border: 1px solid var(--rule-strong);
+  border-radius: 50%;
+  background: var(--bg);
+  transition: background .2s ease, border-color .2s ease, transform .2s ease;
+}
+
+.sig-stop span {
+  opacity: 0;
+  transform: translateX(-4px);
+  transition: opacity .2s ease, transform .2s ease;
+  white-space: nowrap;
+}
+
+.sig-stop:hover,
+.sig-stop:focus-visible { color: var(--ink); }
+.sig-stop:hover span,
+.sig-stop:focus-visible span { opacity: 1; transform: none; }
+.sig-stop:hover i { border-color: var(--blue); }
+
+.sig-stop.on { color: var(--ink); }
+.sig-stop.on i { background: var(--blue); border-color: var(--blue); transform: scale(1.18); }
+.sig-stop.on span { opacity: 1; transform: none; }
+
+/* ── 3. THE OUTLINE NUMERAL ────────────────────────────────────────────
+   One oversized hairline numeral per section, set in the margin. It is
+   texture rather than hierarchy — drawn as an outline so it never
+   competes with the heading it sits behind.                             */
+
+section[data-sig] { position: relative; }
+
+section[data-sig]::before {
+  content: attr(data-sig);
+  position: absolute;
+  top: 2rem;
+  right: 2.5rem;
+  z-index: 0;
+  font-family: var(--mono);
+  font-size: clamp(7rem, 15vw, 15rem);
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: -.04em;
+  color: transparent;
+  -webkit-text-stroke: 1px var(--rule);
+  opacity: var(--sig-ghost);
+  pointer-events: none;
+  user-select: none;
+}
+
+section[data-sig] > * { position: relative; z-index: 1; }
+
+@media (max-width: 900px) {
+  section[data-sig]::before { display: none; }
+}
+
+/* ── 4. HERO ───────────────────────────────────────────────────────────
+   The one place the capped type scale is broken on purpose. Everything
+   else on the site tops out at 2.5rem; the front door goes to five, at
+   weight 300, tracked tight. Scale is doing the work that weight is not
+   allowed to.                                                           */
+
+.hero-h1 {
+  font-size: clamp(2.6rem, 7.4vw, 5.25rem) !important;
+  line-height: .9 !important;
+  letter-spacing: -.055em !important;
+}
+
+/* each line rises out of its own clip, one after the other */
+.hero-h1 .ln {
+  display: block;
+  overflow: hidden;
+  /* the clip has to clear the descenders on "diagram" and "production",
+     so pad both edges and pull the box back to the original metrics */
+  padding-top: .08em;
+  margin-top: -.08em;
+  padding-bottom: .16em;
+  margin-bottom: -.16em;
+}
+.hero-h1 .ln > span {
+  display: block;
+  transform: translateY(105%);
+  animation: sigLine .9s cubic-bezier(.16, .84, .3, 1) forwards;
+}
+.hero-h1 .ln:nth-child(1) > span { animation-delay: .18s; }
+.hero-h1 .ln:nth-child(2) > span { animation-delay: .30s; }
+.hero-h1 .ln:nth-child(3) > span { animation-delay: .42s; }
+@keyframes sigLine { to { transform: none; } }
+
+.hero-lead { max-width: 44ch; }
+
+/* a spotlight on the grid bed that tracks the pointer */
+#hero {
+  --sig-mx: 42%;
+  --sig-my: 44%;
+}
+#hero::before {
+  mask-image:
+    radial-gradient(38rem 30rem at var(--sig-mx) var(--sig-my),
+                    #000 12%, rgba(0, 0, 0, .35) 46%, transparent 78%);
+  -webkit-mask-image:
+    radial-gradient(38rem 30rem at var(--sig-mx) var(--sig-my),
+                    #000 12%, rgba(0, 0, 0, .35) 46%, transparent 78%);
+  opacity: 1;
+}
+
+/* ── 5. THE TOPOLOGY, MADE INTERROGABLE ────────────────────────────────
+   The diagram was decorative. Now each node is a control: take one and
+   the matching confidence bar below lights up, and the rest recede. No
+   new labels — it just wires two things the card already showed.        */
+
+.topo .node { cursor: pointer; }
+.topo .node .node-box,
+.topo .node .node-txt { transition: fill .2s ease, stroke .2s ease, opacity .2s ease; }
+
+.topo .node .hitpad { fill: transparent; }
+
+.sys-card.probing .topo .node { opacity: .38; }
+.sys-card.probing .topo .node.sel { opacity: 1; }
+.sys-card.probing .topo .node.sel .node-box { fill: var(--blue-pale); stroke: var(--blue); }
+.sys-card.probing .topo .node.sel .node-txt { fill: var(--ink); }
+
+.topo .node:hover .node-box  { stroke: var(--blue); }
+.topo .node:focus-visible    { outline: none; }
+.topo .node:focus-visible .node-box { stroke: var(--blue); stroke-width: 2; }
+
+.tc-skill { transition: opacity .2s ease; }
+.sys-card.probing .tc-skill { opacity: .32; }
+.sys-card.probing .tc-skill.lit { opacity: 1; }
+.tc-skill.lit .tc-skill-head span:first-child { color: var(--ink); }
+.tc-skill.lit .tc-skill-track { box-shadow: 0 0 0 1px var(--blue-border); }
+
+/* the card stops bobbing while it is being read */
+.sys-card:hover, .sys-card.probing { animation-play-state: paused; }
+
+/* ── 6. PLATES THAT RESPOND ────────────────────────────────────────────
+   The layer cards tilt very slightly toward the cursor. Two degrees is
+   the whole effect — enough to feel like a physical plate, not enough to
+   read as a gimmick.                                                    */
+
+.exp-mcard {
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+.exp-mcard.tilt {
+  transform:
+    perspective(900px)
+    rotateX(var(--sig-rx, 0deg))
+    rotateY(var(--sig-ry, 0deg))
+    translateY(-4px);
+  transition: transform .12s ease-out, box-shadow .22s, border-color .22s;
+}
+
+/* ── 7. FIGURES ────────────────────────────────────────────────────────
+   The stats band is the page's only pure-number moment, so let it be
+   properly large. Mono, tabular, one weight.                            */
+
+.stat-num {
+  font-size: clamp(2.4rem, 5.6vw, 4rem) !important;
+  letter-spacing: -.055em;
+}
+.stat-cell { padding-block: 64px; }
+
+/* ── 8. CLOSING ────────────────────────────────────────────────────────
+   The sign-off matches the hero, so the page opens and closes on the
+   same note.                                                            */
+
+.cta-h2 {
+  font-size: clamp(2.2rem, 6vw, 4rem) !important;
+  line-height: .94 !important;
+  letter-spacing: -.05em !important;
+}
+
+/* ── 9. REDUCED MOTION ─────────────────────────────────────────────────
+   Everything above is decoration on top of a page that already worked.
+   Strip the movement and leave the composition.                         */
+
+@media (prefers-reduced-motion: reduce) {
+  #sig-progress { display: none; }
+  #sig-rail::after { transition: none; }
+  .hero-h1 .ln > span { transform: none; animation: none; }
+  .exp-mcard.tilt { transform: translateY(-4px); transition: none; }
+  #hero::before { animation: none; mask-image: var(--grid-mask); -webkit-mask-image: var(--grid-mask); }
+  .sys-card { animation: none; }
+}

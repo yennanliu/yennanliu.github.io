@@ -76,6 +76,34 @@ The rules the system is built on:
   them follow the OS preference any more.
 - 0.16s ease for state changes, and `prefers-reduced-motion` honoured.
 
+### The landing page
+
+`index.html` alone carries a signature layer on top of the system —
+`css/index-signature.css` and `js/index-signature.js`, both loaded last
+and only there. The front door is allowed to speak up; the rest of the
+site stays quiet.
+
+It keeps the palette, the hairlines, the two weights and the mono. What
+it changes is scale, composition and responsiveness:
+
+- The hero headline is **the one deliberate break of the 2.5rem cap** —
+  it goes to 5.25rem at weight 300. If you raise the cap anywhere else,
+  the break stops reading as intentional.
+- A pipeline rail down the left edge marks the five sections and fills
+  as you scroll; a hairline across the top tracks read progress.
+- Each section gets an oversized outline numeral in the margin
+  (`data-sig="02"` on the `<section>`), drawn as a stroke so it stays
+  texture rather than hierarchy.
+- The hero topology is wired to the confidence bars beneath it: each
+  `.topo .node[data-skill="n"]` lights `.tc-skill` number `n`. It adds no
+  new labels — it only makes a correspondence the card already had
+  visible.
+- Pointer spotlight on the hero grid, two degrees of tilt on the layer
+  plates.
+
+All of it is additive: the page works with the JS removed, and every
+motion-driven part is skipped under `prefers-reduced-motion`.
+
 Per-page `:root` blocks still exist and still drive each page's own CSS —
 they now hold FinLab values, so retheming a page means editing its tokens
 rather than hunting colour literals.
