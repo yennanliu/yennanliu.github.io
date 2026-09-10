@@ -534,6 +534,44 @@
       .bud-s b { display:none; }
       .mrow-v { font-size:20px; }
     }
+
+    /* ══ The architecture schematic ══
+       The ASCII drawing, drawn. Same five rows, same edges — but the
+       edges carry traffic and the boxes answer when you ask them. */
+    .arch { overflow-x:auto; padding:30px 24px 20px; }
+    .arch svg { display:block; width:100%; min-width:860px; height:auto; }
+
+    .arch .lane { fill:var(--dim); font-family:var(--fl-mono); font-size:11px; letter-spacing:.2em; }
+    .arch .e  { stroke:var(--wire); stroke-width:1.5; fill:none; transition:stroke .25s ease; }
+    .arch .ar { fill:var(--wire); transition:fill .25s ease; }
+    .arch .c  { stroke:var(--acid); stroke-width:2.4; fill:none; stroke-linecap:round;
+      stroke-dasharray:14 300; animation:fanrun 2.4s linear infinite;
+      filter:drop-shadow(0 0 4px var(--acid)); }
+    .arch .e.hot  { stroke:var(--acid); stroke-width:2; }
+    .arch .ar.hot { fill:var(--acid); }
+
+    .arch .nd { cursor:pointer; }
+    .arch .nd rect { fill:var(--bg); stroke:var(--line); stroke-width:1.5;
+      transition:fill .25s ease, stroke .25s ease; }
+    .arch .nd:hover rect { stroke:var(--acid-ink); fill:var(--tint); }
+    .arch .nd.on rect { stroke:var(--acid); fill:var(--tint-2); }
+    .arch .nd:focus { outline:none; }
+    .arch .nd:focus-visible rect { stroke:var(--acid); stroke-width:2.5; }
+    .arch .t  { fill:var(--fg);  font-family:var(--fl-mono); font-size:15px; letter-spacing:-.01em; }
+    .arch .s  { fill:var(--dim); font-family:var(--fl-mono); font-size:12px; }
+    .arch .cr { fill:var(--acid-ink); font-family:var(--fl-mono); font-size:11.5px; letter-spacing:.06em; }
+
+    /* the readout under the drawing — one line, changes with the node */
+    .arch-foot { display:flex; align-items:baseline; gap:12px; padding:16px 24px 20px;
+      border-top:1px solid var(--line); }
+    .arch-foot .k { font-family:var(--fl-mono); font-size:12.5px; letter-spacing:-.01em;
+      color:var(--acid-ink); white-space:nowrap; }
+    .arch-foot .v { font-family:var(--fl-mono); font-size:12px; line-height:1.6;
+      letter-spacing:.03em; color:var(--dim); }
+    @media (max-width: 720px) {
+      .arch-foot { flex-direction:column; gap:6px; padding:16px 18px 18px; }
+      .arch { padding:24px 18px 16px; }
+    }
   </style>
   <link rel="stylesheet" href="css/finlab-theme.css">
   <link rel="stylesheet" href="css/site-nav.css">
@@ -857,9 +895,103 @@
     <span class="lab">Four lanes out, one ledger back &mdash; every edge is a row in runs.db &nbsp;&rarr;</span>
   </div>
 
-  <div class="blk reveal" style="margin-top:38px;">
-    <div class="blk-head"><span>agent_auto_system / architecture</span><span>ASCII</span></div>
-    <div class="ascii-wrap">
+  <div style="display:flex; align-items:center; justify-content:space-between; gap:18px; flex-wrap:wrap; margin-top:44px;">
+    <span class="lab">One process, five rows &mdash; take any box</span>
+    <div class="seg" id="aSeg" role="group" aria-label="Diagram view">
+      <button type="button" data-view="wire" aria-pressed="true">Schematic</button>
+      <button type="button" data-view="ascii" aria-pressed="false">ASCII</button>
+    </div>
+  </div>
+
+  <div class="blk reveal" style="margin-top:18px;">
+    <div class="blk-head"><span>agent_auto_system / architecture</span><span id="archTag">schematic</span></div>
+
+    <div class="arch" id="archWire">
+      <svg viewBox="0 0 1100 660" fill="none">
+      <text class="lane" x="30" y="20">01  ENTRY</text>
+      <text class="lane" x="30" y="140">02  SCHEDULE</text>
+      <text class="lane" x="30" y="294">03  CREWS</text>
+      <text class="lane" x="30" y="436">04  MODEL</text>
+      <text class="lane" x="30" y="554">05  LEDGER</text>
+
+      <path class="e" data-k="main sched" d="M550 94 L550 152"/>
+      <path class="e" data-k="sched ticket" d="M550 236 C 550 272, 130 270, 130 306"/>
+      <path class="e" data-k="sched email" d="M550 236 C 550 272, 410 270, 410 306"/>
+      <path class="e" data-k="sched doc" d="M550 236 C 550 272, 690 270, 690 306"/>
+      <path class="e" data-k="sched stock" d="M550 236 C 550 272, 970 270, 970 306"/>
+      <path class="e" data-k="ticket gpt" d="M130 374 C 130 414, 550 410, 550 448"/>
+      <path class="e" data-k="email gpt" d="M410 374 C 410 414, 550 410, 550 448"/>
+      <path class="e" data-k="doc gpt" d="M690 374 C 690 414, 550 410, 550 448"/>
+      <path class="e" data-k="stock gpt" d="M970 374 C 970 414, 550 410, 550 448"/>
+      <path class="e" data-k="gpt db" d="M550 510 L550 566"/>
+
+      <path class="c" style="animation-delay:0s" d="M550 94 L550 152"/>
+      <path class="c" style="animation-delay:0.25s" d="M550 236 C 550 272, 130 270, 130 306"/>
+      <path class="c" style="animation-delay:0.55s" d="M550 236 C 550 272, 410 270, 410 306"/>
+      <path class="c" style="animation-delay:0.85s" d="M550 236 C 550 272, 690 270, 690 306"/>
+      <path class="c" style="animation-delay:1.15s" d="M550 236 C 550 272, 970 270, 970 306"/>
+      <path class="c" style="animation-delay:1.50s" d="M130 374 C 130 414, 550 410, 550 448"/>
+      <path class="c" style="animation-delay:1.80s" d="M410 374 C 410 414, 550 410, 550 448"/>
+      <path class="c" style="animation-delay:2.10s" d="M690 374 C 690 414, 550 410, 550 448"/>
+      <path class="c" style="animation-delay:2.40s" d="M970 374 C 970 414, 550 410, 550 448"/>
+      <path class="c" style="animation-delay:2.7s" d="M550 510 L550 566"/>
+
+      <polygon class="ar" data-k="main sched" points="545,142 555,142 550,152"/>
+      <polygon class="ar" data-k="sched ticket" points="125,296 135,296 130,306"/>
+      <polygon class="ar" data-k="sched email" points="405,296 415,296 410,306"/>
+      <polygon class="ar" data-k="sched doc" points="685,296 695,296 690,306"/>
+      <polygon class="ar" data-k="sched stock" points="965,296 975,296 970,306"/>
+      <polygon class="ar" data-k="ticket gpt" points="545,438 555,438 550,448"/>
+      <polygon class="ar" data-k="email gpt" points="545,438 555,438 550,448"/>
+      <polygon class="ar" data-k="doc gpt" points="545,438 555,438 550,448"/>
+      <polygon class="ar" data-k="stock gpt" points="545,438 555,438 550,448"/>
+      <polygon class="ar" data-k="gpt db" points="545,556 555,556 550,566"/>
+
+      <g class="nd" data-k="main" tabindex="0" role="button" aria-label="main.py, the cli entrypoint">
+        <rect x="440" y="32" width="220" height="62" rx="8"/>
+        <text class="t" x="550" y="60" text-anchor="middle">main.py</text>
+        <text class="s" x="550" y="80" text-anchor="middle">cli entrypoint</text>
+      </g>
+      <g class="nd" data-k="sched" tabindex="0" role="button" aria-label="APScheduler, reads schedule.yaml">
+        <rect x="440" y="152" width="220" height="84" rx="8"/>
+        <text class="t" x="550" y="180" text-anchor="middle">APScheduler</text>
+        <text class="s" x="550" y="200" text-anchor="middle">reads schedule.yaml</text>
+        <text class="cr" x="550" y="222" text-anchor="middle">0 8 * * 1-5 &middot; 0 18 * * 5</text>
+      </g>
+      <g class="nd" data-k="ticket" tabindex="0" role="button" aria-label="TicketCrew, repo index">
+        <rect x="30" y="306" width="200" height="68" rx="8"/>
+        <text class="t" x="130" y="334" text-anchor="middle">TicketCrew</text>
+        <text class="s" x="130" y="356" text-anchor="middle">repo index</text>
+      </g>
+      <g class="nd" data-k="email" tabindex="0" role="button" aria-label="EmailCrew, gmail smtp">
+        <rect x="310" y="306" width="200" height="68" rx="8"/>
+        <text class="t" x="410" y="334" text-anchor="middle">EmailCrew</text>
+        <text class="s" x="410" y="356" text-anchor="middle">gmail smtp</text>
+      </g>
+      <g class="nd" data-k="doc" tabindex="0" role="button" aria-label="DocSummary, pdf / docx">
+        <rect x="590" y="306" width="200" height="68" rx="8"/>
+        <text class="t" x="690" y="334" text-anchor="middle">DocSummary</text>
+        <text class="s" x="690" y="356" text-anchor="middle">pdf / docx</text>
+      </g>
+      <g class="nd" data-k="stock" tabindex="0" role="button" aria-label="StockCrew, yfinance">
+        <rect x="870" y="306" width="200" height="68" rx="8"/>
+        <text class="t" x="970" y="334" text-anchor="middle">StockCrew</text>
+        <text class="s" x="970" y="356" text-anchor="middle">yfinance</text>
+      </g>
+      <g class="nd" data-k="gpt" tabindex="0" role="button" aria-label="OpenAI GPT-4o, one shared client">
+        <rect x="440" y="448" width="220" height="62" rx="8"/>
+        <text class="t" x="550" y="476" text-anchor="middle">OpenAI GPT-4o</text>
+        <text class="s" x="550" y="496" text-anchor="middle">one client, four crews</text>
+      </g>
+      <g class="nd" data-k="db" tabindex="0" role="button" aria-label="runs.db, the ledger">
+        <rect x="410" y="566" width="280" height="68" rx="8"/>
+        <text class="t" x="550" y="596" text-anchor="middle">runs.db (SQLite)</text>
+        <text class="s" x="550" y="618" text-anchor="middle">tokens &middot; cost &middot; status</text>
+      </g>
+      </svg>
+    </div>
+
+    <div class="ascii-wrap" id="archAscii">
 <pre class="ascii">                      ┌────────────────────┐
                       │      main.py       │
                       │   cli entrypoint   │
@@ -887,6 +1019,11 @@
                     │   runs.db  (SQLite)    │
                     │ tokens · cost · status │
                     └────────────────────────┘</pre>
+    </div>
+
+    <div class="arch-foot">
+      <span class="k" id="archK">agent_auto_system</span>
+      <span class="v" id="archV" aria-live="polite">One entry point, one schedule, four crews that share nothing, and one ledger they all write to. Take a box to read it.</span>
     </div>
   </div>
 </section>
@@ -1739,6 +1876,83 @@
     };
 
     onSeg($('hSeg'), function (b) { harnessMode(parseInt(b.getAttribute('data-h'), 10)); });
+  }
+
+  /* ── 004 · the architecture schematic ──
+     The ASCII drawing is still in the page, one toggle away. Both views
+     ship visible; the script is what hides the one you are not reading. */
+  var ARCH = {
+    main:   ['main.py',
+             'The whole system is one process. It reads the schedule file, starts the crews, and exits non-zero the moment one of them does.'],
+    sched:  ['APScheduler',
+             'Holds the cron table in memory — no broker, no queue, nothing to drain. Editing a line in schedule.yaml is the whole deployment.'],
+    ticket: ['TicketCrew',
+             'Clones and indexes a repo, then writes tickets an engineer can act on: title, description, acceptance criteria, priority.'],
+    email:  ['EmailCrew',
+             'Intent in, sent mail out over gmail smtp. The one crew whose side effect cannot be taken back — so it is the one that carries a key.'],
+    doc:    ['DocSummaryCrew',
+             'pdf and docx in, summary.md on disk. Fridays at six, when nobody is waiting on it.'],
+    stock:  ['StockSummaryCrew',
+             'yfinance ohlcv into a market digest, weekday mornings before the open.'],
+    gpt:    ['OpenAI GPT-4o',
+             'One client, shared by four crews. Swap the model here and not a single crew changes.'],
+    db:     ['runs.db (SQLite)',
+             'run_id, crew, model, tokens in and out, cost, status, duration. Written before anybody reads the output.']
+  };
+
+  var wire = $('archWire'), ascii = $('archAscii');
+  if (wire && ascii) {
+    var nds = wire.querySelectorAll('.nd');
+    var eds = wire.querySelectorAll('.e, .ar');
+    var aK = $('archK'), aV = $('archV');
+    var dK = aK.textContent, dV = aV.textContent;
+    var pinned = null;
+
+    /* an edge lists the two boxes it joins, so lighting a box lights
+       everything that touches it */
+    function paint(k) {
+      for (var i = 0; i < nds.length; i++) {
+        nds[i].setAttribute('class', 'nd' + (k && nds[i].getAttribute('data-k') === k ? ' on' : ''));
+      }
+      for (var e = 0; e < eds.length; e++) {
+        var hot = k && (' ' + eds[e].getAttribute('data-k') + ' ').indexOf(' ' + k + ' ') >= 0;
+        eds[e].setAttribute('class', (eds[e].tagName === 'polygon' ? 'ar' : 'e') + (hot ? ' hot' : ''));
+      }
+    }
+
+    function say(k) {
+      aK.textContent = k ? ARCH[k][0] : dK;
+      aV.textContent = k ? ARCH[k][1] : dV;
+    }
+
+    Array.prototype.forEach.call(nds, function (g) {
+      var k = g.getAttribute('data-k');
+      function preview() { paint(k); say(k); }
+      g.addEventListener('mouseenter', preview);
+      g.addEventListener('focus', preview);
+      g.addEventListener('click', function () {
+        pinned = (pinned === k) ? null : k;
+        paint(pinned || k);
+        say(pinned || k);
+      });
+      g.addEventListener('keydown', function (e) {
+        if (e.key !== 'Enter' && e.key !== ' ' && e.key !== 'Spacebar') return;
+        e.preventDefault();
+        pinned = (pinned === k) ? null : k;
+        paint(pinned || k);
+        say(pinned || k);
+      });
+    });
+
+    wire.addEventListener('mouseleave', function () { paint(pinned); say(pinned); });
+
+    ascii.hidden = true;
+    onSeg($('aSeg'), function (b) {
+      var w = b.getAttribute('data-view') === 'wire';
+      wire.hidden = !w;
+      ascii.hidden = w;
+      $('archTag').textContent = w ? 'schematic' : 'ascii';
+    });
   }
 })();
 </script>

@@ -150,6 +150,17 @@ mono for anything numeric.
   the right order before the script runs and stays right when the row
   height changes at a breakpoint.
 
+The run graph's architecture drawing is the same ASCII art it always
+was, plus a drawn version of it — `.arch`, an SVG of the same five rows
+with traffic on the edges. A box lights everything that touches it
+because each edge names the two boxes it joins (`data-k="sched email"`),
+and the readout under the drawing says what the box is. The `.seg`
+toggle switches the two views; **both ship visible and the script
+hides one**, so no-JS gets the schematic with the ASCII under it rather
+than an empty panel. The SVG keeps a `min-width` inside an
+`overflow-x: auto` wrapper — it scrolls on a phone instead of shrinking
+the type to nothing.
+
 ### Dark
 
 Every page's dark switch resolves to one palette, declared once in
