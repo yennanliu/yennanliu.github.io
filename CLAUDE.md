@@ -124,6 +124,43 @@ Two rules the stack exists to respect, worth keeping if you extend it:
 All of it is additive: the page works with the JS removed, and every
 motion-driven part is skipped under `prefers-reduced-motion`.
 
+### The AI-builder diagrams
+
+`ai_builder.html` carries its own set of explanatory panels below the
+run graph — KV cache, retrieval, the agent loop, harness engineering.
+They share the fan graph's vocabulary and add nothing new to the
+palette: hairlines, the one blue in four flat tints (`--tint` through
+`--tint-4`),
+mono for anything numeric.
+
+- **Every figure on them is a model of a mechanism, not a measurement**,
+  and each panel says so in a `.note` under the chart. Keep that line
+  when you change the numbers. The cache arithmetic is the only part
+  that is real: published input and cache-read rates, ten to one.
+- The three toggles are one control, `.seg`. Adding a fourth panel
+  means reusing it, not inventing another switch.
+- Figures animate through `tween()`, which reads the current value off
+  the node's `data-v` — so repeated switches interpolate instead of
+  jumping, and `prefers-reduced-motion` snaps straight to the value.
+- A `.note` is a `<div>`, never a `<p>`: `finlab-theme.css` forces body
+  face and base size onto `p` with `!important`, which would undo the
+  small mono caption.
+- Rows that reorder (`.rank-i`) are positioned by a `--p` index against
+  a `--rh` row height, both declared in the markup, so the list is in
+  the right order before the script runs and stays right when the row
+  height changes at a breakpoint.
+
+The run graph's architecture drawing is the same ASCII art it always
+was, plus a drawn version of it — `.arch`, an SVG of the same five rows
+with traffic on the edges. A box lights everything that touches it
+because each edge names the two boxes it joins (`data-k="sched email"`),
+and the readout under the drawing says what the box is. The `.seg`
+toggle switches the two views; **both ship visible and the script
+hides one**, so no-JS gets the schematic with the ASCII under it rather
+than an empty panel. The SVG keeps a `min-width` inside an
+`overflow-x: auto` wrapper — it scrolls on a phone instead of shrinking
+the type to nothing.
+
 ### Dark
 
 Every page's dark switch resolves to one palette, declared once in
