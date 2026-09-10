@@ -405,18 +405,6 @@
     }
     .peek figcaption em { font-style: normal; color: var(--accent); }
 
-    /* ── COLOPHON ───────────────────────────────────────── */
-    .colophon-in { display: grid; grid-template-columns: 88px minmax(0, 1fr) 300px 240px; gap: 48px; padding: 52px 0 48px; }
-    .colophon-mark { font-family: var(--fl-display); font-style: italic; font-size: 34px; line-height: 1.1; }
-    .colophon-note { font-family: var(--fl-mono); font-size: 12px; letter-spacing: .18em; text-transform: uppercase; color: var(--ink-3); margin-top: 10px; }
-    .colophon-nav { display: flex; flex-direction: column; gap: 0; font-family: var(--fl-mono); font-size: 12px; letter-spacing: .14em; text-transform: uppercase; }
-    .colophon-nav a { display: flex; align-items: center; min-height: 44px; color: var(--ink-2); transition: color .18s ease; }
-    .colophon-nav a:hover { color: var(--accent); }
-    .colophon-set { display: flex; flex-direction: column; justify-content: space-between; gap: 20px;
-      font-family: var(--fl-mono); font-size: 12px; letter-spacing: .12em; line-height: 1.9; text-transform: uppercase; color: var(--ink-3); }
-    .to-top { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; color: var(--ink); }
-    .to-top:hover { color: var(--accent); }
-
     @keyframes rise   { from { transform: translateY(108%); } to { transform: translateY(0); } }
     @keyframes fadeUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
     @keyframes drift  { 0%, 100% { transform: rotate(var(--r)) translateY(0); } 50% { transform: rotate(var(--r)) translateY(-9px); } }
@@ -431,7 +419,6 @@
       .masthead-in { grid-template-columns: 64px minmax(0, 1fr) 320px; gap: 32px; }
       .rec-head { grid-template-columns: 40px 108px minmax(0, 1fr) 200px 104px 18px; gap: 16px; }
       .panel-grid { grid-template-columns: 40px 330px minmax(0, 1fr) 210px; gap: 16px; padding-left: 36px; padding-right: 36px; }
-      .colophon-in { grid-template-columns: 64px minmax(0, 1fr) 220px 200px; gap: 32px; }
     }
 
     @media (max-width: 1000px) {
@@ -453,9 +440,6 @@
       .panel-grid { grid-template-columns: minmax(0, 1fr); gap: 22px; padding: 0 36px 32px; }
       .plate img { height: 220px; }
       .panel-meta { max-width: 420px; }
-      .colophon-in { grid-template-columns: minmax(0, 1fr) 200px; gap: 32px; }
-      .colophon-in .margin-col { display: none; }
-      .colophon-set { grid-column: 1 / -1; flex-direction: row; align-items: center; justify-content: space-between; }
       .peek { display: none; }
     }
 
@@ -470,8 +454,6 @@
       .count { display: none; }
       .actions { flex-direction: column; align-items: stretch; }
       .btn { justify-content: space-between; }
-      .colophon-in { grid-template-columns: minmax(0, 1fr); gap: 24px; padding: 36px 0 40px; }
-      .colophon-set { flex-direction: column; align-items: flex-start; gap: 16px; }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -485,7 +467,7 @@
     /* ── FinLab: paper is the ground, rules are hairlines ───────────── */
     body { font-family: var(--fl-body); line-height: 1.7; }
     .mono { letter-spacing: .08em; }
-    .serif, .p-lede, .colophon-mark { font-family: var(--fl-display); font-style: normal; }
+    .serif, .p-lede { font-family: var(--fl-display); font-style: normal; }
     .eyebrow { letter-spacing: .08em; color: var(--fl-faint); }
     h1.title, .rec-t { letter-spacing: -.02em; }
     .fan-i, .rec, .panel, .card, .tile {
@@ -501,6 +483,7 @@
   </style>
   <link rel="stylesheet" href="css/finlab-theme.css">
   <link rel="stylesheet" href="css/site-nav.css">
+  <link rel="stylesheet" href="css/site-footer.css">
 </head>
 
 <body>
@@ -919,30 +902,38 @@
   </figure>
 
   <!-- ══ COLOPHON ══ -->
-  <footer>
-    <div class="wrap colophon-in">
-      <div class="margin-col"></div>
-      <div>
-        <p class="colophon-mark">Index of works</p>
-        <p class="colophon-note">&copy; 2026 yen.dev &mdash; all rights reserved</p>
-      </div>
-      <nav class="colophon-nav" aria-label="Footer">
-        <a href="https://yennanliu.github.io/">Home</a>
-        <a href="https://yennanliu.github.io/about_me.html">About me</a>
-        <a href="https://yennanliu.github.io/aws_architecture.html">AWS architecture</a>
-        <a href="https://yennanliu.github.io/contact.html">Contact</a>
-        <a href="https://yennj12.js.org/yennj12_blog_V4/">Blog</a>
-        <a href="https://yennj12.js.org/index.html.backup.html">Old site</a>
-      </nav>
-      <div class="colophon-set">
-        <span>Set in Space Grotesk,<br>DM Sans &amp; system mono</span>
-        <a class="to-top" href="#top" id="toTop">
-          <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8 12.5v-9"/><path d="M4 7.5 8 3.5l4 4"/></svg>
-          Top of index
-        </a>
-      </div>
+<!-- ══ FOOTER — shared; see css/site-footer.css ══ -->
+<footer class="site-footer" id="site-footer">
+  <div class="ft-grid ft-wrap">
+    <div>
+      <div class="ft-mark">YEN<em>.DEV</em></div>
+      <p class="ft-tagline">Physics first, full stack after. AI products built end to end — from 31 of 195 countries.</p>
     </div>
-  </footer>
+    <div class="ft-col">
+      <span class="ft-col-hd">Work</span>
+      <a href="portfolios.html">Portfolios</a>
+      <a href="ai_builder.html">AI Builder</a>
+      <a href="aws_architecture.html">AWS Architecture</a>
+    </div>
+    <div class="ft-col">
+      <span class="ft-col-hd">Navigate</span>
+      <a href="about_me.html">About Me</a>
+      <a href="contact.html">Contact</a>
+      <a href="https://yennj12.js.org/yennj12_blog_V4/" target="_blank" rel="noreferrer">Blog ↗</a>
+    </div>
+    <div class="ft-col">
+      <span class="ft-col-hd">Connect</span>
+      <a href="https://github.com/yennanliu"      target="_blank" rel="noreferrer">GitHub</a>
+      <a href="https://linkedin.com/in/yennanliu" target="_blank" rel="noreferrer">LinkedIn</a>
+      <a href="https://huggingface.co/yennj12"    target="_blank" rel="noreferrer">HuggingFace</a>
+      <a href="https://gitlab.com/yennanliu"      target="_blank" rel="noreferrer">GitLab</a>
+    </div>
+  </div>
+  <div class="ft-lower ft-wrap">
+    <span class="ft-copy">© 2026 Yen · All rights reserved.</span>
+    <span class="ft-sig">yennj12.js.org</span>
+  </div>
+</footer>
 
   <script>
   (function () {

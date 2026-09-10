@@ -543,35 +543,6 @@
     }
     .social-btn:hover { border-color:var(--blue); color:var(--blue); background:var(--surface-raised); transform:translateY(-2px); }
 
-    /* ── FOOTER ── */
-    footer { background:var(--bg); border-top:1px solid var(--rule); }
-    .ft-grid {
-      display:grid; grid-template-columns:1.4fr repeat(3,1fr); gap:52px;
-      padding-top:60px; padding-bottom:56px;
-    }
-    .ft-mark {
-      font-family:var(--mono); font-size:.95rem; font-weight:400;
-      letter-spacing:.1em; text-transform:uppercase; color:var(--ink); margin-bottom:12px;
-    }
-    .ft-mark em { color:var(--blue); font-style:normal; }
-    .ft-tagline { font-size:.875rem; line-height:1.7; color:var(--ink-dim); max-width:220px; }
-    .ft-col-hd {
-      font-family:var(--mono); font-size:.6rem; letter-spacing:.18em;
-      text-transform:uppercase; color:var(--ink-dim); margin-bottom:14px; display:block;
-    }
-    .ft-col a {
-      display:block; font-size:.85rem; color:var(--ink-3);
-      text-decoration:none; margin-bottom:9px; transition:color .2s;
-      font-family:var(--mono);
-    }
-    .ft-col a:hover { color:var(--blue); }
-    .ft-lower {
-      display:flex; justify-content:space-between; align-items:center;
-      padding:20px 0; border-top:1px solid var(--rule);
-    }
-    .ft-copy { font-family:var(--mono); font-size:.63rem; letter-spacing:.06em; color:var(--ink-dim); }
-    .ft-sig  { font-family:var(--mono); font-size:.63rem; color:var(--ink-dim); }
-
     /* ── KEYFRAMES ── */
     @keyframes riseIn { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:none} }
 
@@ -587,7 +558,6 @@
       .stats-row { grid-template-columns:repeat(2,1fr); }
       .stat-cell:nth-child(2) { border-right:none; }
       .stat-cell:nth-child(3) { border-right:1px solid var(--rule); }
-      .ft-grid { grid-template-columns:1fr 1fr; gap:40px; }
     }
     @media(max-width:768px){
       .wrap { padding:0 20px; }
@@ -599,8 +569,6 @@
       .p-name { padding-bottom:4px; }
       .p-lang { padding-top:0; padding-bottom:12px; grid-column:1 / 2; }
       .p-go { grid-row:1 / 3; grid-column:2 / 3; align-items:center; }
-      .ft-grid { grid-template-columns:1fr; gap:28px; padding-top:48px; padding-bottom:48px; }
-      .ft-lower { flex-direction:column; gap:8px; text-align:center; }
       .exp-mcard { width:290px; }
       .era-place { margin-left:0; }
     }
@@ -609,11 +577,6 @@
       .stat-cell { padding:36px 16px; border-right:none; }
       .stat-cell:nth-child(odd) { border-right:1px solid var(--rule); }
       .stat-cell:nth-child(3) { border-right:none; }
-    }
-    @supports (padding:env(safe-area-inset-top)){
-      @media(max-width:768px){
-        footer { padding-bottom:env(safe-area-inset-bottom); }
-      }
     }
     @media(prefers-reduced-motion:reduce){
       *, *::before, *::after { animation:none !important; transition:none !important; }
@@ -628,6 +591,7 @@
   <link rel="stylesheet" href="css/finlab-theme.css">
   <link rel="stylesheet" href="css/index-signature.css">
   <link rel="stylesheet" href="css/site-nav.css">
+  <link rel="stylesheet" href="css/site-footer.css">
 </head>
 <body>
 
@@ -1102,8 +1066,9 @@
 </section>
 
 <!-- FOOTER -->
-<footer>
-  <div class="ft-grid wrap">
+<!-- ══ FOOTER — shared; see css/site-footer.css ══ -->
+<footer class="site-footer" id="site-footer">
+  <div class="ft-grid ft-wrap">
     <div>
       <div class="ft-mark">YEN<em>.DEV</em></div>
       <p class="ft-tagline">Physics first, full stack after. AI products built end to end — from 31 of 195 countries.</p>
@@ -1118,17 +1083,17 @@
       <span class="ft-col-hd">Navigate</span>
       <a href="about_me.html">About Me</a>
       <a href="contact.html">Contact</a>
-      <a href="https://yennj12.js.org/yennj12_blog_V4/" target="_blank">Blog ↗</a>
+      <a href="https://yennj12.js.org/yennj12_blog_V4/" target="_blank" rel="noreferrer">Blog ↗</a>
     </div>
     <div class="ft-col">
       <span class="ft-col-hd">Connect</span>
-      <a href="https://github.com/yennanliu"      target="_blank">GitHub</a>
-      <a href="https://linkedin.com/in/yennanliu" target="_blank">LinkedIn</a>
-      <a href="https://huggingface.co/yennj12"    target="_blank">HuggingFace</a>
-      <a href="https://gitlab.com/yennanliu"      target="_blank">GitLab</a>
+      <a href="https://github.com/yennanliu"      target="_blank" rel="noreferrer">GitHub</a>
+      <a href="https://linkedin.com/in/yennanliu" target="_blank" rel="noreferrer">LinkedIn</a>
+      <a href="https://huggingface.co/yennj12"    target="_blank" rel="noreferrer">HuggingFace</a>
+      <a href="https://gitlab.com/yennanliu"      target="_blank" rel="noreferrer">GitLab</a>
     </div>
   </div>
-  <div class="ft-lower wrap">
+  <div class="ft-lower ft-wrap">
     <span class="ft-copy">© 2026 Yen · All rights reserved.</span>
     <span class="ft-sig">yennj12.js.org</span>
   </div>

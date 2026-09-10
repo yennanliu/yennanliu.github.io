@@ -183,10 +183,6 @@
     .cta .btn { border-color:var(--ink); color:var(--ink); }
     .cta .btn:hover { background:var(--ink); color:var(--acid); border-color:var(--ink); }
     .cta-h { font-size:clamp( 28.8px,5.2vw, 40px); line-height:.94; letter-spacing:-.045em; margin-top:18px; max-width:1000px; }
-    .foot { display:flex; justify-content:space-between; align-items:center; gap:24px; flex-wrap:wrap;
-      padding:26px 48px; font-size:12px; letter-spacing:.06em; color:var(--dim); }
-    .foot a { color:var(--dim); }
-    .foot a:hover { color:var(--acid); }
 
     .h2 { font-size:clamp( 28.8px,4vw, 40px); line-height:1; letter-spacing:-.04em; margin-top:16px;
       font-family:var(--fl-mono); font-weight:400; text-transform:uppercase; }
@@ -299,7 +295,6 @@
       .btn-row { flex-direction:column; align-items:stretch; }
       .btn-row .btn + .btn { margin-left:0; margin-top:-2px; }
       .btn { justify-content:center; }
-      .foot { padding:24px 26px 34px; flex-direction:column; align-items:flex-start; }
       .ascii { font-size:12px; }
       .ascii-wrap { padding:20px 16px; }
       .blk-body { font-size:12px; }
@@ -325,6 +320,7 @@
   </style>
   <link rel="stylesheet" href="css/finlab-theme.css">
   <link rel="stylesheet" href="css/site-nav.css">
+  <link rel="stylesheet" href="css/site-footer.css">
 </head>
 <body>
 
@@ -693,13 +689,37 @@
   </div>
 </section>
 
-<footer class="foot">
-  <span>&copy; 2026 yen &nbsp;//&nbsp; BUILT WITH CURIOSITY &amp; CAFFEINE</span>
-  <span style="display:flex; gap:22px; flex-wrap:wrap;">
-    <a href="https://github.com/yennanliu" target="_blank" rel="noopener">GITHUB</a>
-    <a href="https://yennj12.js.org/yennj12_blog_V4/">BLOG</a>
-    <a href="https://yennanliu.github.io/contact.html">CONTACT</a>
-  </span>
+<!-- ══ FOOTER — shared; see css/site-footer.css ══ -->
+<footer class="site-footer" id="site-footer">
+  <div class="ft-grid ft-wrap">
+    <div>
+      <div class="ft-mark">YEN<em>.DEV</em></div>
+      <p class="ft-tagline">Physics first, full stack after. AI products built end to end — from 31 of 195 countries.</p>
+    </div>
+    <div class="ft-col">
+      <span class="ft-col-hd">Work</span>
+      <a href="portfolios.html">Portfolios</a>
+      <a href="ai_builder.html">AI Builder</a>
+      <a href="aws_architecture.html">AWS Architecture</a>
+    </div>
+    <div class="ft-col">
+      <span class="ft-col-hd">Navigate</span>
+      <a href="about_me.html">About Me</a>
+      <a href="contact.html">Contact</a>
+      <a href="https://yennj12.js.org/yennj12_blog_V4/" target="_blank" rel="noreferrer">Blog ↗</a>
+    </div>
+    <div class="ft-col">
+      <span class="ft-col-hd">Connect</span>
+      <a href="https://github.com/yennanliu"      target="_blank" rel="noreferrer">GitHub</a>
+      <a href="https://linkedin.com/in/yennanliu" target="_blank" rel="noreferrer">LinkedIn</a>
+      <a href="https://huggingface.co/yennj12"    target="_blank" rel="noreferrer">HuggingFace</a>
+      <a href="https://gitlab.com/yennanliu"      target="_blank" rel="noreferrer">GitLab</a>
+    </div>
+  </div>
+  <div class="ft-lower ft-wrap">
+    <span class="ft-copy">© 2026 Yen · All rights reserved.</span>
+    <span class="ft-sig">yennj12.js.org</span>
+  </div>
 </footer>
 
 <script>

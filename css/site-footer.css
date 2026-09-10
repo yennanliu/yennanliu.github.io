@@ -1,0 +1,140 @@
+/* ==========================================================================
+   SITE FOOTER
+   One footer for every page — the landing page's, made portable.
+
+   Before this the site had seven: a Bootstrap list-inline strip on five
+   pages, a Bootstrap 3 dot-separated menu on the oldest, a colophon on
+   the archive, a two-span rule on the terminal page, and the four-column
+   grid on the landing page. They carried different link sets, different
+   labels for the same destination, and three different copyright lines.
+
+   This is the landing page's footer lifted out verbatim — same grid,
+   same mono column heads, same hairline lower bar — rewritten against
+   the --fl-* tokens so it needs nothing from the page it lands on. It
+   brings its own container (.ft-wrap), so a page's .wrap/.container is
+   irrelevant, and it is scoped to .site-footer so it does not collide
+   with whatever `footer { }` rules a page still has.
+
+   Load it after finlab.css (it uses the tokens) and after the page's own
+   <style> block (it must win over the footer rules it replaces).
+   ========================================================================== */
+
+.site-footer {
+  background: var(--fl-surface);
+  border-top: 1px solid var(--fl-hair);
+  margin-top: 0;
+  padding: 0;
+  color: var(--fl-text);
+  font-family: var(--fl-body);
+  text-align: left;
+
+  /* Anchors its own em ladder rather than inheriting the root size:
+     css/bootstrap.css sets html { font-size: 10px }, so a rem here
+     would mean two different things on two pages. */
+  font-size: 16px;
+}
+
+.site-footer .ft-wrap {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 48px;
+}
+
+/* ── the four columns ── */
+
+.site-footer .ft-grid {
+  display: grid;
+  grid-template-columns: 1.4fr repeat(3, 1fr);
+  gap: 52px;
+  padding-top: 60px;
+  padding-bottom: 56px;
+}
+
+.site-footer .ft-mark {
+  font-family: var(--fl-mono);
+  font-size: .95em;
+  font-weight: var(--fl-fw-normal);
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--fl-ink);
+  margin-bottom: 12px;
+}
+.site-footer .ft-mark em { color: var(--fl-link); font-style: normal; }
+
+.site-footer .ft-tagline {
+  font-size: .875em;
+  line-height: var(--fl-lh-body);
+  color: var(--fl-ghost);
+  max-width: 220px;
+  margin: 0;
+}
+
+.site-footer .ft-col-hd {
+  display: block;
+  font-family: var(--fl-mono);
+  font-size: .6em;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--fl-ghost);
+  margin-bottom: 14px;
+}
+
+.site-footer .ft-col a {
+  display: block;
+  font-family: var(--fl-mono);
+  font-size: .85em;
+  font-weight: var(--fl-fw-normal);
+  color: var(--fl-muted);
+  text-decoration: none;
+  margin-bottom: 9px;
+  transition: color var(--fl-t);
+}
+.site-footer .ft-col a:hover,
+.site-footer .ft-col a:focus-visible { color: var(--fl-link); }
+
+/* ── the lower bar ── */
+
+.site-footer .ft-lower {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 0;
+  border-top: 1px solid var(--fl-hair);
+}
+
+.site-footer .ft-copy,
+.site-footer .ft-sig {
+  font-family: var(--fl-mono);
+  font-size: .63em;
+  color: var(--fl-ghost);
+  margin: 0;
+}
+.site-footer .ft-copy { letter-spacing: .06em; }
+
+/* ── narrow ── */
+
+@media (max-width: 960px) {
+  .site-footer .ft-wrap { padding: 0 32px; }
+  .site-footer .ft-grid { grid-template-columns: 1fr 1fr; gap: 40px; }
+}
+
+@media (max-width: 768px) {
+  .site-footer .ft-wrap { padding: 0 20px; }
+  .site-footer .ft-grid {
+    grid-template-columns: 1fr;
+    gap: 28px;
+    padding-top: 48px;
+    padding-bottom: 48px;
+  }
+  .site-footer .ft-lower { flex-direction: column; gap: 8px; text-align: center; }
+}
+
+@supports (padding: env(safe-area-inset-bottom)) {
+  @media (max-width: 768px) {
+    .site-footer { padding-bottom: env(safe-area-inset-bottom); }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .site-footer .ft-col a { transition: none; }
+}
