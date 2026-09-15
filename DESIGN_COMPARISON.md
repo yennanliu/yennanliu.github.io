@@ -1,5 +1,8 @@
 # Website Design Variations - Comparison Guide
 
+
+
+
 I've created 3 distinct design variations for your portfolio website. Each follows web design best practices but targets different aesthetics and audiences.
 
 ## 📁 Files Created
