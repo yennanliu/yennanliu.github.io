@@ -219,33 +219,35 @@ section[data-sig] > * { position: relative; z-index: 1; }
 }
 
 /* ── 5. THE TOPOLOGY, MADE INTERROGABLE ────────────────────────────────
-   The diagram was decorative. Now each node is a control: take one and
-   the matching confidence bar below lights up, and the rest recede. No
-   new labels — it just wires two things the card already showed.        */
+   Each node is a control. Take one and three things answer at once: the
+   box fills, the pipes that feed it carry traffic, and the legend below
+   swaps to that stage. It is a real tablist — arrow keys, Home/End, one
+   tab stop — the same contract the six-layer stack keeps.
+
+   It replaced a set of self-rated percentage bars. A number nobody can
+   check is not evidence, and 95 / 92 / 90 / 88 / 85 is a tell of its own;
+   what the stage actually runs on says more and can be argued with.     */
 
 .topo .node { cursor: pointer; }
 .topo .node .node-box,
-.topo .node .node-txt { transition: fill .2s ease, stroke .2s ease, opacity .2s ease; }
+.topo .node .node-txt,
+.topo .node .node-ix { transition: fill .2s ease, stroke .2s ease, opacity .2s ease; }
 
 .topo .node .hitpad { fill: transparent; }
 
-.sys-card.probing .topo .node { opacity: .38; }
+/* the taken stage holds; the others step back but stay legible */
+.sys-card.probing .topo .node { opacity: .45; }
 .sys-card.probing .topo .node.sel { opacity: 1; }
 .sys-card.probing .topo .node.sel .node-box { fill: var(--blue-pale); stroke: var(--blue); }
 .sys-card.probing .topo .node.sel .node-txt { fill: var(--ink); }
+.sys-card.probing .topo .node.sel .node-ix  { fill: var(--blue); }
 
 .topo .node:hover .node-box  { stroke: var(--blue); }
 .topo .node:focus-visible    { outline: none; }
 .topo .node:focus-visible .node-box { stroke: var(--blue); stroke-width: 2; }
 
-.tc-skill { transition: opacity .2s ease; }
-.sys-card.probing .tc-skill { opacity: .32; }
-.sys-card.probing .tc-skill.lit { opacity: 1; }
-.tc-skill.lit .tc-skill-head span:first-child { color: var(--ink); }
-.tc-skill.lit .tc-skill-track { box-shadow: 0 0 0 1px var(--blue-border); }
-
-/* the card stops bobbing while it is being read */
-.sys-card:hover, .sys-card.probing { animation-play-state: paused; }
+/* the legend panel for whichever stage is taken */
+.tc-rd[hidden] { display: none; }
 
 /* ── 7. FIGURES ────────────────────────────────────────────────────────
    The stats band is the page's only pure-number moment, so let it be

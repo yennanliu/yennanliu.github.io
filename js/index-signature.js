@@ -6,8 +6,8 @@
  *   1. a read-progress hairline across the top
  *   2. a pipeline rail down the left edge that tracks which section you
  *      are in, and jumps you to one when clicked
- *   3. the hero topology wired to the confidence bars underneath it, so
- *      taking a node tells you which layer it belongs to
+ *   3. the hero topology wired to the legend underneath it, so taking a
+ *      stage lights the pipes feeding it and says what runs there
  *   4. the layer stack: six plates you can take apart, as a tablist
  *   5. the trajectory chart: a scrubbable curve with a live packet
  *   6. a pointer spotlight on the hero grid
@@ -101,45 +101,78 @@
   window.addEventListener('resize', onScroll, { passive: true });
   onScroll();
 
-  /* ── 3. the topology, wired to the confidence bars ────────────────── */
-  /* Each node already corresponds to a layer the card lists underneath;
-     this only makes that correspondence visible. No new labels. */
+  /* ── 3. the topology, wired to the legend ─────────────────────────── */
+  /* Take a stage and the card answers three ways: the box fills, the pipes
+     feeding it carry traffic, and the legend swaps to that stage. Every
+     panel ships rendered; this hides the four it is not showing, so the
+     markup still reads in order with the script gone. */
 
   (function wireTopology() {
     var card = document.querySelector('.sys-card');
     if (!card) return;
 
-    var nodes = card.querySelectorAll('.topo .node[data-skill]');
-    var skills = card.querySelectorAll('.tc-skill');
-    if (!nodes.length || !skills.length) return;
+    var nodes = [].slice.call(card.querySelectorAll('.topo .node[data-rd]'));
+    var reads = [].slice.call(card.querySelectorAll('.tc-read .tc-rd'));
+    var edges = [].slice.call(card.querySelectorAll('.topo .edge-flow[data-e]'));
+    if (!nodes.length || !reads.length) return;
 
-    function clear() {
-      card.classList.remove('probing');
-      nodes.forEach(function (n) { n.classList.remove('sel'); });
-      skills.forEach(function (s) { s.classList.remove('lit'); });
-    }
+    // Start from whichever stage the markup marked selected.
+    var current = nodes.filter(function (n) {
+      return n.getAttribute('aria-selected') === 'true';
+    })[0] || nodes[0];
 
-    function probe(node) {
-      var i = parseInt(node.getAttribute('data-skill'), 10);
-      if (isNaN(i) || !skills[i]) return;
-      card.classList.add('probing');
-      nodes.forEach(function (n) { n.classList.toggle('sel', n === node); });
-      skills.forEach(function (s, k) { s.classList.toggle('lit', k === i); });
+    // `engage` marks a choice the reader actually made. Until one happens
+    // the diagram reads at full strength; only then do the stages not
+    // taken step back. Setting up must not look like being used.
+    function take(node, moveFocus, engage) {
+      var i = parseInt(node.getAttribute('data-rd'), 10);
+      if (isNaN(i) || !reads[i]) return;
+      current = node;
+      if (engage) card.classList.add('probing');
+
+      var lit = (node.getAttribute('data-path') || '').split(/\s+/).filter(Boolean);
+      edges.forEach(function (e) {
+        e.classList.toggle('lit', lit.indexOf(e.getAttribute('data-e')) !== -1);
+      });
+
+      nodes.forEach(function (n) {
+        var on = n === node;
+        n.classList.toggle('sel', on);
+        n.setAttribute('aria-selected', on ? 'true' : 'false');
+        n.setAttribute('tabindex', on ? '0' : '-1');
+        n.querySelectorAll('.node-box, .node-txt').forEach(function (el) {
+          el.classList.toggle('on', on);
+        });
+      });
+
+      reads.forEach(function (r, k) {
+        if (k === i) { r.removeAttribute('hidden'); }
+        else { r.setAttribute('hidden', ''); }
+      });
+
+      if (moveFocus) node.focus();
     }
 
     nodes.forEach(function (node) {
-      node.addEventListener('mouseenter', function () { probe(node); });
-      node.addEventListener('focus', function () { probe(node); });
-      node.addEventListener('click', function () { probe(node); });
+      node.addEventListener('mouseenter', function () { take(node, false, true); });
+      node.addEventListener('click', function () { take(node, false, true); });
+      node.addEventListener('focus', function () { take(node, false, true); });
       node.addEventListener('keydown', function (e) {
-        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); probe(node); }
+        var i = nodes.indexOf(node), to = null;
+        if (e.key === 'ArrowRight' || e.key === 'ArrowDown') to = nodes[(i + 1) % nodes.length];
+        else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') to = nodes[(i - 1 + nodes.length) % nodes.length];
+        else if (e.key === 'Home') to = nodes[0];
+        else if (e.key === 'End') to = nodes[nodes.length - 1];
+        else if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); take(node, false, true); return; }
+        if (to) { e.preventDefault(); take(to, true, true); }
       });
     });
 
-    card.addEventListener('mouseleave', clear);
-    card.addEventListener('focusout', function (e) {
-      if (!card.contains(e.relatedTarget)) clear();
-    });
+    // The pointer leaving does not undo a choice — it returns to the one
+    // the reader last took, which is the stage the markup opened on.
+    card.addEventListener('mouseleave', function () { take(current, false, false); });
+
+    take(current, false, false);
   })();
 
 

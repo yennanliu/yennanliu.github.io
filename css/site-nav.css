@@ -139,6 +139,21 @@ body { padding-top: 0 !important; }
 }
 .sn-cta:hover { background: var(--fl-ink-soft); color: var(--fl-on-ink); }
 
+/* ── the bar defends its own colours ──
+   contact.html and about_me.html each carry a blanket
+   `body.dark-mode a { color: … }`. That is (0,1,2) — more specific than
+   both `.sn-cta` (0,1,0) and `.sn-links a` (0,1,1), so it wins whatever
+   the load order. It painted link-blue onto the ink-filled button
+   (light-on-light: the --fl-on-ink trap) and turned every nav link blue
+   on those two pages only. Re-stated here at (0,2,n) so the bar looks the
+   same everywhere, including on any page that adopts it later. */
+.site-nav .sn-cta,
+.site-nav .sn-cta:hover { color: var(--fl-on-ink); }
+
+.site-nav .sn-links a { color: var(--fl-muted); }
+.site-nav .sn-links a:hover,
+.site-nav .sn-links a[aria-current="page"] { color: var(--fl-ink); }
+
 /* ── the theme switch ──
    The pill-and-glyphs pair the Bootstrap pages already used, made the
    one control on every page.                                          */
