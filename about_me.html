@@ -1037,7 +1037,15 @@
          /* the RGB-split heading effect belongs to a louder site */
          .contact-glitch-text::before,
          .contact-glitch-text::after { display: none; }
-  </style>
+  
+         /* aos.css ships [data-aos] at opacity 0, so anything that stops
+            aos.js loading hides the content for good. Until the script has
+            confirmed it is live, the markup shows. */
+         html:not(.aos-live) [data-aos] {
+            opacity: 1 !important;
+            transform: none !important;
+         }
+</style>
       <link rel="stylesheet" href="css/finlab-theme.css">
       <!-- Font Awesome -->
       <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet">
@@ -1262,12 +1270,18 @@
       <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
       <!-- Custom JavaScript -->
       <script>
-         // Initialize AOS animation
-         AOS.init({
-             duration: 800,
-             easing: 'ease-in-out',
-             once: true
-         });
+         // Initialize AOS animation.
+         // Guarded: aos.js comes from a CDN, and an unguarded AOS.init() throws
+         // a ReferenceError when that request fails, taking the whole rest of
+         // this script with it. The class is what un-hides [data-aos] content.
+         if (window.AOS) {
+            document.documentElement.classList.add('aos-live');
+            AOS.init({
+                duration: 800,
+                easing: 'ease-in-out',
+                once: true
+            });
+         }
          
          // Scroll to top button functionality
          const scrollTopBtn = document.querySelector('.scroll-top');

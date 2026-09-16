@@ -2288,7 +2288,15 @@
           border: 1px solid var(--fl-hair);
           color: var(--fl-muted);
        }
-  </style>
+  
+         /* aos.css ships [data-aos] at opacity 0, so anything that stops
+            aos.js loading hides the content for good. Until the script has
+            confirmed it is live, the markup shows. */
+         html:not(.aos-live) [data-aos] {
+            opacity: 1 !important;
+            transform: none !important;
+         }
+</style>
       <link rel="stylesheet" href="css/finlab-theme.css">
      <link rel="stylesheet" href="css/site-nav.css">
      <link rel="stylesheet" href="css/site-footer.css">
@@ -2568,7 +2576,7 @@
       </div>
 
       <!-- AWS Expertise — Redesigned Dark Section -->
-      <section class="aws-mastery-section">
+      <section class="aws-mastery-section" id="aws-mastery">
          <div class="aws-bg-grid"></div>
 
          <div class="container aws-mastery-inner">
@@ -2703,7 +2711,7 @@
       </section>
 
       <!-- AI Infrastructure — Redesigned Dark Grid -->
-      <section class="ai-infra-section ai-infra-redesigned apple-section">
+      <section class="ai-infra-section ai-infra-redesigned apple-section" id="ai-infra">
          <div class="container position-relative" style="z-index:2">
             <div class="text-center" data-aos="fade-up">
                <div class="ai-infra-eyebrow-tag">LLM INFRASTRUCTURE</div>
@@ -2810,7 +2818,7 @@
             </div>
 
             <div class="ai-infra-cta text-center" data-aos="fade-up" data-aos-delay="350">
-               <p class="ai-infra-cta-text" style="color:rgba(255, 255, 255, 0.42)">Ready to build the next generation of AI systems?</p>
+               <p class="ai-infra-cta-text" style="color:#9aa5b5">Got something that needs to survive real traffic?</p>
                <a href="https://yennanliu.github.io/contact.html" class="ai-infra-cta-button">
                   <span>Let's Build Together</span>
                   <svg viewBox="0 0 24 24" class="cta-arrow">
@@ -2866,12 +2874,18 @@
       <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
       
       <script>
-         // Initialize AOS animation
-         AOS.init({
-             duration: 800,
-             easing: 'ease-in-out',
-             once: true
-         });
+         // Initialize AOS animation.
+         // Guarded: aos.js comes from a CDN, and an unguarded AOS.init() throws
+         // a ReferenceError when that request fails, taking the whole rest of
+         // this script with it. The class is what un-hides [data-aos] content.
+         if (window.AOS) {
+            document.documentElement.classList.add('aos-live');
+            AOS.init({
+                duration: 800,
+                easing: 'ease-in-out',
+                once: true
+            });
+         }
          // Scroll to top button functionality
          const scrollTopBtn = document.querySelector('.scroll-top');
          

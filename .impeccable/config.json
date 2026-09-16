@@ -1,7 +1,9 @@
 {
   "detector": {
     "ignoreRules": [],
-    "ignoreFiles": [],
+    "ignoreFiles": [
+      "css/bootstrap*.css"
+    ],
     "ignoreValues": [
       {
         "rule": "overused-font",
