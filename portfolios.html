@@ -62,7 +62,7 @@
       --paper-2:    #f8fafc;
       --ink:        #111827;
       --ink-2:      #4b5565;
-      --ink-3:      #98a2b3;
+      --ink-3:      #647084;
       --rule:       #e5e7eb;
       --tag-border: #e5e7eb;
       --accent:     #2563eb;
@@ -79,7 +79,7 @@
       --paper-2:    #0f0f11;
       --ink:        #f5f7fa;
       --ink-2:      #9aa5b5;
-      --ink-3:      #5b6675;
+      --ink-3:      #7d8899;
       --rule:       #1f1f24;
       --tag-border: #1f1f24;
       --accent:     #7aa8ff;
@@ -274,10 +274,12 @@
     .rec.pop { animation: fadeUp .45s var(--pd, 0ms) both; }
     .rec.is-hidden { display: none; }
     .rec::before {
-      content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 0;
-      background: var(--accent); transition: width .18s ease; z-index: 2;
+      content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 2px;
+      background: var(--accent); z-index: 2;
+      transform: scaleX(0); transform-origin: left center;
+      transition: transform .18s ease;
     }
-    .rec:hover::before, .rec.open::before { width: 3px; }
+    .rec:hover::before, .rec.open::before { transform: scaleX(1); }
 
     .rec-head {
       display: grid; grid-template-columns: 44px 128px minmax(0, 1fr) 260px 116px 20px;
@@ -376,13 +378,17 @@
       padding: 9px 0; border: 0; background: none; cursor: pointer;
     }
     .spine .tick[hidden] { display: none; }
-    .spine i { display: block; width: 12px; height: 1px; background: var(--ink-3); transition: width .3s ease, background .3s ease; }
+    .spine i {
+      display: block; width: 24px; height: 1px; background: var(--ink-3);
+      transform: scaleX(.5); transform-origin: left center;
+      transition: transform .3s ease, background .3s ease;
+    }
     .spine em {
       font-family: var(--fl-mono); font-style: normal;
       font-size: 12px; letter-spacing: .1em; color: var(--ink-3);
       opacity: 0; transition: opacity .3s ease, color .3s ease;
     }
-    .spine .tick:hover i, .spine .tick.on i { width: 24px; background: var(--accent); }
+    .spine .tick:hover i, .spine .tick.on i { transform: scaleX(1); background: var(--accent); }
     .spine .tick:hover em, .spine .tick.on em { opacity: 1; color: var(--accent); }
     @media (max-width: 1380px) { .spine { display: none; } }
 
@@ -897,7 +903,7 @@
 
   <!-- ══ PEEK PLATE ══ -->
   <figure class="peek" id="peek" aria-hidden="true">
-    <img id="peekImg" src="" alt="">
+    <img id="peekImg" alt="" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7">
     <figcaption><span id="peekN">Plate</span><em>Peek</em></figcaption>
   </figure>
 

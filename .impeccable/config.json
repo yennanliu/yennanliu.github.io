@@ -1,0 +1,32 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "overused-font",
+        "value": "space grotesk",
+        "createdAt": "2026-09-16T00:18:21.779Z",
+        "reason": "Pinned brand face: CLAUDE.md fixes Space Grotesk as the site's display font and DM Sans as body. Binding design constraint, not a default."
+      },
+      {
+        "rule": "overused-font",
+        "value": "helvetica",
+        "files": [
+          "css/bootstrap*.css"
+        ],
+        "createdAt": "2026-09-16T00:18:28.971Z",
+        "reason": "Vendored Bootstrap 3.3.6, not authored here."
+      },
+      {
+        "rule": "cramped-padding",
+        "value": "*",
+        "files": [
+          "*.html"
+        ],
+        "createdAt": "2026-09-16T00:18:37.004Z",
+        "reason": "Scanner artifact, verified. The detector renders pages with CDN stylesheets blocked, so Bootstrap 4.5.2's .container and .card-body padding is absent at scan time. Reproduced with a two-line fixture (bare .card + .card-body under the same CDN link) that trips the identical finding. The one local-CSS case, .ft-lower, has a demonstrable padding: 20px 0 against its only visible boundary (css/site-footer.css:97)."
+      }
+    ]
+  }
+}

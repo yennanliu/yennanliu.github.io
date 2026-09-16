@@ -97,7 +97,7 @@
   background: none;
   cursor: pointer;
   font-family: var(--mono);
-  font-size: .58rem;
+  font-size: .75rem;
   letter-spacing: .16em;
   text-transform: uppercase;
   color: var(--ink-dim);
@@ -327,7 +327,7 @@ section[data-sig] > * { position: relative; z-index: 1; }
   overflow: hidden;
   background: var(--surface);
   border: 1px solid var(--rule);
-  border-left: 3px solid color-mix(in oklab, var(--mc) 55%, var(--rule));
+  border-left: 1px solid color-mix(in oklab, var(--mc) 55%, var(--rule));
   border-radius: var(--r);
   /* the staircase: each plate sits a little further in than the last,
      so you see the edge of every layer at once */
@@ -340,7 +340,7 @@ section[data-sig] > * { position: relative; z-index: 1; }
 
 .plate-n {
   font-family: var(--mono);
-  font-size: .74rem;
+  font-size: .75rem;
   letter-spacing: .1em;
   color: var(--ink-dim);
   font-variant-numeric: tabular-nums;
@@ -390,7 +390,7 @@ section[data-sig] > * { position: relative; z-index: 1; }
   padding: 1.9rem 2rem 2rem;
   background: var(--surface);
   border: 1px solid var(--rule);
-  border-top: 3px solid var(--mc);
+  border-top: 1px solid var(--mc);
   border-radius: var(--r-lg);
   box-shadow: var(--sh-sm);
 }

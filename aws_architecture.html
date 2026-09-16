@@ -746,60 +746,6 @@
             50% { background-position: 100% 50%; }
          }
 
-         /* Glitch effect for "Built for Tomorrow" */
-         .glitch-text {
-            position: relative;
-         }
-
-         .glitch-text::before,
-         .glitch-text::after {
-            content: attr(data-text);
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: inherit;
-            -webkit-background-clip: text;
-            background-clip: text;
-         }
-
-         .glitch-text::before {
-            animation: glitch-1 2s infinite;
-            color: #dc2626;
-            z-index: -1;
-         }
-
-         .glitch-text::after {
-            animation: glitch-2 2s infinite;
-            color: #059669;
-            z-index: -2;
-         }
-
-         @keyframes glitch-1 {
-            0%, 14%, 15%, 49%, 50%, 99%, 100% {
-               transform: translate(0);
-            }
-            15% {
-               transform: translate(-2px, 2px);
-            }
-            50% {
-               transform: translate(2px, -2px);
-            }
-         }
-
-         @keyframes glitch-2 {
-            0%, 20%, 21%, 62%, 63%, 99%, 100% {
-               transform: translate(0);
-            }
-            21% {
-               transform: translate(2px, -2px);
-            }
-            63% {
-               transform: translate(-2px, 2px);
-            }
-         }
-
          .ai-infra-subtitle {
             font-size: 28px;
             line-height: 1.5;
@@ -1996,42 +1942,22 @@
             background: #2563eb;
          }
 
-         /* ══ AI Infrastructure — Redesigned Dark ══ */
+         /* ══ AI Infrastructure — dark grid ══
+            Hairlines, one accent, no glow and no gradient: the same
+            vocabulary the rest of the site uses, on a dark ground. */
          .ai-infra-redesigned {
             background: #111827 !important;
             position: relative;
-            overflow: hidden;
          }
          .ai-infra-redesigned::before { display: none !important; }
-         .ai-infra-particles {
-            position: absolute;
-            inset: 0;
-            pointer-events: none;
-            overflow: hidden;
-         }
-         .ai-particle {
-            position: absolute;
-            width: 4px; height: 4px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.22);
-            animation: ai-pfloat 8s ease-in-out infinite;
-         }
-         @keyframes ai-pfloat {
-            0%, 100% { transform: translateY(0) scale(1); opacity: 0.22; }
-            50%       { transform: translateY(-28px) scale(1.9); opacity: 0.65; }
-         }
          .ai-infra-eyebrow-tag {
-            font-family: var(--fl-display);
+            font-family: var(--fl-mono);
             font-size: 12px;
             font-weight: 400;
-            letter-spacing: 3px;
-            color: rgba(255, 255, 255, 0.28);
+            letter-spacing: 0.14em;
+            color: #7a8494;
             text-transform: uppercase;
             margin-bottom: 16px;
-         }
-         @keyframes ai-title-shine {
-            0%   { background-position:  200% center; }
-            100% { background-position: -100% center; }
          }
          .ai-glass-grid {
             display: grid;
@@ -2042,55 +1968,41 @@
          .ai-glass-card {
             position: relative;
             background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            border-top: 2px solid var(--card-accent, #059669);
+            border: 1px solid rgba(255, 255, 255, 0.09);
             border-radius: var(--fl-r-xl);
             padding: 28px 24px;
-            overflow: hidden;
-            transition: transform 0.35s ease, background 0.35s ease, box-shadow 0.35s ease;
+            transition: background 0.16s ease, border-color 0.16s ease;
          }
          .ai-glass-card:hover {
-            background: rgba(255, 255, 255, 0.07);
-            transform: translateY(-8px);
-            box-shadow: var(--fl-sh-lg);
+            background: rgba(255, 255, 255, 0.055);
+            border-color: rgba(255, 255, 255, 0.2);
          }
-         .ai-glass-glow {
-            position: absolute;
-            top: -60px; left: 50%;
-            transform: translateX(-50%);
-            width: 180px; height: 180px;
-            border-radius: 50%;
-            background: radial-gradient(circle, var(--card-accent, #059669), transparent 65%);
-            opacity: 0.06;
-            pointer-events: none;
-            transition: opacity 0.35s ease;
+         /* Icon reads beside the heading, not stacked in a tile above it. */
+         .ai-glass-head {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
          }
-         .ai-glass-card:hover .ai-glass-glow { opacity: 0.16; }
          .ai-glass-icon {
-            width: 50px; height: 50px;
-            border-radius: var(--fl-r);
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            display: flex; align-items: center; justify-content: center;
-            margin-bottom: 18px;
-            transition: transform 0.3s ease, background 0.3s ease;
+            flex: none;
+            display: flex;
+            color: #7a8494;
+            transition: color 0.16s ease;
          }
-         .ai-glass-card:hover .ai-glass-icon {
-            background: rgba(255, 255, 255, 0.1);
-            transform: scale(1.08) rotate(-4deg);
-         }
+         .ai-glass-card:hover .ai-glass-icon { color: #c3cad6; }
          .ai-glass-title {
             font-family: var(--fl-display);
             font-size: 17px;
             font-weight: 400;
             color: #ffffff;
-            margin-bottom: 10px;
+            margin: 0;
             letter-spacing: -0.02em;
          }
          .ai-glass-desc {
             font-size: 13.5px;
             line-height: 1.6;
-            color: rgba(255, 255, 255, 0.42);
+            color: #9aa5b5;
             margin-bottom: 18px;
          }
          .ai-glass-tags {
@@ -2101,16 +2013,17 @@
          .ai-glass-tag {
             padding: 4px 10px;
             border-radius: var(--fl-r-xl);
+            font-family: var(--fl-mono);
             font-size: 12px;
             font-weight: 400;
             background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            color: rgba(255, 255, 255, 0.45);
-            transition: all 0.25s ease;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            color: #9aa5b5;
+            transition: border-color 0.16s ease, color 0.16s ease;
          }
          .ai-glass-card:hover .ai-glass-tag {
-            border-color: var(--card-accent, #059669);
-            color: var(--card-accent, #059669);
+            border-color: rgba(122, 168, 255, 0.5);
+            color: #7aa8ff;
          }
          @media (max-width: 900px) {
             .ai-glass-grid { grid-template-columns: repeat(2, 1fr); }
@@ -2135,29 +2048,13 @@
             background-size: 52px 52px;
             pointer-events: none;
          }
-         .aws-mastery-section .aws-orb {
-            position: absolute;
-            border-radius: 50%;
-            filter: blur(100px);
-            pointer-events: none;
-         }
-         .aws-mastery-section .aws-orb-1 {
-            width: 700px; height: 700px;
-            background: rgba(220, 38, 38, 0.08);
-            top: -250px; left: -180px;
-         }
-         .aws-mastery-section .aws-orb-2 {
-            width: 600px; height: 600px;
-            background: rgba(5, 150, 105, 0.08);
-            bottom: -150px; right: -150px;
-         }
          .aws-mastery-inner { position: relative; z-index: 2; }
          .aws-mastery-eyebrow {
-            font-family: var(--fl-display);
+            font-family: var(--fl-mono);
             font-size: 12px;
             font-weight: 400;
-            letter-spacing: 3px;
-            color: rgba(255, 255, 255, 0.3);
+            letter-spacing: 0.14em;
+            color: #7a8494;
             text-transform: uppercase;
             margin-bottom: 16px;
          }
@@ -2175,7 +2072,7 @@
          }
          .aws-mastery-sub {
             font-size: 17px;
-            color: rgba(255, 255, 255, 0.4);
+            color: #9aa5b5;
             margin-bottom: 72px;
             font-weight: 400;
          }
@@ -2209,17 +2106,24 @@
             min-width: 200px;
             flex-shrink: 0;
          }
+         /* Card titles sit under the section's h2, so they are h3 for the
+            document outline; this holds them at the size they always read. */
+         .card-title { font-size: var(--fl-fs-base) !important; }
+
          .aws-skill-badge {
             width: 42px; height: 42px;
             border-radius: var(--fl-r);
-            border: 1px solid;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            background: rgba(255, 255, 255, 0.04);
+            color: #9aa5b5;
             display: flex; align-items: center; justify-content: center;
             font-size: 16px;
             flex-shrink: 0;
-            transition: transform 0.25s ease;
+            transition: color 0.16s ease, border-color 0.16s ease;
          }
          .aws-skill-row:hover .aws-skill-badge {
-            transform: scale(1.12) rotate(-5deg);
+            color: #c3cad6;
+            border-color: rgba(255, 255, 255, 0.24);
          }
          .aws-skill-name {
             font-family: var(--fl-display);
@@ -2230,7 +2134,7 @@
          }
          .aws-skill-sub {
             font-size: 12px;
-            color: rgba(255, 255, 255, 0.35);
+            color: #9aa5b5;
             margin-top: 2px;
          }
          .aws-skill-bar-wrap {
@@ -2240,13 +2144,21 @@
             border-radius: var(--fl-r-sm);
             overflow: hidden;
          }
+         /* The resting state is the true value, so the bar reads correctly
+            with the script removed. The entrance is a keyframe with no
+            fill-mode: it plays from zero and hands back to this value. */
          .aws-skill-bar {
             height: 100%;
+            width: 100%;
             border-radius: var(--fl-r-sm);
-            width: 0;
-            transition: width 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+            background: #7aa8ff;
+            transform: scaleX(var(--sfrac, 1));
+            transform-origin: left center;
          }
-         .aws-skill-bar.animated { width: var(--starget); }
+         @media (prefers-reduced-motion: no-preference) {
+            .aws-skill-bar.animated { animation: aws-bar-fill 1.2s cubic-bezier(0.22, 1, 0.36, 1); }
+         }
+         @keyframes aws-bar-fill { from { transform: scaleX(0); } }
          .aws-skill-pct {
             font-family: var(--fl-display);
             font-size: 20px;
@@ -2255,6 +2167,7 @@
             text-align: right;
             letter-spacing: -0.03em;
             white-space: nowrap;
+            color: #7aa8ff;
          }
          /* Stats strip */
          .aws-stats-row {
@@ -2370,7 +2283,6 @@
        }
        .tech-track span { opacity: 1; color: var(--fl-muted); }
        .tech-track span i { color: var(--fl-ghost); }
-       .aws-mastery-section .aws-orb { display: none; }
        .stat-badge {
           background: var(--fl-surface);
           border: 1px solid var(--fl-hair);
@@ -2531,7 +2443,7 @@
             <div class="col-md-6 col-lg-4 mb-4" data-aos="fade-up" data-aos-delay="100">
                <div class="card h-100">
                   <div class="card-body">
-                     <h5 class="card-title"><span class="project-number">1</span>Serverless Architecture</h5>
+                     <h3 class="card-title"><span class="project-number">1</span>Serverless Architecture</h3>
                      <p class="card-text">Event-driven serverless applications using AWS Lambda, API Gateway, and DynamoDB. Perfect for high-scale, cost-effective solutions with automatic scaling.</p>
                      <div class="tech-tags mb-3">
                         <span class="tech-tag">Lambda</span>
@@ -2552,7 +2464,7 @@
             <div class="col-md-6 col-lg-4 mb-4" data-aos="fade-up" data-aos-delay="200">
                <div class="card h-100">
                   <div class="card-body">
-                     <h5 class="card-title"><span class="project-number">2</span>Microservices on EKS</h5>
+                     <h3 class="card-title"><span class="project-number">2</span>Microservices on EKS</h3>
                      <p class="card-text">Container-based microservices architecture using Amazon EKS (Kubernetes) with service mesh, auto-scaling, and comprehensive monitoring.</p>
                      <div class="tech-tags mb-3">
                         <span class="tech-tag">EKS</span>
@@ -2573,7 +2485,7 @@
             <div class="col-md-6 col-lg-4 mb-4" data-aos="fade-up" data-aos-delay="300">
                <div class="card h-100">
                   <div class="card-body">
-                     <h5 class="card-title"><span class="project-number">3</span>Data Lake & Analytics</h5>
+                     <h3 class="card-title"><span class="project-number">3</span>Data Lake & Analytics</h3>
                      <p class="card-text">Modern data lake architecture with real-time streaming, batch processing, and advanced analytics. Built for big data processing with ML integration.</p>
                      <div class="tech-tags mb-3">
                         <span class="tech-tag">S3</span>
@@ -2594,7 +2506,7 @@
             <div class="col-md-6 col-lg-4 mb-4" data-aos="fade-up" data-aos-delay="100">
                <div class="card h-100">
                   <div class="card-body">
-                     <h5 class="card-title"><span class="project-number">4</span>Multi-Region HA</h5>
+                     <h3 class="card-title"><span class="project-number">4</span>Multi-Region HA</h3>
                      <p class="card-text">Highly available, disaster-resilient architecture spanning multiple AWS regions with automated failover, data replication, and global load balancing.</p>
                      <div class="tech-tags mb-3">
                         <span class="tech-tag">Route 53</span>
@@ -2615,7 +2527,7 @@
             <div class="col-md-6 col-lg-4 mb-4" data-aos="fade-up" data-aos-delay="200">
                <div class="card h-100">
                   <div class="card-body">
-                     <h5 class="card-title"><span class="project-number">5</span>DevOps & CI/CD</h5>
+                     <h3 class="card-title"><span class="project-number">5</span>DevOps & CI/CD</h3>
                      <p class="card-text">Comprehensive DevOps pipeline with Infrastructure as Code, automated testing, security scanning, and blue-green deployments for continuous delivery.</p>
                      <div class="tech-tags mb-3">
                         <span class="tech-tag">CodePipeline</span>
@@ -2636,8 +2548,8 @@
             <div class="col-md-6 col-lg-4 mb-4" data-aos="fade-up" data-aos-delay="300">
                <div class="card h-100">
                   <div class="card-body">
-                     <h5 class="card-title"><span class="project-number">6</span>Security & Compliance</h5>
-                     <p class="card-text">Enterprise-grade security architecture with identity management, encryption, threat detection, and compliance frameworks for regulated industries.</p>
+                     <h3 class="card-title"><span class="project-number">6</span>Security & Compliance</h3>
+                     <p class="card-text">Security architecture with identity management, encryption in transit and at rest, threat detection, and the compliance controls regulated industries have to evidence.</p>
                      <div class="tech-tags mb-3">
                         <span class="tech-tag">IAM</span>
                         <span class="tech-tag">KMS</span>
@@ -2658,8 +2570,6 @@
       <!-- AWS Expertise — Redesigned Dark Section -->
       <section class="aws-mastery-section">
          <div class="aws-bg-grid"></div>
-         <div class="aws-orb aws-orb-1"></div>
-         <div class="aws-orb aws-orb-2"></div>
 
          <div class="container aws-mastery-inner">
 
@@ -2673,7 +2583,7 @@
 
                <div class="aws-skill-row" data-target="95">
                   <div class="aws-skill-left">
-                     <div class="aws-skill-badge" style="color:#dc2626; background:rgba(220, 38, 38, 0.1); border-color:rgba(220, 38, 38, 0.22)">
+                     <div class="aws-skill-badge">
                         <i class="fas fa-server"></i>
                      </div>
                      <div>
@@ -2682,14 +2592,14 @@
                      </div>
                   </div>
                   <div class="aws-skill-bar-wrap">
-                     <div class="aws-skill-bar" style="background: linear-gradient(90deg, #dc2626, #dc2626); --starget: 95%"></div>
+                     <div class="aws-skill-bar" style="--sfrac: 0.95"></div>
                   </div>
-                  <div class="aws-skill-pct" style="color:#dc2626"><span class="aws-pct-num">0</span>%</div>
+                  <div class="aws-skill-pct"><span class="aws-pct-num">95</span>%</div>
                </div>
 
                <div class="aws-skill-row" data-target="90">
                   <div class="aws-skill-left">
-                     <div class="aws-skill-badge" style="color:#059669; background:rgba(5, 150, 105, 0.1); border-color:rgba(5, 150, 105, 0.22)">
+                     <div class="aws-skill-badge">
                         <i class="fas fa-database"></i>
                      </div>
                      <div>
@@ -2698,14 +2608,14 @@
                      </div>
                   </div>
                   <div class="aws-skill-bar-wrap">
-                     <div class="aws-skill-bar" style="background: linear-gradient(90deg, #059669, #0891b2); --starget: 90%"></div>
+                     <div class="aws-skill-bar" style="--sfrac: 0.9"></div>
                   </div>
-                  <div class="aws-skill-pct" style="color:#059669"><span class="aws-pct-num">0</span>%</div>
+                  <div class="aws-skill-pct"><span class="aws-pct-num">90</span>%</div>
                </div>
 
                <div class="aws-skill-row" data-target="88">
                   <div class="aws-skill-left">
-                     <div class="aws-skill-badge" style="color:#0891b2; background:rgba(8, 145, 178, 0.1); border-color:rgba(8, 145, 178, 0.22)">
+                     <div class="aws-skill-badge">
                         <i class="fas fa-table"></i>
                      </div>
                      <div>
@@ -2714,14 +2624,14 @@
                      </div>
                   </div>
                   <div class="aws-skill-bar-wrap">
-                     <div class="aws-skill-bar" style="background: linear-gradient(90deg, #0891b2, #0891b2); --starget: 88%"></div>
+                     <div class="aws-skill-bar" style="--sfrac: 0.88"></div>
                   </div>
-                  <div class="aws-skill-pct" style="color:#0891b2"><span class="aws-pct-num">0</span>%</div>
+                  <div class="aws-skill-pct"><span class="aws-pct-num">88</span>%</div>
                </div>
 
                <div class="aws-skill-row" data-target="92">
                   <div class="aws-skill-left">
-                     <div class="aws-skill-badge" style="color:#059669; background:rgba(5, 150, 105, 0.1); border-color:rgba(5, 150, 105, 0.22)">
+                     <div class="aws-skill-badge">
                         <i class="fas fa-code-branch"></i>
                      </div>
                      <div>
@@ -2730,14 +2640,14 @@
                      </div>
                   </div>
                   <div class="aws-skill-bar-wrap">
-                     <div class="aws-skill-bar" style="background: linear-gradient(90deg, #059669, #059669); --starget: 92%"></div>
+                     <div class="aws-skill-bar" style="--sfrac: 0.92"></div>
                   </div>
-                  <div class="aws-skill-pct" style="color:#059669"><span class="aws-pct-num">0</span>%</div>
+                  <div class="aws-skill-pct"><span class="aws-pct-num">92</span>%</div>
                </div>
 
                <div class="aws-skill-row" data-target="87">
                   <div class="aws-skill-left">
-                     <div class="aws-skill-badge" style="color:#d97706; background:rgba(217, 119, 6, 0.1); border-color:rgba(217, 119, 6, 0.22)">
+                     <div class="aws-skill-badge">
                         <i class="fas fa-shield-alt"></i>
                      </div>
                      <div>
@@ -2746,14 +2656,14 @@
                      </div>
                   </div>
                   <div class="aws-skill-bar-wrap">
-                     <div class="aws-skill-bar" style="background: linear-gradient(90deg, #d97706, #d97706); --starget: 87%"></div>
+                     <div class="aws-skill-bar" style="--sfrac: 0.87"></div>
                   </div>
-                  <div class="aws-skill-pct" style="color:#d97706"><span class="aws-pct-num">0</span>%</div>
+                  <div class="aws-skill-pct"><span class="aws-pct-num">87</span>%</div>
                </div>
 
                <div class="aws-skill-row" data-target="83">
                   <div class="aws-skill-left">
-                     <div class="aws-skill-badge" style="color:#7c3aed; background:rgba(124, 58, 237, 0.1); border-color:rgba(124, 58, 237, 0.22)">
+                     <div class="aws-skill-badge">
                         <i class="fas fa-chart-line"></i>
                      </div>
                      <div>
@@ -2762,9 +2672,9 @@
                      </div>
                   </div>
                   <div class="aws-skill-bar-wrap">
-                     <div class="aws-skill-bar" style="background: linear-gradient(90deg, #7c3aed, #d9cdec); --starget: 83%"></div>
+                     <div class="aws-skill-bar" style="--sfrac: 0.83"></div>
                   </div>
-                  <div class="aws-skill-pct" style="color:#7c3aed"><span class="aws-pct-num">0</span>%</div>
+                  <div class="aws-skill-pct"><span class="aws-pct-num">83</span>%</div>
                </div>
 
             </div>
@@ -2794,34 +2704,26 @@
 
       <!-- AI Infrastructure — Redesigned Dark Grid -->
       <section class="ai-infra-section ai-infra-redesigned apple-section">
-         <div class="ai-infra-particles">
-            <div class="ai-particle" style="top:12%;left:7%;animation-delay:0s;width:5px;height:5px"></div>
-            <div class="ai-particle" style="top:22%;left:90%;animation-delay:1.3s"></div>
-            <div class="ai-particle" style="top:58%;left:4%;animation-delay:2.2s;width:3px;height:3px"></div>
-            <div class="ai-particle" style="top:78%;left:85%;animation-delay:0.7s;width:5px;height:5px"></div>
-            <div class="ai-particle" style="top:40%;left:94%;animation-delay:1.9s"></div>
-            <div class="ai-particle" style="top:68%;left:48%;animation-delay:3.1s;width:3px;height:3px"></div>
-         </div>
-
          <div class="container position-relative" style="z-index:2">
             <div class="text-center" data-aos="fade-up">
                <div class="ai-infra-eyebrow-tag">LLM INFRASTRUCTURE</div>
                <h2 class="ai-infra-title">
-                  <span class="ai-title-main" style="background:linear-gradient(135deg,#ffffff 0%,rgba(255, 255, 255, 0.72) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">AI Infrastructure.</span>
+                  <span class="ai-title-main" style="color:#ffffff">AI Infrastructure.</span>
                   <br>
-                  <span class="ai-title-sub glitch-text" data-text="Built for Tomorrow." style="background:linear-gradient(90deg,#059669,#ffffff 50%,#7c3aed);background-size:300% 100%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:ai-title-shine 4s linear infinite">Built for Tomorrow.</span>
+                  <span class="ai-title-sub" style="color:#9aa5b5">The parts that run in production.</span>
                </h2>
-               <p class="ai-infra-subtitle" style="color:rgba(255, 255, 255, 0.42)">From neural networks to production systems, architect the future of artificial intelligence.</p>
+               <p class="ai-infra-subtitle" style="color:#9aa5b5">Training, serving, retrieval and the pipelines underneath — the AWS services these six jobs actually land on.</p>
             </div>
 
             <div class="ai-glass-grid" data-aos="fade-up" data-aos-delay="150">
 
-               <div class="ai-glass-card" style="--card-accent:#dc2626">
-                  <div class="ai-glass-glow"></div>
-                  <div class="ai-glass-icon" style="color:#dc2626">
-                     <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L2 7L12 12L22 7L12 2M2 17L12 22L22 17M2 12L12 17L22 12"/></svg>
+               <div class="ai-glass-card">
+                  <div class="ai-glass-head">
+                     <span class="ai-glass-icon" aria-hidden="true">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L2 7L12 12L22 7L12 2M2 17L12 22L22 17M2 12L12 17L22 12"/></svg>
+                     </span>
+                     <h3 class="ai-glass-title">Neural Training</h3>
                   </div>
-                  <h3 class="ai-glass-title">Neural Training</h3>
                   <p class="ai-glass-desc">Distributed training pipelines with automatic scaling and optimization</p>
                   <div class="ai-glass-tags">
                      <span class="ai-glass-tag">SageMaker</span>
@@ -2830,12 +2732,13 @@
                   </div>
                </div>
 
-               <div class="ai-glass-card" style="--card-accent:#059669">
-                  <div class="ai-glass-glow"></div>
-                  <div class="ai-glass-icon" style="color:#059669">
-                     <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M4 6H20V16H4M20 18A2 2 0 0 0 22 16V6C22 4.89 21.1 4 20 4H4A2 2 0 0 0 2 6V16A2 2 0 0 0 4 18H4L6 20V18H18L20 18Z"/></svg>
+               <div class="ai-glass-card">
+                  <div class="ai-glass-head">
+                     <span class="ai-glass-icon" aria-hidden="true">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M4 6H20V16H4M20 18A2 2 0 0 0 22 16V6C22 4.89 21.1 4 20 4H4A2 2 0 0 0 2 6V16A2 2 0 0 0 4 18H4L6 20V18H18L20 18Z"/></svg>
+                     </span>
+                     <h3 class="ai-glass-title">Cluster Orchestration</h3>
                   </div>
-                  <h3 class="ai-glass-title">Cluster Orchestration</h3>
                   <p class="ai-glass-desc">GPU-accelerated compute clusters with intelligent resource allocation</p>
                   <div class="ai-glass-tags">
                      <span class="ai-glass-tag">EKS</span>
@@ -2844,12 +2747,13 @@
                   </div>
                </div>
 
-               <div class="ai-glass-card" style="--card-accent:#0891b2">
-                  <div class="ai-glass-glow"></div>
-                  <div class="ai-glass-icon" style="color:#0891b2">
-                     <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 16L16 12H13V8H11V12H8L12 16M12 2A10 10 0 0 0 2 12A10 10 0 0 0 12 22A10 10 0 0 0 22 12A10 10 0 0 0 12 2Z"/></svg>
+               <div class="ai-glass-card">
+                  <div class="ai-glass-head">
+                     <span class="ai-glass-icon" aria-hidden="true">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 16L16 12H13V8H11V12H8L12 16M12 2A10 10 0 0 0 2 12A10 10 0 0 0 12 22A10 10 0 0 0 22 12A10 10 0 0 0 12 2Z"/></svg>
+                     </span>
+                     <h3 class="ai-glass-title">Model Deployment</h3>
                   </div>
-                  <h3 class="ai-glass-title">Model Deployment</h3>
                   <p class="ai-glass-desc">Real-time inference endpoints with A/B testing and monitoring</p>
                   <div class="ai-glass-tags">
                      <span class="ai-glass-tag">Bedrock</span>
@@ -2858,12 +2762,13 @@
                   </div>
                </div>
 
-               <div class="ai-glass-card" style="--card-accent:#7c3aed">
-                  <div class="ai-glass-glow"></div>
-                  <div class="ai-glass-icon" style="color:#7c3aed">
-                     <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3C7.58 3 4 6.58 4 11C4 16.55 12 21 12 21S20 16.55 20 11C20 6.58 16.42 3 12 3M12 13A2 2 0 0 1 10 11A2 2 0 0 1 12 9A2 2 0 0 1 14 11A2 2 0 0 1 12 13Z"/></svg>
+               <div class="ai-glass-card">
+                  <div class="ai-glass-head">
+                     <span class="ai-glass-icon" aria-hidden="true">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3C7.58 3 4 6.58 4 11C4 16.55 12 21 12 21S20 16.55 20 11C20 6.58 16.42 3 12 3M12 13A2 2 0 0 1 10 11A2 2 0 0 1 12 9A2 2 0 0 1 14 11A2 2 0 0 1 12 13Z"/></svg>
+                     </span>
+                     <h3 class="ai-glass-title">Vector Intelligence</h3>
                   </div>
-                  <h3 class="ai-glass-title">Vector Intelligence</h3>
                   <p class="ai-glass-desc">High-performance embedding storage with semantic search capabilities</p>
                   <div class="ai-glass-tags">
                      <span class="ai-glass-tag">OpenSearch</span>
@@ -2872,12 +2777,13 @@
                   </div>
                </div>
 
-               <div class="ai-glass-card" style="--card-accent:#d97706">
-                  <div class="ai-glass-glow"></div>
-                  <div class="ai-glass-icon" style="color:#d97706">
-                     <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M9 3V18H12V3H9M12 5L16 6.5V9.5L12 8V5M12 10L16 11.5V14.5L12 13V10M12 15L16 16.5V19.5L12 18V15Z"/></svg>
+               <div class="ai-glass-card">
+                  <div class="ai-glass-head">
+                     <span class="ai-glass-icon" aria-hidden="true">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M9 3V18H12V3H9M12 5L16 6.5V9.5L12 8V5M12 10L16 11.5V14.5L12 13V10M12 15L16 16.5V19.5L12 18V15Z"/></svg>
+                     </span>
+                     <h3 class="ai-glass-title">Data Pipeline</h3>
                   </div>
-                  <h3 class="ai-glass-title">Data Pipeline</h3>
                   <p class="ai-glass-desc">Real-time data processing and feature engineering at scale</p>
                   <div class="ai-glass-tags">
                      <span class="ai-glass-tag">Kinesis</span>
@@ -2886,12 +2792,13 @@
                   </div>
                </div>
 
-               <div class="ai-glass-card" style="--card-accent:#059669">
-                  <div class="ai-glass-glow"></div>
-                  <div class="ai-glass-icon" style="color:#059669">
-                     <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+               <div class="ai-glass-card">
+                  <div class="ai-glass-head">
+                     <span class="ai-glass-icon" aria-hidden="true">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                     </span>
+                     <h3 class="ai-glass-title">MLOps Platform</h3>
                   </div>
-                  <h3 class="ai-glass-title">MLOps Platform</h3>
                   <p class="ai-glass-desc">End-to-end machine learning lifecycle management and automation</p>
                   <div class="ai-glass-tags">
                      <span class="ai-glass-tag">MLflow</span>

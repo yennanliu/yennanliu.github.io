@@ -35,6 +35,7 @@
       --bg:#ffffff; --fg:#111827; --dim:#647084; --line:#e5e7eb;
       --acid:#2563eb;
       --acid-ink:#2563eb;              /* the accent used as TEXT on the ground */
+      --on-acid:#ffffff;               /* text ON an acid fill — never --ink  */
       --wire:rgba(37,99,235,.30);      /* idle diagram wires */
       --tint:rgba(37,99,235,.07);      /* four steps of accent fill,   */
       --tint-2:rgba(37,99,235,.16);    /* for tapes, plates and bars — */
@@ -46,6 +47,7 @@
       --bg:#0f0f11; --fg:#f5f7fa; --dim:#9aa5b5; --line:#1f1f24;
       --acid:#7aa8ff;
       --acid-ink:#7aa8ff;
+      --on-acid:#0a0a0b;
       --wire:rgba(122, 168, 255, .42);
       --tint:rgba(122,168,255,.09);
       --tint-2:rgba(122,168,255,.19);
@@ -102,8 +104,8 @@
     .btn { display:inline-flex; align-items:center; gap:10px; padding:15px 26px; min-height:52px;
       border:1px solid var(--line); background:transparent; color:var(--fg);
       font-family:inherit; font-size:13px; font-weight:400; letter-spacing:.12em; text-transform:uppercase; cursor:pointer; }
-    .btn:hover { background:var(--acid); border-color:var(--acid); color:var(--ink); }
-    .btn-solid { background:var(--acid); border-color:var(--acid); color:var(--ink); }
+    .btn:hover { background:var(--acid); border-color:var(--acid); color:var(--on-acid); }
+    .btn-solid { background:var(--acid); border-color:var(--acid); color:var(--on-acid); }
     .btn-solid:hover { background:transparent; color:var(--fg); border-color:var(--fg); }
     .btn-row { display:flex; flex-wrap:wrap; }
     .btn-row .btn + .btn { margin-left:-2px; }
@@ -133,7 +135,7 @@
     .reg-n { font-family:var(--fl-mono); font-weight:400; font-size:clamp( 28.8px,4.4vw, 40px); line-height:.9; letter-spacing:-.05em; }
 
     /* ── Marquee ── */
-    .tick { background:var(--acid); color:var(--ink); border-bottom:1px solid var(--line); overflow:hidden; padding:10px 0; }
+    .tick { background:var(--acid); color:var(--on-acid); border-bottom:1px solid var(--line); overflow:hidden; padding:10px 0; }
     .tick-track { display:flex; width:max-content; animation:marquee 30s linear infinite; }
     .tick-set { display:flex; gap:40px; padding-right:40px; font-size:12px; font-weight:400;
       letter-spacing:.16em; text-transform:uppercase; white-space:nowrap; }
@@ -145,7 +147,7 @@
       background:transparent; color:var(--fg); font-family:inherit; text-align:left; }
     .stage:last-child { border-right:none; }
     .stage:hover { background:var(--line); }
-    .stage[aria-selected="true"] { background:var(--acid); color:var(--ink); }
+    .stage[aria-selected="true"] { background:var(--acid); color:var(--on-acid); }
     .stage[aria-selected="true"]:hover { background:var(--acid); }
     .stage:focus-visible { outline:3px solid var(--acid); outline-offset:-6px; }
     .stage-txt { display:flex; flex-direction:column; gap:4px; }
@@ -154,7 +156,7 @@
     .stage-c { font-size:12px; line-height:1.5; opacity:.72; }
     .stage-ar { position:absolute; right:-11px; top:22px; font-size:15px; z-index:2; background:var(--bg);
       animation:conn 2.6s steps(1) infinite; }
-    .stage[aria-selected="true"] .stage-ar { background:var(--acid); color:var(--ink); animation:none; }
+    .stage[aria-selected="true"] .stage-ar { background:var(--acid); color:var(--on-acid); animation:none; }
 
     .detail { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1.1fr); border:1px solid var(--line); border-top:none; }
     .detail-l { padding:30px 28px; border-right:1px solid var(--line); display:flex; flex-direction:column; gap:16px; }
@@ -166,7 +168,7 @@
     .rec { display:grid; grid-template-columns:150px minmax(0,1fr) 330px; border:1px solid var(--line); border-bottom:none; }
     .rec:last-of-type { border-bottom:1px solid var(--line); }
     .rec-ix { border-right:1px solid var(--line); padding:30px 24px; display:flex; flex-direction:column; justify-content:space-between; gap:16px; }
-    .rec:hover .rec-ix { background:var(--acid); color:var(--ink); }
+    .rec:hover .rec-ix { background:var(--acid); color:var(--on-acid); }
     .rec-n { font-family:var(--fl-mono); font-weight:400; font-size:40px; line-height:.85; letter-spacing:-.05em; }
     .rec-mid { padding:30px; display:flex; flex-direction:column; gap:15px; }
     .rec-t { font-family:var(--fl-mono); font-weight:400; font-size:clamp(22px,2.2vw,30px);
@@ -181,7 +183,7 @@
       border-top:1px solid var(--line); border-right:1px solid var(--line);
       font-size:12px; font-weight:400; letter-spacing:.12em; text-transform:uppercase; }
     .rec-act a:last-child { border-right:none; }
-    .rec-act a:hover { background:var(--acid); color:var(--ink); }
+    .rec-act a:hover { background:var(--acid); color:var(--on-acid); }
     .live { color:var(--acid-ink); }
 
     /* ── ASCII ── */
@@ -189,9 +191,9 @@
     .ascii-wrap { padding:30px 28px; overflow-x:auto; }
 
     /* ── CTA / footer ── */
-    .cta { background:var(--acid); color:var(--ink); border-bottom:1px solid var(--ink); }
+    .cta { background:var(--acid); color:var(--on-acid); border-bottom:1px solid var(--ink); }
     .cta .btn { border-color:var(--ink); color:var(--ink); }
-    .cta .btn:hover { background:var(--ink); color:var(--acid); border-color:var(--ink); }
+    .cta .btn:hover { background:var(--ink); color:var(--paper); border-color:var(--ink); }
     .cta-h { font-size:clamp( 28.8px,5.2vw, 40px); line-height:.94; letter-spacing:-.045em; margin-top:18px; max-width:1000px; }
 
     .h2 { font-size:clamp( 28.8px,4vw, 40px); line-height:1; letter-spacing:-.04em; margin-top:16px;
@@ -256,7 +258,7 @@
       padding:22px 24px; border:0; border-bottom:1px solid var(--line); background:transparent;
       color:var(--fg); font-family:inherit; cursor:pointer; }
     .layer:last-child { border-bottom:none; }
-    .layer:hover, .layer[aria-current="true"] { background:var(--acid); color:var(--ink); }
+    .layer:hover, .layer[aria-current="true"] { background:var(--acid); color:var(--on-acid); }
     .layer:focus-visible { outline:3px solid var(--acid); outline-offset:-6px; }
     .layer-h { display:flex; align-items:baseline; gap:12px; }
     .layer-n { font-family:var(--fl-mono); font-weight:400; font-size:13px; opacity:.7; }
@@ -349,7 +351,7 @@
     .seg button[aria-pressed="true"] { background:var(--fg); color:var(--bg); }
     .seg button:focus-visible { outline:3px solid var(--acid); outline-offset:-4px; }
 
-    .note { font-family:var(--fl-mono); font-size:11.5px; line-height:1.65; letter-spacing:.04em;
+    .note { font-family:var(--fl-mono); font-size:12px; line-height:1.65; letter-spacing:.04em;
       color:var(--dim); margin-top:16px; max-width:78ch; }
     .panel { border:1px solid var(--line); border-radius:var(--fl-r-lg); }
     .panel-hd { display:flex; align-items:center; justify-content:space-between; gap:14px;
@@ -359,7 +361,7 @@
     .mrow { padding:16px 18px; border-bottom:1px solid var(--line);
       display:grid; grid-template-columns:minmax(0,1fr) auto; align-items:baseline; gap:2px 14px; }
     .mrow:last-child { border-bottom:none; }
-    .mrow-k { font-family:var(--fl-mono); font-size:11.5px; letter-spacing:.14em;
+    .mrow-k { font-family:var(--fl-mono); font-size:12px; letter-spacing:.14em;
       text-transform:uppercase; color:var(--dim); }
     .mrow-v { font-family:var(--fl-mono); font-size:23px; letter-spacing:-.03em; text-align:right; }
     .mrow-t { grid-column:1 / -1; height:6px; margin-top:11px; background:var(--fl-raised);
@@ -377,7 +379,7 @@
     @keyframes tapecalc { 0%,100% { background:transparent; } 45% { background:var(--tint-2); } }
     .tape-mk { width:0; align-self:stretch; border-left:1px dashed var(--acid-ink); margin:0 7px; }
     .tape-lg { display:flex; flex-wrap:wrap; gap:9px 24px; padding:0 18px 20px;
-      font-family:var(--fl-mono); font-size:11.5px; letter-spacing:.06em; color:var(--dim); }
+      font-family:var(--fl-mono); font-size:12px; letter-spacing:.06em; color:var(--dim); }
     .tape-lg span { display:inline-flex; align-items:center; gap:9px; }
     .sw { width:13px; height:15px; border:1px solid var(--cell); border-radius:2px; flex-shrink:0; }
     .sw.on { background:var(--tint-3); border-color:var(--acid-ink); }
@@ -391,7 +393,7 @@
     .pipe-s:last-child { border-right:none; }
     .pipe-n { font-family:var(--fl-mono); font-size:11px; letter-spacing:.18em; color:var(--dim); }
     .pipe-t { font-family:var(--fl-mono); font-size:16px; letter-spacing:-.02em; }
-    .pipe-d { font-family:var(--fl-mono); font-size:11.5px; letter-spacing:.04em; color:var(--dim); }
+    .pipe-d { font-family:var(--fl-mono); font-size:12px; letter-spacing:.04em; color:var(--dim); }
     .pipe-s::after { content:""; position:absolute; left:0; right:0; bottom:0; height:2px;
       background:var(--acid); transform:scaleX(0); transform-origin:left;
       animation:pipefill 5s linear infinite; animation-delay:calc(var(--s, 0) * .5s); }
@@ -472,7 +474,7 @@
     .bud-s.s4 { background:var(--tint); }
     .bud-s.s5 { background:transparent; }
     .bud-s b { position:absolute; left:11px; top:12px; font-family:var(--fl-mono); font-weight:400;
-      font-size:10.5px; letter-spacing:.14em; text-transform:uppercase; color:var(--dim);
+      font-size:12px; letter-spacing:.14em; text-transform:uppercase; color:var(--fg);
       white-space:nowrap; }
     .bud-s.s5 b { color:var(--acid-ink); }
     .bud-s.nolab b { display:none; }
@@ -559,7 +561,7 @@
     .arch .nd:focus-visible rect { stroke:var(--acid); stroke-width:2.5; }
     .arch .t  { fill:var(--fg);  font-family:var(--fl-mono); font-size:15px; letter-spacing:-.01em; }
     .arch .s  { fill:var(--dim); font-family:var(--fl-mono); font-size:12px; }
-    .arch .cr { fill:var(--acid-ink); font-family:var(--fl-mono); font-size:11.5px; letter-spacing:.06em; }
+    .arch .cr { fill:var(--acid-ink); font-family:var(--fl-mono); font-size:12px; letter-spacing:.06em; }
 
     /* the readout under the drawing — one line, changes with the node */
     .arch-foot { display:flex; align-items:baseline; gap:12px; padding:16px 24px 20px;
@@ -1361,7 +1363,7 @@
     Every repo above is open. Mail me if one of them is useful to you.
   </p>
   <div class="btn-row" style="margin-top:34px;">
-    <a href="https://yennanliu.github.io/contact.html" class="btn" style="background:var(--ink); color:var(--acid);">Get in touch</a>
+    <a href="https://yennanliu.github.io/contact.html" class="btn" style="background:var(--ink); color:var(--paper);">Get in touch</a>
     <a href="https://yennanliu.github.io/portfolios.html" class="btn">Full portfolio</a>
     <a href="https://github.com/yennanliu" target="_blank" rel="noopener" class="btn">GitHub &nearr;</a>
   </div>

@@ -64,7 +64,7 @@
 .site-footer .ft-tagline {
   font-size: .875em;
   line-height: var(--fl-lh-body);
-  color: var(--fl-ghost);
+  color: var(--fl-faint);
   max-width: 220px;
   margin: 0;
 }
@@ -72,10 +72,10 @@
 .site-footer .ft-col-hd {
   display: block;
   font-family: var(--fl-mono);
-  font-size: .6em;
+  font-size: .75em;          /* 12px — the site's stated type floor */
   letter-spacing: .18em;
   text-transform: uppercase;
-  color: var(--fl-ghost);
+  color: var(--fl-faint);
   margin-bottom: 14px;
 }
 
@@ -105,11 +105,11 @@
 .site-footer .ft-copy,
 .site-footer .ft-sig {
   font-family: var(--fl-mono);
-  font-size: .63em;
-  color: var(--fl-ghost);
+  font-size: .75em;          /* 12px — the site's stated type floor */
+  color: var(--fl-faint);
   margin: 0;
 }
-.site-footer .ft-copy { letter-spacing: .06em; }
+.site-footer .ft-copy { letter-spacing: .04em; }
 
 /* ── narrow ── */
 

@@ -5,3 +5,4 @@ test2.html
 # Impeccable downloads its platform-specific engine on first run
 .claude/skills/impeccable/scripts/bin/
 .impeccable/config.local.json
+.impeccable/hook.cache.json
