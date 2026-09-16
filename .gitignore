@@ -2,3 +2,6 @@
 */.DS_Store
 test2.html
 .claude/worktrees/
+# Impeccable downloads its platform-specific engine on first run
+.claude/skills/impeccable/scripts/bin/
+.impeccable/config.local.json
