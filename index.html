@@ -41,13 +41,14 @@
       --ink:           #111827;
       --ink-2:         #1f2937;
       --ink-3:         #4b5565;
-      --ink-dim:       #98a2b3;
+      --ink-dim:       #647084;
       --blue:          #2563eb;
       --blue-mid:      #0071e3;
       --blue-disp:     #111827;
       --blue-pale:     #eff6ff;
       --blue-border:   #c7d7fd;
-      --green:         #059669;
+      --wire:          rgba(37,99,235,.30);
+      --green:         #047857;
       --green-pale:    #ecfdf5;
       --amber:         #b45309;
       --red:           #dc2626;
@@ -84,12 +85,13 @@
       --ink:           #f5f7fa;
       --ink-2:         #e3e8ef;
       --ink-3:         #9aa5b5;
-      --ink-dim:       #5b6675;
+      --ink-dim:       #7d8899;
       --blue:          #7aa8ff;
       --blue-mid:      #7aa8ff;
       --blue-disp:     #f5f7fa;
       --blue-pale:     #1a1a1e;
       --blue-border:   #2e2e35;
+      --wire:          rgba(122,168,255,.42);
       --green:         #34d399;
       --green-pale:    #141417;
       --amber:         #fbbf24;
@@ -119,13 +121,14 @@
       --ink:           #111827;
       --ink-2:         #1f2937;
       --ink-3:         #4b5565;
-      --ink-dim:       #98a2b3;
+      --ink-dim:       #647084;
       --blue:          #2563eb;
       --blue-mid:      #0071e3;
       --blue-disp:     #111827;
       --blue-pale:     #eff6ff;
       --blue-border:   #c7d7fd;
-      --green:         #059669;
+      --wire:          rgba(37,99,235,.30);
+      --green:         #047857;
       --green-pale:    #ecfdf5;
       --amber:         #b45309;
       --red:           #dc2626;
@@ -202,18 +205,6 @@
       display:grid; grid-template-columns:1fr 404px; gap:64px; align-items:center;
     }
     .hero-left { opacity:0; animation:riseIn .7s ease .15s forwards; }
-    .hero-label {
-      display:inline-flex; align-items:center; gap:8px;
-      background:var(--green-pale); border:1px solid color-mix(in oklab, var(--green) 32%, transparent);
-      border-radius:var(--r-sm); padding:6px 14px;
-      font-family:var(--mono); font-size:.68rem;
-      letter-spacing:.1em; text-transform:uppercase; color:var(--green); margin-bottom:30px;
-    }
-    .hero-label .pulse {
-      width:7px; height:7px; background:var(--green); border-radius:50%;
-      animation:pulse 2.2s ease-in-out infinite;
-    }
-    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.25} }
     .hero-h1 {
       font-family:var(--display);
       font-size:clamp(2rem, 4.4vw, 2.5rem); font-weight:300;
@@ -245,66 +236,82 @@
     .btn-ring { background:transparent; color:var(--ink); border-color:var(--rule-strong); }
     .btn-ring:hover { background:var(--surface); border-color:var(--blue); color:var(--blue); }
 
-    /* ── SYSTEM CARD (live topology) ── */
+    /* ── SYSTEM CARD — a spec plate, not a terminal window ──────────────
+       It used to wear macOS traffic lights and rate its own skills out of
+       100. Both are costume. What it draws is a real pipeline, so it now
+       presents as a drawing: a plate number, registration marks, and a
+       legend that answers whichever stage you take.                      */
     .hero-right { opacity:0; animation:riseIn .7s ease .45s forwards; }
     .sys-card {
       background:var(--surface); border:1px solid var(--rule-strong);
-      border-radius:var(--r-lg); overflow:hidden; box-shadow:var(--sh-md);
-      animation:bob 5s ease-in-out infinite;
+      border-radius:var(--r-lg); overflow:hidden;
     }
-    @keyframes bob { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-5px)} }
     .tc-bar {
       background:var(--bg-alt); border-bottom:1px solid var(--rule);
-      padding:11px 16px; display:flex; align-items:center; gap:7px;
+      padding:11px 16px; display:flex; align-items:baseline; gap:10px;
+      font-family:var(--mono); font-size:.75rem; letter-spacing:.14em;
+      text-transform:uppercase;
     }
-    .tc-dot { width:11px; height:11px; border-radius:50%; }
-    .tc-dot-r { background:#fe5f57; } .tc-dot-y { background:#febc2e; } .tc-dot-g { background:#28c840; }
-    .tc-path { margin-left:auto; font-family:var(--mono); font-size:.62rem; color:var(--ink-dim); letter-spacing:.04em; }
+    .tc-plate { color:var(--ink-3); }
+    .tc-plate b { font-weight:400; color:var(--blue); font-variant-numeric:tabular-nums; }
+    .tc-flow { margin-left:auto; color:var(--ink-dim); letter-spacing:.1em; }
     .tc-body { padding:18px 20px 20px; }
-    .tc-label {
-      font-family:var(--mono); font-size:.6rem;
-      letter-spacing:.18em; text-transform:uppercase; color:var(--blue);
-      margin-bottom:12px; display:block;
-    }
-    .tc-label.mt { margin-top:20px; }
 
+    /* the drawing */
+    .tc-plot { position:relative; padding:14px 6px 6px; }
+    /* registration marks: four hairline corners, the way a plate is trimmed */
+    .tc-plot::before, .tc-plot::after,
+    .tc-plot > .tc-reg::before, .tc-plot > .tc-reg::after {
+      content:''; position:absolute; width:12px; height:12px;
+      border:0 solid var(--rule-strong); pointer-events:none;
+    }
+    .tc-plot::before { top:0; left:0;  border-top-width:1px; border-left-width:1px; }
+    .tc-plot::after  { top:0; right:0; border-top-width:1px; border-right-width:1px; }
+    .tc-plot > .tc-reg::before { bottom:0; left:0;  border-bottom-width:1px; border-left-width:1px; }
+    .tc-plot > .tc-reg::after  { bottom:0; right:0; border-bottom-width:1px; border-right-width:1px; }
+
+    /* The drawing borrows ai_builder's fan-graph vocabulary: a pale wire,
+       a short bright packet running it, and the same --wire token. Every
+       path carries pathLength="100", so one dasharray gives every edge an
+       identically proportioned packet whatever its real length. */
     .topo { display:block; width:100%; overflow:visible; }
-    .edge-base { stroke:var(--rule-strong); stroke-width:1.25; fill:none; }
+    .edge-base { stroke:var(--wire); stroke-width:1.5; fill:none; }
+    .topo-arrow { fill:var(--wire); }
     .edge-flow {
-      stroke:var(--blue); stroke-width:1.6; fill:none; stroke-linecap:round;
-      stroke-dasharray:5 44; animation:flow 2.6s linear infinite;
+      stroke:var(--blue); stroke-width:2.2; fill:none; stroke-linecap:round;
+      stroke-dasharray:7 93;
+      filter:drop-shadow(0 0 3px var(--blue));
+      opacity:.5;
+      animation:pipe-run 3.2s linear infinite;
+      transition:opacity .2s ease;
     }
-    .edge-flow.f2 { animation-duration:3.1s; animation-delay:.35s; }
-    .edge-flow.f3 { animation-duration:2.9s; animation-delay:.7s; }
-    .edge-flow.f4 { animation-duration:3.4s; animation-delay:.2s; }
-    .edge-flow.f5 { animation-duration:2.7s; animation-delay:.9s; }
-    @keyframes flow { from{stroke-dashoffset:0} to{stroke-dashoffset:-320} }
-    .node-ring {
-      fill:none; stroke:var(--blue); stroke-width:1.2;
-      transform-origin:center; transform-box:fill-box;
-      animation:ring 2.8s ease-out infinite;
-    }
-    .node-ring.r2 { animation-delay:1.4s; }
-    @keyframes ring { 0%{transform:scale(.85);opacity:.6} 70%,100%{transform:scale(2.4);opacity:0} }
+    /* the pipes feeding the taken stage run brighter and quicker */
+    .edge-flow.lit { opacity:1; animation-duration:1.9s;
+      filter:drop-shadow(0 0 5px var(--blue)) drop-shadow(0 0 10px var(--blue)); }
+    @keyframes pipe-run { from{stroke-dashoffset:100} to{stroke-dashoffset:0} }
     .node-box  { fill:var(--bg-alt); stroke:var(--rule-strong); }
     .node-box.on { fill:var(--blue-pale); stroke:var(--blue); }
     .node-txt  { fill:var(--ink-3); font-family:var(--mono); font-size:10px; }
     .node-txt.on { fill:var(--ink); }
+    /* the stage index, drawn small above each box like a part number */
+    .node-ix { fill:var(--ink-dim); font-family:var(--mono); font-size:9px; letter-spacing:.08em; }
 
-    .tc-skill { margin-bottom:11px; }
-    .tc-skill:last-child { margin-bottom:0; }
-    .tc-skill-head {
-      display:flex; justify-content:space-between;
-      font-family:var(--mono); font-size:.65rem; color:var(--ink-3); margin-bottom:5px;
+    /* the legend: one panel per stage, swapped by the diagram */
+    .tc-read { margin-top:16px; border-top:1px solid var(--rule); padding-top:14px; }
+    .tc-rd { }
+    .tc-rd-h {
+      display:flex; align-items:baseline; gap:9px; margin-bottom:7px;
+      font-family:var(--mono); font-size:.75rem; letter-spacing:.14em; text-transform:uppercase;
     }
-    .tc-skill-pct { color:var(--blue); font-weight:400; font-variant-numeric:tabular-nums; }
-    .tc-skill-track { height:3px; background:var(--rule); border-radius:2px; overflow:hidden; }
-    .tc-skill-fill {
-      height:100%; border-radius:2px; background:var(--blue);
-      transform:scaleX(0); transform-origin:left;
-      transition:transform .85s cubic-bezier(.4,0,.2,1);
+    .tc-rd-n { color:var(--blue); font-variant-numeric:tabular-nums; }
+    .tc-rd-t { color:var(--ink); }
+    .tc-rd-d { font-size:.8125rem; line-height:1.6; color:var(--ink-3); margin:0 0 10px; }
+    .tc-rd-tags { display:flex; flex-wrap:wrap; gap:5px; }
+    .tc-rd-tags span {
+      font-family:var(--mono); font-size:.75rem; letter-spacing:.04em;
+      color:var(--ink-3); background:var(--bg-alt);
+      border:1px solid var(--rule); border-radius:4px; padding:2px 8px;
     }
-    .tc-skill-fill.in { transform:scaleX(1); }
 
     /* ── TICKER ── */
     .ticker-wrap {
@@ -315,7 +322,7 @@
     }
     .ticker-track { display:flex; white-space:nowrap; width:max-content; animation:ticker 34s linear infinite; }
     .ticker-item {
-      font-family:var(--mono); font-size:.7rem;
+      font-family:var(--mono); font-size:.75rem;
       letter-spacing:.1em; text-transform:uppercase; color:var(--ink-3); padding:0 26px;
     }
     .t-sep { color:var(--blue); margin:0 4px; }
@@ -336,14 +343,14 @@
     }
     .stat-unit { font-size:.44em; color:var(--blue); font-weight:400; vertical-align:super; }
     .stat-lbl {
-      font-family:var(--mono); font-size:.62rem;
+      font-family:var(--mono); font-size:.75rem;
       letter-spacing:.15em; text-transform:uppercase; color:var(--ink-dim);
     }
 
     /* ── SECTION SCAFFOLD ── */
     .section { padding:104px 0; }
     .sec-eye {
-      font-family:var(--mono); font-size:.68rem;
+      font-family:var(--mono); font-size:.75rem;
       letter-spacing:.22em; text-transform:uppercase; color:var(--blue);
       margin-bottom:14px; display:block;
     }
@@ -382,7 +389,7 @@
       background:var(--surface); border:1px solid var(--rule);
       border-radius:var(--r); padding:26px 26px 22px;
       box-shadow:var(--sh-sm);
-      border-top:3px solid var(--rule-strong);
+      border-top:1px solid var(--rule-strong);
       transition:box-shadow .22s, transform .22s, border-color .22s;
     }
     .exp-mcard:hover { box-shadow:var(--sh-md); transform:translateY(-4px); border-color:var(--rule-strong); }
@@ -410,7 +417,7 @@
     .mc-desc  { font-size:.875rem; color:var(--ink-3); line-height:1.65; margin-bottom:14px; }
     .mc-tags  { display:flex; flex-wrap:wrap; gap:5px; }
     .mc-tag {
-      font-family:var(--mono); font-size:.58rem;
+      font-family:var(--mono); font-size:.75rem;
       letter-spacing:.06em; text-transform:uppercase;
       color:var(--ink-3); background:var(--bg-alt); border:1px solid var(--rule);
       border-radius:4px; padding:2px 8px;
@@ -462,10 +469,10 @@
     .era-blurb { margin-bottom:18px; font-size:.97rem; line-height:1.75; color:var(--ink-3); max-width:720px; text-wrap:pretty; }
     .era-metrics { display:flex; flex-wrap:wrap; gap:22px 40px; margin-bottom:20px; }
     .era-mv { font-family:var(--mono); font-size:1.5rem; font-weight:400; color:var(--blue-disp); line-height:1; }
-    .era-mk { font-family:var(--mono); font-size:.62rem; letter-spacing:.14em; text-transform:uppercase; color:var(--ink-dim); margin-top:7px; }
+    .era-mk { font-family:var(--mono); font-size:.75rem; letter-spacing:.14em; text-transform:uppercase; color:var(--ink-dim); margin-top:7px; }
     .era-stack { display:flex; flex-wrap:wrap; gap:6px; }
     .era-tag {
-      font-family:var(--mono); font-size:.62rem; letter-spacing:.06em; text-transform:uppercase;
+      font-family:var(--mono); font-size:.75rem; letter-spacing:.06em; text-transform:uppercase;
       color:var(--ink-3); background:var(--bg-alt); border:1px solid var(--rule);
       border-radius:4px; padding:4px 10px;
     }
@@ -497,7 +504,7 @@
     .ptbl-row[hidden] { display:none; }
     .ptbl-head { background:var(--bg-alt); animation:none; }
     .ptbl-head > div {
-      padding:13px 20px; font-family:var(--mono); font-size:.63rem;
+      padding:13px 20px; font-family:var(--mono); font-size:.75rem;
       letter-spacing:.14em; text-transform:uppercase; color:var(--ink-dim); font-weight:400;
     }
     .p-name { padding:16px 20px; font-family:var(--mono); font-size:.875rem; font-weight:400; color:var(--ink); }
@@ -523,7 +530,7 @@
     @keyframes spinBack { to { transform:rotate(-360deg) } }
     #contact .wrap { position:relative; z-index:1; }
     .cta-label {
-      font-family:var(--mono); font-size:.7rem;
+      font-family:var(--mono); font-size:.75rem;
       letter-spacing:.2em; text-transform:uppercase; color:var(--blue);
       margin-bottom:20px; display:block;
     }
@@ -581,7 +588,10 @@
     @media(prefers-reduced-motion:reduce){
       *, *::before, *::after { animation:none !important; transition:none !important; }
       .reveal, .hero-left, .hero-right { opacity:1; transform:none; }
-      .tc-skill-fill { transform:scaleX(1); }
+      /* packets cannot run, so the lit path is drawn solid and the rest
+         of the pipes are left to the wires */
+      .edge-flow { display:none; }
+      .edge-flow.lit { display:block; stroke-dasharray:none; opacity:1; filter:none; }
       .trace { stroke-dashoffset:0; }
       .stop { opacity:1; transform:none; }
       .track-r { transform:translateX(-50%); }
@@ -634,10 +644,6 @@
   <div class="wrap hero-inner">
 
     <div class="hero-left">
-      <div class="hero-label">
-        <span class="pulse"></span>
-        Available for new challenges · 2026
-      </div>
       <h1 class="hero-h1">
         <span class="ln"><span>AI products,</span></span>
         <span class="ln"><span>diagram to</span></span>
@@ -660,82 +666,99 @@
     <div class="hero-right">
       <div class="sys-card">
         <div class="tc-bar">
-          <span class="tc-dot tc-dot-r"></span>
-          <span class="tc-dot tc-dot-y"></span>
-          <span class="tc-dot tc-dot-g"></span>
-          <span class="tc-path">~/topology.live</span>
+          <span class="tc-plate">Fig. <b>01</b></span>
+          <span class="tc-flow">ingest → serve</span>
         </div>
         <div class="tc-body">
-          <span class="tc-label">pipeline — ingest to serve</span>
+          <div class="tc-plot"><span class="tc-reg" aria-hidden="true"></span>
 
-          <svg class="topo" viewBox="0 0 360 186" role="img" aria-label="System topology: ingest to stream to model to serve, with a store branch">
-            <path class="edge-base" d="M90,38 H138"></path>
-            <path class="edge-base" d="M222,38 H270"></path>
-            <path class="edge-base" d="M180,54 C180,96 102,92 102,132"></path>
-            <path class="edge-base" d="M312,54 C312,102 246,96 246,132"></path>
-            <path class="edge-base" d="M144,148 H204"></path>
+          <svg class="topo" viewBox="0 0 360 186" role="tablist" aria-label="Pipeline stages, ingest to serve">
+            <defs>
+              <marker id="topo-ar" viewBox="0 0 8 8" refX="7" refY="4"
+                      markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+                <path class="topo-arrow" d="M0,1 L7,4 L0,7 Z"></path>
+              </marker>
+            </defs>
 
-            <path class="edge-flow"    d="M90,38 H138"></path>
-            <path class="edge-flow f2" d="M222,38 H270"></path>
-            <path class="edge-flow f3" d="M180,54 C180,96 102,92 102,132"></path>
-            <path class="edge-flow f4" d="M312,54 C312,102 246,96 246,132"></path>
-            <path class="edge-flow f5" d="M144,148 H204"></path>
+            <!-- the wires, drawn with direction -->
+            <path class="edge-base" marker-end="url(#topo-ar)" d="M90,38 H131"></path>
+            <path class="edge-base" marker-end="url(#topo-ar)" d="M222,38 H263"></path>
+            <path class="edge-base" marker-end="url(#topo-ar)" d="M180,54 C180,106 102,96 102,133"></path>
+            <path class="edge-base" marker-end="url(#topo-ar)" d="M312,54 C312,112 246,100 246,133"></path>
+            <path class="edge-base" marker-end="url(#topo-ar)" d="M144,156 H197"></path>
 
-            <circle class="node-ring"    cx="312" cy="38"  r="7"></circle>
-            <circle class="node-ring r2" cx="246" cy="148" r="7"></circle>
-            <g class="node" data-skill="3" role="button" tabindex="0"
-               aria-label="ingest layer">
-              <rect class="hitpad" x="0" y="16" width="96" height="44"></rect>
+            <!-- the packets -->
+            <path class="edge-flow" data-e="e1" pathLength="100" style="animation-delay:0s"    d="M90,38 H131"></path>
+            <path class="edge-flow" data-e="e2" pathLength="100" style="animation-delay:.42s"  d="M222,38 H263"></path>
+            <path class="edge-flow" data-e="e3" pathLength="100" style="animation-delay:.84s"  d="M180,54 C180,106 102,96 102,133"></path>
+            <path class="edge-flow" data-e="e4" pathLength="100" style="animation-delay:1.26s" d="M312,54 C312,112 246,100 246,133"></path>
+            <path class="edge-flow" data-e="e5" pathLength="100" style="animation-delay:1.68s" d="M144,156 H197"></path>
+
+            <g class="node" data-rd="0" data-path="" role="tab" tabindex="0"
+               aria-controls="rd-0" aria-selected="false" aria-label="ingest stage">
+              <rect class="hitpad" x="0" y="8" width="96" height="52"></rect>
+              <text class="node-ix" x="6" y="17">01</text>
               <rect class="node-box" x="6" y="22" width="84" height="32" rx="5"></rect>
               <text class="node-txt" x="48" y="42" text-anchor="middle">ingest</text>
             </g>
-            <g class="node" data-skill="4" role="button" tabindex="0"
-               aria-label="stream layer">
-              <rect class="hitpad" x="132" y="16" width="96" height="44"></rect>
+            <g class="node" data-rd="1" data-path="e1" role="tab" tabindex="-1"
+               aria-controls="rd-1" aria-selected="false" aria-label="stream stage">
+              <rect class="hitpad" x="132" y="8" width="96" height="52"></rect>
+              <text class="node-ix" x="138" y="17">02</text>
               <rect class="node-box" x="138" y="22" width="84" height="32" rx="5"></rect>
               <text class="node-txt" x="180" y="42" text-anchor="middle">stream</text>
             </g>
-            <g class="node" data-skill="0" role="button" tabindex="0"
-               aria-label="model layer">
-              <rect class="hitpad" x="264" y="16" width="96" height="44"></rect>
+            <g class="node" data-rd="2" data-path="e1 e2" role="tab" tabindex="-1"
+               aria-controls="rd-2" aria-selected="true" aria-label="model stage">
+              <rect class="hitpad" x="264" y="8" width="96" height="52"></rect>
+              <text class="node-ix" x="270" y="17">03</text>
               <rect class="node-box on" x="270" y="22" width="84" height="32" rx="5"></rect>
               <text class="node-txt on" x="312" y="42" text-anchor="middle">model</text>
             </g>
-            <g class="node" data-skill="2" role="button" tabindex="0"
-               aria-label="store layer">
-              <rect class="hitpad" x="54" y="126" width="96" height="44"></rect>
-              <rect class="node-box" x="60" y="132" width="84" height="32" rx="5"></rect>
-              <text class="node-txt" x="102" y="152" text-anchor="middle">store</text>
+            <g class="node" data-rd="3" data-path="e1 e3" role="tab" tabindex="-1"
+               aria-controls="rd-3" aria-selected="false" aria-label="store stage">
+              <rect class="hitpad" x="54" y="126" width="96" height="52"></rect>
+              <text class="node-ix" x="60" y="135">04</text>
+              <rect class="node-box" x="60" y="140" width="84" height="32" rx="5"></rect>
+              <text class="node-txt" x="102" y="160" text-anchor="middle">store</text>
             </g>
-            <g class="node" data-skill="1" role="button" tabindex="0"
-               aria-label="serve layer">
-              <rect class="hitpad" x="198" y="126" width="96" height="44"></rect>
-              <rect class="node-box on" x="204" y="132" width="84" height="32" rx="5"></rect>
-              <text class="node-txt on" x="246" y="152" text-anchor="middle">serve</text>
+            <g class="node" data-rd="4" data-path="e1 e2 e4" role="tab" tabindex="-1"
+               aria-controls="rd-4" aria-selected="false" aria-label="serve stage">
+              <rect class="hitpad" x="198" y="126" width="96" height="52"></rect>
+              <text class="node-ix" x="204" y="135">05</text>
+              <rect class="node-box" x="204" y="140" width="84" height="32" rx="5"></rect>
+              <text class="node-txt" x="246" y="160" text-anchor="middle">serve</text>
             </g>
           </svg>
+          </div>
 
-          <span class="tc-label mt">skill_confidence</span>
-          <div class="tc-skills">
-            <div class="tc-skill">
-              <div class="tc-skill-head"><span>LLM / AI Engineering</span><span class="tc-skill-pct">95%</span></div>
-              <div class="tc-skill-track"><div class="tc-skill-fill" style="width:95%"></div></div>
+          <!-- The legend. Every panel ships rendered; the script hides the
+               four it is not showing, so no-JS reads all five in order. -->
+          <div class="tc-read">
+            <div class="tc-rd" id="rd-0" role="tabpanel">
+              <div class="tc-rd-h"><span class="tc-rd-n">01</span><span class="tc-rd-t">Ingest</span></div>
+              <p class="tc-rd-d">Where the feeds land — batch drops, change streams, and whatever the upstream team decided to call an API.</p>
+              <div class="tc-rd-tags"><span>Kafka</span><span>Airflow</span><span>dbt</span></div>
             </div>
-            <div class="tc-skill">
-              <div class="tc-skill-head"><span>Backend Systems</span><span class="tc-skill-pct">92%</span></div>
-              <div class="tc-skill-track"><div class="tc-skill-fill" style="width:92%"></div></div>
+            <div class="tc-rd" id="rd-1" role="tabpanel">
+              <div class="tc-rd-h"><span class="tc-rd-n">02</span><span class="tc-rd-t">Stream</span></div>
+              <p class="tc-rd-d">Moving data while it is still worth something. Backpressure is most of the job.</p>
+              <div class="tc-rd-tags"><span>Kafka</span><span>Spark</span><span>Flink</span></div>
             </div>
-            <div class="tc-skill">
-              <div class="tc-skill-head"><span>Cloud Infrastructure</span><span class="tc-skill-pct">90%</span></div>
-              <div class="tc-skill-track"><div class="tc-skill-fill" style="width:90%"></div></div>
+            <div class="tc-rd" id="rd-2" role="tabpanel">
+              <div class="tc-rd-h"><span class="tc-rd-n">03</span><span class="tc-rd-t">Model</span></div>
+              <p class="tc-rd-d">RAG, agent orchestration and evals. The hard part was never the first prompt working — it is the hundredth.</p>
+              <div class="tc-rd-tags"><span>LLMs</span><span>RAG</span><span>Agents</span><span>MLOps</span></div>
             </div>
-            <div class="tc-skill">
-              <div class="tc-skill-head"><span>Data Engineering</span><span class="tc-skill-pct">88%</span></div>
-              <div class="tc-skill-track"><div class="tc-skill-fill" style="width:88%"></div></div>
+            <div class="tc-rd" id="rd-3" role="tabpanel">
+              <div class="tc-rd-h"><span class="tc-rd-n">04</span><span class="tc-rd-t">Store</span></div>
+              <p class="tc-rd-d">Warehouses, vector indexes, and the cloud underneath them — all of it as code.</p>
+              <div class="tc-rd-tags"><span>AWS</span><span>Terraform</span><span>K8s</span></div>
             </div>
-            <div class="tc-skill">
-              <div class="tc-skill-head"><span>Platform Engineering</span><span class="tc-skill-pct">85%</span></div>
-              <div class="tc-skill-track"><div class="tc-skill-fill" style="width:85%"></div></div>
+            <div class="tc-rd" id="rd-4" role="tabpanel">
+              <div class="tc-rd-h"><span class="tc-rd-n">05</span><span class="tc-rd-t">Serve</span></div>
+              <p class="tc-rd-d">APIs built to be boring: high throughput, and still standing the morning after traffic triples.</p>
+              <div class="tc-rd-tags"><span>Go</span><span>Java</span><span>gRPC</span></div>
             </div>
           </div>
         </div>
@@ -1176,15 +1199,6 @@
   }, {threshold: .4});
   const st = document.getElementById('stats');
   if (st) obs.observe(st);
-})();
-
-// SKILL BAR ANIMATION
-(function(){
-  const fills = [...document.querySelectorAll('.tc-skill-fill')];
-  const obs = new IntersectionObserver(entries => {
-    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); obs.unobserve(e.target); } });
-  }, {threshold: .3});
-  fills.forEach(f => obs.observe(f));
 })();
 
 // SCROLL REVEAL

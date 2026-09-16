@@ -94,10 +94,19 @@ it changes is scale, composition and responsiveness:
 - Each section gets an oversized outline numeral in the margin
   (`data-sig="02"` on the `<section>`), drawn as a stroke so it stays
   texture rather than hierarchy.
-- The hero topology is wired to the confidence bars beneath it: each
-  `.topo .node[data-skill="n"]` lights `.tc-skill` number `n`. It adds no
-  new labels — it only makes a correspondence the card already had
-  visible.
+- The hero card is a **spec plate, not a terminal**. It wore macOS traffic
+  lights and rated its own skills out of 100; both were costume, and the
+  descending 95/92/90/88/85 was a tell of its own. It now presents as what
+  it draws: a plate number, hairline registration marks, and a legend.
+  Taking a stage answers three ways at once — the box fills, the pipes
+  feeding it carry traffic (`data-path` on the node names the `data-e`
+  edges), and `.tc-read` swaps to that stage's `.tc-rd` panel. A real
+  tablist: arrow keys, Home/End, one tab stop.
+  Two rules it keeps: the five panels all ship rendered and the script
+  hides four, so no-JS reads them in order; and `.probing` is only added
+  once the reader has actually taken a stage, so setting up never looks
+  like being used. A figure here must be checkable — the stage index is,
+  a self-rating was not.
 - The six layers are a **stack**, not a marquee: six plates offset into
   a staircase, one open at a time, wired to its detail panel by a
   hairline that tracks whichever plate you took. It is a real tablist —

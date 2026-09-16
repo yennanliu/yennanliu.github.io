@@ -82,9 +82,11 @@
   left: 5px;
   top: .55rem;
   width: 1px;
-  height: calc((100% - 1.1rem) * var(--sig-rail-p, 0));
+  height: calc(100% - 1.1rem);
   background: var(--blue);
-  transition: height .25s linear;
+  transform: scaleY(var(--sig-rail-p, 0));
+  transform-origin: top center;
+  transition: transform .25s linear;
 }
 
 .sig-stop {
@@ -97,7 +99,7 @@
   background: none;
   cursor: pointer;
   font-family: var(--mono);
-  font-size: .58rem;
+  font-size: .75rem;
   letter-spacing: .16em;
   text-transform: uppercase;
   color: var(--ink-dim);
@@ -217,33 +219,35 @@ section[data-sig] > * { position: relative; z-index: 1; }
 }
 
 /* ── 5. THE TOPOLOGY, MADE INTERROGABLE ────────────────────────────────
-   The diagram was decorative. Now each node is a control: take one and
-   the matching confidence bar below lights up, and the rest recede. No
-   new labels — it just wires two things the card already showed.        */
+   Each node is a control. Take one and three things answer at once: the
+   box fills, the pipes that feed it carry traffic, and the legend below
+   swaps to that stage. It is a real tablist — arrow keys, Home/End, one
+   tab stop — the same contract the six-layer stack keeps.
+
+   It replaced a set of self-rated percentage bars. A number nobody can
+   check is not evidence, and 95 / 92 / 90 / 88 / 85 is a tell of its own;
+   what the stage actually runs on says more and can be argued with.     */
 
 .topo .node { cursor: pointer; }
 .topo .node .node-box,
-.topo .node .node-txt { transition: fill .2s ease, stroke .2s ease, opacity .2s ease; }
+.topo .node .node-txt,
+.topo .node .node-ix { transition: fill .2s ease, stroke .2s ease, opacity .2s ease; }
 
 .topo .node .hitpad { fill: transparent; }
 
-.sys-card.probing .topo .node { opacity: .38; }
+/* the taken stage holds; the others step back but stay legible */
+.sys-card.probing .topo .node { opacity: .45; }
 .sys-card.probing .topo .node.sel { opacity: 1; }
 .sys-card.probing .topo .node.sel .node-box { fill: var(--blue-pale); stroke: var(--blue); }
 .sys-card.probing .topo .node.sel .node-txt { fill: var(--ink); }
+.sys-card.probing .topo .node.sel .node-ix  { fill: var(--blue); }
 
 .topo .node:hover .node-box  { stroke: var(--blue); }
 .topo .node:focus-visible    { outline: none; }
 .topo .node:focus-visible .node-box { stroke: var(--blue); stroke-width: 2; }
 
-.tc-skill { transition: opacity .2s ease; }
-.sys-card.probing .tc-skill { opacity: .32; }
-.sys-card.probing .tc-skill.lit { opacity: 1; }
-.tc-skill.lit .tc-skill-head span:first-child { color: var(--ink); }
-.tc-skill.lit .tc-skill-track { box-shadow: 0 0 0 1px var(--blue-border); }
-
-/* the card stops bobbing while it is being read */
-.sys-card:hover, .sys-card.probing { animation-play-state: paused; }
+/* the legend panel for whichever stage is taken */
+.tc-rd[hidden] { display: none; }
 
 /* ── 7. FIGURES ────────────────────────────────────────────────────────
    The stats band is the page's only pure-number moment, so let it be
@@ -327,7 +331,7 @@ section[data-sig] > * { position: relative; z-index: 1; }
   overflow: hidden;
   background: var(--surface);
   border: 1px solid var(--rule);
-  border-left: 3px solid color-mix(in oklab, var(--mc) 55%, var(--rule));
+  border-left: 1px solid color-mix(in oklab, var(--mc) 55%, var(--rule));
   border-radius: var(--r);
   /* the staircase: each plate sits a little further in than the last,
      so you see the edge of every layer at once */
@@ -340,7 +344,7 @@ section[data-sig] > * { position: relative; z-index: 1; }
 
 .plate-n {
   font-family: var(--mono);
-  font-size: .74rem;
+  font-size: .75rem;
   letter-spacing: .1em;
   color: var(--ink-dim);
   font-variant-numeric: tabular-nums;
@@ -390,7 +394,7 @@ section[data-sig] > * { position: relative; z-index: 1; }
   padding: 1.9rem 2rem 2rem;
   background: var(--surface);
   border: 1px solid var(--rule);
-  border-top: 3px solid var(--mc);
+  border-top: 1px solid var(--mc);
   border-radius: var(--r-lg);
   box-shadow: var(--sh-sm);
 }
@@ -534,7 +538,7 @@ section[data-sig] > * { position: relative; z-index: 1; }
   70%, 100% { transform: scale(2.9); opacity: 0; }
 }
 
-.stop .hit { r: 6; transition: r .25s cubic-bezier(.2, .9, .3, 1.4), fill .2s ease; }
+.stop .hit { r: 6; transition: r .25s cubic-bezier(.22, 1, .36, 1), fill .2s ease; }
 .stop.active .hit { r: 7.5; }
 .stop:hover .hit { r: 8; }
 

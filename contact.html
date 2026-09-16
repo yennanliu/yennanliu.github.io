@@ -252,7 +252,8 @@
             height: 40vh;
             display: flex;
             align-items: center;
-            background: linear-gradient(135deg, rgba(37, 99, 235, 0.1) 0%, rgba(5, 150, 105, 0.1) 100%);
+            background: var(--fl-surface);
+            border-bottom: 1px solid var(--fl-hair);
             border-radius: 0 0 var(--fl-r-xl) var(--fl-r-xl);
             margin-bottom: 40px;
             position: relative;
@@ -264,16 +265,7 @@
             z-index: 2;
          }
          
-         .hero-bg {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            z-index: 1;
-            opacity: 0.3;
-            background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1IiBoZWlnaHQ9IjUiPgo8cmVjdCB3aWR0aD0iNSIgaGVpZ2h0PSI1IiBmaWxsPSIjZmZmIj48L3JlY3Q+CjxyZWN0IHdpZHRoPSIxIiBoZWlnaHQ9IjEiIGZpbGw9IiNjY2MiPjwvcmVjdD4KPC9zdmc+');
-         }
+         .hero-bg { display: none; }
          
          .display-4 {
             font-weight: 300;
@@ -436,7 +428,7 @@
          }
          
          body.dark-mode .hero-section {
-            background: linear-gradient(135deg, rgba(122, 168, 255, 0.15) 0%, rgba(52, 211, 153, 0.15) 100%);
+            background: var(--fl-surface);
          }
          
          body.dark-mode .contact-form .form-control {
@@ -619,7 +611,7 @@
             font-size: 40px;
             line-height: 1.1;
             font-weight: 300;
-            color: #1f2937;
+            color: var(--fl-ink);   /* inverts with the theme; #1f2937 did not */
             margin-bottom: 20px;
          }
 
@@ -629,71 +621,11 @@
          }
 
          .contact-title-sub {
-            background-size: 400% 400%;
-            animation: contact-gradient-shift 3s ease-in-out infinite;
             display: inline-block;
             position: relative;
-            color: inherit;
+            color: var(--fl-muted);
          }
 
-         @keyframes contact-gradient-shift {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-         }
-
-         /* Glitch effect for "Let's Connect" */
-         .contact-glitch-text {
-            position: relative;
-         }
-
-         .contact-glitch-text::before,
-         .contact-glitch-text::after {
-            content: attr(data-text);
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: inherit;
-            -webkit-background-clip: text;
-            background-clip: text;
-         }
-
-         .contact-glitch-text::before {
-            animation: contact-glitch-1 2s infinite;
-            color: #dc2626;
-            z-index: -1;
-         }
-
-         .contact-glitch-text::after {
-            animation: contact-glitch-2 2s infinite;
-            color: var(--secondary-color);
-            z-index: -2;
-         }
-
-         @keyframes contact-glitch-1 {
-            0%, 14%, 15%, 49%, 50%, 99%, 100% {
-               transform: translate(0);
-            }
-            15% {
-               transform: translate(-2px, 2px);
-            }
-            50% {
-               transform: translate(2px, -2px);
-            }
-         }
-
-         @keyframes contact-glitch-2 {
-            0%, 20%, 21%, 62%, 63%, 99%, 100% {
-               transform: translate(0);
-            }
-            21% {
-               transform: translate(2px, -2px);
-            }
-            63% {
-               transform: translate(-2px, 2px);
-            }
-         }
 
          /* Enhanced Responsive Design for Contact Title */
 
@@ -760,10 +692,7 @@
             color: inherit;
          }
 
-         body.dark-mode .contact-title-sub {
-            background-size: 400% 400%;
-            color: inherit;
-         }
+         body.dark-mode .contact-title-sub { color: var(--fl-muted); }
       
          /* ── FinLab: quiet the page down ─────────────────────────────
             Flat surfaces, hairline rules, one accent, nothing shouts. */
@@ -845,11 +774,23 @@
             border-color: var(--fl-link);
             box-shadow: none;
          }
-         /* the RGB-split heading effect belongs to a louder site */
-         .contact-glitch-text::before,
-         .contact-glitch-text::after { display: none; }
-  </style>
+  
+         /* aos.css ships [data-aos] at opacity 0, so anything that stops
+            aos.js loading hides the content for good. Until the script has
+            confirmed it is live, the markup shows. */
+         html:not(.aos-live) [data-aos] {
+            opacity: 1 !important;
+            transform: none !important;
+         }
+</style>
       <link rel="stylesheet" href="css/finlab-theme.css">
+      <style>
+         /* Section headings under the page h1: h2 for the document outline,
+            held at the size and spacing they have always rendered at. */
+         .contact-sec-h { font-size: 1.25rem !important; margin-bottom: 1.5rem; }
+         .contact-sub-h { font-size: 1.0625rem !important; }
+      </style>
+
       <!-- Font Awesome -->
       <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet">
       <!-- Google Fonts -->
@@ -900,7 +841,7 @@
                      <h1 class="contact-title">
                         <span class="contact-title-main">Get In Touch.</span>
                         <br>
-                        <span class="contact-title-sub contact-glitch-text" data-text="Let's Connect.">Let's Connect.</span>
+                        <span class="contact-title-sub">Let's Connect.</span>
                      </h1>
                   </div>
                   <p class="lead">Have a project in mind or just want to say hello? I'd love to hear from you!</p>
@@ -915,7 +856,7 @@
             <div class="col-lg-6 mb-5" data-aos="fade-up" data-aos-delay="100">
                <div class="card h-100">
                   <div class="card-body">
-                     <h3 class="mb-4">Contact Information</h3>
+                     <h2 class="contact-sec-h">Contact Information</h2>
                      <div class="contact-info">
                         <p><i class="fas fa-user"></i> Software Engineer from Taiwan, ex UK, Amazon</p>
                         <p><i class="fas fa-envelope"></i> <a href="mailto:f339339@gmail.com">f339339@gmail.com</a></p>
@@ -923,7 +864,7 @@
                         <p><i class="fab fa-github"></i> <a href="https://github.com/yennanliu" target="_blank">github.com/yennanliu</a></p>
                      </div>
                      
-                     <h4 class="mt-5 mb-4">Connect With Me</h4>
+                     <h3 class="contact-sub-h mt-5 mb-4">Connect With Me</h3>
                      <div class="social-icons">
                         <a href="https://linkedin.com/in/yennanliu" target="_blank" class="social-icon">
                            <img src="https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png" alt="LinkedIn">
@@ -939,7 +880,7 @@
             <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200">
                <div class="card h-100">
                   <div class="card-body">
-                     <h3 class="mb-4">Send Me a Message</h3>
+                     <h2 class="contact-sec-h">Send Me a Message</h2>
                      <form class="contact-form" action="https://docs.google.com/forms/d/e/1FAIpQLSc4Kw4HrtFfh9dEvgmhgloJivxLpsjIXEjn8Kza2m_wuzOd6Q/formResponse" method="post" target="_blank">
                         <div class="form-group">
                            <input type="text" class="form-control" name="entry.115692485" placeholder="Your Name" required>
@@ -1010,12 +951,18 @@
       <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
       <!-- Custom JavaScript -->
       <script>
-         // Initialize AOS animation
-         AOS.init({
-             duration: 800,
-             easing: 'ease-in-out',
-             once: true
-         });
+         // Initialize AOS animation.
+         // Guarded: aos.js comes from a CDN, and an unguarded AOS.init() throws
+         // a ReferenceError when that request fails, taking the whole rest of
+         // this script with it. The class is what un-hides [data-aos] content.
+         if (window.AOS) {
+            document.documentElement.classList.add('aos-live');
+            AOS.init({
+                duration: 800,
+                easing: 'ease-in-out',
+                once: true
+            });
+         }
          
          // Scroll to top button functionality
          const scrollTopBtn = document.querySelector('.scroll-top');
