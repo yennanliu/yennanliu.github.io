@@ -26,6 +26,87 @@
         ],
         "createdAt": "2026-09-16T00:18:37.004Z",
         "reason": "Scanner artifact, verified. The detector renders pages with CDN stylesheets blocked, so Bootstrap 4.5.2's .container and .card-body padding is absent at scan time. Reproduced with a two-line fixture (bare .card + .card-body under the same CDN link) that trips the identical finding. The one local-CSS case, .ft-lower, has a demonstrable padding: 20px 0 against its only visible boundary (css/site-footer.css:97)."
+      },
+      {
+        "rule": "all-caps-body",
+        "value": "*",
+        "files": [
+          "ai_builder.html"
+        ],
+        "createdAt": "2026-09-16T00:25:00.909Z",
+        "reason": "Page identity, documented: CLAUDE.md defines ai_builder's panels as sharing the fan graph's mono vocabulary. The flagged runs are section headings marked up as div.h1 / .stage-t / .phase-t rather than h-elements, so the rule reads them as body prose; no running paragraph is uppercased."
+      },
+      {
+        "rule": "all-caps-body",
+        "value": "*",
+        "files": [
+          "portfolios.html"
+        ],
+        "createdAt": "2026-09-16T00:25:00.946Z",
+        "reason": "Mono uppercase catalogue labels (.rec-cat, .count, .keys) — the page's documented chrome vocabulary, not running prose."
+      },
+      {
+        "rule": "all-caps-body",
+        "value": "*",
+        "files": [
+          "index.html"
+        ],
+        "createdAt": "2026-09-16T00:25:00.958Z",
+        "reason": "One 35-char mono section label, not running prose."
+      },
+      {
+        "rule": "wide-tracking",
+        "value": "*",
+        "files": [
+          "ai_builder.html"
+        ],
+        "createdAt": "2026-09-16T00:25:10.108Z",
+        "reason": "Mono micro-labels at .05-.06em, not prose: .fan-txt i, .stage-ix, .pipe-d and the like. CLAUDE.md gives this page a mono vocabulary for chrome and figures."
+      },
+      {
+        "rule": "flat-type-hierarchy",
+        "value": "*",
+        "files": [
+          "contact.html"
+        ],
+        "createdAt": "2026-09-16T00:25:10.146Z",
+        "reason": "CLAUDE.md caps the type scale on purpose: 2.5rem is the largest character on any page and hierarchy comes from size and colour, not a wide ramp."
+      },
+      {
+        "rule": "extreme-negative-tracking",
+        "value": "*",
+        "files": [
+          "index.html"
+        ],
+        "createdAt": "2026-09-16T00:25:10.158Z",
+        "reason": "Display setting on the closing headline, which is large-format type, not body copy."
+      },
+      {
+        "rule": "layout-transition",
+        "value": "*",
+        "files": [
+          "ai_builder.html"
+        ],
+        "createdAt": "2026-09-16T00:25:15.907Z",
+        "reason": "The .bud-s context-budget segments are proportional and carry text labels inside them, so scaleX would distort the labels. Five elements, transitioned only on a user toggle."
+      },
+      {
+        "rule": "clipped-overflow-container",
+        "value": "*",
+        "files": [
+          "*.html"
+        ],
+        "createdAt": "2026-09-16T00:25:15.920Z",
+        "reason": "body { overflow-x: hidden } is a deliberate guard against horizontal scroll from the off-canvas signature layer (pipeline rail, oversized margin numerals, ticker). It propagates to the viewport so it does not break the sticky nav, and these pages have no popover that needs to escape the body."
+      },
+      {
+        "rule": "layout-transition",
+        "value": "*",
+        "files": [
+          "css/index-signature.css"
+        ],
+        "createdAt": "2026-09-16T00:25:52.366Z",
+        "reason": "Forced by SVG: the rule is on .traceClipRect, and a transform on a clipPath child is not honoured, so width is the only animatable property. The comment above the rule in the file says the same."
       }
     ]
   }

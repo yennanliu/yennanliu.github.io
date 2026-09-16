@@ -82,9 +82,11 @@
   left: 5px;
   top: .55rem;
   width: 1px;
-  height: calc((100% - 1.1rem) * var(--sig-rail-p, 0));
+  height: calc(100% - 1.1rem);
   background: var(--blue);
-  transition: height .25s linear;
+  transform: scaleY(var(--sig-rail-p, 0));
+  transform-origin: top center;
+  transition: transform .25s linear;
 }
 
 .sig-stop {
@@ -534,7 +536,7 @@ section[data-sig] > * { position: relative; z-index: 1; }
   70%, 100% { transform: scale(2.9); opacity: 0; }
 }
 
-.stop .hit { r: 6; transition: r .25s cubic-bezier(.2, .9, .3, 1.4), fill .2s ease; }
+.stop .hit { r: 6; transition: r .25s cubic-bezier(.22, 1, .36, 1), fill .2s ease; }
 .stop.active .hit { r: 7.5; }
 .stop:hover .hit { r: 8; }
 
