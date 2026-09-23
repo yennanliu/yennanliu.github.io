@@ -49,89 +49,87 @@ bundle exec jekyll serve
 
 ## Styling System
 
-The whole site runs on one design system, adapted from finlab.finance:
-a quiet, light research-desk look. Two shared stylesheets carry it.
+The whole site runs on one design system: two inks and one typeface. Two
+shared stylesheets carry it. The files keep their historical names
+(`finlab.css`, `--fl-*`) because every page is written against those
+names; the values are the black-and-white system described here.
 
 - `css/finlab.css` — tokens (`--fl-*`) plus base and primitives. Load it
   **before** a page's own `<style>` block.
-- `css/finlab-theme.css` — the normalisation layer: type, weight, radius,
-  shadow and nav appearance. Load it **after** the page's `<style>` block
-  so it wins the cascade. It never sets layout properties.
+- `css/finlab-theme.css` — the normalisation layer: face, width, weight,
+  radius, shadow, button and label appearance. Load it **after** the
+  page's `<style>` block so it wins the cascade. It never sets layout
+  properties.
 
 The rules the system is built on:
 
-- **Two weights only** — 300 for display, 400 for everything else. Nothing
-  on the site is bold; hierarchy comes from size and colour.
-- **A capped scale** — 2.5rem is the largest character on any page; body
-  is 1rem at line-height 1.7; the floor is 12px.
-- **Space Grotesk** display, **DM Sans** body, system mono for figures
-  and chrome. Reference them as `var(--fl-display|body|mono)`.
-- **Hairline rules, not shadows** — 1px `--fl-hair` does the structural
-  work; the four shadow tokens are a whisper.
-- **Flat surfaces** — no gradients. The ground steps
-  `#fff` → `#fbfcfe` → `#f8fafc` → `#f5f5f7`.
-- **One blue for action** (`--fl-link`), ink for the single filled button
-  per view; green/red are reserved for data that moves.
-- **Light is the default.** Dark is opt-in; no page follows the OS
-  preference any more.
-- 0.16s ease for state changes, and `prefers-reduced-motion` honoured.
+- **Two inks, no third.** `#000` and `#fff` plus a short neutral grey
+  ramp. Nothing is tinted (no `#0b0b0b`, no slate). There is no accent
+  colour: emphasis is inversion — a black band, an ink-filled row on
+  hover, one filled button. The "signal" and categorical tokens still
+  exist by name and resolve to greys.
+- **One family, three widths.** Archivo variable, loaded from Google
+  Fonts with `wdth,wght@62..125,100..900`. Display type is wide
+  (`--fl-wide`, 118%) and light (300); body is normal width at 400;
+  small interface text and captions are narrow (`--fl-narrow`, 82%) at
+  500. The width axis does the work a second typeface would have done.
+  Reference faces as `var(--fl-display|body|mono)`; mono is for repo
+  names and code identifiers only.
+- **Three weights only** — 300 / 400 / 500. Nothing is bold.
+- **Sentence case everywhere.** No tracked capitals, no eyebrow labels
+  over every heading, no `01 / 02 / 03` numbering unless the content is
+  actually a sequence (the career path is; the six layers are not), no
+  middle dots or arrows inside link text.
+- **Scale:** body 1.0625rem at line-height 1.6; section heading
+  `--fl-fs-title`; page heading `--fl-fs-zone`; `--fl-fs-xl` is the front
+  door's headline and the closing statement, and needs the `xl` class on
+  an `h1` to escape the normalisation layer's size rule.
+- **Square panels, pill controls.** Large surfaces and images have no
+  radius; buttons and tags are pills; inputs are 4px. Nothing casts a
+  shadow — structure comes from 1px rules: `--fl-hair` (soft grey) inside
+  lists, `--fl-line` (ink) between sections.
+- **Photographs are greyscale until touched.** `finlab.css` applies
+  `filter: grayscale(1)` to every `img`/`video` and lifts it on hover or
+  focus of the image, its link, or its figure. Inline SVG is drawn from
+  the tokens and is exempt.
+- **Motion answers an action.** Row and block hovers invert; images
+  regain colour; accordions open. The one non-triggered sequence on the
+  site is the landing page's hero entrance. No per-section fade-ups, no
+  counters, no marquees, no typewriters. `prefers-reduced-motion` is
+  honoured everywhere.
+- **Light is the default.** Dark is the same ramp read from the other
+  end (see below).
 
 ### The landing page
 
-`index.html` alone carries a signature layer on top of the system —
-`css/index-signature.css` and `js/index-signature.js`, both loaded last
-and only there. The front door is allowed to speak up; the rest of the
-site stays quiet.
+`index.html` carries no extra stylesheet; its `<style>` block is the
+whole page. The one deliberately loud element is the hero headline: a
+black band starts two and a quarter lines into it, and everything in the
+hero is drawn white with `mix-blend-mode: difference`, so the type is
+black on the paper, white on the band, and the third line is half of
+each. Two additive scripts, both skipped under reduced motion: the band
+rises into place on load, and the seam climbs a little with the scroll.
+The markup is complete without them — the band sits at rest in CSS and
+the script only adds the offset it then removes.
 
-It keeps the palette, the hairlines, the two weights and the mono. What
-it changes is scale, composition and responsiveness:
+The seam is computed from the headline size (`--seam: calc(var(--pt) +
+var(--xl) * 2.2)`), so change `--xl` on `.hero`, never the `h1`'s
+`font-size` directly, or the band will stop lining up.
 
-- The hero headline is **the one deliberate break of the 2.5rem cap** —
-  it goes to 5.25rem at weight 300. If you raise the cap anywhere else,
-  the break stops reading as intentional.
-- A pipeline rail down the left edge marks the five sections and fills
-  as you scroll; a hairline across the top tracks read progress.
-- Each section gets an oversized outline numeral in the margin
-  (`data-sig="02"` on the `<section>`), drawn as a stroke so it stays
-  texture rather than hierarchy.
-- The hero topology is wired to the confidence bars beneath it: each
-  `.topo .node[data-skill="n"]` lights `.tc-skill` number `n`. It adds no
-  new labels — it only makes a correspondence the card already had
-  visible.
-- The six layers are a **stack**, not a marquee: six plates offset into
-  a staircase, one open at a time, wired to its detail panel by a
-  hairline that tracks whichever plate you took. It is a real tablist —
-  arrow keys, Home/End, one tab stop.
-- The trajectory chart is an instrument, not a picture: the scope fills
-  only as far as the era you take, a lead path carries the accent up to
-  that point over a ghost of the whole curve, a packet runs the path on
-  a loop, and the panel's figures count up. Where a year sits along the
-  curve is measured off the path with `getPointAtLength`, never
-  hard-coded, so the numbers stay right if the curve is redrawn.
-- Pointer spotlight on the hero grid.
-
-Two rules the stack exists to respect, worth keeping if you extend it:
-
-- **Decoration must never be able to hide content.** The entrance is a
-  transition, not a filled keyframe animation (`animation-fill-mode:
-  both` pins the *from* state until the animation runs, so a stalled
-  clock leaves the text invisible), and the class driving it is removed
-  once it has played.
-- **Script subtracts, markup is complete.** Nothing starts with `hidden`
-  or `opacity: 0` in the HTML/CSS; the script adds those once it is
-  running, so no-JS or a failed observer degrades to everything visible.
-
-All of it is additive: the page works with the JS removed, and every
-motion-driven part is skipped under `prefers-reduced-motion`.
+Below the hero: six hairline rows for the layers (the ink fill on hover
+bleeds into the page margin through a `::before`; the rules do not),
+a contact sheet of six greyscale plates linking into the portfolio
+records, two large blocks for the deeper pages, the career path (the one
+numbered-by-years sequence), and a black closing band that runs into the
+black footer.
 
 ### The AI-builder diagrams
 
 `ai_builder.html` carries its own set of explanatory panels below the
 run graph — KV cache, retrieval, the agent loop, harness engineering.
 They share the fan graph's vocabulary and add nothing new to the
-palette: hairlines, the one blue in four flat tints (`--tint` through
-`--tint-4`),
-mono for anything numeric.
+palette: hairlines and ink in four flat tints (`--tint` through
+`--tint-4`), mono only for the numeric readouts.
 
 - **Every figure on them is a model of a mechanism, not a measurement**,
   and each panel says so in a `.note` under the chart. Keep that line
@@ -144,7 +142,7 @@ mono for anything numeric.
   jumping, and `prefers-reduced-motion` snaps straight to the value.
 - A `.note` is a `<div>`, never a `<p>`: `finlab-theme.css` forces body
   face and base size onto `p` with `!important`, which would undo the
-  small mono caption.
+  small caption.
 - Rows that reorder (`.rank-i`) are positioned by a `--p` index against
   a `--rh` row height, both declared in the markup, so the list is in
   the right order before the script runs and stays right when the row
@@ -169,17 +167,20 @@ Every page's dark switch resolves to one palette, declared once in
 ```css
 :root[data-theme="dark"],   /* index, portfolios */
 :root[data-mode="ink"],     /* ai_builder        */
-body.dark-mode              /* the Bootstrap pages */
+body.dark-mode              /* the Bootstrap-era pages */
 ```
 
-It is a true near-black ground (`#0a0a0b`) with the ink/surface ramp
-turned inside out. Two things to know when adding to it:
+It is the same ramp swapped end for end: `--fl-ink` becomes `#fff`,
+`--fl-surface` becomes `#000`, and the black bands (hero band, closing
+band, footer) turn white. Two things to know when adding to it:
 
 - **Use `--fl-on-ink`, never `#fff`,** for text on an ink-filled control.
   `--fl-ink` inverts, so a hardcoded white foreground goes ink-on-ink and
-  disappears.
+  disappears. The landing page's hero is the one exception: its content
+  is literally `#fff` because the difference blend does the inverting.
 - Pages driven by their own tokens need a `body.dark-mode { … }` block
-  re-pointing those tokens; `finlab.css` cannot reach them.
+  re-pointing those tokens; `finlab.css` cannot reach them. Prefer
+  pointing page tokens at `var(--fl-*)` so this happens for free.
 
 All pages share the `theme` localStorage key (`light` / `dark`), so a
 choice follows the reader across the site.
@@ -187,15 +188,17 @@ choice follows the reader across the site.
 ### Navigation and the theme switch
 
 One bar on every page: `<nav class="site-nav">` plus `css/site-nav.css`
-and `js/site-nav.js`. Before this there were five nav implementations at
-four different heights, and one page had none.
+and `js/site-nav.js`.
 
-- It is **sticky, not fixed**. That is the detail that makes it
-  portable — a sticky bar takes up layout space, so no page needs a
-  `body { padding-top }` to compensate. `site-nav.css` zeroes any that
-  are left over.
+- It is **sticky, not fixed**. A sticky bar takes up layout space, so no
+  page needs a `body { padding-top }` to compensate. `site-nav.css`
+  zeroes any that are left over.
 - `site-nav.css` loads **last**, after the page's own `<style>`, because
   it has to win over the nav rules it replaces.
+- The brand is the word `Yen` in the wide display face. The CTA is a
+  filled pill reading `Contact`. The theme switch is a disc, half ink
+  and half paper, that turns over when switched; the old `☀/☾` glyph
+  span is still in the markup and hidden by CSS.
 - The switch sets **all three** dark mechanisms at once
   (`data-theme`, `data-mode`, `body.dark-mode`), so each page's existing
   dark CSS keeps working without being rewritten.
@@ -204,15 +207,14 @@ four different heights, and one page had none.
   page flash light before turning dark.
 
 If you add a page, copy the nav block, the inline head script, and the
-two file references. Do not write a fifth nav.
+two file references. Do not write another nav.
 
 ### The footer
 
-Same story at the bottom of the page: `<footer class="site-footer"
-id="site-footer">` plus `css/site-footer.css`. It is the landing page's
-four-column footer — mark and tagline, then Work / Navigate / Connect in
-mono, over a hairline lower bar — lifted out of `index.html` and
-rewritten against the `--fl-*` tokens.
+`<footer class="site-footer" id="site-footer">` plus `css/site-footer.css`.
+It is the black base every page stands on: ink ground, paper type, the
+wordmark in the wide display face, three columns (Work / Navigate /
+Connect) with hairline heads, and a lower bar. In dark it turns white.
 
 **It goes on the six pages the nav bar reaches, and only those:**
 `index`, `about_me`, `portfolios`, `ai_builder`, `aws_architecture`,
@@ -222,25 +224,23 @@ do not widen it without being asked.
 
 - It **brings its own container** (`.ft-wrap`), so it does not care what
   a page calls its wrapper or whether Bootstrap's `.container` is in
-  play. That is what made it portable.
+  play.
 - It **anchors its own em ladder at 16px** rather than inheriting the
   root size, since `css/bootstrap.css` sets `html { font-size: 10px }`
-  and a `rem` would then mean two different things on two pages.
-- Every rule is scoped to `.site-footer`, which outranks the bare
-  `footer { }` rules those six pages used to carry. Those have been
-  deleted anyway — including the `body.dark-mode footer` overrides,
-  since the shared footer reads dark straight off the tokens.
+  on the oldest pages.
+- Every rule is scoped to `.site-footer`.
 - `footer.html` holds the same block as a reference copy. Nothing loads
   it at runtime; keep it in step when the markup changes.
 
 If you add a page to the nav, give it this footer too.
 
-Per-page `:root` blocks still exist and still drive each page's own CSS —
-they now hold FinLab values, so retheming a page means editing its tokens
-rather than hunting colour literals.
+### Reviewing a page
 
-Also in use: Bootstrap 4.5.2 for grid and components, Font Awesome for
-icons, AOS for scroll animations.
+Headless Chrome is enough to look at a page: a CDP-driven screenshot
+script that can emulate a phone, force dark via localStorage, hover an
+element and report horizontally overflowing elements was used for this
+redesign. Serve the repo with `python3 -m http.server` and check every
+page in light, dark and at 390px before committing.
 
 ## Deployment
 - Hosted on GitHub Pages
