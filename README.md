@@ -11,6 +11,9 @@ Contents  | 1. applications projects  2. collections of utility codes
 ## Intro
 - This repo only holds the source code for my current `landing page, about-me, and main_projects pages`. `Blog` code is in the other repo : [yennj12_blog_V2](https://github.com/yennanliu/yennj12_blog_V2) which built on top of [fastai](https://github.com/fastai)'s [fastpage](https://github.com/fastai/fastpages)
 
+
+
+
 ## Development 
 ```bash
 # dev 
