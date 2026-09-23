@@ -58,7 +58,7 @@ b, strong, th, dt, .fw-bold, .font-weight-bold,
 /* No tracked capitals anywhere. Small labels are narrow, not shouted. */
 .eyebrow, .fl-eyebrow, .sec-eye, .lab, .tc-label, .cta-label,
 .stat-lbl, .stat-label, .k, .kicker, .tag, .tags span, .mc-tag, .era-tag,
-.tech-tag, .skill-tag, .badge, .career-year-badge, .ft-col-hd,
+.tech-tag, .skill-tag, .badge, .career-year-badge,
 .ai-infra-eyebrow-tag, .aws-mastery-eyebrow, .apple-product-subtitle,
 [class*="eyebrow"], [class*="-label"], [class*="label-"] {
   text-transform: none !important;

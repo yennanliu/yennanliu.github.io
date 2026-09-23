@@ -151,64 +151,71 @@
     .sec-h { font-size: var(--fl-fs-zone); }
     .sec-lead { font-size: var(--fl-fs-lead); line-height: 1.45; color: var(--fl-muted); text-wrap: pretty; }
 
-    /* ═══ THE STACK — six rows that invert under the cursor ═══ */
-    .rows { border-top: 1px solid var(--fl-line); }
-    .row {
-      position: relative; isolation: isolate;
-      display: grid;
-      grid-template-columns: minmax(0, 4fr) minmax(0, 6fr) minmax(0, 3fr);
-      gap: 1.5rem 3rem;
-      padding: 1.75rem 0;
-      border-bottom: 1px solid var(--fl-hair);
-      transition: color var(--fl-t);
+    /* ═══ THE STACK — six plates, one signal, three shapes ═══════════════
+       The plates are a chart: each one's width is the share of the weeks
+       that layer takes on the chosen kind of engagement, so switching the
+       kind reshapes the stack. A packet runs the rail beside them and each
+       plate lights as it passes. Every figure is a sketch, and the note
+       says so.                                                            */
+    .inst-top { display: flex; justify-content: space-between; align-items: center; gap: 1rem 2rem; flex-wrap: wrap; margin-bottom: 2rem; }
+    .seg { display: inline-flex; border: 1px solid var(--fl-ink); border-radius: var(--fl-r-pill); overflow: hidden; }
+    .seg button {
+      appearance: none; -webkit-appearance: none; border: 0; background: transparent; color: var(--fl-muted);
+      cursor: pointer; font: inherit; font-size: var(--fl-fs-sm); font-weight: var(--fl-fw-medium); font-stretch: var(--fl-narrow);
+      padding: .7rem 1.1rem; border-right: 1px solid var(--fl-hair);
+      transition: background var(--fl-t), color var(--fl-t);
     }
-    /* the fill bleeds past the text column into the page margin; the rules do not */
-    .row::before {
-      content: ''; position: absolute; inset: 0 calc(-1 * var(--fl-pad)); z-index: -1;
-      background: var(--fl-ink); opacity: 0; transition: opacity var(--fl-t);
-    }
-    .row:hover, .row:focus-within { color: var(--fl-on-ink); }
-    .row:hover::before, .row:focus-within::before { opacity: 1; }
-    .row dt {
-      font-family: var(--fl-display); font-weight: var(--fl-fw-light); font-stretch: var(--fl-wide);
-      font-size: clamp(1.375rem, 2.2vw, 1.75rem); letter-spacing: -.02em; line-height: 1.1;
-    }
-    .row dd { line-height: 1.55; text-wrap: pretty; }
-    .row .tags { font-size: var(--fl-fs-sm); font-stretch: var(--fl-narrow); font-weight: var(--fl-fw-medium); opacity: .65; align-self: start; }
+    .seg button:last-child { border-right: 0; }
+    .seg button:hover { color: var(--fl-ink); }
+    .seg button[aria-pressed="true"] { background: var(--fl-ink); color: var(--fl-on-ink); }
+    .seg button:focus-visible { outline: 2px solid currentColor; outline-offset: -4px; }
 
-    /* ═══ WORK — a contact sheet ═══ */
-    .sheet {
-      display: grid; grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 3rem 2rem;
-    }
-    .print { display: block; text-decoration: none; color: inherit; }
-    .print figure {
-      position: relative; aspect-ratio: 16 / 9; overflow: hidden;
-      background: var(--fl-page); border: 1px solid var(--fl-hair);
-    }
-    .print img {
-      width: 100%; height: 100%; object-fit: cover; display: block;
-      transition: filter var(--fl-t-slow), transform var(--fl-t-slow);
-    }
-    .print.contain img { object-fit: contain; padding: 14%; }
-    .print:hover figure { border-color: var(--fl-ink); }
-    .print:hover img { transform: scale(1.02); }
-    .print-cap {
-      display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 1rem;
-      align-items: baseline; padding-top: .9rem;
-    }
-    .print-t {
-      font-family: var(--fl-display); font-weight: var(--fl-fw-light); font-stretch: var(--fl-wide);
-      font-size: 1.25rem; letter-spacing: -.02em; line-height: 1.15;
-      text-decoration: underline; text-decoration-color: transparent; text-underline-offset: .18em; text-decoration-thickness: 1px;
-      transition: text-decoration-color var(--fl-t);
-    }
-    .print:hover .print-t { text-decoration-color: currentColor; }
-    .print-d { color: var(--fl-muted); margin-top: .35rem; font-size: var(--fl-fs-sm); line-height: 1.5; text-wrap: pretty; }
-    .sheet-foot { margin-top: 3.5rem; display: flex; gap: 1.5rem; align-items: center; flex-wrap: wrap; }
+    .inst-body { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: 3rem 4rem; align-items: start; }
 
-    /* ═══ TWO DEEPER PAGES ═══ */
-    .deep { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .stack { position: relative; display: flex; flex-direction: column; gap: .5rem; padding-left: 1.75rem; }
+    .rail { position: absolute; left: .5rem; top: 0; bottom: 0; width: 1px; background: var(--fl-hair); }
+    .pkt {
+      position: absolute; left: -1px; top: 0; width: 3px; height: 18px; background: var(--fl-ink);
+      animation: run 4.8s linear infinite;
+    }
+    @keyframes run { from { top: 0; } to { top: calc(100% - 18px); } }
+
+    .plate {
+      --w: 15; --i: 0;
+      appearance: none; -webkit-appearance: none;
+      display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+      height: 3.25rem; padding: 0 1rem;
+      width: calc(22% + var(--w) * 1.75%); min-width: max-content;
+      border: 1px solid var(--fl-hair); border-radius: 0;
+      background: var(--fl-surface); color: var(--fl-ink);
+      font: inherit; text-align: left; cursor: pointer;
+      transition: width .6s cubic-bezier(.2, .7, .2, 1), background var(--fl-t), color var(--fl-t), border-color var(--fl-t);
+      animation: lit 4.8s linear infinite; animation-delay: calc(var(--i) * .8s);
+    }
+    @keyframes lit { 0%, 15% { border-color: var(--fl-ink); } 16%, 100% { border-color: var(--fl-hair); } }
+    .plate:hover { border-color: var(--fl-ink); }
+    .plate:focus-visible { outline: 2px solid var(--fl-ink); outline-offset: 3px; }
+    .plate.is-on { background: var(--fl-ink); color: var(--fl-on-ink); border-color: var(--fl-ink); animation: none; }
+    .plate-t {
+      font-family: var(--fl-display); font-weight: var(--fl-fw-light); font-stretch: var(--fl-wide);
+      font-size: 1.125rem; letter-spacing: -.02em; white-space: nowrap;
+    }
+    .plate-v { font-size: var(--fl-fs-sm); font-weight: var(--fl-fw-medium); font-stretch: var(--fl-narrow); font-variant-numeric: tabular-nums; opacity: .7; }
+    .stack:hover .pkt, .stack:hover .plate { animation-play-state: paused; }
+
+    .lays.js .lay:not(.is-on) { display: none; }
+    .lay-h { font-size: clamp(1.75rem, 3vw, 2.5rem); margin-bottom: 1rem; }
+    .lay p { line-height: 1.55; text-wrap: pretty; margin-bottom: 1rem; max-width: 34em; }
+    .lay-fig { display: flex; align-items: baseline; gap: .75rem; flex-wrap: wrap; margin-top: 1.75rem; padding-top: 1.25rem; border-top: 1px solid var(--fl-line); }
+    .lay-n {
+      font-family: var(--fl-display); font-weight: var(--fl-fw-light); font-stretch: var(--fl-wide);
+      font-size: clamp(2.5rem, 5vw, 4rem); line-height: 1; letter-spacing: -.03em; font-variant-numeric: tabular-nums;
+    }
+    .lay-pc { font-family: var(--fl-display); font-weight: var(--fl-fw-light); font-stretch: var(--fl-wide); font-size: 1.5rem; margin-left: -.5rem; }
+    .note { font-size: var(--fl-fs-sm); font-weight: var(--fl-fw-medium); font-stretch: var(--fl-narrow); color: var(--fl-faint); line-height: 1.6; max-width: 64ch; margin-top: 2rem; }
+
+    /* ═══ THREE DOORS ═══ */
+    .deep { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); }
     .deep a {
       display: grid; grid-template-rows: auto 1fr auto; gap: 1.5rem;
       padding: 2.5rem var(--fl-pad) 2.75rem;
@@ -219,26 +226,15 @@
     #deeper .deep a { padding-block: clamp(4rem, 9vh, 6.5rem); }
     .deep a + a { border-left: 1px solid var(--fl-line); }
     .deep a:hover { background: var(--fl-ink); color: var(--fl-on-ink); }
-    .deep h3 { font-size: clamp(1.75rem, 3vw, 2.5rem); }
+    .deep-h { font-size: clamp(1.75rem, 2.6vw, 2.25rem); }
     .deep p { color: var(--fl-muted); max-width: 30em; text-wrap: pretty; transition: color var(--fl-t); }
     .deep a:hover p { color: inherit; opacity: .8; }
     .deep .go { font-size: var(--fl-fs-sm); font-weight: var(--fl-fw-medium); font-stretch: var(--fl-narrow); text-decoration: underline; text-underline-offset: .3em; }
-
-    /* ═══ PATH — the one thing on the page that is a sequence ═══ */
-    .path { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 2rem; border-top: 1px solid var(--fl-line); }
-    .leg { position: relative; padding-top: 1.75rem; }
-    .leg::before { content: ''; position: absolute; top: -1px; left: 0; width: 1px; height: 1rem; background: var(--fl-line); }
-    .leg-when { font-size: var(--fl-fs-sm); font-weight: var(--fl-fw-medium); font-stretch: var(--fl-narrow); color: var(--fl-faint); margin-bottom: .75rem; }
-    .leg-role { font-size: clamp(1.375rem, 2.2vw, 1.75rem); margin-bottom: .35rem; }
-    .leg-where { color: var(--fl-muted); margin-bottom: 1rem; }
-    .leg p { line-height: 1.55; text-wrap: pretty; max-width: 28em; }
-    .leg-stack { margin-top: 1rem; font-size: var(--fl-fs-sm); font-stretch: var(--fl-narrow); font-weight: var(--fl-fw-medium); color: var(--fl-faint); }
 
     /* ═══ CLOSE — the black base ═══ */
     .close {
       background: var(--fl-ink); color: var(--fl-on-ink);
       padding-block: clamp(5rem, 12vh, 9rem) clamp(4rem, 9vh, 6rem);
-      border-bottom: 1px solid color-mix(in srgb, var(--fl-on-ink) 22%, transparent);
     }
     .close-in { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: 3rem 4rem; align-items: end; }
     .close-h { font-size: var(--fl-fs-xl); line-height: .95; margin-left: -.04em; }
@@ -253,26 +249,22 @@
     @media (max-width: 960px) {
       .hero-foot, .sec-head, .close-in { grid-template-columns: 1fr; }
       .hero-facts { justify-content: start; }
-      .row { grid-template-columns: minmax(0, 1fr); gap: .75rem; }
-      .row .tags { order: 3; }
-      .sheet { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .inst-body { grid-template-columns: 1fr; gap: 2.5rem; }
       .deep { grid-template-columns: 1fr; }
-      .deep a + a { border-left: 0; }
-      .path { grid-template-columns: 1fr; gap: 0; }
-      .leg { padding-bottom: 2rem; border-bottom: 1px solid var(--fl-hair); }
-      .leg:last-child { border-bottom: 0; }
+      .deep a + a { border-left: 0; border-top: 1px solid var(--fl-line); }
     }
     @media (max-width: 600px) {
       .hero { --pt: 2rem; --xl: clamp(2.5rem, 12vw, 4.5rem); min-height: 0; }
       .hero-h1 { margin-bottom: 4.5rem; }
       .hero-facts { grid-template-columns: repeat(2, auto); gap: 1.5rem 2rem; }
-      .sheet { grid-template-columns: 1fr; gap: 2.25rem; }
+      .plate { width: calc(48% + var(--w) * 1.15%); }
       .close-h { font-size: clamp(2.5rem, 13vw, 4rem); }
     }
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
       .hero-band, .hero.live .hero-band { transition: none; transform: none !important; }
-      .print img, .row, .deep a, .btn { transition: none; }
+      .pkt, .plate { animation: none; }
+      .plate, .deep a, .btn { transition: none; }
     }
   </style>
   <link rel="stylesheet" href="css/finlab-theme.css">
@@ -283,7 +275,7 @@
 
 <!-- SITE NAV -->
 <nav class="site-nav" id="site-nav" aria-label="Primary">
-  <a class="sn-brand" href="index.html">Yen</a>
+  <a class="sn-brand" href="index.html">yen<em>.dev</em></a>
 
   <button class="sn-burger" id="sn-burger" type="button"
           aria-label="Open menu" aria-expanded="false" aria-controls="sn-menu">
@@ -318,10 +310,10 @@
 
     <div class="hero-foot">
       <div>
-        <p class="hero-lead">One person carries the whole stack: the system design, the services under it, the cloud they run on, and the screen someone actually touches. Eight years of it, across data pipelines in the UK, backend services in Japan and Ireland, and platform work at AWS.</p>
+        <p class="hero-lead">One engineer, the whole stack. Architecture, backend, cloud, and the AI on top. Eight years across the UK, Japan, Ireland and AWS.</p>
         <div class="hero-acts">
-          <a class="btn btn-fill" href="portfolios.html">See the work</a>
-          <a class="btn btn-line" href="contact.html">Start a conversation</a>
+          <a class="btn btn-fill" href="portfolios.html">The work</a>
+          <a class="btn btn-line" href="contact.html">Get in touch</a>
         </div>
       </div>
       <dl class="hero-facts">
@@ -341,97 +333,124 @@
       <p class="sec-lead">Most products get handed across five specialists and lose something at every seam. These are the layers I carry myself, from the first diagram to the thing that renders.</p>
     </div>
 
-    <dl class="rows">
-      <div class="row">
-        <dt>System design</dt>
-        <dd>The diagram before the code: boundaries, failure modes, what breaks at ten times the load. Most production pain is a week-one decision.</dd>
-        <dd class="tags">Architecture, trade-offs, scaling, reviews</dd>
+    <div class="inst">
+      <div class="inst-top">
+        <div class="seg" role="group" aria-label="Kind of engagement" id="kind">
+          <button type="button" data-k="ai" aria-pressed="true">AI product</button>
+          <button type="button" data-k="data" aria-pressed="false">Data platform</button>
+          <button type="button" data-k="cloud" aria-pressed="false">Cloud migration</button>
+        </div>
+        <div class="meta">Plate width is the share of the weeks. Pick a layer to read it.</div>
       </div>
-      <div class="row">
-        <dt>Cloud infrastructure</dt>
-        <dd>AWS and GCP as code. Kubernetes, Terraform, CI/CD and the observability you need when something pages you at night.</dd>
-        <dd class="tags">AWS, Kubernetes, Terraform, ArgoCD</dd>
+
+      <div class="inst-body">
+        <div class="stack" role="tablist" aria-label="The six layers" aria-orientation="vertical" id="stack-tabs">
+          <span class="rail" aria-hidden="true"><i class="pkt"></i></span>
+        <button class="plate is-on" role="tab" id="tab-0" aria-selected="true"
+                aria-controls="lay-0" tabindex="0" style="--w:15; --i:0">
+          <span class="plate-t">System design</span><span class="plate-v" data-v="15">15%</span>
+        </button>
+        <button class="plate" role="tab" id="tab-1" aria-selected="false"
+                aria-controls="lay-1" tabindex="-1" style="--w:10; --i:1">
+          <span class="plate-t">Cloud infrastructure</span><span class="plate-v" data-v="10">10%</span>
+        </button>
+        <button class="plate" role="tab" id="tab-2" aria-selected="false"
+                aria-controls="lay-2" tabindex="-1" style="--w:15; --i:2">
+          <span class="plate-t">Data pipelines</span><span class="plate-v" data-v="15">15%</span>
+        </button>
+        <button class="plate" role="tab" id="tab-3" aria-selected="false"
+                aria-controls="lay-3" tabindex="-1" style="--w:20; --i:3">
+          <span class="plate-t">Backend services</span><span class="plate-v" data-v="20">20%</span>
+        </button>
+        <button class="plate" role="tab" id="tab-4" aria-selected="false"
+                aria-controls="lay-4" tabindex="-1" style="--w:25; --i:4">
+          <span class="plate-t">AI and LLM systems</span><span class="plate-v" data-v="25">25%</span>
+        </button>
+        <button class="plate" role="tab" id="tab-5" aria-selected="false"
+                aria-controls="lay-5" tabindex="-1" style="--w:15; --i:5">
+          <span class="plate-t">Application layer</span><span class="plate-v" data-v="15">15%</span>
+        </button>
+        </div>
+
+        <div class="lays" id="lays">
+        <div class="lay is-on" id="lay-0" role="tabpanel" aria-labelledby="tab-0">
+          <div class="lay-h disp" role="heading" aria-level="3">System design</div>
+          <p>The diagram before the code: boundaries, failure modes, what breaks at ten times the load. Most production pain is a week-one decision.</p>
+          <div class="lay-tags meta">Architecture, trade-offs, scaling, reviews</div>
+          <div class="lay-fig">
+            <span class="lay-n" data-v="15">15</span><span class="lay-pc">%</span>
+            <span class="lay-cap meta">of the weeks on <span class="lay-k">an AI product</span></span>
+          </div>
+        </div>
+        <div class="lay" id="lay-1" role="tabpanel" aria-labelledby="tab-1">
+          <div class="lay-h disp" role="heading" aria-level="3">Cloud infrastructure</div>
+          <p>AWS and GCP as code. Kubernetes, Terraform, CI/CD and the observability you need when something pages you at night.</p>
+          <div class="lay-tags meta">AWS, Kubernetes, Terraform, ArgoCD</div>
+          <div class="lay-fig">
+            <span class="lay-n" data-v="10">10</span><span class="lay-pc">%</span>
+            <span class="lay-cap meta">of the weeks on <span class="lay-k">an AI product</span></span>
+          </div>
+        </div>
+        <div class="lay" id="lay-2" role="tabpanel" aria-labelledby="tab-2">
+          <div class="lay-h disp" role="heading" aria-level="3">Data pipelines</div>
+          <p>Kafka, Spark, dbt and Airflow. The plumbing that decides whether a model ever sees the truth.</p>
+          <div class="lay-tags meta">Kafka, Spark, Flink, dbt</div>
+          <div class="lay-fig">
+            <span class="lay-n" data-v="15">15</span><span class="lay-pc">%</span>
+            <span class="lay-cap meta">of the weeks on <span class="lay-k">an AI product</span></span>
+          </div>
+        </div>
+        <div class="lay" id="lay-3" role="tabpanel" aria-labelledby="tab-3">
+          <div class="lay-h disp" role="heading" aria-level="3">Backend services</div>
+          <p>APIs built to be boring: high throughput, low latency, and still standing the morning after traffic triples.</p>
+          <div class="lay-tags meta">Go, Java, gRPC, Kafka</div>
+          <div class="lay-fig">
+            <span class="lay-n" data-v="20">20</span><span class="lay-pc">%</span>
+            <span class="lay-cap meta">of the weeks on <span class="lay-k">an AI product</span></span>
+          </div>
+        </div>
+        <div class="lay" id="lay-4" role="tabpanel" aria-labelledby="tab-4">
+          <div class="lay-h disp" role="heading" aria-level="3">AI and LLM systems</div>
+          <p>Retrieval, agent orchestration, evals and fine-tuning. The hard part was never the first prompt working. It is the hundredth.</p>
+          <div class="lay-tags meta">LLMs, RAG, agents, MLOps</div>
+          <div class="lay-fig">
+            <span class="lay-n" data-v="25">25</span><span class="lay-pc">%</span>
+            <span class="lay-cap meta">of the weeks on <span class="lay-k">an AI product</span></span>
+          </div>
+        </div>
+        <div class="lay" id="lay-5" role="tabpanel" aria-labelledby="tab-5">
+          <div class="lay-h disp" role="heading" aria-level="3">Application layer</div>
+          <p>React and TypeScript wired straight through to Python and Go. The half of the product people actually judge you on.</p>
+          <div class="lay-tags meta">React, TypeScript, FastAPI</div>
+          <div class="lay-fig">
+            <span class="lay-n" data-v="15">15</span><span class="lay-pc">%</span>
+            <span class="lay-cap meta">of the weeks on <span class="lay-k">an AI product</span></span>
+          </div>
+        </div>
+        </div>
       </div>
-      <div class="row">
-        <dt>Data pipelines</dt>
-        <dd>Kafka, Spark, dbt and Airflow. The plumbing that decides whether a model ever sees the truth.</dd>
-        <dd class="tags">Kafka, Spark, Flink, dbt</dd>
-      </div>
-      <div class="row">
-        <dt>Backend services</dt>
-        <dd>APIs built to be boring: high throughput, low latency, and still standing the morning after traffic triples.</dd>
-        <dd class="tags">Go, Java, gRPC, Kafka</dd>
-      </div>
-      <div class="row">
-        <dt>AI and LLM systems</dt>
-        <dd>Retrieval, agent orchestration, evals and fine-tuning. The hard part was never the first prompt working. It is the hundredth.</dd>
-        <dd class="tags">LLMs, RAG, agents, MLOps</dd>
-      </div>
-      <div class="row">
-        <dt>Application layer</dt>
-        <dd>React and TypeScript wired straight through to Python and Go. The half of the product people actually judge you on.</dd>
-        <dd class="tags">React, TypeScript, FastAPI</dd>
-      </div>
-    </dl>
+
+      <div class="note">A sketch of where the weeks go on a typical engagement, not a timesheet. The signal on the rail is decoration; the shares are the point.</div>
+    </div>
   </div>
 </section>
 
-<!-- WORK -->
-<section class="sec" id="work" aria-labelledby="work-h">
-  <div class="wrap">
-    <div class="sec-head">
-      <h2 class="sec-h disp" id="work-h">Six systems, each one live.</h2>
-      <p class="sec-lead">Products, a streaming platform, and the cloud stacks under them, each carried from sketch to a deployment that answers on a public address. The screenshots are grey until you touch them.</p>
-    </div>
-
-    <div class="sheet">
-      <a class="print" href="portfolios.html#record-01">
-        <figure><img src="img/plate/p01.jpg" alt="Shopping Cart System, storefront and checkout" loading="lazy" decoding="async"></figure>
-        <div class="print-cap"><span class="print-t">Shopping Cart System</span><span class="meta">Product</span></div>
-        <p class="print-d">An Amazon-shaped storefront with a real payment path: Stripe in front, Spring and Vue behind.</p>
-      </a>
-      <a class="print" href="portfolios.html#record-03">
-        <figure><img src="img/plate/p03.jpg" alt="Flink Data Platform, job submission view" loading="lazy" decoding="async"></figure>
-        <div class="print-cap"><span class="print-t">Flink Data Platform</span><span class="meta">Data</span></div>
-        <p class="print-d">A control plane for Apache Flink: submit and manage streaming jobs without touching the cluster.</p>
-      </a>
-      <a class="print" href="portfolios.html#record-05">
-        <figure><img src="img/plate/p05.jpg" alt="AI Experiment, a collection of AI and ML experiments" loading="lazy" decoding="async"></figure>
-        <div class="print-cap"><span class="print-t">AI Experiment</span><span class="meta">AI</span></div>
-        <p class="print-d">A working notebook of AI ideas kept in the open, each one tried end to end rather than described.</p>
-      </a>
-      <a class="print contain" href="portfolios.html#record-06">
-        <figure><img src="img/plate/p06.jpg" alt="AWS EKS cluster defined with CDK" loading="lazy" decoding="async"></figure>
-        <div class="print-cap"><span class="print-t">EKS on AWS</span><span class="meta">Cloud</span></div>
-        <p class="print-d">A Kubernetes cluster you can stand up from a repository, not a console. Written as an AWS CDK app.</p>
-      </a>
-      <a class="print" href="portfolios.html#record-07">
-        <figure><img src="img/plate/p07.jpg" alt="YouTube Stream Stack, stream ingestion pipeline" loading="lazy" decoding="async"></figure>
-        <div class="print-cap"><span class="print-t">YouTube Stream Stack</span><span class="meta">Cloud</span></div>
-        <p class="print-d">An ingestion pipeline for video streams that nobody has to babysit: Lambda, S3 and EventBridge.</p>
-      </a>
-      <a class="print" href="portfolios.html#record-09">
-        <figure><img src="img/plate/p09.jpg" alt="Permission Control Stack, access control architecture" loading="lazy" decoding="async"></figure>
-        <div class="print-cap"><span class="print-t">Permission Control Stack</span><span class="meta">Cloud</span></div>
-        <p class="print-d">Multi-tenant authorisation handled at the infrastructure layer with IAM, Cognito and Lambda authorizers.</p>
-      </a>
-    </div>
-
-    <div class="sheet-foot">
-      <a class="btn btn-fill" href="portfolios.html">All nine, with demos</a>
-      <a class="fl-ul" href="https://github.com/yennanliu" target="_blank" rel="noreferrer">Everything else is on GitHub</a>
-    </div>
-  </div>
-</section>
-
-<!-- TWO DEEPER PAGES -->
-<section class="sec" id="deeper" aria-label="Two deeper pages">
+<!-- THREE DOORS -->
+<section class="sec" id="deeper" aria-label="Three deeper pages">
   <div class="wrap">
     <div class="deep">
+      <a href="portfolios.html">
+        <span class="meta">Portfolios</span>
+        <div>
+          <div class="deep-h disp" role="heading" aria-level="3">Nine systems, each one live.</div>
+          <p>Products, a streaming platform and the cloud stacks under them, each carried from sketch to a deployment with a public address.</p>
+        </div>
+        <span class="go">Open the archive</span>
+      </a>
       <a href="ai_builder.html">
         <span class="meta">AI Builder</span>
         <div>
-          <h3 class="disp">Agents that run unattended.</h3>
+          <div class="deep-h disp" role="heading" aria-level="3">Agents that run unattended.</div>
           <p>Four systems that read a repo, draft the mail, pull the filings and publish the report. A schedule, a toolbelt, and a ledger of what every run cost.</p>
         </div>
         <span class="go">Read how they work</span>
@@ -439,46 +458,12 @@
       <a href="aws_architecture.html">
         <span class="meta">AWS</span>
         <div>
-          <h3 class="disp">Four architectures, drawn and built.</h3>
+          <div class="deep-h disp" role="heading" aria-level="3">Four architectures, drawn and built.</div>
           <p>Serverless, microservices on EKS, a data lake, and multi-region high availability, each with the CDK code that stands it up.</p>
         </div>
         <span class="go">See the drawings</span>
       </a>
     </div>
-  </div>
-</section>
-
-<!-- PATH -->
-<section class="sec" id="path" aria-labelledby="path-h">
-  <div class="wrap">
-    <div class="sec-head">
-      <h2 class="sec-h disp" id="path-h">The long way to full stack.</h2>
-      <p class="sec-lead">Data first, then the services, then the cloud under them, then the models on top. Nobody handed me the stack. I picked it up a layer at a time.</p>
-    </div>
-
-    <ol class="path" style="list-style:none; padding:0; margin:0;">
-      <li class="leg">
-        <div class="leg-when">2016 to 2018</div>
-        <h3 class="leg-role disp">Software engineer, data</h3>
-        <div class="leg-where">United Kingdom</div>
-        <p>Pipelines, ETL and warehousing on Hadoop and Spark, turning raw feeds into something a business could decide on.</p>
-        <div class="leg-stack">Python, SQL, Hadoop, Spark</div>
-      </li>
-      <li class="leg">
-        <div class="leg-when">2018 to 2024</div>
-        <h3 class="leg-role disp">Backend engineer</h3>
-        <div class="leg-where">Japan, then Ireland and AWS</div>
-        <p>Services and APIs across global teams. Robust beats clever when five teams depend on your endpoint.</p>
-        <div class="leg-stack">Java, Spring Boot, microservices, DevOps</div>
-      </li>
-      <li class="leg">
-        <div class="leg-when">2024 to now</div>
-        <h3 class="leg-role disp">Tech consultant</h3>
-        <div class="leg-where">Remote</div>
-        <p>Architecture and platform work for clients, and increasingly, taking LLM systems out of the demo and into something that gets paged. The layers finally became one job.</p>
-        <div class="leg-stack">Architecture, cloud, LLM systems</div>
-      </li>
-    </ol>
   </div>
 </section>
 
@@ -505,8 +490,8 @@
 <footer class="site-footer" id="site-footer">
   <div class="ft-grid ft-wrap">
     <div>
-      <div class="ft-mark">Yen</div>
-      <p class="ft-tagline">AI products built end to end, from the first diagram to the thing that ships. From Taiwan, by way of the UK, Japan and Ireland.</p>
+      <div class="ft-mark">YEN<em>.DEV</em></div>
+      <p class="ft-tagline">Physics first, full stack after. AI products built end to end — from 31 of 195 countries.</p>
     </div>
     <div class="ft-col">
       <span class="ft-col-hd">Work</span>
@@ -518,7 +503,7 @@
       <span class="ft-col-hd">Navigate</span>
       <a href="about_me.html">About Me</a>
       <a href="contact.html">Contact</a>
-      <a href="https://yennj12.js.org/yennj12_blog_V4/" target="_blank" rel="noreferrer">Blog</a>
+      <a href="https://yennj12.js.org/yennj12_blog_V4/" target="_blank" rel="noreferrer">Blog ↗</a>
     </div>
     <div class="ft-col">
       <span class="ft-col-hd">Connect</span>
@@ -529,7 +514,7 @@
     </div>
   </div>
   <div class="ft-lower ft-wrap">
-    <span class="ft-copy">© 2026 Yen. All rights reserved.</span>
+    <span class="ft-copy">© 2026 Yen · All rights reserved.</span>
     <span class="ft-sig">yennj12.js.org</span>
   </div>
 </footer>
@@ -571,6 +556,94 @@
     if (!raf) raf = requestAnimationFrame(place);
   }, { passive: true });
   place();
+})();
+</script>
+<script>
+/* The stack instrument.
+   Three shapes for the same six plates: the share of the weeks each layer
+   takes on an AI product, a data platform, or a cloud migration. The
+   markup ships in the AI-product shape with the first layer open, so the
+   page is complete without this; the script adds the switching and the
+   tween. Figures interpolate from whatever they currently show, so
+   repeated switches glide instead of jumping. */
+(function () {
+  var kinds = { ai: [15, 10, 15, 20, 25, 15], data: [15, 20, 35, 15, 5, 10], cloud: [20, 45, 10, 15, 5, 5] };
+  var names = { ai: 'an AI product', data: 'a data platform', cloud: 'a cloud migration' };
+  var still = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var plates = Array.prototype.slice.call(document.querySelectorAll('#stack-tabs .plate'));
+  var lays = Array.prototype.slice.call(document.querySelectorAll('#lays .lay'));
+  var seg = document.getElementById('kind');
+  var wrap = document.getElementById('lays');
+  if (!plates.length || !lays.length || !seg || !wrap) return;
+  wrap.classList.add('js');
+  var kind = 'ai';
+
+  function tween(node, to, fmt) {
+    if (!node) return;
+    var from = parseFloat(node.getAttribute('data-v'));
+    if (isNaN(from)) from = to;
+    node.setAttribute('data-v', to);
+    if (still || from === to) { node.textContent = fmt(to); return; }
+    var t0 = null;
+    function frame(ts) {
+      if (t0 === null) t0 = ts;
+      var p = Math.min((ts - t0) / 650, 1);
+      var e = 1 - Math.pow(1 - p, 3);
+      node.textContent = fmt(from + (to - from) * e);
+      if (p < 1) requestAnimationFrame(frame);
+    }
+    requestAnimationFrame(frame);
+  }
+  function pct(v) { return Math.round(v) + '%'; }
+  function num(v) { return String(Math.round(v)); }
+
+  function paint() {
+    var v = kinds[kind];
+    plates.forEach(function (p, i) {
+      p.style.setProperty('--w', v[i]);
+      tween(p.querySelector('.plate-v'), v[i], pct);
+    });
+    lays.forEach(function (l, i) {
+      tween(l.querySelector('.lay-n'), v[i], num);
+      var k = l.querySelector('.lay-k'); if (k) k.textContent = names[kind];
+    });
+  }
+
+  function select(i, focus) {
+    plates.forEach(function (p, j) {
+      var on = j === i;
+      p.classList.toggle('is-on', on);
+      p.setAttribute('aria-selected', on ? 'true' : 'false');
+      p.tabIndex = on ? 0 : -1;
+    });
+    lays.forEach(function (l, j) { l.classList.toggle('is-on', j === i); });
+    if (focus) plates[i].focus();
+  }
+
+  plates.forEach(function (p, i) {
+    p.addEventListener('click', function () { select(i, false); });
+    p.addEventListener('keydown', function (e) {
+      var n = null, N = plates.length;
+      if (e.key === 'ArrowDown' || e.key === 'ArrowRight') n = (i + 1) % N;
+      else if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') n = (i + N - 1) % N;
+      else if (e.key === 'Home') n = 0;
+      else if (e.key === 'End') n = N - 1;
+      if (n === null) return;
+      e.preventDefault(); select(n, true);
+    });
+  });
+
+  seg.addEventListener('click', function (e) {
+    var b = e.target.closest('button[data-k]');
+    if (!b || !kinds[b.getAttribute('data-k')]) return;
+    kind = b.getAttribute('data-k');
+    Array.prototype.forEach.call(seg.querySelectorAll('button'), function (x) {
+      x.setAttribute('aria-pressed', x === b ? 'true' : 'false');
+    });
+    paint();
+  });
+
+  paint();
 })();
 </script>
 <script src="js/site-nav.js" defer></script>

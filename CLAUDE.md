@@ -98,7 +98,8 @@ The rules the system is built on:
   counters, no marquees, no typewriters. `prefers-reduced-motion` is
   honoured everywhere.
 - **Light is the default.** Dark is the same ramp read from the other
-  end (see below).
+  end (see below). The footer is the exception to "no tracked capitals":
+  it is the original footer, kept as it was.
 
 ### The landing page
 
@@ -116,12 +117,25 @@ The seam is computed from the headline size (`--seam: calc(var(--pt) +
 var(--xl) * 2.2)`), so change `--xl` on `.hero`, never the `h1`'s
 `font-size` directly, or the band will stop lining up.
 
-Below the hero: six hairline rows for the layers (the ink fill on hover
-bleeds into the page margin through a `::before`; the rules do not),
-a contact sheet of six greyscale plates linking into the portfolio
-records, two large blocks for the deeper pages, the career path (the one
-numbered-by-years sequence), and a black closing band that runs into the
-black footer.
+Below the hero sits **the stack instrument**, built in the AI-builder
+page's vocabulary (`.seg`, `tween()`, a `.note`): six plates, one per
+layer, whose widths are the share of the weeks that layer takes on the
+chosen kind of engagement. The `.seg` switches between an AI product, a
+data platform and a cloud migration and the plates reshape; the plates
+are a real tablist (arrow keys, Home/End) opening a detail panel with the
+layer's blurb and its figure. A packet runs a rail beside the plates and
+each plate lights as it passes; that is decoration, timed by
+`animation-delay: calc(var(--i) * .8s)` against the packet's 4.8s run,
+and it pauses under the cursor. **Every figure is a sketch, not a
+timesheet**, and the `.note` says so; keep that line if you change the
+numbers. The markup ships in the AI-product shape with the first layer
+open; the script adds `.js` to `#lays` and only then hides the other
+panels, so no-JS shows all six.
+
+Then three doors (Portfolios, AI Builder, AWS) and a black closing band.
+The portfolio contact sheet and the career path used to live here too;
+they were removed because the portfolio and about pages already carry
+them.
 
 ### The AI-builder diagrams
 
@@ -195,8 +209,9 @@ and `js/site-nav.js`.
   zeroes any that are left over.
 - `site-nav.css` loads **last**, after the page's own `<style>`, because
   it has to win over the nav rules it replaces.
-- The brand is the word `Yen` in the wide display face. The CTA is a
-  filled pill reading `Contact`. The theme switch is a disc, half ink
+- The brand is `yen.dev` in the wide display face, the `.dev` in grey
+  (`<a class="sn-brand">yen<em>.dev</em></a>`). The CTA is a filled pill
+  reading `Contact`. The theme switch is a disc, half ink
   and half paper, that turns over when switched; the old `☀/☾` glyph
   span is still in the markup and hidden by CSS.
 - The switch sets **all three** dark mechanisms at once
@@ -212,9 +227,14 @@ two file references. Do not write another nav.
 ### The footer
 
 `<footer class="site-footer" id="site-footer">` plus `css/site-footer.css`.
-It is the black base every page stands on: ink ground, paper type, the
-wordmark in the wide display face, three columns (Work / Navigate /
-Connect) with hairline heads, and a lower bar. In dark it turns white.
+This is the footer the site had before the mono redesign, kept on
+purpose: a light ground with a hairline on top, the `YEN.DEV` mark and
+the Work / Navigate / Connect column heads in tracked mono capitals,
+mono links, and a lower bar with the copyright and the domain. It is the
+one place on the site that keeps tracked capitals; `finlab-theme.css`
+deliberately leaves `.ft-col-hd` out of its no-caps rule. Everything is
+drawn from the tokens, so the `.DEV` that used to be blue is ink, and in
+dark the footer turns black with white type.
 
 **It goes on the six pages the nav bar reaches, and only those:**
 `index`, `about_me`, `portfolios`, `ai_builder`, `aws_architecture`,
