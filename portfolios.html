@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <meta name="description" content="Selected works — an index of nine shipped systems: full-stack products, a streaming data platform, and the AWS infrastructure underneath them.">
-  <title>yen.dev</title>
+  <meta name="description" content="Selected works: nine shipped systems, from full-stack products and a streaming data platform to the AWS infrastructure underneath them.">
+  <title>Portfolios, Yen</title>
 
   <!-- Google analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-X2DJ8VW74E"></script>
@@ -31,64 +31,40 @@
   </script>
 
   <!-- PWA -->
-  <meta name="theme-color" content="#14130e">
+  <meta name="theme-color" content="#ffffff">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
   <meta name="apple-mobile-web-app-title" content="Yen.Dev">
   <meta name="mobile-web-app-capable" content="yes">
-  <meta name="msapplication-TileColor" content="#14130e">
+  <meta name="msapplication-TileColor" content="#000000">
   <meta name="msapplication-tap-highlight" content="no">
   <link rel="icon" href="img/icon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="img/icon.svg">
-  <link rel="mask-icon" href="img/icon.svg" color="#e0703f">
+  <link rel="mask-icon" href="img/icon.svg" color="#000000">
   <link rel="manifest" href="manifest.json">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400&family=Space+Grotesk:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="css/finlab.css">
   <style>
     /* ══════════════════════════════════════════════════════════════
-       ARCHIVE INDEX, on the FinLab system
-       Space Grotesk display / DM Sans body / system mono
-       Paper is the ground state - hairline rules, soft radii,
-       two weights, one blue. Ink mode inverts the ground only.
+       THE INDEX
+       Nine records in a catalogue, on the site's two-ink system. The
+       page's own tokens point at the shared --fl-* values, so the
+       dark switch turns the whole page over at once.
        ══════════════════════════════════════════════════════════════ */
 
-    /* PAPER (default, matches the rest of the site) */
     :root {
-      --paper:      #ffffff;
-      --paper-2:    #f8fafc;
-      --ink:        #111827;
-      --ink-2:      #4b5565;
-      --ink-3:      #98a2b3;
-      --rule:       #e5e7eb;
-      --tag-border: #e5e7eb;
-      --accent:     #2563eb;
-      --accent-2:   #7c3aed;
-      --duo:        saturate(.72) contrast(1.02);
-      --duo-off:    saturate(1) contrast(1);
-      --grain:      0;
-      --shade:      rgba(15,23,42,.07);
-      --nav-bg:     rgba(255,255,255,.86);
-    }
-    /* INK */
-    :root[data-theme="dark"] {
-      --paper:      #0f0f11;
-      --paper-2:    #0f0f11;
-      --ink:        #f5f7fa;
-      --ink-2:      #9aa5b5;
-      --ink-3:      #5b6675;
-      --rule:       #1f1f24;
-      --tag-border: #1f1f24;
-      --accent:     #7aa8ff;
-      --accent-2:   #b48cff;
-      --duo:        saturate(.7) contrast(1.02) brightness(.92);
-      --duo-off:    saturate(1) contrast(1);
-      --grain:      0;
-      --shade:      rgba(10, 10, 11, .42);
-      --nav-bg:     rgba(15, 15, 17, .86);
+      --paper:      var(--fl-surface);
+      --paper-2:    var(--fl-raised);
+      --ink:        var(--fl-ink);
+      --ink-2:      var(--fl-muted);
+      --ink-3:      var(--fl-faint);
+      --rule:       var(--fl-hair);
+      --rule-firm:  var(--fl-line);
+      --on-ink:     var(--fl-on-ink);
     }
     :root { color-scheme: light; }
     :root[data-theme="dark"] { color-scheme: dark; }
@@ -100,386 +76,250 @@
       background: var(--paper);
       color: var(--ink);
       font-family: var(--fl-body);
-      font-size: 16px;
+      font-size: 17px;
       line-height: 1.6;
       -webkit-font-smoothing: antialiased;
       overflow-x: hidden;
-      transition: background .3s ease, color .3s ease;
     }
-
-    /* paper grain */
-    body::before {
-      content: '';
-      position: fixed; inset: 0; z-index: 0; pointer-events: none;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
-      opacity: var(--grain);
-    }
-    body > * { position: relative; z-index: 1; }
-
     a { color: inherit; text-decoration: none; }
-    ::selection { background: var(--accent); color: var(--paper); }
-    :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
 
-    .wrap { max-width: 1560px; margin: 0 auto; padding: 0 56px; }
-    .mono {
-      font-family: var(--fl-mono);
-      letter-spacing: .16em; text-transform: uppercase;
+    .wrap { max-width: var(--fl-max); margin: 0 auto; padding: 0 var(--fl-pad); }
+
+    /* type roles */
+    .disp {
+      font-family: var(--fl-display);
+      font-weight: var(--fl-fw-light);
+      font-stretch: var(--fl-wide);
+      letter-spacing: var(--fl-track-tight);
+      line-height: var(--fl-lh-title);
     }
-    .serif { font-family: var(--fl-display); font-weight: 400; }
-    .brand { font-size: 23px; letter-spacing: -.01em; line-height: 1; }
-    .brand em { font-style: italic; }
-    .brand span { color: var(--accent); }
+    .meta {
+      font-size: var(--fl-fs-sm);
+      font-weight: var(--fl-fw-medium);
+      font-stretch: var(--fl-narrow);
+      letter-spacing: 0;
+      text-transform: none;
+      color: var(--ink-3);
+    }
 
     /* ── MASTHEAD ───────────────────────────────────────── */
-    .masthead { border-bottom: 1px solid var(--rule); }
+    .masthead { border-bottom: 1px solid var(--rule-firm); }
     .masthead-in {
-      display: grid; grid-template-columns: 88px minmax(0, 1fr) 400px;
-      gap: 48px; padding-top: 76px; padding-bottom: 60px;
+      display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 4fr);
+      gap: 3rem 4rem; align-items: end;
+      padding-top: clamp(3rem, 8vh, 5.5rem); padding-bottom: clamp(2.5rem, 6vh, 4rem);
     }
-    .margin-col { display: flex; flex-direction: column; align-items: flex-start; gap: 18px; }
-    .margin-col i { display: block; width: 100%; height: 1px; background: var(--ink); }
-    .margin-col span {
-      writing-mode: vertical-rl; font-size: 12px; letter-spacing: .3em;
-      text-transform: uppercase; color: var(--ink-3);
-    }
-    .eyebrow { font-size: 12px; letter-spacing: .24em; color: var(--accent); margin-bottom: 22px; }
-    h1.title {
-      font-size: clamp( 28.8px, 10.4vw, 40px); line-height: .84; letter-spacing: -.035em;
-    }
-    h1.title .ln { display: block; overflow: hidden; padding-top: .14em; margin-top: -.14em; }
-    h1.title .ln > span { display: block; animation: rise .95s cubic-bezier(.16,.84,.3,1) both; }
-    h1.title .ln:nth-child(1) > span { animation-delay: .12s; }
-    h1.title .ln:nth-child(2) > span { animation-delay: .25s; }
-    .eyebrow { animation: fadeUp .7s .04s both; }
-    .lede { animation: fadeUp .8s .52s both; }
-    .keys div:nth-child(1) { animation: fadeUp .6s .62s both; }
-    .keys div:nth-child(2) { animation: fadeUp .6s .70s both; }
-    .keys div:nth-child(3) { animation: fadeUp .6s .78s both; }
-    .keys div:nth-child(4) { animation: fadeUp .6s .86s both; }
-
-    /* specimen fan */
-    .mast-side { display: flex; flex-direction: column; justify-content: flex-end; gap: 36px; }
-    .fan { position: relative; height: 172px; animation: fadeUp .9s .34s both; }
-    .fan-i {
-      position: absolute; top: 12px; display: block; width: 190px;
-      background: var(--paper); border: 1px solid var(--rule); padding: 8px; line-height: 0;
-      box-shadow: 10px 12px 0 var(--shade);
-      transform: rotate(var(--r));
-      animation: drift 11s var(--d) ease-in-out infinite;
-    }
-    .fan-i:nth-child(1) { left: 0; z-index: 1; }
-    .fan-i:nth-child(2) { left: 76px; z-index: 2; }
-    .fan-i:nth-child(3) { left: 152px; z-index: 3; }
-    .fan-i img { display: block; width: 100%; height: 112px; object-fit: cover; object-position: top left; filter: var(--duo); transition: filter .5s ease; }
-    .fan:hover .fan-i { animation-play-state: paused; }
-    .fan:hover .fan-i img { filter: var(--duo-off); }
-
-    /* kinetic masthead — a colour sweeping the plate, and the plate slipping */
-    .kin-1 { color: inherit;
-    }
-    .kin {
-      position: relative; display: inline-block;
-      background-size: 260% 100%; color: inherit;
-      animation: sweep 9s linear infinite, flick 9s steps(1, end) infinite;
-    }
-    .kin::before, .kin::after {
-      content: attr(data-text); position: absolute; left: 0; top: 0;
-      background: none; z-index: -1; opacity: 0; pointer-events: none;
-    }
-    .kin::before { -webkit-text-fill-color: var(--accent-2); color: var(--accent-2); animation: slipA 9s steps(1, end) infinite; }
-    .kin::after  { -webkit-text-fill-color: var(--accent);   color: var(--accent);   animation: slipB 9s steps(1, end) infinite; }
-    @keyframes sweep { from { background-position: 150% 0; } to { background-position: -150% 0; } }
-    @keyframes slipA {
-      0%, 90.4% { opacity: 0; transform: none; }
-      90.5% { opacity: 1; transform: translate(-.075em, .008em) skewX(-1.5deg); }
-      92%   { opacity: .8; transform: translate(.055em, -.012em); }
-      93.5% { opacity: 1; transform: translate(-.038em, .004em) skewX(1deg); }
-      95%   { opacity: .55; transform: translate(.018em, 0); }
-      96.5%, 100% { opacity: 0; transform: none; }
-    }
-    @keyframes slipB {
-      0%, 90.4% { opacity: 0; transform: none; }
-      90.5% { opacity: 1; transform: translate(.075em, -.008em) skewX(1.5deg); }
-      92%   { opacity: .8; transform: translate(-.055em, .012em); }
-      93.5% { opacity: 1; transform: translate(.038em, -.004em) skewX(-1deg); }
-      95%   { opacity: .55; transform: translate(-.018em, 0); }
-      96.5%, 100% { opacity: 0; transform: none; }
-    }
-    @keyframes flick {
-      0%, 90.4% { opacity: 1; }
-      90.5% { opacity: .55; }
-      92%   { opacity: .9; }
-      93.5% { opacity: .6; }
-      95%   { opacity: .95; }
-      96.5%, 100% { opacity: 1; }
-    }
-    @supports not ((-webkit-background-clip: text) or (background-clip: text)) {
-      .kin, .kin-1 { color: var(--ink); -webkit-text-fill-color: currentColor; }
-    }
-
-    h1.title sup {
-      font-family: var(--fl-mono);
-      font-size: .25em; letter-spacing: 0; color: var(--accent); vertical-align: super; top: 0;
-    }
+    h1.title { font-size: var(--fl-fs-xl); line-height: .95; margin-left: -.04em; text-wrap: balance; }
     .lede {
-      margin-top: 30px; max-width: 620px;
-      font-family: var(--fl-display); font-style: italic;
-      font-size: clamp(18px, 1.7vw, 24px); line-height: 1.45; color: var(--ink-2);
+      margin-top: 2rem; max-width: 34em;
+      font-size: var(--fl-fs-lead); line-height: 1.45; color: var(--ink-2);
       text-wrap: pretty;
     }
-    .keys { display: flex; flex-direction: column; justify-content: flex-end; font-size: 12px; color: var(--ink-2); }
+
+    .keys { display: flex; flex-direction: column; justify-content: flex-end; }
     .keys div {
-      display: flex; align-items: baseline; justify-content: space-between; gap: 20px;
-      padding: 13px 0; border-top: 1px solid var(--rule);
-      font-family: var(--fl-mono);
+      display: flex; align-items: baseline; justify-content: space-between; gap: 1.25rem;
+      padding: .8rem 0; border-top: 1px solid var(--rule);
     }
-    .keys div:first-child { border-top-color: var(--ink); }
+    .keys div:first-child { border-top-color: var(--rule-firm); }
     .keys div:last-child { border-bottom: 1px solid var(--rule); }
-    .keys dt, .keys .k { font-size: 12px; letter-spacing: .16em; text-transform: uppercase; color: var(--ink-3); }
-    .keys .v { font-size: 15px; color: var(--ink); }
-    .keys .v.small { font-size: 12px; text-align: right; line-height: 1.6; }
+    .keys .k { font-size: var(--fl-fs-sm); font-weight: var(--fl-fw-medium); font-stretch: var(--fl-narrow); color: var(--ink-3); }
+    .keys .v {
+      font-family: var(--fl-display); font-weight: var(--fl-fw-light); font-stretch: var(--fl-wide);
+      font-size: 1.5rem; line-height: 1; letter-spacing: -.02em; color: var(--ink);
+      font-variant-numeric: tabular-nums;
+    }
+    .keys .v.small { font-family: var(--fl-body); font-weight: var(--fl-fw-normal); font-stretch: var(--fl-norm); font-size: var(--fl-fs-sm); text-align: right; line-height: 1.5; letter-spacing: 0; color: var(--ink-2); }
 
     /* ── FILTER RAIL ────────────────────────────────────── */
     .rail {
-      position: sticky; top: 58px; z-index: 50;
+      position: sticky; top: var(--sn-h, 64px); z-index: 50;
       background: var(--paper); border-bottom: 1px solid var(--rule);
     }
-    .rail-in { display: flex; align-items: center; justify-content: space-between; gap: 32px; }
-    .tabs { display: flex; align-items: stretch; gap: 36px; overflow-x: auto; scrollbar-width: none; }
+    .rail-in { display: flex; align-items: center; justify-content: space-between; gap: 2rem; }
+    .tabs { display: flex; align-items: center; gap: .5rem; padding: .85rem 0; overflow-x: auto; scrollbar-width: none; }
     .tabs::-webkit-scrollbar { display: none; }
     .tab {
-      display: inline-flex; align-items: center; gap: 7px;
-      min-height: 44px; padding: 15px 0;
-      border: 0; background: none; color: var(--ink-3);
-      font-family: var(--fl-mono);
-      font-size: 12px; letter-spacing: .16em; text-transform: uppercase;
-      white-space: nowrap; cursor: pointer; transition: color .18s ease, box-shadow .18s ease;
+      display: inline-flex; align-items: center; gap: .5rem;
+      min-height: 2.25rem; padding: 0 .95rem;
+      border: 1px solid var(--rule); border-radius: var(--fl-r-pill);
+      background: none; color: var(--ink-2);
+      font-family: var(--fl-body); font-size: var(--fl-fs-sm); font-weight: var(--fl-fw-medium);
+      white-space: nowrap; cursor: pointer;
+      transition: color var(--fl-t), background var(--fl-t), border-color var(--fl-t);
     }
-    .tab b { font-weight: 400; font-size: 12px; }
-    .tab:hover { color: var(--ink); }
-    .tab[aria-pressed="true"] { color: var(--ink); box-shadow: inset 0 -2px 0 var(--accent); }
-    .tab[aria-pressed="true"] b { color: var(--accent); }
-    .count { font-size: 12px; letter-spacing: .18em; text-transform: uppercase; color: var(--ink-3); white-space: nowrap;
-      font-family: var(--fl-mono); }
+    .tab b { font-weight: var(--fl-fw-medium); font-stretch: var(--fl-narrow); color: var(--ink-3); font-variant-numeric: tabular-nums; }
+    .tab:hover { color: var(--ink); border-color: var(--ink); }
+    .tab[aria-pressed="true"] { color: var(--on-ink); background: var(--ink); border-color: var(--ink); }
+    .tab[aria-pressed="true"] b { color: inherit; opacity: .7; }
+    .count { white-space: nowrap; }
 
     /* ── RECORDS ────────────────────────────────────────── */
-    .rec { position: relative; scroll-margin-top: 124px; }
-    .rec::after {
-      content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 1px;
-      background: var(--rule); transform: scaleX(0); transform-origin: left;
-      transition: transform .8s cubic-bezier(.2,.7,.3,1);
-    }
-    .rec.in::after { transform: scaleX(1); }
-    .rec:last-of-type::after { background: var(--ink); }
-    .rec.pop { animation: fadeUp .45s var(--pd, 0ms) both; }
+    .rec { position: relative; scroll-margin-top: calc(var(--sn-h, 64px) + 64px); border-bottom: 1px solid var(--rule); }
+    .rec:last-of-type { border-bottom-color: var(--rule-firm); }
     .rec.is-hidden { display: none; }
-    .rec::before {
-      content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 0;
-      background: var(--accent); transition: width .18s ease; z-index: 2;
-    }
-    .rec:hover::before, .rec.open::before { width: 3px; }
+    .rec.pop { animation: fadeUp .4s var(--pd, 0ms) both; }
 
+    /* the head is a full-width button; hovering or opening turns the row over */
     .rec-head {
-      display: grid; grid-template-columns: 44px 128px minmax(0, 1fr) 260px 116px 20px;
-      gap: 20px; align-items: center; width: 100%;
-      padding: 26px 0; border: 0; background: none; color: inherit;
+      display: grid; grid-template-columns: 2.5rem 8rem minmax(0, 1fr) 17rem 6.5rem 1.25rem;
+      gap: 1.5rem; align-items: center; width: 100%;
+      padding: 1.6rem var(--fl-pad); border: 0; background: none; color: inherit;
       font: inherit; text-align: left; cursor: pointer;
-      transition: background .18s ease;
+      transition: background var(--fl-t), color var(--fl-t);
     }
-    .rec-head::after {
-      content: ''; position: absolute; inset: 0; z-index: -1;
-      background: transparent; transition: background .18s ease;
-    }
-    .rec:hover .rec-head, .rec.open .rec-head { background: var(--paper-2); }
-    .rec-head { padding-left: 56px; padding-right: 56px; }
-    .rec-in { max-width: 1560px; margin: 0 auto; }
-    .rec-n { font-family: var(--fl-mono); font-size: 12px; letter-spacing: .08em; color: var(--ink-3); }
-    .rec-t {
-      font-family: var(--fl-display);
-      font-size: clamp(28px, 3vw, 40px); line-height: 1.05; letter-spacing: -.02em;
-      transition: color .18s ease, text-shadow .3s cubic-bezier(.2,.7,.3,1);
-    }
-    .rec:hover .rec-t { text-shadow: -2px 0 0 var(--accent-2), 2px 0 0 var(--accent); }
-    .rec.open .rec-t, .rec.open .rec-n { color: var(--accent); }
-    .rec:hover .rec-plate img, .rec.open .rec-plate img, .rec.open .plate img { filter: var(--duo-off); }
-    .rec-plate {
-      display: block; background: var(--paper); border: 1px solid var(--rule);
-      padding: 5px; line-height: 0; transition: border-color .18s ease;
-    }
-    .rec-plate img {
-      display: block; width: 100%; height: 70px;
-      object-fit: cover; object-position: top left;
-      filter: var(--duo); transition: filter .5s ease;
-    }
-    .rec-plate.contain img { object-fit: contain; background: var(--paper-2); padding: 6px; }
-    .rec:hover .rec-plate, .rec.open .rec-plate { border-color: var(--accent); }
-    .tags { display: flex; flex-wrap: wrap; gap: 6px; }
-    .tags span {
-      font-family: var(--fl-mono);
-      font-size: 12px; letter-spacing: .12em; text-transform: uppercase;
-      color: var(--ink-2); border: 1px solid var(--tag-border); padding: 5px 8px;
-    }
-    .rec-cat { font-family: var(--fl-mono); font-size: 12px; letter-spacing: .16em; text-transform: uppercase; color: var(--ink-3); }
-    .chev { justify-self: end; color: var(--ink-3); transition: transform .3s cubic-bezier(.2,.7,.3,1), color .18s ease; }
-    .rec.open .chev { transform: rotate(180deg); color: var(--accent); }
+    /* finlab-theme.css rounds every button into a pill; a full-width row head is not a pill */
+    #index .rec .rec-head { border-radius: 0 !important; }
+    .rec-head:focus-visible { outline: 2px solid var(--ink); outline-offset: -4px; }
+    .rec:hover .rec-head, .rec.open .rec-head { background: var(--ink); color: var(--on-ink); }
+    .rec-in { max-width: var(--fl-max); margin: 0 auto; }
 
-    .panel { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .42s cubic-bezier(.2,.7,.3,1); background: var(--paper-2); }
+    .rec-n { font-size: var(--fl-fs-sm); font-weight: var(--fl-fw-medium); font-stretch: var(--fl-narrow); color: var(--ink-3); font-variant-numeric: tabular-nums; }
+    .rec:hover .rec-n, .rec.open .rec-n { color: inherit; opacity: .6; }
+    .rec-t {
+      font-family: var(--fl-display); font-weight: var(--fl-fw-light); font-stretch: var(--fl-wide);
+      font-size: clamp(1.5rem, 2.6vw, 2.25rem); line-height: 1.05; letter-spacing: -.02em;
+    }
+    .rec-plate {
+      display: block; background: var(--paper); border: 1px solid var(--rule); line-height: 0;
+      transition: border-color var(--fl-t);
+    }
+    .rec-plate img { display: block; width: 100%; height: 4.5rem; object-fit: cover; object-position: top left; }
+    .rec-plate.contain img { object-fit: contain; padding: .4rem; }
+    .rec:hover .rec-plate, .rec.open .rec-plate { border-color: var(--on-ink); }
+    .rec:hover .rec-plate img, .rec.open .rec-plate img, .rec.open .plate img { filter: grayscale(0); }
+
+    .tags { display: flex; flex-wrap: wrap; gap: .1rem .4rem; }
+    .tags span { font-size: var(--fl-fs-sm); font-weight: var(--fl-fw-medium); font-stretch: var(--fl-narrow); color: var(--ink-2); }
+    .tags span:not(:last-child)::after { content: ','; }
+    .rec:hover .tags span, .rec.open .tags span { color: inherit; opacity: .75; }
+    .rec-cat { font-size: var(--fl-fs-sm); font-weight: var(--fl-fw-medium); font-stretch: var(--fl-narrow); color: var(--ink-3); }
+    .rec:hover .rec-cat, .rec.open .rec-cat { color: inherit; opacity: .6; }
+    .chev { justify-self: end; color: var(--ink-3); transition: transform var(--fl-t-slow), color var(--fl-t); }
+    .rec:hover .chev, .rec.open .chev { color: inherit; }
+    .rec.open .chev { transform: rotate(180deg); }
+
+    .panel { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .42s cubic-bezier(.2,.7,.3,1); background: var(--paper); }
     .rec.open .panel { grid-template-rows: 1fr; }
     .panel > .panel-clip { overflow: hidden; visibility: hidden; transition: visibility 0s linear .42s; }
     .rec.open .panel > .panel-clip { visibility: visible; transition-delay: 0s; }
     .panel-grid {
-      display: grid; grid-template-columns: 44px 400px minmax(0, 1fr) 240px;
-      gap: 20px; padding: 6px 56px 44px;
+      display: grid; grid-template-columns: 2.5rem 25rem minmax(0, 1fr) 15rem;
+      gap: 1.5rem; padding: 2rem var(--fl-pad) 2.75rem;
     }
-    .plate { background: var(--paper); border: 1px solid var(--rule); padding: 12px; }
-    .plate img {
-      display: block; width: 100%; height: 232px; object-fit: cover; object-position: top left;
-      filter: var(--duo); transition: filter .5s ease;
-    }
-    .plate.contain img { object-fit: contain; background: var(--paper-2); padding: 22px; }
+    .plate { border: 1px solid var(--rule); }
+    .plate img { display: block; width: 100%; height: 14.5rem; object-fit: cover; object-position: top left; }
+    .plate.contain img { object-fit: contain; padding: 1.5rem; }
     .plate figcaption {
-      display: flex; justify-content: space-between; gap: 12px; align-items: baseline; margin-top: 11px;
-      font-family: var(--fl-mono);
-      font-size: 12px; letter-spacing: .18em; text-transform: uppercase; color: var(--ink-3);
+      padding: .6rem .75rem; border-top: 1px solid var(--rule);
+      font-family: var(--fl-mono); font-size: .75rem; color: var(--ink-3);
+      overflow-wrap: anywhere;
     }
-    .panel-copy { display: flex; flex-direction: column; gap: 18px; }
-    .p-lede { font-family: var(--fl-display); font-style: italic; font-size: 22px; line-height: 1.4; text-wrap: pretty; }
-    .p-body { font-size: 15px; line-height: 1.72; color: var(--ink-2); max-width: 480px; text-wrap: pretty; }
-    .actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 4px; }
+    .panel-copy { display: flex; flex-direction: column; gap: 1.1rem; }
+    .p-lede {
+      font-family: var(--fl-display); font-weight: var(--fl-fw-light); font-stretch: var(--fl-wide);
+      font-size: clamp(1.25rem, 1.8vw, 1.5rem); line-height: 1.3; letter-spacing: -.02em; text-wrap: pretty;
+    }
+    .p-body { font-size: var(--fl-fs-base); line-height: 1.6; color: var(--ink-2); max-width: 32em; text-wrap: pretty; }
+    .actions { display: flex; flex-wrap: wrap; gap: .6rem; margin-top: .25rem; }
     .btn {
-      display: inline-flex; align-items: center; gap: 9px; min-height: 48px; padding: 0 22px;
-      border: 1px solid var(--rule); color: var(--ink);
-      font-family: var(--fl-mono);
-      font-size: 12px; letter-spacing: .14em; text-transform: uppercase;
-      transition: background .18s ease, color .18s ease, border-color .18s ease;
+      display: inline-flex; align-items: center; gap: .5rem; min-height: 2.75rem; padding: 0 1.375rem;
+      border: 1px solid var(--ink); border-radius: var(--fl-r-pill); color: var(--ink);
+      font-size: var(--fl-fs-sm); font-weight: var(--fl-fw-medium); line-height: 1;
+      transition: background var(--fl-t), color var(--fl-t);
     }
-    .btn-fill { background: var(--ink); color: var(--paper); }
-    .btn-fill:hover { background: var(--accent); border-color: var(--accent); color: var(--paper); }
-    .btn-line:hover { background: var(--ink); color: var(--paper); }
-    .panel-meta { font-family: var(--fl-mono); font-size: 12px; color: var(--ink-2); }
-    .panel-meta div { display: flex; justify-content: space-between; gap: 12px; padding: 11px 0; border-top: 1px solid var(--tag-border); }
-    .panel-meta div:first-child { border-top-color: var(--ink); }
-    .panel-meta div:last-child { border-bottom: 1px solid var(--tag-border); }
-    .panel-meta .k { font-size: 12px; letter-spacing: .16em; text-transform: uppercase; color: var(--ink-3); }
-    .panel-meta .live { color: var(--accent); }
+    .btn-fill { background: var(--ink); color: var(--on-ink); }
+    .btn-fill:hover { background: transparent; color: var(--ink); }
+    .btn-line { background: transparent; }
+    .btn-line:hover { background: var(--ink); color: var(--on-ink); }
 
-    .empty { padding: 60px 0; font-family: var(--fl-mono); font-size: 12px; letter-spacing: .2em; text-transform: uppercase; color: var(--ink-3); }
+    .panel-meta { font-size: var(--fl-fs-sm); color: var(--ink-2); }
+    .panel-meta div { display: flex; justify-content: space-between; gap: .75rem; padding: .7rem 0; border-top: 1px solid var(--rule); }
+    .panel-meta div:first-child { border-top-color: var(--rule-firm); }
+    .panel-meta div:last-child { border-bottom: 1px solid var(--rule); }
+    .panel-meta .k { font-weight: var(--fl-fw-medium); font-stretch: var(--fl-narrow); color: var(--ink-3); }
+    .panel-meta .live { color: var(--ink); }
 
+    .empty { padding: 4rem 0; color: var(--ink-3); }
+
+    /* ── SPINE ──────────────────────────────────────────── */
     .spine {
-      position: fixed; left: 16px; top: 50%; transform: translateY(-50%); z-index: 45;
+      position: fixed; left: 1rem; top: 50%; transform: translateY(-50%); z-index: 45;
       display: flex; flex-direction: column;
       opacity: 0; pointer-events: none; transition: opacity .45s ease;
     }
     .spine.live { opacity: 1; pointer-events: auto; }
     .spine .tick {
-      display: flex; align-items: center; gap: 7px; width: 40px;
-      padding: 9px 0; border: 0; background: none; cursor: pointer;
+      display: flex; align-items: center; gap: .45rem; width: 2.5rem;
+      padding: .55rem 0; border: 0; background: none; cursor: pointer;
     }
     .spine .tick[hidden] { display: none; }
-    .spine i { display: block; width: 12px; height: 1px; background: var(--ink-3); transition: width .3s ease, background .3s ease; }
+    .spine i { display: block; width: .75rem; height: 1px; background: var(--ink-3); transition: width .3s ease, background .3s ease; }
     .spine em {
-      font-family: var(--fl-mono); font-style: normal;
-      font-size: 12px; letter-spacing: .1em; color: var(--ink-3);
+      font-style: normal; font-size: .75rem; font-weight: var(--fl-fw-medium); font-stretch: var(--fl-narrow);
+      color: var(--ink-3); font-variant-numeric: tabular-nums;
       opacity: 0; transition: opacity .3s ease, color .3s ease;
     }
-    .spine .tick:hover i, .spine .tick.on i { width: 24px; background: var(--accent); }
-    .spine .tick:hover em, .spine .tick.on em { opacity: 1; color: var(--accent); }
-    @media (max-width: 1380px) { .spine { display: none; } }
+    .spine .tick:hover i, .spine .tick.on i { width: 1.5rem; background: var(--ink); }
+    .spine .tick:hover em, .spine .tick.on em { opacity: 1; color: var(--ink); }
+    @media (max-width: 1400px) { .spine { display: none; } }
 
     /* ── PEEK PLATE ─────────────────────────────────────── */
     .peek {
-      position: fixed; top: 0; left: 0; z-index: 40; width: 320px;
-      background: var(--paper); border: 1px solid var(--rule); padding: 10px;
-      box-shadow: 14px 18px 0 var(--shade);
+      position: fixed; top: 0; left: 0; z-index: 40; width: 20rem;
+      background: var(--paper); border: 1px solid var(--ink);
       pointer-events: none; opacity: 0; visibility: hidden;
       transform: translate3d(0,0,0) rotate(-2.2deg);
       transition: opacity .2s ease, visibility 0s linear .2s;
       will-change: transform;
     }
     .peek.on { opacity: 1; visibility: visible; transition-delay: 0s; }
-    .peek img { display: block; width: 100%; height: 186px; object-fit: cover; object-position: top left; filter: var(--duo-off); }
+    .peek img { display: block; width: 100%; height: 11.5rem; object-fit: cover; object-position: top left; filter: grayscale(0); }
     .peek figcaption {
-      display: flex; justify-content: space-between; margin-top: 9px;
-      font-family: var(--fl-mono);
-      font-size: 12px; letter-spacing: .18em; text-transform: uppercase; color: var(--ink-3);
+      display: flex; justify-content: space-between; gap: .75rem; padding: .55rem .75rem; border-top: 1px solid var(--rule);
+      font-size: .75rem; font-weight: var(--fl-fw-medium); font-stretch: var(--fl-narrow); color: var(--ink-3);
     }
-    .peek figcaption em { font-style: normal; color: var(--accent); }
+    .peek figcaption em { font-style: normal; color: var(--ink); }
 
-    @keyframes rise   { from { transform: translateY(108%); } to { transform: translateY(0); } }
-    @keyframes fadeUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
-    @keyframes drift  { 0%, 100% { transform: rotate(var(--r)) translateY(0); } 50% { transform: rotate(var(--r)) translateY(-9px); } }
-
-    /* ── REVEAL ─────────────────────────────────────────── */
-    .rev { opacity: 0; transform: translateY(14px); transition: opacity .5s ease, transform .5s cubic-bezier(.2,.7,.3,1); }
-    .rev.in { opacity: 1; transform: none; }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
 
     /* ── RESPONSIVE ─────────────────────────────────────── */
     @media (max-width: 1240px) {
-      .wrap, .rec-head { padding-left: 36px; padding-right: 36px; }
-      .masthead-in { grid-template-columns: 64px minmax(0, 1fr) 320px; gap: 32px; }
-      .rec-head { grid-template-columns: 40px 108px minmax(0, 1fr) 200px 104px 18px; gap: 16px; }
-      .panel-grid { grid-template-columns: 40px 330px minmax(0, 1fr) 210px; gap: 16px; padding-left: 36px; padding-right: 36px; }
+      .rec-head { grid-template-columns: 2.25rem 6.5rem minmax(0, 1fr) 12rem 5.5rem 1.25rem; gap: 1rem; }
+      .panel-grid { grid-template-columns: 2.25rem 20rem minmax(0, 1fr) 13rem; gap: 1rem; }
     }
 
     @media (max-width: 1000px) {
-      .masthead-in { grid-template-columns: minmax(0, 1fr); gap: 40px; padding-top: 56px; padding-bottom: 44px; }
-      .margin-col { flex-direction: row; align-items: center; gap: 14px; }
-      .margin-col i { width: 40px; }
-      .margin-col span { writing-mode: horizontal-tb; }
-      .keys { max-width: 420px; }
-      .fan { display: none; }
-      .rec-head { grid-template-columns: 40px minmax(0, 1fr) 20px; gap: 16px; row-gap: 12px; padding: 22px 36px; }
+      .masthead-in { grid-template-columns: minmax(0, 1fr); gap: 2.5rem; }
+      .keys { max-width: 26rem; }
+      .rec-head { grid-template-columns: 2.25rem minmax(0, 1fr) 1.25rem; gap: 1rem; row-gap: .75rem; }
       .rec-n { grid-row: 1; align-self: start; }
       .rec-cat { grid-row: 1; grid-column: 2; }
       .chev { grid-row: 1; grid-column: 3; align-self: start; }
       .rec-t { grid-row: 2; grid-column: 2; }
       .tags { grid-row: 3; grid-column: 2; }
-      .rec-plate { grid-row: 4; grid-column: 2; margin-top: 4px; }
-      .rec-plate img { height: 150px; }
+      .rec-plate { grid-row: 4; grid-column: 2; margin-top: .25rem; }
+      .rec-plate img { height: 9.5rem; }
       .rec.open .rec-plate { display: none; }
-      .panel-grid { grid-template-columns: minmax(0, 1fr); gap: 22px; padding: 0 36px 32px; }
-      .plate img { height: 220px; }
-      .panel-meta { max-width: 420px; }
+      .panel-grid { grid-template-columns: minmax(0, 1fr); gap: 1.5rem; padding-top: 1.5rem; }
+      .plate img { height: 13rem; }
+      .panel-meta { max-width: 26rem; }
       .peek { display: none; }
     }
 
     @media (max-width: 720px) {
-      .wrap { padding-left: 20px; padding-right: 20px; }
-      .rec-head { padding: 22px 20px; }
-      .panel-grid { padding: 0 20px 28px; }
-      .rail { top: 54px; }
-      .rail-in { gap: 16px; }
-      .tabs { gap: 18px; }
-      .tab { font-size: 12px; letter-spacing: .12em; }
+      .rail-in { gap: 1rem; }
+      .tabs { flex-wrap: wrap; overflow: visible; }
       .count { display: none; }
       .actions { flex-direction: column; align-items: stretch; }
       .btn { justify-content: space-between; }
+      .rec-plate img { height: 8rem; }
     }
 
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
       *, *::before, *::after { animation: none !important; transition: none !important; }
-      .rev { opacity: 1; transform: none; }
-      .kin { background-position: 42% 0; }
-      .kin::before, .kin::after { display: none; }
     }
-  
-    /* ── FinLab: paper is the ground, rules are hairlines ───────────── */
-    body { font-family: var(--fl-body); line-height: 1.7; }
-    .mono { letter-spacing: .08em; }
-    .serif, .p-lede { font-family: var(--fl-display); font-style: normal; }
-    .eyebrow { letter-spacing: .08em; color: var(--fl-faint); }
-    h1.title, .rec-t { letter-spacing: -.02em; }
-    .fan-i, .rec, .panel, .card, .tile {
-      border-radius: var(--fl-r-lg);
-      overflow: hidden;
-    }
-    .fan-i { box-shadow: var(--fl-sh-sm); }
-    .tab, .mode { border-radius: var(--fl-r-pill); }
-    .tab.on { background: var(--ink); color: var(--paper); }
-    .rec-t { font-family: var(--fl-display); font-weight: var(--fl-fw-normal); }
-    .rec:hover .rec-t { text-shadow: none; color: var(--accent); }
-    .tags span { border-radius: var(--fl-r-pill); }
   </style>
   <link rel="stylesheet" href="css/finlab-theme.css">
   <link rel="stylesheet" href="css/site-nav.css">
@@ -491,7 +331,7 @@
   <!-- ══ NAV ══ -->
   <!-- SITE NAV -->
 <nav class="site-nav" id="site-nav" aria-label="Primary">
-  <a class="sn-brand" href="index.html">YEN<em>.DEV</em></a>
+  <a class="sn-brand" href="index.html">Yen</a>
 
   <button class="sn-burger" id="sn-burger" type="button"
           aria-label="Open menu" aria-expanded="false" aria-controls="sn-menu">
@@ -513,7 +353,7 @@
         <span class="sn-knob"></span>
       </button>
       <span class="sn-icons" aria-hidden="true">&#9728;<i>/</i>&#9790;</span>
-      <a class="sn-cta" href="contact.html">Get In Touch</a>
+      <a class="sn-cta" href="contact.html">Contact</a>
     </div>
   </div>
 </nav>
@@ -521,30 +361,17 @@
   <!-- ══ MASTHEAD ══ -->
   <header class="masthead">
     <div class="wrap masthead-in">
-      <div class="margin-col"><i></i><span class="mono">Cat. 001&ndash;009</span></div>
-
       <div>
-        <p class="eyebrow mono">Index &mdash; an archive of shipped systems</p>
-        <h1 class="title serif">
-          <span class="ln"><span class="kin-1">Selected</span></span>
-          <span class="ln"><span><span class="kin" data-text="Works">Works</span><sup>09</sup></span></span>
-        </h1>
-        <p class="lede">Nine systems, each carried from architecture sketch to a deployment that answers on a public address &mdash; full-stack products, a streaming data platform, and the cloud infrastructure underneath them.</p>
+        <h1 class="title disp xl">Selected works.</h1>
+        <p class="lede">Nine systems, each carried from architecture sketch to a deployment that answers on a public address: full-stack products, a streaming data platform, and the cloud infrastructure underneath them.</p>
       </div>
 
-      <div class="mast-side">
-      <div class="fan" aria-hidden="true">
-        <span class="fan-i" style="--r: -8deg; --d: 0s"><img src="img/plate/p01.jpg" alt="" decoding="async"></span>
-        <span class="fan-i" style="--r: 3deg; --d: 1.4s"><img src="img/plate/p03.jpg" alt="" decoding="async"></span>
-        <span class="fan-i" style="--r: 11deg; --d: 2.8s"><img src="img/plate/p09.jpg" alt="" decoding="async"></span>
-      </div>
       <dl class="keys">
-        <div><dt class="k">Systems</dt><dd class="v">09</dd></div>
-        <div><dt class="k">Domains</dt><dd class="v">03</dd></div>
-        <div><dt class="k">Live demos</dt><dd class="v">09</dd></div>
-        <div><dt class="k">Stack</dt><dd class="v small">Java &middot; Vue &middot; Python<br>TypeScript &middot; AWS CDK</dd></div>
+        <div><dt class="k">Systems</dt><dd class="v">9</dd></div>
+        <div><dt class="k">Domains</dt><dd class="v">3</dd></div>
+        <div><dt class="k">Live demos</dt><dd class="v">9</dd></div>
+        <div><dt class="k">Stack</dt><dd class="v small">Java, Vue, Python,<br>TypeScript, AWS CDK</dd></div>
       </dl>
-      </div>
     </div>
   </header>
 
@@ -557,7 +384,7 @@
         <button class="tab" type="button" data-filter="data" aria-pressed="false">Data &amp; AI<b>02</b></button>
         <button class="tab" type="button" data-filter="cloud" aria-pressed="false">Cloud<b>04</b></button>
       </div>
-      <p class="count" id="count">Sorted by catalogue no.</p>
+      <p class="count meta" id="count">Sorted by catalogue number</p>
     </div>
   </div>
 
@@ -578,7 +405,7 @@
   <main id="index">
 
     <!-- 01 -->
-    <article class="rec rev open" id="record-01" data-cat="product" data-plate="img/plate/p01.jpg" data-n="01">
+    <article class="rec open" id="record-01" data-cat="product" data-plate="img/plate/p01.jpg" data-n="01">
       <h2>
         <button class="rec-head" type="button" aria-expanded="true" aria-controls="panel-01">
           <span class="rec-n">01</span>
@@ -593,7 +420,7 @@
         <div></div>
         <figure class="plate">
           <img src="img/plate/p01.jpg" alt="Shopping Cart System — storefront and checkout" loading="lazy" decoding="async">
-          <figcaption><span>Plate 01</span><span>SpringPlayground/ShoppingCart</span></figcaption>
+          <figcaption>SpringPlayground/ShoppingCart</figcaption>
         </figure>
         <div class="panel-copy">
           <p class="p-lede">An Amazon-shaped storefront with a real payment path, not a mock one.</p>
@@ -613,7 +440,7 @@
     </article>
 
     <!-- 02 -->
-    <article class="rec rev" id="record-02" data-cat="product" data-plate="img/plate/p02.jpg" data-n="02">
+    <article class="rec" id="record-02" data-cat="product" data-plate="img/plate/p02.jpg" data-n="02">
       <h2>
         <button class="rec-head" type="button" aria-expanded="false" aria-controls="panel-02">
           <span class="rec-n">02</span>
@@ -628,7 +455,7 @@
         <div></div>
         <figure class="plate">
           <img src="img/plate/p02.jpg" alt="Spotify PlayList App — playlist and song query views" loading="lazy" decoding="async">
-          <figcaption><span>Plate 02</span><span>springSpotifyPlayList</span></figcaption>
+          <figcaption>springSpotifyPlayList</figcaption>
         </figure>
         <div class="panel-copy">
           <p class="p-lede">A Spotify client that recommends as well as it retrieves.</p>
@@ -648,7 +475,7 @@
     </article>
 
     <!-- 03 -->
-    <article class="rec rev" id="record-03" data-cat="data" data-plate="img/plate/p03.jpg" data-n="03">
+    <article class="rec" id="record-03" data-cat="data" data-plate="img/plate/p03.jpg" data-n="03">
       <h2>
         <button class="rec-head" type="button" aria-expanded="false" aria-controls="panel-03">
           <span class="rec-n">03</span>
@@ -663,7 +490,7 @@
         <div></div>
         <figure class="plate">
           <img src="img/plate/p03.jpg" alt="Flink Data Platform — job submission view" loading="lazy" decoding="async">
-          <figcaption><span>Plate 03</span><span>SpringDataPlatform</span></figcaption>
+          <figcaption>SpringDataPlatform</figcaption>
         </figure>
         <div class="panel-copy">
           <p class="p-lede">A control plane for Apache Flink: submit and manage streaming jobs without touching the cluster.</p>
@@ -683,7 +510,7 @@
     </article>
 
     <!-- 04 -->
-    <article class="rec rev" id="record-04" data-cat="product" data-plate="img/plate/p04.jpg" data-n="04">
+    <article class="rec" id="record-04" data-cat="product" data-plate="img/plate/p04.jpg" data-n="04">
       <h2>
         <button class="rec-head" type="button" aria-expanded="false" aria-controls="panel-04">
           <span class="rec-n">04</span>
@@ -698,7 +525,7 @@
         <div></div>
         <figure class="plate">
           <img src="img/plate/p04.jpg" alt="Employee System — record management view" loading="lazy" decoding="async">
-          <figcaption><span>Plate 04</span><span>springEmployeeSystem</span></figcaption>
+          <figcaption>springEmployeeSystem</figcaption>
         </figure>
         <div class="panel-copy">
           <p class="p-lede">Back-office plumbing: the parts of an HR tool people actually open every day.</p>
@@ -718,7 +545,7 @@
     </article>
 
     <!-- 05 -->
-    <article class="rec rev" id="record-05" data-cat="data" data-plate="img/plate/p05.jpg" data-n="05">
+    <article class="rec" id="record-05" data-cat="data" data-plate="img/plate/p05.jpg" data-n="05">
       <h2>
         <button class="rec-head" type="button" aria-expanded="false" aria-controls="panel-05">
           <span class="rec-n">05</span>
@@ -733,7 +560,7 @@
         <div></div>
         <figure class="plate">
           <img src="img/plate/p05.jpg" alt="AI Experiment — collection of AI and ML experiments" loading="lazy" decoding="async">
-          <figcaption><span>Plate 05</span><span>ai_experiment</span></figcaption>
+          <figcaption>ai_experiment</figcaption>
         </figure>
         <div class="panel-copy">
           <p class="p-lede">A working notebook of AI ideas, kept in the open.</p>
@@ -753,7 +580,7 @@
     </article>
 
     <!-- 06 -->
-    <article class="rec rev" id="record-06" data-cat="cloud" data-plate="img/plate/p06.jpg" data-n="06">
+    <article class="rec" id="record-06" data-cat="cloud" data-plate="img/plate/p06.jpg" data-n="06">
       <h2>
         <button class="rec-head" type="button" aria-expanded="false" aria-controls="panel-06">
           <span class="rec-n">06</span>
@@ -768,7 +595,7 @@
         <div></div>
         <figure class="plate contain">
           <img src="img/plate/p06.jpg" alt="AWS EKS" loading="lazy" decoding="async">
-          <figcaption><span>Plate 06</span><span>cdk-playground/eks-stack-2</span></figcaption>
+          <figcaption>cdk-playground/eks-stack-2</figcaption>
         </figure>
         <div class="panel-copy">
           <p class="p-lede">A Kubernetes cluster you can stand up from a repository, not a console.</p>
@@ -788,7 +615,7 @@
     </article>
 
     <!-- 07 -->
-    <article class="rec rev" id="record-07" data-cat="cloud" data-plate="img/plate/p07.jpg" data-n="07">
+    <article class="rec" id="record-07" data-cat="cloud" data-plate="img/plate/p07.jpg" data-n="07">
       <h2>
         <button class="rec-head" type="button" aria-expanded="false" aria-controls="panel-07">
           <span class="rec-n">07</span>
@@ -803,7 +630,7 @@
         <div></div>
         <figure class="plate">
           <img src="img/plate/p07.jpg" alt="YouTube Stream Stack — stream ingestion pipeline" loading="lazy" decoding="async">
-          <figcaption><span>Plate 07</span><span>cdk-playground/yt-stream-stack-1</span></figcaption>
+          <figcaption>cdk-playground/yt-stream-stack-1</figcaption>
         </figure>
         <div class="panel-copy">
           <p class="p-lede">An ingestion pipeline for video streams that nobody has to babysit.</p>
@@ -823,7 +650,7 @@
     </article>
 
     <!-- 08 -->
-    <article class="rec rev" id="record-08" data-cat="cloud" data-plate="img/plate/p08.jpg" data-n="08">
+    <article class="rec" id="record-08" data-cat="cloud" data-plate="img/plate/p08.jpg" data-n="08">
       <h2>
         <button class="rec-head" type="button" aria-expanded="false" aria-controls="panel-08">
           <span class="rec-n">08</span>
@@ -838,7 +665,7 @@
         <div></div>
         <figure class="plate contain">
           <img src="img/plate/p08.jpg" alt="OpenSearch" loading="lazy" decoding="async">
-          <figcaption><span>Plate 08</span><span>cdk-playground/opensearch-stack-1</span></figcaption>
+          <figcaption>cdk-playground/opensearch-stack-1</figcaption>
         </figure>
         <div class="panel-copy">
           <p class="p-lede">Search infrastructure defined once and reproducible on demand.</p>
@@ -858,7 +685,7 @@
     </article>
 
     <!-- 09 -->
-    <article class="rec rev" id="record-09" data-cat="cloud" data-plate="img/plate/p09.jpg" data-n="09">
+    <article class="rec" id="record-09" data-cat="cloud" data-plate="img/plate/p09.jpg" data-n="09">
       <h2>
         <button class="rec-head" type="button" aria-expanded="false" aria-controls="panel-09">
           <span class="rec-n">09</span>
@@ -873,7 +700,7 @@
         <div></div>
         <figure class="plate">
           <img src="img/plate/p09.jpg" alt="Permission Control Stack — access control architecture" loading="lazy" decoding="async">
-          <figcaption><span>Plate 09</span><span>cdk-playground/permission-control-stack</span></figcaption>
+          <figcaption>cdk-playground/permission-control-stack</figcaption>
         </figure>
         <div class="panel-copy">
           <p class="p-lede">Multi-tenant authorisation handled at the infrastructure layer.</p>
@@ -898,7 +725,7 @@
   <!-- ══ PEEK PLATE ══ -->
   <figure class="peek" id="peek" aria-hidden="true">
     <img id="peekImg" src="" alt="">
-    <figcaption><span id="peekN">Plate</span><em>Peek</em></figcaption>
+    <figcaption><span id="peekN">Record</span><em>Preview</em></figcaption>
   </figure>
 
   <!-- ══ COLOPHON ══ -->
@@ -906,8 +733,8 @@
 <footer class="site-footer" id="site-footer">
   <div class="ft-grid ft-wrap">
     <div>
-      <div class="ft-mark">YEN<em>.DEV</em></div>
-      <p class="ft-tagline">Physics first, full stack after. AI products built end to end — from 31 of 195 countries.</p>
+      <div class="ft-mark">Yen</div>
+      <p class="ft-tagline">AI products built end to end, from the first diagram to the thing that ships. From Taiwan, by way of the UK, Japan and Ireland.</p>
     </div>
     <div class="ft-col">
       <span class="ft-col-hd">Work</span>
@@ -919,7 +746,7 @@
       <span class="ft-col-hd">Navigate</span>
       <a href="about_me.html">About Me</a>
       <a href="contact.html">Contact</a>
-      <a href="https://yennj12.js.org/yennj12_blog_V4/" target="_blank" rel="noreferrer">Blog ↗</a>
+      <a href="https://yennj12.js.org/yennj12_blog_V4/" target="_blank" rel="noreferrer">Blog</a>
     </div>
     <div class="ft-col">
       <span class="ft-col-hd">Connect</span>
@@ -930,7 +757,7 @@
     </div>
   </div>
   <div class="ft-lower ft-wrap">
-    <span class="ft-copy">© 2026 Yen · All rights reserved.</span>
+    <span class="ft-copy">© 2026 Yen. All rights reserved.</span>
     <span class="ft-sig">yennj12.js.org</span>
   </div>
 </footer>
@@ -982,7 +809,7 @@
           if (match) { shown++; } else { setOpen(rec, false); }
         });
 
-        count.textContent = (f === 'all') ? 'Sorted by catalogue no.' : 'Showing ' + shown + ' of ' + records.length;
+        count.textContent = (f === 'all') ? 'Sorted by catalogue number' : 'Showing ' + shown + ' of ' + records.length;
         empty.hidden = shown > 0;
         hidePeek();
 
@@ -1029,7 +856,7 @@
           px = e.clientX; py = e.clientY;
           place();
           peekImg.src = rec.dataset.plate;
-          peekN.textContent = 'Plate ' + rec.dataset.n;
+          peekN.textContent = 'Record ' + rec.dataset.n;
           peek.classList.add('on');
         });
         head.addEventListener('mouseleave', hidePeek);
@@ -1066,18 +893,6 @@
       new IntersectionObserver(function (entries) {
         spineEl.classList.toggle('live', entries[0].isIntersecting);
       }, { rootMargin: '-20% 0px -20% 0px' }).observe(document.getElementById('index'));
-    }
-
-    /* ── Reveal on scroll ── */
-    if ('IntersectionObserver' in window && !calm) {
-      var io = new IntersectionObserver(function (entries) {
-        entries.forEach(function (en) {
-          if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); }
-        });
-      }, { rootMargin: '0px 0px -8% 0px', threshold: 0.06 });
-      document.querySelectorAll('.rev').forEach(function (el) { io.observe(el); });
-    } else {
-      document.querySelectorAll('.rev').forEach(function (el) { el.classList.add('in'); });
     }
 
     /* ── Service worker (PWA) ── */
