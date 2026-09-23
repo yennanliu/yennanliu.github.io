@@ -1,96 +1,100 @@
 /* ==========================================================================
    SITE FOOTER
-   One footer for every page — the landing page's, made portable.
+   One footer for every page, and the black base every page stands on.
 
-   Before this the site had seven: a Bootstrap list-inline strip on five
-   pages, a Bootstrap 3 dot-separated menu on the oldest, a colophon on
-   the archive, a two-span rule on the terminal page, and the four-column
-   grid on the landing page. They carried different link sets, different
-   labels for the same destination, and three different copyright lines.
-
-   This is the landing page's footer lifted out verbatim — same grid,
-   same mono column heads, same hairline lower bar — rewritten against
-   the --fl-* tokens so it needs nothing from the page it lands on. It
-   brings its own container (.ft-wrap), so a page's .wrap/.container is
-   irrelevant, and it is scoped to .site-footer so it does not collide
-   with whatever `footer { }` rules a page still has.
+   It is the inverted band: ink ground, paper type. In dark it turns
+   over with the rest of the site and becomes a white base on a black
+   page. It brings its own container (.ft-wrap) so it does not care what
+   a page calls its wrapper, and every rule is scoped to .site-footer so
+   it outranks whatever footer rules a page still carries.
 
    Load it after finlab.css (it uses the tokens) and after the page's own
-   <style> block (it must win over the footer rules it replaces).
+   <style> block.
    ========================================================================== */
 
 .site-footer {
-  background: var(--fl-surface);
-  border-top: 1px solid var(--fl-hair);
+  background: var(--fl-ink);
+  color: var(--fl-on-ink);
+  border-top: 1px solid var(--fl-ink);
   margin-top: 0;
   padding: 0;
-  color: var(--fl-text);
   font-family: var(--fl-body);
   text-align: left;
 
   /* Anchors its own em ladder rather than inheriting the root size:
-     css/bootstrap.css sets html { font-size: 10px }, so a rem here
-     would mean two different things on two pages. */
+     css/bootstrap.css sets html { font-size: 10px } on the oldest pages,
+     so a rem here would mean two different things on two pages. */
   font-size: 16px;
+
+  /* inside the band, the hairline is a step up from the ground */
+  --ft-hair: color-mix(in srgb, var(--fl-on-ink) 22%, transparent);
+  --ft-dim:  color-mix(in srgb, var(--fl-on-ink) 55%, transparent);
 }
 
 .site-footer .ft-wrap {
-  max-width: 1280px;
+  max-width: 80rem;
   margin: 0 auto;
-  padding: 0 48px;
+  padding: 0 clamp(1.25rem, 4vw, 3rem);
 }
 
 /* ── the four columns ── */
 
 .site-footer .ft-grid {
   display: grid;
-  grid-template-columns: 1.4fr repeat(3, 1fr);
-  gap: 52px;
-  padding-top: 60px;
-  padding-bottom: 56px;
+  grid-template-columns: 1.6fr repeat(3, 1fr);
+  gap: 3rem;
+  padding-top: 4.5rem;
+  padding-bottom: 4rem;
 }
 
 .site-footer .ft-mark {
-  font-family: var(--fl-mono);
-  font-size: .95em;
-  font-weight: var(--fl-fw-normal);
-  letter-spacing: .1em;
-  text-transform: uppercase;
-  color: var(--fl-ink);
-  margin-bottom: 12px;
+  font-family: var(--fl-display);
+  font-size: 2.25em;
+  font-weight: var(--fl-fw-light);
+  font-stretch: var(--fl-wide);
+  letter-spacing: -.03em;
+  line-height: 1;
+  text-transform: none;
+  color: var(--fl-on-ink);
+  margin-bottom: 1rem;
 }
-.site-footer .ft-mark em { color: var(--fl-link); font-style: normal; }
+.site-footer .ft-mark em { font-style: normal; color: var(--ft-dim); }
 
 .site-footer .ft-tagline {
-  font-size: .875em;
-  line-height: var(--fl-lh-body);
-  color: var(--fl-ghost);
-  max-width: 220px;
+  font-size: .9375em;
+  line-height: 1.5;
+  color: var(--ft-dim);
+  max-width: 22em;
   margin: 0;
+  text-wrap: pretty;
 }
 
 .site-footer .ft-col-hd {
   display: block;
-  font-family: var(--fl-mono);
-  font-size: .6em;
-  letter-spacing: .18em;
-  text-transform: uppercase;
-  color: var(--fl-ghost);
-  margin-bottom: 14px;
+  font-size: .8125em;
+  font-weight: var(--fl-fw-medium);
+  font-stretch: var(--fl-narrow);
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--ft-dim);
+  margin-bottom: 1rem;
+  padding-bottom: .5rem;
+  border-bottom: 1px solid var(--ft-hair);
 }
 
 .site-footer .ft-col a {
   display: block;
-  font-family: var(--fl-mono);
-  font-size: .85em;
+  font-size: .9375em;
   font-weight: var(--fl-fw-normal);
-  color: var(--fl-muted);
+  color: var(--fl-on-ink);
   text-decoration: none;
-  margin-bottom: 9px;
-  transition: color var(--fl-t);
+  margin-bottom: .55rem;
+  text-underline-offset: .25em;
+  text-decoration-thickness: 1px;
+  transition: opacity var(--fl-t);
 }
 .site-footer .ft-col a:hover,
-.site-footer .ft-col a:focus-visible { color: var(--fl-link); }
+.site-footer .ft-col a:focus-visible { text-decoration: underline; }
 
 /* ── the lower bar ── */
 
@@ -98,39 +102,40 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px 0;
-  border-top: 1px solid var(--fl-hair);
+  gap: 1rem;
+  padding-block: 1.25rem 1.5rem;
+  border-top: 1px solid var(--ft-hair);
 }
 
 .site-footer .ft-copy,
 .site-footer .ft-sig {
-  font-family: var(--fl-mono);
-  font-size: .63em;
-  color: var(--fl-ghost);
+  font-size: .8125em;
+  font-stretch: var(--fl-narrow);
+  font-weight: var(--fl-fw-medium);
+  letter-spacing: 0;
+  color: var(--ft-dim);
   margin: 0;
 }
-.site-footer .ft-copy { letter-spacing: .06em; }
 
 /* ── narrow ── */
 
 @media (max-width: 960px) {
-  .site-footer .ft-wrap { padding: 0 32px; }
-  .site-footer .ft-grid { grid-template-columns: 1fr 1fr; gap: 40px; }
+  .site-footer .ft-grid { grid-template-columns: 1fr 1fr; gap: 2.5rem; }
+  .site-footer .ft-grid > div:first-child { grid-column: 1 / -1; }
 }
 
-@media (max-width: 768px) {
-  .site-footer .ft-wrap { padding: 0 20px; }
+@media (max-width: 640px) {
   .site-footer .ft-grid {
     grid-template-columns: 1fr;
-    gap: 28px;
-    padding-top: 48px;
-    padding-bottom: 48px;
+    gap: 2rem;
+    padding-top: 3.5rem;
+    padding-bottom: 3rem;
   }
-  .site-footer .ft-lower { flex-direction: column; gap: 8px; text-align: center; }
+  .site-footer .ft-lower { flex-direction: column; align-items: flex-start; gap: .35rem; }
 }
 
 @supports (padding: env(safe-area-inset-bottom)) {
-  @media (max-width: 768px) {
+  @media (max-width: 640px) {
     .site-footer { padding-bottom: env(safe-area-inset-bottom); }
   }
 }

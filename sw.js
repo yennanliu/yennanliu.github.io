@@ -1,26 +1,25 @@
-const CACHE_NAME = 'yen-dev-v1.0.0';
+const CACHE_NAME = 'yen-dev-v2.0.0';
 const urlsToCache = [
   '/',
   '/index.html',
   '/about_me.html',
   '/portfolios.html',
   '/contact.html',
-  '/img/',
-  '/css/landing-page.css',
-  '/css/video_header.css',
-  '/css/parallax_scrolling.css',
-  '/fonts/',
-  '/js/',
-  '/font-awesome/css/font-awesome.min.css',
-  // External CDN resources (cache them for offline use)
+  '/ai_builder.html',
+  '/aws_architecture.html',
+  '/css/finlab.css',
+  '/css/finlab-theme.css',
+  '/css/site-nav.css',
+  '/css/site-footer.css',
+  '/js/site-nav.js',
+  '/img/icon.svg',
+  '/manifest.json',
+  // External resources (cached for offline use)
+  'https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&display=swap',
   'https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css',
-  'https://unpkg.com/aos@2.3.1/dist/aos.css',
-  'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css',
-  'https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap',
   'https://code.jquery.com/jquery-3.5.1.slim.min.js',
   'https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js',
-  'https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js',
-  'https://unpkg.com/aos@2.3.1/dist/aos.js'
+  'https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js'
 ];
 
 // Install Service Worker
