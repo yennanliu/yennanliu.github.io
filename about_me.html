@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-   <head>
+<head>
   <script>
     /* Theme, before first paint. The site has three dark mechanisms from
        three eras; one saved value drives all of them. Inline and
@@ -14,1045 +14,185 @@
       if (d) r.setAttribute('data-mode', 'ink');
     })();
   </script>
-      <meta charset="UTF-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-      <title>yen.dev</title>
-      <meta name="description" content="Learn more about Yen, a software engineer with a passion for technology, travel, and entrepreneurship.">
-      
-      <!-- Open Graph / Facebook -->
-      <meta property="og:type" content="website">
-      <meta property="og:url" content="https://yennanliu.github.io/about_me.html">
-      <meta property="og:title" content="About Me - Yen.Dev">
-      <meta property="og:description" content="Learn more about Yen, a software engineer with a passion for technology, travel, and entrepreneurship.">
-      <meta property="og:image" content="https://yennanliu.github.io/img/website-preview.png">
-      
-      <!-- Twitter -->
-      <meta property="twitter:card" content="summary_large_image">
-      <meta property="twitter:url" content="https://yennanliu.github.io/about_me.html">
-      <meta property="twitter:title" content="About Me - Yen.Dev">
-      <meta property="twitter:description" content="Learn more about Yen, a software engineer with a passion for technology, travel, and entrepreneurship.">
-      <meta property="twitter:image" content="https://yennanliu.github.io/img/website-preview.png">
-      
-      <!-- PWA Meta Tags -->
-      <meta name="theme-color" content="#4a6bff">
-      <meta name="apple-mobile-web-app-capable" content="yes">
-      <meta name="apple-mobile-web-app-status-bar-style" content="default">
-      <meta name="apple-mobile-web-app-title" content="Yen.Dev">
-      <meta name="mobile-web-app-capable" content="yes">
-      <meta name="msapplication-TileColor" content="#4a6bff">
-      <meta name="msapplication-tap-highlight" content="no">
-      
-      <!-- PWA Icons -->
-      <link rel="icon" href="img/icon.svg" type="image/svg+xml">
-      <link rel="apple-touch-icon" href="img/icon.svg">
-      <link rel="mask-icon" href="img/icon.svg" color="#4a6bff">
-      
-      <!-- PWA Manifest -->
-      <link rel="manifest" href="manifest.json">
-      
-      <!-- Google analytics -->
-      <script async src="https://www.googletagmanager.com/gtag/js?id=G-X2DJ8VW74E"></script>
-      <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'G-X2DJ8VW74E');
-      </script>
-      
-      <!-- Bootstrap CSS -->
-      <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-      <!-- AOS Animation Library -->
-      <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-      <!-- Custom CSS -->
-      <link rel="stylesheet" href="css/finlab.css">
-      <style>
-         :root {
-            /* FinLab palette */
-            --primary-color: #2563eb;
-            --secondary-color: #059669;
-            --light-bg: #f8fafc;
-            --dark-bg: #0f1115;
-            --light-text: #ffffff;
-            --dark-text: #28303b;
-            --transition-speed: 0.16s;
-         }
-         
-         /* Base styles */
-         body {
-            font-family: var(--fl-body);
-            transition: background-color var(--transition-speed), color var(--transition-speed);
-            scroll-behavior: smooth;
-            padding-top: 76px; /* Add padding for fixed navbar */
-         }
-         
-         /* Enhanced Responsive typography */
-         h1.display-4 {
-            font-size: 2rem;
-         }
-
-         .lead {
-            font-size: 1rem;
-         }
-
-         @media (min-width: 481px) {
-            h1.display-4 {
-               font-size: 2.5rem;
-            }
-
-            .lead {
-               font-size: 1.1rem;
-            }
-         }
-
-         @media (min-width: 768px) {
-            h1.display-4 {
-               font-size: 2.5rem;
-            }
-
-            .lead {
-               font-size: 1.2rem;
-            }
-         }
-
-         @media (min-width: 1024px) {
-            h1.display-4 {
-               font-size: 2.5rem;
-            }
-
-            .lead {
-               font-size: 1.25rem;
-            }
-         }
-
-         @media (min-width: 1440px) {
-            h1.display-4 {
-               font-size: 2.5rem;
-            }
-
-            .lead {
-               font-size: 1.4rem;
-            }
-         }
-         
-         /* Responsive navbar */
-         .navbar {
-            box-shadow: var(--fl-sh);
-            transition: all var(--transition-speed);
-            padding: 15px 0;
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            background-color: rgba(255, 255, 255, 0.9) !important;
-         }
-         
-         @media (max-width: 991.98px) {
-            .navbar-collapse {
-               background-color: rgba(255, 255, 255, 0.95);
-               padding: 20px;
-               border-radius: var(--fl-r);
-               margin-top: 10px;
-            }
-            
-            .nav-link {
-               margin: 10px 0;
-            }
-            
-            .toggle-container {
-               margin: 15px 0;
-            }
-         }
-         
-         /* Enhanced Responsive about section */
-         .about-section {
-            padding: 30px 15px 40px;
-            min-height: auto;
-         }
-
-         @media (min-width: 481px) {
-            .about-section {
-               padding: 40px 20px 50px;
-            }
-         }
-
-         @media (min-width: 768px) {
-            .about-section {
-               padding: 60px 0 70px;
-            }
-         }
-
-         @media (min-width: 1024px) {
-            .about-section {
-               padding: 80px 0;
-            }
-         }
-
-         @media (min-width: 1440px) {
-            .about-section {
-               padding: 100px 0;
-            }
-         }
-         
-         /* Responsive map container */
-         .map-container {
-            height: 300px;
-            margin: 20px 0;
-         }
-         
-         @media (min-width: 768px) {
-            .map-container {
-               height: 500px;
-               margin: 40px 0;
-            }
-         }
-         
-         /* Scroll to top button */
-         .scroll-top {
-            width: 40px;
-            height: 40px;
-            bottom: 20px;
-            right: 20px;
-         }
-         
-         @media (min-width: 768px) {
-            .scroll-top {
-               width: 50px;
-               height: 50px;
-               bottom: 30px;
-               right: 30px;
-            }
-         }
-         
-         .navbar-brand {
-            font-weight: 400;
-            font-size: 1.5rem;
-            color: var(--primary-color) !important;
-         }
-         
-         .nav-link {
-            font-weight: 400;
-            position: relative;
-            margin: 0 10px;
-         }
-         
-         .nav-link::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: 0;
-            left: 0;
-            background-color: var(--primary-color);
-            transition: width var(--transition-speed);
-         }
-         
-         .nav-link:hover::after,
-         .nav-link:focus::after,
-         .nav-link:active::after {
-            width: 100%;
-         }
-         
-         .about-section {
-            padding: 80px 0;
-            background: linear-gradient(135deg, rgba(37, 99, 235, 0.1) 0%, rgba(5, 150, 105, 0.1) 100%);
-            border-radius: 0 0 var(--fl-r-xl) var(--fl-r-xl);
-            margin-bottom: 80px;
-         }
-         
-         .display-4 {
-            font-weight: 300;
-            margin-bottom: 20px;
-            font-size: 2.5rem;
-            color: inherit;
-         }
-         
-         .lead {
-            font-size: 1.25rem;
-            font-weight: 400;
-            margin-bottom: 30px;
-            line-height: 1.8;
-         }
-         
-         .map-container {
-            height: 500px;
-            border-radius: var(--fl-r-lg);
-            overflow: hidden;
-            box-shadow: var(--fl-sh-lg);
-            margin: 40px 0;
-         }
-         
-         #map {
-            width: 100%;
-            height: 100%;
-         }
-         
-         /* Dark mode styles */
-         body.dark-mode {
-            background-color: var(--dark-bg);
-            color: var(--light-text);
-         }
-         
-         body.dark-mode .navbar {
-            background-color: rgba(20, 20, 23, 0.9) !important;
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-         }
-         
-         body.dark-mode .navbar-light .navbar-brand,
-         body.dark-mode .navbar-light .nav-link {
-            color: var(--light-text) !important;
-         }
-
-         /* Improve toggler button visibility in light mode */
-         .navbar-light .navbar-toggler {
-            border-color: rgba(17, 24, 39, 0.3) !important;
-         }
-         .navbar-light .navbar-toggler-icon {
-            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(17, 24, 39, 0.7)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
-         }
-         body.dark-mode .navbar-light .navbar-toggler {
-            border-color: rgba(245, 247, 250, 0.4) !important;
-         }
-         body.dark-mode .navbar-light .navbar-toggler-icon {
-            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(245, 247, 250, 0.8)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
-         }
-
-         /* Dark mode mobile navbar styles */
-         @media (max-width: 991.98px) {
-            body.dark-mode .navbar-collapse {
-               background-color: rgba(31, 31, 36, 0.95) !important;
-            }
-         }
-         
-         body.dark-mode a {
-            color: #7aa8ff;
-         }
-         
-         /* Toggle button styles */
-         .toggle-container {
-            display: flex;
-            align-items: center;
-            margin-left: 15px;
-         }
-         
-         .theme-switch {
-            display: inline-block;
-            height: 24px;
-            position: relative;
-            width: 48px;
-         }
-         
-         .theme-switch input {
-            display: none;
-         }
-         
-         .slider {
-            background-color: #dbe1e8;
-            bottom: 0;
-            cursor: pointer;
-            left: 0;
-            position: absolute;
-            right: 0;
-            top: 0;
-            transition: .4s;
-            border-radius: var(--fl-r-xl);
-         }
-         
-         .slider:before {
-            background-color: white;
-            bottom: 4px;
-            content: "";
-            height: 16px;
-            left: 4px;
-            position: absolute;
-            transition: .4s;
-            width: 16px;
-            border-radius: 50%;
-         }
-         
-         input:checked + .slider {
-            background-color: var(--primary-color);
-         }
-         
-         input:checked + .slider:before {
-            transform: translateX(24px);
-         }
-         
-         .toggle-icons {
-            font-size: 14px;
-            display: flex;
-            align-items: center;
-            margin-left: 8px;
-         }
-         
-         /* Scroll to top button */
-         .scroll-top {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background-color: var(--primary-color);
-            color: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            opacity: 0;
-            transition: all 0.3s;
-            box-shadow: var(--fl-sh);
-            z-index: 999;
-         }
-         
-         .scroll-top.visible {
-            opacity: 1;
-         }
-         
-         .scroll-top:hover,
-         .scroll-top:focus,
-         .scroll-top:active {
-            transform: translateY(-5px);
-            box-shadow: var(--fl-sh);
-         }
-         
-         /* Apple-style Career Journey Section */
-         .career-section {
-            background: #ffffff;
-            padding: 120px 0;
-            margin-bottom: 0;
-            position: relative;
-            overflow: hidden;
-         }
-
-         body.dark-mode .career-section {
-            background: #141417;
-         }
-
-         .section-title {
-            font-weight: 300;
-            margin-bottom: 15px;
-            font-size: 40px;
-            text-align: center;
-            letter-spacing: -0.5px;
-            color: inherit;
-         }
-
-         .section-subtitle {
-            font-size: 28px;
-            text-align: center;
-            margin-bottom: 80px;
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
-            color: #647084;
-            font-weight: 400;
-         }
-
-         body.dark-mode .section-subtitle {
-            color: #9aa5b5;
-         }
-
-         .career-timeline {
-            position: relative;
-            max-width: 1400px;
-            margin: 0 auto;
-            z-index: 1;
-         }
-
-         /* Apple-style Career Items */
-         .career-item {
-            position: relative;
-            width: 100%;
-            height: 600px;
-            margin-bottom: 120px;
-            border-radius: var(--fl-r-lg);
-            overflow: hidden;
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-         }
-
-         .career-item:hover {
-            transform: scale(1.02);
-         }
-
-         /* Background overlay for readability */
-         .career-item::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, rgba(17, 24, 39, 0.4) 0%, rgba(17, 24, 39, 0.1) 50%, rgba(17, 24, 39, 0.6) 100%);
-            z-index: 1;
-         }
-
-         /* Content container */
-         .career-content-wrapper {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 2;
-            padding: 60px;
-         }
-
-         .career-content {
-            text-align: center;
-            max-width: 800px;
-            color: white;
-         }
-
-         /* Apple-style statistics display */
-         .career-stats {
-            display: flex;
-            justify-content: center;
-            gap: 80px;
-            margin-bottom: 40px;
-            flex-wrap: wrap;
-         }
-
-         .stat-item {
-            text-align: center;
-            min-width: 120px;
-         }
-
-         .stat-number {
-            font-size: 40px;
-            font-weight: 300;
-            line-height: 1;
-            color: white;
-            display: block;
-            margin-bottom: 8px;
-         }
-
-         .stat-label {
-            font-size: 16px;
-            color: rgba(255, 255, 255, 0.8);
-            font-weight: 400;
-            line-height: 1.3;
-         }
-
-         .career-title {
-            font-size: 40px;
-            font-weight: 300;
-            color: white;
-            margin-bottom: 20px;
-            text-shadow: 0 2px 20px rgba(17, 24, 39, 0.3);
-            line-height: 1.1;
-         }
-
-         .career-year-badge {
-            display: inline-block;
-            background: rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            padding: 12px 24px;
-            border-radius: var(--fl-r-xl);
-            color: white;
-            font-weight: 400;
-            font-size: 18px;
-            margin-bottom: 30px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-         }
-
-         .career-description {
-            font-size: 20px;
-            line-height: 1.5;
-            color: rgba(255, 255, 255, 0.9);
-            margin-bottom: 40px;
-            text-shadow: 0 1px 10px rgba(17, 24, 39, 0.3);
-         }
-
-         /* Skills tags for Apple style */
-         .career-skills {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 16px;
-            margin-top: 40px;
-         }
-
-         .skill-tag {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            color: white;
-            font-size: 14px;
-            font-weight: 400;
-            padding: 12px 20px;
-            border-radius: var(--fl-r-xl);
-            transition: all 0.3s ease;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-         }
-
-         .skill-tag:hover {
-            background: rgba(255, 255, 255, 0.2);
-            transform: translateY(-2px);
-         }
-
-         /* Enhanced Responsive Design */
-
-         /* Large Desktop (1440px+) */
-         @media (min-width: 1440px) {
-            .career-item {
-               height: 700px;
-               margin-bottom: 140px;
-            }
-
-            .career-title {
-               font-size: 40px;
-            }
-
-            .stat-number {
-               font-size: 40px;
-            }
-
-            .career-description {
-               font-size: 22px;
-            }
-         }
-
-         /* Standard Desktop (1024px-1440px) */
-         @media (min-width: 1024px) and (max-width: 1439px) {
-            .career-item {
-               height: 600px;
-               margin-bottom: 120px;
-            }
-
-            .career-title {
-               font-size: 40px;
-            }
-         }
-
-         /* Tablets Landscape (768px-1023px) */
-         @media (min-width: 768px) and (max-width: 1023px) {
-            .career-section {
-               padding: 100px 0;
-            }
-
-            .section-title {
-               font-size: 40px;
-            }
-
-            .section-subtitle {
-               font-size: 24px;
-            }
-
-            .career-item {
-               height: 500px;
-               margin-bottom: 80px;
-            }
-
-            .career-content-wrapper {
-               padding: 40px;
-            }
-
-            .career-title {
-               font-size: 40px;
-            }
-
-            .career-stats {
-               gap: 40px;
-            }
-
-            .stat-number {
-               font-size: 36px;
-            }
-
-            .stat-label {
-               font-size: 14px;
-            }
-
-            .career-description {
-               font-size: 18px;
-            }
-         }
-
-         /* Tablets Portrait (481px-767px) */
-         @media (min-width: 481px) and (max-width: 767px) {
-            .career-section {
-               padding: 80px 0;
-            }
-
-            .section-title {
-               font-size: 36px;
-            }
-
-            .section-subtitle {
-               font-size: 20px;
-               margin-bottom: 60px;
-               padding: 0 20px;
-            }
-
-            .career-item {
-               height: 450px;
-               margin-bottom: 60px;
-               margin-left: 15px;
-               margin-right: 15px;
-            }
-
-            .career-content-wrapper {
-               padding: 35px 25px;
-            }
-
-            .career-title {
-               font-size: 32px;
-            }
-
-            .career-stats {
-               gap: 25px;
-               margin-bottom: 30px;
-            }
-
-            .stat-number {
-               font-size: 28px;
-            }
-
-            .stat-label {
-               font-size: 13px;
-            }
-
-            .career-description {
-               font-size: 16px;
-               line-height: 1.6;
-            }
-
-            .career-skills {
-               gap: 12px;
-            }
-
-            .skill-tag {
-               padding: 10px 16px;
-               font-size: 13px;
-            }
-         }
-
-         /* Mobile Phones (320px-480px) */
-         @media (max-width: 480px) {
-            .career-section {
-               padding: 60px 0;
-            }
-
-            .section-title {
-               font-size: 28px;
-               padding: 0 20px;
-            }
-
-            .section-subtitle {
-               font-size: 16px;
-               margin-bottom: 40px;
-               padding: 0 20px;
-            }
-
-            .career-item {
-               height: 400px;
-               margin-bottom: 40px;
-               margin-left: 10px;
-               margin-right: 10px;
-               border-radius: var(--fl-r);
-            }
-
-            .career-content-wrapper {
-               padding: 25px 20px;
-            }
-
-            .career-year-badge {
-               font-size: 14px;
-               padding: 8px 16px;
-               margin-bottom: 20px;
-            }
-
-            .career-title {
-               font-size: 24px;
-               line-height: 1.2;
-               margin-bottom: 20px;
-            }
-
-            .career-stats {
-               flex-direction: column;
-               gap: 20px;
-               margin-bottom: 25px;
-            }
-
-            .stat-item {
-               min-width: auto;
-            }
-
-            .stat-number {
-               font-size: 24px;
-            }
-
-            .stat-label {
-               font-size: 12px;
-            }
-
-            .career-description {
-               font-size: 14px;
-               line-height: 1.5;
-               margin-bottom: 25px;
-            }
-
-            .career-skills {
-               gap: 8px;
-               justify-content: center;
-            }
-
-            .skill-tag {
-               padding: 8px 12px;
-               font-size: 12px;
-            }
-         }
-
-         /* Extra Small Mobile (max-width: 320px) */
-         @media (max-width: 320px) {
-            .career-item {
-               height: 380px;
-               margin-left: 5px;
-               margin-right: 5px;
-            }
-
-            .career-content-wrapper {
-               padding: 20px 15px;
-            }
-
-            .career-title {
-               font-size: 20px;
-            }
-
-            .stat-number {
-               font-size: 20px;
-            }
-
-            .career-description {
-               font-size: 13px;
-            }
-         }
-
-         /* Touch-specific optimizations */
-         @media (hover: none) and (pointer: coarse) {
-            .skill-tag:active {
-               transform: translateY(-3px);
-               background: var(--primary-color);
-               color: white;
-               transition: all 0.1s ease;
-            }
-
-            .career-item:active {
-               transform: translateY(-16px);
-               box-shadow: var(--fl-sh-lg);
-               transition: all 0.1s ease;
-            }
-
-            body.dark-mode .career-item:active {
-               box-shadow: var(--fl-sh-lg);
-               transition: all 0.1s ease;
-            }
-
-            .career-cta:active {
-               transform: translateY(-3px);
-               box-shadow: var(--fl-sh-lg);
-               color: white;
-               text-decoration: none;
-               transition: all 0.1s ease;
-            }
-
-            .scroll-top:active {
-               transform: translateY(-5px);
-               box-shadow: var(--fl-sh);
-               transition: all 0.1s ease;
-            }
-
-            .nav-link:active::after {
-               width: 100%;
-               transition: width 0.1s ease;
-            }
-
-            /* Enhanced touch targets */
-            .btn, .nav-link, .skill-tag, .career-cta {
-               min-height: 44px;
-               min-width: 44px;
-               display: inline-flex;
-               align-items: center;
-               justify-content: center;
-            }
-
-            .nav-link {
-               padding: 12px 16px;
-            }
-         }
-
-         /* Mobile-specific social icons stacking - Note: about_me.html doesn't have social icons section like other pages */
-         @media (max-width: 480px) {
-            .social-icons {
-               flex-direction: column;
-               align-items: center;
-               gap: 20px;
-               max-width: 200px;
-               margin: 40px auto;
-            }
-
-            .social-icon {
-               width: 55px;
-               height: 55px;
-            }
-         }
-
-         @media (min-width: 481px) and (max-width: 767px) {
-            .social-icons {
-               gap: 18px;
-               max-width: 400px;
-               margin: 40px auto;
-            }
-         }
-
-         /* Typewriter effect */
-         .typewriter {
-            overflow: hidden;
-            border-right: 0.15em solid var(--primary-color);
-            white-space: nowrap;
-            display: inline-block;
-            letter-spacing: 0.15em;
-            animation: typing 3.5s steps(50, end), blink-caret 0.75s step-end infinite;
-         }
-
-         @keyframes typing {
-            from { width: 0 }
-            to { width: 100% }
-         }
-
-         @keyframes blink-caret {
-            from, to { border-color: transparent }
-            50% { border-color: var(--primary-color) }
-         }
-
-         /* Enhanced Responsive typewriter */
-         @media (max-width: 1024px) {
-            .typewriter {
-               letter-spacing: 0.12em;
-               animation: typing 3.8s steps(45, end), blink-caret 0.75s step-end infinite;
-            }
-         }
-
-         @media (max-width: 768px) {
-            .typewriter {
-               letter-spacing: 0.1em;
-               animation: typing 4s steps(40, end), blink-caret 0.75s step-end infinite;
-            }
-         }
-
-         @media (max-width: 480px) {
-            .typewriter {
-               letter-spacing: 0.08em;
-               animation: typing 4.5s steps(35, end), blink-caret 0.75s step-end infinite;
-               font-size: 1rem;
-            }
-         }
-      
-         /* ── FinLab: quiet the page down ─────────────────────────────
-            Flat surfaces, hairline rules, one accent, nothing shouts. */
-         body { line-height: 1.7; letter-spacing: 0; }
-         .navbar { border-bottom: 1px solid var(--fl-hair); }
-         .about-section, .career-section, .contact-section {
-            background: var(--fl-raised);
-            border-bottom: 1px solid var(--fl-hair);
-         }
-         .display-4, .section-title { color: var(--fl-ink); }
-         .section-subtitle, .lead { color: var(--fl-muted); }
-         .card, .timeline-content, .info-card {
-            border: 1px solid var(--fl-hair);
-            background: var(--fl-surface);
-         }
-         body.dark-mode { background-color: var(--fl-ink); }
-         body.dark-mode .card, body.dark-mode .timeline-content {
-            background: #141417; border-color: #2e2e35;
-         }
-
-         /* The career journey set its text straight onto photography. The
-            reference site never does that — copy sits on a real surface. */
-         .career-item::before { background: rgba(15, 23, 42, .22); }
-         .career-item:hover { transform: none; }
-         .career-content {
-            background: rgba(255, 255, 255, .93);
-            backdrop-filter: saturate(180%) blur(14px);
-            -webkit-backdrop-filter: saturate(180%) blur(14px);
-            border: 1px solid var(--fl-hair);
-            border-radius: var(--fl-r-lg);
-            padding: 40px;
-            color: var(--fl-text);
-         }
-         .career-title, .stat-number { color: var(--fl-ink); text-shadow: none; }
-         .career-description, .stat-label { color: var(--fl-muted); text-shadow: none; }
-         .career-year-badge {
-            background: var(--fl-ink); color: var(--fl-on-ink); border: 0;
-            border-radius: var(--fl-r-pill);
-         }
-         .skill-tag {
-            background: var(--fl-raised);
-            border: 1px solid var(--fl-hair);
-            border-radius: var(--fl-r-pill);
-            color: var(--fl-muted);
-         }
-         .skill-tag:hover {
-            background: var(--fl-inset); color: var(--fl-ink); transform: none;
-         }
-
-         /* Hero grounds are flat on the reference site, and the one filled
-            action on a page is ink, not the accent. */
-         .about-section, .hero-section, .contact-hero {
-            background: var(--fl-raised) !important;
-         }
-         .btn-submit {
-            background: var(--fl-ink);
-            border: 1px solid var(--fl-ink);
-            color: var(--fl-on-ink);
-            border-radius: var(--fl-r-pill);
-            box-shadow: none;
-         }
-         .btn-submit:hover, .btn-submit:focus, .btn-submit:active {
-            background: var(--fl-ink-soft);
-            border-color: var(--fl-ink-soft);
-            color: var(--fl-on-ink);
-            box-shadow: none;
-         }
-         .social-icon {
-            border: 1px solid var(--fl-hair);
-            background: var(--fl-surface);
-            box-shadow: none;
-         }
-         .social-icon:hover { background: var(--fl-inset); }
-         .form-control {
-            border: 1px solid var(--fl-hair);
-            box-shadow: none;
-         }
-         .form-control:focus {
-            border-color: var(--fl-link);
-            box-shadow: none;
-         }
-         /* the RGB-split heading effect belongs to a louder site */
-         .contact-glitch-text::before,
-         .contact-glitch-text::after { display: none; }
-  </style>
-      <link rel="stylesheet" href="css/finlab-theme.css">
-      <!-- Font Awesome -->
-      <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet">
-      <!-- Google Fonts -->
-      <link rel="preconnect" href="https://fonts.googleapis.com">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>About Yen</title>
+  <meta name="description" content="Yen: slashie, digital nomad and software engineer. Physics and engineering first, then data, backend services, cloud and AI systems, across the UK, Japan, Ireland and Taiwan.">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://yennanliu.github.io/about_me.html">
+  <meta property="og:title" content="About Yen">
+  <meta property="og:description" content="Slashie, digital nomad and software engineer. Physics and engineering first, then data, backend services, cloud and AI systems.">
+  <meta property="og:image" content="https://yennanliu.github.io/img/website-preview.png">
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://yennanliu.github.io/about_me.html">
+  <meta property="twitter:title" content="About Yen">
+  <meta property="twitter:description" content="Slashie, digital nomad and software engineer. Physics and engineering first, then data, backend services, cloud and AI systems.">
+  <meta property="twitter:image" content="https://yennanliu.github.io/img/website-preview.png">
+
+  <!-- PWA -->
+  <meta name="theme-color" content="#ffffff">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="Yen">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="msapplication-TileColor" content="#000000">
+  <meta name="msapplication-tap-highlight" content="no">
+  <link rel="icon" href="img/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="img/icon.svg">
+  <link rel="mask-icon" href="img/icon.svg" color="#000000">
+  <link rel="manifest" href="manifest.json">
+
+  <!-- Google analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-X2DJ8VW74E"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-X2DJ8VW74E');
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400&family=Space+Grotesk:wght@300;400;500&display=swap" rel="stylesheet">
-     <link rel="stylesheet" href="css/site-nav.css">
-     <link rel="stylesheet" href="css/site-footer.css">
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/finlab.css">
+  <style>
+    /* ═══════════════════════════════════════════════════════════════════
+       ABOUT
+       A white page with one black band: the line I keep coming back to.
+       Everything else is type on paper, in rows.
+       ═══════════════════════════════════════════════════════════════════ */
+
+    *, *::before, *::after { box-sizing: border-box; }
+    body { margin: 0; overflow-x: hidden; }
+    h1, h2, h3, p, dl, dd, dt, ol, ul, figure { margin: 0; }
+    ol, ul { padding: 0; list-style: none; }
+    a { color: inherit; }
+
+    .wrap { max-width: var(--fl-max); margin-inline: auto; padding-inline: var(--fl-pad); }
+
+    .disp {
+      font-family: var(--fl-display);
+      font-weight: var(--fl-fw-light);
+      font-stretch: var(--fl-wide);
+      letter-spacing: var(--fl-track-tight);
+      line-height: var(--fl-lh-title);
+      text-wrap: balance;
+    }
+    .meta {
+      font-size: var(--fl-fs-sm);
+      font-weight: var(--fl-fw-medium);
+      font-stretch: var(--fl-narrow);
+      color: var(--fl-faint);
+    }
+
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center;
+      min-height: 2.875rem; padding: 0 1.5rem;
+      border: 1px solid var(--fl-ink); border-radius: var(--fl-r-pill);
+      font-size: var(--fl-fs-sm); font-weight: var(--fl-fw-medium); line-height: 1;
+      text-decoration: none; white-space: nowrap;
+      transition: background var(--fl-t), color var(--fl-t);
+    }
+    .btn-fill { background: var(--fl-ink); color: var(--fl-on-ink); }
+    .btn-fill:hover { background: transparent; color: var(--fl-ink); }
+    .btn-line { background: transparent; color: var(--fl-ink); }
+    .btn-line:hover { background: var(--fl-ink); color: var(--fl-on-ink); }
+
+    .sec { padding-block: clamp(4.5rem, 10vh, 7.5rem); }
+    .sec + .sec { border-top: 1px solid var(--fl-line); }
+    .sec-head {
+      display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+      gap: 1.5rem 4rem; align-items: end;
+      margin-bottom: clamp(2.5rem, 6vh, 4rem);
+    }
+    .sec-lead { font-size: var(--fl-fs-lead); line-height: 1.45; color: var(--fl-muted); text-wrap: pretty; }
+
+    /* ═══ INTRO ═══ */
+    .intro { padding-block: clamp(3rem, 8vh, 6rem) clamp(4rem, 9vh, 6.5rem); }
+    .intro-in {
+      display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+      gap: 3rem 4rem; align-items: start;
+    }
+    /* the page heading stays at the site's page-heading size; the motto
+       band below is the one thing here allowed to go larger */
+    .intro h1 { font-size: var(--fl-fs-zone); line-height: 1; margin-left: -.04em; }
+    .intro-side { padding-top: .5rem; }
+    .lede { font-size: var(--fl-fs-lead); line-height: 1.45; text-wrap: pretty; }
+
+    .facts { margin-top: 2.5rem; border-top: 1px solid var(--fl-line); }
+    .facts > div {
+      display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 5fr); gap: 1rem;
+      padding: .85rem 0; border-bottom: 1px solid var(--fl-hair);
+    }
+    .facts dt { font-size: var(--fl-fs-sm); font-weight: var(--fl-fw-medium); font-stretch: var(--fl-narrow); color: var(--fl-faint); padding-top: .15rem; }
+    .facts dd { line-height: 1.5; }
+
+    /* ═══ THE LINE — the one black band ═══ */
+    .motto {
+      background: var(--fl-ink); color: var(--fl-on-ink);
+      padding-block: clamp(4.5rem, 12vh, 8rem);
+    }
+    .motto-in { display: grid; grid-template-columns: minmax(0, 9fr) minmax(0, 3fr); gap: 2rem 4rem; align-items: end; }
+    .motto-t { font-size: var(--fl-fs-xl); line-height: .95; margin-left: -.04em; }
+    .motto-note { font-size: var(--fl-fs-sm); font-weight: var(--fl-fw-medium); font-stretch: var(--fl-narrow); opacity: .6; }
+
+    /* ═══ COUNTRIES ═══ */
+    .countries {
+      font-size: var(--fl-fs-lead); line-height: 1.5;
+      font-stretch: var(--fl-narrow); font-weight: var(--fl-fw-medium);
+      color: var(--fl-faint); text-wrap: pretty; max-width: 60em;
+    }
+    .countries b { font-weight: inherit; color: var(--fl-ink); }
+
+    /* ═══ CAREER — three chapters, in order ═══ */
+    .chapters { border-top: 1px solid var(--fl-line); }
+    .chapter {
+      display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 8fr);
+      gap: 1.5rem 4rem; padding: 2.5rem 0 3rem;
+      border-bottom: 1px solid var(--fl-hair);
+    }
+    .ch-when { font-size: var(--fl-fs-sm); font-weight: var(--fl-fw-medium); font-stretch: var(--fl-narrow); color: var(--fl-faint); margin-bottom: .75rem; }
+    .ch-role { font-size: clamp(1.5rem, 2.4vw, 2rem); margin-bottom: .35rem; }
+    .ch-where { color: var(--fl-muted); }
+    .ch-body p { line-height: 1.55; text-wrap: pretty; max-width: 40em; }
+    .ch-figs { display: flex; flex-wrap: wrap; gap: 1.5rem 3rem; margin-top: 2rem; }
+    .ch-figs .fl-stat__value { font-size: clamp(1.75rem, 2.6vw, 2.25rem); }
+    .ch-figs .fl-stat__label { display: block; margin-top: .3rem; }
+    .ch-skills { margin-top: 1.75rem; font-size: var(--fl-fs-sm); font-stretch: var(--fl-narrow); font-weight: var(--fl-fw-medium); color: var(--fl-faint); }
+
+    /* ═══ NEXT ═══ */
+    .next-in { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1.5rem; }
+    .next h2 { font-size: var(--fl-fs-title); }
+    .next-acts { display: flex; gap: .75rem; flex-wrap: wrap; }
+
+    /* ═══ NARROW ═══ */
+    @media (max-width: 960px) {
+      .intro-in, .sec-head, .motto-in, .chapter { grid-template-columns: 1fr; }
+      .motto-in { gap: 1.5rem; }
+      .chapter { gap: 1.25rem; padding: 2rem 0 2.5rem; }
+    }
+    @media (max-width: 600px) {
+      .motto-t { font-size: clamp(2.25rem, 11vw, 4rem); }
+      .facts > div { grid-template-columns: 1fr; gap: .25rem; }
+      .ch-figs { gap: 1.25rem 2rem; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .btn { transition: none; }
+    }
+  </style>
+  <link rel="stylesheet" href="css/finlab-theme.css">
+  <link rel="stylesheet" href="css/site-nav.css">
+  <link rel="stylesheet" href="css/site-footer.css">
 </head>
-   <body>
-      <!-- Navigation -->
-      <!-- SITE NAV -->
+<body>
+
+<!-- SITE NAV -->
 <nav class="site-nav" id="site-nav" aria-label="Primary">
-  <a class="sn-brand" href="index.html">YEN<em>.DEV</em></a>
+  <a class="sn-brand" href="index.html">yen<em>.dev</em></a>
 
   <button class="sn-burger" id="sn-burger" type="button"
           aria-label="Open menu" aria-expanded="false" aria-controls="sn-menu">
@@ -1074,152 +214,123 @@
         <span class="sn-knob"></span>
       </button>
       <span class="sn-icons" aria-hidden="true">&#9728;<i>/</i>&#9790;</span>
-      <a class="sn-cta" href="contact.html">Get In Touch</a>
+      <a class="sn-cta" href="contact.html">Contact</a>
     </div>
   </div>
 </nav>
 
-      <!-- About Section -->
-      <section class="about-section">
-         <div class="container">
-            <div class="row">
-               <div class="col-lg-12" data-aos="fade-up">
-                  <h1 class="display-4">About Me</h1>
-                  <p class="lead"><span class="typewriter">Yen is a slashie, digital nomad, and software engineer,</span> used to work in military, NGO, and companies around the world(UK/HK/SG/JP/TW). From Physics/Engineering but having entrepreneur mindset that is running his own business now. <span style="color:var(--primary-color);">#travel #tech #music #mobility</span> 🇬🇧 🇩🇪 🇪🇸 🇵🇹 🇮🇹 🇫🇷 🇳🇱 🇭🇷 🇲🇪 🇧🇪 🇨🇿 🇵🇱 🇫🇮 🇮🇸 🇱🇻 🇪🇪 🇱🇹 🇲🇦 🇻🇦 🇷🇺 🇺🇸 🇰🇷 🇯🇵 🇮🇩 🇸🇬 🇭🇰 🇹🇼 <b><i>"future is anyway you wanna flow"</i></b></p>
-                  <p class="lead">Visited 31 of 195 countries over the world</p>
-               </div>
-            </div>
-         </div>
-      </section>
+<main>
 
-      <!-- Apple-style Career Journey Section -->
-      <section class="career-section py-5">
-         <div class="container-fluid">
-            <div class="row">
-               <div class="col-lg-12 text-center mb-5" data-aos="fade-up">
-                  <h2 class="section-title">My Career Journey</h2>
-                  <p class="section-subtitle">From data engineering to software architecture, explore the path that shaped my technical expertise and leadership skills.</p>
-               </div>
-            </div>
-            <div class="career-timeline">
-               <!-- Career Item 1: Data Engineer -->
-               <div class="career-item" data-aos="fade-up" data-aos-delay="100" style="background-image: url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2340&q=80');">
-                  <div class="career-content-wrapper">
-                     <div class="career-content">
-                        <div class="career-year-badge">2016-2018</div>
-                        <h3 class="career-title">Software Engineer (Data)</h3>
-
-                        <div class="career-stats">
-                           <div class="stat-item">
-                              <span class="stat-number">50+</span>
-                              <span class="stat-label">Data Pipelines<br>Built</span>
-                           </div>
-                           <div class="stat-item">
-                              <span class="stat-number">10TB</span>
-                              <span class="stat-label">Data Processed<br>Daily</span>
-                           </div>
-                           <div class="stat-item">
-                              <span class="stat-number">3</span>
-                              <span class="stat-label">Countries<br>UK/EU Experience</span>
-                           </div>
-                        </div>
-
-                        <p class="career-description">
-                           Started my journey building data pipelines, ETL processes, and data warehousing solutions. Worked with big data technologies like Hadoop, Spark, and various database systems. Developed expertise in transforming raw data into actionable insights that drive business decisions. Lived at UK 🇬🇧 and traveled countries around Europe.
-                        </p>
-
-                        <div class="career-skills">
-                           <span class="skill-tag">Python</span>
-                           <span class="skill-tag">SQL</span>
-                           <span class="skill-tag">Hadoop</span>
-                           <span class="skill-tag">Spark</span>
-                           <span class="skill-tag">ETL</span>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-
-               <!-- Career Item 2: Backend Engineer -->
-               <div class="career-item" data-aos="fade-up" data-aos-delay="200" style="background-image: url('https://images.unsplash.com/photo-1571171637578-41bc2dd41cd2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2340&q=80');">
-                  <div class="career-content-wrapper">
-                     <div class="career-content">
-                        <div class="career-year-badge">2018-2024</div>
-                        <h3 class="career-title">Backend Engineer</h3>
-
-                        <div class="career-stats">
-                           <div class="stat-item">
-                              <span class="stat-number">100+</span>
-                              <span class="stat-label">APIs<br>Developed</span>
-                           </div>
-                           <div class="stat-item">
-                              <span class="stat-number">99.9%</span>
-                              <span class="stat-label">System<br>Uptime</span>
-                           </div>
-                           <div class="stat-item">
-                              <span class="stat-number">5</span>
-                              <span class="stat-label">Global Teams<br>JP/IE/AWS</span>
-                           </div>
-                        </div>
-
-                        <p class="career-description">
-                           Evolved into backend development, building robust applications and services. Expanded my toolkit with various frameworks and languages, focusing on creating scalable solutions. Collaborated with cross-functional teams to deliver high-quality software products that meet user needs and business requirements. Worked with global teams at Japan 🇯🇵, Relocated to 🇮🇪 and worked for AWS.
-                        </p>
-
-                        <div class="career-skills">
-                           <span class="skill-tag">Java</span>
-                           <span class="skill-tag">Spring Boot</span>
-                           <span class="skill-tag">Microservices</span>
-                           <span class="skill-tag">REST APIs</span>
-                           <span class="skill-tag">DevOps</span>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-
-               <!-- Career Item 3: Tech Consultant -->
-               <div class="career-item" data-aos="fade-up" data-aos-delay="300" style="background-image: url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2340&q=80');">
-                  <div class="career-content-wrapper">
-                     <div class="career-content">
-                        <div class="career-year-badge">2024-Present</div>
-                        <h3 class="career-title">Tech Consultant</h3>
-
-                        <div class="career-stats">
-                           <div class="stat-item">
-                              <span class="stat-number">20+</span>
-                              <span class="stat-label">Client<br>Projects</span>
-                           </div>
-                           <div class="stat-item">
-                              <span class="stat-number">3x</span>
-                              <span class="stat-label">Performance<br>Improvements</span>
-                           </div>
-                           <div class="stat-item">
-                              <span class="stat-number">∞</span>
-                              <span class="stat-label">Innovation<br>Mindset</span>
-                           </div>
-                        </div>
-
-                        <p class="career-description">
-                           Leading development teams and architecting complex systems. Balancing technical leadership with consulting, while continuing to evolve my technical skills and business understanding. Driving innovation and excellence in software development practices, ensuring projects are delivered on time and with exceptional quality.
-                        </p>
-
-                        <div class="career-skills">
-                           <span class="skill-tag">System Architecture</span>
-                           <span class="skill-tag">Team Leadership</span>
-                           <span class="skill-tag">Cloud Infrastructure</span>
-                           <span class="skill-tag">Strategic Planning</span>
-                           <span class="skill-tag">Innovation</span>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-            </div>
-         </div>
-      </section>
-
-      <!-- Scroll to top button -->
-      <div class="scroll-top">
-         <i class="fas fa-arrow-up"></i>
+  <!-- INTRO -->
+  <header class="intro">
+    <div class="wrap intro-in">
+      <h1 class="disp">Slashie,<br>nomad,<br>engineer.</h1>
+      <div class="intro-side">
+        <p class="lede">I am a slashie, a digital nomad and a software engineer. I have worked in the military, in an NGO and in companies across the UK, Hong Kong, Singapore, Japan and Taiwan. Physics and engineering trained me; an entrepreneur's habit of building the thing rather than describing it keeps me going, and these days it runs my own business.</p>
+        <dl class="facts">
+          <div><dt>From</dt><dd>Taiwan</dd></div>
+          <div><dt>Trained in</dt><dd>Physics and engineering</dd></div>
+          <div><dt>Worked in</dt><dd>The military, an NGO, and companies in the UK, Hong Kong, Singapore, Japan and Taiwan</dd></div>
+          <div><dt>Now</dt><dd>Running my own business, consulting on architecture and AI systems</dd></div>
+          <div><dt>Off the clock</dt><dd>Travel, tech, music, mobility</dd></div>
+        </dl>
       </div>
+    </div>
+  </header>
+
+  <!-- THE LINE -->
+  <section class="motto" aria-label="A line I keep coming back to">
+    <div class="wrap motto-in">
+      <div class="motto-t disp">Future is anyway you wanna flow.</div>
+      <div class="motto-note">The line I keep coming back to, and the closest thing I have to a plan.</div>
+    </div>
+  </section>
+
+  <!-- COUNTRIES -->
+  <section class="sec" aria-labelledby="travel-h">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2 class="disp" id="travel-h">Thirty-one of a hundred and ninety-five countries.</h2>
+        <p class="sec-lead">Most of them between deploys. The UK was home for two years and Europe was the weekend; Japan and Ireland came with the work.</p>
+      </div>
+      <p class="countries">Among them <b>United Kingdom</b>, Germany, Spain, Portugal, Italy, France, the Netherlands, Croatia, Montenegro, Belgium, Czechia, Poland, Finland, Iceland, Latvia, Estonia, Lithuania, Morocco, Vatican City, Russia, the United States, South Korea, <b>Japan</b>, Indonesia, <b>Singapore</b>, <b>Hong Kong</b> and <b>Taiwan</b>.</p>
+    </div>
+  </section>
+
+  <!-- CAREER -->
+  <section class="sec" aria-labelledby="career-h">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2 class="disp" id="career-h">The career, in three chapters.</h2>
+        <p class="sec-lead">From data engineering to software architecture. Each chapter added a layer the previous one had been leaning on.</p>
+      </div>
+
+      <ol class="chapters">
+        <li class="chapter">
+          <div class="ch-side">
+            <div class="ch-when">2016 to 2018</div>
+            <h3 class="ch-role disp">Software engineer, data</h3>
+            <div class="ch-where">United Kingdom</div>
+          </div>
+          <div class="ch-body">
+            <p>It started with data: pipelines, ETL and warehousing on Hadoop, Spark and a range of database systems, turning raw feeds into something a business could decide on. I lived in the UK and travelled Europe between deploys.</p>
+            <div class="ch-figs">
+              <div><span class="fl-stat__value">50+</span><span class="fl-stat__label">data pipelines built</span></div>
+              <div><span class="fl-stat__value">10TB</span><span class="fl-stat__label">processed a day</span></div>
+              <div><span class="fl-stat__value">3</span><span class="fl-stat__label">countries worked in, UK and EU</span></div>
+            </div>
+            <div class="ch-skills">Python, SQL, Hadoop, Spark, ETL</div>
+          </div>
+        </li>
+
+        <li class="chapter">
+          <div class="ch-side">
+            <div class="ch-when">2018 to 2024</div>
+            <h3 class="ch-role disp">Backend engineer</h3>
+            <div class="ch-where">Japan, then Ireland and AWS</div>
+          </div>
+          <div class="ch-body">
+            <p>Then the services underneath: robust applications and APIs, a wider toolkit of frameworks and languages, and cross-functional teams shipping software that had to meet both user needs and business requirements. First with a team in Japan, then a relocation to Ireland and platform work at AWS.</p>
+            <div class="ch-figs">
+              <div><span class="fl-stat__value">100+</span><span class="fl-stat__label">APIs developed</span></div>
+              <div><span class="fl-stat__value">99.9%</span><span class="fl-stat__label">system uptime</span></div>
+              <div><span class="fl-stat__value">5</span><span class="fl-stat__label">global teams, Japan, Ireland and AWS</span></div>
+            </div>
+            <div class="ch-skills">Java, Spring Boot, microservices, REST APIs, DevOps</div>
+          </div>
+        </li>
+
+        <li class="chapter">
+          <div class="ch-side">
+            <div class="ch-when">2024 to now</div>
+            <h3 class="ch-role disp">Tech consultant</h3>
+            <div class="ch-where">Remote</div>
+          </div>
+          <div class="ch-body">
+            <p>Now the whole picture: leading development teams and architecting complex systems, balancing technical leadership with consulting, and keeping both the technical skills and the business understanding moving. Projects delivered on time and to a standard I would put my name on.</p>
+            <div class="ch-figs">
+              <div><span class="fl-stat__value">20+</span><span class="fl-stat__label">client projects</span></div>
+              <div><span class="fl-stat__value">3x</span><span class="fl-stat__label">performance improvements</span></div>
+            </div>
+            <div class="ch-skills">System architecture, team leadership, cloud infrastructure, strategic planning</div>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- NEXT -->
+  <section class="sec next" aria-label="Where to next">
+    <div class="wrap next-in">
+      <h2 class="disp">The work says the rest.</h2>
+      <div class="next-acts">
+        <a class="btn btn-fill" href="portfolios.html">See the portfolios</a>
+        <a class="btn btn-line" href="contact.html">Get in touch</a>
+      </div>
+    </div>
+  </section>
+
+</main>
 
 <!-- ══ FOOTER — shared; see css/site-footer.css ══ -->
 <footer class="site-footer" id="site-footer">
@@ -1253,124 +364,28 @@
     <span class="ft-sig">yennj12.js.org</span>
   </div>
 </footer>
-      
-      <!-- jQuery, Popper.js, Bootstrap JS -->
-      <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-      <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
-      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-      <!-- AOS Animation Library -->
-      <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-      <!-- Custom JavaScript -->
-      <script>
-         // Initialize AOS animation
-         AOS.init({
-             duration: 800,
-             easing: 'ease-in-out',
-             once: true
-         });
-         
-         // Scroll to top button functionality
-         const scrollTopBtn = document.querySelector('.scroll-top');
-         
-         window.addEventListener('scroll', function() {
-             if (window.pageYOffset > 300) {
-                 scrollTopBtn.classList.add('visible');
-             } else {
-                 scrollTopBtn.classList.remove('visible');
-             }
-         });
-         
-         scrollTopBtn.addEventListener('click', function() {
-             window.scrollTo({
-                 top: 0,
-                 behavior: 'smooth'
-             });
-         });
-         
-         // Apple-style parallax and animations for career section
-         document.addEventListener('DOMContentLoaded', function() {
-             // Parallax effect for career images
-             const careerItems = document.querySelectorAll('.career-item');
-             
-             function applyParallaxEffect() {
-                 careerItems.forEach(item => {
-                     const rect = item.getBoundingClientRect();
-                     const image = item.querySelector('.career-image');
-                     const windowHeight = window.innerHeight;
-                     
-                     if (rect.top < windowHeight && rect.bottom > 0) {
-                         // Calculate how far the element is in the viewport
-                         const percentInView = (windowHeight - rect.top) / (windowHeight + rect.height);
-                         // Apply transform based on scroll position
-                         image.style.transform = `scale(${1 + percentInView * 0.1}) translateY(${percentInView * -20}px)`;
-                     }
-                 });
-             }
-             
-             // Staggered reveal animation for skill tags
-             function animateSkillTags() {
-                 const skillSections = document.querySelectorAll('.career-skills');
-                 
-                 skillSections.forEach(section => {
-                     const rect = section.getBoundingClientRect();
-                     const tags = section.querySelectorAll('.skill-tag');
-                     
-                     if (rect.top < window.innerHeight - 100 && rect.bottom > 0) {
-                         tags.forEach((tag, index) => {
-                             setTimeout(() => {
-                                 tag.style.opacity = '1';
-                                 tag.style.transform = 'translateY(0)';
-                             }, 100 * index);
-                         });
-                     }
-                 });
-             }
-             
-             // Apply initial styles for staggered animations
-             document.querySelectorAll('.skill-tag').forEach(tag => {
-                 tag.style.opacity = '0';
-                 tag.style.transform = 'translateY(20px)';
-                 tag.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-             });
-             
-             // Handle scroll events
-             window.addEventListener('scroll', () => {
-                 requestAnimationFrame(() => {
-                     applyParallaxEffect();
-                     animateSkillTags();
-                 });
-             });
-             
-             // Trigger initial animation
-             applyParallaxEffect();
-             animateSkillTags();
-         });         
-         // Register Service Worker for PWA functionality
-         if ('serviceWorker' in navigator) {
-            window.addEventListener('load', function() {
-               navigator.serviceWorker.register('/sw.js')
-                  .then(function(registration) {
-                     console.log('ServiceWorker registration successful with scope: ', registration.scope);
-                     
-                     // Check for updates
-                     registration.addEventListener('updatefound', () => {
-                        const newWorker = registration.installing;
-                        newWorker.addEventListener('statechange', () => {
-                           if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
-                              // Show update available notification
-                              if (confirm('A new version is available. Refresh to update?')) {
-                                 window.location.reload();
-                              }
-                           }
-                        });
-                     });
-                  })
-                  .catch(function(err) {
-                     console.log('ServiceWorker registration failed: ', err);
-                  });
+
+<script>
+  // Register the service worker for offline use
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', function () {
+      navigator.serviceWorker.register('/sw.js')
+        .then(function (registration) {
+          registration.addEventListener('updatefound', function () {
+            var newWorker = registration.installing;
+            newWorker.addEventListener('statechange', function () {
+              if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                if (confirm('A new version is available. Refresh to update?')) {
+                  window.location.reload();
+                }
+              }
             });
-         }
-      </script>
-     <script src="js/site-nav.js" defer></script>
+          });
+        })
+        .catch(function () {});
+    });
+  }
+</script>
+<script src="js/site-nav.js" defer></script>
 </body>
 </html>

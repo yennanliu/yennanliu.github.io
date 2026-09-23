@@ -2,33 +2,15 @@
    SITE NAV
    One navigation bar for every page.
 
-   The site had five: a bespoke bar on the landing page, Bootstrap 4's
-   fixed-top navbar on five pages, a sticky rule on the archive, a
-   brutalist strip on the terminal page, Bootstrap 3 on the oldest page,
-   and nothing at all on one. They sat at different heights, in
-   different positions, with different link sets and different labels
-   for the same destinations.
+   Sticky rather than fixed: a sticky bar occupies layout space, so no
+   page needs a body padding-top to compensate. It takes its ink and
+   paper from the tokens, so it inverts with the rest of the page.
 
-   This replaces all of them. It is sticky rather than fixed, which is
-   the detail that makes it portable: a sticky bar occupies layout
-   space, so no page needs a body padding-top to compensate, and the
-   whole class of "the nav is covering the heading" bugs goes away.
-
-   Load it after finlab.css (it uses the tokens) and after the page's
-   own <style> block (it must win over the nav rules it replaces).
+   Load it after finlab.css (it uses the tokens) and after the page's own
+   <style> block (it must win over any nav rules a page still has).
    ========================================================================== */
 
-:root {
-  --sn-h: 56px;
-  --sn-bg: rgba(255, 255, 255, .82);
-  --sn-border: var(--fl-hair);
-}
-
-:root[data-theme="dark"],
-:root[data-mode="ink"] {
-  --sn-bg: rgba(10, 10, 11, .82);
-}
-body.dark-mode { --sn-bg: rgba(10, 10, 11, .82); }
+:root { --sn-h: 64px; }
 
 /* the pages each carried their own clearance for a fixed bar */
 body { padding-top: 0 !important; }
@@ -39,161 +21,133 @@ body { padding-top: 0 !important; }
   z-index: 900;
   display: flex;
   align-items: center;
-  gap: 1.5rem;
+  gap: 2rem;
   height: var(--sn-h);
-  padding-inline: clamp(1rem, 3vw, 3rem);
-  background: var(--sn-bg);
-  -webkit-backdrop-filter: saturate(180%) blur(18px);
-          backdrop-filter: saturate(180%) blur(18px);
-  border-bottom: 1px solid var(--sn-border);
+  padding-inline: var(--fl-pad);
+  background: var(--fl-surface);
+  color: var(--fl-ink);
+  border-bottom: 1px solid var(--fl-line);
   font-family: var(--fl-body);
 }
 
 /* ── brand ── */
 
 .sn-brand {
-  font-family: var(--fl-mono);
-  font-size: .82rem;
-  font-weight: var(--fl-fw-normal);
-  letter-spacing: .1em;
-  text-transform: uppercase;
+  font-family: var(--fl-display);
+  font-size: 1.125rem;
+  font-weight: var(--fl-fw-medium);
+  font-stretch: var(--fl-wide);
+  letter-spacing: -.01em;
+  text-transform: none;
   color: var(--fl-ink);
   text-decoration: none;
   white-space: nowrap;
 }
-.sn-brand em { color: var(--fl-link); font-style: normal; }
+.sn-brand em { font-style: normal; color: var(--fl-faint); }
 
 /* ── links ── */
 
 .sn-menu {
   display: flex;
   align-items: center;
-  gap: 1.5rem;
+  gap: 2rem;
   margin-left: auto;
 }
 
 .sn-links {
   display: flex;
   align-items: center;
-  gap: clamp(.85rem, 1.8vw, 1.75rem);
+  gap: clamp(1rem, 2vw, 1.75rem);
   margin: 0;
   padding: 0;
   list-style: none;
 }
 
 .sn-links a {
-  position: relative;
   display: inline-block;
   padding: .35rem 0;
   font-size: var(--fl-fs-sm);
   font-weight: var(--fl-fw-normal);
-  letter-spacing: 0;
   color: var(--fl-muted);
   text-decoration: none;
   white-space: nowrap;
+  text-underline-offset: .45em;
+  text-decoration-thickness: 1px;
   transition: color var(--fl-t);
 }
-.sn-links a:hover { color: var(--fl-ink); }
-
-/* the underline the reference site uses, drawn from the centre */
-.sn-links a::after {
-  content: '';
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  height: 1px;
-  background: currentColor;
-  border-radius: var(--fl-r-pill);
-  transform: scaleX(0);
-  transform-origin: center;
-  transition: transform var(--fl-t);
-}
-.sn-links a:hover::after { transform: scaleX(1); }
-
+.sn-links a:hover { color: var(--fl-ink); text-decoration: underline; }
 .sn-links a[aria-current="page"] {
   color: var(--fl-ink);
+  text-decoration: underline;
 }
-.sn-links a[aria-current="page"]::after { transform: scaleX(1); }
 
 /* ── right cluster ── */
 
 .sn-right {
   display: flex;
   align-items: center;
-  gap: .75rem;
+  gap: 1rem;
 }
 
 .sn-cta {
   display: inline-flex;
   align-items: center;
-  height: 2rem;
-  padding: 0 .95rem;
+  height: 2.25rem;
+  padding: 0 1.1rem;
+  border: 1px solid var(--fl-ink);
   border-radius: var(--fl-r-pill);
   background: var(--fl-ink);
   color: var(--fl-on-ink);
   font-size: var(--fl-fs-sm);
+  font-weight: var(--fl-fw-medium);
   text-decoration: none;
   white-space: nowrap;
-  transition: background var(--fl-t);
+  transition: background var(--fl-t), color var(--fl-t);
 }
-.sn-cta:hover { background: var(--fl-ink-soft); color: var(--fl-on-ink); }
+.sn-cta:hover { background: var(--fl-surface); color: var(--fl-ink); }
 
 /* ── the theme switch ──
-   The pill-and-glyphs pair the Bootstrap pages already used, made the
-   one control on every page.                                          */
+   A disc, half ink and half paper. Switching turns it over.          */
 
 .sn-theme {
   position: relative;
   flex-shrink: 0;
-  width: 42px;
-  height: 23px;
+  width: 1.5rem;
+  height: 1.5rem;
   padding: 0;
-  border: 1px solid var(--fl-hair);
-  border-radius: var(--fl-r-pill);
-  background: var(--fl-inset);
+  border: 1px solid var(--fl-ink);
+  border-radius: 50%;
+  background: transparent;
   cursor: pointer;
-  transition: background var(--fl-t), border-color var(--fl-t);
+  overflow: hidden;
+  transition: transform var(--fl-t-slow);
 }
-.sn-theme:hover { border-color: var(--fl-line); }
-.sn-theme:focus-visible { outline: 2px solid var(--fl-link); outline-offset: 2px; }
+.sn-theme:hover { transform: rotate(-20deg); }
+.sn-theme:focus-visible { outline: 2px solid var(--fl-ink); outline-offset: 3px; }
 
 .sn-knob {
   position: absolute;
-  top: 50%;
-  left: 3px;
-  width: 15px;
-  height: 15px;
-  margin-top: -7.5px;
-  border-radius: 50%;
-  background: var(--fl-surface);
-  box-shadow: 0 1px 2px rgba(15, 23, 42, .28);
-  transition: transform var(--fl-t-slow), background var(--fl-t);
+  inset: 0;
+  margin: 0;
+  width: auto;
+  height: auto;
+  border-radius: 0;
+  background: linear-gradient(90deg, var(--fl-ink) 0 50%, transparent 50% 100%);
+  box-shadow: none;
+  transform: none;
+  transition: transform var(--fl-t-slow);
 }
+.sn-theme[aria-checked="true"] .sn-knob { transform: rotate(180deg); }
 
-.sn-theme[aria-checked="true"] {
-  background: var(--fl-link);
-  border-color: var(--fl-link);
-}
-.sn-theme[aria-checked="true"] .sn-knob { transform: translateX(19px); }
-
-.sn-icons {
-  display: inline-flex;
-  align-items: center;
-  gap: .18rem;
-  font-size: .9rem;
-  line-height: 1;
-  color: var(--fl-ink);
-  user-select: none;
-}
-.sn-icons i { font-style: normal; color: var(--fl-ghost); }
+/* the ☀/☾ glyph pair the old switch carried — retired */
+.sn-icons { display: none; }
 
 /* ── burger ── */
 
 .sn-burger {
   display: none;
   flex-direction: column;
-  gap: 4px;
+  gap: 5px;
   margin-left: auto;
   padding: 8px;
   background: none;
@@ -202,15 +156,14 @@ body { padding-top: 0 !important; }
 }
 .sn-burger span {
   display: block;
-  width: 20px;
-  height: 1.5px;
+  width: 22px;
+  height: 1px;
   background: var(--fl-ink);
-  border-radius: 2px;
   transition: transform var(--fl-t-slow), opacity var(--fl-t);
 }
-.sn-burger[aria-expanded="true"] span:nth-child(1) { transform: translateY(5.5px) rotate(45deg); }
+.sn-burger[aria-expanded="true"] span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
 .sn-burger[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
-.sn-burger[aria-expanded="true"] span:nth-child(3) { transform: translateY(-5.5px) rotate(-45deg); }
+.sn-burger[aria-expanded="true"] span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
 
 /* ── narrow ── */
 
@@ -226,13 +179,12 @@ body { padding-top: 0 !important; }
     align-items: stretch;
     gap: 0;
     margin: 0;
-    padding: .5rem 0 1rem;
+    padding: .5rem 0 1.25rem;
     background: var(--fl-surface);
-    border-bottom: 1px solid var(--sn-border);
-    box-shadow: var(--fl-sh);
+    border-bottom: 1px solid var(--fl-line);
     opacity: 0;
     visibility: hidden;
-    transform: translateY(-8px);
+    transform: translateY(-6px);
     transition: opacity var(--fl-t), transform var(--fl-t), visibility var(--fl-t);
   }
   .site-nav.is-open .sn-menu {
@@ -243,20 +195,21 @@ body { padding-top: 0 !important; }
 
   .sn-links { flex-direction: column; align-items: stretch; gap: 0; }
   .sn-links a {
-    padding: .85rem clamp(1rem, 3vw, 3rem);
-    font-size: var(--fl-fs-base);
+    padding: .9rem var(--fl-pad);
+    font-size: var(--fl-fs-lead);
+    font-stretch: var(--fl-wide);
+    font-weight: var(--fl-fw-light);
+    border-bottom: 1px solid var(--fl-hair);
   }
-  .sn-links a::after { display: none; }
-  .sn-links a[aria-current="page"] { background: var(--fl-inset); }
+  .sn-links a:hover, .sn-links a[aria-current="page"] { text-decoration: none; }
+  .sn-links a[aria-current="page"] { background: var(--fl-ink); color: var(--fl-on-ink); }
 
   .sn-right {
     justify-content: space-between;
-    padding: .85rem clamp(1rem, 3vw, 3rem) 0;
-    margin-top: .5rem;
-    border-top: 1px solid var(--sn-border);
+    padding: 1rem var(--fl-pad) 0;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .sn-links a::after, .sn-knob, .sn-burger span, .sn-menu { transition: none; }
+  .sn-links a, .sn-knob, .sn-theme, .sn-burger span, .sn-menu { transition: none; }
 }

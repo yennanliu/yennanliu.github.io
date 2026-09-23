@@ -1,116 +1,136 @@
 /* ==========================================================================
-   FINLAB THEME — normalisation layer
+   MONO — normalisation layer
    Loaded AFTER each page's own <style> block, so it wins the cascade.
 
-   This layer only touches *appearance*: type, weight, colour of text,
-   radius, border and shadow. It never changes layout — no display,
-   position, width, margin or padding on structural elements — so every
-   page keeps the composition it already had.
+   This layer touches appearance only: face, width, weight, colour of
+   text, radius, border, shadow, and the greyscale on photographs. It
+   never changes layout — no display, position, width, margin or padding
+   on structural elements — so every page keeps the composition it has.
    ========================================================================== */
 
-/* ── 1. TYPE ───────────────────────────────────────────────────────────
-   One body face, one display face, one mono. Everything else goes.      */
+/* ── 1. TYPE ─────────────────────────────────────────────────────────
+   One family. Headings go wide and light; captions go narrow and
+   medium; everything else is normal width at 400.                     */
 
 body,
 button, input, select, textarea, optgroup,
-.lead, p, li, dd, dt, td, th, label, figcaption, blockquote, small {
-  font-family: var(--fl-body) !important;
-}
-
+.lead, p, li, dd, dt, td, th, label, figcaption, blockquote, small,
 h1, h2, h3, h4, h5, h6,
 .display-1, .display-2, .display-3, .display-4, .display-5,
 .apple-headline, .apple-subheadline, .apple-title,
-.section-title, .fl-title, .fl-zone,
-.disp, .serif {
-  font-family: var(--fl-display) !important;
+.section-title, .fl-title, .fl-zone, .disp, .serif, .h1, .h2 {
+  font-family: var(--fl-body) !important;
+}
+
+h1, h2, h3,
+.display-1, .display-2, .display-3, .display-4, .display-5,
+.apple-headline, .apple-subheadline, .apple-product-title,
+.section-title, .fl-title, .fl-zone, .disp, .serif, .h1, .h2 {
+  font-stretch: var(--fl-wide) !important;
+  font-weight: var(--fl-fw-light) !important;
   letter-spacing: var(--fl-track-tight) !important;
   line-height: var(--fl-lh-title) !important;
   text-transform: none !important;
 }
 
-code, pre, kbd, samp, .mono, .fl-mono, [class*="mono"] {
+h4, h5, h6 {
+  font-stretch: var(--fl-norm) !important;
+  font-weight: var(--fl-fw-medium) !important;
+  letter-spacing: 0 !important;
+  line-height: var(--fl-lh-snug) !important;
+  text-transform: none !important;
+}
+
+code, pre, kbd, samp, .mono, .fl-mono {
   font-family: var(--fl-mono) !important;
 }
 
-/* Nothing is bold. The reference site collapses every weight above
-   "normal" down to 400 and leans on size and colour for hierarchy. */
+/* Weight is allowed to carry a little hierarchy again, but only 500. */
 body, p, li, dd, td, input, select, textarea,
-h4, h5, h6, .lead, .fl-lead, figcaption, blockquote, small, label {
+.lead, .fl-lead, figcaption, blockquote, small, label {
   font-weight: var(--fl-fw-normal) !important;
 }
-
-h1, h2, h3,
-.display-1, .display-2, .display-3, .display-4, .display-5,
-.apple-headline, .fl-zone {
-  font-weight: var(--fl-fw-light) !important;
-}
-
 b, strong, th, dt, .fw-bold, .font-weight-bold,
 .btn, button, .badge, .nav-link, .navbar-brand {
-  font-weight: var(--fl-fw-normal) !important;
+  font-weight: var(--fl-fw-medium) !important;
 }
 
-/* ── 2. SCALE ──────────────────────────────────────────────────────────
-   The scale is capped. 2.5rem is the largest character on the site.     */
+/* No tracked capitals anywhere. Small labels are narrow, not shouted. */
+.eyebrow, .fl-eyebrow, .sec-eye, .lab, .tc-label, .cta-label,
+.stat-lbl, .stat-label, .k, .kicker, .tag, .tags span, .mc-tag, .era-tag,
+.tech-tag, .skill-tag, .badge, .career-year-badge,
+.ai-infra-eyebrow-tag, .aws-mastery-eyebrow, .apple-product-subtitle,
+[class*="eyebrow"], [class*="-label"], [class*="label-"] {
+  text-transform: none !important;
+  letter-spacing: 0 !important;
+  font-stretch: var(--fl-narrow);
+  font-weight: var(--fl-fw-medium) !important;
+}
 
-h1, .display-1, .display-2, .display-3, .display-4, .display-5,
-.apple-headline {
-  font-size: clamp(1.9rem, 4.5vw, var(--fl-fs-zone)) !important;
+/* ── 2. SCALE ──────────────────────────────────────────────────────── */
+
+h1:not(.xl), .display-1, .display-2, .display-3, .display-4, .display-5,
+.apple-headline, .h1 {
+  font-size: var(--fl-fs-zone) !important;
 }
-h2, .apple-subheadline, .section-title {
-  font-size: clamp(1.5rem, 3.2vw, var(--fl-fs-title)) !important;
+h2, .apple-subheadline, .section-title, .h2, .apple-product-title {
+  font-size: var(--fl-fs-title) !important;
 }
-h3 { font-size: 1.25rem !important; }
-h4 { font-size: 1.0625rem !important; }
+h3 { font-size: 1.5rem !important; }
+h4 { font-size: 1.125rem !important; }
 h5, h6 { font-size: var(--fl-fs-base) !important; }
 
 p, li, dd, td, .lead, .fl-lead {
   font-size: var(--fl-fs-base) !important;
   line-height: var(--fl-lh-body) !important;
 }
+.lead, .fl-lead, .lede, .apple-body-large {
+  font-size: var(--fl-fs-lead) !important;
+  line-height: 1.5 !important;
+}
 small, .small, figcaption, .badge, .fl-pill {
   font-size: var(--fl-fs-sm) !important;
 }
 
-/* Figures read as data: tabular mono, never emphasised by weight. */
-.fl-stat__value, .stat-value, .stat-num, .metric-value,
-.counter, [data-count], .num, .kpi-value {
-  font-family: var(--fl-mono) !important;
-  font-weight: var(--fl-fw-normal) !important;
+/* Figures are wide light numerals, tabular. Never mono, never bold. */
+.fl-stat__value, .stat-value, .stat-num, .stat-number, .metric-value,
+.counter, [data-count], .num, .kpi-value, .era-mv, .reg-n, .v {
+  font-family: var(--fl-display) !important;
+  font-stretch: var(--fl-wide) !important;
+  font-weight: var(--fl-fw-light) !important;
   font-variant-numeric: tabular-nums;
-  letter-spacing: -.02em !important;
+  letter-spacing: var(--fl-track-tight) !important;
 }
 
-/* ── 3. SHAPE ──────────────────────────────────────────────────────────
-   Soft, consistent radii. Shadows are a whisper; rules do the work.     */
+/* ── 3. SHAPE ──────────────────────────────────────────────────────── */
 
 .card, .fl-card, .modal-content, .dropdown-menu, .alert,
 .list-group, .toast, .popover, .panel, .tile, .box,
 [class*="-card"], [class*="card-"] {
-  border-radius: var(--fl-r-lg) !important;
-  box-shadow: none;
+  border-radius: 0 !important;
+  box-shadow: none !important;
 }
 
-.btn, button, input, select, textarea, .form-control, .input-group-text {
-  border-radius: var(--fl-r-sm) !important;
-}
-
-.badge, .pill, .tag, .chip, .fl-pill, [class*="badge"], [class*="-tag"] {
+/* Small controls are pills. A bare <button> is left alone so accordion
+   heads, tab lists and other large buttons can stay square. */
+.btn, .fl-btn, .badge, .pill, .tag, .chip,
+.fl-pill, [class*="badge"], [class*="-tag"], .tech-tag, .skill-tag {
   border-radius: var(--fl-r-pill) !important;
 }
 
+input, select, textarea, .form-control, .input-group-text {
+  border-radius: var(--fl-r-xs) !important;
+}
+
 img, video, iframe, picture, canvas, .rounded, .img-fluid {
-  border-radius: var(--fl-r) ;
+  border-radius: 0 !important;
 }
 .rounded-circle, .avatar, [class*="avatar"] { border-radius: var(--fl-r-pill) !important; }
 
-/* Flatten the heavy drop shadows the old pages used for depth. */
 .card, .shadow, .shadow-sm, .shadow-lg, .navbar, .btn,
-[class*="-card"], .tile, .box, .panel {
-  box-shadow: var(--fl-sh-xs);
-}
+[class*="-card"], .tile, .box, .panel,
 .card:hover, [class*="-card"]:hover, .tile:hover {
-  box-shadow: var(--fl-sh-sm);
+  box-shadow: none !important;
 }
 
 /* ── 4. RULES & SURFACES ───────────────────────────────────────────── */
@@ -118,6 +138,7 @@ img, video, iframe, picture, canvas, .rounded, .img-fluid {
 .card, .fl-card, .list-group-item, .table td, .table th,
 .dropdown-menu, .modal-content, [class*="-card"] {
   border-color: var(--fl-hair) !important;
+  background-image: none !important;
 }
 
 hr, .divider, .rule, [class*="divider"] {
@@ -126,50 +147,37 @@ hr, .divider, .rule, [class*="divider"] {
   opacity: 1;
 }
 
-/* ── 5. ACTION ─────────────────────────────────────────────────────────
-   One blue for links. Buttons are ink-on-white or a hairline ghost.     */
+/* ── 5. ACTION ─────────────────────────────────────────────────────── */
 
-a { transition: color var(--fl-t), opacity var(--fl-t); }
+a { color: var(--fl-link); transition: color var(--fl-t), opacity var(--fl-t); }
+a:hover { color: var(--fl-link-hover); }
 
-.btn-primary, .btn-dark, .btn-secondary {
+.btn-primary, .btn-dark, .btn-secondary, .btn-submit, .apple-button {
   background: var(--fl-ink) !important;
-  border-color: var(--fl-ink) !important;
+  border: 1px solid var(--fl-ink) !important;
   color: var(--fl-on-ink) !important;
+  background-image: none !important;
 }
-.btn-primary:hover, .btn-dark:hover, .btn-secondary:hover {
-  background: var(--fl-ink-soft) !important;
-  border-color: var(--fl-ink-soft) !important;
-  color: var(--fl-on-ink) !important;
+.btn-primary:hover, .btn-dark:hover, .btn-secondary:hover, .btn-submit:hover,
+.apple-button:hover {
+  background: var(--fl-surface) !important;
+  border-color: var(--fl-ink) !important;
+  color: var(--fl-ink) !important;
 }
 .btn-outline-primary, .btn-outline-dark, .btn-outline-secondary,
 .btn-light, .btn-outline-light {
-  background: var(--fl-surface) !important;
-  border-color: var(--fl-line) !important;
+  background: transparent !important;
+  border: 1px solid var(--fl-ink) !important;
   color: var(--fl-ink) !important;
 }
 .btn-outline-primary:hover, .btn-outline-dark:hover,
 .btn-outline-secondary:hover, .btn-light:hover, .btn-outline-light:hover {
-  background: var(--fl-inset) !important;
-  color: var(--fl-ink) !important;
+  background: var(--fl-ink) !important;
+  color: var(--fl-on-ink) !important;
 }
 .btn { letter-spacing: 0 !important; text-transform: none !important; }
 
-/* ── 6. NAV ────────────────────────────────────────────────────────────
-   A thin, near-white bar with a hairline underneath.                    */
-
-.navbar {
-  background: rgba(255, 255, 255, .82) !important;
-  backdrop-filter: saturate(180%) blur(18px);
-  -webkit-backdrop-filter: saturate(180%) blur(18px);
-  border-bottom: 1px solid var(--fl-hair);
-  box-shadow: none !important;
-}
-.navbar .navbar-brand { color: var(--fl-ink) !important; letter-spacing: 0 !important; }
-.navbar .nav-link { color: var(--fl-muted) !important; font-size: var(--fl-fs-sm) !important; }
-.navbar .nav-link:hover, .navbar .nav-link.active { color: var(--fl-ink) !important; }
-
-/* ── 7. MOTION ─────────────────────────────────────────────────────────
-   Fast and small. Nothing travels far.                                  */
+/* ── 6. MOTION ─────────────────────────────────────────────────────── */
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
@@ -180,11 +188,9 @@ a { transition: color var(--fl-t), opacity var(--fl-t); }
   }
 }
 
-/* ── 8. DARK ───────────────────────────────────────────────────────────
-   The tokens in finlab.css do most of the work. What is left is the
-   handful of places the old pages painted a colour literal straight
-   into a rule: the translucent nav, and any surface that assumed a
-   white page underneath it.                                            */
+/* ── 7. DARK ───────────────────────────────────────────────────────────
+   The tokens do the work. What remains is the handful of places a page
+   painted a literal straight into a rule.                             */
 
 :root[data-theme="dark"] body,
 :root[data-mode="ink"] body,
@@ -193,19 +199,13 @@ body.dark-mode {
   color: var(--fl-text);
 }
 
-body.dark-mode .navbar,
-:root[data-theme="dark"] .navbar {
-  background: rgba(10, 10, 11, .82) !important;
-  border-bottom-color: var(--fl-hair);
-}
-
 body.dark-mode .card,
 body.dark-mode .modal-content,
 body.dark-mode .dropdown-menu,
 body.dark-mode [class*="-card"],
 body.dark-mode .tile,
 body.dark-mode .panel {
-  background: var(--fl-quiet);
+  background: var(--fl-surface);
   border-color: var(--fl-hair) !important;
   color: var(--fl-text);
 }
@@ -214,16 +214,7 @@ body.dark-mode .form-control,
 body.dark-mode input,
 body.dark-mode select,
 body.dark-mode textarea {
-  background: var(--fl-quiet);
-  border-color: var(--fl-hair) !important;
+  background: var(--fl-surface);
   color: var(--fl-text);
 }
 body.dark-mode ::placeholder { color: var(--fl-ghost); }
-
-body.dark-mode hr,
-body.dark-mode .divider,
-body.dark-mode [class*="divider"] { border-color: var(--fl-hair) !important; }
-
-/* A white logo mark or diagram on a black ground needs its own plate. */
-body.dark-mode .navbar-brand img,
-:root[data-theme="dark"] .navbar-brand img { filter: invert(1) hue-rotate(180deg); }

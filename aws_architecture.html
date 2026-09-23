@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-   <head>
+<head>
   <script>
     /* Theme, before first paint. The site has three dark mechanisms from
        three eras; one saved value drives all of them. Inline and
@@ -14,2378 +14,217 @@
       if (d) r.setAttribute('data-mode', 'ink');
     })();
   </script>
-      <meta charset="UTF-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-      <title>AWS Architecture - Yen.Dev</title>
-      <meta name="description" content="Explore comprehensive AWS architecture solutions, from serverless applications to enterprise-scale cloud infrastructure designs.">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>AWS architecture, Yen</title>
+  <meta name="description" content="Four AWS architectures, drawn and built: serverless, microservices on EKS, a data lake, and multi-region high availability, each with the CDK code that stands it up.">
 
-      <!-- Open Graph / Facebook -->
-      <meta property="og:type" content="website">
-      <meta property="og:url" content="https://yennanliu.github.io/aws_architecture.html">
-      <meta property="og:title" content="AWS Architecture - Yen.Dev">
-      <meta property="og:description" content="Explore comprehensive AWS architecture solutions, from serverless applications to enterprise-scale cloud infrastructure designs.">
-      <meta property="og:image" content="https://yennanliu.github.io/img/website-preview.png">
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://yennanliu.github.io/aws_architecture.html">
+  <meta property="og:title" content="AWS architecture, Yen">
+  <meta property="og:description" content="Four AWS architectures, drawn and built: serverless, microservices on EKS, a data lake, and multi-region high availability, each with the CDK code that stands it up.">
+  <meta property="og:image" content="https://yennanliu.github.io/img/website-preview.png">
 
-      <!-- Twitter -->
-      <meta property="twitter:card" content="summary_large_image">
-      <meta property="twitter:url" content="https://yennanliu.github.io/aws_architecture.html">
-      <meta property="twitter:title" content="AWS Architecture - Yen.Dev">
-      <meta property="twitter:description" content="Explore comprehensive AWS architecture solutions, from serverless applications to enterprise-scale cloud infrastructure designs.">
-      <meta property="twitter:image" content="https://yennanliu.github.io/img/website-preview.png">
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://yennanliu.github.io/aws_architecture.html">
+  <meta property="twitter:title" content="AWS architecture, Yen">
+  <meta property="twitter:description" content="Four AWS architectures, drawn and built: serverless, microservices on EKS, a data lake, and multi-region high availability, each with the CDK code that stands it up.">
+  <meta property="twitter:image" content="https://yennanliu.github.io/img/website-preview.png">
 
-      <!-- PWA Meta Tags -->
-      <meta name="theme-color" content="#4a6bff">
-      <meta name="apple-mobile-web-app-capable" content="yes">
-      <meta name="apple-mobile-web-app-status-bar-style" content="default">
-      <meta name="apple-mobile-web-app-title" content="Yen.Dev">
-      <meta name="mobile-web-app-capable" content="yes">
-      <meta name="msapplication-TileColor" content="#4a6bff">
-      <meta name="msapplication-tap-highlight" content="no">
+  <!-- PWA -->
+  <meta name="theme-color" content="#ffffff">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="Yen">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="msapplication-TileColor" content="#000000">
+  <meta name="msapplication-tap-highlight" content="no">
+  <link rel="icon" href="img/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="img/icon.svg">
+  <link rel="mask-icon" href="img/icon.svg" color="#000000">
+  <link rel="manifest" href="manifest.json">
 
-      <!-- PWA Icons -->
-      <link rel="icon" href="img/icon.svg" type="image/svg+xml">
-      <link rel="apple-touch-icon" href="img/icon.svg">
-      <link rel="mask-icon" href="img/icon.svg" color="#4a6bff">
+  <!-- Google analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-X2DJ8VW74E"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-X2DJ8VW74E');
+  </script>
 
-      <!-- PWA Manifest -->
-      <link rel="manifest" href="manifest.json">
-
-      <!-- Google analytics -->
-      <script async src="https://www.googletagmanager.com/gtag/js?id=G-X2DJ8VW74E"></script>
-      <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'G-X2DJ8VW74E');
-      </script>
-      
-      <!-- Bootstrap CSS -->
-      <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-      <!-- AOS Animation Library -->
-      <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-      <!-- Font Awesome -->
-      <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet">
-      <!-- Google Fonts -->
-      <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400&family=Space+Grotesk:wght@300;400;500&display=swap" rel="stylesheet">
-      
-      <!-- Custom CSS -->
-      <link rel="stylesheet" href="css/finlab.css">
-      <style>
-         :root {
-          /* FinLab palette */
-          --apple-blue: #2563eb;
-          --apple-gray: #111827;
-          --apple-light-gray: #f8fafc;
-          --apple-white: #ffffff;
-          --apple-text: #111827;
-          --apple-secondary-text: #647084;
-          --apple-border: #e5e7eb;
-          --transition-speed: 0.16s;
-          --apple-radius: 16px;
-          --apple-shadow: 0 2px 6px rgba(15, 23, 42, .06);
-          --primary-color: #111827;
-          --gradient-black: #111827;
-       }
-         
-         /* Base styles */
-         body {
-            font-family: var(--fl-body);
-            background-color: var(--apple-white);
-            color: var(--apple-text);
-            line-height: 1.6;
-            font-weight: 400;
-            letter-spacing: -.022em;
-            transition: all var(--transition-speed) ease-in-out;
-            scroll-behavior: smooth;
-            padding-top: 44px;
-         }
-
-         /* Global Heading Styles */
-         h1, h2, h3, h4, h5, h6 {
-            font-family: var(--fl-display);
-            font-weight: 400;
-            letter-spacing: -.02em;
-            color: var(--apple-text);
-         }
-
-         /* Apple Typography */
-         .apple-headline {
-            font-family: var(--fl-display);
-            font-size: 40px;
-            line-height: 1;
-            font-weight: 300;
-            letter-spacing: -.04em;
-            color: var(--apple-text);
-            margin-bottom: 30px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-         }
-
-         .headline-chinese-line {
-            display: block;
-            white-space: nowrap;
-            word-break: keep-all;
-            overflow-wrap: normal;
-            -webkit-text-size-adjust: 100%;
-            text-rendering: optimizeLegibility;
-            margin: 0;
-            line-height: 1.1;
-            text-align: center;
-            font-size: inherit;
-            font-weight: inherit;
-            letter-spacing: inherit;
-         }
-
-         .apple-subheadline {
-            font-size: 40px;
-            line-height: 1.2;
-            font-weight: 400;
-            letter-spacing: -.01em;
-            color: var(--apple-secondary-text);
-            margin-bottom: 50px;
-            max-width: 1000px;
-            margin-left: auto;
-            margin-right: auto;
-         }
-         
-         .apple-body-large {
-            font-size: 21px;
-            line-height: 1.381;
-            font-weight: 400;
-            letter-spacing: .011em;
-         }
-         
-         /* Enhanced Mobile First Responsive Typography - Moved to main responsive section above */
-         /* Typography is now handled in the comprehensive responsive design section */
-         
-         /* Apple-style navbar */
-         .navbar {
-            background-color: rgba(255, 255, 255, 0.92) !important;
-            backdrop-filter: saturate(180%) blur(20px);
-            -webkit-backdrop-filter: saturate(180%) blur(20px);
-            border-bottom: 1px solid var(--apple-border);
-            padding: 8px 0;
-            transition: all var(--transition-speed) ease-in-out;
-         }
-         
-         @media (max-width: 991.98px) {
-            .navbar-collapse {
-               background-color: rgba(255, 255, 255, 0.95);
-               padding: 20px;
-               border-radius: var(--fl-r);
-               margin-top: 10px;
-            }
-            
-            .nav-link {
-               margin: 10px 0;
-            }
-            
-            .toggle-container {
-               margin: 15px 0;
-            }
-         }
-         
-         /* Apple-style hero section - Mobile First */
-         .hero-section {
-            background: var(--apple-light-gray);
-            padding: 40px 0 60px;
-            text-align: center;
-         }
-         
-         @media (min-width: 768px) {
-            .hero-section {
-               padding: 66px 0 80px;
-            }
-         }
-         
-         @media (min-width: 1024px) {
-            .hero-section {
-               padding: 106px 0 120px;
-            }
-         }
-         
-         /* Apple-style product cards */
-         .architecture-card {
-            background: var(--apple-white);
-            border-radius: var(--apple-radius);
-            box-shadow: var(--apple-shadow);
-            border: 1px solid var(--apple-border);
-            transition: all var(--transition-speed) ease-in-out;
-            overflow: hidden;
-            margin-bottom: 40px;
-         }
-         
-         .architecture-card:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--fl-sh-lg);
-         }
-         
-         .architecture-card-body {
-            padding: 40px;
-         }
-         
-         @media (min-width: 1024px) {
-            .architecture-card-body {
-               padding: 60px;
-            }
-         }
-         
-         /* Responsive buttons */
-         .btn-primary, .btn-outline-primary {
-            padding: 8px 16px;
-            font-size: 0.9rem;
-         }
-         
-         @media (min-width: 768px) {
-            .btn-primary, .btn-outline-primary {
-               padding: 10px 20px;
-               font-size: 1rem;
-            }
-         }
-         
-         /* Scroll to top button */
-         .scroll-top {
-            width: 40px;
-            height: 40px;
-            bottom: 20px;
-            right: 20px;
-         }
-         
-         @media (min-width: 768px) {
-            .scroll-top {
-               width: 50px;
-               height: 50px;
-               bottom: 30px;
-               right: 30px;
-            }
-         }
-         
-         .navbar-brand {
-            font-weight: 400;
-            font-size: 1.5rem;
-            color: var(--apple-text) !important;
-            letter-spacing: .011em;
-         }
-
-         .nav-link {
-            font-weight: 400;
-            font-size: 1rem;
-            color: var(--apple-text) !important;
-            position: relative;
-            transition: opacity var(--transition-speed) ease-in-out;
-            padding: 8px 10px;
-            margin: 0 10px;
-         }
-         
-         .nav-link:hover {
-            opacity: 1;
-            color: var(--apple-text) !important;
-         }
-         
-         /* Apple-style buttons - Mobile First */
-         .apple-button {
-            background: var(--apple-blue);
-            color: var(--apple-white);
-            border: none;
-            border-radius: 980px;
-            padding: 8px 16px;
-            font-size: 12px;
-            font-weight: 400;
-            letter-spacing: -.01em;
-            min-width: 28px;
-            transition: all var(--transition-speed) ease-in-out;
-            cursor: pointer;
-            text-decoration: none;
-            display: inline-block;
-            line-height: 1.33337;
-            margin: 5px;
-         }
-         
-         .apple-button:hover {
-            background: #2563eb;
-            color: var(--apple-white);
-            text-decoration: none;
-         }
-         
-         .apple-button-large {
-            padding: 10px 20px;
-            font-size: 14px;
-            min-width: 44px;
-            min-height: 44px;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-         }
-         
-         @media (min-width: 768px) {
-            .apple-button-large {
-               padding: 12px 24px;
-               font-size: 17px;
-               margin: 0 10px;
-            }
-         }
-         
-         /* Mobile button stacking */
-         @media (max-width: 480px) {
-            .hero-section .apple-button-large {
-               display: block;
-               width: 80%;
-               max-width: 280px;
-               margin: 10px auto;
-            }
-         }
-         
-         /* Apple-style sections */
-         .apple-section {
-            padding: 100px 0;
-         }
-         
-         @media (max-width: 1023px) {
-            .apple-section {
-               padding: 80px 0;
-            }
-         }
-         
-         .apple-product-title {
-            font-size: 24px;
-            line-height: 1.16667;
-            font-weight: 400;
-            letter-spacing: .009em;
-            color: var(--apple-text);
-            margin-bottom: 8px;
-         }
-         
-         .apple-product-subtitle {
-            font-size: 19px;
-            line-height: 1.2105263158;
-            font-weight: 400;
-            letter-spacing: .012em;
-            color: var(--apple-secondary-text);
-            margin-bottom: 20px;
-         }
-         
-         /* Architecture showcase grid - Mobile First */
-         .architecture-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 20px;
-            margin: 40px 0;
-         }
-         
-         @media (min-width: 768px) {
-            .architecture-grid {
-               grid-template-columns: 1fr 1fr;
-               gap: 40px;
-               margin: 60px 0;
-            }
-         }
-         
-         @media (min-width: 1024px) {
-            .architecture-grid {
-               margin: 80px 0;
-            }
-         }
-         
-         /* Apple-style Expanded Architecture Visuals */
-         .architecture-visual {
-            position: relative;
-            overflow: hidden;
-            border-radius: 0;
-            padding: 0;
-            text-align: center;
-            min-height: 400px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: transparent;
-            margin: 0 -20px; /* Break out of container slightly */
-         }
-
-         .architecture-visual img {
-            width: 100%;
-            height: auto;
-            min-height: 400px;
-            max-width: none;
-            border-radius: var(--fl-r-xl);
-            object-fit: cover;
-            object-position: center;
-            box-shadow: var(--fl-sh-lg);
-            transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-         }
-
-         .architecture-visual svg {
-            width: 100%;
-            height: auto;
-            min-height: 400px;
-            border-radius: var(--fl-r-xl);
-            box-shadow: var(--fl-sh-lg);
-            background: white;
-            transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            display: block;
-         }
-
-         /* Specific styling for serverless architecture SVG */
-         .architecture-visual svg[viewBox="0 0 700 400"] {
-            aspect-ratio: 7/4;
-            object-fit: contain;
-            object-position: center;
-         }
-
-         .architecture-visual:hover img,
-         .architecture-visual:hover svg {
-            transform: scale(1.02);
-            box-shadow: var(--fl-sh-lg);
-         }
-
-         @media (min-width: 768px) {
-            .architecture-visual {
-               min-height: 500px;
-               margin: 0 -40px; /* Bigger breakout on larger screens */
-            }
-
-            .architecture-visual img,
-            .architecture-visual svg {
-               min-height: 500px;
-               border-radius: var(--fl-r-xl);
-            }
-
-            .architecture-visual svg[viewBox="0 0 700 400"] {
-               min-height: 500px;
-            }
-         }
-
-         @media (min-width: 1024px) {
-            .architecture-visual {
-               min-height: 600px;
-               margin: 0 -60px; /* Even bigger breakout on desktop */
-            }
-
-            .architecture-visual img,
-            .architecture-visual svg {
-               min-height: 600px;
-               border-radius: var(--fl-r-xl);
-            }
-
-            .architecture-visual svg[viewBox="0 0 700 400"] {
-               min-height: 600px;
-            }
-         }
-
-         @media (min-width: 1440px) {
-            .architecture-visual {
-               min-height: 700px;
-               margin: 0 -80px; /* Maximum breakout on large screens */
-            }
-
-            .architecture-visual img,
-            .architecture-visual svg {
-               min-height: 700px;
-               border-radius: var(--fl-r-xl);
-            }
-
-            .architecture-visual svg[viewBox="0 0 700 400"] {
-               min-height: 700px;
-            }
-         }
-
-         /* Enhanced architecture grid for Apple-style layout */
-         .architecture-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 60px;
-            margin: 80px 0;
-            align-items: center;
-         }
-
-         @media (min-width: 768px) {
-            .architecture-grid {
-               grid-template-columns: 1fr 1fr;
-               gap: 80px;
-               margin: 120px 0;
-            }
-         }
-
-         @media (min-width: 1024px) {
-            .architecture-grid {
-               gap: 100px;
-               margin: 140px 0;
-            }
-         }
-
-         @media (min-width: 1440px) {
-            .architecture-grid {
-               gap: 120px;
-               margin: 160px 0;
-            }
-         }
-         
-         /* Apple-style tech tags */
-         .tech-tag {
-            background: var(--apple-light-gray);
-            color: var(--apple-secondary-text);
-            padding: 4px 12px;
-            border-radius: var(--fl-r-lg);
-            font-size: 12px;
-            font-weight: 400;
-            margin: 2px 4px 2px 0;
-            display: inline-block;
-         }
-         
-         /* Apple-style links */
-         .apple-link {
-            color: var(--apple-blue);
-            text-decoration: none;
-            font-size: 17px;
-            line-height: 1.23529;
-            font-weight: 400;
-            letter-spacing: -.022em;
-         }
-         
-         .apple-link:hover {
-            text-decoration: underline;
-            color: var(--apple-blue);
-         }
-         
-         /* Apple dark mode - Enhanced */
-         body.dark-mode {
-            background-color: #141417;
-            color: #f5f7fa;
-         }
-         
-         body.dark-mode .navbar {
-            background-color: rgba(31, 31, 36, 0.92) !important;
-            border-bottom: 1px solid #2e2e35;
-         }
-         
-         body.dark-mode .navbar-brand,
-         body.dark-mode .nav-link {
-            color: #f5f7fa !important;
-         }
-         
-         body.dark-mode .hero-section {
-            background: #1f1f24;
-         }
-         
-         body.dark-mode .apple-headline {
-            color: #f5f7fa;
-         }
-
-         body.dark-mode .headline-chinese-line {
-            color: #f5f7fa;
-         }
-         
-         body.dark-mode .apple-subheadline {
-            color: #9aa5b5;
-         }
-         
-         body.dark-mode .architecture-card {
-            background: #1f1f24;
-            border-color: #2e2e35;
-            box-shadow: var(--fl-sh-sm);
-         }
-         
-         body.dark-mode .architecture-card:hover {
-            background: #212126;
-            box-shadow: var(--fl-sh-lg);
-         }
-         
-         body.dark-mode .architecture-visual {
-            background: transparent;
-         }
-
-         body.dark-mode .architecture-visual img,
-         body.dark-mode .architecture-visual svg {
-            box-shadow: var(--fl-sh-lg);
-         }
-
-         body.dark-mode .architecture-visual:hover img,
-         body.dark-mode .architecture-visual:hover svg {
-            box-shadow: var(--fl-sh-lg);
-         }
-
-         body.dark-mode .architecture-visual svg {
-            background: #1f1f24;
-         }
-         
-         body.dark-mode .architecture-card-body {
-            color: #f5f7fa;
-         }
-         
-         body.dark-mode .apple-product-title {
-            color: #f5f7fa;
-         }
-         
-         body.dark-mode .apple-product-subtitle {
-            color: #9aa5b5;
-         }
-         
-         body.dark-mode .apple-body-large {
-            color: #d3dae4;
-         }
-         
-         body.dark-mode .tech-tag {
-            background: #2e2e35;
-            color: #9aa5b5;
-            border: 1px solid #3a3a43;
-         }
-         
-         body.dark-mode .apple-link {
-            color: #7aa8ff;
-         }
-         
-         body.dark-mode .apple-link:hover {
-            color: #7aa8ff;
-         }
-         
-         body.dark-mode .apple-button {
-            background: #f5f7fa;
-            color: #141417;
-         }
-         
-         body.dark-mode .apple-button:hover {
-            background: #7aa8ff;
-         }
-         
-         /* Improve toggler button visibility in light mode */
-         .navbar-light .navbar-toggler {
-            border-color: rgba(17, 24, 39, 0.3) !important;
-         }
-         .navbar-light .navbar-toggler-icon {
-            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(17, 24, 39, 0.7)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
-         }
-         body.dark-mode .navbar-light .navbar-toggler {
-            border-color: rgba(245, 247, 250, 0.4) !important;
-         }
-         body.dark-mode .navbar-light .navbar-toggler-icon {
-            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(245, 247, 250, 0.8)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
-         }
-
-         /* Dark mode mobile navbar styles */
-         @media (max-width: 991.98px) {
-            body.dark-mode .navbar-collapse {
-               background-color: rgba(31, 31, 36, 0.95) !important;
-               border: 1px solid #2e2e35;
-            }
-         }
-         
-         /* Dark mode progress bars (if any) */
-         body.dark-mode .progress {
-            background-color: #2e2e35;
-         }
-         
-         body.dark-mode .progress-bar {
-            background-color: #f5f7fa !important;
-         }
-         
-         /* Dark mode certification badges */
-         body.dark-mode .cert-badge {
-            background: #f5f7fa;
-            color: #141417;
-            box-shadow: var(--fl-sh);
-         }
-         
-         body.dark-mode .cert-badge:hover {
-            box-shadow: var(--fl-sh-lg);
-         }
-
-         /* AI Infrastructure Section - Creative Design */
-         .ai-infra-section {
-            background: #f8fafc;
-            position: relative;
-            overflow: hidden;
-         }
-
-         .ai-infra-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background:
-               radial-gradient(circle at 20% 20%, rgba(37, 99, 235, 0.03) 0%, transparent 50%),
-               radial-gradient(circle at 80% 80%, rgba(37, 99, 235, 0.03) 0%, transparent 50%),
-               linear-gradient(45deg, transparent 0%, rgba(37, 99, 235, 0.01) 50%, transparent 100%);
-            pointer-events: none;
-         }
-
-         .ai-infra-hero {
-            position: relative;
-            z-index: 2;
-         }
-
-         .ai-infra-title {
-            font-size: 40px;
-            line-height: 1;
-            font-weight: 300;
-            color: #1f2937;
-            margin-bottom: 30px;
-            letter-spacing: -0.03em;
-         }
-
-         .ai-title-main {
-            display: inline-block;
-            font-family: var(--fl-display);
-            color: inherit;
-         }
-
-         .ai-title-sub {
-            background-size: 400% 400%;
-            animation: gradient-shift 3s ease-in-out infinite;
-            display: inline-block;
-            position: relative;
-            font-family: var(--fl-display);
-            color: inherit;
-         }
-
-         @keyframes gradient-shift {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-         }
-
-         /* Glitch effect for "Built for Tomorrow" */
-         .glitch-text {
-            position: relative;
-         }
-
-         .glitch-text::before,
-         .glitch-text::after {
-            content: attr(data-text);
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: inherit;
-            -webkit-background-clip: text;
-            background-clip: text;
-         }
-
-         .glitch-text::before {
-            animation: glitch-1 2s infinite;
-            color: #dc2626;
-            z-index: -1;
-         }
-
-         .glitch-text::after {
-            animation: glitch-2 2s infinite;
-            color: #059669;
-            z-index: -2;
-         }
-
-         @keyframes glitch-1 {
-            0%, 14%, 15%, 49%, 50%, 99%, 100% {
-               transform: translate(0);
-            }
-            15% {
-               transform: translate(-2px, 2px);
-            }
-            50% {
-               transform: translate(2px, -2px);
-            }
-         }
-
-         @keyframes glitch-2 {
-            0%, 20%, 21%, 62%, 63%, 99%, 100% {
-               transform: translate(0);
-            }
-            21% {
-               transform: translate(2px, -2px);
-            }
-            63% {
-               transform: translate(-2px, 2px);
-            }
-         }
-
-         .ai-infra-subtitle {
-            font-size: 28px;
-            line-height: 1.5;
-            color: var(--apple-secondary-text);
-            max-width: 800px;
-            margin: 0 auto;
-            font-weight: 400;
-         }
-
-         /* AI Infrastructure Carousel */
-         .ai-carousel-container {
-            margin-top: 60px;
-            position: relative;
-            z-index: 2;
-         }
-
-         .ai-carousel-wrapper {
-            overflow: hidden;
-            border-radius: var(--fl-r-xl);
-            position: relative;
-         }
-
-         .ai-carousel-track {
-            display: flex;
-            transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            gap: 30px;
-         }
-
-         .ai-infra-card {
-            background: rgba(255, 255, 255, 0.8);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: var(--fl-r-xl);
-            padding: 40px 30px;
-            position: relative;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            overflow: hidden;
-            cursor: pointer;
-            flex: 0 0 350px;
-            min-height: 300px;
-         }
-
-         .ai-infra-card::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(45deg, transparent, rgba(37, 99, 235, 0.1), transparent);
-            transform: rotate(45deg);
-            transition: all 0.6s ease;
-            opacity: 0;
-         }
-
-         .ai-infra-card:hover::before {
-            animation: shimmer 1.5s ease-in-out;
-         }
-
-         @keyframes shimmer {
-            0% {
-               transform: translateX(-100%) translateY(-100%) rotate(45deg);
-               opacity: 0;
-            }
-            50% {
-               opacity: 1;
-            }
-            100% {
-               transform: translateX(100%) translateY(100%) rotate(45deg);
-               opacity: 0;
-            }
-         }
-
-         .ai-infra-card:hover {
-            transform: translateY(-8px) scale(1.02);
-            box-shadow:
-               var(--fl-sh-lg);
-            border-color: rgba(37, 99, 235, 0.3);
-         }
-
-         .ai-infra-card-icon {
-            width: 60px;
-            height: 60px;
-            margin: 0 auto 25px;
-            background: #2563eb;
-            border-radius: var(--fl-r-lg);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            overflow: hidden;
-         }
-
-         .ai-infra-card-icon::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-            transition: left 0.6s ease;
-         }
-
-         .ai-infra-card:hover .ai-infra-card-icon::before {
-            left: 100%;
-         }
-
-         .ai-icon {
-            width: 28px;
-            height: 28px;
-            color: white;
-            z-index: 2;
-            position: relative;
-         }
-
-         .ai-infra-card-title {
-            font-family: var(--fl-display);
-            font-size: 28px;
-            font-weight: 300;
-            color: #111827;
-            margin-bottom: 16px;
-            text-align: center;
-            letter-spacing: -0.02em;
-         }
-
-         .ai-infra-card-description {
-            font-size: 17px;
-            line-height: 1.6;
-            color: var(--apple-secondary-text);
-            text-align: center;
-            margin-bottom: 25px;
-            font-weight: 400;
-         }
-
-         .ai-infra-tech-stack {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            justify-content: center;
-         }
-
-         .ai-tech-tag {
-            background: linear-gradient(135deg, rgba(17, 24, 39, 0.05) 0%, rgba(17, 24, 39, 0.08) 100%);
-            color: #111827;
-            border: 2px solid rgba(17, 24, 39, 0.15);
-            padding: 10px 20px;
-            border-radius: var(--fl-r-xl);
-            font-size: 15px;
-            font-weight: 400;
-            transition: all 0.3s ease;
-            letter-spacing: 0.01em;
-         }
-
-         .ai-tech-tag:hover {
-            background: #111827;
-            color: white;
-            transform: scale(1.05);
-            border-color: #111827;
-         }
-
-         .ai-infra-cta {
-            margin-top: 80px;
-            position: relative;
-            z-index: 2;
-         }
-
-         .ai-infra-cta-text {
-            font-size: 32px;
-            color: #2563eb;
-            margin-bottom: 40px;
-            font-weight: 400;
-            letter-spacing: -0.02em;
-         }
-
-         .ai-infra-cta-button {
-            display: inline-flex;
-            align-items: center;
-            gap: 16px;
-            background: #111827;
-            color: white;
-            padding: 24px 48px;
-            border-radius: var(--fl-r-xl);
-            font-size: 20px;
-            font-weight: 400;
-            text-decoration: none;
-            position: relative;
-            overflow: hidden;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: var(--fl-sh-lg);
-         }
-
-         .ai-infra-cta-button::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transition: left 0.6s ease;
-         }
-
-         .ai-infra-cta-button:hover::before {
-            left: 100%;
-         }
-
-         .ai-infra-cta-button:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--fl-sh-lg);
-            color: white;
-            text-decoration: none;
-         }
-
-         .cta-arrow {
-            width: 18px;
-            height: 18px;
-            transition: transform 0.3s ease;
-         }
-
-         .ai-infra-cta-button:hover .cta-arrow {
-            transform: translateX(4px);
-         }
-
-         /* Carousel Indicators */
-         .ai-carousel-indicators {
-            display: flex;
-            justify-content: center;
-            gap: 12px;
-            margin-top: 40px;
-         }
-
-         .indicator {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background: rgba(37, 99, 235, 0.3);
-            cursor: pointer;
-            transition: all 0.3s ease;
-         }
-
-         .indicator.active {
-            background: #2563eb;
-            transform: scale(1.2);
-         }
-
-         .indicator:hover {
-            background: rgba(37, 99, 235, 0.6);
-            transform: scale(1.1);
-         }
-
-         /* Enhanced Responsive Design for All Devices */
-
-         /* Extra Large Desktop (1920px+) */
-         @media (min-width: 1920px) {
-            .container {
-               max-width: 1800px;
-            }
-
-            .apple-headline {
-               font-size: 40px;
-            }
-
-            .apple-subheadline {
-               font-size: 40px;
-            }
-
-            .architecture-card-body {
-               padding: 80px;
-            }
-
-            .ai-infra-title {
-               font-size: 40px;
-            }
-
-            .ai-infra-subtitle {
-               font-size: 32px;
-            }
-
-            .ai-infra-card {
-               flex: 0 0 400px;
-               min-height: 350px;
-               padding: 50px 40px;
-            }
-         }
-
-         /* Large Desktop (1440px-1919px) */
-         @media (min-width: 1440px) and (max-width: 1919px) {
-            .apple-headline {
-               font-size: 40px;
-            }
-
-            .apple-subheadline {
-               font-size: 40px;
-            }
-
-            .architecture-card-body {
-               padding: 70px;
-            }
-
-            .ai-infra-title {
-               font-size: 40px;
-            }
-
-            .ai-infra-subtitle {
-               font-size: 28px;
-            }
-         }
-
-         /* Standard Desktop (1024px-1439px) */
-         @media (min-width: 1024px) and (max-width: 1439px) {
-            .apple-headline {
-               font-size: 40px;
-            }
-
-            .apple-subheadline {
-               font-size: 38px;
-            }
-
-            .architecture-card-body {
-               padding: 50px;
-            }
-
-            .ai-infra-title {
-               font-size: 40px;
-            }
-
-            .ai-infra-subtitle {
-               font-size: 24px;
-            }
-
-            .ai-infra-card {
-               flex: 0 0 340px;
-               min-height: 320px;
-            }
-         }
-
-         /* Tablets Landscape (768px-1023px) */
-         @media (min-width: 768px) and (max-width: 1023px) {
-            .hero-section {
-               padding: 80px 0 100px;
-            }
-
-            .apple-headline {
-               font-size: 40px;
-            }
-
-            .apple-subheadline {
-               font-size: 28px;
-            }
-
-            .architecture-grid {
-               grid-template-columns: 1fr;
-               gap: 60px;
-               margin: 60px 0;
-            }
-
-            .architecture-card-body {
-               padding: 40px;
-            }
-
-            .ai-infra-title {
-               font-size: 40px;
-            }
-
-            .ai-infra-subtitle {
-               font-size: 20px;
-            }
-
-            .ai-carousel-container {
-               margin-top: 50px;
-            }
-
-            .ai-carousel-track {
-               gap: 25px;
-            }
-
-            .ai-infra-card {
-               flex: 0 0 320px;
-               padding: 35px 25px;
-               min-height: 300px;
-            }
-
-            .ai-infra-cta {
-               margin-top: 70px;
-            }
-         }
-
-         /* Tablets Portrait (481px-767px) */
-         @media (min-width: 481px) and (max-width: 767px) {
-            .hero-section {
-               padding: 60px 0 80px;
-            }
-
-            .apple-headline {
-               font-size: 40px;
-               line-height: 1.1;
-               padding: 0 20px;
-            }
-
-            .headline-chinese-line {
-               font-size: 40px;
-               line-height: 1.1;
-               margin: 0;
-               text-align: center;
-            }
-
-            .apple-subheadline {
-               font-size: 24px;
-               padding: 0 20px;
-            }
-
-            .architecture-grid {
-               grid-template-columns: 1fr;
-               gap: 40px;
-               margin: 40px 0;
-            }
-
-            .architecture-card-body {
-               padding: 35px 25px;
-            }
-
-            .apple-product-title {
-               font-size: 20px;
-            }
-
-            .apple-product-subtitle {
-               font-size: 16px;
-            }
-
-            .apple-body-large {
-               font-size: 15px;
-            }
-
-            .ai-infra-title {
-               font-size: 36px;
-               padding: 0 20px;
-            }
-
-            .ai-infra-subtitle {
-               font-size: 16px;
-               padding: 0 30px;
-            }
-
-            .ai-carousel-container {
-               margin-top: 40px;
-            }
-
-            .ai-carousel-track {
-               gap: 20px;
-               padding: 0 20px;
-            }
-
-            .ai-infra-card {
-               flex: 0 0 300px;
-               padding: 30px 20px;
-               min-height: 280px;
-            }
-
-            .ai-infra-card-title {
-               font-size: 18px;
-            }
-
-            .ai-infra-card-description {
-               font-size: 13px;
-            }
-
-            .ai-infra-cta {
-               margin-top: 60px;
-            }
-
-            .ai-infra-cta-text {
-               font-size: 20px;
-            }
-
-            .ai-infra-cta-button {
-               padding: 18px 36px;
-               font-size: 18px;
-            }
-         }
-
-         /* Mobile Phones (320px-480px) */
-         @media (max-width: 480px) {
-            body {
-               padding-top: 60px;
-            }
-
-            .navbar {
-               padding: 6px 0;
-            }
-
-            .hero-section {
-               padding: 40px 0 60px;
-            }
-
-            .apple-headline {
-               font-size: 32px;
-               line-height: 1.2;
-               padding: 0 15px;
-               margin-bottom: 12px;
-            }
-
-            .headline-chinese-line {
-               font-size: 32px;
-               line-height: 1.1;
-               margin: 0;
-               text-align: center;
-            }
-
-            .apple-subheadline {
-               font-size: 18px;
-               line-height: 1.4;
-               padding: 0 15px;
-               margin-bottom: 25px;
-            }
-
-            .apple-button-large {
-               display: block;
-               width: 80%;
-               max-width: 260px;
-               margin: 8px auto;
-               padding: 12px 20px;
-               font-size: 14px;
-            }
-
-            .architecture-grid {
-               grid-template-columns: 1fr;
-               gap: 30px;
-               margin: 30px 0;
-            }
-
-            .architecture-card-body {
-               padding: 25px 20px;
-            }
-
-            .apple-product-title {
-               font-size: 18px;
-            }
-
-            .apple-product-subtitle {
-               font-size: 14px;
-            }
-
-            .apple-body-large {
-               font-size: 14px;
-               line-height: 1.5;
-            }
-
-            .tech-tag {
-               padding: 3px 10px;
-               font-size: 12px;
-               margin: 1px 3px 1px 0;
-            }
-
-            .ai-infra-section {
-               padding: 60px 0;
-            }
-
-            .ai-infra-title {
-               font-size: 26px;
-               line-height: 1.3;
-               padding: 0 15px;
-            }
-
-            .ai-title-main, .ai-title-sub {
-               display: block;
-               margin-bottom: 5px;
-            }
-
-            .ai-infra-subtitle {
-               font-size: 14px;
-               line-height: 1.5;
-               padding: 0 20px;
-            }
-
-            .ai-carousel-container {
-               margin-top: 30px;
-            }
-
-            .ai-carousel-track {
-               gap: 15px;
-               padding: 0 15px;
-            }
-
-            .ai-infra-card {
-               flex: 0 0 260px;
-               padding: 25px 15px;
-               min-height: 260px;
-            }
-
-            .ai-infra-card-icon {
-               width: 50px;
-               height: 50px;
-               margin-bottom: 20px;
-            }
-
-            .ai-icon {
-               width: 22px;
-               height: 22px;
-            }
-
-            .ai-infra-card-title {
-               font-size: 16px;
-               margin-bottom: 10px;
-            }
-
-            .ai-infra-card-description {
-               font-size: 12px;
-               line-height: 1.5;
-               margin-bottom: 15px;
-            }
-
-            .ai-tech-tag {
-               padding: 4px 8px;
-               font-size: 12px;
-               border-radius: var(--fl-r-lg);
-            }
-
-            .ai-infra-cta {
-               margin-top: 50px;
-            }
-
-            .ai-infra-cta-text {
-               font-size: 18px;
-               padding: 0 20px;
-            }
-
-            .ai-infra-cta-button {
-               padding: 16px 32px;
-               font-size: 16px;
-               border-radius: var(--fl-r-xl);
-            }
-
-            .cta-arrow {
-               width: 14px;
-               height: 14px;
-            }
-
-            .ai-carousel-indicators {
-               margin-top: 25px;
-               gap: 8px;
-            }
-
-            .indicator {
-               width: 8px;
-               height: 8px;
-            }
-         }
-
-         /* Extra Small Mobile (max-width: 320px) */
-         @media (max-width: 320px) {
-            .apple-headline {
-               font-size: 28px;
-               padding: 0 10px;
-            }
-
-            .headline-chinese-line {
-               font-size: 28px;
-               line-height: 1.1;
-               margin: 0;
-               text-align: center;
-            }
-
-            .apple-subheadline {
-               font-size: 16px;
-               padding: 0 10px;
-            }
-
-            .architecture-card-body {
-               padding: 20px 15px;
-            }
-
-            .ai-infra-title {
-               font-size: 24px;
-               padding: 0 10px;
-            }
-
-            .ai-infra-subtitle {
-               font-size: 13px;
-               padding: 0 15px;
-            }
-
-            .ai-infra-card {
-               flex: 0 0 240px;
-               padding: 20px 12px;
-               min-height: 240px;
-            }
-
-            .ai-infra-card-title {
-               font-size: 14px;
-            }
-
-            .ai-infra-card-description {
-               font-size: 12px;
-            }
-
-            .ai-infra-cta-text {
-               font-size: 16px;
-            }
-
-            .ai-infra-cta-button {
-               padding: 14px 28px;
-               font-size: 15px;
-            }
-         }
-
-         /* Landscape Mobile Phones */
-         @media (max-height: 500px) and (orientation: landscape) {
-            .hero-section {
-               padding: 20px 0 40px;
-            }
-
-            .apple-headline {
-               font-size: 36px;
-            }
-
-            .headline-chinese-line {
-               font-size: 36px;
-               line-height: 1.1;
-               margin: 0;
-               text-align: center;
-            }
-
-            .apple-subheadline {
-               font-size: 20px;
-            }
-
-            .ai-infra-section {
-               padding: 40px 0;
-            }
-
-            .ai-carousel-container {
-               margin-top: 20px;
-            }
-
-            .ai-infra-cta {
-               margin-top: 30px;
-            }
-         }
-
-         /* Dark Mode Support */
-         body.dark-mode .ai-infra-section {
-            background: #1f1f24;
-         }
-
-         body.dark-mode .ai-infra-section::before {
-            background:
-               radial-gradient(circle at 20% 20%, rgba(245, 247, 250, 0.05) 0%, transparent 50%),
-               radial-gradient(circle at 80% 80%, rgba(245, 247, 250, 0.05) 0%, transparent 50%),
-               linear-gradient(45deg, transparent 0%, rgba(245, 247, 250, 0.02) 50%, transparent 100%);
-         }
-
-         body.dark-mode .ai-title-main {
-            color: inherit;
-         }
-
-         body.dark-mode .ai-title-sub {
-            background-size: 400% 400%;
-            color: inherit;
-         }
-
-         body.dark-mode .ai-infra-subtitle {
-            color: #9aa5b5;
-         }
-
-         body.dark-mode .ai-infra-card {
-            background: rgba(31, 31, 36, 0.8);
-            border-color: rgba(245, 247, 250, 0.1);
-         }
-
-         body.dark-mode .ai-infra-card:hover {
-            background: rgba(33, 33, 38, 0.9);
-            box-shadow:
-               var(--fl-sh-lg);
-         }
-
-         body.dark-mode .ai-infra-card-title {
-            color: #f5f7fa;
-         }
-
-         body.dark-mode .ai-infra-card-description {
-            color: #9aa5b5;
-         }
-
-         body.dark-mode .ai-infra-cta-text {
-            color: #9aa5b5;
-         }
-
-         body.dark-mode .indicator {
-            background: rgba(122, 168, 255, 0.4);
-         }
-
-         body.dark-mode .indicator.active {
-            background: #7aa8ff;
-         }
-
-         body.dark-mode .indicator:hover {
-            background: rgba(122, 168, 255, 0.7);
-         }
-
-         /* AWS Expertise Cards - Modern Design */
-         .expertise-card {
-            background: white;
-            border: 2px solid #e5e7eb;
-            border-radius: var(--fl-r-xl);
-            padding: 40px 30px;
-            text-align: center;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            overflow: hidden;
-            height: 100%;
-         }
-
-         .expertise-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: #111827;
-            transform: scaleX(0);
-            transform-origin: left;
-            transition: transform 0.4s ease;
-         }
-
-         .expertise-card:hover::before {
-            transform: scaleX(1);
-         }
-
-         .expertise-card:hover {
-            transform: translateY(-8px);
-            border-color: #111827;
-            box-shadow: var(--fl-sh-lg);
-         }
-
-         .expertise-icon-wrapper {
-            width: 60px;
-            height: 60px;
-            background: #111827;
-            border-radius: var(--fl-r-lg);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 25px;
-            transition: all 0.3s ease;
-         }
-
-         .expertise-card:hover .expertise-icon-wrapper {
-            transform: rotate(5deg) scale(1.1);
-         }
-
-         .expertise-icon {
-            font-size: 1.8rem;
-            color: white;
-         }
-
-         .expertise-progress-circle {
-            margin: 25px auto;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-         }
-
-         .circular-chart {
-            display: block;
-            margin: 0 auto;
-            max-width: 140px;
-            transform: rotate(-90deg);
-         }
-
-         .circle-bg {
-            fill: none;
-            stroke: #f3f4f6;
-            stroke-width: 8;
-         }
-
-         .circle-progress {
-            fill: none;
-            stroke: #111827;
-            stroke-width: 8;
-            stroke-linecap: round;
-            transition: stroke-dashoffset 1.5s ease-in-out;
-            animation: progress-animation 1.5s ease-out forwards;
-         }
-
-         @keyframes progress-animation {
-            from {
-               stroke-dashoffset: 377;
-            }
-         }
-
-         .circle-percentage {
-            fill: #111827;
-            font-family: var(--fl-display);
-            font-size: 2.2rem;
-            font-weight: 300;
-            transform: rotate(90deg);
-            transform-origin: center;
-            text-anchor: middle;
-            dominant-baseline: middle;
-         }
-
-         .expertise-title {
-            font-family: var(--fl-display);
-            font-size: 2rem;
-            font-weight: 300;
-            margin: 25px 0 15px;
-            color: #111827;
-            letter-spacing: -0.03em;
-         }
-
-         .expertise-services {
-            font-size: 1.1rem;
-            color: var(--apple-secondary-text);
-            margin: 0;
-            font-weight: 400;
-            letter-spacing: 0.02em;
-         }
-
-         /* Expertise Cards - Mobile Responsive */
-         @media (max-width: 767.98px) {
-            .expertise-card {
-               padding: 30px 20px;
-            }
-
-            .expertise-icon-wrapper {
-               width: 50px;
-               height: 50px;
-            }
-
-            .expertise-icon {
-               font-size: 1.5rem;
-            }
-
-            .expertise-progress-circle {
-               margin: 20px auto;
-            }
-
-            .circular-chart {
-               max-width: 120px;
-            }
-
-            .circle-percentage {
-               font-size: 1.6rem;
-            }
-
-            .expertise-title {
-               font-size: 1.3rem;
-            }
-
-            .expertise-services {
-               font-size: 0.9rem;
-            }
-         }
-
-         /* AWS Expertise Level - Dark Mode */
-         body.dark-mode .expertise-card {
-            background-color: #1f1f24;
-            border-color: #2e2e35;
-            color: #f5f7fa;
-         }
-
-         body.dark-mode .expertise-card::before {
-            background: #f5f7fa;
-         }
-
-         body.dark-mode .expertise-card:hover {
-            border-color: #f5f7fa;
-            box-shadow: var(--fl-sh-lg);
-         }
-
-         body.dark-mode .expertise-icon-wrapper {
-            background: #f5f7fa;
-         }
-
-         body.dark-mode .expertise-icon {
-            color: #141417;
-         }
-
-         body.dark-mode .circle-bg {
-            stroke: #2e2e35;
-         }
-
-         body.dark-mode .circle-progress {
-            stroke: #f5f7fa;
-         }
-
-         body.dark-mode .circle-percentage {
-            fill: #f5f7fa;
-         }
-
-         body.dark-mode .expertise-title {
-            color: #f5f7fa;
-         }
-
-         body.dark-mode .expertise-services {
-            color: #9aa5b5;
-         }
-         
-         /* Toggle button styles */
-         .toggle-container {
-            display: flex;
-            align-items: center;
-            margin-left: 15px;
-         }
-         
-         .theme-switch {
-            display: inline-block;
-            height: 24px;
-            position: relative;
-            width: 48px;
-         }
-         
-         .theme-switch input {
-            display: none;
-         }
-         
-         .slider {
-            background-color: #dbe1e8;
-            bottom: 0;
-            cursor: pointer;
-            left: 0;
-            position: absolute;
-            right: 0;
-            top: 0;
-            transition: .4s;
-            border-radius: var(--fl-r-xl);
-         }
-         
-         .slider:before {
-            background-color: white;
-            bottom: 4px;
-            content: "";
-            height: 16px;
-            left: 4px;
-            position: absolute;
-            transition: .4s;
-            width: 16px;
-            border-radius: 50%;
-         }
-         
-         input:checked + .slider {
-            background-color: var(--primary-color);
-         }
-         
-         input:checked + .slider:before {
-            transform: translateX(24px);
-         }
-         
-         .toggle-icons {
-            font-size: 14px;
-            display: flex;
-            align-items: center;
-            margin-left: 8px;
-         }
-         
-         /* Floating scroll-to-top button */
-         .scroll-top {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background-color: var(--primary-color);
-            color: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            opacity: 0;
-            transition: all 0.3s;
-            box-shadow: var(--fl-sh);
-            z-index: 999;
-         }
-         
-         .scroll-top.visible {
-            opacity: 1;
-         }
-         
-         .scroll-top:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--fl-sh);
-         }
-         
-         .project-number {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            background: var(--primary-color);
-            color: white;
-            font-weight: bold;
-            margin-right: 10px;
-         }
-         
-         /* Tech tags */
-         .tech-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            margin-bottom: 20px;
-         }
-         
-         .tech-tag {
-            background: rgba(37, 99, 235, 0.1);
-            color: var(--primary-color);
-            padding: 5px 12px;
-            border-radius: var(--fl-r-lg);
-            font-size: 0.85rem;
-            font-weight: 400;
-            border: 1px solid rgba(37, 99, 235, 0.3);
-         }
-         
-         body.dark-mode .tech-tag {
-            background: rgba(122, 168, 255, 0.2);
-            color: #7aa8ff;
-         }
-         
-         /* Touch-friendly and accessibility optimizations */
-         @media (hover: none) and (pointer: coarse) {
-            /* Touch devices - enhance tap targets */
-            .apple-button,
-            .nav-link,
-            .apple-link {
-               min-height: 44px;
-               min-width: 44px;
-               display: inline-flex;
-               align-items: center;
-               justify-content: center;
-               padding: 12px 16px;
-            }
-            
-            .architecture-card:active {
-               transform: translateY(-2px);
-               box-shadow: var(--fl-sh-lg);
-               transition: all 0.1s ease;
-            }
-            
-            .apple-button:active {
-               background: #2563eb;
-               transform: scale(0.98);
-               transition: all 0.1s ease;
-            }
-         }
-         
-         /* Performance optimizations for mobile */
-         @media (max-width: 768px) {
-            * {
-               -webkit-tap-highlight-color: rgba(17, 24, 39, 0.1);
-            }
-            
-            .architecture-card {
-               will-change: transform;
-            }
-            
-            .apple-button {
-               will-change: transform, background-color;
-            }
-         }
-         
-         /* High DPI display support */
-         @media (-webkit-min-device-pixel-ratio: 2),
-                (min-resolution: 192dpi) {
-            .architecture-visual img {
-               image-rendering: -webkit-optimize-contrast;
-               image-rendering: crisp-edges;
-            }
-         }
-         
-         /* Certification badges - Light Mode */
-         .cert-badge {
-            background: var(--apple-blue);
-            color: var(--apple-white);
-            padding: 10px 20px;
-            border-radius: var(--fl-r-xl);
-            font-weight: 400;
-            text-decoration: none;
-            display: inline-block;
-            margin: 10px;
-            transition: all 0.3s ease;
-            box-shadow: var(--fl-sh);
-            border: 1px solid transparent;
-         }
-
-         .cert-badge:hover {
-            transform: translateY(-3px);
-            box-shadow: var(--fl-sh-lg);
-            color: var(--apple-white);
-            text-decoration: none;
-            background: #2563eb;
-         }
-
-         /* ══ AI Infrastructure — Redesigned Dark ══ */
-         .ai-infra-redesigned {
-            background: #111827 !important;
-            position: relative;
-            overflow: hidden;
-         }
-         .ai-infra-redesigned::before { display: none !important; }
-         .ai-infra-particles {
-            position: absolute;
-            inset: 0;
-            pointer-events: none;
-            overflow: hidden;
-         }
-         .ai-particle {
-            position: absolute;
-            width: 4px; height: 4px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.22);
-            animation: ai-pfloat 8s ease-in-out infinite;
-         }
-         @keyframes ai-pfloat {
-            0%, 100% { transform: translateY(0) scale(1); opacity: 0.22; }
-            50%       { transform: translateY(-28px) scale(1.9); opacity: 0.65; }
-         }
-         .ai-infra-eyebrow-tag {
-            font-family: var(--fl-display);
-            font-size: 12px;
-            font-weight: 400;
-            letter-spacing: 3px;
-            color: rgba(255, 255, 255, 0.28);
-            text-transform: uppercase;
-            margin-bottom: 16px;
-         }
-         @keyframes ai-title-shine {
-            0%   { background-position:  200% center; }
-            100% { background-position: -100% center; }
-         }
-         .ai-glass-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 18px;
-            margin: 56px 0 64px;
-         }
-         .ai-glass-card {
-            position: relative;
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            border-top: 2px solid var(--card-accent, #059669);
-            border-radius: var(--fl-r-xl);
-            padding: 28px 24px;
-            overflow: hidden;
-            transition: transform 0.35s ease, background 0.35s ease, box-shadow 0.35s ease;
-         }
-         .ai-glass-card:hover {
-            background: rgba(255, 255, 255, 0.07);
-            transform: translateY(-8px);
-            box-shadow: var(--fl-sh-lg);
-         }
-         .ai-glass-glow {
-            position: absolute;
-            top: -60px; left: 50%;
-            transform: translateX(-50%);
-            width: 180px; height: 180px;
-            border-radius: 50%;
-            background: radial-gradient(circle, var(--card-accent, #059669), transparent 65%);
-            opacity: 0.06;
-            pointer-events: none;
-            transition: opacity 0.35s ease;
-         }
-         .ai-glass-card:hover .ai-glass-glow { opacity: 0.16; }
-         .ai-glass-icon {
-            width: 50px; height: 50px;
-            border-radius: var(--fl-r);
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            display: flex; align-items: center; justify-content: center;
-            margin-bottom: 18px;
-            transition: transform 0.3s ease, background 0.3s ease;
-         }
-         .ai-glass-card:hover .ai-glass-icon {
-            background: rgba(255, 255, 255, 0.1);
-            transform: scale(1.08) rotate(-4deg);
-         }
-         .ai-glass-title {
-            font-family: var(--fl-display);
-            font-size: 17px;
-            font-weight: 400;
-            color: #ffffff;
-            margin-bottom: 10px;
-            letter-spacing: -0.02em;
-         }
-         .ai-glass-desc {
-            font-size: 13.5px;
-            line-height: 1.6;
-            color: rgba(255, 255, 255, 0.42);
-            margin-bottom: 18px;
-         }
-         .ai-glass-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 6px;
-         }
-         .ai-glass-tag {
-            padding: 4px 10px;
-            border-radius: var(--fl-r-xl);
-            font-size: 12px;
-            font-weight: 400;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            color: rgba(255, 255, 255, 0.45);
-            transition: all 0.25s ease;
-         }
-         .ai-glass-card:hover .ai-glass-tag {
-            border-color: var(--card-accent, #059669);
-            color: var(--card-accent, #059669);
-         }
-         @media (max-width: 900px) {
-            .ai-glass-grid { grid-template-columns: repeat(2, 1fr); }
-         }
-         @media (max-width: 576px) {
-            .ai-glass-grid { grid-template-columns: 1fr; }
-         }
-
-         /* ══ AWS Mastery Section — Redesigned ══ */
-         .aws-mastery-section {
-            position: relative;
-            padding: 120px 0;
-            background: #111827;
-            overflow: hidden;
-         }
-         .aws-mastery-section .aws-bg-grid {
-            position: absolute;
-            inset: 0;
-            background-image:
-               linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
-               linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
-            background-size: 52px 52px;
-            pointer-events: none;
-         }
-         .aws-mastery-section .aws-orb {
-            position: absolute;
-            border-radius: 50%;
-            filter: blur(100px);
-            pointer-events: none;
-         }
-         .aws-mastery-section .aws-orb-1 {
-            width: 700px; height: 700px;
-            background: rgba(220, 38, 38, 0.08);
-            top: -250px; left: -180px;
-         }
-         .aws-mastery-section .aws-orb-2 {
-            width: 600px; height: 600px;
-            background: rgba(5, 150, 105, 0.08);
-            bottom: -150px; right: -150px;
-         }
-         .aws-mastery-inner { position: relative; z-index: 2; }
-         .aws-mastery-eyebrow {
-            font-family: var(--fl-display);
-            font-size: 12px;
-            font-weight: 400;
-            letter-spacing: 3px;
-            color: rgba(255, 255, 255, 0.3);
-            text-transform: uppercase;
-            margin-bottom: 16px;
-         }
-         .aws-mastery-title {
-            font-family: var(--fl-display);
-            font-size: clamp( 28.8px, 7vw, 40px);
-            font-weight: 400;
-            color: #ffffff;
-            letter-spacing: -0.04em;
-            line-height: 1.0;
-            margin-bottom: 16px;
-         }
-         .aws-grad-text {
-            color: inherit;
-         }
-         .aws-mastery-sub {
-            font-size: 17px;
-            color: rgba(255, 255, 255, 0.4);
-            margin-bottom: 72px;
-            font-weight: 400;
-         }
-         .aws-skills-list {
-            max-width: 860px;
-            margin: 0 auto 80px;
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-         }
-         .aws-skill-row {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-            background: rgba(255, 255, 255, 0.025);
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            border-radius: var(--fl-r);
-            padding: 18px 22px;
-            transition: transform 0.25s ease, background 0.25s ease, border-color 0.25s ease;
-            cursor: default;
-         }
-         .aws-skill-row:hover {
-            background: rgba(255, 255, 255, 0.055);
-            border-color: rgba(255, 255, 255, 0.13);
-            transform: translateX(6px);
-         }
-         .aws-skill-left {
-            display: flex;
-            align-items: center;
-            gap: 14px;
-            min-width: 200px;
-            flex-shrink: 0;
-         }
-         .aws-skill-badge {
-            width: 42px; height: 42px;
-            border-radius: var(--fl-r);
-            border: 1px solid;
-            display: flex; align-items: center; justify-content: center;
-            font-size: 16px;
-            flex-shrink: 0;
-            transition: transform 0.25s ease;
-         }
-         .aws-skill-row:hover .aws-skill-badge {
-            transform: scale(1.12) rotate(-5deg);
-         }
-         .aws-skill-name {
-            font-family: var(--fl-display);
-            font-size: 15px;
-            font-weight: 400;
-            color: #ffffff;
-            letter-spacing: -0.01em;
-         }
-         .aws-skill-sub {
-            font-size: 12px;
-            color: rgba(255, 255, 255, 0.35);
-            margin-top: 2px;
-         }
-         .aws-skill-bar-wrap {
-            flex: 1;
-            height: 5px;
-            background: rgba(255, 255, 255, 0.07);
-            border-radius: var(--fl-r-sm);
-            overflow: hidden;
-         }
-         .aws-skill-bar {
-            height: 100%;
-            border-radius: var(--fl-r-sm);
-            width: 0;
-            transition: width 1.5s cubic-bezier(0.4, 0, 0.2, 1);
-         }
-         .aws-skill-bar.animated { width: var(--starget); }
-         .aws-skill-pct {
-            font-family: var(--fl-display);
-            font-size: 20px;
-            font-weight: 400;
-            min-width: 54px;
-            text-align: right;
-            letter-spacing: -0.03em;
-            white-space: nowrap;
-         }
-         /* Stats strip */
-         .aws-stats-row {
-            max-width: 860px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 14px;
-            border-top: 1px solid rgba(255, 255, 255, 0.07);
-            padding-top: 48px;
-         }
-         .aws-stat-card {
-            text-align: center;
-            padding: 24px 12px;
-            background: rgba(255, 255, 255, 0.025);
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            border-radius: var(--fl-r);
-            transition: background 0.25s ease, border-color 0.25s ease;
-         }
-         .aws-stat-card:hover {
-            background: rgba(255, 255, 255, 0.055);
-            border-color: rgba(255, 255, 255, 0.13);
-         }
-         .aws-stat-num {
-            font-family: var(--fl-display);
-            font-size: 32px;
-            font-weight: 300;
-            color: #ffffff;
-            letter-spacing: -0.04em;
-         }
-         .aws-stat-lbl {
-            font-size: 12px;
-            color: rgba(255, 255, 255, 0.38);
-            font-weight: 400;
-            margin-top: 4px;
-         }
-         @media (max-width: 767px) {
-            .aws-mastery-section { padding: 80px 0; }
-            .aws-skill-left { min-width: 140px; }
-            .aws-skill-sub { display: none; }
-            .aws-skill-pct { font-size: 17px; min-width: 44px; }
-            .aws-stats-row { grid-template-columns: repeat(2, 1fr); }
-            .aws-mastery-sub { margin-bottom: 48px; }
-         }
-         @media (max-width: 480px) {
-            .aws-skill-row { gap: 12px; padding: 14px 16px; }
-            .aws-skill-left { min-width: 120px; }
-            .aws-skill-name { font-size: 13px; }
-            .aws-stat-num { font-size: 26px; }
-         }
-      
-       /* ── FinLab: flat surfaces, hairline rules, one accent ────────── */
-       body { line-height: 1.7; letter-spacing: 0; }
-       .apple-headline, .apple-subheadline { letter-spacing: -.01em; }
-       .apple-subheadline { color: var(--fl-muted); }
-       section, .section { border-bottom: 1px solid var(--fl-hair); }
-       .card, .feature-card, .stat-card, .project-card, .skill-card,
-       .timeline-content, .apple-card {
-          background: var(--fl-surface);
-          border: 1px solid var(--fl-hair);
-          box-shadow: none;
-       }
-       .card:hover, .feature-card:hover, .project-card:hover,
-       .skill-card:hover, .apple-card:hover {
-          border-color: var(--fl-line);
-          box-shadow: var(--fl-sh-sm);
-          transform: none;
-       }
-
-       /* One filled action per pair; the second is a hairline ghost. */
-       .apple-button {
-          background: var(--fl-ink);
-          border: 1px solid var(--fl-ink);
-          color: var(--fl-on-ink);
-          border-radius: var(--fl-r-pill);
-       }
-       .apple-button:hover {
-          background: var(--fl-ink-soft);
-          border-color: var(--fl-ink-soft);
-          color: var(--fl-on-ink);
-       }
-       .apple-button + .apple-button {
-          background: var(--fl-surface);
-          border-color: var(--fl-line);
-          color: var(--fl-ink);
-       }
-       .apple-button + .apple-button:hover {
-          background: var(--fl-inset);
-          color: var(--fl-ink);
-       }
-
-       /* The "premium" layer — drifting mesh, shimmer sweep, gradient
-          buttons, cards that lift and rotate — is the opposite register
-          from the reference site. Take it out and leave the structure. */
-       .hero-section::before, .ai-banner::before { display: none; }
-       .btn-gradient, .btn-gradient:hover {
-          background: var(--fl-ink) !important;
-          border-color: var(--fl-ink);
-          color: var(--fl-on-ink);
-          box-shadow: none;
-          transform: none;
-       }
-       .ai-banner {
-          box-shadow: none;
-          border: 1px solid var(--fl-hair);
-       }
-       .stat-badge, .feature-icon { box-shadow: none; }
-       .feature-card:hover .feature-icon { transform: none; }
-       .feature-card::before, .case-card::before { background: var(--fl-ink); }
-       .tech-strip {
-          background: var(--fl-raised);
-          border-color: var(--fl-hair);
-       }
-       .tech-track span { opacity: 1; color: var(--fl-muted); }
-       .tech-track span i { color: var(--fl-ghost); }
-       .aws-mastery-section .aws-orb { display: none; }
-       .stat-badge {
-          background: var(--fl-surface);
-          border: 1px solid var(--fl-hair);
-          color: var(--fl-muted);
-       }
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/finlab.css">
+  <style>
+    /* ═══════════════════════════════════════════════════════════════════
+       AWS ARCHITECTURE
+       Four drawings and the code that stands each one up. The page is
+       white, the drawings sit in hairline frames and stay grey until
+       touched, and the page ends in the black footer like every other.
+       ═══════════════════════════════════════════════════════════════════ */
+
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; overflow-x: hidden; }
+    h1, h2, h3, p, dl, dd, dt, figure, ul { margin: 0; }
+    ul { padding: 0; list-style: none; }
+    a { color: inherit; }
+
+    .wrap { max-width: var(--fl-max); margin-inline: auto; padding-inline: var(--fl-pad); }
+
+    .disp {
+      font-family: var(--fl-display);
+      font-weight: var(--fl-fw-light);
+      font-stretch: var(--fl-wide);
+      letter-spacing: var(--fl-track-tight);
+      line-height: var(--fl-lh-title);
+      text-wrap: balance;
+    }
+    .meta {
+      font-size: var(--fl-fs-sm);
+      font-weight: var(--fl-fw-medium);
+      font-stretch: var(--fl-narrow);
+      color: var(--fl-faint);
+    }
+
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center;
+      min-height: 2.875rem; padding: 0 1.5rem;
+      border: 1px solid var(--fl-ink); border-radius: var(--fl-r-pill);
+      font-size: var(--fl-fs-sm); font-weight: var(--fl-fw-medium); line-height: 1;
+      text-decoration: none; white-space: nowrap;
+      transition: background var(--fl-t), color var(--fl-t);
+    }
+    .btn-fill { background: var(--fl-ink); color: var(--fl-on-ink); }
+    .btn-fill:hover { background: transparent; color: var(--fl-ink); }
+    .btn-line { background: transparent; color: var(--fl-ink); }
+    .btn-line:hover { background: var(--fl-ink); color: var(--fl-on-ink); }
+
+    /* ═══ HERO ═══ */
+    .hero { padding-block: clamp(4rem, 12vh, 8rem) clamp(3.5rem, 9vh, 6rem); border-bottom: 1px solid var(--fl-line); }
+    .hero-h1 {
+      /* eight CJK characters to a line, one phrase per line, at every width */
+      font-size: clamp(2.5rem, 7.4vw, 6.5rem);
+      line-height: 1.12;
+      margin-left: -.03em;
+      margin-bottom: clamp(2rem, 5vh, 3.5rem);
+    }
+    .hero-h1 span { display: block; white-space: nowrap; }
+    .hero-foot { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: 1.5rem 4rem; align-items: end; }
+    .hero-lead { font-size: var(--fl-fs-lead); line-height: 1.45; color: var(--fl-muted); max-width: 30em; text-wrap: pretty; }
+    .hero-acts { display: flex; gap: .75rem; flex-wrap: wrap; justify-content: flex-end; }
+
+    /* ═══ SECTIONS ═══ */
+    .sec { padding-block: clamp(5rem, 11vh, 8.5rem); }
+    .sec + .sec { border-top: 1px solid var(--fl-line); }
+    .sec-head {
+      display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+      gap: 1.5rem 4rem; align-items: end;
+      margin-bottom: clamp(2.5rem, 6vh, 4rem);
+    }
+    .sec-h { font-size: var(--fl-fs-zone); }
+    .sec-lead { font-size: var(--fl-fs-lead); line-height: 1.45; color: var(--fl-muted); text-wrap: pretty; }
+
+    /* ═══ THE FOUR DRAWINGS ═══ */
+    .arch { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 2.5rem 4rem; align-items: center; padding-block: clamp(3rem, 7vh, 5rem); border-top: 1px solid var(--fl-hair); }
+    .arch:first-of-type { border-top: 1px solid var(--fl-line); }
+    .arch:nth-of-type(even) .arch-copy { order: 2; }
+    .arch-copy { display: flex; flex-direction: column; gap: 1rem; align-items: flex-start; }
+    .arch-h { font-size: clamp(1.75rem, 3vw, 2.5rem); }
+    .arch-zh { font-size: var(--fl-fs-lead); color: var(--fl-muted); }
+    .arch-copy p.body { line-height: 1.55; text-wrap: pretty; max-width: 30em; }
+    .arch-tags { font-size: var(--fl-fs-sm); font-weight: var(--fl-fw-medium); font-stretch: var(--fl-narrow); color: var(--fl-faint); }
+    .arch-go {
+      margin-top: .5rem;
+      font-size: var(--fl-fs-sm); font-weight: var(--fl-fw-medium); font-stretch: var(--fl-narrow);
+      text-decoration: underline; text-underline-offset: .3em; text-decoration-thickness: 1px;
+      text-decoration-color: var(--fl-ghost); transition: text-decoration-color var(--fl-t);
+    }
+    .arch-go:hover { text-decoration-color: currentColor; }
+    .arch figure {
+      border: 1px solid var(--fl-hair); background: var(--fl-surface);
+      padding: clamp(1rem, 2.5vw, 2rem);
+      transition: border-color var(--fl-t);
+    }
+    .arch figure:hover { border-color: var(--fl-ink); }
+    .arch img { display: block; width: 100%; height: auto; }
+    .arch figcaption { margin-top: 1rem; font-size: var(--fl-fs-sm); font-weight: var(--fl-fw-medium); font-stretch: var(--fl-narrow); color: var(--fl-faint); display: flex; justify-content: space-between; gap: 1rem; }
+
+    /* ═══ SIX DOMAINS — hairline rows ═══ */
+    .rows { border-top: 1px solid var(--fl-line); }
+    .row {
+      position: relative; isolation: isolate;
+      display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 9fr);
+      gap: 1rem 3rem; padding: 1.5rem 0;
+      border-bottom: 1px solid var(--fl-hair);
+      transition: color var(--fl-t);
+    }
+    .row::before {
+      content: ''; position: absolute; inset: 0 calc(-1 * var(--fl-pad)); z-index: -1;
+      background: var(--fl-ink); opacity: 0; transition: opacity var(--fl-t);
+    }
+    .row:hover { color: var(--fl-on-ink); }
+    .row:hover::before { opacity: 1; }
+    .row dt { font-family: var(--fl-display); font-weight: var(--fl-fw-light); font-stretch: var(--fl-wide); font-size: clamp(1.375rem, 2.2vw, 1.75rem); letter-spacing: -.02em; line-height: 1.1; }
+    .row dd { align-self: center; font-size: var(--fl-fs-lead); line-height: 1.4; }
+
+    /* ═══ AI INFRASTRUCTURE — hairline grid ═══ */
+    .grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-top: 1px solid var(--fl-line); border-left: 1px solid var(--fl-hair); }
+    .cell {
+      display: flex; flex-direction: column; gap: .75rem;
+      padding: 2rem 1.75rem 2.25rem;
+      border-right: 1px solid var(--fl-hair); border-bottom: 1px solid var(--fl-hair);
+      transition: background var(--fl-t), color var(--fl-t);
+    }
+    .cell:hover { background: var(--fl-ink); color: var(--fl-on-ink); }
+    .cell h3 { font-size: 1.375rem; }
+    .cell p { line-height: 1.5; text-wrap: pretty; color: var(--fl-muted); transition: color var(--fl-t); }
+    .cell:hover p { color: inherit; opacity: .8; }
+    .cell .meta { margin-top: auto; padding-top: .75rem; color: var(--fl-faint); transition: color var(--fl-t); }
+    .cell:hover .meta { color: inherit; opacity: .65; }
+
+    /* ═══ CLOSE ═══ */
+    .close { padding-block: clamp(4rem, 9vh, 6rem); border-top: 1px solid var(--fl-line); }
+    .close-in { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: 2rem 4rem; align-items: center; }
+    .close-h { font-size: clamp(2rem, 4.2vw, 3.25rem); }
+    .close p { color: var(--fl-muted); text-wrap: pretty; max-width: 28em; }
+    .close .btn { margin-top: 1.25rem; }
+
+    /* ═══ NARROW ═══ */
+    @media (max-width: 960px) {
+      .hero-foot, .sec-head, .close-in { grid-template-columns: 1fr; }
+      .hero-acts { justify-content: flex-start; }
+      .arch { grid-template-columns: 1fr; gap: 1.75rem; }
+      .arch:nth-of-type(even) .arch-copy { order: 0; }
+      .row { grid-template-columns: 1fr; gap: .5rem; }
+      .row dd { font-size: var(--fl-fs-base); }
+      .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+    @media (max-width: 600px) {
+      .grid { grid-template-columns: 1fr; }
+      .cell { padding: 1.5rem 1.25rem 1.75rem; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .btn, .row, .row::before, .cell, .cell p, .cell .meta, .arch figure, .arch-go { transition: none; }
+    }
   </style>
-      <link rel="stylesheet" href="css/finlab-theme.css">
-     <link rel="stylesheet" href="css/site-nav.css">
-     <link rel="stylesheet" href="css/site-footer.css">
+  <link rel="stylesheet" href="css/finlab-theme.css">
+  <link rel="stylesheet" href="css/site-nav.css">
+  <link rel="stylesheet" href="css/site-footer.css">
+</head>
+<body>
+
 </head>
    <body>
       <!-- Navigation -->
       <!-- SITE NAV -->
 <nav class="site-nav" id="site-nav" aria-label="Primary">
-  <a class="sn-brand" href="index.html">YEN<em>.DEV</em></a>
+  <a class="sn-brand" href="index.html">yen<em>.dev</em></a>
 
   <button class="sn-burger" id="sn-burger" type="button"
           aria-label="Open menu" aria-expanded="false" aria-controls="sn-menu">
@@ -2407,517 +246,164 @@
         <span class="sn-knob"></span>
       </button>
       <span class="sn-icons" aria-hidden="true">&#9728;<i>/</i>&#9790;</span>
-      <a class="sn-cta" href="contact.html">Get In Touch</a>
+      <a class="sn-cta" href="contact.html">Contact</a>
     </div>
   </div>
 </nav>
 
-      <!-- Hero Section -->
-      <section class="hero-section">
-         <div class="container">
-            <div class="row justify-content-center">
-               <div class="col-lg-8 text-center" data-aos="fade-up" data-aos-delay="100">
-                  <h1 class="apple-headline">
-                     <div class="headline-chinese-line">你能想到的架構，</div>
-                     <div class="headline-chinese-line">AWS 就能做到。</div>
-                  </h1>
-                  <p class="apple-subheadline">Everything you can imagine in cloud architecture, AWS can do.</p>
-                  <a href="#architectures" class="apple-button apple-button-large">Navigate Infra</a>
-                  <a href="https://yennanliu.github.io/contact.html" class="apple-button apple-button-large">Contact Me</a>
-               </div>
-            </div>
-         </div>
-      </section>
-
-      <!-- Architecture Showcase Section -->
-      <section class="apple-section" id="architectures">
-         <div class="container">
-            
-            <!-- Serverless Architecture -->
-            <div class="architecture-grid" data-aos="fade-up" data-aos-delay="100">
-               <div class="architecture-card-body">
-                  <h2 class="apple-product-title">Serverless Architecture</h2>
-                  <p class="apple-product-subtitle">無伺服器架構</p>
-                  <p class="apple-body-large">Event-driven applications that scale automatically. Perfect for modern cloud-native solutions with zero server management.</p>
-                  <div class="mb-4">
-                     <span class="tech-tag">Lambda</span>
-                     <span class="tech-tag">API Gateway</span>
-                     <span class="tech-tag">DynamoDB</span>
-                     <span class="tech-tag">S3</span>
-                     <span class="tech-tag">CloudWatch</span>
-                  </div>
-                  <a href="https://github.com/yennanliu/cdk-playground" class="apple-link" target="_blank">View Code ›</a>
-               </div>
-               <div class="architecture-visual">
-                  <img src="img/aws_serverless.png"
-                       alt="Serverless Architecture"
-                       class="img-fluid">
-               </div>
-            </div>
-
-            <!-- Microservices Architecture -->
-            <div class="architecture-grid" data-aos="fade-up" data-aos-delay="200">
-               <div class="architecture-visual">
-                  <img src="img/microservices-eks-architecture.png" 
-                       alt="Microservices Architecture with EKS" 
-                       class="img-fluid">
-               </div>
-               <div class="architecture-card-body">
-                  <h2 class="apple-product-title">Microservices with EKS</h2>
-                  <p class="apple-product-subtitle">容器化微服務</p>
-                  <p class="apple-body-large">Container-based architecture using Kubernetes. Build scalable applications with independent services that can be developed and deployed separately.</p>
-                  <div class="mb-4">
-                     <span class="tech-tag">EKS</span>
-                     <span class="tech-tag">Fargate</span>
-                     <span class="tech-tag">App Mesh</span>
-                     <span class="tech-tag">ALB</span>
-                     <span class="tech-tag">ECR</span>
-                  </div>
-                  <a href="https://github.com/yennanliu/cdk-playground" class="apple-link" target="_blank">View Code ›</a>
-               </div>
-            </div>
-
-            <!-- Data Lake Architecture -->
-            <div class="architecture-grid" data-aos="fade-up" data-aos-delay="300">
-               <div class="architecture-card-body">
-                  <h2 class="apple-product-title">Data Lake & Analytics</h2>
-                  <p class="apple-product-subtitle">現代數據湖</p>
-                  <p class="apple-body-large">Modern data architecture with real-time streaming and advanced analytics. Process big data with machine learning integration at scale.</p>
-                  <div class="mb-4">
-                     <span class="tech-tag">S3</span>
-                     <span class="tech-tag">Kinesis</span>
-                     <span class="tech-tag">Glue</span>
-                     <span class="tech-tag">Athena</span>
-                     <span class="tech-tag">Redshift</span>
-                  </div>
-                  <a href="https://github.com/yennanliu/cdk-playground" class="apple-link" target="_blank">View Code ›</a>
-               </div>
-               <div class="architecture-visual">
-                  <img src="img/data-lake-architecture.png" 
-                       alt="Data Lake & Analytics Architecture" 
-                       class="img-fluid">
-               </div>
-            </div>
-
-            <!-- Multi-Region HA -->
-            <div class="architecture-grid" data-aos="fade-up" data-aos-delay="100">
-               <div class="architecture-visual">
-                  <img src="img/multi-region-ha-architecture.png" 
-                       alt="Multi-Region High Availability Architecture" 
-                       class="img-fluid">
-               </div>
-               <div class="architecture-card-body">
-                  <h2 class="apple-product-title">Multi-Region HA</h2>
-                  <p class="apple-product-subtitle">多區域高可用</p>
-                  <p class="apple-body-large">Disaster-resilient architecture spanning multiple AWS regions. Automated failover with global load balancing for maximum uptime.</p>
-                  <div class="mb-4">
-                     <span class="tech-tag">Route 53</span>
-                     <span class="tech-tag">CloudFront</span>
-                     <span class="tech-tag">RDS Cross-Region</span>
-                     <span class="tech-tag">VPC Peering</span>
-                     <span class="tech-tag">AWS Backup</span>
-                  </div>
-                  <a href="https://github.com/yennanliu/cdk-playground" class="apple-link" target="_blank">View Code ›</a>
-               </div>
-            </div>
-            
-         </div>
-      </section>
-
-      <!-- Legacy Architecture Solutions Grid -->
-      <div class="container mt-5" style="display: none;">
-         <div class="row">
-            <!-- 1) Serverless Architecture -->
-            <div class="col-md-6 col-lg-4 mb-4" data-aos="fade-up" data-aos-delay="100">
-               <div class="card h-100">
-                  <div class="card-body">
-                     <h5 class="card-title"><span class="project-number">1</span>Serverless Architecture</h5>
-                     <p class="card-text">Event-driven serverless applications using AWS Lambda, API Gateway, and DynamoDB. Perfect for high-scale, cost-effective solutions with automatic scaling.</p>
-                     <div class="tech-tags mb-3">
-                        <span class="tech-tag">Lambda</span>
-                        <span class="tech-tag">API Gateway</span>
-                        <span class="tech-tag">DynamoDB</span>
-                        <span class="tech-tag">S3</span>
-                        <span class="tech-tag">CloudWatch</span>
-                     </div>
-                     <div class="mt-auto">
-                        <a href="#" class="btn btn-primary">Learn More</a>
-                        <a href="https://github.com/yennanliu/cdk-playground" target="_blank" class="btn btn-outline-primary">Code</a>
-                     </div>
-                  </div>
-               </div>
-            </div>
-
-            <!-- 2) Microservices on EKS -->
-            <div class="col-md-6 col-lg-4 mb-4" data-aos="fade-up" data-aos-delay="200">
-               <div class="card h-100">
-                  <div class="card-body">
-                     <h5 class="card-title"><span class="project-number">2</span>Microservices on EKS</h5>
-                     <p class="card-text">Container-based microservices architecture using Amazon EKS (Kubernetes) with service mesh, auto-scaling, and comprehensive monitoring.</p>
-                     <div class="tech-tags mb-3">
-                        <span class="tech-tag">EKS</span>
-                        <span class="tech-tag">Fargate</span>
-                        <span class="tech-tag">App Mesh</span>
-                        <span class="tech-tag">ALB</span>
-                        <span class="tech-tag">ECR</span>
-                     </div>
-                     <div class="mt-auto">
-                        <a href="#" class="btn btn-primary">Learn More</a>
-                        <a href="https://github.com/yennanliu/k8s-playground" target="_blank" class="btn btn-outline-primary">Code</a>
-                     </div>
-                  </div>
-               </div>
-            </div>
-
-            <!-- 3) Data Lake Architecture -->
-            <div class="col-md-6 col-lg-4 mb-4" data-aos="fade-up" data-aos-delay="300">
-               <div class="card h-100">
-                  <div class="card-body">
-                     <h5 class="card-title"><span class="project-number">3</span>Data Lake & Analytics</h5>
-                     <p class="card-text">Modern data lake architecture with real-time streaming, batch processing, and advanced analytics. Built for big data processing with ML integration.</p>
-                     <div class="tech-tags mb-3">
-                        <span class="tech-tag">S3</span>
-                        <span class="tech-tag">Kinesis</span>
-                        <span class="tech-tag">Glue</span>
-                        <span class="tech-tag">Athena</span>
-                        <span class="tech-tag">Redshift</span>
-                     </div>
-                     <div class="mt-auto">
-                        <a href="#" class="btn btn-primary">Learn More</a>
-                        <a href="https://github.com/yennanliu/NYC_Taxi_Pipeline" target="_blank" class="btn btn-outline-primary">Code</a>
-                     </div>
-                  </div>
-               </div>
-            </div>
-
-            <!-- 4) Multi-Region HA -->
-            <div class="col-md-6 col-lg-4 mb-4" data-aos="fade-up" data-aos-delay="100">
-               <div class="card h-100">
-                  <div class="card-body">
-                     <h5 class="card-title"><span class="project-number">4</span>Multi-Region HA</h5>
-                     <p class="card-text">Highly available, disaster-resilient architecture spanning multiple AWS regions with automated failover, data replication, and global load balancing.</p>
-                     <div class="tech-tags mb-3">
-                        <span class="tech-tag">Route 53</span>
-                        <span class="tech-tag">CloudFront</span>
-                        <span class="tech-tag">RDS Cross-Region</span>
-                        <span class="tech-tag">VPC Peering</span>
-                        <span class="tech-tag">AWS Backup</span>
-                     </div>
-                     <div class="mt-auto">
-                        <a href="#" class="btn btn-primary">Learn More</a>
-                        <a href="https://github.com/yennanliu/aws-playground" target="_blank" class="btn btn-outline-primary">Code</a>
-                     </div>
-                  </div>
-               </div>
-            </div>
-
-            <!-- 5) DevOps & CI/CD -->
-            <div class="col-md-6 col-lg-4 mb-4" data-aos="fade-up" data-aos-delay="200">
-               <div class="card h-100">
-                  <div class="card-body">
-                     <h5 class="card-title"><span class="project-number">5</span>DevOps & CI/CD</h5>
-                     <p class="card-text">Comprehensive DevOps pipeline with Infrastructure as Code, automated testing, security scanning, and blue-green deployments for continuous delivery.</p>
-                     <div class="tech-tags mb-3">
-                        <span class="tech-tag">CodePipeline</span>
-                        <span class="tech-tag">CodeBuild</span>
-                        <span class="tech-tag">CloudFormation</span>
-                        <span class="tech-tag">CodeDeploy</span>
-                        <span class="tech-tag">CDK</span>
-                     </div>
-                     <div class="mt-auto">
-                        <a href="#" class="btn btn-primary">Learn More</a>
-                        <a href="https://github.com/yennanliu/cdk-playground" target="_blank" class="btn btn-outline-primary">Code</a>
-                     </div>
-                  </div>
-               </div>
-            </div>
-
-            <!-- 6) Security & Compliance -->
-            <div class="col-md-6 col-lg-4 mb-4" data-aos="fade-up" data-aos-delay="300">
-               <div class="card h-100">
-                  <div class="card-body">
-                     <h5 class="card-title"><span class="project-number">6</span>Security & Compliance</h5>
-                     <p class="card-text">Enterprise-grade security architecture with identity management, encryption, threat detection, and compliance frameworks for regulated industries.</p>
-                     <div class="tech-tags mb-3">
-                        <span class="tech-tag">IAM</span>
-                        <span class="tech-tag">KMS</span>
-                        <span class="tech-tag">GuardDuty</span>
-                        <span class="tech-tag">WAF</span>
-                        <span class="tech-tag">Config</span>
-                     </div>
-                     <div class="mt-auto">
-                        <a href="#" class="btn btn-primary">Learn More</a>
-                        <a href="https://github.com/yennanliu/aws-security" target="_blank" class="btn btn-outline-primary">Code</a>
-                     </div>
-                  </div>
-               </div>
-            </div>
-         </div>
+<!-- HERO -->
+<header class="hero" id="top">
+  <div class="wrap">
+    <h1 class="hero-h1 disp xl" lang="zh-Hant">
+      <span>你能想到的架構，</span>
+      <span>AWS 就能做到。</span>
+    </h1>
+    <div class="hero-foot">
+      <p class="hero-lead">Everything you can imagine in cloud architecture, AWS can do. Four of those architectures, drawn and then built, with the CDK code that stands each one up.</p>
+      <div class="hero-acts">
+        <a class="btn btn-fill" href="#architectures">See the architectures</a>
+        <a class="btn btn-line" href="contact.html">Contact</a>
       </div>
+    </div>
+  </div>
+</header>
 
-      <!-- AWS Expertise — Redesigned Dark Section -->
-      <section class="aws-mastery-section">
-         <div class="aws-bg-grid"></div>
-         <div class="aws-orb aws-orb-1"></div>
-         <div class="aws-orb aws-orb-2"></div>
+<!-- THE FOUR DRAWINGS -->
+<section class="sec" id="architectures" aria-labelledby="arch-h">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2 class="sec-h disp" id="arch-h">Four architectures, drawn and built.</h2>
+      <p class="sec-lead">Each drawing has a repository behind it. The pictures are grey until you touch them.</p>
+    </div>
 
-         <div class="container aws-mastery-inner">
-
-            <div class="text-center aws-mastery-header" data-aos="fade-up">
-               <div class="aws-mastery-eyebrow">CLOUD MASTERY</div>
-               <h2 class="aws-mastery-title">AWS Expertise <span class="aws-grad-text">Level.</span></h2>
-               <p class="aws-mastery-sub">Six core domains. Hands-on production experience at scale.</p>
-            </div>
-
-            <div class="aws-skills-list" data-aos="fade-up" data-aos-delay="150">
-
-               <div class="aws-skill-row" data-target="95">
-                  <div class="aws-skill-left">
-                     <div class="aws-skill-badge" style="color:#dc2626; background:rgba(220, 38, 38, 0.1); border-color:rgba(220, 38, 38, 0.22)">
-                        <i class="fas fa-server"></i>
-                     </div>
-                     <div>
-                        <div class="aws-skill-name">Compute</div>
-                        <div class="aws-skill-sub">EC2 · Lambda · ECS/EKS</div>
-                     </div>
-                  </div>
-                  <div class="aws-skill-bar-wrap">
-                     <div class="aws-skill-bar" style="background: linear-gradient(90deg, #dc2626, #dc2626); --starget: 95%"></div>
-                  </div>
-                  <div class="aws-skill-pct" style="color:#dc2626"><span class="aws-pct-num">0</span>%</div>
-               </div>
-
-               <div class="aws-skill-row" data-target="90">
-                  <div class="aws-skill-left">
-                     <div class="aws-skill-badge" style="color:#059669; background:rgba(5, 150, 105, 0.1); border-color:rgba(5, 150, 105, 0.22)">
-                        <i class="fas fa-database"></i>
-                     </div>
-                     <div>
-                        <div class="aws-skill-name">Storage</div>
-                        <div class="aws-skill-sub">S3 · EBS · EFS</div>
-                     </div>
-                  </div>
-                  <div class="aws-skill-bar-wrap">
-                     <div class="aws-skill-bar" style="background: linear-gradient(90deg, #059669, #0891b2); --starget: 90%"></div>
-                  </div>
-                  <div class="aws-skill-pct" style="color:#059669"><span class="aws-pct-num">0</span>%</div>
-               </div>
-
-               <div class="aws-skill-row" data-target="88">
-                  <div class="aws-skill-left">
-                     <div class="aws-skill-badge" style="color:#0891b2; background:rgba(8, 145, 178, 0.1); border-color:rgba(8, 145, 178, 0.22)">
-                        <i class="fas fa-table"></i>
-                     </div>
-                     <div>
-                        <div class="aws-skill-name">Database</div>
-                        <div class="aws-skill-sub">RDS · DynamoDB · Redshift</div>
-                     </div>
-                  </div>
-                  <div class="aws-skill-bar-wrap">
-                     <div class="aws-skill-bar" style="background: linear-gradient(90deg, #0891b2, #0891b2); --starget: 88%"></div>
-                  </div>
-                  <div class="aws-skill-pct" style="color:#0891b2"><span class="aws-pct-num">0</span>%</div>
-               </div>
-
-               <div class="aws-skill-row" data-target="92">
-                  <div class="aws-skill-left">
-                     <div class="aws-skill-badge" style="color:#059669; background:rgba(5, 150, 105, 0.1); border-color:rgba(5, 150, 105, 0.22)">
-                        <i class="fas fa-code-branch"></i>
-                     </div>
-                     <div>
-                        <div class="aws-skill-name">DevOps</div>
-                        <div class="aws-skill-sub">CodePipeline · CloudFormation · CDK</div>
-                     </div>
-                  </div>
-                  <div class="aws-skill-bar-wrap">
-                     <div class="aws-skill-bar" style="background: linear-gradient(90deg, #059669, #059669); --starget: 92%"></div>
-                  </div>
-                  <div class="aws-skill-pct" style="color:#059669"><span class="aws-pct-num">0</span>%</div>
-               </div>
-
-               <div class="aws-skill-row" data-target="87">
-                  <div class="aws-skill-left">
-                     <div class="aws-skill-badge" style="color:#d97706; background:rgba(217, 119, 6, 0.1); border-color:rgba(217, 119, 6, 0.22)">
-                        <i class="fas fa-shield-alt"></i>
-                     </div>
-                     <div>
-                        <div class="aws-skill-name">Security</div>
-                        <div class="aws-skill-sub">IAM · KMS · GuardDuty · WAF</div>
-                     </div>
-                  </div>
-                  <div class="aws-skill-bar-wrap">
-                     <div class="aws-skill-bar" style="background: linear-gradient(90deg, #d97706, #d97706); --starget: 87%"></div>
-                  </div>
-                  <div class="aws-skill-pct" style="color:#d97706"><span class="aws-pct-num">0</span>%</div>
-               </div>
-
-               <div class="aws-skill-row" data-target="83">
-                  <div class="aws-skill-left">
-                     <div class="aws-skill-badge" style="color:#7c3aed; background:rgba(124, 58, 237, 0.1); border-color:rgba(124, 58, 237, 0.22)">
-                        <i class="fas fa-chart-line"></i>
-                     </div>
-                     <div>
-                        <div class="aws-skill-name">Analytics</div>
-                        <div class="aws-skill-sub">Kinesis · Glue · Athena · EMR</div>
-                     </div>
-                  </div>
-                  <div class="aws-skill-bar-wrap">
-                     <div class="aws-skill-bar" style="background: linear-gradient(90deg, #7c3aed, #d9cdec); --starget: 83%"></div>
-                  </div>
-                  <div class="aws-skill-pct" style="color:#7c3aed"><span class="aws-pct-num">0</span>%</div>
-               </div>
-
-            </div>
-
-            <!-- Stats strip -->
-            <div class="aws-stats-row" data-aos="fade-up" data-aos-delay="300">
-               <div class="aws-stat-card">
-                  <div class="aws-stat-num">50+</div>
-                  <div class="aws-stat-lbl">AWS Services</div>
-               </div>
-               <div class="aws-stat-card">
-                  <div class="aws-stat-num">10+</div>
-                  <div class="aws-stat-lbl">Production Systems</div>
-               </div>
-               <div class="aws-stat-card">
-                  <div class="aws-stat-num">5+</div>
-                  <div class="aws-stat-lbl">Years Experience</div>
-               </div>
-               <div class="aws-stat-card">
-                  <div class="aws-stat-num">3</div>
-                  <div class="aws-stat-lbl">Certifications</div>
-               </div>
-            </div>
-
-         </div>
-      </section>
-
-      <!-- AI Infrastructure — Redesigned Dark Grid -->
-      <section class="ai-infra-section ai-infra-redesigned apple-section">
-         <div class="ai-infra-particles">
-            <div class="ai-particle" style="top:12%;left:7%;animation-delay:0s;width:5px;height:5px"></div>
-            <div class="ai-particle" style="top:22%;left:90%;animation-delay:1.3s"></div>
-            <div class="ai-particle" style="top:58%;left:4%;animation-delay:2.2s;width:3px;height:3px"></div>
-            <div class="ai-particle" style="top:78%;left:85%;animation-delay:0.7s;width:5px;height:5px"></div>
-            <div class="ai-particle" style="top:40%;left:94%;animation-delay:1.9s"></div>
-            <div class="ai-particle" style="top:68%;left:48%;animation-delay:3.1s;width:3px;height:3px"></div>
-         </div>
-
-         <div class="container position-relative" style="z-index:2">
-            <div class="text-center" data-aos="fade-up">
-               <div class="ai-infra-eyebrow-tag">LLM INFRASTRUCTURE</div>
-               <h2 class="ai-infra-title">
-                  <span class="ai-title-main" style="background:linear-gradient(135deg,#ffffff 0%,rgba(255, 255, 255, 0.72) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">AI Infrastructure.</span>
-                  <br>
-                  <span class="ai-title-sub glitch-text" data-text="Built for Tomorrow." style="background:linear-gradient(90deg,#059669,#ffffff 50%,#7c3aed);background-size:300% 100%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:ai-title-shine 4s linear infinite">Built for Tomorrow.</span>
-               </h2>
-               <p class="ai-infra-subtitle" style="color:rgba(255, 255, 255, 0.42)">From neural networks to production systems, architect the future of artificial intelligence.</p>
-            </div>
-
-            <div class="ai-glass-grid" data-aos="fade-up" data-aos-delay="150">
-
-               <div class="ai-glass-card" style="--card-accent:#dc2626">
-                  <div class="ai-glass-glow"></div>
-                  <div class="ai-glass-icon" style="color:#dc2626">
-                     <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L2 7L12 12L22 7L12 2M2 17L12 22L22 17M2 12L12 17L22 12"/></svg>
-                  </div>
-                  <h3 class="ai-glass-title">Neural Training</h3>
-                  <p class="ai-glass-desc">Distributed training pipelines with automatic scaling and optimization</p>
-                  <div class="ai-glass-tags">
-                     <span class="ai-glass-tag">SageMaker</span>
-                     <span class="ai-glass-tag">EC2 P4</span>
-                     <span class="ai-glass-tag">PyTorch</span>
-                  </div>
-               </div>
-
-               <div class="ai-glass-card" style="--card-accent:#059669">
-                  <div class="ai-glass-glow"></div>
-                  <div class="ai-glass-icon" style="color:#059669">
-                     <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M4 6H20V16H4M20 18A2 2 0 0 0 22 16V6C22 4.89 21.1 4 20 4H4A2 2 0 0 0 2 6V16A2 2 0 0 0 4 18H4L6 20V18H18L20 18Z"/></svg>
-                  </div>
-                  <h3 class="ai-glass-title">Cluster Orchestration</h3>
-                  <p class="ai-glass-desc">GPU-accelerated compute clusters with intelligent resource allocation</p>
-                  <div class="ai-glass-tags">
-                     <span class="ai-glass-tag">EKS</span>
-                     <span class="ai-glass-tag">Karpenter</span>
-                     <span class="ai-glass-tag">NVIDIA</span>
-                  </div>
-               </div>
-
-               <div class="ai-glass-card" style="--card-accent:#0891b2">
-                  <div class="ai-glass-glow"></div>
-                  <div class="ai-glass-icon" style="color:#0891b2">
-                     <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 16L16 12H13V8H11V12H8L12 16M12 2A10 10 0 0 0 2 12A10 10 0 0 0 12 22A10 10 0 0 0 22 12A10 10 0 0 0 12 2Z"/></svg>
-                  </div>
-                  <h3 class="ai-glass-title">Model Deployment</h3>
-                  <p class="ai-glass-desc">Real-time inference endpoints with A/B testing and monitoring</p>
-                  <div class="ai-glass-tags">
-                     <span class="ai-glass-tag">Bedrock</span>
-                     <span class="ai-glass-tag">Lambda</span>
-                     <span class="ai-glass-tag">API Gateway</span>
-                  </div>
-               </div>
-
-               <div class="ai-glass-card" style="--card-accent:#7c3aed">
-                  <div class="ai-glass-glow"></div>
-                  <div class="ai-glass-icon" style="color:#7c3aed">
-                     <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3C7.58 3 4 6.58 4 11C4 16.55 12 21 12 21S20 16.55 20 11C20 6.58 16.42 3 12 3M12 13A2 2 0 0 1 10 11A2 2 0 0 1 12 9A2 2 0 0 1 14 11A2 2 0 0 1 12 13Z"/></svg>
-                  </div>
-                  <h3 class="ai-glass-title">Vector Intelligence</h3>
-                  <p class="ai-glass-desc">High-performance embedding storage with semantic search capabilities</p>
-                  <div class="ai-glass-tags">
-                     <span class="ai-glass-tag">OpenSearch</span>
-                     <span class="ai-glass-tag">Pinecone</span>
-                     <span class="ai-glass-tag">RAG</span>
-                  </div>
-               </div>
-
-               <div class="ai-glass-card" style="--card-accent:#d97706">
-                  <div class="ai-glass-glow"></div>
-                  <div class="ai-glass-icon" style="color:#d97706">
-                     <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M9 3V18H12V3H9M12 5L16 6.5V9.5L12 8V5M12 10L16 11.5V14.5L12 13V10M12 15L16 16.5V19.5L12 18V15Z"/></svg>
-                  </div>
-                  <h3 class="ai-glass-title">Data Pipeline</h3>
-                  <p class="ai-glass-desc">Real-time data processing and feature engineering at scale</p>
-                  <div class="ai-glass-tags">
-                     <span class="ai-glass-tag">Kinesis</span>
-                     <span class="ai-glass-tag">Glue</span>
-                     <span class="ai-glass-tag">EMR</span>
-                  </div>
-               </div>
-
-               <div class="ai-glass-card" style="--card-accent:#059669">
-                  <div class="ai-glass-glow"></div>
-                  <div class="ai-glass-icon" style="color:#059669">
-                     <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
-                  </div>
-                  <h3 class="ai-glass-title">MLOps Platform</h3>
-                  <p class="ai-glass-desc">End-to-end machine learning lifecycle management and automation</p>
-                  <div class="ai-glass-tags">
-                     <span class="ai-glass-tag">MLflow</span>
-                     <span class="ai-glass-tag">Kubeflow</span>
-                     <span class="ai-glass-tag">Airflow</span>
-                  </div>
-               </div>
-
-            </div>
-
-            <div class="ai-infra-cta text-center" data-aos="fade-up" data-aos-delay="350">
-               <p class="ai-infra-cta-text" style="color:rgba(255, 255, 255, 0.42)">Ready to build the next generation of AI systems?</p>
-               <a href="https://yennanliu.github.io/contact.html" class="ai-infra-cta-button">
-                  <span>Let's Build Together</span>
-                  <svg viewBox="0 0 24 24" class="cta-arrow">
-                     <path d="M4 12L20 12M14 6L20 12L14 18" stroke="currentColor" stroke-width="2" fill="none"/>
-                  </svg>
-               </a>
-            </div>
-         </div>
-      </section>
-
-      <!-- Scroll to top button -->
-      <div class="scroll-top">
-         <i class="fas fa-arrow-up"></i>
+    <article class="arch">
+      <div class="arch-copy">
+        <h3 class="arch-h disp">Serverless architecture</h3>
+        <p class="arch-zh" lang="zh-Hant">無伺服器架構</p>
+        <p class="body">Event-driven applications that scale on their own. The right shape for a cloud-native product where nobody wants to manage a server.</p>
+        <p class="arch-tags">Lambda, API Gateway, DynamoDB, S3, CloudWatch</p>
+        <a class="arch-go" href="https://github.com/yennanliu/cdk-playground" target="_blank" rel="noreferrer">View the code</a>
       </div>
+      <figure>
+        <img src="img/aws_serverless.png" alt="Serverless architecture drawing: API Gateway in front of Lambda functions, with DynamoDB, S3 and CloudWatch behind them" decoding="async">
+        <figcaption><span>Serverless</span><span>cdk-playground</span></figcaption>
+      </figure>
+    </article>
+
+    <article class="arch">
+      <div class="arch-copy">
+        <h3 class="arch-h disp">Microservices with EKS</h3>
+        <p class="arch-zh" lang="zh-Hant">容器化微服務</p>
+        <p class="body">Container-based architecture on Kubernetes. Independent services that can be developed, deployed and scaled separately.</p>
+        <p class="arch-tags">EKS, Fargate, App Mesh, ALB, ECR</p>
+        <a class="arch-go" href="https://github.com/yennanliu/cdk-playground" target="_blank" rel="noreferrer">View the code</a>
+      </div>
+      <figure>
+        <img src="img/microservices-eks-architecture.png" alt="Microservices architecture drawing: an application load balancer in front of EKS services on Fargate, with App Mesh and ECR" loading="lazy" decoding="async">
+        <figcaption><span>Microservices</span><span>cdk-playground</span></figcaption>
+      </figure>
+    </article>
+
+    <article class="arch">
+      <div class="arch-copy">
+        <h3 class="arch-h disp">Data lake and analytics</h3>
+        <p class="arch-zh" lang="zh-Hant">現代數據湖</p>
+        <p class="body">A modern data architecture with real-time streaming and analytics on top, processing big data with machine learning wired in at scale.</p>
+        <p class="arch-tags">S3, Kinesis, Glue, Athena, Redshift</p>
+        <a class="arch-go" href="https://github.com/yennanliu/cdk-playground" target="_blank" rel="noreferrer">View the code</a>
+      </div>
+      <figure>
+        <img src="img/data-lake-architecture.png" alt="Data lake architecture drawing: Kinesis streams landing in S3, catalogued by Glue and queried through Athena and Redshift" loading="lazy" decoding="async">
+        <figcaption><span>Data lake</span><span>cdk-playground</span></figcaption>
+      </figure>
+    </article>
+
+    <article class="arch">
+      <div class="arch-copy">
+        <h3 class="arch-h disp">Multi-region high availability</h3>
+        <p class="arch-zh" lang="zh-Hant">多區域高可用</p>
+        <p class="body">A disaster-resilient architecture spanning several AWS regions, with automated failover and global load balancing for maximum uptime.</p>
+        <p class="arch-tags">Route 53, CloudFront, RDS cross-region, VPC peering, AWS Backup</p>
+        <a class="arch-go" href="https://github.com/yennanliu/cdk-playground" target="_blank" rel="noreferrer">View the code</a>
+      </div>
+      <figure>
+        <img src="img/multi-region-ha-architecture.png" alt="Multi-region architecture drawing: Route 53 and CloudFront routing to two regions with cross-region RDS replication and VPC peering" loading="lazy" decoding="async">
+        <figcaption><span>Multi-region</span><span>cdk-playground</span></figcaption>
+      </figure>
+    </article>
+  </div>
+</section>
+
+<!-- SIX DOMAINS -->
+<section class="sec" id="domains" aria-labelledby="dom-h">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2 class="sec-h disp" id="dom-h">Six domains, hands on.</h2>
+      <p class="sec-lead">The parts of AWS I have run in production, and the services in each that I reach for.</p>
+    </div>
+    <dl class="rows">
+      <div class="row"><dt>Compute</dt><dd>EC2, Lambda, ECS and EKS</dd></div>
+      <div class="row"><dt>Storage</dt><dd>S3, EBS, EFS</dd></div>
+      <div class="row"><dt>Database</dt><dd>RDS, DynamoDB, Redshift</dd></div>
+      <div class="row"><dt>DevOps</dt><dd>CodePipeline, CloudFormation, CDK</dd></div>
+      <div class="row"><dt>Security</dt><dd>IAM, KMS, GuardDuty, WAF</dd></div>
+      <div class="row"><dt>Analytics</dt><dd>Kinesis, Glue, Athena, EMR</dd></div>
+    </dl>
+  </div>
+</section>
+
+<!-- AI INFRASTRUCTURE -->
+<section class="sec" id="ai" aria-labelledby="ai-h">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2 class="sec-h disp" id="ai-h">The infrastructure under an AI system.</h2>
+      <p class="sec-lead">Six pieces that turn a trained model into something that answers requests, on AWS.</p>
+    </div>
+    <ul class="grid">
+      <li class="cell">
+        <h3 class="disp">Neural training</h3>
+        <p>Distributed training pipelines with automatic scaling and optimisation.</p>
+        <span class="meta">SageMaker, EC2 P4, PyTorch</span>
+      </li>
+      <li class="cell">
+        <h3 class="disp">Cluster orchestration</h3>
+        <p>GPU-accelerated compute clusters with intelligent resource allocation.</p>
+        <span class="meta">EKS, Karpenter, NVIDIA</span>
+      </li>
+      <li class="cell">
+        <h3 class="disp">Model deployment</h3>
+        <p>Real-time inference endpoints with A/B testing and monitoring.</p>
+        <span class="meta">Bedrock, Lambda, API Gateway</span>
+      </li>
+      <li class="cell">
+        <h3 class="disp">Vector intelligence</h3>
+        <p>High-performance embedding storage with semantic search.</p>
+        <span class="meta">OpenSearch, Pinecone, RAG</span>
+      </li>
+      <li class="cell">
+        <h3 class="disp">Data pipeline</h3>
+        <p>Real-time data processing and feature engineering at scale.</p>
+        <span class="meta">Kinesis, Glue, EMR</span>
+      </li>
+      <li class="cell">
+        <h3 class="disp">MLOps platform</h3>
+        <p>End-to-end machine learning lifecycle management and automation.</p>
+        <span class="meta">MLflow, Kubeflow, Airflow</span>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- CLOSE -->
+<section class="close" aria-labelledby="close-h">
+  <div class="wrap close-in">
+    <h2 class="close-h disp" id="close-h">Have an architecture in mind?</h2>
+    <div>
+      <p>Cloud infrastructure as code, from the first diagram to a stack that stands up in an account.</p>
+      <a class="btn btn-fill" href="contact.html">Start a conversation</a>
+    </div>
+  </div>
+</section>
 
 <!-- ══ FOOTER — shared; see css/site-footer.css ══ -->
 <footer class="site-footer" id="site-footer">
@@ -2952,147 +438,6 @@
   </div>
 </footer>
 
-      <!-- Scripts -->
-      <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-      <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
-      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-      <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-      
-      <script>
-         // Initialize AOS animation
-         AOS.init({
-             duration: 800,
-             easing: 'ease-in-out',
-             once: true
-         });
-         // Scroll to top button functionality
-         const scrollTopBtn = document.querySelector('.scroll-top');
-         
-         window.addEventListener('scroll', function() {
-             if (window.pageYOffset > 300) {
-                 scrollTopBtn.classList.add('visible');
-             } else {
-                 scrollTopBtn.classList.remove('visible');
-             }
-         });
-         
-         scrollTopBtn.addEventListener('click', function() {
-             window.scrollTo({
-                 top: 0,
-                 behavior: 'smooth'
-             });
-         });
-
-         // ── AWS Mastery: animated bars + counter-up ──
-         (function () {
-            var rows = document.querySelectorAll('.aws-skill-row');
-            if (!rows.length) return;
-
-            var obs = new IntersectionObserver(function (entries) {
-               entries.forEach(function (entry) {
-                  if (!entry.isIntersecting) return;
-                  var row = entry.target;
-                  var bar = row.querySelector('.aws-skill-bar');
-                  var numEl = row.querySelector('.aws-pct-num');
-                  var target = parseInt(row.dataset.target, 10);
-
-                  if (bar && !bar.classList.contains('animated')) {
-                     bar.classList.add('animated');
-                  }
-                  if (numEl && !numEl.dataset.counted) {
-                     numEl.dataset.counted = '1';
-                     var cur = 0;
-                     var step = (target / 1400) * 16;
-                     var timer = setInterval(function () {
-                        cur = Math.min(cur + step, target);
-                        numEl.textContent = Math.round(cur);
-                        if (cur >= target) clearInterval(timer);
-                     }, 16);
-                  }
-                  obs.unobserve(row);
-               });
-            }, { threshold: 0.3 });
-
-            rows.forEach(function (row) { obs.observe(row); });
-         })();
-
-         // AI Infrastructure Carousel functionality
-         document.addEventListener('DOMContentLoaded', function() {
-            const track = document.querySelector('.ai-carousel-track');
-            const indicators = document.querySelectorAll('.indicator');
-            const cards = document.querySelectorAll('.ai-infra-card');
-
-            if (!track || !indicators.length || !cards.length) return;
-
-            let currentSlide = 0;
-            const cardsPerView = window.innerWidth <= 768 ? 1 : 2;
-            const totalSlides = Math.max(0, cards.length - cardsPerView);
-            const cardWidth = cards[0].offsetWidth + 30; // card width + gap
-
-            // Auto-advance carousel
-            function nextSlide() {
-               currentSlide = (currentSlide + 1) % (totalSlides + 1);
-               updateCarousel();
-            }
-
-            // Update carousel position and indicators
-            function updateCarousel() {
-               const translateX = -(currentSlide * cardWidth);
-               track.style.transform = `translateX(${translateX}px)`;
-
-               // Update indicators
-               indicators.forEach((indicator, index) => {
-                  indicator.classList.toggle('active', index === Math.floor(currentSlide * indicators.length / (totalSlides + 1)));
-               });
-            }
-
-            // Manual navigation via indicators
-            indicators.forEach((indicator, index) => {
-               indicator.addEventListener('click', () => {
-                  currentSlide = Math.floor(index * (totalSlides + 1) / indicators.length);
-                  updateCarousel();
-               });
-            });
-
-            // Auto-play carousel - faster movement
-            let autoPlay = setInterval(nextSlide, 2500);
-
-            // Pause auto-play on hover
-            const carouselContainer = document.querySelector('.ai-carousel-container');
-            if (carouselContainer) {
-               carouselContainer.addEventListener('mouseenter', () => {
-                  clearInterval(autoPlay);
-               });
-
-               carouselContainer.addEventListener('mouseleave', () => {
-                  autoPlay = setInterval(nextSlide, 2500);
-               });
-            }
-
-            // Handle window resize and orientation change
-            window.addEventListener('resize', function() {
-               // Debounce resize events
-               clearTimeout(window.resizeTimer);
-               window.resizeTimer = setTimeout(() => {
-                  updateCarousel();
-                  // Recalculate carousel dimensions
-                  const newCardsPerView = window.innerWidth <= 768 ? 1 : 2;
-                  const newTotalSlides = Math.max(0, cards.length - newCardsPerView);
-                  if (currentSlide > newTotalSlides) {
-                     currentSlide = newTotalSlides;
-                     updateCarousel();
-                  }
-               }, 250);
-            });
-
-            // Handle orientation change for mobile devices
-            window.addEventListener('orientationchange', function() {
-               setTimeout(() => {
-                  updateCarousel();
-               }, 500);
-            });
-         });
-      </script>
-     <script src="js/site-nav.js" defer></script>
+<script src="js/site-nav.js" defer></script>
 </body>
 </html>
