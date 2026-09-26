@@ -216,159 +216,6 @@ section[data-sig] > * { position: relative; z-index: 1; }
   opacity: 1;
 }
 
-/* ── 5. THE TOPOLOGY, MADE INTERROGABLE ────────────────────────────────
-   The diagram was decorative. Now each node is a control: take one and
-   the matching confidence bar below lights up, and the rest recede. No
-   new labels — it just wires two things the card already showed.        */
-
-.topo .node { cursor: pointer; }
-.topo .node .node-box,
-.topo .node .node-txt { transition: fill .2s ease, stroke .2s ease, opacity .2s ease; }
-
-.topo .node .hitpad { fill: transparent; }
-
-.sys-card.probing .topo .node { opacity: .38; }
-.sys-card.probing .topo .node.sel { opacity: 1; }
-.sys-card.probing .topo .node.sel .node-box { fill: var(--blue-pale); stroke: var(--blue); }
-.sys-card.probing .topo .node.sel .node-txt { fill: var(--ink); }
-
-.topo .node:hover .node-box  { stroke: var(--blue); }
-.topo .node:focus-visible    { outline: none; }
-.topo .node:focus-visible .node-box { stroke: var(--blue); stroke-width: 2; }
-
-/* ── the trace ────────────────────────────────────────────────────────
-   One request followed through every layer, drawn the way a tracing
-   tool draws it: a waterfall of spans on one time axis. Each span is a
-   node in the topology above, so the two drawings are the same system
-   read two ways — structure on top, time underneath.
-
-   Rows are divs with list roles, not <li>: finlab-theme.css forces body
-   face and size onto li with !important.
-
-   Markup is complete: every bar is drawn at full length from --s/--e.
-   js/index-signature.js replays the request by driving --f (how much of
-   each bar has happened) and --c (where the cursor is); without it the
-   waterfall simply sits there finished.                                 */
-
-.tc-bar { gap: 12px !important; }
-.tc-live {
-  display: inline-flex; align-items: center; gap: 6px;
-  font-family: var(--mono); font-size: .62rem; letter-spacing: .14em;
-  text-transform: uppercase; color: var(--green);
-}
-.tc-live i {
-  width: 6px; height: 6px; border-radius: 50%; background: var(--green);
-  animation: pulse 2.2s ease-in-out infinite;
-}
-.tc-bar .tc-path {
-  margin-left: 0; min-width: 0;
-  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-}
-.tc-total {
-  margin-left: auto; font-family: var(--mono); font-size: .62rem;
-  color: var(--ink); font-variant-numeric: tabular-nums;
-  white-space: nowrap;
-}
-
-.trace {
-  --c: 1;
-  position: relative;
-  list-style: none; margin: 0; padding: 0;
-  display: grid; gap: 7px;
-}
-.span {
-  display: grid;
-  grid-template-columns: 9.6rem minmax(0, 1fr) 2.2rem;
-  align-items: center; gap: 10px;
-  font-family: var(--mono); font-size: .62rem; color: var(--ink-3);
-  cursor: default;
-  transition: opacity .16s ease, color .16s ease;
-}
-.sp-name {
-  position: relative;
-  padding-left: calc(var(--d) * 12px);
-  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-}
-.sp-name b { font-weight: 400; color: var(--ink); }
-/* the tree: a hairline elbow back to the parent */
-.span:not([style*="--d:0"]) .sp-name::before {
-  content: ''; position: absolute;
-  left: calc(var(--d) * 12px - 8px); top: -5px;
-  width: 5px; height: calc(.5em + 7px);
-  border-left: 1px solid var(--rule-strong);
-  border-bottom: 1px solid var(--rule-strong);
-}
-.sp-track { position: relative; height: 8px; }
-.sp-track::before {                    /* the full axis, as a hairline */
-  content: ''; position: absolute; left: 0; right: 0; top: 50%;
-  border-top: 1px dashed var(--rule);
-}
-.sp-bar {
-  --f: 1;
-  position: absolute; top: 0; bottom: 0;
-  left: calc(var(--s) * 100% / var(--T));
-  width: calc((var(--e) - var(--s)) * 100% / var(--T));
-  min-width: 2px;
-  border-radius: 2px;
-  background: color-mix(in oklab, var(--blue) 18%, transparent);
-  box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--blue) 45%, transparent);
-  overflow: hidden;
-}
-.sp-bar::after {                       /* the part that has happened */
-  content: ''; position: absolute; inset: 0;
-  background: var(--blue);
-  transform: scaleX(var(--f)); transform-origin: left;
-}
-.sp-ms { text-align: right; color: var(--ink-dim); font-variant-numeric: tabular-nums; }
-
-.span.is-run { color: var(--ink); }
-.span.is-run .sp-ms { color: var(--blue); }
-
-/* the cursor: a hairline down the bar column at time --c */
-.trace::after {
-  content: ''; position: absolute; top: -4px; bottom: -4px;
-  left: calc(9.6rem + 10px + (100% - 9.6rem - 2.2rem - 20px) * var(--c));
-  width: 1px; background: var(--blue);
-  opacity: 0; transition: opacity .16s ease;
-  pointer-events: none;
-}
-.trace.is-playing::after { opacity: .7; }
-
-.trace-axis {
-  display: flex; justify-content: space-between;
-  margin: 10px 2.2rem 0 calc(9.6rem + 10px);
-  padding-top: 6px; border-top: 1px solid var(--rule);
-  font-family: var(--mono); font-size: .56rem; color: var(--ink-dim);
-  font-variant-numeric: tabular-nums;
-}
-
-/* a feedback edge — the loop back, dashed like a drawing's return path */
-.topo .edge-loop { stroke-dasharray: 3 4; }
-
-/* the switch between the five systems */
-.tc-next {
-  appearance: none; margin-left: 4px;
-  padding: 3px 8px; border: 1px solid var(--rule-strong); border-radius: 4px;
-  background: var(--surface); color: var(--ink-3);
-  font-family: var(--mono); font-size: .58rem; letter-spacing: .06em;
-  font-variant-numeric: tabular-nums; cursor: pointer;
-  transition: color .16s ease, border-color .16s ease;
-}
-.tc-next:hover { color: var(--blue); border-color: var(--blue); }
-.tc-next:focus-visible { outline: 2px solid var(--blue); outline-offset: 1px; }
-.tc-next[hidden] { display: none; }
-.sys-card.is-swap .tc-body { animation: tcSwap .36s ease; }
-@keyframes tcSwap { from { opacity: .35; transform: translateY(4px); } }
-
-/* a node whose span is running */
-.topo .node.is-run .node-box { fill: var(--blue-pale); stroke: var(--blue); }
-.topo .node.is-run .node-txt { fill: var(--ink); }
-
-/* probing: point at either drawing, the other answers */
-.sys-card.probing .span { opacity: .32; }
-.sys-card.probing .span.lit { opacity: 1; color: var(--ink); }
-.sys-card.probing .span.lit .sp-ms { color: var(--blue); }
-
 /* ── the headline, drafted then shipped ──────────────────────────────
    "diagram to" stays a drawing — outline only. "production." is drawn
    the same way and then filled, left to right, once the lines land:
@@ -397,12 +244,6 @@ section[data-sig] > * { position: relative; z-index: 1; }
     clip-path: inset(-.3em 0 -.3em 0);
     transition: clip-path 1.2s cubic-bezier(.65, 0, .25, 1);
   }
-}
-
-@media (max-width: 480px) {
-  .span { grid-template-columns: 7.6rem minmax(0, 1fr) 2rem; }
-  .trace::after { left: calc(7.6rem + 10px + (100% - 7.6rem - 2rem - 20px) * var(--c)); }
-  .trace-axis { margin-left: calc(7.6rem + 10px); margin-right: 2rem; }
 }
 
 /* ── 7. FIGURES ────────────────────────────────────────────────────────
@@ -434,8 +275,6 @@ section[data-sig] > * { position: relative; z-index: 1; }
   #sig-rail::after { transition: none; }
   .hero-h1 .ln > span { transform: none; animation: none; }
   #hero::before { animation: none; mask-image: var(--grid-mask); -webkit-mask-image: var(--grid-mask); }
-  .tc-live i { animation: none; }
-  .sys-card.is-swap .tc-body { animation: none; }
 }
 
 /* ── 6. THE STACK ──────────────────────────────────────────────────────

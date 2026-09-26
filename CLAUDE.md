@@ -99,25 +99,25 @@ it changes is scale, composition and responsiveness:
   is drafted in outline then filled left to right once the lines land.
   The outline state is a class the script adds and then removes — the
   markup and the CSS alone give solid type.
-- The hero card is one system read two ways: the topology on top is its
-  structure, and under it a **sample trace** — one `POST /ask` drawn as
-  a waterfall of spans on a single time axis — is its time. Each
-  `.topo .node[data-span="n"]` is span `n`; the script replays the
-  request by driving `--f` per bar and a cursor `--c`, lighting the node
-  whose span is running, and pointing at either a node or a row pauses
-  it and shows the pair. Bars are positioned from `--s`/`--e` against
-  `--T` in the markup, so the waterfall is finished without JS. Rows are
-  `div`s with list roles: `finlab-theme.css` forces the body face onto
-  `li`. The trace replaced a set of skill-percentage bars — do not bring
-  those back.
-- The card holds **five systems** — serve, agent loop, RAG indexing,
-  deploy, observability — and draws one at random on each load, with a
-  `01/05` switch in the title bar. They are data (`SYSTEMS` in
-  `index-signature.js`), not drawings: five shared node slots, edges
-  named by slot pair (`'bd'`, and `'eb~'` for a dashed feedback edge),
-  and spans that name the node they run on. Adding a sixth means adding
-  an entry. The markup ships the first system complete; the switch
-  starts `hidden` and the script reveals it.
+- The hero card (`#hero-card`, `css/index-card.css` + `js/index-card.js`)
+  holds **five charts of five different kinds**, one drawn at random per
+  load, with a `01/05` switch in the title bar. Each draws one layer the
+  way someone operating it reads it: serve as a **sequence diagram**,
+  the agent as an **orbit** (thought → action → observation, one lap a
+  turn, a context bar that bounds it), RAG as an **embedding space**
+  (top-k radius grows, then a reranker reorders), deploy as **capacity
+  stepping under traffic**, observability as a **latency heatmap** with
+  p50/p99. Do not collapse them back into one box-and-arrow template.
+- Each chart is a pure `build()` returning SVG plus `frame(root, u)`,
+  which poses it at progress `u ∈ [0, 1]` and returns the three readout
+  figures. `u = 1` is the finished state: reduced motion gets it, and
+  the markup ships chart 01 at `u = 1`, pre-rendered from the same
+  builder. If you change chart 01, regenerate that block — load the page
+  with reduced motion, step the switch to 01, copy `.tc-body`.
+- One vocabulary across all five (`.cv-*`): hairline, dashed guide, the
+  one blue, four flat tints, mono labels. Random scatter and heatmap
+  noise come from a seeded RNG, so the drawing is the same every load.
+  Every figure is a sample and the title bar says so.
 - The six layers are a **stack**, not a marquee: six plates offset into
   a staircase, one open at a time, wired to its detail panel by a
   hairline that tracks whichever plate you took. It is a real tablist —

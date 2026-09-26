@@ -1,0 +1,139 @@
+/* ==========================================================================
+   INDEX — THE HERO CARD
+   Loaded after index-signature.css, only on the landing page. Styles the
+   five charts js/index-card.js draws into .sys-card.
+
+   One vocabulary for all five, so they read as one instrument showing
+   different systems rather than five widgets: a hairline for structure,
+   a dashed guide for scale, the one blue for whatever is happening now,
+   four flat tints of it for quantity, mono for every label and figure.
+   ========================================================================== */
+
+/* ── the title bar ── */
+
+.sys-card .tc-bar { gap: 12px; }
+.tc-live {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-family: var(--mono); font-size: .62rem; letter-spacing: .14em;
+  text-transform: uppercase; color: var(--green);
+}
+.tc-live i {
+  width: 6px; height: 6px; border-radius: 50%; background: var(--green);
+  animation: pulse 2.2s ease-in-out infinite;
+}
+.sys-card .tc-path {
+  margin-left: 0; min-width: 0;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.tc-total {
+  margin-left: auto; white-space: nowrap;
+  font-family: var(--mono); font-size: .62rem;
+  color: var(--ink); font-variant-numeric: tabular-nums;
+}
+.tc-next {
+  appearance: none; margin-left: 4px;
+  padding: 3px 8px; border: 1px solid var(--rule-strong); border-radius: 4px;
+  background: var(--surface); color: var(--ink-3);
+  font-family: var(--mono); font-size: .58rem; letter-spacing: .06em;
+  font-variant-numeric: tabular-nums; cursor: pointer;
+  transition: color .16s ease, border-color .16s ease;
+}
+.tc-next:hover { color: var(--blue); border-color: var(--blue); }
+.tc-next:focus-visible { outline: 2px solid var(--blue); outline-offset: 1px; }
+.tc-next[hidden] { display: none; }
+
+.sys-card.is-swap .tc-body { animation: cvSwap .36s ease; }
+@keyframes cvSwap { from { opacity: .35; transform: translateY(4px); } }
+
+/* ── the drawing ── */
+
+.cv-svg { display: block; width: 100%; height: auto; overflow: visible; margin-top: 4px; }
+
+.cv-svg text { font-family: var(--mono); font-size: 10px; fill: var(--ink-3); }
+.cv-svg .cv-ink  { fill: var(--ink); }
+.cv-svg .cv-dim  { fill: var(--ink-dim); }
+.cv-svg .cv-blue { fill: var(--blue); }
+.cv-svg .cv-big  { font-family: var(--display); font-weight: 300; font-size: 26px; fill: var(--ink); }
+
+.cv-guide { stroke: var(--rule); stroke-width: 1; stroke-dasharray: 2 4; fill: none; }
+.cv-axis  { stroke: var(--rule-strong); stroke-width: 1; }
+.cv-frame { fill: none; stroke: var(--rule); stroke-width: 1; }
+.cv-box   { fill: var(--bg-alt); stroke: var(--rule-strong); stroke-width: 1;
+            transition: fill .16s ease, stroke .16s ease; }
+.cv-box.on { fill: var(--blue-pale); stroke: var(--blue); }
+
+.cv-t1 { fill: color-mix(in oklab, var(--blue) 9%,  transparent); }
+.cv-t3 { fill: color-mix(in oklab, var(--blue) 26%, transparent); }
+.cv-line     { fill: none; stroke: var(--blue); stroke-width: 1.6; stroke-linejoin: round; }
+.cv-line-ink { fill: none; stroke: var(--ink); stroke-width: 1.2; stroke-linejoin: round; }
+.cv-track { fill: var(--rule); }
+.cv-fill  { fill: var(--blue); }
+
+.cv-cur  { stroke: var(--blue); stroke-width: 1; opacity: .7; transition: opacity .16s ease; }
+.cv-pkt  { fill: var(--blue); transition: opacity .16s ease; }
+.cv-chev { fill: none; stroke: var(--ink-dim); stroke-width: 1; stroke-linecap: round; stroke-linejoin: round; }
+
+/* 01 sequence */
+.cv-msg   { stroke: var(--ink-3); stroke-width: 1; }
+.cv-ret   { stroke-dasharray: 3 3; stroke: var(--ink-dim); }
+.cv-async { stroke: var(--blue); stroke-dasharray: 1 3; stroke-linecap: round; }
+.cv-head  { fill: var(--ink-3); }
+.cv-act   { fill: var(--blue-pale); stroke: var(--blue); stroke-width: 1; }
+
+/* 02 orbit */
+.cv-ring  { fill: none; stroke: var(--rule-strong); stroke-width: 1; }
+.cv-arc   { fill: none; stroke: var(--blue); stroke-width: 2; stroke-linecap: round; }
+.cv-st    { fill: var(--surface); stroke: var(--blue); stroke-width: 1.5; }
+.cv-link  { fill: none; stroke: var(--rule-strong); stroke-width: 1; transition: stroke .16s ease; }
+.cv-link.on { stroke: var(--blue); }
+.cv-limit { stroke: var(--ink-3); stroke-width: 1; stroke-dasharray: 2 2; }
+
+/* 03 space */
+.cv-pt    { fill: var(--ink-dim); opacity: .55; transition: fill .16s ease, opacity .16s ease; }
+.cv-pt.on { fill: var(--blue); opacity: 1; }
+.cv-rad   { fill: color-mix(in oklab, var(--blue) 6%, transparent); stroke: var(--blue); stroke-width: 1; stroke-dasharray: 3 3; }
+.cv-spoke { stroke: var(--blue); stroke-width: .75; opacity: 0; transition: opacity .16s ease; }
+.cv-spoke.on { opacity: .55; }
+.cv-q     { stroke: var(--blue); stroke-width: 1.6; stroke-linecap: round; }
+.cv-row   { transition: transform .6s cubic-bezier(.65, 0, .25, 1), opacity .2s ease; }
+.cv-row .cv-sbar { transition: width .6s ease; }
+.cv-row.lead text:first-child { fill: var(--blue); }
+
+/* 04 scale */
+.cv-pod    { fill: var(--bg-alt); stroke: var(--rule-strong); stroke-width: 1; transition: fill .16s ease, stroke .16s ease; }
+.cv-pod.on { fill: var(--blue); stroke: var(--blue); }
+
+/* 05 heat — four flat steps of the one blue, a band per density class */
+.cv-h1 { fill: color-mix(in oklab, var(--blue) 12%, transparent); }
+.cv-h2 { fill: color-mix(in oklab, var(--blue) 30%, transparent); }
+.cv-h3 { fill: color-mix(in oklab, var(--blue) 55%, transparent); }
+.cv-h4 { fill: var(--blue); }
+.cv-halo  { fill: none; stroke: var(--surface); stroke-width: 3.5; stroke-linejoin: round; opacity: .85; }
+.cv-mark  { stroke: var(--ink-dim); stroke-width: 1; stroke-dasharray: 2 3; opacity: .35; transition: opacity .2s ease; }
+.cv-mark.on { opacity: 1; }
+
+/* ── readout and caption ── */
+
+.cv-read {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--rule);
+}
+.cv-read > div + div { padding-left: 12px; border-left: 1px solid var(--rule); }
+.cv-v {
+  font-family: var(--mono); font-size: 1.05rem; line-height: 1.1;
+  color: var(--ink); font-variant-numeric: tabular-nums; white-space: nowrap;
+}
+.cv-k {
+  margin-top: 4px; font-family: var(--mono); font-size: 12px;
+  letter-spacing: .08em; text-transform: uppercase; color: var(--ink-dim);
+}
+/* a <div>, not a <p>: finlab-theme.css forces body face and size onto p */
+.cv-note {
+  margin-top: 12px; font-family: var(--mono); font-size: 12px;
+  line-height: 1.6; color: var(--ink-3);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tc-live i, .sys-card.is-swap .tc-body { animation: none; }
+  .cv-row, .cv-row .cv-sbar { transition: none; }
+}
