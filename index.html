@@ -185,18 +185,6 @@
     }
     @keyframes drift { to { background-position:56px 56px, 56px 56px; } }
 
-    /* packets riding the grid lines */
-    .pk {
-      position:absolute; width:26px; height:2px; border-radius:2px;
-      background:var(--blue); opacity:0; pointer-events:none; z-index:0;
-    }
-    @keyframes pkRun  { 0%{transform:translateX(0);opacity:0} 8%{opacity:.9}  82%{opacity:.9}  100%{transform:translateX(760px);opacity:0} }
-    @keyframes pkRunB { 0%{transform:translateX(0);opacity:0} 8%{opacity:.75} 82%{opacity:.75} 100%{transform:translateX(520px);opacity:0} }
-    .pk1 { top:22%; left:2%;  animation:pkRun  6.5s linear infinite; }
-    .pk2 { top:46%; left:8%;  animation:pkRunB 8.2s linear 1.4s infinite; }
-    .pk3 { top:70%; left:0;   animation:pkRun  7.4s linear 3.1s infinite; }
-    .pk4 { top:34%; left:26%; animation:pkRunB 9.1s linear 4.6s infinite; }
-
     .hero-inner {
       position:relative; z-index:1; width:100%;
       display:grid; grid-template-columns:1fr 404px; gap:64px; align-items:center;
@@ -250,15 +238,11 @@
     .sys-card {
       background:var(--surface); border:1px solid var(--rule-strong);
       border-radius:var(--r-lg); overflow:hidden; box-shadow:var(--sh-md);
-      animation:bob 5s ease-in-out infinite;
     }
-    @keyframes bob { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-5px)} }
     .tc-bar {
       background:var(--bg-alt); border-bottom:1px solid var(--rule);
       padding:11px 16px; display:flex; align-items:center; gap:7px;
     }
-    .tc-dot { width:11px; height:11px; border-radius:50%; }
-    .tc-dot-r { background:#fe5f57; } .tc-dot-y { background:#febc2e; } .tc-dot-g { background:#28c840; }
     .tc-path { margin-left:auto; font-family:var(--mono); font-size:.62rem; color:var(--ink-dim); letter-spacing:.04em; }
     .tc-body { padding:18px 20px 20px; }
     .tc-label {
@@ -279,32 +263,9 @@
     .edge-flow.f4 { animation-duration:3.4s; animation-delay:.2s; }
     .edge-flow.f5 { animation-duration:2.7s; animation-delay:.9s; }
     @keyframes flow { from{stroke-dashoffset:0} to{stroke-dashoffset:-320} }
-    .node-ring {
-      fill:none; stroke:var(--blue); stroke-width:1.2;
-      transform-origin:center; transform-box:fill-box;
-      animation:ring 2.8s ease-out infinite;
-    }
-    .node-ring.r2 { animation-delay:1.4s; }
-    @keyframes ring { 0%{transform:scale(.85);opacity:.6} 70%,100%{transform:scale(2.4);opacity:0} }
     .node-box  { fill:var(--bg-alt); stroke:var(--rule-strong); }
-    .node-box.on { fill:var(--blue-pale); stroke:var(--blue); }
     .node-txt  { fill:var(--ink-3); font-family:var(--mono); font-size:10px; }
-    .node-txt.on { fill:var(--ink); }
 
-    .tc-skill { margin-bottom:11px; }
-    .tc-skill:last-child { margin-bottom:0; }
-    .tc-skill-head {
-      display:flex; justify-content:space-between;
-      font-family:var(--mono); font-size:.65rem; color:var(--ink-3); margin-bottom:5px;
-    }
-    .tc-skill-pct { color:var(--blue); font-weight:400; font-variant-numeric:tabular-nums; }
-    .tc-skill-track { height:3px; background:var(--rule); border-radius:2px; overflow:hidden; }
-    .tc-skill-fill {
-      height:100%; border-radius:2px; background:var(--blue);
-      transform:scaleX(0); transform-origin:left;
-      transition:transform .85s cubic-bezier(.4,0,.2,1);
-    }
-    .tc-skill-fill.in { transform:scaleX(1); }
 
     /* ── TICKER ── */
     .ticker-wrap {
@@ -581,11 +542,9 @@
     @media(prefers-reduced-motion:reduce){
       *, *::before, *::after { animation:none !important; transition:none !important; }
       .reveal, .hero-left, .hero-right { opacity:1; transform:none; }
-      .tc-skill-fill { transform:scaleX(1); }
       .trace { stroke-dashoffset:0; }
       .stop { opacity:1; transform:none; }
       .track-r { transform:translateX(-50%); }
-      .pk { display:none; }
     }
   </style>
   <link rel="stylesheet" href="css/finlab-theme.css">
@@ -627,10 +586,6 @@
 
 <!-- HERO -->
 <section id="hero">
-  <span class="pk pk1" aria-hidden="true"></span>
-  <span class="pk pk2" aria-hidden="true"></span>
-  <span class="pk pk3" aria-hidden="true"></span>
-  <span class="pk pk4" aria-hidden="true"></span>
 
   <div class="wrap hero-inner">
 
@@ -642,7 +597,7 @@
       <h1 class="hero-h1">
         <span class="ln"><span>AI products,</span></span>
         <span class="ln"><span>diagram to</span></span>
-        <span class="ln"><span class="line-blue">production.</span></span>
+        <span class="ln"><span class="line-blue" data-text="production.">production.</span></span>
       </h1>
       <p class="hero-sub">
         <span class="chev">&gt;</span> <span id="tw" class="tw">AI full-stack engineer</span><span class="cursor">_</span>
@@ -661,10 +616,9 @@
     <div class="hero-right">
       <div class="sys-card">
         <div class="tc-bar">
-          <span class="tc-dot tc-dot-r"></span>
-          <span class="tc-dot tc-dot-y"></span>
-          <span class="tc-dot tc-dot-g"></span>
-          <span class="tc-path">~/topology.live</span>
+          <span class="tc-live"><i aria-hidden="true"></i>live</span>
+          <span class="tc-path">sample trace · POST /ask</span>
+          <span class="tc-total">412&thinsp;ms</span>
         </div>
         <div class="tc-body">
           <span class="tc-label">pipeline — ingest to serve</span>
@@ -682,63 +636,67 @@
             <path class="edge-flow f4" d="M312,54 C312,102 246,96 246,132"></path>
             <path class="edge-flow f5" d="M144,148 H204"></path>
 
-            <circle class="node-ring"    cx="312" cy="38"  r="7"></circle>
-            <circle class="node-ring r2" cx="246" cy="148" r="7"></circle>
-            <g class="node" data-skill="3" role="button" tabindex="0"
+            <g class="node" data-span="4" role="button" tabindex="0"
                aria-label="ingest layer">
               <rect class="hitpad" x="0" y="16" width="96" height="44"></rect>
               <rect class="node-box" x="6" y="22" width="84" height="32" rx="5"></rect>
               <text class="node-txt" x="48" y="42" text-anchor="middle">ingest</text>
             </g>
-            <g class="node" data-skill="4" role="button" tabindex="0"
+            <g class="node" data-span="3" role="button" tabindex="0"
                aria-label="stream layer">
               <rect class="hitpad" x="132" y="16" width="96" height="44"></rect>
               <rect class="node-box" x="138" y="22" width="84" height="32" rx="5"></rect>
               <text class="node-txt" x="180" y="42" text-anchor="middle">stream</text>
             </g>
-            <g class="node" data-skill="0" role="button" tabindex="0"
+            <g class="node" data-span="2" role="button" tabindex="0"
                aria-label="model layer">
               <rect class="hitpad" x="264" y="16" width="96" height="44"></rect>
-              <rect class="node-box on" x="270" y="22" width="84" height="32" rx="5"></rect>
-              <text class="node-txt on" x="312" y="42" text-anchor="middle">model</text>
+              <rect class="node-box" x="270" y="22" width="84" height="32" rx="5"></rect>
+              <text class="node-txt" x="312" y="42" text-anchor="middle">model</text>
             </g>
-            <g class="node" data-skill="2" role="button" tabindex="0"
+            <g class="node" data-span="1" role="button" tabindex="0"
                aria-label="store layer">
               <rect class="hitpad" x="54" y="126" width="96" height="44"></rect>
               <rect class="node-box" x="60" y="132" width="84" height="32" rx="5"></rect>
               <text class="node-txt" x="102" y="152" text-anchor="middle">store</text>
             </g>
-            <g class="node" data-skill="1" role="button" tabindex="0"
+            <g class="node" data-span="0" role="button" tabindex="0"
                aria-label="serve layer">
               <rect class="hitpad" x="198" y="126" width="96" height="44"></rect>
-              <rect class="node-box on" x="204" y="132" width="84" height="32" rx="5"></rect>
-              <text class="node-txt on" x="246" y="152" text-anchor="middle">serve</text>
+              <rect class="node-box" x="204" y="132" width="84" height="32" rx="5"></rect>
+              <text class="node-txt" x="246" y="152" text-anchor="middle">serve</text>
             </g>
           </svg>
 
-          <span class="tc-label mt">skill_confidence</span>
-          <div class="tc-skills">
-            <div class="tc-skill">
-              <div class="tc-skill-head"><span>LLM / AI Engineering</span><span class="tc-skill-pct">95%</span></div>
-              <div class="tc-skill-track"><div class="tc-skill-fill" style="width:95%"></div></div>
+          <span class="tc-label mt">one request, every layer</span>
+          <div class="trace" role="list" style="--T:412" aria-label="Sample trace of one request through the stack, 412 milliseconds end to end">
+            <div class="span" role="listitem" data-span="0" style="--s:0;--e:412;--d:0">
+              <span class="sp-name"><b>serve</b> POST /ask</span>
+              <span class="sp-track"><span class="sp-bar"></span></span>
+              <span class="sp-ms">412</span>
             </div>
-            <div class="tc-skill">
-              <div class="tc-skill-head"><span>Backend Systems</span><span class="tc-skill-pct">92%</span></div>
-              <div class="tc-skill-track"><div class="tc-skill-fill" style="width:92%"></div></div>
+            <div class="span" role="listitem" data-span="1" style="--s:22;--e:88;--d:1">
+              <span class="sp-name"><b>store</b> retrieve</span>
+              <span class="sp-track"><span class="sp-bar"></span></span>
+              <span class="sp-ms">66</span>
             </div>
-            <div class="tc-skill">
-              <div class="tc-skill-head"><span>Cloud Infrastructure</span><span class="tc-skill-pct">90%</span></div>
-              <div class="tc-skill-track"><div class="tc-skill-fill" style="width:90%"></div></div>
+            <div class="span" role="listitem" data-span="2" style="--s:92;--e:396;--d:1">
+              <span class="sp-name"><b>model</b> generate</span>
+              <span class="sp-track"><span class="sp-bar"></span></span>
+              <span class="sp-ms">304</span>
             </div>
-            <div class="tc-skill">
-              <div class="tc-skill-head"><span>Data Engineering</span><span class="tc-skill-pct">88%</span></div>
-              <div class="tc-skill-track"><div class="tc-skill-fill" style="width:88%"></div></div>
+            <div class="span" role="listitem" data-span="3" style="--s:128;--e:404;--d:2">
+              <span class="sp-name"><b>stream</b> tokens out</span>
+              <span class="sp-track"><span class="sp-bar"></span></span>
+              <span class="sp-ms">276</span>
             </div>
-            <div class="tc-skill">
-              <div class="tc-skill-head"><span>Platform Engineering</span><span class="tc-skill-pct">85%</span></div>
-              <div class="tc-skill-track"><div class="tc-skill-fill" style="width:85%"></div></div>
+            <div class="span" role="listitem" data-span="4" style="--s:398;--e:412;--d:1">
+              <span class="sp-name"><b>ingest</b> log → kafka</span>
+              <span class="sp-track"><span class="sp-bar"></span></span>
+              <span class="sp-ms">14</span>
             </div>
           </div>
+          <div class="trace-axis" aria-hidden="true"><span>0</span><span>200</span><span>412&thinsp;ms</span></div>
         </div>
       </div>
     </div>
@@ -1228,15 +1186,6 @@
   }, {threshold: .4});
   const st = document.getElementById('stats');
   if (st) obs.observe(st);
-})();
-
-// SKILL BAR ANIMATION
-(function(){
-  const fills = [...document.querySelectorAll('.tc-skill-fill')];
-  const obs = new IntersectionObserver(entries => {
-    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); obs.unobserve(e.target); } });
-  }, {threshold: .3});
-  fills.forEach(f => obs.observe(f));
 })();
 
 // SCROLL REVEAL

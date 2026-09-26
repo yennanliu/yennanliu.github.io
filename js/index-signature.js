@@ -102,45 +102,123 @@
   window.addEventListener('resize', onScroll, { passive: true });
   onScroll();
 
-  /* ── 3. the topology, wired to the confidence bars ────────────────── */
-  /* Each node already corresponds to a layer the card lists underneath;
-     this only makes that correspondence visible. No new labels. */
+  /* ── 3. the topology, wired to the trace ──────────────────────────── */
+  /* Each node is a span in the waterfall under it: the same request,
+     drawn as structure and as time. The replay walks a cursor along the
+     time axis and lights whichever node is doing work; pointing at a
+     node or a row pauses it and shows the pair. No new labels. */
 
-  (function wireTopology() {
+  (function wireTrace() {
     var card = document.querySelector('.sys-card');
     if (!card) return;
+    var trace = card.querySelector('.trace');
+    var nodes = [].slice.call(card.querySelectorAll('.topo .node[data-span]'));
+    var spans = [].slice.call(card.querySelectorAll('.trace .span'));
+    if (!trace || !spans.length) return;
 
-    var nodes = card.querySelectorAll('.topo .node[data-skill]');
-    var skills = card.querySelectorAll('.tc-skill');
-    if (!nodes.length || !skills.length) return;
-
-    function clear() {
-      card.classList.remove('probing');
-      nodes.forEach(function (n) { n.classList.remove('sel'); });
-      skills.forEach(function (s) { s.classList.remove('lit'); });
+    var T = parseFloat(getComputedStyle(trace).getPropertyValue('--T')) || 1;
+    var bounds = spans.map(function (el) {
+      var cs = el.style;
+      return { el: el, s: parseFloat(cs.getPropertyValue('--s')), e: parseFloat(cs.getPropertyValue('--e')),
+               bar: el.querySelector('.sp-bar') };
+    });
+    function nodeFor(i) {
+      for (var k = 0; k < nodes.length; k++) {
+        if (+nodes[k].getAttribute('data-span') === i) return nodes[k];
+      }
+      return null;
     }
 
-    function probe(node) {
-      var i = parseInt(node.getAttribute('data-skill'), 10);
-      if (isNaN(i) || !skills[i]) return;
+    var probing = false;
+
+    function clear() {
+      probing = false;
+      card.classList.remove('probing');
+      nodes.forEach(function (n) { n.classList.remove('sel'); });
+      spans.forEach(function (s) { s.classList.remove('lit'); });
+    }
+    function probe(i) {
+      if (isNaN(i) || !spans[i]) return;
+      probing = true;
       card.classList.add('probing');
-      nodes.forEach(function (n) { n.classList.toggle('sel', n === node); });
-      skills.forEach(function (s, k) { s.classList.toggle('lit', k === i); });
+      nodes.forEach(function (n) { n.classList.toggle('sel', +n.getAttribute('data-span') === i); });
+      spans.forEach(function (s, k) { s.classList.toggle('lit', k === i); });
     }
 
     nodes.forEach(function (node) {
-      node.addEventListener('mouseenter', function () { probe(node); });
-      node.addEventListener('focus', function () { probe(node); });
-      node.addEventListener('click', function () { probe(node); });
+      var i = parseInt(node.getAttribute('data-span'), 10);
+      node.addEventListener('mouseenter', function () { probe(i); });
+      node.addEventListener('focus', function () { probe(i); });
+      node.addEventListener('click', function () { probe(i); });
       node.addEventListener('keydown', function (e) {
-        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); probe(node); }
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); probe(i); }
       });
     });
-
+    spans.forEach(function (s, i) {
+      s.addEventListener('mouseenter', function () { probe(i); });
+    });
     card.addEventListener('mouseleave', clear);
     card.addEventListener('focusout', function (e) {
       if (!card.contains(e.relatedTarget)) clear();
     });
+
+    if (reduced) return;          /* the finished waterfall is the static state */
+
+    // the replay: 0..T over RUN ms, a beat at the end, again
+    var RUN = 4200, HOLD = 1600, t0 = null, visible = true, looping = false;
+
+    function paint(ms) {
+      trace.style.setProperty('--c', (ms / T).toFixed(4));
+      bounds.forEach(function (b, i) {
+        var f = Math.max(0, Math.min(1, (ms - b.s) / Math.max(1, b.e - b.s)));
+        b.bar.style.setProperty('--f', f.toFixed(3));
+        var run = ms >= b.s && ms < b.e;
+        b.el.classList.toggle('is-run', run);
+        var n = nodeFor(i);
+        if (n) n.classList.toggle('is-run', run);
+      });
+    }
+    function tick(ts) {
+      if (!visible) { looping = false; return; }
+      if (probing) { t0 = null; raf(tick); return; }   /* hold still while read */
+      if (t0 === null) t0 = ts - (parseFloat(trace.getAttribute('data-at')) || 0);
+      var el = (ts - t0) % (RUN + HOLD);
+      trace.setAttribute('data-at', el);
+      paint(Math.min(el, RUN) / RUN * T);
+      trace.classList.toggle('is-playing', el < RUN);
+      raf(tick);
+    }
+    function start() {
+      if (looping) return;
+      looping = true;
+      t0 = null;
+      raf(tick);
+    }
+
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function (es) {
+        visible = es[0].isIntersecting;
+        if (visible) start();
+      }).observe(card);
+    } else start();
+  })();
+
+  /* ── 3b. the headline: drafted, then shipped ──────────────────────── */
+  /* The outline state is added here, not in CSS, and taken away once
+     the fill has played — so a stalled clock leaves solid type. */
+
+  (function draftToProduction() {
+    var h1 = document.querySelector('.hero-h1');
+    if (!h1 || reduced || !(window.CSS && CSS.supports('-webkit-text-stroke', '1px'))) return;
+    var word = h1.querySelector('.line-blue');
+    if (!word) return;
+    h1.classList.add('is-draft');
+    function done() { h1.classList.remove('is-draft', 'is-fill'); }
+    setTimeout(function () {
+      h1.classList.add('is-fill');
+      h1.classList.remove('is-draft');
+      setTimeout(done, 1400);           /* transitionend on a pseudo is unreliable */
+    }, 1250);                            /* after the third line has risen */
   })();
 
 

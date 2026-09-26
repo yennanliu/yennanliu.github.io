@@ -236,14 +236,152 @@ section[data-sig] > * { position: relative; z-index: 1; }
 .topo .node:focus-visible    { outline: none; }
 .topo .node:focus-visible .node-box { stroke: var(--blue); stroke-width: 2; }
 
-.tc-skill { transition: opacity .2s ease; }
-.sys-card.probing .tc-skill { opacity: .32; }
-.sys-card.probing .tc-skill.lit { opacity: 1; }
-.tc-skill.lit .tc-skill-head span:first-child { color: var(--ink); }
-.tc-skill.lit .tc-skill-track { box-shadow: 0 0 0 1px var(--blue-border); }
+/* ── the trace ────────────────────────────────────────────────────────
+   One request followed through every layer, drawn the way a tracing
+   tool draws it: a waterfall of spans on one time axis. Each span is a
+   node in the topology above, so the two drawings are the same system
+   read two ways — structure on top, time underneath.
 
-/* the card stops bobbing while it is being read */
-.sys-card:hover, .sys-card.probing { animation-play-state: paused; }
+   Rows are divs with list roles, not <li>: finlab-theme.css forces body
+   face and size onto li with !important.
+
+   Markup is complete: every bar is drawn at full length from --s/--e.
+   js/index-signature.js replays the request by driving --f (how much of
+   each bar has happened) and --c (where the cursor is); without it the
+   waterfall simply sits there finished.                                 */
+
+.tc-bar { gap: 12px !important; }
+.tc-live {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-family: var(--mono); font-size: .62rem; letter-spacing: .14em;
+  text-transform: uppercase; color: var(--green);
+}
+.tc-live i {
+  width: 6px; height: 6px; border-radius: 50%; background: var(--green);
+  animation: pulse 2.2s ease-in-out infinite;
+}
+.tc-bar .tc-path { margin-left: 0; }
+.tc-total {
+  margin-left: auto; font-family: var(--mono); font-size: .62rem;
+  color: var(--ink); font-variant-numeric: tabular-nums;
+}
+
+.trace {
+  --c: 1;
+  position: relative;
+  list-style: none; margin: 0; padding: 0;
+  display: grid; gap: 7px;
+}
+.span {
+  display: grid;
+  grid-template-columns: 9.6rem minmax(0, 1fr) 2.2rem;
+  align-items: center; gap: 10px;
+  font-family: var(--mono); font-size: .62rem; color: var(--ink-3);
+  cursor: default;
+  transition: opacity .16s ease, color .16s ease;
+}
+.sp-name {
+  position: relative;
+  padding-left: calc(var(--d) * 12px);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.sp-name b { font-weight: 400; color: var(--ink); }
+/* the tree: a hairline elbow back to the parent */
+.span:not([style*="--d:0"]) .sp-name::before {
+  content: ''; position: absolute;
+  left: calc(var(--d) * 12px - 8px); top: -5px;
+  width: 5px; height: calc(.5em + 7px);
+  border-left: 1px solid var(--rule-strong);
+  border-bottom: 1px solid var(--rule-strong);
+}
+.sp-track { position: relative; height: 8px; }
+.sp-track::before {                    /* the full axis, as a hairline */
+  content: ''; position: absolute; left: 0; right: 0; top: 50%;
+  border-top: 1px dashed var(--rule);
+}
+.sp-bar {
+  --f: 1;
+  position: absolute; top: 0; bottom: 0;
+  left: calc(var(--s) * 100% / var(--T));
+  width: calc((var(--e) - var(--s)) * 100% / var(--T));
+  min-width: 2px;
+  border-radius: 2px;
+  background: color-mix(in oklab, var(--blue) 18%, transparent);
+  box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--blue) 45%, transparent);
+  overflow: hidden;
+}
+.sp-bar::after {                       /* the part that has happened */
+  content: ''; position: absolute; inset: 0;
+  background: var(--blue);
+  transform: scaleX(var(--f)); transform-origin: left;
+}
+.sp-ms { text-align: right; color: var(--ink-dim); font-variant-numeric: tabular-nums; }
+
+.span.is-run { color: var(--ink); }
+.span.is-run .sp-ms { color: var(--blue); }
+
+/* the cursor: a hairline down the bar column at time --c */
+.trace::after {
+  content: ''; position: absolute; top: -4px; bottom: -4px;
+  left: calc(9.6rem + 10px + (100% - 9.6rem - 2.2rem - 20px) * var(--c));
+  width: 1px; background: var(--blue);
+  opacity: 0; transition: opacity .16s ease;
+  pointer-events: none;
+}
+.trace.is-playing::after { opacity: .7; }
+
+.trace-axis {
+  display: flex; justify-content: space-between;
+  margin: 10px 2.2rem 0 calc(9.6rem + 10px);
+  padding-top: 6px; border-top: 1px solid var(--rule);
+  font-family: var(--mono); font-size: .56rem; color: var(--ink-dim);
+  font-variant-numeric: tabular-nums;
+}
+
+/* a node whose span is running */
+.topo .node.is-run .node-box { fill: var(--blue-pale); stroke: var(--blue); }
+.topo .node.is-run .node-txt { fill: var(--ink); }
+
+/* probing: point at either drawing, the other answers */
+.sys-card.probing .span { opacity: .32; }
+.sys-card.probing .span.lit { opacity: 1; color: var(--ink); }
+.sys-card.probing .span.lit .sp-ms { color: var(--blue); }
+
+/* ── the headline, drafted then shipped ──────────────────────────────
+   "diagram to" stays a drawing — outline only. "production." is drawn
+   the same way and then filled, left to right, once the lines land:
+   the claim acted out in the type rather than decorated around it.
+   Only where text-stroke exists; elsewhere both are plain filled text. */
+
+@supports (-webkit-text-stroke: 1px) {
+  .hero-h1 .ln:nth-child(2) > span {
+    color: transparent;
+    -webkit-text-stroke: 1px var(--ink);
+  }
+  .hero-h1 .line-blue { position: relative; display: inline-block; }
+  .hero-h1 .line-blue::after {
+    content: attr(data-text);
+    position: absolute; left: 0; top: 0;
+    color: var(--blue);
+    -webkit-text-stroke: 0;
+    clip-path: inset(-.3em 0 -.3em 0);   /* clear the descender of p */
+    pointer-events: none;
+  }
+  /* set by the script, then taken away — never in the markup */
+  .hero-h1.is-draft .line-blue,
+  .hero-h1.is-fill  .line-blue { color: transparent; -webkit-text-stroke: 1px var(--blue); }
+  .hero-h1.is-draft .line-blue::after { clip-path: inset(-.3em 100% -.3em 0); }
+  .hero-h1.is-fill  .line-blue::after {
+    clip-path: inset(-.3em 0 -.3em 0);
+    transition: clip-path 1.2s cubic-bezier(.65, 0, .25, 1);
+  }
+}
+
+@media (max-width: 480px) {
+  .span { grid-template-columns: 7.6rem minmax(0, 1fr) 2rem; }
+  .trace::after { left: calc(7.6rem + 10px + (100% - 7.6rem - 2rem - 20px) * var(--c)); }
+  .trace-axis { margin-left: calc(7.6rem + 10px); margin-right: 2rem; }
+}
 
 /* ── 7. FIGURES ────────────────────────────────────────────────────────
    The stats band is the page's only pure-number moment, so let it be
@@ -274,7 +412,7 @@ section[data-sig] > * { position: relative; z-index: 1; }
   #sig-rail::after { transition: none; }
   .hero-h1 .ln > span { transform: none; animation: none; }
   #hero::before { animation: none; mask-image: var(--grid-mask); -webkit-mask-image: var(--grid-mask); }
-  .sys-card { animation: none; }
+  .tc-live i { animation: none; }
 }
 
 /* ── 6. THE STACK ──────────────────────────────────────────────────────

@@ -94,10 +94,22 @@ it changes is scale, composition and responsiveness:
 - Each section gets an oversized outline numeral in the margin
   (`data-sig="02"` on the `<section>`), drawn as a stroke so it stays
   texture rather than hierarchy.
-- The hero topology is wired to the confidence bars beneath it: each
-  `.topo .node[data-skill="n"]` lights `.tc-skill` number `n`. It adds no
-  new labels — it only makes a correspondence the card already had
-  visible.
+- The hero headline acts out its own claim: "diagram to" is set in
+  outline (`-webkit-text-stroke`, behind `@supports`), and "production."
+  is drafted in outline then filled left to right once the lines land.
+  The outline state is a class the script adds and then removes — the
+  markup and the CSS alone give solid type.
+- The hero card is one system read two ways: the topology on top is its
+  structure, and under it a **sample trace** — one `POST /ask` drawn as
+  a waterfall of spans on a single time axis — is its time. Each
+  `.topo .node[data-span="n"]` is span `n`; the script replays the
+  request by driving `--f` per bar and a cursor `--c`, lighting the node
+  whose span is running, and pointing at either a node or a row pauses
+  it and shows the pair. Bars are positioned from `--s`/`--e` against
+  `--T` in the markup, so the waterfall is finished without JS. Rows are
+  `div`s with list roles: `finlab-theme.css` forces the body face onto
+  `li`. The trace replaced a set of skill-percentage bars — do not bring
+  those back.
 - The six layers are a **stack**, not a marquee: six plates offset into
   a staircase, one open at a time, wired to its detail panel by a
   hairline that tracks whichever plate you took. It is a real tablist —
