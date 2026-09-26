@@ -27,6 +27,7 @@
     { id: 'hero',      label: 'Top' },
     { id: 'expertise', label: 'Layers' },
     { id: 'career',    label: 'Trajectory' },
+    { id: 'terrain',   label: 'Terrain' },
     { id: 'projects',  label: 'Work' },
     { id: 'contact',   label: 'Contact' }
   ];

@@ -590,6 +590,7 @@
   </style>
   <link rel="stylesheet" href="css/finlab-theme.css">
   <link rel="stylesheet" href="css/index-signature.css">
+  <link rel="stylesheet" href="css/index-terrain.css">
   <link rel="stylesheet" href="css/site-nav.css">
   <link rel="stylesheet" href="css/site-footer.css">
 </head>
@@ -988,8 +989,59 @@
   </div>
 </section>
 
+<!-- TERRAIN — the same trajectory as a surface you can turn -->
+<section id="terrain" class="section" data-sig="04">
+  <div class="wrap">
+    <span class="sec-eye reveal">Terrain</span>
+    <h2 class="sec-h2 reveal">Data, then services, then models — one surface.</h2>
+    <p class="sec-lead reveal">The trajectory above, drawn as a landscape. Height is scope, and each summit stands on the slope of the one before it — the surface is a sum, so the AI peak is taller partly because the backend ridge runs underneath. Drag to turn it; pick a stop to climb.</p>
+
+    <div class="terrain reveal" id="terrain-fig">
+      <div class="terrain-stage">
+        <canvas class="terrain-cv" aria-hidden="true"></canvas>
+        <span class="terrain-hint" aria-hidden="true">drag to turn</span>
+      </div>
+
+      <div class="terrain-side">
+        <div class="terrain-seg" role="tablist" aria-label="Stops on the surface">
+          <button class="terrain-tab" role="tab" id="tt-0" aria-controls="tp-0" aria-selected="false" tabindex="-1" data-stop="0"><span>01</span> Data</button>
+          <button class="terrain-tab" role="tab" id="tt-1" aria-controls="tp-1" aria-selected="false" tabindex="-1" data-stop="1"><span>02</span> Backend</button>
+          <button class="terrain-tab is-on" role="tab" id="tt-2" aria-controls="tp-2" aria-selected="true" tabindex="0" data-stop="2"><span>03</span> AI</button>
+        </div>
+
+        <div class="terrain-panel" id="tp-0" role="tabpanel" aria-labelledby="tt-0" data-stop="0">
+          <div class="tp-head"><span class="tp-years">x<sub>1</sub> · 2016</span><span class="tp-role">The plateau</span></div>
+          <p class="tp-blurb">Wide and low. Pipelines, ETL and warehousing on Hadoop and Spark — nothing about it looks like a summit, but every contour further along is drawn on top of it.</p>
+          <div class="tp-figs">
+            <div><div class="tp-v" data-z="0">0.00</div><div class="tp-k">Elevation</div></div>
+            <div><div class="tp-v" data-c="0">0.00</div><div class="tp-k">Carried</div></div>
+          </div>
+        </div>
+        <div class="terrain-panel" id="tp-1" role="tabpanel" aria-labelledby="tt-1" data-stop="1">
+          <div class="tp-head"><span class="tp-years">x<sub>2</sub> · 2018</span><span class="tp-role">The ridge</span></div>
+          <p class="tp-blurb">Services and APIs for teams in three countries. Getting here meant going down first: the route off the plateau drops through the seam — the hollow where a handoff between specialists loses something — before it climbs the ridge.</p>
+          <div class="tp-figs">
+            <div><div class="tp-v" data-z="1">0.00</div><div class="tp-k">Elevation</div></div>
+            <div><div class="tp-v" data-c="1">0.00</div><div class="tp-k">Carried</div></div>
+          </div>
+        </div>
+        <div class="terrain-panel" id="tp-2" role="tabpanel" aria-labelledby="tt-2" data-stop="2">
+          <div class="tp-head"><span class="tp-years">x<sub>3</sub> · 2024</span><span class="tp-role">The summit</span></div>
+          <p class="tp-blurb">LLM systems, agents and evals — the narrowest peak and the highest, because it is built on the shoulder of the ridge. Take the ridge away and it stands a good deal lower.</p>
+          <div class="tp-figs">
+            <div><div class="tp-v" data-z="2">0.00</div><div class="tp-k">Elevation</div></div>
+            <div><div class="tp-v" data-c="2">0.00</div><div class="tp-k">Carried</div></div>
+          </div>
+        </div>
+
+        <div class="terrain-note">A model of a career, not a measurement: three Gaussians and one hollow, summed. Elevation is the surface at the stop; carried is the part of it the earlier stops leave underneath. Both are read off the function that draws the mesh, not typed in.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- PROJECTS -->
-<section id="projects" class="section" data-sig="04">
+<section id="projects" class="section" data-sig="05">
   <div class="wrap">
     <span class="sec-eye reveal">Selected Work</span>
     <h2 class="sec-h2 reveal">Four repos, four layers.</h2>
@@ -1044,7 +1096,7 @@
 </section>
 
 <!-- CONTACT -->
-<section id="contact" data-sig="05">
+<section id="contact" data-sig="06">
   <svg class="radar-bed" viewBox="0 0 600 600" aria-hidden="true">
     <circle class="radar"   cx="300" cy="300" r="286" fill="none" stroke="var(--rule-strong)" stroke-width="1" stroke-dasharray="3 13"></circle>
     <circle class="radar-b" cx="300" cy="300" r="214" fill="none" stroke="var(--rule)" stroke-width="1" stroke-dasharray="2 9"></circle>
@@ -1204,6 +1256,7 @@
 })();
 </script>
   <script src="js/index-signature.js" defer></script>
+  <script src="js/index-terrain.js" defer></script>
   <script src="js/site-nav.js" defer></script>
 </body>
 </html>

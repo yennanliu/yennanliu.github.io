@@ -1,0 +1,142 @@
+/* ==========================================================================
+   INDEX — TERRAIN
+   Loaded after index-signature.css, only on the landing page.
+
+   The career trace drawn a second way: a surface you can turn, with its
+   contours projected onto the floor underneath — the way a loss landscape
+   is drawn, with height standing for scope instead of loss.
+
+   No new palette. The mesh is the one blue in flat, height-banded tints
+   (a band is a contour interval, not a gradient), hairlines do the
+   structure, mono carries every figure. The canvas is painted by
+   js/index-terrain.js, which reads its colours off these tokens so dark
+   mode needs nothing extra here.
+
+   Markup is complete: all three panels ship visible and the script hides
+   two. Without JS you lose the drawing, not the content.
+   ========================================================================== */
+
+.terrain {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 340px;
+  border: 1px solid var(--rule);
+  border-radius: var(--r);
+  background: var(--bg-alt);
+  overflow: hidden;
+}
+
+.terrain-stage {
+  position: relative;
+  min-height: 480px;
+  border-right: 1px solid var(--rule);
+  touch-action: pan-y;               /* horizontal drag turns, vertical scrolls */
+  cursor: grab;
+}
+.terrain-stage.is-drag { cursor: grabbing; }
+
+.terrain-cv {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.terrain-hint {
+  position: absolute;
+  left: 18px;
+  bottom: 14px;
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--ink-dim);
+  pointer-events: none;
+  transition: opacity .16s ease;
+}
+.terrain-stage.is-touched .terrain-hint { opacity: 0; }
+
+/* ── the side column ── */
+
+.terrain-side {
+  display: flex;
+  flex-direction: column;
+  background: var(--surface);
+  padding: 22px 24px;
+  gap: 18px;
+}
+
+.terrain-seg {
+  display: flex;
+  border: 1px solid var(--rule-strong);
+  border-radius: var(--r-sm);
+  overflow: hidden;
+}
+.terrain-tab {
+  flex: 1;
+  appearance: none;
+  border: 0;
+  border-left: 1px solid var(--rule-strong);
+  background: transparent;
+  padding: 9px 6px;
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  cursor: pointer;
+  transition: background .16s ease, color .16s ease;
+}
+.terrain-tab:first-child { border-left: 0; }
+.terrain-tab span { color: var(--ink-dim); margin-right: 4px; }
+.terrain-tab:hover { color: var(--ink); background: var(--bg-alt); }
+.terrain-tab.is-on { color: var(--blue); background: var(--blue-pale); }
+.terrain-tab.is-on span { color: var(--blue); }
+.terrain-tab:focus-visible { outline: 2px solid var(--blue); outline-offset: -2px; }
+
+.terrain-panel + .terrain-panel { border-top: 1px solid var(--rule); padding-top: 18px; }
+.terrain.is-live .terrain-panel + .terrain-panel { border-top: 0; padding-top: 0; }
+
+.tp-head { display: flex; flex-direction: column; gap: 4px; margin-bottom: 10px; }
+.tp-years { font-family: var(--mono); font-size: .76rem; letter-spacing: .08em; color: var(--blue); }
+.tp-years sub { font-size: .7em; }
+.tp-role { font-size: 1.25rem; font-weight: 400; letter-spacing: -.015em; color: var(--ink); }
+.terrain p.tp-blurb { font-size: .94rem; line-height: 1.7; color: var(--ink-3); margin: 0 0 16px; text-wrap: pretty; }
+
+.tp-figs { display: flex; gap: 32px; }
+.tp-v { font-family: var(--mono); font-size: 1.5rem; line-height: 1; color: var(--blue-disp); font-variant-numeric: tabular-nums; }
+.tp-k { font-family: var(--mono); font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--ink-dim); margin-top: 7px; }
+
+/* a <div>, not a <p>: finlab-theme.css forces body size onto p */
+.terrain-note {
+  margin-top: auto;
+  padding-top: 14px;
+  border-top: 1px solid var(--rule);
+  font-family: var(--mono);
+  font-size: 12px;
+  line-height: 1.6;
+  color: var(--ink-dim);
+}
+
+.terrain.is-live .terrain-panel.is-entering { animation: tpIn .32s ease; }
+@keyframes tpIn { from { opacity: .2; transform: translateY(6px); } }
+
+@media (max-width: 960px) {
+  .terrain { grid-template-columns: 1fr; }
+  .terrain-stage { min-height: 360px; border-right: 0; border-bottom: 1px solid var(--rule); }
+}
+@media (max-width: 560px) {
+  .terrain-stage { min-height: 300px; }
+  .terrain-side { padding: 18px 16px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .terrain.is-live .terrain-panel.is-entering { animation: none; }
+}
+
+/* ── script subtracts ──
+   Without JS: no canvas, no switch, all three panels in a column. */
+.terrain:not(.is-live) { grid-template-columns: 1fr; }
+.terrain:not(.is-live) .terrain-stage,
+.terrain:not(.is-live) .terrain-seg { display: none; }
+.terrain.is-live .terrain-panel:not(.is-on) { display: none; }

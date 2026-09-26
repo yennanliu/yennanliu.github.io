@@ -89,7 +89,7 @@ it changes is scale, composition and responsiveness:
 - The hero headline is **the one deliberate break of the 2.5rem cap** —
   it goes to 5.25rem at weight 300. If you raise the cap anywhere else,
   the break stops reading as intentional.
-- A pipeline rail down the left edge marks the five sections and fills
+- A pipeline rail down the left edge marks the six sections and fills
   as you scroll; a hairline across the top tracks read progress.
 - Each section gets an oversized outline numeral in the margin
   (`data-sig="02"` on the `<section>`), drawn as a stroke so it stays
@@ -109,6 +109,16 @@ it changes is scale, composition and responsiveness:
   curve is measured off the path with `getPointAtLength`, never
   hard-coded, so the numbers stay right if the curve is redrawn.
 - Pointer spotlight on the hero grid.
+- The terrain (`#terrain`, `css/index-terrain.css` + `js/index-terrain.js`)
+  redraws the trajectory as a surface you can turn — a loss-landscape
+  plot with height standing for scope, contours projected on the floor.
+  The surface is a **sum** of three Gaussians (data, backend-as-ridge,
+  AI) and one hollow (the seam), so each panel's *elevation* and
+  *carried* figures are evaluated off the same `f(x, y)` that draws the
+  mesh — never typed in. Move a bump and the numbers follow. It is a
+  hand-rolled painter's-algorithm canvas (no library); tints are the one
+  blue banded by height and mixed into the ground, read from the tokens,
+  and re-read when the theme switches. It only animates while on screen.
 
 Two rules the stack exists to respect, worth keeping if you extend it:
 
