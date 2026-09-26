@@ -6,8 +6,8 @@
  *   1. a read-progress hairline across the top
  *   2. a pipeline rail down the left edge that tracks which section you
  *      are in, and jumps you to one when clicked
- *   3. the hero topology wired to the confidence bars underneath it, so
- *      taking a node tells you which layer it belongs to
+ *   3. the headline, drafted in outline and then filled
+ *      (the hero card's five charts live in js/index-card.js)
  *   4. the layer stack: six plates you can take apart, as a tablist
  *   5. the trajectory chart: a scrubbable curve with a live packet
  *   6. a pointer spotlight on the hero grid
@@ -27,6 +27,7 @@
     { id: 'hero',      label: 'Top' },
     { id: 'expertise', label: 'Layers' },
     { id: 'career',    label: 'Trajectory' },
+    { id: 'terrain',   label: 'Terrain' },
     { id: 'projects',  label: 'Work' },
     { id: 'contact',   label: 'Contact' }
   ];
@@ -101,45 +102,22 @@
   window.addEventListener('resize', onScroll, { passive: true });
   onScroll();
 
-  /* ── 3. the topology, wired to the confidence bars ────────────────── */
-  /* Each node already corresponds to a layer the card lists underneath;
-     this only makes that correspondence visible. No new labels. */
+  /* ── 3b. the headline: drafted, then shipped ──────────────────────── */
+  /* The outline state is added here, not in CSS, and taken away once
+     the fill has played — so a stalled clock leaves solid type. */
 
-  (function wireTopology() {
-    var card = document.querySelector('.sys-card');
-    if (!card) return;
-
-    var nodes = card.querySelectorAll('.topo .node[data-skill]');
-    var skills = card.querySelectorAll('.tc-skill');
-    if (!nodes.length || !skills.length) return;
-
-    function clear() {
-      card.classList.remove('probing');
-      nodes.forEach(function (n) { n.classList.remove('sel'); });
-      skills.forEach(function (s) { s.classList.remove('lit'); });
-    }
-
-    function probe(node) {
-      var i = parseInt(node.getAttribute('data-skill'), 10);
-      if (isNaN(i) || !skills[i]) return;
-      card.classList.add('probing');
-      nodes.forEach(function (n) { n.classList.toggle('sel', n === node); });
-      skills.forEach(function (s, k) { s.classList.toggle('lit', k === i); });
-    }
-
-    nodes.forEach(function (node) {
-      node.addEventListener('mouseenter', function () { probe(node); });
-      node.addEventListener('focus', function () { probe(node); });
-      node.addEventListener('click', function () { probe(node); });
-      node.addEventListener('keydown', function (e) {
-        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); probe(node); }
-      });
-    });
-
-    card.addEventListener('mouseleave', clear);
-    card.addEventListener('focusout', function (e) {
-      if (!card.contains(e.relatedTarget)) clear();
-    });
+  (function draftToProduction() {
+    var h1 = document.querySelector('.hero-h1');
+    if (!h1 || reduced || !(window.CSS && CSS.supports('-webkit-text-stroke', '1px'))) return;
+    var word = h1.querySelector('.line-blue');
+    if (!word) return;
+    h1.classList.add('is-draft');
+    function done() { h1.classList.remove('is-draft', 'is-fill'); }
+    setTimeout(function () {
+      h1.classList.add('is-fill');
+      h1.classList.remove('is-draft');
+      setTimeout(done, 1400);           /* transitionend on a pseudo is unreliable */
+    }, 1250);                            /* after the third line has risen */
   })();
 
 

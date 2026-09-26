@@ -185,18 +185,6 @@
     }
     @keyframes drift { to { background-position:56px 56px, 56px 56px; } }
 
-    /* packets riding the grid lines */
-    .pk {
-      position:absolute; width:26px; height:2px; border-radius:2px;
-      background:var(--blue); opacity:0; pointer-events:none; z-index:0;
-    }
-    @keyframes pkRun  { 0%{transform:translateX(0);opacity:0} 8%{opacity:.9}  82%{opacity:.9}  100%{transform:translateX(760px);opacity:0} }
-    @keyframes pkRunB { 0%{transform:translateX(0);opacity:0} 8%{opacity:.75} 82%{opacity:.75} 100%{transform:translateX(520px);opacity:0} }
-    .pk1 { top:22%; left:2%;  animation:pkRun  6.5s linear infinite; }
-    .pk2 { top:46%; left:8%;  animation:pkRunB 8.2s linear 1.4s infinite; }
-    .pk3 { top:70%; left:0;   animation:pkRun  7.4s linear 3.1s infinite; }
-    .pk4 { top:34%; left:26%; animation:pkRunB 9.1s linear 4.6s infinite; }
-
     .hero-inner {
       position:relative; z-index:1; width:100%;
       display:grid; grid-template-columns:1fr 404px; gap:64px; align-items:center;
@@ -245,20 +233,16 @@
     .btn-ring { background:transparent; color:var(--ink); border-color:var(--rule-strong); }
     .btn-ring:hover { background:var(--surface); border-color:var(--blue); color:var(--blue); }
 
-    /* ── SYSTEM CARD (live topology) ── */
+    /* ── SYSTEM CARD (chrome only; the charts are css/index-card.css) ── */
     .hero-right { opacity:0; animation:riseIn .7s ease .45s forwards; }
     .sys-card {
       background:var(--surface); border:1px solid var(--rule-strong);
       border-radius:var(--r-lg); overflow:hidden; box-shadow:var(--sh-md);
-      animation:bob 5s ease-in-out infinite;
     }
-    @keyframes bob { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-5px)} }
     .tc-bar {
       background:var(--bg-alt); border-bottom:1px solid var(--rule);
       padding:11px 16px; display:flex; align-items:center; gap:7px;
     }
-    .tc-dot { width:11px; height:11px; border-radius:50%; }
-    .tc-dot-r { background:#fe5f57; } .tc-dot-y { background:#febc2e; } .tc-dot-g { background:#28c840; }
     .tc-path { margin-left:auto; font-family:var(--mono); font-size:.62rem; color:var(--ink-dim); letter-spacing:.04em; }
     .tc-body { padding:18px 20px 20px; }
     .tc-label {
@@ -268,43 +252,7 @@
     }
     .tc-label.mt { margin-top:20px; }
 
-    .topo { display:block; width:100%; overflow:visible; }
-    .edge-base { stroke:var(--rule-strong); stroke-width:1.25; fill:none; }
-    .edge-flow {
-      stroke:var(--blue); stroke-width:1.6; fill:none; stroke-linecap:round;
-      stroke-dasharray:5 44; animation:flow 2.6s linear infinite;
-    }
-    .edge-flow.f2 { animation-duration:3.1s; animation-delay:.35s; }
-    .edge-flow.f3 { animation-duration:2.9s; animation-delay:.7s; }
-    .edge-flow.f4 { animation-duration:3.4s; animation-delay:.2s; }
-    .edge-flow.f5 { animation-duration:2.7s; animation-delay:.9s; }
-    @keyframes flow { from{stroke-dashoffset:0} to{stroke-dashoffset:-320} }
-    .node-ring {
-      fill:none; stroke:var(--blue); stroke-width:1.2;
-      transform-origin:center; transform-box:fill-box;
-      animation:ring 2.8s ease-out infinite;
-    }
-    .node-ring.r2 { animation-delay:1.4s; }
-    @keyframes ring { 0%{transform:scale(.85);opacity:.6} 70%,100%{transform:scale(2.4);opacity:0} }
-    .node-box  { fill:var(--bg-alt); stroke:var(--rule-strong); }
-    .node-box.on { fill:var(--blue-pale); stroke:var(--blue); }
-    .node-txt  { fill:var(--ink-3); font-family:var(--mono); font-size:10px; }
-    .node-txt.on { fill:var(--ink); }
 
-    .tc-skill { margin-bottom:11px; }
-    .tc-skill:last-child { margin-bottom:0; }
-    .tc-skill-head {
-      display:flex; justify-content:space-between;
-      font-family:var(--mono); font-size:.65rem; color:var(--ink-3); margin-bottom:5px;
-    }
-    .tc-skill-pct { color:var(--blue); font-weight:400; font-variant-numeric:tabular-nums; }
-    .tc-skill-track { height:3px; background:var(--rule); border-radius:2px; overflow:hidden; }
-    .tc-skill-fill {
-      height:100%; border-radius:2px; background:var(--blue);
-      transform:scaleX(0); transform-origin:left;
-      transition:transform .85s cubic-bezier(.4,0,.2,1);
-    }
-    .tc-skill-fill.in { transform:scaleX(1); }
 
     /* ── TICKER ── */
     .ticker-wrap {
@@ -581,15 +529,15 @@
     @media(prefers-reduced-motion:reduce){
       *, *::before, *::after { animation:none !important; transition:none !important; }
       .reveal, .hero-left, .hero-right { opacity:1; transform:none; }
-      .tc-skill-fill { transform:scaleX(1); }
       .trace { stroke-dashoffset:0; }
       .stop { opacity:1; transform:none; }
       .track-r { transform:translateX(-50%); }
-      .pk { display:none; }
     }
   </style>
   <link rel="stylesheet" href="css/finlab-theme.css">
   <link rel="stylesheet" href="css/index-signature.css">
+  <link rel="stylesheet" href="css/index-terrain.css">
+  <link rel="stylesheet" href="css/index-card.css">
   <link rel="stylesheet" href="css/site-nav.css">
   <link rel="stylesheet" href="css/site-footer.css">
 </head>
@@ -626,10 +574,6 @@
 
 <!-- HERO -->
 <section id="hero">
-  <span class="pk pk1" aria-hidden="true"></span>
-  <span class="pk pk2" aria-hidden="true"></span>
-  <span class="pk pk3" aria-hidden="true"></span>
-  <span class="pk pk4" aria-hidden="true"></span>
 
   <div class="wrap hero-inner">
 
@@ -641,7 +585,7 @@
       <h1 class="hero-h1">
         <span class="ln"><span>AI products,</span></span>
         <span class="ln"><span>diagram to</span></span>
-        <span class="ln"><span class="line-blue">production.</span></span>
+        <span class="ln"><span class="line-blue" data-text="production.">production.</span></span>
       </h1>
       <p class="hero-sub">
         <span class="chev">&gt;</span> <span id="tw" class="tw">AI full-stack engineer</span><span class="cursor">_</span>
@@ -658,86 +602,118 @@
     </div>
 
     <div class="hero-right">
-      <div class="sys-card">
+      <div class="sys-card" id="hero-card">
         <div class="tc-bar">
-          <span class="tc-dot tc-dot-r"></span>
-          <span class="tc-dot tc-dot-y"></span>
-          <span class="tc-dot tc-dot-g"></span>
-          <span class="tc-path">~/topology.live</span>
+          <span class="tc-live"><i aria-hidden="true"></i>live</span>
+          <span class="tc-path">sample · POST /ask</span>
+          <span class="tc-total">412&thinsp;ms</span>
+          <button class="tc-next" type="button" hidden aria-label="Show the next chart">01/05</button>
         </div>
         <div class="tc-body">
-          <span class="tc-label">pipeline — ingest to serve</span>
-
-          <svg class="topo" viewBox="0 0 360 186" role="img" aria-label="System topology: ingest to stream to model to serve, with a store branch">
-            <path class="edge-base" d="M90,38 H138"></path>
-            <path class="edge-base" d="M222,38 H270"></path>
-            <path class="edge-base" d="M180,54 C180,96 102,92 102,132"></path>
-            <path class="edge-base" d="M312,54 C312,102 246,96 246,132"></path>
-            <path class="edge-base" d="M144,148 H204"></path>
-
-            <path class="edge-flow"    d="M90,38 H138"></path>
-            <path class="edge-flow f2" d="M222,38 H270"></path>
-            <path class="edge-flow f3" d="M180,54 C180,96 102,92 102,132"></path>
-            <path class="edge-flow f4" d="M312,54 C312,102 246,96 246,132"></path>
-            <path class="edge-flow f5" d="M144,148 H204"></path>
-
-            <circle class="node-ring"    cx="312" cy="38"  r="7"></circle>
-            <circle class="node-ring r2" cx="246" cy="148" r="7"></circle>
-            <g class="node" data-skill="3" role="button" tabindex="0"
-               aria-label="ingest layer">
-              <rect class="hitpad" x="0" y="16" width="96" height="44"></rect>
-              <rect class="node-box" x="6" y="22" width="84" height="32" rx="5"></rect>
-              <text class="node-txt" x="48" y="42" text-anchor="middle">ingest</text>
-            </g>
-            <g class="node" data-skill="4" role="button" tabindex="0"
-               aria-label="stream layer">
-              <rect class="hitpad" x="132" y="16" width="96" height="44"></rect>
-              <rect class="node-box" x="138" y="22" width="84" height="32" rx="5"></rect>
-              <text class="node-txt" x="180" y="42" text-anchor="middle">stream</text>
-            </g>
-            <g class="node" data-skill="0" role="button" tabindex="0"
-               aria-label="model layer">
-              <rect class="hitpad" x="264" y="16" width="96" height="44"></rect>
-              <rect class="node-box on" x="270" y="22" width="84" height="32" rx="5"></rect>
-              <text class="node-txt on" x="312" y="42" text-anchor="middle">model</text>
-            </g>
-            <g class="node" data-skill="2" role="button" tabindex="0"
-               aria-label="store layer">
-              <rect class="hitpad" x="54" y="126" width="96" height="44"></rect>
-              <rect class="node-box" x="60" y="132" width="84" height="32" rx="5"></rect>
-              <text class="node-txt" x="102" y="152" text-anchor="middle">store</text>
-            </g>
-            <g class="node" data-skill="1" role="button" tabindex="0"
-               aria-label="serve layer">
-              <rect class="hitpad" x="198" y="126" width="96" height="44"></rect>
-              <rect class="node-box on" x="204" y="132" width="84" height="32" rx="5"></rect>
-              <text class="node-txt on" x="246" y="152" text-anchor="middle">serve</text>
-            </g>
+          <!-- chart 01, pre-rendered from js/index-card.js at u = 1: the no-JS state -->
+          <span class="tc-label">serve — one request, in order</span>
+          <svg class="cv-svg" viewBox="0 0 360 240" role="img" aria-label="serve — one request, in order — sample data">
+          <line x1="30" y1="22" x2="30" y2="236" class="cv-guide">
+          </line>
+          <rect x="2" y="2" width="56" height="18" rx="4" class="cv-box">
+          </rect>
+          <text x="30" y="14.5" class="cv-lbl cv-ink" text-anchor="middle">client</text>
+          <line x1="102" y1="22" x2="102" y2="236" class="cv-guide">
+          </line>
+          <rect x="74" y="2" width="56" height="18" rx="4" class="cv-box">
+          </rect>
+          <text x="102" y="14.5" class="cv-lbl cv-ink" text-anchor="middle">api</text>
+          <line x1="178" y1="22" x2="178" y2="236" class="cv-guide">
+          </line>
+          <rect x="150" y="2" width="56" height="18" rx="4" class="cv-box">
+          </rect>
+          <text x="178" y="14.5" class="cv-lbl cv-ink" text-anchor="middle">vector</text>
+          <line x1="254" y1="22" x2="254" y2="236" class="cv-guide">
+          </line>
+          <rect x="226" y="2" width="56" height="18" rx="4" class="cv-box">
+          </rect>
+          <text x="254" y="14.5" class="cv-lbl cv-ink" text-anchor="middle">llm</text>
+          <line x1="330" y1="22" x2="330" y2="236" class="cv-guide">
+          </line>
+          <rect x="302" y="2" width="56" height="18" rx="4" class="cv-box">
+          </rect>
+          <text x="330" y="14.5" class="cv-lbl cv-ink" text-anchor="middle">kafka</text>
+          <defs>
+          <clipPath id="cvc-seq">
+          <rect x="0" y="0" width="360" height="225" class="cv-clip">
+          </rect>
+          </clipPath>
+          </defs>
+          <g clip-path="url(#cvc-seq)">
+          <rect x="99" y="44" width="6" height="152" class="cv-act">
+          </rect>
+          <rect x="175" y="68" width="6" height="30" class="cv-act">
+          </rect>
+          <rect x="251" y="114" width="6" height="56" class="cv-act">
+          </rect>
+          <line x1="33" y1="48" x2="99" y2="48" class="cv-msg cv-call">
+          </line>
+          <path d="M99,48 l-6,-3 v6 z" class="cv-head">
+          </path>
+          <text x="66" y="44" class="cv-lbl" text-anchor="middle">POST /ask</text>
+          <line x1="105" y1="72" x2="175" y2="72" class="cv-msg cv-call">
+          </line>
+          <path d="M175,72 l-6,-3 v6 z" class="cv-head">
+          </path>
+          <text x="140" y="68" class="cv-lbl" text-anchor="middle">retrieve k=8</text>
+          <line x1="175" y1="94" x2="105" y2="94" class="cv-msg cv-ret">
+          </line>
+          <path d="M111,91 L105,94 L111,97" class="cv-chev">
+          </path>
+          <text x="140" y="90" class="cv-lbl" text-anchor="middle">8 chunks</text>
+          <line x1="105" y1="118" x2="251" y2="118" class="cv-msg cv-call">
+          </line>
+          <path d="M251,118 l-6,-3 v6 z" class="cv-head">
+          </path>
+          <text x="178" y="114" class="cv-lbl" text-anchor="middle">generate</text>
+          <line x1="251" y1="142" x2="33" y2="142" class="cv-msg cv-ret">
+          </line>
+          <path d="M39,139 L33,142 L39,145" class="cv-chev">
+          </path>
+          <text x="142" y="138" class="cv-lbl" text-anchor="middle">tokens</text>
+          <line x1="251" y1="154" x2="33" y2="154" class="cv-msg cv-ret">
+          </line>
+          <path d="M39,151 L33,154 L39,157" class="cv-chev">
+          </path>
+          <line x1="251" y1="166" x2="33" y2="166" class="cv-msg cv-ret">
+          </line>
+          <path d="M39,163 L33,166 L39,169" class="cv-chev">
+          </path>
+          <line x1="99" y1="192" x2="33" y2="192" class="cv-msg cv-ret">
+          </line>
+          <path d="M39,189 L33,192 L39,195" class="cv-chev">
+          </path>
+          <text x="66" y="188" class="cv-lbl" text-anchor="middle">200 · 412 ms</text>
+          <line x1="105" y1="214" x2="327" y2="214" class="cv-msg cv-async">
+          </line>
+          <path d="M321,211 L327,214 L321,217" class="cv-chev">
+          </path>
+          <text x="216" y="210" class="cv-lbl" text-anchor="middle">log event</text>
+          </g>
+          <line x1="0" y1="224" x2="360" y2="224" class="cv-cur" style="opacity: 0;">
+          </line>
+          <text x="358" y="221" class="cv-lbl cv-blue cv-curt" text-anchor="end" style="opacity: 0;">412 ms</text>
           </svg>
-
-          <span class="tc-label mt">skill_confidence</span>
-          <div class="tc-skills">
-            <div class="tc-skill">
-              <div class="tc-skill-head"><span>LLM / AI Engineering</span><span class="tc-skill-pct">95%</span></div>
-              <div class="tc-skill-track"><div class="tc-skill-fill" style="width:95%"></div></div>
-            </div>
-            <div class="tc-skill">
-              <div class="tc-skill-head"><span>Backend Systems</span><span class="tc-skill-pct">92%</span></div>
-              <div class="tc-skill-track"><div class="tc-skill-fill" style="width:92%"></div></div>
-            </div>
-            <div class="tc-skill">
-              <div class="tc-skill-head"><span>Cloud Infrastructure</span><span class="tc-skill-pct">90%</span></div>
-              <div class="tc-skill-track"><div class="tc-skill-fill" style="width:90%"></div></div>
-            </div>
-            <div class="tc-skill">
-              <div class="tc-skill-head"><span>Data Engineering</span><span class="tc-skill-pct">88%</span></div>
-              <div class="tc-skill-track"><div class="tc-skill-fill" style="width:88%"></div></div>
-            </div>
-            <div class="tc-skill">
-              <div class="tc-skill-head"><span>Platform Engineering</span><span class="tc-skill-pct">85%</span></div>
-              <div class="tc-skill-track"><div class="tc-skill-fill" style="width:85%"></div></div>
-            </div>
+          <div class="cv-read">
+          <div>
+          <div class="cv-v">412</div>
+          <div class="cv-k">elapsed ms</div>
           </div>
+          <div>
+          <div class="cv-v">8</div>
+          <div class="cv-k">chunks</div>
+          </div>
+          <div>
+          <div class="cv-v">512</div>
+          <div class="cv-k">tokens</div>
+          </div>
+          </div>
+          <div class="cv-note">Time runs down the page. Only the log is async — nobody waits on kafka.</div>
         </div>
       </div>
     </div>
@@ -988,8 +964,59 @@
   </div>
 </section>
 
+<!-- TERRAIN — the same trajectory as a surface you can turn -->
+<section id="terrain" class="section" data-sig="04">
+  <div class="wrap">
+    <span class="sec-eye reveal">Terrain</span>
+    <h2 class="sec-h2 reveal">Data, then services, then models — one surface.</h2>
+    <p class="sec-lead reveal">The trajectory above, drawn as a landscape. Height is scope, and each summit stands on the slope of the one before it — the surface is a sum, so the AI peak is taller partly because the backend ridge runs underneath. Drag to turn it; pick a stop to climb.</p>
+
+    <div class="terrain reveal" id="terrain-fig">
+      <div class="terrain-stage">
+        <canvas class="terrain-cv" aria-hidden="true"></canvas>
+        <span class="terrain-hint" aria-hidden="true">drag to turn</span>
+      </div>
+
+      <div class="terrain-side">
+        <div class="terrain-seg" role="tablist" aria-label="Stops on the surface">
+          <button class="terrain-tab" role="tab" id="tt-0" aria-controls="tp-0" aria-selected="false" tabindex="-1" data-stop="0"><span>01</span> Data</button>
+          <button class="terrain-tab" role="tab" id="tt-1" aria-controls="tp-1" aria-selected="false" tabindex="-1" data-stop="1"><span>02</span> Backend</button>
+          <button class="terrain-tab is-on" role="tab" id="tt-2" aria-controls="tp-2" aria-selected="true" tabindex="0" data-stop="2"><span>03</span> AI</button>
+        </div>
+
+        <div class="terrain-panel" id="tp-0" role="tabpanel" aria-labelledby="tt-0" data-stop="0">
+          <div class="tp-head"><span class="tp-years">x<sub>1</sub> · 2016</span><span class="tp-role">The plateau</span></div>
+          <p class="tp-blurb">Wide and low. Pipelines, ETL and warehousing on Hadoop and Spark — nothing about it looks like a summit, but every contour further along is drawn on top of it.</p>
+          <div class="tp-figs">
+            <div><div class="tp-v" data-z="0">0.00</div><div class="tp-k">Elevation</div></div>
+            <div><div class="tp-v" data-c="0">0.00</div><div class="tp-k">Carried</div></div>
+          </div>
+        </div>
+        <div class="terrain-panel" id="tp-1" role="tabpanel" aria-labelledby="tt-1" data-stop="1">
+          <div class="tp-head"><span class="tp-years">x<sub>2</sub> · 2018</span><span class="tp-role">The ridge</span></div>
+          <p class="tp-blurb">Services and APIs for teams in three countries. Getting here meant going down first: the route off the plateau drops through the seam — the hollow where a handoff between specialists loses something — before it climbs the ridge.</p>
+          <div class="tp-figs">
+            <div><div class="tp-v" data-z="1">0.00</div><div class="tp-k">Elevation</div></div>
+            <div><div class="tp-v" data-c="1">0.00</div><div class="tp-k">Carried</div></div>
+          </div>
+        </div>
+        <div class="terrain-panel" id="tp-2" role="tabpanel" aria-labelledby="tt-2" data-stop="2">
+          <div class="tp-head"><span class="tp-years">x<sub>3</sub> · 2024</span><span class="tp-role">The summit</span></div>
+          <p class="tp-blurb">LLM systems, agents and evals — the narrowest peak and the highest, because it is built on the shoulder of the ridge. Take the ridge away and it stands a good deal lower.</p>
+          <div class="tp-figs">
+            <div><div class="tp-v" data-z="2">0.00</div><div class="tp-k">Elevation</div></div>
+            <div><div class="tp-v" data-c="2">0.00</div><div class="tp-k">Carried</div></div>
+          </div>
+        </div>
+
+        <div class="terrain-note">A model of a career, not a measurement: three Gaussians and one hollow, summed. Elevation is the surface at the stop; carried is the part of it the earlier stops leave underneath. Both are read off the function that draws the mesh, not typed in.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- PROJECTS -->
-<section id="projects" class="section" data-sig="04">
+<section id="projects" class="section" data-sig="05">
   <div class="wrap">
     <span class="sec-eye reveal">Selected Work</span>
     <h2 class="sec-h2 reveal">Four repos, four layers.</h2>
@@ -1044,7 +1071,7 @@
 </section>
 
 <!-- CONTACT -->
-<section id="contact" data-sig="05">
+<section id="contact" data-sig="06">
   <svg class="radar-bed" viewBox="0 0 600 600" aria-hidden="true">
     <circle class="radar"   cx="300" cy="300" r="286" fill="none" stroke="var(--rule-strong)" stroke-width="1" stroke-dasharray="3 13"></circle>
     <circle class="radar-b" cx="300" cy="300" r="214" fill="none" stroke="var(--rule)" stroke-width="1" stroke-dasharray="2 9"></circle>
@@ -1178,15 +1205,6 @@
   if (st) obs.observe(st);
 })();
 
-// SKILL BAR ANIMATION
-(function(){
-  const fills = [...document.querySelectorAll('.tc-skill-fill')];
-  const obs = new IntersectionObserver(entries => {
-    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); obs.unobserve(e.target); } });
-  }, {threshold: .3});
-  fills.forEach(f => obs.observe(f));
-})();
-
 // SCROLL REVEAL
 (function(){
   const obs = new IntersectionObserver(entries => {
@@ -1204,6 +1222,8 @@
 })();
 </script>
   <script src="js/index-signature.js" defer></script>
+  <script src="js/index-terrain.js" defer></script>
+  <script src="js/index-card.js" defer></script>
   <script src="js/site-nav.js" defer></script>
 </body>
 </html>

@@ -89,15 +89,35 @@ it changes is scale, composition and responsiveness:
 - The hero headline is **the one deliberate break of the 2.5rem cap** —
   it goes to 5.25rem at weight 300. If you raise the cap anywhere else,
   the break stops reading as intentional.
-- A pipeline rail down the left edge marks the five sections and fills
+- A pipeline rail down the left edge marks the six sections and fills
   as you scroll; a hairline across the top tracks read progress.
 - Each section gets an oversized outline numeral in the margin
   (`data-sig="02"` on the `<section>`), drawn as a stroke so it stays
   texture rather than hierarchy.
-- The hero topology is wired to the confidence bars beneath it: each
-  `.topo .node[data-skill="n"]` lights `.tc-skill` number `n`. It adds no
-  new labels — it only makes a correspondence the card already had
-  visible.
+- The hero headline acts out its own claim: "diagram to" is set in
+  outline (`-webkit-text-stroke`, behind `@supports`), and "production."
+  is drafted in outline then filled left to right once the lines land.
+  The outline state is a class the script adds and then removes — the
+  markup and the CSS alone give solid type.
+- The hero card (`#hero-card`, `css/index-card.css` + `js/index-card.js`)
+  holds **five charts of five different kinds**, one drawn at random per
+  load, with a `01/05` switch in the title bar. Each draws one layer the
+  way someone operating it reads it: serve as a **sequence diagram**,
+  the agent as an **orbit** (thought → action → observation, one lap a
+  turn, a context bar that bounds it), RAG as an **embedding space**
+  (top-k radius grows, then a reranker reorders), deploy as **capacity
+  stepping under traffic**, observability as a **latency heatmap** with
+  p50/p99. Do not collapse them back into one box-and-arrow template.
+- Each chart is a pure `build()` returning SVG plus `frame(root, u)`,
+  which poses it at progress `u ∈ [0, 1]` and returns the three readout
+  figures. `u = 1` is the finished state: reduced motion gets it, and
+  the markup ships chart 01 at `u = 1`, pre-rendered from the same
+  builder. If you change chart 01, regenerate that block — load the page
+  with reduced motion, step the switch to 01, copy `.tc-body`.
+- One vocabulary across all five (`.cv-*`): hairline, dashed guide, the
+  one blue, four flat tints, mono labels. Random scatter and heatmap
+  noise come from a seeded RNG, so the drawing is the same every load.
+  Every figure is a sample and the title bar says so.
 - The six layers are a **stack**, not a marquee: six plates offset into
   a staircase, one open at a time, wired to its detail panel by a
   hairline that tracks whichever plate you took. It is a real tablist —
@@ -109,6 +129,16 @@ it changes is scale, composition and responsiveness:
   curve is measured off the path with `getPointAtLength`, never
   hard-coded, so the numbers stay right if the curve is redrawn.
 - Pointer spotlight on the hero grid.
+- The terrain (`#terrain`, `css/index-terrain.css` + `js/index-terrain.js`)
+  redraws the trajectory as a surface you can turn — a loss-landscape
+  plot with height standing for scope, contours projected on the floor.
+  The surface is a **sum** of three Gaussians (data, backend-as-ridge,
+  AI) and one hollow (the seam), so each panel's *elevation* and
+  *carried* figures are evaluated off the same `f(x, y)` that draws the
+  mesh — never typed in. Move a bump and the numbers follow. It is a
+  hand-rolled painter's-algorithm canvas (no library); tints are the one
+  blue banded by height and mixed into the ground, read from the tokens,
+  and re-read when the theme switches. It only animates while on screen.
 
 Two rules the stack exists to respect, worth keeping if you extend it:
 
