@@ -102,97 +102,240 @@
   window.addEventListener('resize', onScroll, { passive: true });
   onScroll();
 
-  /* ── 3. the topology, wired to the trace ──────────────────────────── */
-  /* Each node is a span in the waterfall under it: the same request,
-     drawn as structure and as time. The replay walks a cursor along the
-     time axis and lights whichever node is doing work; pointing at a
-     node or a row pauses it and shows the pair. No new labels. */
+  /* ── 3. the card: five systems, one drawn at random ─────────────────── */
+  /* Each system is read two ways: a topology on top (structure) and the
+     trace of one run through it underneath (time). Every span names the
+     node it runs on, so pointing at either drawing lights the other, and
+     the replay lights whichever node is doing work.
 
-  (function wireTrace() {
+     The markup ships the first system, complete. The script draws a
+     random one over it and puts a switch in the title bar; without JS
+     you get the first system with its waterfall finished.
+
+     Five node slots and one edge vocabulary are shared by all five —
+     a new system is data, not new drawing code. Figures are samples,
+     which the title bar says. */
+
+  var SLOT = { a: [48, 38], b: [180, 38], c: [312, 38], d: [102, 148], e: [246, 148] };
+
+  var SYSTEMS = [
+    { title: 'pipeline — ingest to serve', sub: 'one request, every layer',
+      req: 'POST /ask', unit: 'ms', T: 412,
+      nodes: { a: 'ingest', b: 'stream', c: 'model', d: 'store', e: 'serve' },
+      edges: ['ab', 'bc', 'bd', 'ce', 'de'],
+      spans: [
+        ['serve',  'POST /ask',      0, 412, 0],
+        ['store',  'retrieve',      22,  88, 1],
+        ['model',  'generate',      92, 396, 1],
+        ['stream', 'tokens out',   128, 404, 2],
+        ['ingest', 'log → kafka',  398, 412, 1]
+      ] },
+    { title: 'agent — thought, action, observation', sub: 'one task, every turn',
+      req: 'agent · triage', unit: 'ms', T: 2840,
+      nodes: { a: 'query', b: 'agent', c: 'tools', d: 'memory', e: 'loop' },
+      edges: ['ab', 'bc', 'bd', 'ce', 'de', 'eb~'],
+      spans: [
+        ['query',  'run task',        0, 2840, 0],
+        ['agent',  'plan',           40,  620, 1],
+        ['memory', 'recall',         80,  190, 2],
+        ['tools',  'search · sql',  640, 1480, 1],
+        ['loop',   'observe → retry', 1500, 2310, 1],
+        ['agent',  'answer',       2330, 2800, 1]
+      ] },
+    { title: 'rag — the knowledge engine', sub: 'one index job, every stage',
+      req: 'POST /index', unit: 's', T: 38,
+      nodes: { a: 'docs', b: 'chunk', c: 'embed', d: 'rerank', e: 'vectors' },
+      edges: ['ab', 'bc', 'ce', 'de'],
+      spans: [
+        ['docs',    'index job',       0, 38, 0],
+        ['docs',    'parse pdf · web', 1,  6, 1],
+        ['chunk',   'split semantic',  5, 11, 1],
+        ['embed',   'batch × 24',     10, 29, 1],
+        ['vectors', 'upsert',         26, 34, 1],
+        ['rerank',  'eval recall@10', 33, 38, 1]
+      ] },
+    { title: 'deploy — the body and the scale', sub: 'one rollout, every hop',
+      req: 'rollout · v2.4', unit: 's', T: 186,
+      nodes: { a: 'image', b: 'registry', c: 'k8s', d: 'gpu', e: 'serve' },
+      edges: ['ab', 'bc', 'ce', 'de', 'cd~'],
+      spans: [
+        ['k8s',      'rollout',        0, 186, 0],
+        ['image',    'build · docker', 0,  64, 1],
+        ['registry', 'push · ecr',    64,  82, 1],
+        ['k8s',      'schedule pods', 82, 110, 1],
+        ['gpu',      'warm · vllm',  104, 160, 2],
+        ['serve',    'canary · 5%',  158, 186, 1]
+      ] },
+    { title: 'observe — health and performance', sub: 'one nightly run, every signal',
+      req: 'eval run · nightly', unit: 's', T: 540,
+      nodes: { a: 'traces', b: 'metrics', c: 'logs', d: 'evals', e: 'tune' },
+      edges: ['ab', 'bc', 'bd', 'ce', 'de'],
+      spans: [
+        ['evals',   'nightly run',       0, 540, 0],
+        ['traces',  'sample 2k',         0,  90, 1],
+        ['metrics', 'p99 · cost',       80, 150, 1],
+        ['logs',    'scan errors',     120, 230, 1],
+        ['evals',   'judge · ragas',   220, 470, 1],
+        ['tune',    'flag regressions', 470, 540, 1]
+      ] }
+  ];
+
+  var SVGNS = 'http://www.w3.org/2000/svg';
+
+  function edgePath(pair) {
+    var p = SLOT[pair[0]], q = SLOT[pair[1]];
+    if (p[1] === q[1]) {                       /* same row: box edge to box edge */
+      var l = p[0] < q[0] ? p : q, r = p[0] < q[0] ? q : p;
+      return 'M' + (l[0] + 42) + ',' + l[1] + ' H' + (r[0] - 42);
+    }
+    var top = p[1] < q[1] ? p : q, bot = p[1] < q[1] ? q : p;
+    return 'M' + top[0] + ',54 C' + top[0] + ',98 ' + bot[0] + ',88 ' + bot[0] + ',132';
+  }
+
+  function drawTopology(svg, sys) {
+    var html = '', flows = '', groups = '';
+    sys.edges.forEach(function (e, i) {
+      var d = edgePath(e), loop = e.charAt(2) === '~';
+      html += '<path class="edge-base' + (loop ? ' edge-loop' : '') + '" d="' + d + '"></path>';
+      flows += '<path class="edge-flow' + (i ? ' f' + (Math.min(i, 4) + 1) : '') + '" d="' + d + '"></path>';
+    });
+    Object.keys(SLOT).forEach(function (k) {
+      var x = SLOT[k][0], y = SLOT[k][1], name = sys.nodes[k];
+      groups += '<g class="node" data-node="' + name + '" role="button" tabindex="0" aria-label="' + name + ' layer">'
+        + '<rect class="hitpad" x="' + (x - 48) + '" y="' + (y - 22) + '" width="96" height="44"></rect>'
+        + '<rect class="node-box" x="' + (x - 42) + '" y="' + (y - 16) + '" width="84" height="32" rx="5"></rect>'
+        + '<text class="node-txt" x="' + x + '" y="' + (y + 4) + '" text-anchor="middle">' + name + '</text></g>';
+    });
+    svg.innerHTML = html + flows + groups;
+    svg.setAttribute('aria-label', 'System topology: ' + sys.title);
+  }
+
+  function fmt(v, unit) { return unit === 's' ? v + '&thinsp;s' : v + '&thinsp;ms'; }
+
+  function drawTrace(trace, axis, sys) {
+    trace.style.setProperty('--T', sys.T);
+    trace.innerHTML = sys.spans.map(function (sp) {
+      return '<div class="span" role="listitem" data-node="' + sp[0] + '" style="--s:' + sp[2] + ';--e:' + sp[3] + ';--d:' + sp[4] + '">'
+        + '<span class="sp-name"><b>' + sp[0] + '</b> ' + sp[1] + '</span>'
+        + '<span class="sp-track"><span class="sp-bar"></span></span>'
+        + '<span class="sp-ms">' + (sp[3] - sp[2]) + '</span></div>';
+    }).join('');
+    trace.setAttribute('aria-label', 'Sample trace of ' + sys.req + ', ' + sys.T + ' ' + sys.unit + ' end to end');
+    var mid = Math.round(sys.T / 2);          /* sits at the centre, so it must be T/2 */
+    axis.innerHTML = '<span>0</span><span>' + mid + '</span><span>' + fmt(sys.T, sys.unit) + '</span>';
+  }
+
+  (function card() {
     var card = document.querySelector('.sys-card');
     if (!card) return;
+    var svg = card.querySelector('.topo');
     var trace = card.querySelector('.trace');
-    var nodes = [].slice.call(card.querySelectorAll('.topo .node[data-span]'));
-    var spans = [].slice.call(card.querySelectorAll('.trace .span'));
-    if (!trace || !spans.length) return;
+    var axis = card.querySelector('.trace-axis');
+    var next = card.querySelector('.tc-next');
+    if (!svg || !trace || !axis) return;
 
-    var T = parseFloat(getComputedStyle(trace).getPropertyValue('--T')) || 1;
-    var bounds = spans.map(function (el) {
-      var cs = el.style;
-      return { el: el, s: parseFloat(cs.getPropertyValue('--s')), e: parseFloat(cs.getPropertyValue('--e')),
-               bar: el.querySelector('.sp-bar') };
-    });
-    function nodeFor(i) {
-      for (var k = 0; k < nodes.length; k++) {
-        if (+nodes[k].getAttribute('data-span') === i) return nodes[k];
-      }
-      return null;
+    var current = 0, bounds = [], nodes = [], probing = false;
+
+    function collect() {
+      var T = parseFloat(trace.style.getPropertyValue('--T')) || 1;
+      nodes = [].slice.call(svg.querySelectorAll('.node[data-node]'));
+      bounds = [].slice.call(trace.querySelectorAll('.span')).map(function (el) {
+        return { el: el, node: el.getAttribute('data-node'), T: T,
+                 s: parseFloat(el.style.getPropertyValue('--s')),
+                 e: parseFloat(el.style.getPropertyValue('--e')),
+                 bar: el.querySelector('.sp-bar') };
+      });
     }
 
-    var probing = false;
+    function show(i) {
+      var sys = SYSTEMS[i];
+      current = i;
+      card.querySelector('.tc-title').textContent = sys.title;
+      card.querySelector('.tc-sub').textContent = sys.sub;
+      card.querySelector('.tc-path').textContent = 'sample trace · ' + sys.req;
+      card.querySelector('.tc-total').innerHTML = fmt(sys.T, sys.unit);
+      drawTopology(svg, sys);
+      drawTrace(trace, axis, sys);
+      if (next) next.textContent = '0' + (i + 1) + '/0' + SYSTEMS.length;
+      collect();
+      clear();
+      trace.removeAttribute('data-at');
+      tStart = null;
+    }
 
+    /* probing — delegated, so it survives a redraw */
     function clear() {
       probing = false;
       card.classList.remove('probing');
       nodes.forEach(function (n) { n.classList.remove('sel'); });
-      spans.forEach(function (s) { s.classList.remove('lit'); });
+      bounds.forEach(function (b) { b.el.classList.remove('lit'); });
     }
-    function probe(i) {
-      if (isNaN(i) || !spans[i]) return;
+    function probe(name) {
+      if (!name) return;
       probing = true;
       card.classList.add('probing');
-      nodes.forEach(function (n) { n.classList.toggle('sel', +n.getAttribute('data-span') === i); });
-      spans.forEach(function (s, k) { s.classList.toggle('lit', k === i); });
+      nodes.forEach(function (n) { n.classList.toggle('sel', n.getAttribute('data-node') === name); });
+      bounds.forEach(function (b) { b.el.classList.toggle('lit', b.node === name); });
     }
-
-    nodes.forEach(function (node) {
-      var i = parseInt(node.getAttribute('data-span'), 10);
-      node.addEventListener('mouseenter', function () { probe(i); });
-      node.addEventListener('focus', function () { probe(i); });
-      node.addEventListener('click', function () { probe(i); });
-      node.addEventListener('keydown', function (e) {
-        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); probe(i); }
-      });
-    });
-    spans.forEach(function (s, i) {
-      s.addEventListener('mouseenter', function () { probe(i); });
+    function target(e) {
+      var t = e.target.closest && e.target.closest('.node[data-node], .span[data-node]');
+      return t && card.contains(t) ? t.getAttribute('data-node') : null;
+    }
+    card.addEventListener('mouseover', function (e) { var n = target(e); if (n) probe(n); });
+    card.addEventListener('focusin', function (e) { var n = target(e); if (n) probe(n); });
+    card.addEventListener('click', function (e) { var n = target(e); if (n) probe(n); });
+    card.addEventListener('keydown', function (e) {
+      if (e.key !== 'Enter' && e.key !== ' ') return;
+      var n = target(e);
+      if (n) { e.preventDefault(); probe(n); }
     });
     card.addEventListener('mouseleave', clear);
     card.addEventListener('focusout', function (e) {
       if (!card.contains(e.relatedTarget)) clear();
     });
 
-    if (reduced) return;          /* the finished waterfall is the static state */
+    /* the replay: 0..T over RUN ms, a beat at the end, again */
+    var RUN = 4200, HOLD = 1600, tStart = null, visible = true, looping = false;
 
-    // the replay: 0..T over RUN ms, a beat at the end, again
-    var RUN = 4200, HOLD = 1600, t0 = null, visible = true, looping = false;
-
-    function paint(ms) {
-      trace.style.setProperty('--c', (ms / T).toFixed(4));
-      bounds.forEach(function (b, i) {
-        var f = Math.max(0, Math.min(1, (ms - b.s) / Math.max(1, b.e - b.s)));
+    function paint(t) {
+      var on = {};
+      trace.style.setProperty('--c', (bounds.length ? t / bounds[0].T : 1).toFixed(4));
+      bounds.forEach(function (b) {
+        var f = Math.max(0, Math.min(1, (t - b.s) / Math.max(1e-6, b.e - b.s)));
         b.bar.style.setProperty('--f', f.toFixed(3));
-        var run = ms >= b.s && ms < b.e;
+        var run = t >= b.s && t < b.e;
         b.el.classList.toggle('is-run', run);
-        var n = nodeFor(i);
-        if (n) n.classList.toggle('is-run', run);
+        if (run && b.el.style.getPropertyValue('--d').trim() !== '0') on[b.node] = true;
       });
+      nodes.forEach(function (n) { n.classList.toggle('is-run', !!on[n.getAttribute('data-node')]); });
     }
     function tick(ts) {
       if (!visible) { looping = false; return; }
-      if (probing) { t0 = null; raf(tick); return; }   /* hold still while read */
-      if (t0 === null) t0 = ts - (parseFloat(trace.getAttribute('data-at')) || 0);
-      var el = (ts - t0) % (RUN + HOLD);
+      if (probing) { tStart = null; raf(tick); return; }   /* hold still while read */
+      if (tStart === null) tStart = ts - (parseFloat(trace.getAttribute('data-at')) || 0);
+      var el = (ts - tStart) % (RUN + HOLD);
       trace.setAttribute('data-at', el);
-      paint(Math.min(el, RUN) / RUN * T);
+      paint(Math.min(el, RUN) / RUN * (bounds.length ? bounds[0].T : 1));
       trace.classList.toggle('is-playing', el < RUN);
       raf(tick);
     }
     function start() {
-      if (looping) return;
+      if (looping || reduced) return;
       looping = true;
-      t0 = null;
+      tStart = null;
       raf(tick);
+    }
+
+    show(Math.floor(Math.random() * SYSTEMS.length));
+
+    if (next) {
+      next.hidden = false;
+      next.addEventListener('click', function () {
+        show((current + 1) % SYSTEMS.length);
+        card.classList.remove('is-swap');
+        void card.offsetWidth;
+        card.classList.add('is-swap');
+      });
     }
 
     if ('IntersectionObserver' in window) {

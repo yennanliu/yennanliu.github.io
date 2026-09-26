@@ -110,6 +110,14 @@ it changes is scale, composition and responsiveness:
   `div`s with list roles: `finlab-theme.css` forces the body face onto
   `li`. The trace replaced a set of skill-percentage bars — do not bring
   those back.
+- The card holds **five systems** — serve, agent loop, RAG indexing,
+  deploy, observability — and draws one at random on each load, with a
+  `01/05` switch in the title bar. They are data (`SYSTEMS` in
+  `index-signature.js`), not drawings: five shared node slots, edges
+  named by slot pair (`'bd'`, and `'eb~'` for a dashed feedback edge),
+  and spans that name the node they run on. Adding a sixth means adding
+  an entry. The markup ships the first system complete; the switch
+  starts `hidden` and the script reveals it.
 - The six layers are a **stack**, not a marquee: six plates offset into
   a staircase, one open at a time, wired to its detail panel by a
   hairline that tracks whichever plate you took. It is a real tablist —

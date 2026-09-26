@@ -619,9 +619,10 @@
           <span class="tc-live"><i aria-hidden="true"></i>live</span>
           <span class="tc-path">sample trace · POST /ask</span>
           <span class="tc-total">412&thinsp;ms</span>
+          <button class="tc-next" type="button" hidden aria-label="Show the next system">01/05</button>
         </div>
         <div class="tc-body">
-          <span class="tc-label">pipeline — ingest to serve</span>
+          <span class="tc-label tc-title">pipeline — ingest to serve</span>
 
           <svg class="topo" viewBox="0 0 360 186" role="img" aria-label="System topology: ingest to stream to model to serve, with a store branch">
             <path class="edge-base" d="M90,38 H138"></path>
@@ -636,31 +637,31 @@
             <path class="edge-flow f4" d="M312,54 C312,102 246,96 246,132"></path>
             <path class="edge-flow f5" d="M144,148 H204"></path>
 
-            <g class="node" data-span="4" role="button" tabindex="0"
+            <g class="node" data-node="ingest" role="button" tabindex="0"
                aria-label="ingest layer">
               <rect class="hitpad" x="0" y="16" width="96" height="44"></rect>
               <rect class="node-box" x="6" y="22" width="84" height="32" rx="5"></rect>
               <text class="node-txt" x="48" y="42" text-anchor="middle">ingest</text>
             </g>
-            <g class="node" data-span="3" role="button" tabindex="0"
+            <g class="node" data-node="stream" role="button" tabindex="0"
                aria-label="stream layer">
               <rect class="hitpad" x="132" y="16" width="96" height="44"></rect>
               <rect class="node-box" x="138" y="22" width="84" height="32" rx="5"></rect>
               <text class="node-txt" x="180" y="42" text-anchor="middle">stream</text>
             </g>
-            <g class="node" data-span="2" role="button" tabindex="0"
+            <g class="node" data-node="model" role="button" tabindex="0"
                aria-label="model layer">
               <rect class="hitpad" x="264" y="16" width="96" height="44"></rect>
               <rect class="node-box" x="270" y="22" width="84" height="32" rx="5"></rect>
               <text class="node-txt" x="312" y="42" text-anchor="middle">model</text>
             </g>
-            <g class="node" data-span="1" role="button" tabindex="0"
+            <g class="node" data-node="store" role="button" tabindex="0"
                aria-label="store layer">
               <rect class="hitpad" x="54" y="126" width="96" height="44"></rect>
               <rect class="node-box" x="60" y="132" width="84" height="32" rx="5"></rect>
               <text class="node-txt" x="102" y="152" text-anchor="middle">store</text>
             </g>
-            <g class="node" data-span="0" role="button" tabindex="0"
+            <g class="node" data-node="serve" role="button" tabindex="0"
                aria-label="serve layer">
               <rect class="hitpad" x="198" y="126" width="96" height="44"></rect>
               <rect class="node-box" x="204" y="132" width="84" height="32" rx="5"></rect>
@@ -668,29 +669,29 @@
             </g>
           </svg>
 
-          <span class="tc-label mt">one request, every layer</span>
+          <span class="tc-label mt tc-sub">one request, every layer</span>
           <div class="trace" role="list" style="--T:412" aria-label="Sample trace of one request through the stack, 412 milliseconds end to end">
-            <div class="span" role="listitem" data-span="0" style="--s:0;--e:412;--d:0">
+            <div class="span" role="listitem" data-node="serve" style="--s:0;--e:412;--d:0">
               <span class="sp-name"><b>serve</b> POST /ask</span>
               <span class="sp-track"><span class="sp-bar"></span></span>
               <span class="sp-ms">412</span>
             </div>
-            <div class="span" role="listitem" data-span="1" style="--s:22;--e:88;--d:1">
+            <div class="span" role="listitem" data-node="store" style="--s:22;--e:88;--d:1">
               <span class="sp-name"><b>store</b> retrieve</span>
               <span class="sp-track"><span class="sp-bar"></span></span>
               <span class="sp-ms">66</span>
             </div>
-            <div class="span" role="listitem" data-span="2" style="--s:92;--e:396;--d:1">
+            <div class="span" role="listitem" data-node="model" style="--s:92;--e:396;--d:1">
               <span class="sp-name"><b>model</b> generate</span>
               <span class="sp-track"><span class="sp-bar"></span></span>
               <span class="sp-ms">304</span>
             </div>
-            <div class="span" role="listitem" data-span="3" style="--s:128;--e:404;--d:2">
+            <div class="span" role="listitem" data-node="stream" style="--s:128;--e:404;--d:2">
               <span class="sp-name"><b>stream</b> tokens out</span>
               <span class="sp-track"><span class="sp-bar"></span></span>
               <span class="sp-ms">276</span>
             </div>
-            <div class="span" role="listitem" data-span="4" style="--s:398;--e:412;--d:1">
+            <div class="span" role="listitem" data-node="ingest" style="--s:398;--e:412;--d:1">
               <span class="sp-name"><b>ingest</b> log → kafka</span>
               <span class="sp-track"><span class="sp-bar"></span></span>
               <span class="sp-ms">14</span>

@@ -260,10 +260,14 @@ section[data-sig] > * { position: relative; z-index: 1; }
   width: 6px; height: 6px; border-radius: 50%; background: var(--green);
   animation: pulse 2.2s ease-in-out infinite;
 }
-.tc-bar .tc-path { margin-left: 0; }
+.tc-bar .tc-path {
+  margin-left: 0; min-width: 0;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
 .tc-total {
   margin-left: auto; font-family: var(--mono); font-size: .62rem;
   color: var(--ink); font-variant-numeric: tabular-nums;
+  white-space: nowrap;
 }
 
 .trace {
@@ -337,6 +341,24 @@ section[data-sig] > * { position: relative; z-index: 1; }
   font-family: var(--mono); font-size: .56rem; color: var(--ink-dim);
   font-variant-numeric: tabular-nums;
 }
+
+/* a feedback edge — the loop back, dashed like a drawing's return path */
+.topo .edge-loop { stroke-dasharray: 3 4; }
+
+/* the switch between the five systems */
+.tc-next {
+  appearance: none; margin-left: 4px;
+  padding: 3px 8px; border: 1px solid var(--rule-strong); border-radius: 4px;
+  background: var(--surface); color: var(--ink-3);
+  font-family: var(--mono); font-size: .58rem; letter-spacing: .06em;
+  font-variant-numeric: tabular-nums; cursor: pointer;
+  transition: color .16s ease, border-color .16s ease;
+}
+.tc-next:hover { color: var(--blue); border-color: var(--blue); }
+.tc-next:focus-visible { outline: 2px solid var(--blue); outline-offset: 1px; }
+.tc-next[hidden] { display: none; }
+.sys-card.is-swap .tc-body { animation: tcSwap .36s ease; }
+@keyframes tcSwap { from { opacity: .35; transform: translateY(4px); } }
 
 /* a node whose span is running */
 .topo .node.is-run .node-box { fill: var(--blue-pale); stroke: var(--blue); }
@@ -413,6 +435,7 @@ section[data-sig] > * { position: relative; z-index: 1; }
   .hero-h1 .ln > span { transform: none; animation: none; }
   #hero::before { animation: none; mask-image: var(--grid-mask); -webkit-mask-image: var(--grid-mask); }
   .tc-live i { animation: none; }
+  .sys-card.is-swap .tc-body { animation: none; }
 }
 
 /* ── 6. THE STACK ──────────────────────────────────────────────────────
