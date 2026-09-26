@@ -2,3 +2,5 @@
 */.DS_Store
 test2.html
 .claude/worktrees/
+# Impeccable skill: the launcher fetches its platform binary on first use
+.claude/skills/impeccable/scripts/bin/
