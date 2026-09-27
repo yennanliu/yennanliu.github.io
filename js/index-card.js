@@ -29,6 +29,9 @@
   if (!card) return;
   var body = card.querySelector('.tc-body');
   var next = card.querySelector('.tc-next');
+  var tl = card.querySelector('.tc-tl');
+  var clips = [].slice.call(card.querySelectorAll('.tc-clip'));
+  var file = card.querySelector('.tc-file');
   if (!body) return;
 
   var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -516,6 +519,8 @@
         }).join('') + '</div>'
       + '<div class="cv-note">' + ch.note + '</div>';
     card.setAttribute('data-chart', ch.key);
+    if (file) file.innerHTML = ch.key + '<i>.sample</i>';
+    clips.forEach(function (c, k) { c.classList.toggle('on', k === i); });
     card.querySelector('.tc-path').textContent = ch.path.replace(/&thinsp;/g, ' ');
     card.querySelector('.tc-total').innerHTML = ch.total;
     if (next) next.textContent = '0' + (i + 1) + '/0' + CHARTS.length;
@@ -528,6 +533,8 @@
   function pose(u) {
     var v = CHARTS[current].frame(svg, u);
     figs.forEach(function (el, k) { el.textContent = v[k]; });
+    /* the playhead: chart index plus progress, across five clips */
+    if (tl) tl.style.setProperty('--ph-u', ((current + u) / CHARTS.length).toFixed(4));
   }
 
   function tick(ts) {
@@ -546,15 +553,25 @@
 
   show(Math.floor(Math.random() * CHARTS.length), true);
 
+  function swap(i) {
+    show(i, true);
+    card.classList.remove('is-swap');
+    void card.offsetWidth;
+    card.classList.add('is-swap');
+  }
+
   if (next) {
     next.hidden = false;
-    next.addEventListener('click', function () {
-      show((current + 1) % CHARTS.length, true);
-      card.classList.remove('is-swap');
-      void card.offsetWidth;
-      card.classList.add('is-swap');
-    });
+    next.addEventListener('click', function () { swap((current + 1) % CHARTS.length); });
   }
+
+  /* the timeline is a pointer shortcut to the same switch */
+  clips.forEach(function (c) {
+    c.addEventListener('click', function () {
+      var i = +c.getAttribute('data-i');
+      if (i !== current) swap(i);
+    });
+  });
 
   if ('IntersectionObserver' in window) {
     new IntersectionObserver(function (es) {

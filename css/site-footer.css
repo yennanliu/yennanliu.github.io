@@ -51,38 +51,42 @@
 }
 
 .site-footer .ft-mark {
-  font-family: var(--fl-mono);
-  font-size: .95em;
-  font-weight: var(--fl-fw-normal);
-  letter-spacing: .1em;
-  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  gap: .55em;
+  font-family: var(--fl-body);
+  font-size: .9375em;
+  font-weight: var(--fl-fw-medium);
+  letter-spacing: -.01em;
+  text-transform: none;
   color: var(--fl-ink);
   margin-bottom: 12px;
 }
-.site-footer .ft-mark em { color: var(--fl-link); font-style: normal; }
+.site-footer .ft-mark em { color: var(--fl-faint); font-style: normal; }
 
 .site-footer .ft-tagline {
   font-size: .875em;
   line-height: var(--fl-lh-body);
-  color: var(--fl-ghost);
-  max-width: 220px;
+  color: var(--fl-faint);
+  max-width: 240px;
   margin: 0;
 }
 
 .site-footer .ft-col-hd {
   display: block;
-  font-family: var(--fl-mono);
-  font-size: .6em;
-  letter-spacing: .18em;
-  text-transform: uppercase;
-  color: var(--fl-ghost);
+  font-family: var(--fl-body);
+  font-size: .8125em;
+  font-weight: var(--fl-fw-medium);
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--fl-ink);
   margin-bottom: 14px;
 }
 
 .site-footer .ft-col a {
   display: block;
-  font-family: var(--fl-mono);
-  font-size: .85em;
+  font-family: var(--fl-body);
+  font-size: .875em;
   font-weight: var(--fl-fw-normal);
   color: var(--fl-muted);
   text-decoration: none;
@@ -90,7 +94,7 @@
   transition: color var(--fl-t);
 }
 .site-footer .ft-col a:hover,
-.site-footer .ft-col a:focus-visible { color: var(--fl-link); }
+.site-footer .ft-col a:focus-visible { color: var(--fl-ink); text-decoration: none; }
 
 /* ── the lower bar ── */
 
@@ -104,12 +108,12 @@
 
 .site-footer .ft-copy,
 .site-footer .ft-sig {
-  font-family: var(--fl-mono);
-  font-size: .63em;
-  color: var(--fl-ghost);
+  font-family: var(--fl-body);
+  font-size: .75em;
+  color: var(--fl-faint);
   margin: 0;
 }
-.site-footer .ft-copy { letter-spacing: .06em; }
+.site-footer .ft-sig { font-family: var(--fl-mono); }
 
 /* ── narrow ── */
 

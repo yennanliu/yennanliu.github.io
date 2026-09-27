@@ -7,8 +7,8 @@
        synchronous on purpose — a deferred script would let the page
        flash light before turning dark. */
     (function () {
-      var d = false;
-      try { d = localStorage.getItem('theme') === 'dark'; } catch (e) {}
+      var d = true;   /* dark unless the reader chose light */
+      try { d = localStorage.getItem('theme') !== 'light'; } catch (e) {}
       var r = document.documentElement;
       r.setAttribute('data-theme', d ? 'dark' : 'light');
       if (d) r.setAttribute('data-mode', 'ink');
@@ -19,7 +19,7 @@
     <title>小小帶我魯 — 躺平導師計畫</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400&family=Space+Grotesk:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Playwrite+AU+VIC&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="css/finlab.css">
     <style>
@@ -807,7 +807,7 @@
 
 <!-- SITE NAV -->
 <nav class="site-nav" id="site-nav" aria-label="Primary">
-  <a class="sn-brand" href="index.html">YEN<em>.DEV</em></a>
+  <a class="sn-brand" href="index.html"><span class="sn-mark" aria-hidden="true">Y</span><span>yen<em>.dev</em></span></a>
 
   <button class="sn-burger" id="sn-burger" type="button"
           aria-label="Open menu" aria-expanded="false" aria-controls="sn-menu">

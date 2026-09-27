@@ -45,7 +45,7 @@
     if (document.body) document.body.classList.toggle('dark-mode', dark);
 
     var meta = document.querySelector('meta[name="theme-color"]');
-    if (meta) meta.setAttribute('content', dark ? '#0a0a0b' : '#ffffff');
+    if (meta) meta.setAttribute('content', dark ? '#000000' : '#ffffff');
 
     document.querySelectorAll('.sn-theme').forEach(function (b) {
       b.setAttribute('aria-checked', dark ? 'true' : 'false');
