@@ -169,8 +169,8 @@ section[data-sig] > * { position: relative; z-index: 1; }
 /* ── 4. HERO ───────────────────────────────────────────────────────────
    The one place the type scale goes past its 3rem cap on purpose. The
    reference site's pairing: a heavy, tightly tracked sans line, and
-   under it a handwritten line that overlaps it slightly, in a muted
-   lavender, as if written on afterwards.                               */
+   under it a handwritten line that overlaps it slightly, in a
+   lavender-to-silver ink, as if written on afterwards.                               */
 
 .hero-h1 {
   font-size: clamp(2.75rem, 6.2vw, 4.75rem) !important;
@@ -215,6 +215,20 @@ section[data-sig] > * { position: relative; z-index: 1; }
   letter-spacing: 0;
   color: var(--fl-script-ink);
   text-wrap: balance;
+}
+/* the reference site's ink: lavender at the pen's first stroke, easing
+   to plain silver by the end of the line. inline-block so the gradient
+   spans the words, not the column. */
+@supports ((-webkit-background-clip: text) or (background-clip: text)) {
+  .hero-h1 .ln > .line-script {
+    display: inline-block;
+    padding-right: .15em;               /* keep the last swash inside the paint */
+    background: var(--fl-script-grad);
+    -webkit-background-clip: text;
+            background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+  }
 }
 
 /* Written in, left to right, once the line has risen. The clip is a

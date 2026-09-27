@@ -50,7 +50,7 @@ bundle exec jekyll serve
 ## Styling System
 
 The whole site runs on one design system, modelled on tenzen.studio: a
-black studio ground, app-window panels, one violet for action, and a
+black studio ground, app-window panels, one silver-lavender for action, and a
 handwritten line where a page wants a voice. (It replaced an earlier
 light, finlab.finance-style system; the token names kept that system's
 `--fl-` prefix so every page still resolves.) Two shared stylesheets
@@ -78,7 +78,10 @@ The rules the system is built on:
   `--fl-sh-lg` shadow for windows only. `.fl-window` is the primitive.
 - **Flat surfaces** — no gradients, no coloured glows. The dark ground
   steps `#000` → `#0a0a0a` → `#111` → `#151515` → `#1b1b1b`.
-- **One violet for action** (`--fl-link`, #b399ff dark / #6540b5 light);
+- **One silver-lavender for action** (`--fl-link`, #aba4b8 dark / #6a6377
+  light) — taken from the reference site's script ink. The hero's
+  handwritten line paints the full gradient, `--fl-script-grad`
+  (#9587a6 → #96919e → #929292);
   the primary button is a solid ink fill (white on black) with 8px
   corners. Amber is the timeline-clip colour; green/red stay for data.
 - **Dark is the default.** Light is opt-in through the switch; no page
@@ -96,7 +99,7 @@ site stays quiet.
 It keeps the palette, the strokes, the weights and the mono. What it
 changes is scale, composition and responsiveness. Its local short names
 (`--bg`, `--ink`, `--blue`…) are aliases for the `--fl-*` tokens —
-`--blue` is the violet accent now; the name is historical.
+`--blue` is the silver-lavender accent now; the name is historical.
 
 - The hero headline is **the one deliberate break of the 3rem cap** —
   it goes to 4.75rem at weight 600, tracked -.06em. If you raise the cap
@@ -178,7 +181,7 @@ motion-driven part is skipped under `prefers-reduced-motion`.
 `ai_builder.html` carries its own set of explanatory panels below the
 run graph — KV cache, retrieval, the agent loop, harness engineering.
 They share the fan graph's vocabulary and add nothing new to the
-palette: hairlines, the one accent (violet) in four flat tints (`--tint` through
+palette: hairlines, the one accent (silver-lavender) in four flat tints (`--tint` through
 `--tint-4`),
 mono for anything numeric.
 

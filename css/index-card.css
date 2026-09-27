@@ -5,7 +5,7 @@
 
    One vocabulary for all five, so they read as one instrument showing
    different systems rather than five widgets: a hairline for structure,
-   a dashed guide for scale, the one accent (violet — still named --blue
+   a dashed guide for scale, the one accent (silver-lavender — still named --blue
    on this page) for whatever is happening now, four flat tints of it for
    quantity, mono for every label and figure.
    ========================================================================== */
@@ -68,7 +68,7 @@
 }
 
 /* ── the timeline ──
-   Five clips, one per chart. The open one is the violet clip; the
+   Five clips, one per chart. The open one is the accent clip; the
    playhead sits at (chart + progress) / 5 and is set by the script
    through --ph. The markup ships chart 01 finished, so --ph starts at
    20% and the strip reads right with the script off.                   */
