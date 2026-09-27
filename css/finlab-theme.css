@@ -135,7 +135,7 @@ hr, .divider, .rule, [class*="divider"] {
 }
 
 /* ── 5. ACTION ─────────────────────────────────────────────────────────
-   One silver-lavender for links. The primary button is a solid ink fill (white
+   One neon purple for links. The primary button is a solid ink fill (white
    on the black ground); the secondary is a dark control with a stroke. */
 
 a { transition: color var(--fl-t), opacity var(--fl-t); }

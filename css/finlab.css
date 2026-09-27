@@ -1,7 +1,7 @@
 /* ==========================================================================
    TENZEN-STYLE DESIGN SYSTEM
    After tenzen.studio: a black studio ground, app-window panels, one
-   silver-lavender for action, and a handwritten line where a page wants a voice.
+   neon purple for action, and a handwritten line where a page wants a voice.
 
    Token names keep their historical `--fl-` prefix so every page's
    rules still resolve; only the values changed.
@@ -12,8 +12,8 @@
      · Three weights: 400 body, 500 headings and controls, 600 display.
      · Panels, not slabs — #0d0d0d/#111 windows on a #000 page, a
        translucent 1px stroke, 12–14px corners, a deep soft shadow.
-     · One silver-lavender for action and focus; white fill for the
-       primary button.
+     · One neon purple (#8A00C4) for action and focus; white fill for
+       the primary button.
      · Motion is quick and eased out (.135s hover, .24s windows).
 
    Load order per page:
@@ -53,15 +53,15 @@ body.dark-mode {
   --fl-stroke-top:   rgba(255, 255, 255, .14);   /* lit top edge       */
 
   /* ── Action ──────────────────────────────────────────────────────── */
-  /* Silver with a breath of lavender — the reference site's script
-     line, #9587a6 → #96919e → #929292, lifted a step for use as a
-     single accent on black. */
-  --fl-link:         #aba4b8;
-  --fl-link-hover:   #c9c5d0;
-  --fl-accent:       #aba4b8;
-  --fl-accent-deep:  #9587a6;
-  --fl-accent-wash:  #16151a;
-  --fl-accent-edge:  #38353f;
+  /* Neon purple, #8A00C4 — the one accent, the same in both themes.
+     The handwritten line keeps the reference site's silver ink. */
+  --fl-link:         #8a00c4;
+  --fl-link-hover:   #a51fe6;
+  --fl-accent:       #8a00c4;
+  --fl-accent-deep:  #6d009b;
+  --fl-accent-wash:  #1a0726;
+  --fl-accent-edge:  #420a5e;
+  --fl-on-accent:    #ffffff;   /* text on an accent fill              */
   --fl-script-ink:   #96919e;   /* the handwritten line (flat fallback) */
   --fl-script-grad:  linear-gradient(110deg, #9587a6 0%, #96919e 48%, #929292 100%);
 
@@ -79,7 +79,7 @@ body.dark-mode {
   --fl-amber-wash:   #251b0a;
   --fl-amber-edge:   #4a3714;
 
-  --fl-cat-1:#aba4b8; --fl-cat-2:#e3a22a; --fl-cat-3:#4ade80;
+  --fl-cat-1:#8a00c4; --fl-cat-2:#e3a22a; --fl-cat-3:#4ade80;
   --fl-cat-4:#7cc4ff; --fl-cat-5:#f59ac6; --fl-cat-6:#a4a4a9;
 
   /* A shadow on black reads as depth only when it is large and soft. */
@@ -112,12 +112,13 @@ body.dark-mode {
   --fl-stroke:       rgba(0, 0, 0, .09);
   --fl-stroke-top:   rgba(255, 255, 255, .8);
 
-  --fl-link:         #6a6377;
-  --fl-link-hover:   #4a4553;
-  --fl-accent:       #6a6377;
-  --fl-accent-deep:  #4a4553;
-  --fl-accent-wash:  #f3f2f5;
-  --fl-accent-edge:  #d9d6de;
+  --fl-link:         #8a00c4;
+  --fl-link-hover:   #6d009b;
+  --fl-accent:       #8a00c4;
+  --fl-accent-deep:  #6d009b;
+  --fl-accent-wash:  #f7ecfc;
+  --fl-accent-edge:  #e3c3f2;
+  --fl-on-accent:    #ffffff;
   --fl-script-ink:   #77708a;
   --fl-script-grad:  linear-gradient(110deg, #7a6d8e 0%, #7b7684 48%, #767676 100%);
 
@@ -134,7 +135,7 @@ body.dark-mode {
   --fl-amber-wash:   #fdf7ea;
   --fl-amber-edge:   #f0dcae;
 
-  --fl-cat-1:#6a6377; --fl-cat-2:#b7791f; --fl-cat-3:#15803d;
+  --fl-cat-1:#8a00c4; --fl-cat-2:#b7791f; --fl-cat-3:#15803d;
   --fl-cat-4:#2b6cb0; --fl-cat-5:#b83280; --fl-cat-6:#4f4f57;
 
   --fl-sh-xs: 0 1px 2px rgba(0, 0, 0, .06);
