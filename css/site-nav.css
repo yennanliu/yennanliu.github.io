@@ -19,16 +19,11 @@
    ========================================================================== */
 
 :root {
-  --sn-h: 56px;
-  --sn-bg: rgba(255, 255, 255, .82);
+  --sn-h: 64px;
+  --sn-bg: color-mix(in srgb, var(--fl-surface) 84%, transparent);
   --sn-border: var(--fl-hair);
 }
-
-:root[data-theme="dark"],
-:root[data-mode="ink"] {
-  --sn-bg: rgba(10, 10, 11, .82);
-}
-body.dark-mode { --sn-bg: rgba(10, 10, 11, .82); }
+body.dark-mode { --sn-bg: color-mix(in srgb, var(--fl-surface) 84%, transparent); }
 
 /* the pages each carried their own clearance for a fixed bar */
 body { padding-top: 0 !important; }
@@ -49,39 +44,57 @@ body { padding-top: 0 !important; }
   font-family: var(--fl-body);
 }
 
-/* ── brand ── */
+/* ── brand ──
+   A handwritten initial beside the name, the way the reference site
+   pairs its script mark with a plain wordmark.                         */
 
-.sn-brand {
-  font-family: var(--fl-mono);
-  font-size: .82rem;
-  font-weight: var(--fl-fw-normal);
-  letter-spacing: .1em;
-  text-transform: uppercase;
+.site-nav .sn-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: .55rem;
+  font-family: var(--fl-body);
+  font-size: .9375rem;
+  font-weight: var(--fl-fw-medium);
+  letter-spacing: -.01em;
+  text-transform: none;
   color: var(--fl-ink);
   text-decoration: none;
   white-space: nowrap;
 }
-.sn-brand em { color: var(--fl-link); font-style: normal; }
+.site-nav .sn-brand:hover { color: var(--fl-ink); text-decoration: none; }
+.site-nav .sn-brand em { color: var(--fl-faint); font-style: normal; }
+
+/* shared with the footer mark */
+.sn-mark {
+  display: inline-block;
+  font-family: var(--fl-script);
+  font-size: 1.35em;
+  font-weight: var(--fl-fw-normal);
+  line-height: 1;
+  color: var(--fl-ink);
+  transform: translateY(.04em);
+}
 
 /* ── links ── */
 
 .sn-menu {
   display: flex;
+  flex: 1;
   align-items: center;
   gap: 1.5rem;
-  margin-left: auto;
 }
 
+/* links sit centred in the bar, the right cluster pinned to the edge */
 .sn-links {
   display: flex;
   align-items: center;
-  gap: clamp(.85rem, 1.8vw, 1.75rem);
-  margin: 0;
+  gap: clamp(.85rem, 1.8vw, 1.6rem);
+  margin: 0 auto;
   padding: 0;
   list-style: none;
 }
 
-.sn-links a {
+.site-nav .sn-links a {
   position: relative;
   display: inline-block;
   padding: .35rem 0;
@@ -93,28 +106,28 @@ body { padding-top: 0 !important; }
   white-space: nowrap;
   transition: color var(--fl-t);
 }
-.sn-links a:hover { color: var(--fl-ink); }
+.site-nav .sn-links a:hover { color: var(--fl-ink); text-decoration: none; }
 
-/* the underline the reference site uses, drawn from the centre */
-.sn-links a::after {
+/* no underline: the current page is simply the bright one, with a
+   small dot under it */
+.site-nav .sn-links a::after {
   content: '';
   position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  height: 1px;
-  background: currentColor;
-  border-radius: var(--fl-r-pill);
-  transform: scaleX(0);
-  transform-origin: center;
-  transition: transform var(--fl-t);
+  left: 50%;
+  bottom: -2px;
+  width: 3px;
+  height: 3px;
+  margin-left: -1.5px;
+  border-radius: 50%;
+  background: var(--fl-link);
+  opacity: 0;
+  transition: opacity var(--fl-t);
 }
-.sn-links a:hover::after { transform: scaleX(1); }
 
-.sn-links a[aria-current="page"] {
+.site-nav .sn-links a[aria-current="page"] {
   color: var(--fl-ink);
 }
-.sn-links a[aria-current="page"]::after { transform: scaleX(1); }
+.site-nav .sn-links a[aria-current="page"]::after { opacity: 1; }
 
 /* ── right cluster ── */
 
@@ -124,20 +137,22 @@ body { padding-top: 0 !important; }
   gap: .75rem;
 }
 
-.sn-cta {
+.site-nav .sn-cta {
   display: inline-flex;
   align-items: center;
-  height: 2rem;
-  padding: 0 .95rem;
-  border-radius: var(--fl-r-pill);
+  height: 2.5rem;
+  padding: 0 1.05rem;
+  border-radius: var(--fl-r-sm);
   background: var(--fl-ink);
   color: var(--fl-on-ink);
   font-size: var(--fl-fs-sm);
+  font-weight: var(--fl-fw-medium);
   text-decoration: none;
   white-space: nowrap;
   transition: background var(--fl-t);
 }
-.sn-cta:hover { background: var(--fl-ink-soft); color: var(--fl-on-ink); }
+.site-nav .sn-cta:hover { background: var(--fl-ink-soft); color: var(--fl-on-ink); text-decoration: none; }
+.site-nav .sn-cta:active { transform: scale(.97); }
 
 /* ── the theme switch ──
    The pill-and-glyphs pair the Bootstrap pages already used, made the
@@ -149,7 +164,7 @@ body { padding-top: 0 !important; }
   width: 42px;
   height: 23px;
   padding: 0;
-  border: 1px solid var(--fl-hair);
+  border: 1px solid var(--fl-line);
   border-radius: var(--fl-r-pill);
   background: var(--fl-inset);
   cursor: pointer;
@@ -166,15 +181,16 @@ body { padding-top: 0 !important; }
   height: 15px;
   margin-top: -7.5px;
   border-radius: 50%;
-  background: var(--fl-surface);
-  box-shadow: 0 1px 2px rgba(15, 23, 42, .28);
+  background: var(--fl-muted);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, .35);
   transition: transform var(--fl-t-slow), background var(--fl-t);
 }
 
 .sn-theme[aria-checked="true"] {
-  background: var(--fl-link);
-  border-color: var(--fl-link);
+  background: var(--fl-accent-wash);
+  border-color: var(--fl-accent-edge);
 }
+.sn-theme[aria-checked="true"] .sn-knob { background: var(--fl-link); }
 .sn-theme[aria-checked="true"] .sn-knob { transform: translateX(19px); }
 
 .sn-icons {
@@ -242,12 +258,13 @@ body { padding-top: 0 !important; }
   }
 
   .sn-links { flex-direction: column; align-items: stretch; gap: 0; }
-  .sn-links a {
+  .site-nav .sn-links a {
     padding: .85rem clamp(1rem, 3vw, 3rem);
     font-size: var(--fl-fs-base);
   }
-  .sn-links a::after { display: none; }
-  .sn-links a[aria-current="page"] { background: var(--fl-inset); }
+  .sn-links { margin: 0; }
+  .site-nav .sn-links a::after { display: none; }
+  .site-nav .sn-links a[aria-current="page"] { background: var(--fl-inset); }
 
   .sn-right {
     justify-content: space-between;
@@ -258,5 +275,5 @@ body { padding-top: 0 !important; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .sn-links a::after, .sn-knob, .sn-burger span, .sn-menu { transition: none; }
+  .site-nav .sn-links a::after, .sn-knob, .sn-burger span, .sn-menu { transition: none; }
 }

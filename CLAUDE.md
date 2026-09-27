@@ -49,8 +49,12 @@ bundle exec jekyll serve
 
 ## Styling System
 
-The whole site runs on one design system, adapted from finlab.finance:
-a quiet, light research-desk look. Two shared stylesheets carry it.
+The whole site runs on one design system, modelled on tenzen.studio: a
+black studio ground, app-window panels, one neon purple for action, and a
+handwritten line where a page wants a voice. (It replaced an earlier
+light, finlab.finance-style system; the token names kept that system's
+`--fl-` prefix so every page still resolves.) Two shared stylesheets
+carry it.
 
 - `css/finlab.css` — tokens (`--fl-*`) plus base and primitives. Load it
   **before** a page's own `<style>` block.
@@ -60,21 +64,30 @@ a quiet, light research-desk look. Two shared stylesheets carry it.
 
 The rules the system is built on:
 
-- **Two weights only** — 300 for display, 400 for everything else. Nothing
-  on the site is bold; hierarchy comes from size and colour.
-- **A capped scale** — 2.5rem is the largest character on any page; body
-  is 1rem at line-height 1.7; the floor is 12px.
-- **Space Grotesk** display, **DM Sans** body, system mono for figures
-  and chrome. Reference them as `var(--fl-display|body|mono)`.
-- **Hairline rules, not shadows** — 1px `--fl-hair` does the structural
-  work; the four shadow tokens are a whisper.
-- **Flat surfaces** — no gradients. The ground steps
-  `#fff` → `#fbfcfe` → `#f8fafc` → `#f5f5f7`.
-- **One blue for action** (`--fl-link`), ink for the single filled button
-  per view; green/red are reserved for data that moves.
-- **Light is the default.** Dark is opt-in; no page follows the OS
-  preference any more.
-- 0.16s ease for state changes, and `prefers-reduced-motion` honoured.
+- **Three weights** — 400 body, 500 headings and controls, 600 for the
+  largest display lines. Nothing thin, nothing 700+; display type gets
+  its punch from tight tracking (`--fl-track-display`, -.055em).
+- **A capped scale** — 3rem is the largest character outside the landing
+  hero; body is 1rem at line-height 1.65; the floor is 12px.
+- **Inter** for display and body, **JetBrains Mono** for figures and
+  chrome, **Playwrite AU VIC** (`--fl-script`, `.fl-script`) for at most
+  one handwritten line per view. Reference them as
+  `var(--fl-display|body|mono|script)`.
+- **Panels, not slabs** — `#111` windows (`--fl-raised`) on a `#000` page,
+  a translucent 1px `--fl-stroke` edge, 12–14px corners, and the deep soft
+  `--fl-sh-lg` shadow for windows only. `.fl-window` is the primitive.
+- **Flat surfaces** — no gradients, no coloured glows. The dark ground
+  steps `#000` → `#0a0a0a` → `#111` → `#151515` → `#1b1b1b`.
+- **One neon purple for action** (`--fl-link`, #8A00C4 in both themes;
+  text on an accent fill uses `--fl-on-accent`). The hero's handwritten
+  line keeps the reference site's silver ink, `--fl-script-grad`
+  (#9587a6 → #96919e → #929292);
+  the primary button is a solid ink fill (white on black) with 8px
+  corners. Amber is the timeline-clip colour; green/red stay for data.
+- **Dark is the default.** Light is opt-in through the switch; no page
+  follows the OS preference.
+- .135s for hover, .24s for windows, presses scale to .97, and
+  `prefers-reduced-motion` honoured.
 
 ### The landing page
 
@@ -83,25 +96,34 @@ The rules the system is built on:
 and only there. The front door is allowed to speak up; the rest of the
 site stays quiet.
 
-It keeps the palette, the hairlines, the two weights and the mono. What
-it changes is scale, composition and responsiveness:
+It keeps the palette, the strokes, the weights and the mono. What it
+changes is scale, composition and responsiveness. Its local short names
+(`--bg`, `--ink`, `--blue`…) are aliases for the `--fl-*` tokens —
+`--blue` is the neon purple accent now; the name is historical.
 
-- The hero headline is **the one deliberate break of the 2.5rem cap** —
-  it goes to 5.25rem at weight 300. If you raise the cap anywhere else,
-  the break stops reading as intentional.
+- The hero headline is **the one deliberate break of the 3rem cap** —
+  it goes to 4.75rem at weight 600, tracked -.06em. If you raise the cap
+  anywhere else, the break stops reading as intentional.
 - A pipeline rail down the left edge marks the six sections and fills
   as you scroll; a hairline across the top tracks read progress.
 - Each section gets an oversized outline numeral in the margin
   (`data-sig="02"` on the `<section>`), drawn as a stroke so it stays
   texture rather than hierarchy.
-- The hero headline acts out its own claim: "diagram to" is set in
-  outline (`-webkit-text-stroke`, behind `@supports`), and "production."
-  is drafted in outline then filled left to right once the lines land.
-  The outline state is a class the script adds and then removes — the
-  markup and the CSS alone give solid type.
+- The hero headline is the reference site's pairing: a heavy sans line
+  ("AI products,") and under it a handwritten line ("diagram to
+  production.", `.line-script`) that overlaps it slightly in
+  `--fl-script-ink`, and writes itself in left to right once the lines
+  land. The clip is a class the script adds and then removes — the
+  markup and the CSS alone give the line fully written.
 - The hero card (`#hero-card`, `css/index-card.css` + `js/index-card.js`)
-  holds **five charts of five different kinds**, one drawn at random per
-  load, with a `01/05` switch in the title bar. Each draws one layer the
+  is drawn as an **editor window**: tools and the open file
+  (`serve.sample`) in the title bar, the chart as the canvas, a transport
+  row, and the five charts as **clips on a timeline** whose playhead sits
+  at `(chart + u) / 5` via `--ph-u`. The markup ships clip 01 active with
+  the playhead at `.2`. The timeline is a pointer shortcut
+  (`aria-hidden`, `tabindex="-1"`); the `01/05` button in the title bar
+  is the keyboard route. It holds **five charts of five different
+  kinds**, one drawn at random per load. Each draws one layer the
   way someone operating it reads it: serve as a **sequence diagram**,
   the agent as an **orbit** (thought → action → observation, one lap a
   turn, a context bar that bounds it), RAG as an **embedding space**
@@ -115,7 +137,7 @@ it changes is scale, composition and responsiveness:
   builder. If you change chart 01, regenerate that block — load the page
   with reduced motion, step the switch to 01, copy `.tc-body`.
 - One vocabulary across all five (`.cv-*`): hairline, dashed guide, the
-  one blue, four flat tints, mono labels. Random scatter and heatmap
+  one accent, four flat tints, mono labels. Random scatter and heatmap
   noise come from a seeded RNG, so the drawing is the same every load.
   Every figure is a sample and the title bar says so.
 - The six layers are a **stack**, not a marquee: six plates offset into
@@ -159,7 +181,7 @@ motion-driven part is skipped under `prefers-reduced-motion`.
 `ai_builder.html` carries its own set of explanatory panels below the
 run graph — KV cache, retrieval, the agent loop, harness engineering.
 They share the fan graph's vocabulary and add nothing new to the
-palette: hairlines, the one blue in four flat tints (`--tint` through
+palette: hairlines, the one accent (neon purple) in four flat tints (`--tint` through
 `--tint-4`),
 mono for anything numeric.
 
@@ -202,12 +224,15 @@ Every page's dark switch resolves to one palette, declared once in
 body.dark-mode              /* the Bootstrap pages */
 ```
 
-It is a true near-black ground (`#0a0a0b`) with the ink/surface ramp
-turned inside out. Two things to know when adding to it:
+Dark is the ground state: `:root` itself carries the dark palette (a
+true black `#000` ground), and the light palette applies only under
+`:root[data-theme="light"]`. The inline head script defaults to dark
+unless the reader has stored `light`. Two things to know when adding to
+it:
 
 - **Use `--fl-on-ink`, never `#fff`,** for text on an ink-filled control.
-  `--fl-ink` inverts, so a hardcoded white foreground goes ink-on-ink and
-  disappears.
+  `--fl-ink` inverts (white in dark, near-black in light), so a
+  hardcoded white foreground goes ink-on-ink and disappears.
 - Pages driven by their own tokens need a `body.dark-mode { … }` block
   re-pointing those tokens; `finlab.css` cannot reach them.
 
@@ -220,6 +245,9 @@ One bar on every page: `<nav class="site-nav">` plus `css/site-nav.css`
 and `js/site-nav.js`. Before this there were five nav implementations at
 four different heights, and one page had none.
 
+- The brand is a handwritten `Y` (`.sn-mark`, shared with the footer
+  mark) beside a plain `yen.dev` wordmark; links sit centred, the right
+  cluster holds the switch and a solid ink CTA.
 - It is **sticky, not fixed**. That is the detail that makes it
   portable — a sticky bar takes up layout space, so no page needs a
   `body { padding-top }` to compensate. `site-nav.css` zeroes any that

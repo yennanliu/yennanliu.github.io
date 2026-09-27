@@ -1,5 +1,5 @@
 /* ==========================================================================
-   FINLAB THEME — normalisation layer
+   THEME — normalisation layer (tenzen.studio style)
    Loaded AFTER each page's own <style> block, so it wins the cascade.
 
    This layer only touches *appearance*: type, weight, colour of text,
@@ -32,30 +32,37 @@ code, pre, kbd, samp, .mono, .fl-mono, [class*="mono"] {
   font-family: var(--fl-mono) !important;
 }
 
-/* Nothing is bold. The reference site collapses every weight above
-   "normal" down to 400 and leans on size and colour for hierarchy. */
+/* Three weights. Body is 400; headings, controls and emphasis are 500;
+   the largest display lines are 600. Nothing is thin, nothing is 700+ —
+   the reference site gets its punch from tight tracking, not weight. */
 body, p, li, dd, td, input, select, textarea,
-h4, h5, h6, .lead, .fl-lead, figcaption, blockquote, small, label {
+.lead, .fl-lead, figcaption, blockquote, small, label {
   font-weight: var(--fl-fw-normal) !important;
 }
 
-h1, h2, h3,
+h2, h3, h4, h5, h6, .fl-title, .section-title, .apple-subheadline {
+  font-weight: var(--fl-fw-medium) !important;
+}
+
+h1,
 .display-1, .display-2, .display-3, .display-4, .display-5,
 .apple-headline, .fl-zone {
-  font-weight: var(--fl-fw-light) !important;
+  font-weight: var(--fl-fw-semi) !important;
 }
 
 b, strong, th, dt, .fw-bold, .font-weight-bold,
 .btn, button, .badge, .nav-link, .navbar-brand {
-  font-weight: var(--fl-fw-normal) !important;
+  font-weight: var(--fl-fw-medium) !important;
 }
 
 /* ── 2. SCALE ──────────────────────────────────────────────────────────
-   The scale is capped. 2.5rem is the largest character on the site.     */
+   The scale is capped at 3rem outside the landing hero. Display sizes
+   are tracked tight — that, not weight, is what makes them read.       */
 
 h1, .display-1, .display-2, .display-3, .display-4, .display-5,
 .apple-headline {
-  font-size: clamp(1.9rem, 4.5vw, var(--fl-fs-zone)) !important;
+  font-size: clamp(2rem, 4.8vw, var(--fl-fs-zone)) !important;
+  letter-spacing: var(--fl-track-display) !important;
 }
 h2, .apple-subheadline, .section-title {
   font-size: clamp(1.5rem, 3.2vw, var(--fl-fs-title)) !important;
@@ -82,7 +89,8 @@ small, .small, figcaption, .badge, .fl-pill {
 }
 
 /* ── 3. SHAPE ──────────────────────────────────────────────────────────
-   Soft, consistent radii. Shadows are a whisper; rules do the work.     */
+   Panels at 14px, controls at 8px. Structure is a translucent stroke;
+   depth is reserved for windows.                                       */
 
 .card, .fl-card, .modal-content, .dropdown-menu, .alert,
 .list-group, .toast, .popover, .panel, .tile, .box,
@@ -127,7 +135,8 @@ hr, .divider, .rule, [class*="divider"] {
 }
 
 /* ── 5. ACTION ─────────────────────────────────────────────────────────
-   One blue for links. Buttons are ink-on-white or a hairline ghost.     */
+   One neon purple for links. The primary button is a solid ink fill (white
+   on the black ground); the secondary is a dark control with a stroke. */
 
 a { transition: color var(--fl-t), opacity var(--fl-t); }
 
@@ -143,7 +152,7 @@ a { transition: color var(--fl-t), opacity var(--fl-t); }
 }
 .btn-outline-primary, .btn-outline-dark, .btn-outline-secondary,
 .btn-light, .btn-outline-light {
-  background: var(--fl-surface) !important;
+  background: var(--fl-quiet) !important;
   border-color: var(--fl-line) !important;
   color: var(--fl-ink) !important;
 }
@@ -155,10 +164,10 @@ a { transition: color var(--fl-t), opacity var(--fl-t); }
 .btn { letter-spacing: 0 !important; text-transform: none !important; }
 
 /* ── 6. NAV ────────────────────────────────────────────────────────────
-   A thin, near-white bar with a hairline underneath.                    */
+   A black bar with a hairline underneath.                               */
 
 .navbar {
-  background: rgba(255, 255, 255, .82) !important;
+  background: color-mix(in srgb, var(--fl-surface) 82%, transparent) !important;
   backdrop-filter: saturate(180%) blur(18px);
   -webkit-backdrop-filter: saturate(180%) blur(18px);
   border-bottom: 1px solid var(--fl-hair);
@@ -193,20 +202,14 @@ body.dark-mode {
   color: var(--fl-text);
 }
 
-body.dark-mode .navbar,
-:root[data-theme="dark"] .navbar {
-  background: rgba(10, 10, 11, .82) !important;
-  border-bottom-color: var(--fl-hair);
-}
-
 body.dark-mode .card,
 body.dark-mode .modal-content,
 body.dark-mode .dropdown-menu,
 body.dark-mode [class*="-card"],
 body.dark-mode .tile,
 body.dark-mode .panel {
-  background: var(--fl-quiet);
-  border-color: var(--fl-hair) !important;
+  background: var(--fl-raised);
+  border-color: var(--fl-stroke) !important;
   color: var(--fl-text);
 }
 

@@ -5,42 +5,113 @@
 
    One vocabulary for all five, so they read as one instrument showing
    different systems rather than five widgets: a hairline for structure,
-   a dashed guide for scale, the one blue for whatever is happening now,
-   four flat tints of it for quantity, mono for every label and figure.
+   a dashed guide for scale, the one accent (neon purple — still named --blue
+   on this page) for whatever is happening now, four flat tints of it for
+   quantity, mono for every label and figure.
    ========================================================================== */
 
-/* ── the title bar ── */
+/* ── the title bar ──
+   Tools on the left, the open file centred, the switch on the right where
+   the reference site keeps its Export button.                          */
 
-.sys-card .tc-bar { gap: 12px; }
+.tc-tools { display: inline-flex; gap: 10px; color: var(--ink-dim); }
+.tc-tools svg {
+  width: 13px; height: 13px; fill: none; stroke: currentColor;
+  stroke-width: 1.3; stroke-linejoin: round;
+}
 .tc-live {
   display: inline-flex; align-items: center; gap: 6px;
-  font-family: var(--mono); font-size: .62rem; letter-spacing: .14em;
-  text-transform: uppercase; color: var(--green);
+  font-family: var(--mono); font-size: .62rem; letter-spacing: .04em;
+  text-transform: lowercase; color: var(--green);
 }
 .tc-live i {
   width: 6px; height: 6px; border-radius: 50%; background: var(--green);
   animation: pulse 2.2s ease-in-out infinite;
 }
-.sys-card .tc-path {
-  margin-left: 0; min-width: 0;
-  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+.tc-file {
+  position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
+  font-family: var(--sans); font-size: .8125rem; font-weight: 500;
+  color: var(--ink); white-space: nowrap; letter-spacing: -.005em;
 }
-.tc-total {
-  margin-left: auto; white-space: nowrap;
-  font-family: var(--mono); font-size: .62rem;
-  color: var(--ink); font-variant-numeric: tabular-nums;
-}
+.tc-file i { font-style: normal; color: var(--ink-dim); font-weight: 400; }
 .tc-next {
-  appearance: none; margin-left: 4px;
-  padding: 3px 8px; border: 1px solid var(--rule-strong); border-radius: 4px;
-  background: var(--surface); color: var(--ink-3);
-  font-family: var(--mono); font-size: .58rem; letter-spacing: .06em;
+  appearance: none; margin-left: auto;
+  height: 26px; padding: 0 10px; border: 1px solid var(--rule-strong); border-radius: 6px;
+  background: var(--bg-alt); color: var(--ink-2);
+  font-family: var(--mono); font-size: .66rem; letter-spacing: 0;
   font-variant-numeric: tabular-nums; cursor: pointer;
-  transition: color .16s ease, border-color .16s ease;
+  transition: color .135s ease, border-color .135s ease, background .135s ease;
 }
-.tc-next:hover { color: var(--blue); border-color: var(--blue); }
+.tc-next:hover { color: var(--ink); background: var(--surface-raised); }
 .tc-next:focus-visible { outline: 2px solid var(--blue); outline-offset: 1px; }
 .tc-next[hidden] { display: none; }
+
+/* ── the transport row ── */
+
+.tc-transport {
+  display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 12px;
+  margin: 10px 10px 0; padding: 7px 12px;
+  border: 1px solid var(--stroke); border-radius: 10px;
+  background: var(--bg-alt);
+}
+.sys-card .tc-path { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0; }
+.tc-play {
+  display: inline-flex; align-items: center; justify-content: center; gap: 3px;
+  width: 24px; height: 24px; border-radius: 50%;
+  border: 1px solid var(--rule-strong);
+}
+.tc-play i { display: block; width: 2px; height: 8px; border-radius: 1px; background: var(--ink-3); }
+.tc-total {
+  justify-self: end; white-space: nowrap;
+  font-family: var(--mono); font-size: .66rem;
+  color: var(--ink-3); font-variant-numeric: tabular-nums;
+}
+
+/* ── the timeline ──
+   Five clips, one per chart. The open one is the accent clip; the
+   playhead sits at (chart + progress) / 5 and is set by the script
+   through --ph. The markup ships chart 01 finished, so --ph starts at
+   20% and the strip reads right with the script off.                   */
+
+.tc-tl {
+  display: grid; grid-template-columns: 44px minmax(0, 1fr); align-items: center; gap: 8px;
+  padding: 14px 12px 12px;
+  margin-top: 10px;
+  border-top: 1px solid var(--rule);
+}
+.tc-tl-k { font-family: var(--mono); font-size: .58rem; color: var(--ink-dim); }
+.tc-tl-track {
+  position: relative;
+  display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 3px;
+  padding: 3px; border: 1px solid var(--rule); border-radius: 7px;
+  background: var(--bg-alt);
+}
+.tc-clip {
+  appearance: none; height: 24px; padding: 0 6px; min-width: 0;
+  border: 1px solid var(--rule-strong); border-radius: 5px;
+  background: var(--surface-raised); color: var(--ink-3);
+  font-family: var(--mono); font-size: .6rem; line-height: 1;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  cursor: pointer;
+  transition: background .135s ease, border-color .135s ease, color .135s ease;
+}
+.tc-clip:hover { color: var(--ink); border-color: var(--ink-dim); }
+.tc-clip.on {
+  background: var(--blue);
+  border-color: var(--blue);
+  color: var(--fl-on-accent);
+}
+.tc-head {
+  position: absolute; top: -9px; bottom: -4px;
+  left: calc(3px + (100% - 6px) * var(--ph-u, .2));
+  width: 1px; background: var(--blue);
+  pointer-events: none;
+}
+.tc-head::before {
+  content: ''; position: absolute; top: 0; left: -4px;
+  width: 9px; height: 9px; border-radius: 3px 3px 50% 50%;
+  background: var(--blue);
+}
 
 .sys-card.is-swap .tc-body { animation: cvSwap .36s ease; }
 @keyframes cvSwap { from { opacity: .35; transform: translateY(4px); } }
@@ -53,7 +124,7 @@
 .cv-svg .cv-ink  { fill: var(--ink); }
 .cv-svg .cv-dim  { fill: var(--ink-dim); }
 .cv-svg .cv-blue { fill: var(--blue); }
-.cv-svg .cv-big  { font-family: var(--display); font-weight: 300; font-size: 26px; fill: var(--ink); }
+.cv-svg .cv-big  { font-family: var(--display); font-weight: 600; letter-spacing: -.04em; font-size: 26px; fill: var(--ink); }
 
 .cv-guide { stroke: var(--rule); stroke-width: 1; stroke-dasharray: 2 4; fill: none; }
 .cv-axis  { stroke: var(--rule-strong); stroke-width: 1; }
@@ -125,7 +196,7 @@
 }
 .cv-k {
   margin-top: 4px; font-family: var(--mono); font-size: 12px;
-  letter-spacing: .08em; text-transform: uppercase; color: var(--ink-dim);
+  letter-spacing: 0; text-transform: none; color: var(--ink-dim);
 }
 /* a <div>, not a <p>: finlab-theme.css forces body face and size onto p */
 .cv-note {

@@ -1,14 +1,20 @@
 /* ==========================================================================
-   FINLAB DESIGN SYSTEM
-   Adapted from finlab.finance — a quiet, light, research-desk aesthetic.
+   TENZEN-STYLE DESIGN SYSTEM
+   After tenzen.studio: a black studio ground, app-window panels, one
+   neon purple for action, and a handwritten line where a page wants a voice.
 
-   The system is deliberately restrained:
-     · Two type weights only (300 / 400). Nothing is ever bold.
-     · A capped type scale — the largest heading on any page is 2.5rem.
-     · Hairline 1px rules instead of shadows for structure.
-     · Near-white surface progression (#fff -> #fbfcfe -> #f8fafc -> #f5f5f7).
-     · One blue for action, green/red reserved for data signal.
-     · 0.16s ease for every state change.
+   Token names keep their historical `--fl-` prefix so every page's
+   rules still resolve; only the values changed.
+
+     · Dark is the ground state. Light is opt-in.
+     · Inter throughout, tracked tight at display sizes; JetBrains Mono
+       for chrome and figures; Playwrite AU VIC for the one script line.
+     · Three weights: 400 body, 500 headings and controls, 600 display.
+     · Panels, not slabs — #0d0d0d/#111 windows on a #000 page, a
+       translucent 1px stroke, 12–14px corners, a deep soft shadow.
+     · One neon purple (#8A00C4) for action and focus; white fill for
+       the primary button.
+     · Motion is quick and eased out (.135s hover, .24s windows).
 
    Load order per page:
      1. finlab.css        (tokens + base + primitives)
@@ -16,164 +22,176 @@
      3. finlab-theme.css  (normalisation layer — wins over page styles)
    ========================================================================== */
 
-:root {
+/* The dark palette applies to :root by default — a page with no theme
+   attribute, or with JS off, is dark. Light applies only when the
+   switch has set data-theme="light" (which also clears the other two
+   dark mechanisms). */
+
+:root,
+:root[data-theme="dark"],
+:root[data-mode="ink"],
+body.dark-mode {
   /* ── Ink ─────────────────────────────────────────────────────────── */
-  --fl-ink:          #111827;   /* headings, strongest text            */
-  --fl-ink-soft:     #1f2937;
-  --fl-text:         #28303b;   /* default body text                   */
-  --fl-prose:        #374151;   /* long-form reading                   */
-  --fl-muted:        #4b5565;
-  --fl-faint:        #647084;   /* labels, captions, metadata          */
-  --fl-ghost:        #98a2b3;   /* placeholders, disabled              */
+  --fl-ink:          #f5f5f6;   /* headings, strongest text            */
+  --fl-ink-soft:     #e4e4e7;
+  --fl-text:         #d4d4d8;   /* default body text                   */
+  --fl-prose:        #c4c4c9;   /* long-form reading                   */
+  --fl-muted:        #a4a4a9;
+  --fl-faint:        #7c7c84;   /* labels, captions, metadata          */
+  --fl-ghost:        #55555c;   /* placeholders, disabled              */
+  --fl-on-ink:       #0a0a0a;   /* text on an ink-filled control       */
 
   /* ── Rules & surfaces ────────────────────────────────────────────── */
-  --fl-hair:         #e5e7eb;   /* the default 1px rule                */
-  --fl-line:         #dbe1e8;   /* a slightly firmer rule              */
-  --fl-surface:      #ffffff;
-  --fl-quiet:        #fbfcfe;
-  --fl-raised:       #f8fafc;
-  --fl-page:         #f5f5f7;   /* section ground / page alt           */
-  --fl-inset:        #f3f4f6;   /* hover wash on nav & list rows       */
+  --fl-hair:         #1c1c1f;   /* the default 1px rule                */
+  --fl-line:         #2b2b2f;   /* a firmer rule, control outlines     */
+  --fl-surface:      #000000;   /* the page                            */
+  --fl-quiet:        #0a0a0a;
+  --fl-raised:       #111111;   /* a window / panel                    */
+  --fl-page:         #151515;   /* section ground inside a panel       */
+  --fl-inset:        #1b1b1b;   /* hover wash on nav & list rows       */
+  --fl-stroke:       rgba(255, 255, 255, .09);   /* panel edge         */
+  --fl-stroke-top:   rgba(255, 255, 255, .14);   /* lit top edge       */
 
   /* ── Action ──────────────────────────────────────────────────────── */
-  --fl-on-ink:       #ffffff;   /* text on an ink-filled control        */
-
-  --fl-link:         #2563eb;
-  --fl-link-hover:   #1d4ed8;
-  --fl-accent:       #0071e3;
-  --fl-accent-wash:  #eff6ff;
-  --fl-accent-edge:  #c7d7fd;
+  /* Neon purple, #8A00C4 — the one accent, the same in both themes.
+     The handwritten line keeps the reference site's silver ink. */
+  --fl-link:         #8a00c4;
+  --fl-link-hover:   #a51fe6;
+  --fl-accent:       #8a00c4;
+  --fl-accent-deep:  #6d009b;
+  --fl-accent-wash:  #1a0726;
+  --fl-accent-edge:  #420a5e;
+  --fl-on-accent:    #ffffff;   /* text on an accent fill              */
+  --fl-script-ink:   #96919e;   /* the handwritten line (flat fallback) */
+  --fl-script-grad:  linear-gradient(110deg, #9587a6 0%, #96919e 48%, #929292 100%);
 
   /* ── Signal (data only — never decoration) ───────────────────────── */
-  --fl-green:        #059669;
-  --fl-green-ink:    #065f46;
-  --fl-green-wash:   #ecfdf5;
-  --fl-green-edge:   #cfeeda;
-  --fl-red:          #dc2626;
-  --fl-red-ink:      #991b1b;
-  --fl-red-wash:     #fef2f2;
-  --fl-red-edge:     #f5d6d6;
-  --fl-amber:        #f59e0b;
-  --fl-amber-2:      #fbbf24;
-  --fl-amber-wash:   #fffbeb;
-  --fl-amber-edge:   #fde68a;
+  --fl-green:        #4ade80;
+  --fl-green-ink:    #86efac;
+  --fl-green-wash:   #0c2016;
+  --fl-green-edge:   #1b3d2a;
+  --fl-red:          #f5566f;
+  --fl-red-ink:      #fb9aa9;
+  --fl-red-wash:     #2a1116;
+  --fl-red-edge:     #4a1f27;
+  --fl-amber:        #e3a22a;   /* the timeline's clip colour          */
+  --fl-amber-2:      #f2b84b;
+  --fl-amber-wash:   #251b0a;
+  --fl-amber-edge:   #4a3714;
 
-  /* Categorical — desaturated so a grid of them still reads as one page */
-  --fl-cat-1:#2563eb; --fl-cat-2:#7c3aed; --fl-cat-3:#059669;
-  --fl-cat-4:#d97706; --fl-cat-5:#0891b2; --fl-cat-6:#db2777;
+  --fl-cat-1:#8a00c4; --fl-cat-2:#e3a22a; --fl-cat-3:#4ade80;
+  --fl-cat-4:#7cc4ff; --fl-cat-5:#f59ac6; --fl-cat-6:#a4a4a9;
 
+  /* A shadow on black reads as depth only when it is large and soft. */
+  --fl-sh-xs: 0 1px 2px rgba(0, 0, 0, .45);
+  --fl-sh-sm: 0 2px 6px rgba(0, 0, 0, .55);
+  --fl-sh:    0 12px 34px rgba(0, 0, 0, .75);
+  --fl-sh-lg: 0 40px 120px rgba(0, 0, 0, .85), 0 10px 30px rgba(0, 0, 0, .7);
+  --fl-edge:  inset 0 1px 0 var(--fl-stroke-top), inset 0 0 0 1px var(--fl-stroke);
+
+  color-scheme: dark;
+}
+
+:root[data-theme="light"] {
+  --fl-ink:          #0a0a0b;
+  --fl-ink-soft:     #26262a;
+  --fl-text:         #2b2b30;
+  --fl-prose:        #3a3a40;
+  --fl-muted:        #4f4f57;
+  --fl-faint:        #6b6b74;
+  --fl-ghost:        #a1a1aa;
+  --fl-on-ink:       #ffffff;
+
+  --fl-hair:         #e6e6ea;
+  --fl-line:         #d6d6da;
+  --fl-surface:      #ffffff;
+  --fl-quiet:        #fafafa;
+  --fl-raised:       #f5f5f6;
+  --fl-page:         #eeeef0;
+  --fl-inset:        #e9e9ec;
+  --fl-stroke:       rgba(0, 0, 0, .09);
+  --fl-stroke-top:   rgba(255, 255, 255, .8);
+
+  --fl-link:         #8a00c4;
+  --fl-link-hover:   #6d009b;
+  --fl-accent:       #8a00c4;
+  --fl-accent-deep:  #6d009b;
+  --fl-accent-wash:  #f7ecfc;
+  --fl-accent-edge:  #e3c3f2;
+  --fl-on-accent:    #ffffff;
+  --fl-script-ink:   #77708a;
+  --fl-script-grad:  linear-gradient(110deg, #7a6d8e 0%, #7b7684 48%, #767676 100%);
+
+  --fl-green:        #15803d;
+  --fl-green-ink:    #14532d;
+  --fl-green-wash:   #ecfdf3;
+  --fl-green-edge:   #c9ecd6;
+  --fl-red:          #d0314b;
+  --fl-red-ink:      #8f1d30;
+  --fl-red-wash:     #fdf0f2;
+  --fl-red-edge:     #f3cdd4;
+  --fl-amber:        #b7791f;
+  --fl-amber-2:      #d69e2e;
+  --fl-amber-wash:   #fdf7ea;
+  --fl-amber-edge:   #f0dcae;
+
+  --fl-cat-1:#8a00c4; --fl-cat-2:#b7791f; --fl-cat-3:#15803d;
+  --fl-cat-4:#2b6cb0; --fl-cat-5:#b83280; --fl-cat-6:#4f4f57;
+
+  --fl-sh-xs: 0 1px 2px rgba(0, 0, 0, .06);
+  --fl-sh-sm: 0 2px 6px rgba(0, 0, 0, .08);
+  --fl-sh:    0 12px 34px rgba(0, 0, 0, .12);
+  --fl-sh-lg: 0 40px 120px rgba(0, 0, 0, .16), 0 10px 30px rgba(0, 0, 0, .10);
+
+  color-scheme: light;
+}
+
+:root {
   /* ── Type ────────────────────────────────────────────────────────── */
-  --fl-display: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
-  --fl-body:    'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  --fl-mono:    ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Monaco, Consolas,
-                'Liberation Mono', monospace;
+  --fl-display: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', ui-sans-serif, system-ui, sans-serif;
+  --fl-body:    'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', ui-sans-serif, system-ui, sans-serif;
+  --fl-mono:    'JetBrains Mono', ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace;
+  --fl-script:  'Playwrite AU VIC', 'Snell Roundhand', cursive;
 
-  --fl-fw-light:  300;
+  --fl-fw-light:  400;   /* kept for old rules: nothing is thin now   */
   --fl-fw-normal: 400;
+  --fl-fw-medium: 500;
+  --fl-fw-semi:   600;
 
   --fl-fs-xs:    .8125rem;
   --fl-fs-sm:    .875rem;
   --fl-fs-base:  1rem;
   --fl-fs-lead:  1.0625rem;
-  --fl-fs-title: 1.75rem;   /* section heading  */
-  --fl-fs-zone:  2.5rem;    /* page / hero head — the ceiling */
+  --fl-fs-title: 2rem;      /* section heading  */
+  --fl-fs-zone:  3rem;      /* page / hero head — the ceiling */
 
-  --fl-lh-body:  1.7;
-  --fl-lh-snug:  1.5;
-  --fl-lh-title: 1.3;
+  --fl-lh-body:  1.65;
+  --fl-lh-snug:  1.4;
+  --fl-lh-title: 1.1;
 
-  --fl-track-label: .08em;
-  --fl-track-tight: -.01em;
+  --fl-track-label: .04em;
+  --fl-track-tight: -.035em;
+  --fl-track-display: -.055em;
 
   /* ── Shape ───────────────────────────────────────────────────────── */
-  --fl-r-xs:   6px;
+  --fl-r-xs:   5px;
   --fl-r-sm:   8px;
   --fl-r:     12px;
-  --fl-r-lg:  16px;
-  --fl-r-xl:  24px;
+  --fl-r-lg:  14px;
+  --fl-r-xl:  20px;
   --fl-r-pill: 999px;
-
-  /* Shadows are a whisper — structure comes from rules, not depth. */
-  --fl-sh-xs: 0 1px 2px rgba(15, 23, 42, .05);
-  --fl-sh-sm: 0 2px 6px rgba(15, 23, 42, .06);
-  --fl-sh:    0 6px 12px rgba(15, 23, 42, .08);
-  --fl-sh-lg: 0 12px 28px rgba(15, 23, 42, .10);
 
   /* ── Layout & motion ─────────────────────────────────────────────── */
   --fl-max:  80rem;
   --fl-pad:  1.5rem;
-  --fl-t:    .16s ease;
-  --fl-t-slow: .28s ease;
+  --fl-ease: cubic-bezier(.2, .7, .3, 1);
+  --fl-t:    .135s cubic-bezier(.4, 0, .2, 1);
+  --fl-t-slow: .24s cubic-bezier(.2, .7, .3, 1);
 }
 
 @media (max-width: 640px) {
-  :root { --fl-pad: 1rem; --fl-fs-zone: 2rem; --fl-fs-title: 1.5rem; }
+  :root { --fl-pad: 1rem; --fl-fs-zone: 2.25rem; --fl-fs-title: 1.625rem; }
 }
-
-/* ==========================================================================
-   DARK
-   The same system with the ground inverted: a true near-black page, the
-   ink/surface ramp turned inside out, and the accents lifted just enough
-   to hold their contrast. Every page's dark switch resolves to this one
-   palette — [data-theme] for the console and the archive, [data-mode]
-   for the terminal, .dark-mode for the Bootstrap pages.
-   ========================================================================== */
-
-:root[data-theme="dark"],
-:root[data-mode="ink"],
-body.dark-mode {
-  /* Ink inverts: what was the darkest text is now the brightest. */
-  --fl-ink:          #f5f7fa;
-  --fl-ink-soft:     #e3e8ef;
-  --fl-text:         #d3dae4;
-  --fl-prose:        #c2cad6;
-  --fl-muted:        #9aa5b5;
-  --fl-faint:        #7d8899;
-  --fl-ghost:        #5b6675;
-  --fl-on-ink:       #0a0a0b;
-
-  /* Rules stay hairlines; they just sit a step above the ground. */
-  --fl-hair:         #212126;
-  --fl-line:         #2e2e35;
-
-  /* The ground is black, and the surfaces step up from it. */
-  --fl-surface:      #0a0a0b;
-  --fl-quiet:        #0f0f11;
-  --fl-raised:       #141417;
-  --fl-page:         #1a1a1e;
-  --fl-inset:        #1f1f24;
-
-  --fl-link:         #7aa8ff;
-  --fl-link-hover:   #9cc0ff;
-  --fl-accent:       #7aa8ff;
-  --fl-accent-wash:  #111a2b;
-  --fl-accent-edge:  #2a3b55;
-
-  --fl-green:        #34d399;
-  --fl-green-ink:    #6ee7b7;
-  --fl-green-wash:   #0c2a20;
-  --fl-green-edge:   #1d4535;
-  --fl-red:          #f87171;
-  --fl-red-ink:      #fca5a5;
-  --fl-red-wash:     #2a1416;
-  --fl-red-edge:     #4a2226;
-  --fl-amber:        #fbbf24;
-  --fl-amber-2:      #fcd34d;
-  --fl-amber-wash:   #2a2010;
-  --fl-amber-edge:   #4a3a18;
-
-  --fl-cat-1:#7aa8ff; --fl-cat-2:#b48cff; --fl-cat-3:#34d399;
-  --fl-cat-4:#fbbf24; --fl-cat-5:#5ec8dd; --fl-cat-6:#f0a0cd;
-
-  /* On a black ground a shadow reads as a void, not a lift. */
-  --fl-sh-xs: 0 1px 2px rgba(0, 0, 0, .5);
-  --fl-sh-sm: 0 2px 6px rgba(0, 0, 0, .55);
-  --fl-sh:    0 6px 14px rgba(0, 0, 0, .6);
-  --fl-sh-lg: 0 14px 32px rgba(0, 0, 0, .65);
-
-  color-scheme: dark;
-}
-
 
 /* ==========================================================================
    BASE
@@ -214,14 +232,14 @@ hr { border: 0; border-top: 1px solid var(--fl-hair); }
   padding-inline: var(--fl-pad);
 }
 
-/* Eyebrow — the tiny tracked label that opens every section */
+/* Eyebrow — the small mono label that opens a section */
 .fl-eyebrow {
   display: block;
-  font-family: var(--fl-body);
-  font-size: var(--fl-fs-sm);
+  font-family: var(--fl-mono);
+  font-size: var(--fl-fs-xs);
   font-weight: var(--fl-fw-normal);
   letter-spacing: var(--fl-track-label);
-  text-transform: uppercase;
+  text-transform: none;
   color: var(--fl-faint);
   margin-bottom: .5rem;
 }
@@ -229,7 +247,7 @@ hr { border: 0; border-top: 1px solid var(--fl-hair); }
 .fl-title {
   font-family: var(--fl-display);
   font-size: var(--fl-fs-title);
-  font-weight: var(--fl-fw-normal);
+  font-weight: var(--fl-fw-medium);
   line-height: var(--fl-lh-title);
   letter-spacing: var(--fl-track-tight);
   color: var(--fl-ink);
@@ -238,7 +256,7 @@ hr { border: 0; border-top: 1px solid var(--fl-hair); }
 .fl-zone {
   font-family: var(--fl-display);
   font-size: var(--fl-fs-zone);
-  font-weight: var(--fl-fw-light);
+  font-weight: var(--fl-fw-medium);
   line-height: var(--fl-lh-title);
   letter-spacing: var(--fl-track-tight);
   color: var(--fl-ink);
@@ -251,10 +269,28 @@ hr { border: 0; border-top: 1px solid var(--fl-hair); }
   max-width: 44rem;
 }
 
-/* Card — a hairline box, not a floating slab */
+/* The handwritten line — one per view, never body copy */
+.fl-script {
+  font-family: var(--fl-script);
+  font-weight: var(--fl-fw-normal);
+  font-style: normal;
+  letter-spacing: 0;
+  color: var(--fl-script-ink);
+}
+
+/* Window — the app-panel the reference site frames everything in */
+.fl-window {
+  background: var(--fl-raised);
+  border: 1px solid var(--fl-stroke);
+  border-radius: var(--fl-r-lg);
+  box-shadow: var(--fl-sh-lg);
+  overflow: hidden;
+}
+
+/* Card — a panel on the page, lit along its top edge */
 .fl-card {
-  background: var(--fl-surface);
-  border: 1px solid var(--fl-hair);
+  background: var(--fl-raised);
+  border: 1px solid var(--fl-stroke);
   border-radius: var(--fl-r-lg);
   padding: 1.5rem;
   transition: border-color var(--fl-t), box-shadow var(--fl-t),
@@ -274,10 +310,10 @@ hr { border: 0; border-top: 1px solid var(--fl-hair); }
   min-height: 2.75rem;
   padding: 0 1.25rem;
   border: 1px solid transparent;
-  border-radius: var(--fl-r-pill);
+  border-radius: var(--fl-r-sm);
   font-family: var(--fl-body);
   font-size: var(--fl-fs-sm);
-  font-weight: var(--fl-fw-normal);
+  font-weight: var(--fl-fw-medium);
   line-height: 1;
   text-decoration: none;
   cursor: pointer;
@@ -287,7 +323,7 @@ hr { border: 0; border-top: 1px solid var(--fl-hair); }
 .fl-btn--primary { background: var(--fl-ink); color: var(--fl-on-ink); }
 .fl-btn--primary:hover { background: var(--fl-ink-soft); color: var(--fl-on-ink); }
 .fl-btn--ghost {
-  background: var(--fl-surface);
+  background: var(--fl-quiet);
   color: var(--fl-ink);
   border-color: var(--fl-line);
 }
@@ -299,8 +335,8 @@ hr { border: 0; border-top: 1px solid var(--fl-hair); }
   align-items: center;
   gap: .35rem;
   padding: .25rem .7rem;
-  border: 1px solid var(--fl-hair);
-  border-radius: var(--fl-r-pill);
+  border: 1px solid var(--fl-stroke);
+  border-radius: var(--fl-r-sm);
   background: var(--fl-raised);
   font-size: var(--fl-fs-xs);
   font-weight: var(--fl-fw-normal);

@@ -9,8 +9,8 @@
        synchronous on purpose — a deferred script would let the page
        flash light before turning dark. */
     (function () {
-      var d = false;
-      try { d = localStorage.getItem('theme') === 'dark'; } catch (e) {}
+      var d = true;   /* dark unless the reader chose light */
+      try { d = localStorage.getItem('theme') !== 'light'; } catch (e) {}
       var r = document.documentElement;
       r.setAttribute('data-theme', d ? 'dark' : 'light');
       if (d) r.setAttribute('data-mode', 'ink');
@@ -48,8 +48,22 @@
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
       <![endif]-->
-     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400&family=Space+Grotesk:wght@300;400;500&display=swap" rel="stylesheet">
+     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Playwrite+AU+VIC&display=swap" rel="stylesheet">
       <link rel="stylesheet" href="css/finlab.css">
+      <style>
+        /* Bootstrap 3 still paints links its own blue; bring the list
+           onto the tokens. Colour and rules only — no layout. */
+        .content-section-a a { color: var(--fl-prose); text-decoration: none; }
+        .content-section-a a:hover,
+        .content-section-a a:focus { color: var(--fl-link); text-decoration: none; }
+        .content-section-a li { color: var(--fl-ghost); }
+        .content-section-a .section-heading { color: var(--fl-ink); }
+        .section-heading-spacer { border-top: 1px solid var(--fl-line); }
+        footer { color: var(--fl-faint); }
+        footer a { color: var(--fl-muted); font-family: var(--fl-mono); font-size: 12px; letter-spacing: .02em; }
+        footer a:hover, footer a:focus { color: var(--fl-link); text-decoration: none; }
+        footer .footer-menu-divider { color: var(--fl-ghost); }
+      </style>
       <link rel="stylesheet" href="css/finlab-theme.css">
      <link rel="stylesheet" href="css/site-nav.css">
 </head>
@@ -57,7 +71,7 @@
       <!-- Navigation -->
       <!-- SITE NAV -->
 <nav class="site-nav" id="site-nav" aria-label="Primary">
-  <a class="sn-brand" href="index.html">YEN<em>.DEV</em></a>
+  <a class="sn-brand" href="index.html"><span class="sn-mark" aria-hidden="true">Y</span><span>yen<em>.dev</em></span></a>
 
   <button class="sn-burger" id="sn-burger" type="button"
           aria-label="Open menu" aria-expanded="false" aria-controls="sn-menu">

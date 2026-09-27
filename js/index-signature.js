@@ -6,7 +6,7 @@
  *   1. a read-progress hairline across the top
  *   2. a pipeline rail down the left edge that tracks which section you
  *      are in, and jumps you to one when clicked
- *   3. the headline, drafted in outline and then filled
+ *   3. the headline, its script line written in left to right
  *      (the hero card's five charts live in js/index-card.js)
  *   4. the layer stack: six plates you can take apart, as a tablist
  *   5. the trajectory chart: a scrubbable curve with a live packet
@@ -102,22 +102,21 @@
   window.addEventListener('resize', onScroll, { passive: true });
   onScroll();
 
-  /* ── 3b. the headline: drafted, then shipped ──────────────────────── */
-  /* The outline state is added here, not in CSS, and taken away once
-     the fill has played — so a stalled clock leaves solid type. */
+  /* ── 3b. the headline: the script line writes itself in ─────────── */
+  /* The clip is added here, not in CSS, and taken away once the reveal
+     has played — so a stalled clock leaves the line fully written. */
 
-  (function draftToProduction() {
+  (function writeIn() {
     var h1 = document.querySelector('.hero-h1');
-    if (!h1 || reduced || !(window.CSS && CSS.supports('-webkit-text-stroke', '1px'))) return;
-    var word = h1.querySelector('.line-blue');
-    if (!word) return;
+    if (!h1 || reduced || !(window.CSS && CSS.supports('clip-path', 'inset(0 0 0 0)'))) return;
+    if (!h1.querySelector('.line-script')) return;
     h1.classList.add('is-draft');
     function done() { h1.classList.remove('is-draft', 'is-fill'); }
     setTimeout(function () {
       h1.classList.add('is-fill');
       h1.classList.remove('is-draft');
-      setTimeout(done, 1400);           /* transitionend on a pseudo is unreliable */
-    }, 1250);                            /* after the third line has risen */
+      setTimeout(done, 1700);           /* transitionend is not worth trusting here */
+    }, 900);                             /* after the second line has risen */
   })();
 
 
