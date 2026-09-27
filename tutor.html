@@ -43,22 +43,24 @@
     <link rel="stylesheet" href="css/finlab.css">
     <style>
        :root {
-          /* FinLab palette */
-          --apple-blue: #2563eb;
-          --apple-gray: #111827;
-          --apple-light-gray: #f8fafc;
-          --apple-white: #ffffff;
-          --apple-text: #111827;
-          --apple-secondary-text: #647084;
-          --apple-border: #e5e7eb;
-          --transition-speed: 0.16s;
-          --apple-radius: 16px;
-          --apple-shadow: 0 2px 6px rgba(15, 23, 42, .06);
+          /* Tenzen palette — the old apple-* names now point at the
+             shared tokens, so dark (default) and light both resolve
+             from finlab.css; no per-page dark overrides needed. */
+          --apple-blue: var(--fl-link);
+          --apple-gray: var(--fl-ink);
+          --apple-light-gray: var(--fl-raised);
+          --apple-white: var(--fl-surface);
+          --apple-text: var(--fl-text);
+          --apple-secondary-text: var(--fl-muted);
+          --apple-border: var(--fl-stroke);
+          --transition-speed: 0.135s;
+          --apple-radius: var(--fl-r-lg);
+          --apple-shadow: none;
        }
 
        /* Base styles */
        body {
-          font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', Roboto, sans-serif;
+          font-family: var(--fl-body);
           background-color: var(--apple-white);
           color: var(--apple-text);
           line-height: 1.4705882353;
@@ -154,7 +156,7 @@
 
        /* Apple-style navbar */
        .navbar {
-          background-color: rgba(255, 255, 255, 0.92) !important;
+          background-color: var(--fl-surface) !important;
           backdrop-filter: saturate(180%) blur(20px);
           -webkit-backdrop-filter: saturate(180%) blur(20px);
           border-bottom: 1px solid var(--apple-border);
@@ -164,7 +166,7 @@
 
        @media (max-width: 991.98px) {
           .navbar-collapse {
-             background-color: rgba(255, 255, 255, 0.95);
+             background-color: var(--fl-raised);
              padding: 20px;
              border-radius: var(--fl-r);
              margin-top: 10px;
@@ -270,7 +272,7 @@
        }
 
        .apple-button:hover {
-          background: #2563eb;
+          background: var(--apple-blue);
           color: var(--apple-white);
           text-decoration: none;
        }
@@ -307,7 +309,7 @@
           font-size: 17px;
           line-height: 1.5;
           color: var(--apple-text);
-          border-bottom: 1px solid rgba(17, 24, 39, 0.05);
+          border-bottom: 1px solid var(--fl-hair);
        }
 
        .teaching-list li:last-child {
@@ -339,76 +341,6 @@
           margin-top: 20px;
        }
 
-       /* Apple dark mode */
-       body.dark-mode {
-          background-color: #141417;
-          color: #f5f7fa;
-       }
-
-       body.dark-mode .navbar {
-          background-color: rgba(31, 31, 36, 0.92) !important;
-          border-bottom: 1px solid #2e2e35;
-       }
-
-       body.dark-mode .navbar-brand,
-       body.dark-mode .nav-link {
-          color: #f5f7fa !important;
-       }
-
-       body.dark-mode .hero-section {
-          background: #1f1f24;
-       }
-
-       body.dark-mode .apple-headline {
-          color: #f5f7fa;
-       }
-
-       body.dark-mode .apple-subheadline {
-          color: #9aa5b5;
-       }
-
-       body.dark-mode .content-card {
-          background: #1f1f24;
-          border-color: #2e2e35;
-          box-shadow: var(--fl-sh-sm);
-       }
-
-       body.dark-mode .content-card:hover {
-          background: #212126;
-          box-shadow: var(--fl-sh-lg);
-       }
-
-       body.dark-mode h4 {
-          color: #f5f7fa;
-       }
-
-       body.dark-mode .teaching-list li {
-          color: #d3dae4;
-          border-bottom-color: rgba(245, 247, 250, 0.08);
-       }
-
-       body.dark-mode footer {
-          background-color: #1f1f24;
-          border-top: 1px solid #2e2e35;
-          color: #9aa5b5;
-       }
-
-       body.dark-mode footer a {
-          color: #7aa8ff;
-       }
-
-       body.dark-mode footer a:hover {
-          color: #7aa8ff;
-       }
-
-       /* Dark mode mobile navbar styles */
-       @media (max-width: 991.98px) {
-          body.dark-mode .navbar-collapse {
-             background-color: rgba(31, 31, 36, 0.95) !important;
-             border: 1px solid #2e2e35;
-          }
-       }
-
        /* Toggle button styles */
        .toggle-container {
           display: flex;
@@ -428,7 +360,7 @@
        }
 
        .slider {
-          background-color: #dbe1e8;
+          background-color: var(--fl-line);
           bottom: 0;
           cursor: pointer;
           left: 0;
@@ -478,7 +410,7 @@
        }
 
        .stat-badge {
-          background: rgba(255, 255, 255, 0.7);
+          background: var(--fl-raised);
           border: 1px solid var(--apple-border);
           border-radius: 980px;
           padding: 8px 18px;
@@ -556,7 +488,7 @@
        .feature-card:hover {
           transform: translateY(-4px);
           box-shadow: var(--fl-sh-lg);
-          border-color: rgba(37, 99, 235, 0.4);
+          border-color: var(--fl-line);
        }
 
        .feature-icon {
@@ -567,17 +499,10 @@
           align-items: center;
           justify-content: center;
           font-size: 22px;
-          color: #ffffff;
+          color: var(--fl-link);
           margin-bottom: 20px;
           flex-shrink: 0;
        }
-
-       .icon-blue   { background: #2563eb; }
-       .icon-purple { background: #7c3aed; }
-       .icon-green  { background: #059669; }
-       .icon-orange { background: #d97706; }
-       .icon-teal   { background: #0891b2; }
-       .icon-pink   { background: #dc2626; }
 
        .feature-card h5 {
           font-size: 19px;
@@ -612,10 +537,10 @@
 
        /* AI highlight banner card */
        .ai-banner {
-          background: #273249;
+          background: var(--fl-accent-wash);
           border-radius: var(--apple-radius);
           padding: 44px 40px;
-          color: #ffffff;
+          color: var(--fl-ink);
           margin-bottom: 24px;
           position: relative;
           overflow: hidden;
@@ -630,14 +555,14 @@
           bottom: -20px;
           font-size: 40px;
           opacity: 0.08;
-          color: #ffffff;
+          color: var(--fl-link);
        }
 
        .ai-banner .ai-pill {
           display: inline-flex;
           align-items: center;
           gap: 8px;
-          background: rgba(255, 255, 255, 0.16);
+          background: var(--fl-raised);
           border-radius: 980px;
           padding: 6px 16px;
           font-size: 13px;
@@ -657,7 +582,7 @@
 
        .ai-banner p {
           font-size: 17px;
-          color: rgba(255, 255, 255, 0.85);
+          color: var(--fl-prose);
           max-width: 640px;
           margin-bottom: 0;
           position: relative;
@@ -691,7 +616,7 @@
           height: 44px;
           border-radius: 50%;
           background: var(--apple-blue);
-          color: #ffffff;
+          color: var(--fl-link);
           font-weight: 400;
           font-size: 18px;
           display: flex;
@@ -735,46 +660,6 @@
           margin-bottom: 28px;
        }
 
-       /* Dark mode for enhanced components */
-       body.dark-mode .stat-badge {
-          background: rgba(33, 33, 38, 0.7);
-          border-color: #2e2e35;
-          color: #f5f7fa;
-       }
-
-       body.dark-mode .section-title,
-       body.dark-mode .feature-card h5,
-       body.dark-mode .step-item h6,
-       body.dark-mode .cta-card h3 {
-          color: #f5f7fa;
-       }
-
-       body.dark-mode .section-desc,
-       body.dark-mode .feature-card p,
-       body.dark-mode .step-item p,
-       body.dark-mode .cta-card p {
-          color: #9aa5b5;
-       }
-
-       body.dark-mode .feature-card {
-          background: #1f1f24;
-          border-color: #2e2e35;
-       }
-
-       body.dark-mode .feature-card:hover {
-          background: #212126;
-       }
-
-       body.dark-mode .tag {
-          background: #212126;
-          color: #d3dae4;
-       }
-
-       body.dark-mode .cta-card {
-          background: #1f1f24;
-          border-color: #2e2e35;
-       }
-
        /* ===== Premium / fancy layer ===== */
 
        /* Animated mesh background in hero */
@@ -784,10 +669,7 @@
           content: "";
           position: absolute;
           inset: -25%;
-          background:
-             radial-gradient(circle at 18% 22%, rgba(37, 99, 235, 0.20), transparent 38%),
-             radial-gradient(circle at 82% 26%, rgba(124, 58, 237, 0.18), transparent 40%),
-             radial-gradient(circle at 50% 85%, rgba(124, 58, 237, 0.16), transparent 42%);
+          background: none;
           animation: meshFloat 20s ease-in-out infinite alternate;
           z-index: 1;
           pointer-events: none;
@@ -814,11 +696,11 @@
 
        /* Premium gradient button */
        .btn-gradient {
-          background: #2563eb !important;
+          background: var(--apple-blue) !important;
           box-shadow: var(--fl-sh);
        }
        .btn-gradient:hover {
-          background: #2563eb !important;
+          background: var(--apple-blue) !important;
           box-shadow: var(--fl-sh-lg);
           transform: translateY(-2px);
        }
@@ -853,7 +735,7 @@
        .feature-card::before {
           content: "";
           position: absolute; top: 0; left: 0; right: 0; height: 3px;
-          background: #2563eb;
+          background: var(--apple-blue);
           transform: scaleX(0); transform-origin: left;
           transition: transform .35s ease;
        }
@@ -869,7 +751,7 @@
        .ai-banner::before {
           content: "";
           position: absolute; inset: 0;
-          background: linear-gradient(115deg, transparent 35%, rgba(255, 255, 255, 0.13) 50%, transparent 65%);
+          background: none;
           background-size: 220% 100%;
           animation: shimmer 7s linear infinite;
           z-index: 0;
@@ -909,79 +791,150 @@
           100% { transform: translateX(-50%); }
        }
 
-       body.dark-mode .tech-strip { background: #141417; border-color: #2e2e35; }
-       body.dark-mode .stat-block .label { color: #9aa5b5; }
-    
-       /* ── FinLab: flat surfaces, hairline rules, one accent ────────── */
-       body { line-height: 1.7; letter-spacing: 0; }
-       .apple-headline, .apple-subheadline { letter-spacing: -.01em; }
+       /* ── Tenzen: black ground, app-window panels, one violet ─────── */
+       body { line-height: var(--fl-lh-body); letter-spacing: 0; }
+       .apple-headline, .section-title, .feature-card h5,
+       .cta-card h3, h4 { color: var(--fl-ink); }
        .apple-subheadline { color: var(--fl-muted); }
        section, .section { border-bottom: 1px solid var(--fl-hair); }
-       .card, .feature-card, .stat-card, .project-card, .skill-card,
-       .timeline-content, .apple-card {
-          background: var(--fl-surface);
-          border: 1px solid var(--fl-hair);
+
+       /* Hero: the page ground, no mesh. */
+       .hero-section { background: var(--fl-surface); }
+       .hero-section::before, .ai-banner::before { display: none; }
+
+       /* Panels */
+       .content-card, .feature-card, .cta-card {
+          background: var(--fl-raised);
+          border: 1px solid var(--fl-stroke);
+          border-radius: var(--fl-r-lg);
           box-shadow: none;
        }
-       .card:hover, .feature-card:hover, .project-card:hover,
-       .skill-card:hover, .apple-card:hover {
+       .content-card:hover, .feature-card:hover {
           border-color: var(--fl-line);
           box-shadow: var(--fl-sh-sm);
           transform: none;
        }
+       .feature-card::before { background: var(--fl-link); height: 1px; }
 
-       /* One filled action per pair; the second is a hairline ghost. */
-       .apple-button {
-          background: var(--fl-ink);
+       /* Icon tiles: an inset square, the glyph in a categorical tint. */
+       .feature-icon {
+          background: var(--fl-page);
+          border: 1px solid var(--fl-stroke);
+          border-radius: var(--fl-r);
+          box-shadow: none;
+          width: 44px; height: 44px; font-size: 18px;
+       }
+       .feature-card:hover .feature-icon { transform: none; }
+       .icon-blue   { color: var(--fl-cat-4); }
+       .icon-purple { color: var(--fl-cat-1); }
+       .icon-green  { color: var(--fl-cat-3); }
+       .icon-orange { color: var(--fl-cat-2); }
+       .icon-teal   { color: var(--fl-cat-4); }
+       .icon-pink   { color: var(--fl-cat-5); }
+
+       .tag {
+          background: var(--fl-page);
+          border: 1px solid var(--fl-stroke);
+          color: var(--fl-muted);
+          font-family: var(--fl-mono);
+          font-size: 12px;
+          padding: 3px 10px;
+       }
+
+       /* Labels: small mono, barely tracked. */
+       .section-label {
+          font-family: var(--fl-mono);
+          font-size: 12px;
+          letter-spacing: var(--fl-track-label);
+          color: var(--fl-faint);
+       }
+       .section-desc, .feature-card p, .cta-card p { color: var(--fl-muted); }
+
+       /* Buttons: one solid ink fill per pair, the second a stroked control. */
+       .apple-button, .btn-gradient, .btn-gradient:hover {
+          background: var(--fl-ink) !important;
           border: 1px solid var(--fl-ink);
           color: var(--fl-on-ink);
-          border-radius: var(--fl-r-pill);
+          border-radius: var(--fl-r-sm);
+          font-weight: var(--fl-fw-medium);
+          box-shadow: none;
+          transform: none;
        }
        .apple-button:hover {
-          background: var(--fl-ink-soft);
+          background: var(--fl-ink-soft) !important;
           border-color: var(--fl-ink-soft);
           color: var(--fl-on-ink);
        }
        .apple-button + .apple-button {
-          background: var(--fl-surface);
+          background: var(--fl-quiet) !important;
           border-color: var(--fl-line);
           color: var(--fl-ink);
        }
        .apple-button + .apple-button:hover {
-          background: var(--fl-inset);
+          background: var(--fl-inset) !important;
           color: var(--fl-ink);
        }
 
-       /* The "premium" layer — drifting mesh, shimmer sweep, gradient
-          buttons, cards that lift and rotate — is the opposite register
-          from the reference site. Take it out and leave the structure. */
-       .hero-section::before, .ai-banner::before { display: none; }
-       .btn-gradient, .btn-gradient:hover {
-          background: var(--fl-ink) !important;
-          border-color: var(--fl-ink);
-          color: var(--fl-on-ink);
-          box-shadow: none;
-          transform: none;
-       }
+       /* Featured banner: a violet-washed window rather than a slab. */
        .ai-banner {
+          background: var(--fl-accent-wash);
+          border: 1px solid var(--fl-accent-edge);
+          color: var(--fl-ink);
           box-shadow: none;
-          border: 1px solid var(--fl-hair);
        }
-       .stat-badge, .feature-icon { box-shadow: none; }
-       .feature-card:hover .feature-icon { transform: none; }
-       .feature-card::before, .case-card::before { background: var(--fl-ink); }
-       .tech-strip {
+       .ai-banner::after { color: var(--fl-link); }
+       .ai-banner .ai-pill {
           background: var(--fl-raised);
+          border: 1px solid var(--fl-accent-edge);
+          color: var(--fl-link);
+          font-family: var(--fl-mono);
+          font-size: 12px;
+          padding: 4px 12px;
+       }
+       .ai-banner h3 { color: var(--fl-ink); }
+       .ai-banner p { color: var(--fl-prose); }
+
+       /* Stats, badges, marquee */
+       .stat-badge {
+          background: var(--fl-raised);
+          border: 1px solid var(--fl-stroke);
+          color: var(--fl-muted);
+          box-shadow: none;
+          backdrop-filter: none;
+       }
+       .stat-badge i { color: var(--fl-link); }
+       .stat-block .num { color: var(--fl-ink); }
+       .stat-block .label {
+          color: var(--fl-faint);
+          font-family: var(--fl-mono);
+          font-size: 12px;
+       }
+       .tech-strip {
+          background: var(--fl-quiet);
           border-color: var(--fl-hair);
        }
        .tech-track span { opacity: 1; color: var(--fl-muted); }
        .tech-track span i { color: var(--fl-ghost); }
-       .aws-mastery-section .aws-orb { display: none; }
-       .stat-badge {
+
+       footer {
           background: var(--fl-surface);
-          border: 1px solid var(--fl-hair);
-          color: var(--fl-muted);
+          border-top: 1px solid var(--fl-hair);
+          color: var(--fl-faint);
        }
+       footer a { color: var(--fl-muted); text-decoration: none; }
+       footer a:hover { color: var(--fl-link); text-decoration: none; }
+
+       /* Process steps: a mono numeral in a violet-washed ring. */
+       .step-num {
+          background: var(--fl-accent-wash);
+          border: 1px solid var(--fl-accent-edge);
+          color: var(--fl-link);
+          font-family: var(--fl-mono);
+          font-size: 15px;
+       }
+       .step-item h6 { color: var(--fl-ink); }
+       .step-item p { color: var(--fl-muted); }
+       .teaching-list li { border-bottom-color: var(--fl-hair); }
   </style>
     <link rel="stylesheet" href="css/finlab-theme.css">
   <link rel="stylesheet" href="css/site-nav.css">

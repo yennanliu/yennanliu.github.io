@@ -100,10 +100,10 @@ body.dark-mode {
   --fl-hair:         #e6e6ea;
   --fl-line:         #d6d6da;
   --fl-surface:      #ffffff;
-  --fl-quiet:        #f8f8f9;
-  --fl-raised:       #f8f8f9;
-  --fl-page:         #f1f1f3;
-  --fl-inset:        #ededf0;
+  --fl-quiet:        #fafafa;
+  --fl-raised:       #f5f5f6;
+  --fl-page:         #eeeef0;
+  --fl-inset:        #e9e9ec;
   --fl-stroke:       rgba(0, 0, 0, .09);
   --fl-stroke-top:   rgba(255, 255, 255, .8);
 

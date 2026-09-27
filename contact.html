@@ -34,13 +34,13 @@
       <meta name="apple-mobile-web-app-status-bar-style" content="default">
       <meta name="apple-mobile-web-app-title" content="Yen.Dev">
       <meta name="mobile-web-app-capable" content="yes">
-      <meta name="msapplication-TileColor" content="#4a6bff">
+      <meta name="msapplication-TileColor" content="#000000">
       <meta name="msapplication-tap-highlight" content="no">
       
       <!-- PWA Icons -->
       <link rel="icon" href="img/icon.svg" type="image/svg+xml">
       <link rel="apple-touch-icon" href="img/icon.svg">
-      <link rel="mask-icon" href="img/icon.svg" color="#4a6bff">
+      <link rel="mask-icon" href="img/icon.svg" color="#b399ff">
       
       <!-- PWA Manifest -->
       <link rel="manifest" href="manifest.json">
@@ -53,19 +53,22 @@
       <link rel="stylesheet" href="css/finlab.css">
       <style>
          :root {
-            /* FinLab palette */
-            --primary-color: #2563eb;
-            --secondary-color: #059669;
-            --light-bg: #f8fafc;
-            --dark-bg: #0f1115;
-            --light-text: #ffffff;
-            --dark-text: #28303b;
+            /* Page aliases onto the shared tokens — finlab.css switches
+               them for dark (default) and light, so no per-mode copies. */
+            --primary-color: var(--fl-link);
+            --secondary-color: var(--fl-green);
+            --light-bg: var(--fl-raised);
+            --dark-bg: var(--fl-surface);
+            --light-text: var(--fl-ink);
+            --dark-text: var(--fl-text);
             --transition-speed: 0.16s;
          }
          
          /* Base styles */
          body {
             font-family: var(--fl-body);
+            background-color: var(--fl-surface);
+            color: var(--fl-text);
             transition: background-color var(--transition-speed), color var(--transition-speed);
             scroll-behavior: smooth;
             padding-top: 76px; /* Add padding for fixed navbar */
@@ -97,12 +100,12 @@
             padding: 15px 0;
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
-            background-color: rgba(255, 255, 255, 0.9) !important;
+            background-color: var(--fl-surface) !important;
          }
          
          @media (max-width: 991.98px) {
             .navbar-collapse {
-               background-color: rgba(255, 255, 255, 0.95);
+               background-color: var(--fl-raised);
                padding: 20px;
                border-radius: var(--fl-r);
                margin-top: 10px;
@@ -207,8 +210,9 @@
             text-decoration: none;
             display: inline-block;
             padding: 8px 16px;
-            border-radius: var(--fl-r-xl);
-            background: rgba(37, 99, 235, 0.1);
+            border-radius: var(--fl-r-sm);
+            background: var(--fl-accent-wash);
+            border: 1px solid var(--fl-accent-edge);
          }
          
          .skills-item:hover,
@@ -252,7 +256,9 @@
             height: 40vh;
             display: flex;
             align-items: center;
-            background: linear-gradient(135deg, rgba(37, 99, 235, 0.1) 0%, rgba(5, 150, 105, 0.1) 100%);
+            background: var(--fl-raised);
+            border: 1px solid var(--fl-stroke);
+            border-top: 0;
             border-radius: 0 0 var(--fl-r-xl) var(--fl-r-xl);
             margin-bottom: 40px;
             position: relative;
@@ -271,12 +277,12 @@
             top: 0;
             left: 0;
             z-index: 1;
-            opacity: 0.3;
-            background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1IiBoZWlnaHQ9IjUiPgo8cmVjdCB3aWR0aD0iNSIgaGVpZ2h0PSI1IiBmaWxsPSIjZmZmIj48L3JlY3Q+CjxyZWN0IHdpZHRoPSIxIiBoZWlnaHQ9IjEiIGZpbGw9IiNjY2MiPjwvcmVjdD4KPC9zdmc+');
+            /* the old white dot texture went grey on black; flat now */
+            display: none;
          }
          
          .display-4 {
-            font-weight: 300;
+            font-weight: 600;
             margin-bottom: 20px;
             font-size: 2.5rem;
             color: inherit;
@@ -290,7 +296,9 @@
          }
          
          .card {
-            border: none;
+            background: var(--fl-raised);
+            color: var(--fl-text);
+            border: 1px solid var(--fl-stroke);
             border-radius: var(--fl-r-lg);
             box-shadow: var(--fl-sh-lg);
             transition: all var(--transition-speed);
@@ -301,7 +309,6 @@
          .card:hover,
          .card:focus,
          .card:active {
-            transform: translateY(-5px);
             box-shadow: var(--fl-sh-lg);
          }
          
@@ -325,15 +332,15 @@
             align-items: center;
             justify-content: center;
             transition: all var(--transition-speed);
-            background-color: #ffffff;
-            box-shadow: var(--fl-sh);
+            background-color: var(--fl-page);
+            border: 1px solid var(--fl-line);
          }
          
          .social-icon:hover,
          .social-icon:focus,
          .social-icon:active {
-            transform: translateY(-10px);
-            box-shadow: var(--fl-sh);
+            background-color: var(--fl-inset);
+            border-color: var(--fl-stroke-top);
          }
          
          .social-icon img {
@@ -354,97 +361,46 @@
          }
          
          .contact-form .form-control {
-            border-radius: var(--fl-r-lg);
+            border-radius: var(--fl-r-sm);
             padding: 15px;
             margin-bottom: 20px;
-            border: 1px solid #dbe1e8;
+            background-color: var(--fl-page);
+            color: var(--fl-ink);
+            border: 1px solid var(--fl-line);
             transition: all var(--transition-speed);
          }
          
          .contact-form .form-control:focus {
-            box-shadow: var(--fl-sh-xs);
-            border-color: var(--primary-color);
+            background-color: var(--fl-page);
+            color: var(--fl-ink);
+            box-shadow: 0 0 0 3px var(--fl-accent-wash);
+            border-color: var(--fl-accent);
          }
+         .contact-form .form-control::placeholder { color: var(--fl-ghost); }
          
          .btn-submit {
-            background: var(--primary-color);
-            border: none;
+            background: var(--fl-ink);
+            border: 1px solid var(--fl-ink);
             padding: 12px 30px;
-            border-radius: var(--fl-r-xl);
-            color: white;
-            font-weight: 400;
+            border-radius: var(--fl-r-sm);
+            color: var(--fl-on-ink);
+            font-weight: 500;
             transition: all var(--transition-speed);
          }
          
          .btn-submit:hover,
          .btn-submit:focus,
          .btn-submit:active {
-            transform: translateY(-3px);
-            box-shadow: var(--fl-sh);
+            background: var(--fl-ink-soft);
+            border-color: var(--fl-ink-soft);
+            color: var(--fl-on-ink);
          }
          
-         /* Dark mode styles */
-         body.dark-mode {
-            background-color: var(--dark-bg);
-            color: var(--light-text);
-         }
-         
-         body.dark-mode .navbar {
-            background-color: rgba(20, 20, 23, 0.9) !important;
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-         }
-         
-         body.dark-mode .navbar-light .navbar-brand,
-         body.dark-mode .navbar-light .nav-link {
-            color: var(--light-text) !important;
-         }
+         /* Dark is the default ground; the tokens switch, so the old
+            body.dark-mode card/form/hero/link overrides are gone. */
+         a { color: var(--fl-link); }
+         a:hover { color: var(--fl-link-hover); }
 
-         /* Improve toggler button visibility in light mode */
-         .navbar-light .navbar-toggler {
-            border-color: rgba(17, 24, 39, 0.3) !important;
-         }
-         .navbar-light .navbar-toggler-icon {
-            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(17, 24, 39, 0.7)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
-         }
-         body.dark-mode .navbar-light .navbar-toggler {
-            border-color: rgba(245, 247, 250, 0.4) !important;
-         }
-         body.dark-mode .navbar-light .navbar-toggler-icon {
-            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(245, 247, 250, 0.8)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
-         }
-
-         /* Dark mode mobile navbar styles */
-         @media (max-width: 991.98px) {
-            body.dark-mode .navbar-collapse {
-               background-color: rgba(31, 31, 36, 0.95) !important;
-            }
-         }
-         
-         body.dark-mode .card {
-            background-color: #1f1f24;
-            color: var(--light-text);
-            box-shadow: var(--fl-sh-lg);
-         }
-         
-         body.dark-mode a {
-            color: #7aa8ff;
-         }
-         
-         body.dark-mode .social-icon {
-            background-color: #212126;
-         }
-         
-         body.dark-mode .hero-section {
-            background: linear-gradient(135deg, rgba(122, 168, 255, 0.15) 0%, rgba(52, 211, 153, 0.15) 100%);
-         }
-         
-         body.dark-mode .contact-form .form-control {
-            background-color: #212126;
-            border-color: #2e2e35;
-            color: var(--light-text);
-         }
-         
          /* Toggle button styles */
          .toggle-container {
             display: flex;
@@ -464,7 +420,7 @@
          }
          
          .slider {
-            background-color: #dbe1e8;
+            background-color: var(--fl-line);
             bottom: 0;
             cursor: pointer;
             left: 0;
@@ -476,7 +432,7 @@
          }
          
          .slider:before {
-            background-color: white;
+            background-color: var(--fl-ink);
             bottom: 4px;
             content: "";
             height: 16px;
@@ -510,8 +466,8 @@
             width: 50px;
             height: 50px;
             border-radius: 50%;
-            background-color: var(--primary-color);
-            color: white;
+            background-color: var(--fl-ink);
+            color: var(--fl-on-ink);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -542,21 +498,13 @@
                transition: all 0.1s ease;
             }
 
-            .card:active {
-               transform: translateY(-5px);
-               box-shadow: var(--fl-sh-lg);
-               transition: all 0.1s ease;
-            }
-
             .social-icon:active {
-               transform: translateY(-10px);
-               box-shadow: var(--fl-sh);
+               background-color: var(--fl-inset);
                transition: all 0.1s ease;
             }
 
             .btn-submit:active {
-               transform: translateY(-3px);
-               box-shadow: var(--fl-sh);
+               background: var(--fl-ink-soft);
                transition: all 0.1s ease;
             }
 
@@ -618,8 +566,9 @@
          .contact-title {
             font-size: 40px;
             line-height: 1.1;
-            font-weight: 300;
-            color: #1f2937;
+            font-weight: 600;
+            letter-spacing: -0.03em;
+            color: var(--fl-ink);
             margin-bottom: 20px;
          }
 
@@ -629,16 +578,9 @@
          }
 
          .contact-title-sub {
-            background-size: 400% 400%;
-            animation: contact-gradient-shift 3s ease-in-out infinite;
             display: inline-block;
             position: relative;
-            color: inherit;
-         }
-
-         @keyframes contact-gradient-shift {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
+            color: var(--fl-faint);
          }
 
          /* Glitch effect for "Let's Connect" */
@@ -661,7 +603,7 @@
 
          .contact-glitch-text::before {
             animation: contact-glitch-1 2s infinite;
-            color: #dc2626;
+            color: var(--fl-red);
             z-index: -1;
          }
 
@@ -755,97 +697,14 @@
             }
          }
 
-         /* Dark Mode Support for Contact Title */
-         body.dark-mode .contact-title-main {
-            color: inherit;
-         }
-
-         body.dark-mode .contact-title-sub {
-            background-size: 400% 400%;
-            color: inherit;
-         }
-      
-         /* ── FinLab: quiet the page down ─────────────────────────────
-            Flat surfaces, hairline rules, one accent, nothing shouts. */
+         /* ── Tenzen: panels on a black ground ──────────────────────
+            One hero panel, two app-window cards, ink for the one filled
+            action. The RGB-split heading belongs to a louder site. */
          body { line-height: 1.7; letter-spacing: 0; }
-         .navbar { border-bottom: 1px solid var(--fl-hair); }
-         .about-section, .career-section, .contact-section {
-            background: var(--fl-raised);
-            border-bottom: 1px solid var(--fl-hair);
-         }
-         .display-4, .section-title { color: var(--fl-ink); }
-         .section-subtitle, .lead { color: var(--fl-muted); }
-         .card, .timeline-content, .info-card {
-            border: 1px solid var(--fl-hair);
-            background: var(--fl-surface);
-         }
-         body.dark-mode { background-color: var(--fl-ink); }
-         body.dark-mode .card, body.dark-mode .timeline-content {
-            background: #141417; border-color: #2e2e35;
-         }
-
-         /* The career journey set its text straight onto photography. The
-            reference site never does that — copy sits on a real surface. */
-         .career-item::before { background: rgba(15, 23, 42, .22); }
-         .career-item:hover { transform: none; }
-         .career-content {
-            background: rgba(255, 255, 255, .93);
-            backdrop-filter: saturate(180%) blur(14px);
-            -webkit-backdrop-filter: saturate(180%) blur(14px);
-            border: 1px solid var(--fl-hair);
-            border-radius: var(--fl-r-lg);
-            padding: 40px;
-            color: var(--fl-text);
-         }
-         .career-title, .stat-number { color: var(--fl-ink); text-shadow: none; }
-         .career-description, .stat-label { color: var(--fl-muted); text-shadow: none; }
-         .career-year-badge {
-            background: var(--fl-ink); color: var(--fl-on-ink); border: 0;
-            border-radius: var(--fl-r-pill);
-         }
-         .skill-tag {
-            background: var(--fl-raised);
-            border: 1px solid var(--fl-hair);
-            border-radius: var(--fl-r-pill);
-            color: var(--fl-muted);
-         }
-         .skill-tag:hover {
-            background: var(--fl-inset); color: var(--fl-ink); transform: none;
-         }
-
-         /* Hero grounds are flat on the reference site, and the one filled
-            action on a page is ink, not the accent. */
-         .about-section, .hero-section, .contact-hero {
-            background: var(--fl-raised) !important;
-         }
-         .btn-submit {
-            background: var(--fl-ink);
-            border: 1px solid var(--fl-ink);
-            color: var(--fl-on-ink);
-            border-radius: var(--fl-r-pill);
-            box-shadow: none;
-         }
-         .btn-submit:hover, .btn-submit:focus, .btn-submit:active {
-            background: var(--fl-ink-soft);
-            border-color: var(--fl-ink-soft);
-            color: var(--fl-on-ink);
-            box-shadow: none;
-         }
-         .social-icon {
-            border: 1px solid var(--fl-hair);
-            background: var(--fl-surface);
-            box-shadow: none;
-         }
-         .social-icon:hover { background: var(--fl-inset); }
-         .form-control {
-            border: 1px solid var(--fl-hair);
-            box-shadow: none;
-         }
-         .form-control:focus {
-            border-color: var(--fl-link);
-            box-shadow: none;
-         }
-         /* the RGB-split heading effect belongs to a louder site */
+         .contact-hero { background: transparent; }
+         /* the message card ran into the footer rule */
+         .hero-section + .container { padding-bottom: 48px; }
+         .lead { color: var(--fl-muted); }
          .contact-glitch-text::before,
          .contact-glitch-text::after { display: none; }
   </style>
